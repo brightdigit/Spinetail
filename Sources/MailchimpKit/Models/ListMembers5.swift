@@ -30,7 +30,7 @@ public struct ListMembers5: Codable {
     /** Subscriber&#x27;s current status. */
     public var status: Status?
     /** An individual merge var and value for a member. */
-    public var mergeFields: [String:Any]?
+    public var mergeFields: [String:String]?
     /** The key of this object&#x27;s properties is the ID of the interest in question. */
     public var interests: [String:Bool]?
     public var stats: SubscriberStats?
@@ -63,7 +63,7 @@ public struct ListMembers5: Codable {
     /** A list of link types and descriptions for the API schema documents. */
     public var links: [ResourceLink]?
 
-    public init(_id: String? = nil, emailAddress: String? = nil, uniqueEmailId: String? = nil, emailType: String? = nil, status: Status? = nil, mergeFields: [String:Any]? = nil, interests: [String:Bool]? = nil, stats: SubscriberStats? = nil, ipSignup: String? = nil, timestampSignup: Date? = nil, ipOpt: String? = nil, timestampOpt: Date? = nil, memberRating: Int? = nil, lastChanged: Date? = nil, language: String? = nil, vip: Bool? = nil, emailClient: String? = nil, location: Location1? = nil, lastNote: Notes? = nil, tagsCount: Int? = nil, tags: [ListMembers1Tags]? = nil, listId: String? = nil, links: [ResourceLink]? = nil) {
+    public init(_id: String? = nil, emailAddress: String? = nil, uniqueEmailId: String? = nil, emailType: String? = nil, status: Status? = nil, mergeFields: [String:String]? = nil, interests: [String:Bool]? = nil, stats: SubscriberStats? = nil, ipSignup: String? = nil, timestampSignup: Date? = nil, ipOpt: String? = nil, timestampOpt: Date? = nil, memberRating: Int? = nil, lastChanged: Date? = nil, language: String? = nil, vip: Bool? = nil, emailClient: String? = nil, location: Location1? = nil, lastNote: Notes? = nil, tagsCount: Int? = nil, tags: [ListMembers1Tags]? = nil, listId: String? = nil, links: [ResourceLink]? = nil) {
         self._id = _id
         self.emailAddress = emailAddress
         self.uniqueEmailId = uniqueEmailId

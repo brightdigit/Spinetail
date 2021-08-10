@@ -26,7 +26,7 @@ public struct AddListMembers1: Codable {
     /** Subscriber&#x27;s current status. */
     public var status: Status
     /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {\&quot;FNAME\&quot;:\&quot;Freddie\&quot;} */
-    public var mergeFields: [String:Any]?
+    public var mergeFields: [String:String]?
     /** The key of this object&#x27;s properties is the ID of the interest in question. */
     public var interests: [String:Bool]?
     /** If set/detected, the [subscriber&#x27;s language](https://mailchimp.com/help/view-and-edit-contact-languages/). */
@@ -47,7 +47,7 @@ public struct AddListMembers1: Codable {
     /** The tags that are associated with a member. */
     public var tags: [String]?
 
-    public init(emailAddress: String, emailType: String? = nil, status: Status, mergeFields: [String:Any]? = nil, interests: [String:Bool]? = nil, language: String? = nil, vip: Bool? = nil, location: Location? = nil, marketingPermissions: [MarketingPermission]? = nil, ipSignup: String? = nil, timestampSignup: Date? = nil, ipOpt: String? = nil, timestampOpt: Date? = nil, tags: [String]? = nil) {
+    public init(emailAddress: String, emailType: String? = nil, status: Status, mergeFields: [String:String]? = nil, interests: [String:Bool]? = nil, language: String? = nil, vip: Bool? = nil, location: Location? = nil, marketingPermissions: [MarketingPermission]? = nil, ipSignup: String? = nil, timestampSignup: Date? = nil, ipOpt: String? = nil, timestampOpt: Date? = nil, tags: [String]? = nil) {
         self.emailAddress = emailAddress
         self.emailType = emailType
         self.status = status
