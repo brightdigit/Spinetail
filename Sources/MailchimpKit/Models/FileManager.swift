@@ -10,7 +10,7 @@ import Foundation
 
 /** A list of available images and files stored in the File Manager for the account. */
 
-public struct FileManager: Codable {
+public struct MailchimpFileManager: Codable {
 
     /**  A list of files and images in an account. */
     public var files: [GalleryFile3]?

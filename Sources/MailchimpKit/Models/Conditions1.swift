@@ -19,9 +19,9 @@ public struct Conditions1: Codable {
     /** Match type. */
     public var match: Match?
     /** An array of segment conditions. */
-    public var conditions: [[Any]]?
+    public var conditions: [[ConditionFilter]]?
 
-    public init(match: Match? = nil, conditions: [[Any]]? = nil) {
+    public init(match: Match? = nil, conditions: [[ConditionFilter]]? = nil) {
         self.match = match
         self.conditions = conditions
     }

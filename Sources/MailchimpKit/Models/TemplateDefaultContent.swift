@@ -13,11 +13,11 @@ import Foundation
 public struct TemplateDefaultContent: Codable {
 
     /** The sections that you can edit in the template, including each section&#x27;s default content. */
-    public var sections: [String:Any]?
+    public var sections: [String:String]?
     /** A list of link types and descriptions for the API schema documents. */
     public var links: [ResourceLink]?
 
-    public init(sections: [String:Any]? = nil, links: [ResourceLink]? = nil) {
+    public init(sections: [String:String]? = nil, links: [ResourceLink]? = nil) {
         self.sections = sections
         self.links = links
     }

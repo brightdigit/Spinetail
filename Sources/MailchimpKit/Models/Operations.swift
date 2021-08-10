@@ -22,13 +22,13 @@ public struct Operations: Codable {
     /** The relative path to use for the operation. */
     public var path: String
     /** Any request query parameters. Example parameters: {\&quot;count\&quot;:10, \&quot;offset\&quot;:0} */
-    public var params: Any?
+    public var params: [String:String]?
     /** A string containing the JSON body to use with the request. */
     public var body: String?
     /** An optional client-supplied id returned with the operation results. */
     public var operationId: String?
 
-    public init(method: Method, path: String, params: Any? = nil, body: String? = nil, operationId: String? = nil) {
+    public init(method: Method, path: String, params: [String:String]? = nil, body: String? = nil, operationId: String? = nil) {
         self.method = method
         self.path = path
         self.params = params

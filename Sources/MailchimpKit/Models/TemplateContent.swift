@@ -15,9 +15,9 @@ public struct TemplateContent: Codable {
     /** The id of the template to use. */
     public var _id: Int
     /** Content for the sections of the template. Each key should be the unique [mc:edit area](https://mailchimp.com/help/create-editable-content-areas-with-mailchimps-template-language/) name from the template. */
-    public var sections: Any?
+    public var sections: [String:String]?
 
-    public init(_id: Int, sections: Any? = nil) {
+    public init(_id: Int, sections: [String:String]? = nil) {
         self._id = _id
         self.sections = sections
     }

@@ -23,9 +23,9 @@ public struct SegmentOptions1: Codable {
     /** Segment match type. */
     public var match: Match?
     /** Segment match conditions. There are multiple possible types, see the [condition types documentation](https://mailchimp.com/developer/marketing/docs/alternative-schemas/#segment-condition-schemas). */
-    public var conditions: [Any]?
+    public var conditions: [ConditionFilter]?
 
-    public init(savedSegmentId: Int? = nil, prebuiltSegmentId: String? = nil, match: Match? = nil, conditions: [Any]? = nil) {
+    public init(savedSegmentId: Int? = nil, prebuiltSegmentId: String? = nil, match: Match? = nil, conditions: [ConditionFilter]? = nil) {
         self.savedSegmentId = savedSegmentId
         self.prebuiltSegmentId = prebuiltSegmentId
         self.match = match

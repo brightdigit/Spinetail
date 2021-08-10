@@ -7,6 +7,15 @@
 import Foundation
 import Alamofire
 
+extension Result {
+  var error : Error? {
+    guard case let .failure(error) = self else {
+      return nil
+    }
+    return error
+  }
+}
+
 class AlamofireRequestBuilderFactory: RequestBuilderFactory {
     func getNonDecodableBuilder<T>() -> RequestBuilder<T>.Type {
         return AlamofireRequestBuilder<T>.self
@@ -18,7 +27,7 @@ class AlamofireRequestBuilderFactory: RequestBuilderFactory {
 }
 
 // Store manager to retain its reference
-private var managerStore: [String: Alamofire.SessionManager] = [:]
+private var managerStore: [String: Alamofire.Session] = [:]
 
 // Sync queue to manage safe access to the store manager
 private let syncQueue = DispatchQueue(label: "thread-safe-sync-queue", attributes: .concurrent)
@@ -32,10 +41,10 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
      May be overridden by a subclass if you want to control the session
      configuration.
      */
-    open func createSessionManager() -> Alamofire.SessionManager {
+    open func createSessionManager() -> Alamofire.Session {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = buildHeaders()
-        return Alamofire.SessionManager(configuration: configuration)
+        return Alamofire.Session(configuration: configuration)
     }
 
     /**
@@ -53,8 +62,9 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
      May be overridden by a subclass if you want to control the request
      configuration (e.g. to override the cache policy).
      */
-    open func makeRequest(manager: SessionManager, method: HTTPMethod, encoding: ParameterEncoding, headers: [String:String]) -> DataRequest {
-        return manager.request(URLString, method: method, parameters: parameters, encoding: encoding, headers: headers)
+    open func makeRequest(manager: Session, method: HTTPMethod, encoding: ParameterEncoding, headers: [String:String]) -> DataRequest {
+      
+        return manager.request(URLString, method: method, parameters: parameters, encoding: encoding, headers: HTTPHeaders(headers))
     }
 
     override open func execute(_ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
@@ -90,7 +100,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
                         fatalError("Unprocessable value \(v) with key \(k)")
                     }
                 }
-                }, to: URLString, method: xMethod!, headers: nil, encodingCompletion: { encodingResult in
+                }, to: URLString, method: xMethod, headers: nil, encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
                     if let onProgressReady = self.onProgressReady {
@@ -102,9 +112,9 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
                 }
             })
         } else {
-            let request = makeRequest(manager: manager, method: xMethod!, encoding: encoding, headers: headers)
+          let request = makeRequest(manager: manager, method: xMethod, encoding: encoding, headers: headers)
             if let onProgressReady = self.onProgressReady {
-                onProgressReady(request.progress)
+                onProgressReady(request.uploadProgress)
             }
             processRequest(request: request, managerId, completion)
         }
@@ -113,7 +123,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
 
     fileprivate func processRequest(request: DataRequest, _ managerId: String, _ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
         if let credential = self.credential {
-            request.authenticate(usingCredential: credential)
+          request.authenticate(with: credential)
         }
 
         let cleanupRequest = {
@@ -128,22 +138,23 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
         case is String.Type:
             validatedRequest.responseString(completionHandler: { (stringResponse) in
                 cleanupRequest()
-
-                if stringResponse.result.isFailure {
-                    completion(
-                        nil,
-                        ErrorResponse.error(stringResponse.response?.statusCode ?? 500, stringResponse.data, stringResponse.result.error!)
-                    )
-                    return
-                }
-
+              switch stringResponse.result {
+              case .failure(let error):
+                completion(
+                    nil,
+                    ErrorResponse.error(stringResponse.response?.statusCode ?? 500, stringResponse.data, error)
+                )
+                return
+              case .success(let value):
+                
                 completion(
                     Response(
                         response: stringResponse.response!,
-                        body: ((stringResponse.result.value ?? "") as! T)
+                        body: (value) as? T
                     ),
                     nil
                 )
+              }
             })
         case is URL.Type:
             validatedRequest.responseData(completionHandler: { (dataResponse) in
@@ -151,8 +162,8 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
 
                 do {
 
-                    guard !dataResponse.result.isFailure else {
-                        throw DownloadException.responseFailed
+                  if case let .failure(error) = dataResponse.result {
+                        throw DownloadException.responseFailed(error)
                     }
 
                     guard let data = dataResponse.data else {
@@ -199,10 +210,10 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
             validatedRequest.responseData(completionHandler: { (voidResponse) in
                 cleanupRequest()
 
-                if voidResponse.result.isFailure {
+              if let error = voidResponse.result.error {
                     completion(
                         nil,
-                        ErrorResponse.error(voidResponse.response?.statusCode ?? 500, voidResponse.data, voidResponse.result.error!)
+                        ErrorResponse.error(voidResponse.response?.statusCode ?? 500, voidResponse.data,  error)
                     )
                     return
                 }
@@ -238,7 +249,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
     }
 
     open func buildHeaders() -> [String: String] {
-        var httpHeaders = SessionManager.defaultHTTPHeaders
+        var httpHeaders = Session.defaultHTTPHeaders
         for (key, value) in self.headers {
             httpHeaders[key] = value
         }
@@ -300,7 +311,7 @@ open class AlamofireRequestBuilder<T>: RequestBuilder<T> {
 
 fileprivate enum DownloadException : Error {
     case responseDataMissing
-    case responseFailed
+    case responseFailed(Error)
     case requestMissing
     case requestMissingPath
     case requestMissingURL
@@ -317,7 +328,7 @@ open class AlamofireDecodableRequestBuilder<T:Decodable>: AlamofireRequestBuilde
 
     override fileprivate func processRequest(request: DataRequest, _ managerId: String, _ completion: @escaping (_ response: Response<T>?, _ error: Error?) -> Void) {
         if let credential = self.credential {
-            request.authenticate(usingCredential: credential)
+          request.authenticate(with: credential)
         }
 
         let cleanupRequest = {
