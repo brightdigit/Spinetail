@@ -17,6 +17,10 @@
 
 import Foundation
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 extension URLRequest {
     /// Add a basic authorization header to the request.
     ///

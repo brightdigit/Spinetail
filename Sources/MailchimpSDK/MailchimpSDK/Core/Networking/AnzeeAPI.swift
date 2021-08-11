@@ -17,6 +17,10 @@
 
 import Foundation
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 public enum APIError: Error {
     case jsonParsingError(err: String)
     case requestError(err: Error)

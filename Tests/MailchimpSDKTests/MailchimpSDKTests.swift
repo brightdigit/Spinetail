@@ -129,7 +129,7 @@ class MailchimpSDKTests: XCTestCase {
 
     func testAutotagging() {
         XCTAssertTrue(Mailchimp.autoTagContacts) // Defaults to true
-
+#if os(iOS) && canImport(UIKit)
         // Use mock API
         let mockApi = MockAnzeeAPI()
         Mailchimp.api = mockApi
@@ -182,6 +182,7 @@ class MailchimpSDKTests: XCTestCase {
         default:
             XCTFail()
         }
+      #endif
 
         Mailchimp.autoTagContacts = true // Reset value to default
     }

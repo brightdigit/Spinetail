@@ -14,8 +14,11 @@
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
 //
+import Foundation
 
+#if canImport(UIKit)
 import UIKit
+#endif
 
 /// Provides an interface for storing user behavior in Mailchimp
 public class Mailchimp: NSObject {
@@ -170,6 +173,9 @@ public class Mailchimp: NSObject {
     }
 
     private class func autoTags() -> [Contact.Tag] {
+      
+      var tags : [Contact.Tag] = []
+#if os(iOS) && canImport(UIKit)
         let platform = "iOS"
         let deviceType: String?
 
@@ -182,12 +188,13 @@ public class Mailchimp: NSObject {
             deviceType = nil
         }
 
-        var tags = [Contact.Tag(name: platform, status: .active)]
+      tags.append(Contact.Tag(name: platform, status: .active))
 
         // Only auto-tag device type if a valid type is detected. Sending a blank Tag to the API is a bad practice.
         if let deviceType = deviceType {
             tags.append(Contact.Tag(name: deviceType, status: .active))
         }
+#endif
 
         return tags
     }
