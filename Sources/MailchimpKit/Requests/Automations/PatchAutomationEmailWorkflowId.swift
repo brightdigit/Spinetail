@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Automations {
+extension MailchimpKit.Automations {
 
     /**
     Update workflow email
@@ -19,7 +19,7 @@ extension API.Automations {
         public final class Request: APIRequest<Response> {
 
             /** Update information about an individual Automation workflow email. */
-            public class Body: APIModel {
+            public struct Body: MailchimpModel {
 
                 /** The delay settings for an automation email. */
                 public var delay: Delay?
@@ -28,7 +28,7 @@ extension API.Automations {
                 public var settings: Settings?
 
                 /** The delay settings for an automation email. */
-                public class Delay: APIModel {
+                public struct Delay: MailchimpModel {
 
                     /** The action that triggers the delay of an automation emails. */
                     public enum Action: String, Codable, Equatable, CaseIterable {
@@ -69,7 +69,7 @@ extension API.Automations {
                         self.type = type
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         action = try container.decode("action")
@@ -87,22 +87,10 @@ extension API.Automations {
                         try container.encodeIfPresent(type, forKey: "type")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Delay else { return false }
-                      guard self.action == object.action else { return false }
-                      guard self.amount == object.amount else { return false }
-                      guard self.direction == object.direction else { return false }
-                      guard self.type == object.type else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Delay, rhs: Delay) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Settings for the campaign including the email subject, from name, and from email address. */
-                public class Settings: APIModel {
+                public struct Settings: MailchimpModel {
 
                     /** The 'from' name for the Automation (not an email address). */
                     public var fromName: String?
@@ -127,7 +115,7 @@ extension API.Automations {
                         self.title = title
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         fromName = try container.decodeIfPresent("from_name")
@@ -147,19 +135,6 @@ extension API.Automations {
                         try container.encodeIfPresent(title, forKey: "title")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Settings else { return false }
-                      guard self.fromName == object.fromName else { return false }
-                      guard self.previewText == object.previewText else { return false }
-                      guard self.replyTo == object.replyTo else { return false }
-                      guard self.subjectLine == object.subjectLine else { return false }
-                      guard self.title == object.title else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Settings, rhs: Settings) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(delay: Delay? = nil, settings: Settings? = nil) {
@@ -167,7 +142,7 @@ extension API.Automations {
                     self.settings = settings
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     delay = try container.decodeIfPresent("delay")
@@ -181,16 +156,6 @@ extension API.Automations {
                     try container.encodeIfPresent(settings, forKey: "settings")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.delay == object.delay else { return false }
-                  guard self.settings == object.settings else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -233,7 +198,7 @@ extension API.Automations {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** A summary of an individual Automation workflow email. */
-            public class Status200: APIModel {
+            public struct Status200: MailchimpModel {
 
                 /** The current status of the campaign. */
                 public enum Status: String, Codable, Equatable, CaseIterable {
@@ -306,7 +271,7 @@ extension API.Automations {
                 public var workflowId: String?
 
                 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                public class Links: APIModel {
+                public struct Links: MailchimpModel {
 
                     /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -342,7 +307,7 @@ extension API.Automations {
                         self.targetSchema = targetSchema
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         href = try container.decodeIfPresent("href")
@@ -362,23 +327,10 @@ extension API.Automations {
                         try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Links else { return false }
-                      guard self.href == object.href else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.rel == object.rel else { return false }
-                      guard self.schema == object.schema else { return false }
-                      guard self.targetSchema == object.targetSchema else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Links, rhs: Links) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The delay settings for an Automation email. */
-                public class Delay: APIModel {
+                public struct Delay: MailchimpModel {
 
                     /** The action that triggers the delay of an Automation email. */
                     public enum Action: String, Codable, Equatable, CaseIterable {
@@ -458,7 +410,7 @@ extension API.Automations {
                         self.type = type
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         action = try container.decodeIfPresent("action")
@@ -480,24 +432,10 @@ extension API.Automations {
                         try container.encodeIfPresent(type, forKey: "type")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Delay else { return false }
-                      guard self.action == object.action else { return false }
-                      guard self.actionDescription == object.actionDescription else { return false }
-                      guard self.amount == object.amount else { return false }
-                      guard self.direction == object.direction else { return false }
-                      guard self.fullDescription == object.fullDescription else { return false }
-                      guard self.type == object.type else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Delay, rhs: Delay) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** List settings for the campaign. */
-                public class Recipients: APIModel {
+                public struct Recipients: MailchimpModel {
 
                     /** The unique list id. */
                     public var listId: String?
@@ -518,7 +456,7 @@ extension API.Automations {
                     public var segmentText: String?
 
                     /** An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options. */
-                    public class SegmentOpts: APIModel {
+                    public struct SegmentOpts: MailchimpModel {
 
                         /** Segment match type. */
                         public enum Match: String, Codable, Equatable, CaseIterable {
@@ -527,7 +465,7 @@ extension API.Automations {
                         }
 
                         /** Segment match conditions. There are multiple possible types, see the [condition types documentation](https://mailchimp.com/developer/marketing/docs/alternative-schemas/#segment-condition-schemas). */
-                        public var conditions: [[String: Any]]?
+                        public var conditions: [[String: CodableAny]]?
 
                         /** Segment match type. */
                         public var match: Match?
@@ -538,14 +476,14 @@ extension API.Automations {
                         /** The id for an existing saved segment. */
                         public var savedSegmentId: Int?
 
-                        public init(conditions: [[String: Any]]? = nil, match: Match? = nil, prebuiltSegmentId: String? = nil, savedSegmentId: Int? = nil) {
+                        public init(conditions: [[String: CodableAny]]? = nil, match: Match? = nil, prebuiltSegmentId: String? = nil, savedSegmentId: Int? = nil) {
                             self.conditions = conditions
                             self.match = match
                             self.prebuiltSegmentId = prebuiltSegmentId
                             self.savedSegmentId = savedSegmentId
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             conditions = try container.decodeAnyIfPresent("conditions")
@@ -563,18 +501,6 @@ extension API.Automations {
                             try container.encodeIfPresent(savedSegmentId, forKey: "saved_segment_id")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? SegmentOpts else { return false }
-                          guard self.conditions == object.conditions else { return false }
-                          guard self.match == object.match else { return false }
-                          guard self.prebuiltSegmentId == object.prebuiltSegmentId else { return false }
-                          guard self.savedSegmentId == object.savedSegmentId else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: SegmentOpts, rhs: SegmentOpts) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(listId: String? = nil, listIsActive: Bool? = nil, listName: String? = nil, recipientCount: Int? = nil, segmentOpts: SegmentOpts? = nil, segmentText: String? = nil) {
@@ -586,7 +512,7 @@ extension API.Automations {
                         self.segmentText = segmentText
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         listId = try container.decodeIfPresent("list_id")
@@ -608,24 +534,10 @@ extension API.Automations {
                         try container.encodeIfPresent(segmentText, forKey: "segment_text")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Recipients else { return false }
-                      guard self.listId == object.listId else { return false }
-                      guard self.listIsActive == object.listIsActive else { return false }
-                      guard self.listName == object.listName else { return false }
-                      guard self.recipientCount == object.recipientCount else { return false }
-                      guard self.segmentOpts == object.segmentOpts else { return false }
-                      guard self.segmentText == object.segmentText else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Recipients, rhs: Recipients) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** For sent campaigns, a summary of opens and clicks. */
-                public class ReportSummary: APIModel {
+                public struct ReportSummary: MailchimpModel {
 
                     /** The number of unique clicks divided by the total number of successful deliveries. */
                     public var clickRate: Double?
@@ -654,7 +566,7 @@ extension API.Automations {
                         self.uniqueOpens = uniqueOpens
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         clickRate = try container.decodeIfPresent("click_rate")
@@ -676,24 +588,10 @@ extension API.Automations {
                         try container.encodeIfPresent(uniqueOpens, forKey: "unique_opens")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? ReportSummary else { return false }
-                      guard self.clickRate == object.clickRate else { return false }
-                      guard self.clicks == object.clicks else { return false }
-                      guard self.openRate == object.openRate else { return false }
-                      guard self.opens == object.opens else { return false }
-                      guard self.subscriberClicks == object.subscriberClicks else { return false }
-                      guard self.uniqueOpens == object.uniqueOpens else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: ReportSummary, rhs: ReportSummary) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Settings for the campaign including the email subject, from name, and from email address. */
-                public class Settings: APIModel {
+                public struct Settings: MailchimpModel {
 
                     /** Whether Mailchimp [authenticated](https://mailchimp.com/help/about-email-authentication/) the campaign. Defaults to `true`. */
                     public var authenticate: Bool?
@@ -750,7 +648,7 @@ extension API.Automations {
                         self.title = title
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         authenticate = try container.decodeIfPresent("authenticate")
@@ -786,31 +684,10 @@ extension API.Automations {
                         try container.encodeIfPresent(title, forKey: "title")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Settings else { return false }
-                      guard self.authenticate == object.authenticate else { return false }
-                      guard self.autoFbPost == object.autoFbPost else { return false }
-                      guard self.autoFooter == object.autoFooter else { return false }
-                      guard self.autoTweet == object.autoTweet else { return false }
-                      guard self.dragAndDrop == object.dragAndDrop else { return false }
-                      guard self.fbComments == object.fbComments else { return false }
-                      guard self.fromName == object.fromName else { return false }
-                      guard self.inlineCss == object.inlineCss else { return false }
-                      guard self.previewText == object.previewText else { return false }
-                      guard self.replyTo == object.replyTo else { return false }
-                      guard self.subjectLine == object.subjectLine else { return false }
-                      guard self.templateId == object.templateId else { return false }
-                      guard self.title == object.title else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Settings, rhs: Settings) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/). */
-                public class SocialCard: APIModel {
+                public struct SocialCard: MailchimpModel {
 
                     /** A short summary of the campaign to display. */
                     public var description: String?
@@ -827,7 +704,7 @@ extension API.Automations {
                         self.title = title
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         description = try container.decodeIfPresent("description")
@@ -843,21 +720,10 @@ extension API.Automations {
                         try container.encodeIfPresent(title, forKey: "title")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? SocialCard else { return false }
-                      guard self.description == object.description else { return false }
-                      guard self.imageURL == object.imageURL else { return false }
-                      guard self.title == object.title else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: SocialCard, rhs: SocialCard) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The tracking options for a campaign. */
-                public class Tracking: APIModel {
+                public struct Tracking: MailchimpModel {
 
                     /** Deprecated */
                     public var capsule: Capsule?
@@ -887,7 +753,7 @@ extension API.Automations {
                     public var textClicks: Bool?
 
                     /** Deprecated */
-                    public class Capsule: APIModel {
+                    public struct Capsule: MailchimpModel {
 
                         /** Update contact notes for a campaign based on a subscriber's email address. */
                         public var notes: Bool?
@@ -896,7 +762,7 @@ extension API.Automations {
                             self.notes = notes
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             notes = try container.decodeIfPresent("notes")
@@ -908,19 +774,10 @@ extension API.Automations {
                             try container.encodeIfPresent(notes, forKey: "notes")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Capsule else { return false }
-                          guard self.notes == object.notes else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Capsule, rhs: Capsule) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     /** Deprecated */
-                    public class Salesforce: APIModel {
+                    public struct Salesforce: MailchimpModel {
 
                         /** Create a campaign in a connected Salesforce account. */
                         public var campaign: Bool?
@@ -933,7 +790,7 @@ extension API.Automations {
                             self.notes = notes
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             campaign = try container.decodeIfPresent("campaign")
@@ -947,16 +804,6 @@ extension API.Automations {
                             try container.encodeIfPresent(notes, forKey: "notes")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Salesforce else { return false }
-                          guard self.campaign == object.campaign else { return false }
-                          guard self.notes == object.notes else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Salesforce, rhs: Salesforce) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(capsule: Capsule? = nil, clicktale: String? = nil, ecomm360: Bool? = nil, goalTracking: Bool? = nil, googleAnalytics: String? = nil, htmlClicks: Bool? = nil, opens: Bool? = nil, salesforce: Salesforce? = nil, textClicks: Bool? = nil) {
@@ -971,7 +818,7 @@ extension API.Automations {
                         self.textClicks = textClicks
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         capsule = try container.decodeIfPresent("capsule")
@@ -999,27 +846,10 @@ extension API.Automations {
                         try container.encodeIfPresent(textClicks, forKey: "text_clicks")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Tracking else { return false }
-                      guard self.capsule == object.capsule else { return false }
-                      guard self.clicktale == object.clicktale else { return false }
-                      guard self.ecomm360 == object.ecomm360 else { return false }
-                      guard self.goalTracking == object.goalTracking else { return false }
-                      guard self.googleAnalytics == object.googleAnalytics else { return false }
-                      guard self.htmlClicks == object.htmlClicks else { return false }
-                      guard self.opens == object.opens else { return false }
-                      guard self.salesforce == object.salesforce else { return false }
-                      guard self.textClicks == object.textClicks else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Tracking, rhs: Tracking) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Available triggers for Automation workflows. */
-                public class TriggerSettings: APIModel {
+                public struct TriggerSettings: MailchimpModel {
 
                     /** The type of Automation workflow. */
                     public enum WorkflowType: String, Codable, Equatable, CaseIterable {
@@ -1055,7 +885,7 @@ extension API.Automations {
                     public var workflowTitle: String?
 
                     /** A workflow's runtime settings for an Automation. */
-                    public class Runtime: APIModel {
+                    public struct Runtime: MailchimpModel {
 
                         /** The days an Automation workflow can send. */
                         public enum Days: String, Codable, Equatable, CaseIterable {
@@ -1075,7 +905,7 @@ extension API.Automations {
                         public var hours: Hours?
 
                         /** The hours an Automation workflow can send. */
-                        public class Hours: APIModel {
+                        public struct Hours: MailchimpModel {
 
                             /** When to send the Automation email. */
                             public enum `Type`: String, Codable, Equatable, CaseIterable {
@@ -1091,7 +921,7 @@ extension API.Automations {
                                 self.type = type
                             }
 
-                            public required init(from decoder: Decoder) throws {
+                            public init(from decoder: Decoder) throws {
                                 let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                                 type = try container.decode("type")
@@ -1103,15 +933,6 @@ extension API.Automations {
                                 try container.encode(type, forKey: "type")
                             }
 
-                            public func isEqual(to object: Any?) -> Bool {
-                              guard let object = object as? Hours else { return false }
-                              guard self.type == object.type else { return false }
-                              return true
-                            }
-
-                            public static func == (lhs: Hours, rhs: Hours) -> Bool {
-                                return lhs.isEqual(to: rhs)
-                            }
                         }
 
                         public init(days: [Days]? = nil, hours: Hours? = nil) {
@@ -1119,7 +940,7 @@ extension API.Automations {
                             self.hours = hours
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             days = try container.decodeArrayIfPresent("days")
@@ -1133,16 +954,6 @@ extension API.Automations {
                             try container.encodeIfPresent(hours, forKey: "hours")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Runtime else { return false }
-                          guard self.days == object.days else { return false }
-                          guard self.hours == object.hours else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Runtime, rhs: Runtime) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(workflowType: WorkflowType, runtime: Runtime? = nil, workflowEmailsCount: Int? = nil, workflowTitle: String? = nil) {
@@ -1152,7 +963,7 @@ extension API.Automations {
                         self.workflowTitle = workflowTitle
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         workflowType = try container.decode("workflow_type")
@@ -1170,18 +981,6 @@ extension API.Automations {
                         try container.encodeIfPresent(workflowTitle, forKey: "workflow_title")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? TriggerSettings else { return false }
-                      guard self.workflowType == object.workflowType else { return false }
-                      guard self.runtime == object.runtime else { return false }
-                      guard self.workflowEmailsCount == object.workflowEmailsCount else { return false }
-                      guard self.workflowTitle == object.workflowTitle else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: TriggerSettings, rhs: TriggerSettings) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(links: [Links]? = nil, archiveURL: String? = nil, contentType: String? = nil, createTime: DateTime? = nil, delay: Delay? = nil, emailsSent: Int? = nil, hasLogoMergeTag: Bool? = nil, id: String? = nil, needsBlockRefresh: Bool? = nil, position: Int? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, sendTime: DateTime? = nil, settings: Settings? = nil, socialCard: SocialCard? = nil, startTime: DateTime? = nil, status: Status? = nil, tracking: Tracking? = nil, triggerSettings: TriggerSettings? = nil, webId: Int? = nil, workflowId: String? = nil) {
@@ -1208,7 +1007,7 @@ extension API.Automations {
                     self.workflowId = workflowId
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     links = try container.decodeArrayIfPresent("_links")
@@ -1260,39 +1059,10 @@ extension API.Automations {
                     try container.encodeIfPresent(workflowId, forKey: "workflow_id")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.links == object.links else { return false }
-                  guard self.archiveURL == object.archiveURL else { return false }
-                  guard self.contentType == object.contentType else { return false }
-                  guard self.createTime == object.createTime else { return false }
-                  guard self.delay == object.delay else { return false }
-                  guard self.emailsSent == object.emailsSent else { return false }
-                  guard self.hasLogoMergeTag == object.hasLogoMergeTag else { return false }
-                  guard self.id == object.id else { return false }
-                  guard self.needsBlockRefresh == object.needsBlockRefresh else { return false }
-                  guard self.position == object.position else { return false }
-                  guard self.recipients == object.recipients else { return false }
-                  guard self.reportSummary == object.reportSummary else { return false }
-                  guard self.sendTime == object.sendTime else { return false }
-                  guard self.settings == object.settings else { return false }
-                  guard self.socialCard == object.socialCard else { return false }
-                  guard self.startTime == object.startTime else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.tracking == object.tracking else { return false }
-                  guard self.triggerSettings == object.triggerSettings else { return false }
-                  guard self.webId == object.webId else { return false }
-                  guard self.workflowId == object.workflowId else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-            public class DefaultResponse: APIModel {
+            public struct DefaultResponse: MailchimpModel {
 
                 /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
                 public var detail: String
@@ -1317,7 +1087,7 @@ extension API.Automations {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     detail = try container.decode("detail")
@@ -1337,19 +1107,6 @@ extension API.Automations {
                     try container.encode(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? DefaultResponse else { return false }
-                  guard self.detail == object.detail else { return false }
-                  guard self.instance == object.instance else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: DefaultResponse, rhs: DefaultResponse) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
             case status200(Status200)

@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Reports {
+extension MailchimpKit.Reports {
 
     /**
     List EepURL activity
@@ -68,7 +68,7 @@ extension API.Reports {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** A summary of social activity for the campaign, tracked by EepURL. */
-            public class Status200: APIModel {
+            public struct Status200: MailchimpModel {
 
                 /** A list of link types and descriptions for the API schema documents. */
                 public var links: [Links]?
@@ -92,7 +92,7 @@ extension API.Reports {
                 public var twitter: Twitter?
 
                 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                public class Links: APIModel {
+                public struct Links: MailchimpModel {
 
                     /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -128,7 +128,7 @@ extension API.Reports {
                         self.targetSchema = targetSchema
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         href = try container.decodeIfPresent("href")
@@ -148,23 +148,10 @@ extension API.Reports {
                         try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Links else { return false }
-                      guard self.href == object.href else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.rel == object.rel else { return false }
-                      guard self.schema == object.schema else { return false }
-                      guard self.targetSchema == object.targetSchema else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Links, rhs: Links) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** A summary of the click-throughs on the campaign's URL. */
-                public class Clicks: APIModel {
+                public struct Clicks: MailchimpModel {
 
                     /** The total number of clicks to the campaign's URL. */
                     public var clicks: Int?
@@ -179,7 +166,7 @@ extension API.Reports {
                     public var locations: [Locations]?
 
                     /** An individual click location. */
-                    public class Locations: APIModel {
+                    public struct Locations: MailchimpModel {
 
                         /** The two-digit country code for a recorded click. */
                         public var country: String?
@@ -192,7 +179,7 @@ extension API.Reports {
                             self.region = region
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             country = try container.decodeIfPresent("country")
@@ -206,16 +193,6 @@ extension API.Reports {
                             try container.encodeIfPresent(region, forKey: "region")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Locations else { return false }
-                          guard self.country == object.country else { return false }
-                          guard self.region == object.region else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Locations, rhs: Locations) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(clicks: Int? = nil, firstClick: DateTime? = nil, lastClick: DateTime? = nil, locations: [Locations]? = nil) {
@@ -225,7 +202,7 @@ extension API.Reports {
                         self.locations = locations
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         clicks = try container.decodeIfPresent("clicks")
@@ -243,22 +220,10 @@ extension API.Reports {
                         try container.encodeIfPresent(locations, forKey: "locations")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Clicks else { return false }
-                      guard self.clicks == object.clicks else { return false }
-                      guard self.firstClick == object.firstClick else { return false }
-                      guard self.lastClick == object.lastClick else { return false }
-                      guard self.locations == object.locations else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Clicks, rhs: Clicks) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** A single instance of a campaign referral. */
-                public class Referrers: APIModel {
+                public struct Referrers: MailchimpModel {
 
                     /** The number of clicks a single referrer generated. */
                     public var clicks: Int?
@@ -279,7 +244,7 @@ extension API.Reports {
                         self.referrer = referrer
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         clicks = try container.decodeIfPresent("clicks")
@@ -297,22 +262,10 @@ extension API.Reports {
                         try container.encodeIfPresent(referrer, forKey: "referrer")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Referrers else { return false }
-                      guard self.clicks == object.clicks else { return false }
-                      guard self.firstClick == object.firstClick else { return false }
-                      guard self.lastClick == object.lastClick else { return false }
-                      guard self.referrer == object.referrer else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Referrers, rhs: Referrers) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** A summary of Twitter activity for a campaign. */
-                public class Twitter: APIModel {
+                public struct Twitter: MailchimpModel {
 
                     /** The day and time of the first recorded tweet with a link to the campaign. */
                     public var firstTweet: String?
@@ -330,7 +283,7 @@ extension API.Reports {
                     public var tweets: Int?
 
                     /** An individual tweet. */
-                    public class Statuses: APIModel {
+                    public struct Statuses: MailchimpModel {
 
                         /** A timestamp for the tweet. */
                         public var datetime: DateTime?
@@ -355,7 +308,7 @@ extension API.Reports {
                             self.statusId = statusId
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             datetime = try container.decodeIfPresent("datetime")
@@ -375,19 +328,6 @@ extension API.Reports {
                             try container.encodeIfPresent(statusId, forKey: "status_id")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Statuses else { return false }
-                          guard self.datetime == object.datetime else { return false }
-                          guard self.isRetweet == object.isRetweet else { return false }
-                          guard self.screenName == object.screenName else { return false }
-                          guard self.status == object.status else { return false }
-                          guard self.statusId == object.statusId else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Statuses, rhs: Statuses) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(firstTweet: String? = nil, lastTweet: String? = nil, retweets: Int? = nil, statuses: [Statuses]? = nil, tweets: Int? = nil) {
@@ -398,7 +338,7 @@ extension API.Reports {
                         self.tweets = tweets
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         firstTweet = try container.decodeIfPresent("first_tweet")
@@ -418,19 +358,6 @@ extension API.Reports {
                         try container.encodeIfPresent(tweets, forKey: "tweets")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Twitter else { return false }
-                      guard self.firstTweet == object.firstTweet else { return false }
-                      guard self.lastTweet == object.lastTweet else { return false }
-                      guard self.retweets == object.retweets else { return false }
-                      guard self.statuses == object.statuses else { return false }
-                      guard self.tweets == object.tweets else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Twitter, rhs: Twitter) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(links: [Links]? = nil, campaignId: String? = nil, clicks: Clicks? = nil, eepurl: String? = nil, referrers: [Referrers]? = nil, totalItems: Int? = nil, twitter: Twitter? = nil) {
@@ -443,7 +370,7 @@ extension API.Reports {
                     self.twitter = twitter
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     links = try container.decodeArrayIfPresent("_links")
@@ -467,25 +394,10 @@ extension API.Reports {
                     try container.encodeIfPresent(twitter, forKey: "twitter")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.links == object.links else { return false }
-                  guard self.campaignId == object.campaignId else { return false }
-                  guard self.clicks == object.clicks else { return false }
-                  guard self.eepurl == object.eepurl else { return false }
-                  guard self.referrers == object.referrers else { return false }
-                  guard self.totalItems == object.totalItems else { return false }
-                  guard self.twitter == object.twitter else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-            public class DefaultResponse: APIModel {
+            public struct DefaultResponse: MailchimpModel {
 
                 /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
                 public var detail: String
@@ -510,7 +422,7 @@ extension API.Reports {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     detail = try container.decode("detail")
@@ -530,19 +442,6 @@ extension API.Reports {
                     try container.encode(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? DefaultResponse else { return false }
-                  guard self.detail == object.detail else { return false }
-                  guard self.instance == object.instance else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: DefaultResponse, rhs: DefaultResponse) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
             case status200(Status200)

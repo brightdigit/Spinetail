@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Lists {
+extension MailchimpKit.Lists {
 
     /**
     List recent activity
@@ -68,7 +68,7 @@ extension API.Lists {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity. */
-            public class Status200: APIModel {
+            public struct Status200: MailchimpModel {
 
                 /** A list of link types and descriptions for the API schema documents. */
                 public var links: [Links]?
@@ -83,7 +83,7 @@ extension API.Lists {
                 public var totalItems: Int?
 
                 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                public class Links: APIModel {
+                public struct Links: MailchimpModel {
 
                     /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -119,7 +119,7 @@ extension API.Lists {
                         self.targetSchema = targetSchema
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         href = try container.decodeIfPresent("href")
@@ -139,23 +139,10 @@ extension API.Lists {
                         try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Links else { return false }
-                      guard self.href == object.href else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.rel == object.rel else { return false }
-                      guard self.schema == object.schema else { return false }
-                      guard self.targetSchema == object.targetSchema else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Links, rhs: Links) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** One day's worth of list activity. Doesn't include Automation activity. */
-                public class Activity: APIModel {
+                public struct Activity: MailchimpModel {
 
                     /** A list of link types and descriptions for the API schema documents. */
                     public var links: [Links]?
@@ -191,7 +178,7 @@ extension API.Lists {
                     public var unsubs: Int?
 
                     /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                    public class Links: APIModel {
+                    public struct Links: MailchimpModel {
 
                         /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                         public enum Method: String, Codable, Equatable, CaseIterable {
@@ -227,7 +214,7 @@ extension API.Lists {
                             self.targetSchema = targetSchema
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             href = try container.decodeIfPresent("href")
@@ -247,19 +234,6 @@ extension API.Lists {
                             try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Links else { return false }
-                          guard self.href == object.href else { return false }
-                          guard self.method == object.method else { return false }
-                          guard self.rel == object.rel else { return false }
-                          guard self.schema == object.schema else { return false }
-                          guard self.targetSchema == object.targetSchema else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Links, rhs: Links) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(links: [Links]? = nil, day: String? = nil, emailsSent: Int? = nil, hardBounce: Int? = nil, otherAdds: Int? = nil, otherRemoves: Int? = nil, recipientClicks: Int? = nil, softBounce: Int? = nil, subs: Int? = nil, uniqueOpens: Int? = nil, unsubs: Int? = nil) {
@@ -276,7 +250,7 @@ extension API.Lists {
                         self.unsubs = unsubs
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         links = try container.decodeArrayIfPresent("_links")
@@ -308,25 +282,6 @@ extension API.Lists {
                         try container.encodeIfPresent(unsubs, forKey: "unsubs")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Activity else { return false }
-                      guard self.links == object.links else { return false }
-                      guard self.day == object.day else { return false }
-                      guard self.emailsSent == object.emailsSent else { return false }
-                      guard self.hardBounce == object.hardBounce else { return false }
-                      guard self.otherAdds == object.otherAdds else { return false }
-                      guard self.otherRemoves == object.otherRemoves else { return false }
-                      guard self.recipientClicks == object.recipientClicks else { return false }
-                      guard self.softBounce == object.softBounce else { return false }
-                      guard self.subs == object.subs else { return false }
-                      guard self.uniqueOpens == object.uniqueOpens else { return false }
-                      guard self.unsubs == object.unsubs else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Activity, rhs: Activity) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(links: [Links]? = nil, activity: [Activity]? = nil, listId: String? = nil, totalItems: Int? = nil) {
@@ -336,7 +291,7 @@ extension API.Lists {
                     self.totalItems = totalItems
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     links = try container.decodeArrayIfPresent("_links")
@@ -354,22 +309,10 @@ extension API.Lists {
                     try container.encodeIfPresent(totalItems, forKey: "total_items")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.links == object.links else { return false }
-                  guard self.activity == object.activity else { return false }
-                  guard self.listId == object.listId else { return false }
-                  guard self.totalItems == object.totalItems else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-            public class DefaultResponse: APIModel {
+            public struct DefaultResponse: MailchimpModel {
 
                 /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
                 public var detail: String
@@ -394,7 +337,7 @@ extension API.Lists {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     detail = try container.decode("detail")
@@ -414,19 +357,6 @@ extension API.Lists {
                     try container.encode(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? DefaultResponse else { return false }
-                  guard self.detail == object.detail else { return false }
-                  guard self.instance == object.instance else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: DefaultResponse, rhs: DefaultResponse) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
             case status200(Status200)

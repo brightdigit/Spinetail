@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Campaigns {
+extension MailchimpKit.Campaigns {
 
     /**
     Update campaign settings
@@ -19,7 +19,7 @@ extension API.Campaigns {
         public final class Request: APIRequest<Response> {
 
             /** A summary of an individual campaign's settings and content. */
-            public class Body: APIModel {
+            public struct Body: MailchimpModel {
 
                 /** The settings for your campaign, including subject, from name, reply-to address, and more. */
                 public var settings: Settings
@@ -40,7 +40,7 @@ extension API.Campaigns {
                 public var variateSettings: VariateSettings?
 
                 /** The settings for your campaign, including subject, from name, reply-to address, and more. */
-                public class Settings: APIModel {
+                public struct Settings: MailchimpModel {
 
                     /** The 'from' name on the campaign (not an email address). */
                     public var fromName: String
@@ -105,7 +105,7 @@ extension API.Campaigns {
                         self.useConversation = useConversation
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         fromName = try container.decode("from_name")
@@ -145,33 +145,10 @@ extension API.Campaigns {
                         try container.encodeIfPresent(useConversation, forKey: "use_conversation")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Settings else { return false }
-                      guard self.fromName == object.fromName else { return false }
-                      guard self.replyTo == object.replyTo else { return false }
-                      guard self.subjectLine == object.subjectLine else { return false }
-                      guard self.authenticate == object.authenticate else { return false }
-                      guard self.autoFbPost == object.autoFbPost else { return false }
-                      guard self.autoFooter == object.autoFooter else { return false }
-                      guard self.autoTweet == object.autoTweet else { return false }
-                      guard self.fbComments == object.fbComments else { return false }
-                      guard self.folderId == object.folderId else { return false }
-                      guard self.inlineCss == object.inlineCss else { return false }
-                      guard self.previewText == object.previewText else { return false }
-                      guard self.templateId == object.templateId else { return false }
-                      guard self.title == object.title else { return false }
-                      guard self.toName == object.toName else { return false }
-                      guard self.useConversation == object.useConversation else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Settings, rhs: Settings) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** List settings for the campaign. */
-                public class Recipients: APIModel {
+                public struct Recipients: MailchimpModel {
 
                     /** The unique list id. */
                     public var listId: String
@@ -180,7 +157,7 @@ extension API.Campaigns {
                     public var segmentOpts: SegmentOpts?
 
                     /** An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options. */
-                    public class SegmentOpts: APIModel {
+                    public struct SegmentOpts: MailchimpModel {
 
                         /** Segment match type. */
                         public enum Match: String, Codable, Equatable, CaseIterable {
@@ -189,7 +166,7 @@ extension API.Campaigns {
                         }
 
                         /** Segment match conditions. There are multiple possible types, see the [condition types documentation](https://mailchimp.com/developer/marketing/docs/alternative-schemas/#segment-condition-schemas). */
-                        public var conditions: [[String: Any]]?
+                        public var conditions: [[String: CodableAny]]?
 
                         /** Segment match type. */
                         public var match: Match?
@@ -200,14 +177,14 @@ extension API.Campaigns {
                         /** The id for an existing saved segment. */
                         public var savedSegmentId: Int?
 
-                        public init(conditions: [[String: Any]]? = nil, match: Match? = nil, prebuiltSegmentId: String? = nil, savedSegmentId: Int? = nil) {
+                        public init(conditions: [[String: CodableAny]]? = nil, match: Match? = nil, prebuiltSegmentId: String? = nil, savedSegmentId: Int? = nil) {
                             self.conditions = conditions
                             self.match = match
                             self.prebuiltSegmentId = prebuiltSegmentId
                             self.savedSegmentId = savedSegmentId
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             conditions = try container.decodeAnyIfPresent("conditions")
@@ -225,18 +202,6 @@ extension API.Campaigns {
                             try container.encodeIfPresent(savedSegmentId, forKey: "saved_segment_id")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? SegmentOpts else { return false }
-                          guard self.conditions == object.conditions else { return false }
-                          guard self.match == object.match else { return false }
-                          guard self.prebuiltSegmentId == object.prebuiltSegmentId else { return false }
-                          guard self.savedSegmentId == object.savedSegmentId else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: SegmentOpts, rhs: SegmentOpts) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(listId: String, segmentOpts: SegmentOpts? = nil) {
@@ -244,7 +209,7 @@ extension API.Campaigns {
                         self.segmentOpts = segmentOpts
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         listId = try container.decode("list_id")
@@ -258,20 +223,10 @@ extension API.Campaigns {
                         try container.encodeIfPresent(segmentOpts, forKey: "segment_opts")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Recipients else { return false }
-                      guard self.listId == object.listId else { return false }
-                      guard self.segmentOpts == object.segmentOpts else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Recipients, rhs: Recipients) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign. */
-                public class RssOpts: APIModel {
+                public struct RssOpts: MailchimpModel {
 
                     /** The frequency of the RSS Campaign. */
                     public enum Frequency: String, Codable, Equatable, CaseIterable {
@@ -293,7 +248,7 @@ extension API.Campaigns {
                     public var schedule: Schedule?
 
                     /** The schedule for sending the RSS Campaign. */
-                    public class Schedule: APIModel {
+                    public struct Schedule: MailchimpModel {
 
                         /** The day of the week to send a weekly RSS Campaign. */
                         public enum WeeklySendDay: String, Codable, Equatable, CaseIterable {
@@ -319,7 +274,7 @@ extension API.Campaigns {
                         public var weeklySendDay: WeeklySendDay?
 
                         /** The days of the week to send a daily RSS Campaign. */
-                        public class DailySend: APIModel {
+                        public struct DailySend: MailchimpModel {
 
                             /** Sends the daily RSS Campaign on Fridays. */
                             public var friday: Bool?
@@ -352,7 +307,7 @@ extension API.Campaigns {
                                 self.wednesday = wednesday
                             }
 
-                            public required init(from decoder: Decoder) throws {
+                            public init(from decoder: Decoder) throws {
                                 let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                                 friday = try container.decodeIfPresent("friday")
@@ -376,21 +331,6 @@ extension API.Campaigns {
                                 try container.encodeIfPresent(wednesday, forKey: "wednesday")
                             }
 
-                            public func isEqual(to object: Any?) -> Bool {
-                              guard let object = object as? DailySend else { return false }
-                              guard self.friday == object.friday else { return false }
-                              guard self.monday == object.monday else { return false }
-                              guard self.saturday == object.saturday else { return false }
-                              guard self.sunday == object.sunday else { return false }
-                              guard self.thursday == object.thursday else { return false }
-                              guard self.tuesday == object.tuesday else { return false }
-                              guard self.wednesday == object.wednesday else { return false }
-                              return true
-                            }
-
-                            public static func == (lhs: DailySend, rhs: DailySend) -> Bool {
-                                return lhs.isEqual(to: rhs)
-                            }
                         }
 
                         public init(dailySend: DailySend? = nil, hour: Int? = nil, monthlySendDate: Double? = nil, weeklySendDay: WeeklySendDay? = nil) {
@@ -400,7 +340,7 @@ extension API.Campaigns {
                             self.weeklySendDay = weeklySendDay
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             dailySend = try container.decodeIfPresent("daily_send")
@@ -418,18 +358,6 @@ extension API.Campaigns {
                             try container.encodeIfPresent(weeklySendDay, forKey: "weekly_send_day")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Schedule else { return false }
-                          guard self.dailySend == object.dailySend else { return false }
-                          guard self.hour == object.hour else { return false }
-                          guard self.monthlySendDate == object.monthlySendDate else { return false }
-                          guard self.weeklySendDay == object.weeklySendDay else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Schedule, rhs: Schedule) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(feedURL: URL, frequency: Frequency, constrainRssImg: Bool? = nil, schedule: Schedule? = nil) {
@@ -439,7 +367,7 @@ extension API.Campaigns {
                         self.schedule = schedule
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         feedURL = try container.decode("feed_url")
@@ -457,22 +385,10 @@ extension API.Campaigns {
                         try container.encodeIfPresent(schedule, forKey: "schedule")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? RssOpts else { return false }
-                      guard self.feedURL == object.feedURL else { return false }
-                      guard self.frequency == object.frequency else { return false }
-                      guard self.constrainRssImg == object.constrainRssImg else { return false }
-                      guard self.schedule == object.schedule else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: RssOpts, rhs: RssOpts) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/). */
-                public class SocialCard: APIModel {
+                public struct SocialCard: MailchimpModel {
 
                     /** A short summary of the campaign to display. */
                     public var description: String?
@@ -489,7 +405,7 @@ extension API.Campaigns {
                         self.title = title
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         description = try container.decodeIfPresent("description")
@@ -505,21 +421,10 @@ extension API.Campaigns {
                         try container.encodeIfPresent(title, forKey: "title")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? SocialCard else { return false }
-                      guard self.description == object.description else { return false }
-                      guard self.imageURL == object.imageURL else { return false }
-                      guard self.title == object.title else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: SocialCard, rhs: SocialCard) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The tracking options for a campaign. */
-                public class Tracking: APIModel {
+                public struct Tracking: MailchimpModel {
 
                     /** Deprecated */
                     public var capsule: Capsule?
@@ -549,7 +454,7 @@ extension API.Campaigns {
                     public var textClicks: Bool?
 
                     /** Deprecated */
-                    public class Capsule: APIModel {
+                    public struct Capsule: MailchimpModel {
 
                         /** Update contact notes for a campaign based on subscriber email addresses. */
                         public var notes: Bool?
@@ -558,7 +463,7 @@ extension API.Campaigns {
                             self.notes = notes
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             notes = try container.decodeIfPresent("notes")
@@ -570,19 +475,10 @@ extension API.Campaigns {
                             try container.encodeIfPresent(notes, forKey: "notes")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Capsule else { return false }
-                          guard self.notes == object.notes else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Capsule, rhs: Capsule) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     /** Deprecated */
-                    public class Salesforce: APIModel {
+                    public struct Salesforce: MailchimpModel {
 
                         /** Create a campaign in a connected Salesforce account. */
                         public var campaign: Bool?
@@ -595,7 +491,7 @@ extension API.Campaigns {
                             self.notes = notes
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             campaign = try container.decodeIfPresent("campaign")
@@ -609,16 +505,6 @@ extension API.Campaigns {
                             try container.encodeIfPresent(notes, forKey: "notes")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Salesforce else { return false }
-                          guard self.campaign == object.campaign else { return false }
-                          guard self.notes == object.notes else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Salesforce, rhs: Salesforce) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(capsule: Capsule? = nil, clicktale: String? = nil, ecomm360: Bool? = nil, goalTracking: Bool? = nil, googleAnalytics: String? = nil, htmlClicks: Bool? = nil, opens: Bool? = nil, salesforce: Salesforce? = nil, textClicks: Bool? = nil) {
@@ -633,7 +519,7 @@ extension API.Campaigns {
                         self.textClicks = textClicks
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         capsule = try container.decodeIfPresent("capsule")
@@ -661,27 +547,10 @@ extension API.Campaigns {
                         try container.encodeIfPresent(textClicks, forKey: "text_clicks")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Tracking else { return false }
-                      guard self.capsule == object.capsule else { return false }
-                      guard self.clicktale == object.clicktale else { return false }
-                      guard self.ecomm360 == object.ecomm360 else { return false }
-                      guard self.goalTracking == object.goalTracking else { return false }
-                      guard self.googleAnalytics == object.googleAnalytics else { return false }
-                      guard self.htmlClicks == object.htmlClicks else { return false }
-                      guard self.opens == object.opens else { return false }
-                      guard self.salesforce == object.salesforce else { return false }
-                      guard self.textClicks == object.textClicks else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Tracking, rhs: Tracking) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The settings specific to A/B test campaigns. */
-                public class VariateSettings: APIModel {
+                public struct VariateSettings: MailchimpModel {
 
                     /** The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application. */
                     public enum WinnerCriteria: String, Codable, Equatable, CaseIterable {
@@ -722,7 +591,7 @@ extension API.Campaigns {
                         self.waitTime = waitTime
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         winnerCriteria = try container.decode("winner_criteria")
@@ -746,21 +615,6 @@ extension API.Campaigns {
                         try container.encodeIfPresent(waitTime, forKey: "wait_time")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? VariateSettings else { return false }
-                      guard self.winnerCriteria == object.winnerCriteria else { return false }
-                      guard self.fromNames == object.fromNames else { return false }
-                      guard self.replyToAddresses == object.replyToAddresses else { return false }
-                      guard self.sendTimes == object.sendTimes else { return false }
-                      guard self.subjectLines == object.subjectLines else { return false }
-                      guard self.testSize == object.testSize else { return false }
-                      guard self.waitTime == object.waitTime else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: VariateSettings, rhs: VariateSettings) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(settings: Settings, recipients: Recipients? = nil, rssOpts: RssOpts? = nil, socialCard: SocialCard? = nil, tracking: Tracking? = nil, variateSettings: VariateSettings? = nil) {
@@ -772,7 +626,7 @@ extension API.Campaigns {
                     self.variateSettings = variateSettings
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     settings = try container.decode("settings")
@@ -794,20 +648,6 @@ extension API.Campaigns {
                     try container.encodeIfPresent(variateSettings, forKey: "variate_settings")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.settings == object.settings else { return false }
-                  guard self.recipients == object.recipients else { return false }
-                  guard self.rssOpts == object.rssOpts else { return false }
-                  guard self.socialCard == object.socialCard else { return false }
-                  guard self.tracking == object.tracking else { return false }
-                  guard self.variateSettings == object.variateSettings else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -846,7 +686,7 @@ extension API.Campaigns {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** A summary of an individual campaign's settings and content. */
-            public class Status200: APIModel {
+            public struct Status200: MailchimpModel {
 
                 /** How the campaign's content is put together. */
                 public enum ContentType: String, Codable, Equatable, CaseIterable {
@@ -947,7 +787,7 @@ extension API.Campaigns {
                 public var webId: Int?
 
                 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                public class Links: APIModel {
+                public struct Links: MailchimpModel {
 
                     /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -983,7 +823,7 @@ extension API.Campaigns {
                         self.targetSchema = targetSchema
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         href = try container.decodeIfPresent("href")
@@ -1003,23 +843,10 @@ extension API.Campaigns {
                         try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Links else { return false }
-                      guard self.href == object.href else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.rel == object.rel else { return false }
-                      guard self.schema == object.schema else { return false }
-                      guard self.targetSchema == object.targetSchema else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Links, rhs: Links) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign. */
-                public class AbSplitOpts: APIModel {
+                public struct AbSplitOpts: MailchimpModel {
 
                     /** How we should evaluate a winner. Based on 'opens', 'clicks', or 'manual'. */
                     public enum PickWinner: String, Codable, Equatable, CaseIterable {
@@ -1100,7 +927,7 @@ extension API.Campaigns {
                         self.waitUnits = waitUnits
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         fromNamea = try container.decodeIfPresent("from_name_a")
@@ -1138,32 +965,10 @@ extension API.Campaigns {
                         try container.encodeIfPresent(waitUnits, forKey: "wait_units")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? AbSplitOpts else { return false }
-                      guard self.fromNamea == object.fromNamea else { return false }
-                      guard self.fromNameb == object.fromNameb else { return false }
-                      guard self.pickWinner == object.pickWinner else { return false }
-                      guard self.replyEmaila == object.replyEmaila else { return false }
-                      guard self.replyEmailb == object.replyEmailb else { return false }
-                      guard self.sendTimea == object.sendTimea else { return false }
-                      guard self.sendTimeb == object.sendTimeb else { return false }
-                      guard self.sendTimeWinner == object.sendTimeWinner else { return false }
-                      guard self.splitSize == object.splitSize else { return false }
-                      guard self.splitTest == object.splitTest else { return false }
-                      guard self.subjecta == object.subjecta else { return false }
-                      guard self.subjectb == object.subjectb else { return false }
-                      guard self.waitTime == object.waitTime else { return false }
-                      guard self.waitUnits == object.waitUnits else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: AbSplitOpts, rhs: AbSplitOpts) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Updates on campaigns in the process of sending. */
-                public class DeliveryStatus: APIModel {
+                public struct DeliveryStatus: MailchimpModel {
 
                     /** The current state of a campaign delivery. */
                     public enum Status: String, Codable, Equatable, CaseIterable {
@@ -1196,7 +1001,7 @@ extension API.Campaigns {
                         self.status = status
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         canCancel = try container.decodeIfPresent("can_cancel")
@@ -1216,23 +1021,10 @@ extension API.Campaigns {
                         try container.encodeIfPresent(status, forKey: "status")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? DeliveryStatus else { return false }
-                      guard self.canCancel == object.canCancel else { return false }
-                      guard self.emailsCanceled == object.emailsCanceled else { return false }
-                      guard self.emailsSent == object.emailsSent else { return false }
-                      guard self.enabled == object.enabled else { return false }
-                      guard self.status == object.status else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: DeliveryStatus, rhs: DeliveryStatus) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** List settings for the campaign. */
-                public class Recipients: APIModel {
+                public struct Recipients: MailchimpModel {
 
                     /** The unique list id. */
                     public var listId: String?
@@ -1253,7 +1045,7 @@ extension API.Campaigns {
                     public var segmentText: String?
 
                     /** An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options. */
-                    public class SegmentOpts: APIModel {
+                    public struct SegmentOpts: MailchimpModel {
 
                         /** Segment match type. */
                         public enum Match: String, Codable, Equatable, CaseIterable {
@@ -1262,7 +1054,7 @@ extension API.Campaigns {
                         }
 
                         /** Segment match conditions. There are multiple possible types, see the [condition types documentation](https://mailchimp.com/developer/marketing/docs/alternative-schemas/#segment-condition-schemas). */
-                        public var conditions: [[String: Any]]?
+                        public var conditions: [[String: CodableAny]]?
 
                         /** Segment match type. */
                         public var match: Match?
@@ -1273,14 +1065,14 @@ extension API.Campaigns {
                         /** The id for an existing saved segment. */
                         public var savedSegmentId: Int?
 
-                        public init(conditions: [[String: Any]]? = nil, match: Match? = nil, prebuiltSegmentId: String? = nil, savedSegmentId: Int? = nil) {
+                        public init(conditions: [[String: CodableAny]]? = nil, match: Match? = nil, prebuiltSegmentId: String? = nil, savedSegmentId: Int? = nil) {
                             self.conditions = conditions
                             self.match = match
                             self.prebuiltSegmentId = prebuiltSegmentId
                             self.savedSegmentId = savedSegmentId
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             conditions = try container.decodeAnyIfPresent("conditions")
@@ -1298,18 +1090,6 @@ extension API.Campaigns {
                             try container.encodeIfPresent(savedSegmentId, forKey: "saved_segment_id")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? SegmentOpts else { return false }
-                          guard self.conditions == object.conditions else { return false }
-                          guard self.match == object.match else { return false }
-                          guard self.prebuiltSegmentId == object.prebuiltSegmentId else { return false }
-                          guard self.savedSegmentId == object.savedSegmentId else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: SegmentOpts, rhs: SegmentOpts) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(listId: String? = nil, listIsActive: Bool? = nil, listName: String? = nil, recipientCount: Int? = nil, segmentOpts: SegmentOpts? = nil, segmentText: String? = nil) {
@@ -1321,7 +1101,7 @@ extension API.Campaigns {
                         self.segmentText = segmentText
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         listId = try container.decodeIfPresent("list_id")
@@ -1343,24 +1123,10 @@ extension API.Campaigns {
                         try container.encodeIfPresent(segmentText, forKey: "segment_text")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Recipients else { return false }
-                      guard self.listId == object.listId else { return false }
-                      guard self.listIsActive == object.listIsActive else { return false }
-                      guard self.listName == object.listName else { return false }
-                      guard self.recipientCount == object.recipientCount else { return false }
-                      guard self.segmentOpts == object.segmentOpts else { return false }
-                      guard self.segmentText == object.segmentText else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Recipients, rhs: Recipients) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** For sent campaigns, a summary of opens, clicks, and e-commerce data. */
-                public class ReportSummary: APIModel {
+                public struct ReportSummary: MailchimpModel {
 
                     /** The number of unique clicks divided by the total number of successful deliveries. */
                     public var clickRate: Double?
@@ -1384,7 +1150,7 @@ extension API.Campaigns {
                     public var uniqueOpens: Int?
 
                     /** E-Commerce stats for a campaign. */
-                    public class Ecommerce: APIModel {
+                    public struct Ecommerce: MailchimpModel {
 
                         /** The total orders for a campaign. */
                         public var totalOrders: Int?
@@ -1401,7 +1167,7 @@ extension API.Campaigns {
                             self.totalSpent = totalSpent
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             totalOrders = try container.decodeIfPresent("total_orders")
@@ -1417,17 +1183,6 @@ extension API.Campaigns {
                             try container.encodeIfPresent(totalSpent, forKey: "total_spent")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Ecommerce else { return false }
-                          guard self.totalOrders == object.totalOrders else { return false }
-                          guard self.totalRevenue == object.totalRevenue else { return false }
-                          guard self.totalSpent == object.totalSpent else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Ecommerce, rhs: Ecommerce) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(clickRate: Double? = nil, clicks: Int? = nil, ecommerce: Ecommerce? = nil, openRate: Double? = nil, opens: Int? = nil, subscriberClicks: Int? = nil, uniqueOpens: Int? = nil) {
@@ -1440,7 +1195,7 @@ extension API.Campaigns {
                         self.uniqueOpens = uniqueOpens
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         clickRate = try container.decodeIfPresent("click_rate")
@@ -1464,25 +1219,10 @@ extension API.Campaigns {
                         try container.encodeIfPresent(uniqueOpens, forKey: "unique_opens")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? ReportSummary else { return false }
-                      guard self.clickRate == object.clickRate else { return false }
-                      guard self.clicks == object.clicks else { return false }
-                      guard self.ecommerce == object.ecommerce else { return false }
-                      guard self.openRate == object.openRate else { return false }
-                      guard self.opens == object.opens else { return false }
-                      guard self.subscriberClicks == object.subscriberClicks else { return false }
-                      guard self.uniqueOpens == object.uniqueOpens else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: ReportSummary, rhs: ReportSummary) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign. */
-                public class RssOpts: APIModel {
+                public struct RssOpts: MailchimpModel {
 
                     /** The frequency of the RSS Campaign. */
                     public enum Frequency: String, Codable, Equatable, CaseIterable {
@@ -1507,7 +1247,7 @@ extension API.Campaigns {
                     public var schedule: Schedule?
 
                     /** The schedule for sending the RSS Campaign. */
-                    public class Schedule: APIModel {
+                    public struct Schedule: MailchimpModel {
 
                         /** The day of the week to send a weekly RSS Campaign. */
                         public enum WeeklySendDay: String, Codable, Equatable, CaseIterable {
@@ -1533,7 +1273,7 @@ extension API.Campaigns {
                         public var weeklySendDay: WeeklySendDay?
 
                         /** The days of the week to send a daily RSS Campaign. */
-                        public class DailySend: APIModel {
+                        public struct DailySend: MailchimpModel {
 
                             /** Sends the daily RSS Campaign on Fridays. */
                             public var friday: Bool?
@@ -1566,7 +1306,7 @@ extension API.Campaigns {
                                 self.wednesday = wednesday
                             }
 
-                            public required init(from decoder: Decoder) throws {
+                            public init(from decoder: Decoder) throws {
                                 let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                                 friday = try container.decodeIfPresent("friday")
@@ -1590,21 +1330,6 @@ extension API.Campaigns {
                                 try container.encodeIfPresent(wednesday, forKey: "wednesday")
                             }
 
-                            public func isEqual(to object: Any?) -> Bool {
-                              guard let object = object as? DailySend else { return false }
-                              guard self.friday == object.friday else { return false }
-                              guard self.monday == object.monday else { return false }
-                              guard self.saturday == object.saturday else { return false }
-                              guard self.sunday == object.sunday else { return false }
-                              guard self.thursday == object.thursday else { return false }
-                              guard self.tuesday == object.tuesday else { return false }
-                              guard self.wednesday == object.wednesday else { return false }
-                              return true
-                            }
-
-                            public static func == (lhs: DailySend, rhs: DailySend) -> Bool {
-                                return lhs.isEqual(to: rhs)
-                            }
                         }
 
                         public init(dailySend: DailySend? = nil, hour: Int? = nil, monthlySendDate: Double? = nil, weeklySendDay: WeeklySendDay? = nil) {
@@ -1614,7 +1339,7 @@ extension API.Campaigns {
                             self.weeklySendDay = weeklySendDay
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             dailySend = try container.decodeIfPresent("daily_send")
@@ -1632,18 +1357,6 @@ extension API.Campaigns {
                             try container.encodeIfPresent(weeklySendDay, forKey: "weekly_send_day")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Schedule else { return false }
-                          guard self.dailySend == object.dailySend else { return false }
-                          guard self.hour == object.hour else { return false }
-                          guard self.monthlySendDate == object.monthlySendDate else { return false }
-                          guard self.weeklySendDay == object.weeklySendDay else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Schedule, rhs: Schedule) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(constrainRssImg: Bool? = nil, feedURL: URL? = nil, frequency: Frequency? = nil, lastSent: DateTime? = nil, schedule: Schedule? = nil) {
@@ -1654,7 +1367,7 @@ extension API.Campaigns {
                         self.schedule = schedule
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         constrainRssImg = try container.decodeIfPresent("constrain_rss_img")
@@ -1674,23 +1387,10 @@ extension API.Campaigns {
                         try container.encodeIfPresent(schedule, forKey: "schedule")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? RssOpts else { return false }
-                      guard self.constrainRssImg == object.constrainRssImg else { return false }
-                      guard self.feedURL == object.feedURL else { return false }
-                      guard self.frequency == object.frequency else { return false }
-                      guard self.lastSent == object.lastSent else { return false }
-                      guard self.schedule == object.schedule else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: RssOpts, rhs: RssOpts) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The settings for your campaign, including subject, from name, reply-to address, and more. */
-                public class Settings: APIModel {
+                public struct Settings: MailchimpModel {
 
                     /** Whether Mailchimp [authenticated](https://mailchimp.com/help/about-email-authentication/) the campaign. Defaults to `true`. */
                     public var authenticate: Bool?
@@ -1763,7 +1463,7 @@ extension API.Campaigns {
                         self.useConversation = useConversation
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         authenticate = try container.decodeIfPresent("authenticate")
@@ -1807,35 +1507,10 @@ extension API.Campaigns {
                         try container.encodeIfPresent(useConversation, forKey: "use_conversation")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Settings else { return false }
-                      guard self.authenticate == object.authenticate else { return false }
-                      guard self.autoFbPost == object.autoFbPost else { return false }
-                      guard self.autoFooter == object.autoFooter else { return false }
-                      guard self.autoTweet == object.autoTweet else { return false }
-                      guard self.dragAndDrop == object.dragAndDrop else { return false }
-                      guard self.fbComments == object.fbComments else { return false }
-                      guard self.folderId == object.folderId else { return false }
-                      guard self.fromName == object.fromName else { return false }
-                      guard self.inlineCss == object.inlineCss else { return false }
-                      guard self.previewText == object.previewText else { return false }
-                      guard self.replyTo == object.replyTo else { return false }
-                      guard self.subjectLine == object.subjectLine else { return false }
-                      guard self.templateId == object.templateId else { return false }
-                      guard self.timewarp == object.timewarp else { return false }
-                      guard self.title == object.title else { return false }
-                      guard self.toName == object.toName else { return false }
-                      guard self.useConversation == object.useConversation else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Settings, rhs: Settings) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/). */
-                public class SocialCard: APIModel {
+                public struct SocialCard: MailchimpModel {
 
                     /** A short summary of the campaign to display. */
                     public var description: String?
@@ -1852,7 +1527,7 @@ extension API.Campaigns {
                         self.title = title
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         description = try container.decodeIfPresent("description")
@@ -1868,21 +1543,10 @@ extension API.Campaigns {
                         try container.encodeIfPresent(title, forKey: "title")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? SocialCard else { return false }
-                      guard self.description == object.description else { return false }
-                      guard self.imageURL == object.imageURL else { return false }
-                      guard self.title == object.title else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: SocialCard, rhs: SocialCard) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The tracking options for a campaign. */
-                public class Tracking: APIModel {
+                public struct Tracking: MailchimpModel {
 
                     /** Deprecated */
                     public var capsule: Capsule?
@@ -1912,7 +1576,7 @@ extension API.Campaigns {
                     public var textClicks: Bool?
 
                     /** Deprecated */
-                    public class Capsule: APIModel {
+                    public struct Capsule: MailchimpModel {
 
                         /** Update contact notes for a campaign based on subscriber email addresses. */
                         public var notes: Bool?
@@ -1921,7 +1585,7 @@ extension API.Campaigns {
                             self.notes = notes
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             notes = try container.decodeIfPresent("notes")
@@ -1933,19 +1597,10 @@ extension API.Campaigns {
                             try container.encodeIfPresent(notes, forKey: "notes")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Capsule else { return false }
-                          guard self.notes == object.notes else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Capsule, rhs: Capsule) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     /** Deprecated */
-                    public class Salesforce: APIModel {
+                    public struct Salesforce: MailchimpModel {
 
                         /** Create a campaign in a connected Salesforce account. */
                         public var campaign: Bool?
@@ -1958,7 +1613,7 @@ extension API.Campaigns {
                             self.notes = notes
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             campaign = try container.decodeIfPresent("campaign")
@@ -1972,16 +1627,6 @@ extension API.Campaigns {
                             try container.encodeIfPresent(notes, forKey: "notes")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Salesforce else { return false }
-                          guard self.campaign == object.campaign else { return false }
-                          guard self.notes == object.notes else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Salesforce, rhs: Salesforce) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(capsule: Capsule? = nil, clicktale: String? = nil, ecomm360: Bool? = nil, goalTracking: Bool? = nil, googleAnalytics: String? = nil, htmlClicks: Bool? = nil, opens: Bool? = nil, salesforce: Salesforce? = nil, textClicks: Bool? = nil) {
@@ -1996,7 +1641,7 @@ extension API.Campaigns {
                         self.textClicks = textClicks
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         capsule = try container.decodeIfPresent("capsule")
@@ -2024,27 +1669,10 @@ extension API.Campaigns {
                         try container.encodeIfPresent(textClicks, forKey: "text_clicks")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Tracking else { return false }
-                      guard self.capsule == object.capsule else { return false }
-                      guard self.clicktale == object.clicktale else { return false }
-                      guard self.ecomm360 == object.ecomm360 else { return false }
-                      guard self.goalTracking == object.goalTracking else { return false }
-                      guard self.googleAnalytics == object.googleAnalytics else { return false }
-                      guard self.htmlClicks == object.htmlClicks else { return false }
-                      guard self.opens == object.opens else { return false }
-                      guard self.salesforce == object.salesforce else { return false }
-                      guard self.textClicks == object.textClicks else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Tracking, rhs: Tracking) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The settings specific to A/B test campaigns. */
-                public class VariateSettings: APIModel {
+                public struct VariateSettings: MailchimpModel {
 
                     /** The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application. */
                     public enum WinnerCriteria: String, Codable, Equatable, CaseIterable {
@@ -2088,7 +1716,7 @@ extension API.Campaigns {
                     public var winningCombinationId: String?
 
                     /** The settings specific to A/B test campaigns. */
-                    public class Combinations: APIModel {
+                    public struct Combinations: MailchimpModel {
 
                         /** The index of `variate_settings.contents` used. */
                         public var contentDescription: Int?
@@ -2121,7 +1749,7 @@ extension API.Campaigns {
                             self.subjectLine = subjectLine
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             contentDescription = try container.decodeIfPresent("content_description")
@@ -2145,21 +1773,6 @@ extension API.Campaigns {
                             try container.encodeIfPresent(subjectLine, forKey: "subject_line")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Combinations else { return false }
-                          guard self.contentDescription == object.contentDescription else { return false }
-                          guard self.fromName == object.fromName else { return false }
-                          guard self.id == object.id else { return false }
-                          guard self.recipients == object.recipients else { return false }
-                          guard self.replyTo == object.replyTo else { return false }
-                          guard self.sendTime == object.sendTime else { return false }
-                          guard self.subjectLine == object.subjectLine else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Combinations, rhs: Combinations) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(combinations: [Combinations]? = nil, contents: [String]? = nil, fromNames: [String]? = nil, replyToAddresses: [String]? = nil, sendTimes: [DateTime]? = nil, subjectLines: [String]? = nil, testSize: Int? = nil, waitTime: Int? = nil, winnerCriteria: WinnerCriteria? = nil, winningCampaignId: String? = nil, winningCombinationId: String? = nil) {
@@ -2176,7 +1789,7 @@ extension API.Campaigns {
                         self.winningCombinationId = winningCombinationId
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         combinations = try container.decodeArrayIfPresent("combinations")
@@ -2208,25 +1821,6 @@ extension API.Campaigns {
                         try container.encodeIfPresent(winningCombinationId, forKey: "winning_combination_id")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? VariateSettings else { return false }
-                      guard self.combinations == object.combinations else { return false }
-                      guard self.contents == object.contents else { return false }
-                      guard self.fromNames == object.fromNames else { return false }
-                      guard self.replyToAddresses == object.replyToAddresses else { return false }
-                      guard self.sendTimes == object.sendTimes else { return false }
-                      guard self.subjectLines == object.subjectLines else { return false }
-                      guard self.testSize == object.testSize else { return false }
-                      guard self.waitTime == object.waitTime else { return false }
-                      guard self.winnerCriteria == object.winnerCriteria else { return false }
-                      guard self.winningCampaignId == object.winningCampaignId else { return false }
-                      guard self.winningCombinationId == object.winningCombinationId else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: VariateSettings, rhs: VariateSettings) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(links: [Links]? = nil, abSplitOpts: AbSplitOpts? = nil, archiveURL: String? = nil, contentType: ContentType? = nil, createTime: DateTime? = nil, deliveryStatus: DeliveryStatus? = nil, emailsSent: Int? = nil, id: String? = nil, longArchiveURL: String? = nil, needsBlockRefresh: Bool? = nil, parentCampaignId: String? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, resendable: Bool? = nil, rssOpts: RssOpts? = nil, sendTime: DateTime? = nil, settings: Settings? = nil, socialCard: SocialCard? = nil, status: Status? = nil, tracking: Tracking? = nil, type: `Type`? = nil, variateSettings: VariateSettings? = nil, webId: Int? = nil) {
@@ -2255,7 +1849,7 @@ extension API.Campaigns {
                     self.webId = webId
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     links = try container.decodeArrayIfPresent("_links")
@@ -2311,41 +1905,10 @@ extension API.Campaigns {
                     try container.encodeIfPresent(webId, forKey: "web_id")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.links == object.links else { return false }
-                  guard self.abSplitOpts == object.abSplitOpts else { return false }
-                  guard self.archiveURL == object.archiveURL else { return false }
-                  guard self.contentType == object.contentType else { return false }
-                  guard self.createTime == object.createTime else { return false }
-                  guard self.deliveryStatus == object.deliveryStatus else { return false }
-                  guard self.emailsSent == object.emailsSent else { return false }
-                  guard self.id == object.id else { return false }
-                  guard self.longArchiveURL == object.longArchiveURL else { return false }
-                  guard self.needsBlockRefresh == object.needsBlockRefresh else { return false }
-                  guard self.parentCampaignId == object.parentCampaignId else { return false }
-                  guard self.recipients == object.recipients else { return false }
-                  guard self.reportSummary == object.reportSummary else { return false }
-                  guard self.resendable == object.resendable else { return false }
-                  guard self.rssOpts == object.rssOpts else { return false }
-                  guard self.sendTime == object.sendTime else { return false }
-                  guard self.settings == object.settings else { return false }
-                  guard self.socialCard == object.socialCard else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.tracking == object.tracking else { return false }
-                  guard self.type == object.type else { return false }
-                  guard self.variateSettings == object.variateSettings else { return false }
-                  guard self.webId == object.webId else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-            public class DefaultResponse: APIModel {
+            public struct DefaultResponse: MailchimpModel {
 
                 /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
                 public var detail: String
@@ -2370,7 +1933,7 @@ extension API.Campaigns {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     detail = try container.decode("detail")
@@ -2390,19 +1953,6 @@ extension API.Campaigns {
                     try container.encode(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? DefaultResponse else { return false }
-                  guard self.detail == object.detail else { return false }
-                  guard self.instance == object.instance else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: DefaultResponse, rhs: DefaultResponse) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
             case status200(Status200)

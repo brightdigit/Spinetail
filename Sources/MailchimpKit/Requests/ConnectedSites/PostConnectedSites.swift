@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.ConnectedSites {
+extension MailchimpKit.ConnectedSites {
 
     /**
     Add connected site
@@ -19,7 +19,7 @@ extension API.ConnectedSites {
         public final class Request: APIRequest<Response> {
 
             /** Information about a specific connected site. */
-            public class Body: APIModel {
+            public struct Body: MailchimpModel {
 
                 /** The connected site domain. */
                 public var domain: String
@@ -32,7 +32,7 @@ extension API.ConnectedSites {
                     self.foreignId = foreignId
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     domain = try container.decode("domain")
@@ -46,16 +46,6 @@ extension API.ConnectedSites {
                     try container.encode(foreignId, forKey: "foreign_id")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.domain == object.domain else { return false }
-                  guard self.foreignId == object.foreignId else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public var body: Body
@@ -71,7 +61,7 @@ extension API.ConnectedSites {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** Information about a specific connected site. */
-            public class Status200: APIModel {
+            public struct Status200: MailchimpModel {
 
                 /** A list of link types and descriptions for the API schema documents. */
                 public var links: [Links]?
@@ -98,7 +88,7 @@ extension API.ConnectedSites {
                 public var updatedAt: DateTime?
 
                 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                public class Links: APIModel {
+                public struct Links: MailchimpModel {
 
                     /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -134,7 +124,7 @@ extension API.ConnectedSites {
                         self.targetSchema = targetSchema
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         href = try container.decodeIfPresent("href")
@@ -154,23 +144,10 @@ extension API.ConnectedSites {
                         try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Links else { return false }
-                      guard self.href == object.href else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.rel == object.rel else { return false }
-                      guard self.schema == object.schema else { return false }
-                      guard self.targetSchema == object.targetSchema else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Links, rhs: Links) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The script used to connect your site with Mailchimp. */
-                public class SiteScript: APIModel {
+                public struct SiteScript: MailchimpModel {
 
                     /** A pre-built script that you can copy-and-paste into your site to integrate it with Mailchimp. */
                     public var fragment: String?
@@ -183,7 +160,7 @@ extension API.ConnectedSites {
                         self.url = url
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         fragment = try container.decodeIfPresent("fragment")
@@ -197,16 +174,6 @@ extension API.ConnectedSites {
                         try container.encodeIfPresent(url, forKey: "url")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? SiteScript else { return false }
-                      guard self.fragment == object.fragment else { return false }
-                      guard self.url == object.url else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: SiteScript, rhs: SiteScript) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(links: [Links]? = nil, createdAt: DateTime? = nil, domain: String? = nil, foreignId: String? = nil, platform: String? = nil, siteScript: SiteScript? = nil, storeId: String? = nil, updatedAt: DateTime? = nil) {
@@ -220,7 +187,7 @@ extension API.ConnectedSites {
                     self.updatedAt = updatedAt
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     links = try container.decodeArrayIfPresent("_links")
@@ -246,26 +213,10 @@ extension API.ConnectedSites {
                     try container.encodeIfPresent(updatedAt, forKey: "updated_at")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.links == object.links else { return false }
-                  guard self.createdAt == object.createdAt else { return false }
-                  guard self.domain == object.domain else { return false }
-                  guard self.foreignId == object.foreignId else { return false }
-                  guard self.platform == object.platform else { return false }
-                  guard self.siteScript == object.siteScript else { return false }
-                  guard self.storeId == object.storeId else { return false }
-                  guard self.updatedAt == object.updatedAt else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-            public class DefaultResponse: APIModel {
+            public struct DefaultResponse: MailchimpModel {
 
                 /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
                 public var detail: String
@@ -290,7 +241,7 @@ extension API.ConnectedSites {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     detail = try container.decode("detail")
@@ -310,19 +261,6 @@ extension API.ConnectedSites {
                     try container.encode(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? DefaultResponse else { return false }
-                  guard self.detail == object.detail else { return false }
-                  guard self.instance == object.instance else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: DefaultResponse, rhs: DefaultResponse) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
             case status200(Status200)

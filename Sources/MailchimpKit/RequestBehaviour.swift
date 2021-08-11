@@ -134,15 +134,15 @@ public class AnyRequest: APIRequest<AnyResponseValue> {
 
 public struct AnyResponseValue: APIResponseValue, CustomDebugStringConvertible, CustomStringConvertible {
 
-    public typealias SuccessType = Any
+    public typealias SuccessType = AnyCodable
 
     public let statusCode: Int
     public let successful: Bool
     public let response: Any
     public let responseEnum: Any
-    public let success: Any?
+    public let success: AnyCodable?
 
-    public init(statusCode: Int, successful: Bool, response: Any, responseEnum: Any, success: Any?) {
+    public init(statusCode: Int, successful: Bool, response: Any, responseEnum: Any, success: AnyCodable?) {
         self.statusCode = statusCode
         self.successful = successful
         self.response = response
@@ -167,17 +167,17 @@ public struct AnyResponseValue: APIResponseValue, CustomDebugStringConvertible, 
     }
 }
 
-extension APIResponseValue {
-    public func asAny() -> AnyResponseValue {
-        return AnyResponseValue(statusCode: statusCode, successful: successful, response: response, responseEnum: self, success: success)
-    }
-}
+//extension APIResponseValue {
+//    public func asAny() -> AnyResponseValue {
+//      return AnyResponseValue(statusCode: statusCode, successful: successful, response: response, responseEnum: self, s //(AnyCodable(success)))
+//    }
+//}
 
-extension APIResponse {
-    public func asAny() -> APIResponse<AnyResponseValue> {
-        return APIResponse<AnyResponseValue>(request: request.asAny(), result: result.map{ $0.asAny() }, urlRequest: urlRequest, urlResponse: urlResponse, data: data, metrics: metrics)
-    }
-}
+//extension APIResponse {
+//    public func asAny() -> APIResponse<AnyResponseValue> {
+//        return APIResponse<AnyResponseValue>(request: request.asAny(), result: result.map{ $0.asAny() }, urlRequest: urlRequest, urlResponse: urlResponse, data: data, metrics: metrics)
+//    }
+//}
 
 extension APIRequest {
     public func asAny() -> AnyRequest {

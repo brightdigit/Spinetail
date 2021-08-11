@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Conversations {
+extension MailchimpKit.Conversations {
 
     /**
     List conversations
@@ -101,7 +101,7 @@ extension API.Conversations {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** A collection of this account's tracked conversations. */
-            public class Status200: APIModel {
+            public struct Status200: MailchimpModel {
 
                 /** A list of link types and descriptions for the API schema documents. */
                 public var links: [Links]?
@@ -113,7 +113,7 @@ extension API.Conversations {
                 public var totalItems: Int?
 
                 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                public class Links: APIModel {
+                public struct Links: MailchimpModel {
 
                     /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -149,7 +149,7 @@ extension API.Conversations {
                         self.targetSchema = targetSchema
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         href = try container.decodeIfPresent("href")
@@ -169,23 +169,10 @@ extension API.Conversations {
                         try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Links else { return false }
-                      guard self.href == object.href else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.rel == object.rel else { return false }
-                      guard self.schema == object.schema else { return false }
-                      guard self.targetSchema == object.targetSchema else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Links, rhs: Links) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account. */
-                public class Conversations: APIModel {
+                public struct Conversations: MailchimpModel {
 
                     /** A list of link types and descriptions for the API schema documents. */
                     public var links: [Links]?
@@ -218,7 +205,7 @@ extension API.Conversations {
                     public var unreadMessages: Int?
 
                     /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                    public class Links: APIModel {
+                    public struct Links: MailchimpModel {
 
                         /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                         public enum Method: String, Codable, Equatable, CaseIterable {
@@ -254,7 +241,7 @@ extension API.Conversations {
                             self.targetSchema = targetSchema
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             href = try container.decodeIfPresent("href")
@@ -274,23 +261,10 @@ extension API.Conversations {
                             try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Links else { return false }
-                          guard self.href == object.href else { return false }
-                          guard self.method == object.method else { return false }
-                          guard self.rel == object.rel else { return false }
-                          guard self.schema == object.schema else { return false }
-                          guard self.targetSchema == object.targetSchema else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Links, rhs: Links) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     /** The most recent message in the conversation. */
-                    public class LastMessage: APIModel {
+                    public struct LastMessage: MailchimpModel {
 
                         /** A label representing the email of the sender of this message. */
                         public var fromEmail: String?
@@ -319,7 +293,7 @@ extension API.Conversations {
                             self.timestamp = timestamp
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             fromEmail = try container.decodeIfPresent("from_email")
@@ -341,20 +315,6 @@ extension API.Conversations {
                             try container.encodeIfPresent(timestamp, forKey: "timestamp")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? LastMessage else { return false }
-                          guard self.fromEmail == object.fromEmail else { return false }
-                          guard self.fromLabel == object.fromLabel else { return false }
-                          guard self.message == object.message else { return false }
-                          guard self.read == object.read else { return false }
-                          guard self.subject == object.subject else { return false }
-                          guard self.timestamp == object.timestamp else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: LastMessage, rhs: LastMessage) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(links: [Links]? = nil, campaignId: String? = nil, fromEmail: String? = nil, fromLabel: String? = nil, id: String? = nil, lastMessage: LastMessage? = nil, listId: String? = nil, messageCount: Int? = nil, subject: String? = nil, unreadMessages: Int? = nil) {
@@ -370,7 +330,7 @@ extension API.Conversations {
                         self.unreadMessages = unreadMessages
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         links = try container.decodeArrayIfPresent("_links")
@@ -400,24 +360,6 @@ extension API.Conversations {
                         try container.encodeIfPresent(unreadMessages, forKey: "unread_messages")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Conversations else { return false }
-                      guard self.links == object.links else { return false }
-                      guard self.campaignId == object.campaignId else { return false }
-                      guard self.fromEmail == object.fromEmail else { return false }
-                      guard self.fromLabel == object.fromLabel else { return false }
-                      guard self.id == object.id else { return false }
-                      guard self.lastMessage == object.lastMessage else { return false }
-                      guard self.listId == object.listId else { return false }
-                      guard self.messageCount == object.messageCount else { return false }
-                      guard self.subject == object.subject else { return false }
-                      guard self.unreadMessages == object.unreadMessages else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Conversations, rhs: Conversations) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(links: [Links]? = nil, conversations: [Conversations]? = nil, totalItems: Int? = nil) {
@@ -426,7 +368,7 @@ extension API.Conversations {
                     self.totalItems = totalItems
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     links = try container.decodeArrayIfPresent("_links")
@@ -442,21 +384,10 @@ extension API.Conversations {
                     try container.encodeIfPresent(totalItems, forKey: "total_items")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.links == object.links else { return false }
-                  guard self.conversations == object.conversations else { return false }
-                  guard self.totalItems == object.totalItems else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-            public class DefaultResponse: APIModel {
+            public struct DefaultResponse: MailchimpModel {
 
                 /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
                 public var detail: String
@@ -481,7 +412,7 @@ extension API.Conversations {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     detail = try container.decode("detail")
@@ -501,19 +432,6 @@ extension API.Conversations {
                     try container.encode(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? DefaultResponse else { return false }
-                  guard self.detail == object.detail else { return false }
-                  guard self.instance == object.instance else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: DefaultResponse, rhs: DefaultResponse) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
             case status200(Status200)

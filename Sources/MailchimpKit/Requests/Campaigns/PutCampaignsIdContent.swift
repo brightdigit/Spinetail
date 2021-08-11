@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Campaigns {
+extension MailchimpKit.Campaigns {
 
     /**
     Set campaign content
@@ -19,7 +19,7 @@ extension API.Campaigns {
         public final class Request: APIRequest<Response> {
 
             /** The HTML and plain-text content for a campaign */
-            public class Body: APIModel {
+            public struct Body: MailchimpModel {
 
                 /** Available when uploading an archive to create campaign content. The archive should include all campaign content and images. [Learn more](https://mailchimp.com/help/import-a-custom-html-template/). */
                 public var archive: Archive?
@@ -40,7 +40,7 @@ extension API.Campaigns {
                 public var variateContents: [VariateContents]?
 
                 /** Available when uploading an archive to create campaign content. The archive should include all campaign content and images. [Learn more](https://mailchimp.com/help/import-a-custom-html-template/). */
-                public class Archive: APIModel {
+                public struct Archive: MailchimpModel {
 
                     /** The type of encoded file. Defaults to zip. */
                     public enum ArchiveType: String, Codable, Equatable, CaseIterable {
@@ -63,7 +63,7 @@ extension API.Campaigns {
                         self.archiveType = archiveType
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         archiveContent = try container.decode("archive_content")
@@ -77,33 +77,23 @@ extension API.Campaigns {
                         try container.encodeIfPresent(archiveType, forKey: "archive_type")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Archive else { return false }
-                      guard self.archiveContent == object.archiveContent else { return false }
-                      guard self.archiveType == object.archiveType else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Archive, rhs: Archive) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Use this template to generate the HTML content of the campaign */
-                public class Template: APIModel {
+                public struct Template: MailchimpModel {
 
                     /** The id of the template to use. */
                     public var id: Int
 
                     /** Content for the sections of the template. Each key should be the unique [mc:edit area](https://mailchimp.com/help/create-editable-content-areas-with-mailchimps-template-language/) name from the template. */
-                    public var sections: [String: Any]?
+                    public var sections: [String: CodableAny]?
 
-                    public init(id: Int, sections: [String: Any]? = nil) {
+                    public init(id: Int, sections: [String: CodableAny]? = nil) {
                         self.id = id
                         self.sections = sections
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         id = try container.decode("id")
@@ -117,20 +107,10 @@ extension API.Campaigns {
                         try container.encodeAnyIfPresent(sections, forKey: "sections")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Template else { return false }
-                      guard self.id == object.id else { return false }
-                      guard NSDictionary(dictionary: self.sections ?? [:]).isEqual(to: object.sections ?? [:]) else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Template, rhs: Template) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The HTML and plain-text content for a campaign */
-                public class VariateContents: APIModel {
+                public struct VariateContents: MailchimpModel {
 
                     /** The label used to identify the content option. */
                     public var contentLabel: String
@@ -151,7 +131,7 @@ extension API.Campaigns {
                     public var url: String?
 
                     /** Available when uploading an archive to create campaign content. The archive should include all campaign content and images. [Learn more](https://mailchimp.com/help/import-a-custom-html-template/). */
-                    public class Archive: APIModel {
+                    public struct Archive: MailchimpModel {
 
                         /** The type of encoded file. Defaults to zip. */
                         public enum ArchiveType: String, Codable, Equatable, CaseIterable {
@@ -174,7 +154,7 @@ extension API.Campaigns {
                             self.archiveType = archiveType
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             archiveContent = try container.decode("archive_content")
@@ -188,33 +168,23 @@ extension API.Campaigns {
                             try container.encodeIfPresent(archiveType, forKey: "archive_type")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Archive else { return false }
-                          guard self.archiveContent == object.archiveContent else { return false }
-                          guard self.archiveType == object.archiveType else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Archive, rhs: Archive) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     /** Use this template to generate the HTML content for the campaign. */
-                    public class Template: APIModel {
+                    public struct Template: MailchimpModel {
 
                         /** The id of the template to use. */
                         public var id: Int
 
                         /** Content for the sections of the template. Each key should be the unique [mc:edit area](https://mailchimp.com/help/create-editable-content-areas-with-mailchimps-template-language/) name from the template. */
-                        public var sections: [String: Any]?
+                        public var sections: [String: CodableAny]?
 
-                        public init(id: Int, sections: [String: Any]? = nil) {
+                        public init(id: Int, sections: [String: CodableAny]? = nil) {
                             self.id = id
                             self.sections = sections
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             id = try container.decode("id")
@@ -228,16 +198,6 @@ extension API.Campaigns {
                             try container.encodeAnyIfPresent(sections, forKey: "sections")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Template else { return false }
-                          guard self.id == object.id else { return false }
-                          guard NSDictionary(dictionary: self.sections ?? [:]).isEqual(to: object.sections ?? [:]) else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Template, rhs: Template) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(contentLabel: String, archive: Archive? = nil, html: String? = nil, plainText: String? = nil, template: Template? = nil, url: String? = nil) {
@@ -249,7 +209,7 @@ extension API.Campaigns {
                         self.url = url
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         contentLabel = try container.decode("content_label")
@@ -271,20 +231,6 @@ extension API.Campaigns {
                         try container.encodeIfPresent(url, forKey: "url")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? VariateContents else { return false }
-                      guard self.contentLabel == object.contentLabel else { return false }
-                      guard self.archive == object.archive else { return false }
-                      guard self.html == object.html else { return false }
-                      guard self.plainText == object.plainText else { return false }
-                      guard self.template == object.template else { return false }
-                      guard self.url == object.url else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: VariateContents, rhs: VariateContents) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(archive: Archive? = nil, html: String? = nil, plainText: String? = nil, template: Template? = nil, url: String? = nil, variateContents: [VariateContents]? = nil) {
@@ -296,7 +242,7 @@ extension API.Campaigns {
                     self.variateContents = variateContents
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     archive = try container.decodeIfPresent("archive")
@@ -318,20 +264,6 @@ extension API.Campaigns {
                     try container.encodeIfPresent(variateContents, forKey: "variate_contents")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.archive == object.archive else { return false }
-                  guard self.html == object.html else { return false }
-                  guard self.plainText == object.plainText else { return false }
-                  guard self.template == object.template else { return false }
-                  guard self.url == object.url else { return false }
-                  guard self.variateContents == object.variateContents else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -370,7 +302,7 @@ extension API.Campaigns {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** The HTML and plain-text content for a campaign. */
-            public class Status200: APIModel {
+            public struct Status200: MailchimpModel {
 
                 /** A list of link types and descriptions for the API schema documents. */
                 public var links: [Links]?
@@ -388,7 +320,7 @@ extension API.Campaigns {
                 public var variateContents: [VariateContents]?
 
                 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                public class Links: APIModel {
+                public struct Links: MailchimpModel {
 
                     /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -424,7 +356,7 @@ extension API.Campaigns {
                         self.targetSchema = targetSchema
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         href = try container.decodeIfPresent("href")
@@ -444,23 +376,10 @@ extension API.Campaigns {
                         try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Links else { return false }
-                      guard self.href == object.href else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.rel == object.rel else { return false }
-                      guard self.schema == object.schema else { return false }
-                      guard self.targetSchema == object.targetSchema else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Links, rhs: Links) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The HTML and plain-text content for a campaign. */
-                public class VariateContents: APIModel {
+                public struct VariateContents: MailchimpModel {
 
                     /** Label used to identify the content option. */
                     public var contentLabel: String?
@@ -477,7 +396,7 @@ extension API.Campaigns {
                         self.plainText = plainText
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         contentLabel = try container.decodeIfPresent("content_label")
@@ -493,17 +412,6 @@ extension API.Campaigns {
                         try container.encodeIfPresent(plainText, forKey: "plain_text")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? VariateContents else { return false }
-                      guard self.contentLabel == object.contentLabel else { return false }
-                      guard self.html == object.html else { return false }
-                      guard self.plainText == object.plainText else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: VariateContents, rhs: VariateContents) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(links: [Links]? = nil, archiveHtml: String? = nil, html: String? = nil, plainText: String? = nil, variateContents: [VariateContents]? = nil) {
@@ -514,7 +422,7 @@ extension API.Campaigns {
                     self.variateContents = variateContents
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     links = try container.decodeArrayIfPresent("_links")
@@ -534,23 +442,10 @@ extension API.Campaigns {
                     try container.encodeIfPresent(variateContents, forKey: "variate_contents")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.links == object.links else { return false }
-                  guard self.archiveHtml == object.archiveHtml else { return false }
-                  guard self.html == object.html else { return false }
-                  guard self.plainText == object.plainText else { return false }
-                  guard self.variateContents == object.variateContents else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-            public class DefaultResponse: APIModel {
+            public struct DefaultResponse: MailchimpModel {
 
                 /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
                 public var detail: String
@@ -575,7 +470,7 @@ extension API.Campaigns {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     detail = try container.decode("detail")
@@ -595,19 +490,6 @@ extension API.Campaigns {
                     try container.encode(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? DefaultResponse else { return false }
-                  guard self.detail == object.detail else { return false }
-                  guard self.instance == object.instance else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: DefaultResponse, rhs: DefaultResponse) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
             case status200(Status200)

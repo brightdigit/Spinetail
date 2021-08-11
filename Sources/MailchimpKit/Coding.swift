@@ -5,7 +5,7 @@
 
 import Foundation
 
-public protocol APIModel: Codable, Equatable { }
+public protocol MailchimpModel: Codable, Equatable { }
 
 public typealias DateTime = Date
 public typealias File = Data
@@ -25,7 +25,7 @@ public protocol RequestEncoder {
 
 extension JSONEncoder: RequestEncoder {}
 
-extension APIModel {
+extension MailchimpModel {
     func encode() -> [String: Any] {
         guard
             let jsonData = try? JSONEncoder().encode(self),
@@ -130,7 +130,7 @@ extension KeyedDecodingContainer {
         do {
             container = try nestedUnkeyedContainer(forKey: key)
         } catch {
-            if API.safeArrayDecoding {
+            if MailchimpKit.safeArrayDecoding {
                 return array
             } else {
                 throw error
@@ -142,7 +142,7 @@ extension KeyedDecodingContainer {
                 let element = try container.decode(T.self)
                 array.append(element)
             } catch {
-                if API.safeArrayDecoding {
+                if MailchimpKit.safeArrayDecoding {
                     // hack to advance the current index
                     _ = try? container.decode(AnyCodable.self)
                 } else {
@@ -164,7 +164,7 @@ extension KeyedDecodingContainer {
     }
 
     fileprivate func decodeOptional<T>(_ closure: () throws -> T? ) throws -> T? {
-        if API.safeOptionalDecoding {
+        if MailchimpKit.safeOptionalDecoding {
             do {
                 return try closure()
             } catch {
@@ -319,7 +319,7 @@ extension DateDay {
 
 extension Date {
     func encode() -> Any {
-        return API.dateEncodingFormatter.string(from: self)
+        return MailchimpKit.dateEncodingFormatter.string(from: self)
     }
 }
 

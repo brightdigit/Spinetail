@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Lists {
+extension MailchimpKit.Lists {
 
     /**
     Update merge field
@@ -19,7 +19,7 @@ extension API.Lists {
         public final class Request: APIRequest<Response> {
 
             /** A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list. */
-            public class Body: APIModel {
+            public struct Body: MailchimpModel {
 
                 /** The name of the merge field (audience field). */
                 public var name: String
@@ -46,7 +46,7 @@ extension API.Lists {
                 public var tag: String?
 
                 /** Extra options for some merge field types. */
-                public class Options: APIModel {
+                public struct Options: MailchimpModel {
 
                     /** In a radio or dropdown non-group field, the available options for members to pick from. */
                     public var choices: [String]?
@@ -67,7 +67,7 @@ extension API.Lists {
                         self.phoneFormat = phoneFormat
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         choices = try container.decodeArrayIfPresent("choices")
@@ -85,18 +85,6 @@ extension API.Lists {
                         try container.encodeIfPresent(phoneFormat, forKey: "phone_format")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Options else { return false }
-                      guard self.choices == object.choices else { return false }
-                      guard self.dateFormat == object.dateFormat else { return false }
-                      guard self.defaultCountry == object.defaultCountry else { return false }
-                      guard self.phoneFormat == object.phoneFormat else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Options, rhs: Options) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(name: String, defaultValue: String? = nil, displayOrder: Int? = nil, helpText: String? = nil, options: Options? = nil, `public`: Bool? = nil, required: Bool? = nil, tag: String? = nil) {
@@ -110,7 +98,7 @@ extension API.Lists {
                     self.tag = tag
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     name = try container.decode("name")
@@ -136,22 +124,6 @@ extension API.Lists {
                     try container.encodeIfPresent(tag, forKey: "tag")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.name == object.name else { return false }
-                  guard self.defaultValue == object.defaultValue else { return false }
-                  guard self.displayOrder == object.displayOrder else { return false }
-                  guard self.helpText == object.helpText else { return false }
-                  guard self.options == object.options else { return false }
-                  guard self.`public` == object.`public` else { return false }
-                  guard self.required == object.required else { return false }
-                  guard self.tag == object.tag else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -194,7 +166,7 @@ extension API.Lists {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list. */
-            public class Status200: APIModel {
+            public struct Status200: MailchimpModel {
 
                 /** The [type](https://mailchimp.com/help/manage-audience-signup-form-fields/#Audience_field_types) for the merge field. */
                 public enum `Type`: String, Codable, Equatable, CaseIterable {
@@ -248,7 +220,7 @@ extension API.Lists {
                 public var type: `Type`?
 
                 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                public class Links: APIModel {
+                public struct Links: MailchimpModel {
 
                     /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -284,7 +256,7 @@ extension API.Lists {
                         self.targetSchema = targetSchema
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         href = try container.decodeIfPresent("href")
@@ -304,23 +276,10 @@ extension API.Lists {
                         try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Links else { return false }
-                      guard self.href == object.href else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.rel == object.rel else { return false }
-                      guard self.schema == object.schema else { return false }
-                      guard self.targetSchema == object.targetSchema else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Links, rhs: Links) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Extra options for some merge field types. */
-                public class Options: APIModel {
+                public struct Options: MailchimpModel {
 
                     /** In a radio or dropdown non-group field, the available options for members to pick from. */
                     public var choices: [String]?
@@ -345,7 +304,7 @@ extension API.Lists {
                         self.size = size
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         choices = try container.decodeArrayIfPresent("choices")
@@ -365,19 +324,6 @@ extension API.Lists {
                         try container.encodeIfPresent(size, forKey: "size")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Options else { return false }
-                      guard self.choices == object.choices else { return false }
-                      guard self.dateFormat == object.dateFormat else { return false }
-                      guard self.defaultCountry == object.defaultCountry else { return false }
-                      guard self.phoneFormat == object.phoneFormat else { return false }
-                      guard self.size == object.size else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Options, rhs: Options) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(links: [Links]? = nil, defaultValue: String? = nil, displayOrder: Int? = nil, helpText: String? = nil, listId: String? = nil, mergeId: Int? = nil, name: String? = nil, options: Options? = nil, `public`: Bool? = nil, required: Bool? = nil, tag: String? = nil, type: `Type`? = nil) {
@@ -395,7 +341,7 @@ extension API.Lists {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     links = try container.decodeArrayIfPresent("_links")
@@ -429,30 +375,10 @@ extension API.Lists {
                     try container.encodeIfPresent(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.links == object.links else { return false }
-                  guard self.defaultValue == object.defaultValue else { return false }
-                  guard self.displayOrder == object.displayOrder else { return false }
-                  guard self.helpText == object.helpText else { return false }
-                  guard self.listId == object.listId else { return false }
-                  guard self.mergeId == object.mergeId else { return false }
-                  guard self.name == object.name else { return false }
-                  guard self.options == object.options else { return false }
-                  guard self.`public` == object.`public` else { return false }
-                  guard self.required == object.required else { return false }
-                  guard self.tag == object.tag else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-            public class DefaultResponse: APIModel {
+            public struct DefaultResponse: MailchimpModel {
 
                 /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
                 public var detail: String
@@ -477,7 +403,7 @@ extension API.Lists {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     detail = try container.decode("detail")
@@ -497,19 +423,6 @@ extension API.Lists {
                     try container.encode(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? DefaultResponse else { return false }
-                  guard self.detail == object.detail else { return false }
-                  guard self.instance == object.instance else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: DefaultResponse, rhs: DefaultResponse) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
             case status200(Status200)

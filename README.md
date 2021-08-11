@@ -1,10 +1,10 @@
-# API
+# MailchimpKit
 
 This is an api generated from a OpenAPI 3.0 spec with [SwagGen](https://github.com/yonaskolb/SwagGen)
 
 ## Operation
 
-Each operation lives under the `API` namespace and within an optional tag: `API(.tagName).operationId`. If an operation doesn't have an operationId one will be generated from the path and method.
+Each operation lives under the `MailchimpKit` namespace and within an optional tag: `MailchimpKit(.tagName).operationId`. If an operation doesn't have an operationId one will be generated from the path and method.
 
 Each operation has a nested `Request` and a `Response`, as well as a static `service` property
 
@@ -57,7 +57,7 @@ Example request (that is not neccessarily in this api):
 
 ```swift
 
-let getUserRequest = API.User.GetUser.Request(id: 123)
+let getUserRequest = MailchimpKit.User.GetUser.Request(id: 123)
 let apiClient = APIClient.default
 
 apiClient.makeRequest(getUserRequest) { apiResponse in
@@ -74,7 +74,7 @@ apiClient.makeRequest(getUserRequest) { apiResponse in
 }
 ```
 
-Each [Request](#request) also has a `makeRequest` convenience function that uses `API.shared`.
+Each [Request](#request) also has a `makeRequest` convenience function that uses `MailchimpKit.shared`.
 
 #### APIResponse
 The `APIResponse` that gets passed to the completion closure contains the following properties:
@@ -88,7 +88,7 @@ The `APIResponse` that gets passed to the completion closure contains the follow
 
 #### Encoding and Decoding
 Only JSON requests and responses are supported. These are encoded and decoded by `JSONEncoder` and `JSONDecoder` respectively, using Swift's `Codable` apis.
-There are some options to control how invalid JSON is handled when decoding and these are available as static properties on `API`:
+There are some options to control how invalid JSON is handled when decoding and these are available as static properties on `MailchimpKit`:
 
 - `safeOptionalDecoding`: Whether to discard any errors when decoding optional properties. Defaults to `true`.
 - `safeArrayDecoding`: Whether to remove invalid elements instead of throwing when decoding arrays. Defaults to `true`.
@@ -153,12 +153,12 @@ To add support for a specific asynchronous library, just add an extension on `AP
 
 ## Requests
 
-- **API.ActivityFeed**
+- **MailchimpKit.ActivityFeed**
 	- **GetActivityFeedChimpChatter**: GET `/activity-feed/chimp-chatter`
-- **API.AuthorizedApps**
+- **MailchimpKit.AuthorizedApps**
 	- **GetAuthorizedApps**: GET `/authorized-apps`
 	- **GetAuthorizedAppsId**: GET `/authorized-apps/{app_id}`
-- **API.Automations**
+- **MailchimpKit.Automations**
 	- **ArchiveAutomations**: POST `/automations/{workflow_id}/actions/archive`
 	- **DeleteAutomationsIdEmailsId**: DELETE `/automations/{workflow_id}/emails/{workflow_email_id}`
 	- **GetAutomations**: GET `/automations`
@@ -177,24 +177,24 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PostAutomationsIdEmailsIdActionsStart**: POST `/automations/{workflow_id}/emails/{workflow_email_id}/actions/start`
 	- **PostAutomationsIdEmailsIdQueue**: POST `/automations/{workflow_id}/emails/{workflow_email_id}/queue`
 	- **PostAutomationsIdRemovedSubscribers**: POST `/automations/{workflow_id}/removed-subscribers`
-- **API.Batches**
+- **MailchimpKit.Batches**
 	- **DeleteBatchesId**: DELETE `/batches/{batch_id}`
 	- **GetBatches**: GET `/batches`
 	- **GetBatchesId**: GET `/batches/{batch_id}`
 	- **PostBatches**: POST `/batches`
-- **API.BatchWebhooks**
+- **MailchimpKit.BatchWebhooks**
 	- **DeleteBatchWebhookId**: DELETE `/batch-webhooks/{batch_webhook_id}`
 	- **GetBatchWebhook**: GET `/batch-webhooks/{batch_webhook_id}`
 	- **GetBatchWebhooks**: GET `/batch-webhooks`
 	- **PatchBatchWebhooks**: PATCH `/batch-webhooks/{batch_webhook_id}`
 	- **PostBatchWebhooks**: POST `/batch-webhooks`
-- **API.CampaignFolders**
+- **MailchimpKit.CampaignFolders**
 	- **DeleteCampaignFoldersId**: DELETE `/campaign-folders/{folder_id}`
 	- **GetCampaignFolders**: GET `/campaign-folders`
 	- **GetCampaignFoldersId**: GET `/campaign-folders/{folder_id}`
 	- **PatchCampaignFoldersId**: PATCH `/campaign-folders/{folder_id}`
 	- **PostCampaignFolders**: POST `/campaign-folders`
-- **API.Campaigns**
+- **MailchimpKit.Campaigns**
 	- **DeleteCampaignsId**: DELETE `/campaigns/{campaign_id}`
 	- **DeleteCampaignsIdFeedbackId**: DELETE `/campaigns/{campaign_id}/feedback/{feedback_id}`
 	- **GetCampaigns**: GET `/campaigns`
@@ -217,20 +217,20 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PostCampaignsIdActionsUnschedule**: POST `/campaigns/{campaign_id}/actions/unschedule`
 	- **PostCampaignsIdFeedback**: POST `/campaigns/{campaign_id}/feedback`
 	- **PutCampaignsIdContent**: PUT `/campaigns/{campaign_id}/content`
-- **API.ConnectedSites**
+- **MailchimpKit.ConnectedSites**
 	- **DeleteConnectedSitesId**: DELETE `/connected-sites/{connected_site_id}`
 	- **GetConnectedSites**: GET `/connected-sites`
 	- **GetConnectedSitesId**: GET `/connected-sites/{connected_site_id}`
 	- **PostConnectedSites**: POST `/connected-sites`
 	- **PostConnectedSitesIdActionsVerifyScriptInstallation**: POST `/connected-sites/{connected_site_id}/actions/verify-script-installation`
-- **API.Conversations**
+- **MailchimpKit.Conversations**
 	- **GetConversations**: GET `/conversations`
 	- **GetConversationsId**: GET `/conversations/{conversation_id}`
 	- **GetConversationsIdMessages**: GET `/conversations/{conversation_id}/messages`
 	- **GetConversationsIdMessagesId**: GET `/conversations/{conversation_id}/messages/{message_id}`
-- **API.CustomerJourneys**
+- **MailchimpKit.CustomerJourneys**
 	- **PostCustomerJourneysJourneysIdStepsIdActionsTrigger**: POST `/customer-journeys/journeys/{journey_id}/steps/{step_id}/actions/trigger`
-- **API.Ecommerce**
+- **MailchimpKit.Ecommerce**
 	- **DeleteEcommerceStoresId**: DELETE `/ecommerce/stores/{store_id}`
 	- **DeleteEcommerceStoresIdCartsId**: DELETE `/ecommerce/stores/{store_id}/carts/{cart_id}`
 	- **DeleteEcommerceStoresIdCartsLinesId**: DELETE `/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}`
@@ -289,10 +289,10 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PostEcommerceStoresIdPromorules**: POST `/ecommerce/stores/{store_id}/promo-rules`
 	- **PutEcommerceStoresIdCustomersId**: PUT `/ecommerce/stores/{store_id}/customers/{customer_id}`
 	- **PutEcommerceStoresIdProductsIdVariantsId**: PUT `/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}`
-- **API.FacebookAds**
+- **MailchimpKit.FacebookAds**
 	- **GetAllFacebookAds**: GET `/facebook-ads`
 	- **GetFacebookAdsId**: GET `/facebook-ads/{outreach_id}`
-- **API.FileManager**
+- **MailchimpKit.FileManager**
 	- **DeleteFileManagerFilesId**: DELETE `/file-manager/files/{file_id}`
 	- **DeleteFileManagerFoldersId**: DELETE `/file-manager/folders/{folder_id}`
 	- **GetFileManagerFiles**: GET `/file-manager/files`
@@ -303,7 +303,7 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PatchFileManagerFoldersId**: PATCH `/file-manager/folders/{folder_id}`
 	- **PostFileManagerFiles**: POST `/file-manager/files`
 	- **PostFileManagerFolders**: POST `/file-manager/folders`
-- **API.LandingPages**
+- **MailchimpKit.LandingPages**
 	- **DeleteLandingPageId**: DELETE `/landing-pages/{page_id}`
 	- **GetAllLandingPages**: GET `/landing-pages`
 	- **GetLandingPageId**: GET `/landing-pages/{page_id}`
@@ -312,7 +312,7 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PostAllLandingPages**: POST `/landing-pages`
 	- **PostLandingPageIdActionsPublish**: POST `/landing-pages/{page_id}/actions/publish`
 	- **PostLandingPageIdActionsUnpublish**: POST `/landing-pages/{page_id}/actions/unpublish`
-- **API.Lists**
+- **MailchimpKit.Lists**
 	- **DeleteListsId**: DELETE `/lists/{list_id}`
 	- **DeleteListsIdInterestCategoriesId**: DELETE `/lists/{list_id}/interest-categories/{interest_category_id}`
 	- **DeleteListsIdInterestCategoriesIdInterestsId**: DELETE `/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}`
@@ -377,15 +377,15 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PreviewASegment**: GET `/lists/{list_id}/segments`
 	- **PutListsIdMembersId**: PUT `/lists/{list_id}/members/{subscriber_hash}`
 	- **SearchTagsByName**: GET `/lists/{list_id}/tag-search`
-- **API.Ping**
+- **MailchimpKit.Ping**
 	- **GetPing**: GET `/ping`
-- **API.Reporting**
+- **MailchimpKit.Reporting**
 	- **GetReportingFacebookAds**: GET `/reporting/facebook-ads`
 	- **GetReportingFacebookAdsId**: GET `/reporting/facebook-ads/{outreach_id}`
 	- **GetReportingFacebookAdsIdEcommerceProductActivity**: GET `/reporting/facebook-ads/{outreach_id}/ecommerce-product-activity`
 	- **GetReportingLandingPages**: GET `/reporting/landing-pages`
 	- **GetReportingLandingPagesId**: GET `/reporting/landing-pages/{outreach_id}`
-- **API.Reports**
+- **MailchimpKit.Reports**
 	- **GetReports**: GET `/reports`
 	- **GetReportsId**: GET `/reports/{campaign_id}`
 	- **GetReportsIdAbuseReportsId**: GET `/reports/{campaign_id}/abuse-reports`
@@ -408,26 +408,26 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **GetReportsIdSubReportsId**: GET `/reports/{campaign_id}/sub-reports`
 	- **GetReportsIdUnsubscribed**: GET `/reports/{campaign_id}/unsubscribed`
 	- **GetReportsIdUnsubscribedId**: GET `/reports/{campaign_id}/unsubscribed/{subscriber_hash}`
-- **API.Root**
+- **MailchimpKit.Root**
 	- **GetRoot**: GET `/`
-- **API.SearchCampaigns**
+- **MailchimpKit.SearchCampaigns**
 	- **GetSearchCampaigns**: GET `/search-campaigns`
-- **API.SearchMembers**
+- **MailchimpKit.SearchMembers**
 	- **GetSearchMembers**: GET `/search-members`
-- **API.TemplateFolders**
+- **MailchimpKit.TemplateFolders**
 	- **DeleteTemplateFoldersId**: DELETE `/template-folders/{folder_id}`
 	- **GetTemplateFolders**: GET `/template-folders`
 	- **GetTemplateFoldersId**: GET `/template-folders/{folder_id}`
 	- **PatchTemplateFoldersId**: PATCH `/template-folders/{folder_id}`
 	- **PostTemplateFolders**: POST `/template-folders`
-- **API.Templates**
+- **MailchimpKit.Templates**
 	- **DeleteTemplatesId**: DELETE `/templates/{template_id}`
 	- **GetTemplates**: GET `/templates`
 	- **GetTemplatesId**: GET `/templates/{template_id}`
 	- **GetTemplatesIdDefaultContent**: GET `/templates/{template_id}/default-content`
 	- **PatchTemplatesId**: PATCH `/templates/{template_id}`
 	- **PostTemplates**: POST `/templates`
-- **API.VerifiedDomains**
+- **MailchimpKit.VerifiedDomains**
 	- **CreateVerifiedDomain**: POST `/verified-domains`
 	- **DeleteVerifiedDomain**: DELETE `/verified-domains/{domain_name}`
 	- **GetVerifiedDomain**: GET `/verified-domains/{domain_name}`

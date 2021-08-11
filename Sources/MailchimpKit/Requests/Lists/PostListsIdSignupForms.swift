@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Lists {
+extension MailchimpKit.Lists {
 
     /**
     Customize signup form
@@ -19,7 +19,7 @@ extension API.Lists {
         public final class Request: APIRequest<Response> {
 
             /** List signup form. */
-            public class Body: APIModel {
+            public struct Body: MailchimpModel {
 
                 /** The signup form body content. */
                 public var contents: [Contents]?
@@ -31,7 +31,7 @@ extension API.Lists {
                 public var styles: [Styles]?
 
                 /** Collection of Content for List Signup Forms. */
-                public class Contents: APIModel {
+                public struct Contents: MailchimpModel {
 
                     /** The content section name. */
                     public enum Section: String, Codable, Equatable, CaseIterable {
@@ -51,7 +51,7 @@ extension API.Lists {
                         self.value = value
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         section = try container.decodeIfPresent("section")
@@ -65,20 +65,10 @@ extension API.Lists {
                         try container.encodeIfPresent(value, forKey: "value")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Contents else { return false }
-                      guard self.section == object.section else { return false }
-                      guard self.value == object.value else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Contents, rhs: Contents) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Options for customizing your signup form header. */
-                public class Header: APIModel {
+                public struct Header: MailchimpModel {
 
                     /** Image alignment. */
                     public enum ImageAlign: String, Codable, Equatable, CaseIterable {
@@ -154,7 +144,7 @@ extension API.Lists {
                         self.text = text
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         imageAlign = try container.decodeIfPresent("image_align")
@@ -186,29 +176,10 @@ extension API.Lists {
                         try container.encodeIfPresent(text, forKey: "text")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Header else { return false }
-                      guard self.imageAlign == object.imageAlign else { return false }
-                      guard self.imageAlt == object.imageAlt else { return false }
-                      guard self.imageBorderColor == object.imageBorderColor else { return false }
-                      guard self.imageBorderStyle == object.imageBorderStyle else { return false }
-                      guard self.imageBorderWidth == object.imageBorderWidth else { return false }
-                      guard self.imageHeight == object.imageHeight else { return false }
-                      guard self.imageLink == object.imageLink else { return false }
-                      guard self.imageTarget == object.imageTarget else { return false }
-                      guard self.imageURL == object.imageURL else { return false }
-                      guard self.imageWidth == object.imageWidth else { return false }
-                      guard self.text == object.text else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Header, rhs: Header) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Collection of Element style for List Signup Forms. */
-                public class Styles: APIModel {
+                public struct Styles: MailchimpModel {
 
                     /** A string that identifies the element selector. */
                     public enum Selector: String, Codable, Equatable, CaseIterable {
@@ -235,7 +206,7 @@ extension API.Lists {
                     public var selector: Selector?
 
                     /** An option for Signup Form Styles. */
-                    public class Options: APIModel {
+                    public struct Options: MailchimpModel {
 
                         /** A string that identifies the property. */
                         public var property: String?
@@ -248,7 +219,7 @@ extension API.Lists {
                             self.value = value
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             property = try container.decodeIfPresent("property")
@@ -262,16 +233,6 @@ extension API.Lists {
                             try container.encodeIfPresent(value, forKey: "value")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Options else { return false }
-                          guard self.property == object.property else { return false }
-                          guard self.value == object.value else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Options, rhs: Options) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(options: [Options]? = nil, selector: Selector? = nil) {
@@ -279,7 +240,7 @@ extension API.Lists {
                         self.selector = selector
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         options = try container.decodeArrayIfPresent("options")
@@ -293,16 +254,6 @@ extension API.Lists {
                         try container.encodeIfPresent(selector, forKey: "selector")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Styles else { return false }
-                      guard self.options == object.options else { return false }
-                      guard self.selector == object.selector else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Styles, rhs: Styles) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(contents: [Contents]? = nil, header: Header? = nil, styles: [Styles]? = nil) {
@@ -311,7 +262,7 @@ extension API.Lists {
                     self.styles = styles
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     contents = try container.decodeArrayIfPresent("contents")
@@ -327,17 +278,6 @@ extension API.Lists {
                     try container.encodeIfPresent(styles, forKey: "styles")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.contents == object.contents else { return false }
-                  guard self.header == object.header else { return false }
-                  guard self.styles == object.styles else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -376,7 +316,7 @@ extension API.Lists {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** List signup form. */
-            public class Status200: APIModel {
+            public struct Status200: MailchimpModel {
 
                 /** A list of link types and descriptions for the API schema documents. */
                 public var links: [Links]?
@@ -397,7 +337,7 @@ extension API.Lists {
                 public var styles: [Styles]?
 
                 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                public class Links: APIModel {
+                public struct Links: MailchimpModel {
 
                     /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -433,7 +373,7 @@ extension API.Lists {
                         self.targetSchema = targetSchema
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         href = try container.decodeIfPresent("href")
@@ -453,23 +393,10 @@ extension API.Lists {
                         try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Links else { return false }
-                      guard self.href == object.href else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.rel == object.rel else { return false }
-                      guard self.schema == object.schema else { return false }
-                      guard self.targetSchema == object.targetSchema else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Links, rhs: Links) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Collection of Content for List Signup Forms. */
-                public class Contents: APIModel {
+                public struct Contents: MailchimpModel {
 
                     /** The content section name. */
                     public enum Section: String, Codable, Equatable, CaseIterable {
@@ -489,7 +416,7 @@ extension API.Lists {
                         self.value = value
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         section = try container.decodeIfPresent("section")
@@ -503,20 +430,10 @@ extension API.Lists {
                         try container.encodeIfPresent(value, forKey: "value")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Contents else { return false }
-                      guard self.section == object.section else { return false }
-                      guard self.value == object.value else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Contents, rhs: Contents) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Options for customizing your signup form header. */
-                public class Header: APIModel {
+                public struct Header: MailchimpModel {
 
                     /** Image alignment. */
                     public enum ImageAlign: String, Codable, Equatable, CaseIterable {
@@ -592,7 +509,7 @@ extension API.Lists {
                         self.text = text
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         imageAlign = try container.decodeIfPresent("image_align")
@@ -624,29 +541,10 @@ extension API.Lists {
                         try container.encodeIfPresent(text, forKey: "text")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Header else { return false }
-                      guard self.imageAlign == object.imageAlign else { return false }
-                      guard self.imageAlt == object.imageAlt else { return false }
-                      guard self.imageBorderColor == object.imageBorderColor else { return false }
-                      guard self.imageBorderStyle == object.imageBorderStyle else { return false }
-                      guard self.imageBorderWidth == object.imageBorderWidth else { return false }
-                      guard self.imageHeight == object.imageHeight else { return false }
-                      guard self.imageLink == object.imageLink else { return false }
-                      guard self.imageTarget == object.imageTarget else { return false }
-                      guard self.imageURL == object.imageURL else { return false }
-                      guard self.imageWidth == object.imageWidth else { return false }
-                      guard self.text == object.text else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Header, rhs: Header) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Collection of Element style for List Signup Forms. */
-                public class Styles: APIModel {
+                public struct Styles: MailchimpModel {
 
                     /** A string that identifies the element selector. */
                     public enum Selector: String, Codable, Equatable, CaseIterable {
@@ -673,7 +571,7 @@ extension API.Lists {
                     public var selector: Selector?
 
                     /** An option for Signup Form Styles. */
-                    public class Options: APIModel {
+                    public struct Options: MailchimpModel {
 
                         /** A string that identifies the property. */
                         public var property: String?
@@ -686,7 +584,7 @@ extension API.Lists {
                             self.value = value
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             property = try container.decodeIfPresent("property")
@@ -700,16 +598,6 @@ extension API.Lists {
                             try container.encodeIfPresent(value, forKey: "value")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Options else { return false }
-                          guard self.property == object.property else { return false }
-                          guard self.value == object.value else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Options, rhs: Options) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(options: [Options]? = nil, selector: Selector? = nil) {
@@ -717,7 +605,7 @@ extension API.Lists {
                         self.selector = selector
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         options = try container.decodeArrayIfPresent("options")
@@ -731,16 +619,6 @@ extension API.Lists {
                         try container.encodeIfPresent(selector, forKey: "selector")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Styles else { return false }
-                      guard self.options == object.options else { return false }
-                      guard self.selector == object.selector else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Styles, rhs: Styles) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(links: [Links]? = nil, contents: [Contents]? = nil, header: Header? = nil, listId: String? = nil, signupFormURL: String? = nil, styles: [Styles]? = nil) {
@@ -752,7 +630,7 @@ extension API.Lists {
                     self.styles = styles
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     links = try container.decodeArrayIfPresent("_links")
@@ -774,24 +652,10 @@ extension API.Lists {
                     try container.encodeIfPresent(styles, forKey: "styles")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.links == object.links else { return false }
-                  guard self.contents == object.contents else { return false }
-                  guard self.header == object.header else { return false }
-                  guard self.listId == object.listId else { return false }
-                  guard self.signupFormURL == object.signupFormURL else { return false }
-                  guard self.styles == object.styles else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-            public class DefaultResponse: APIModel {
+            public struct DefaultResponse: MailchimpModel {
 
                 /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
                 public var detail: String
@@ -816,7 +680,7 @@ extension API.Lists {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     detail = try container.decode("detail")
@@ -836,19 +700,6 @@ extension API.Lists {
                     try container.encode(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? DefaultResponse else { return false }
-                  guard self.detail == object.detail else { return false }
-                  guard self.instance == object.instance else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: DefaultResponse, rhs: DefaultResponse) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
             case status200(Status200)

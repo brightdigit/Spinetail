@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.source_files = '*.swift'
-    s.name = 'API'
+    s.name = 'MailchimpKit'
     s.authors = 'Yonas Kolb'
     s.summary = 'A generated API'
     s.version = '3.0.55'

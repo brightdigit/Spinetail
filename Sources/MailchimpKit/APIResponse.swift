@@ -6,13 +6,14 @@
 import Foundation
 import Alamofire
 
+public typealias CodableAny = String
 public protocol APIResponseValue: CustomDebugStringConvertible, CustomStringConvertible {
-    associatedtype SuccessType
+    //associatedtype SuccessType : Codable
     var statusCode: Int { get }
     var successful: Bool { get }
     var response: Any { get }
     init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws
-    var success: SuccessType? { get }
+    //var success: SuccessType? { get }
 }
 
 public enum APIResponseResult<SuccessType, FailureType>: CustomStringConvertible, CustomDebugStringConvertible {

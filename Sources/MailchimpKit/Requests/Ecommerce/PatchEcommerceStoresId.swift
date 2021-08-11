@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Ecommerce {
+extension MailchimpKit.Ecommerce {
 
     /**
     Update store
@@ -19,7 +19,7 @@ extension API.Ecommerce {
         public final class Request: APIRequest<Response> {
 
             /** An individual store in an account. */
-            public class Body: APIModel {
+            public struct Body: MailchimpModel {
 
                 /** The store address. */
                 public var address: Address?
@@ -55,7 +55,7 @@ extension API.Ecommerce {
                 public var timezone: String?
 
                 /** The store address. */
-                public class Address: APIModel {
+                public struct Address: MailchimpModel {
 
                     /** The store's mailing address. */
                     public var address1: String?
@@ -100,7 +100,7 @@ extension API.Ecommerce {
                         self.provinceCode = provinceCode
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         address1 = try container.decodeIfPresent("address1")
@@ -130,24 +130,6 @@ extension API.Ecommerce {
                         try container.encodeIfPresent(provinceCode, forKey: "province_code")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Address else { return false }
-                      guard self.address1 == object.address1 else { return false }
-                      guard self.address2 == object.address2 else { return false }
-                      guard self.city == object.city else { return false }
-                      guard self.country == object.country else { return false }
-                      guard self.countryCode == object.countryCode else { return false }
-                      guard self.latitude == object.latitude else { return false }
-                      guard self.longitude == object.longitude else { return false }
-                      guard self.postalCode == object.postalCode else { return false }
-                      guard self.province == object.province else { return false }
-                      guard self.provinceCode == object.provinceCode else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Address, rhs: Address) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(address: Address? = nil, currencyCode: String? = nil, domain: String? = nil, emailAddress: String? = nil, isSyncing: Bool? = nil, moneyFormat: String? = nil, name: String? = nil, phone: String? = nil, platform: String? = nil, primaryLocale: String? = nil, timezone: String? = nil) {
@@ -164,7 +146,7 @@ extension API.Ecommerce {
                     self.timezone = timezone
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     address = try container.decodeIfPresent("address")
@@ -196,25 +178,6 @@ extension API.Ecommerce {
                     try container.encodeIfPresent(timezone, forKey: "timezone")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.address == object.address else { return false }
-                  guard self.currencyCode == object.currencyCode else { return false }
-                  guard self.domain == object.domain else { return false }
-                  guard self.emailAddress == object.emailAddress else { return false }
-                  guard self.isSyncing == object.isSyncing else { return false }
-                  guard self.moneyFormat == object.moneyFormat else { return false }
-                  guard self.name == object.name else { return false }
-                  guard self.phone == object.phone else { return false }
-                  guard self.platform == object.platform else { return false }
-                  guard self.primaryLocale == object.primaryLocale else { return false }
-                  guard self.timezone == object.timezone else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -253,7 +216,7 @@ extension API.Ecommerce {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** An individual store in an account. */
-            public class Status200: APIModel {
+            public struct Status200: MailchimpModel {
 
                 /** A list of link types and descriptions for the API schema documents. */
                 public var links: [Links]?
@@ -313,7 +276,7 @@ extension API.Ecommerce {
                 public var updatedAt: DateTime?
 
                 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                public class Links: APIModel {
+                public struct Links: MailchimpModel {
 
                     /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -349,7 +312,7 @@ extension API.Ecommerce {
                         self.targetSchema = targetSchema
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         href = try container.decodeIfPresent("href")
@@ -369,23 +332,10 @@ extension API.Ecommerce {
                         try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Links else { return false }
-                      guard self.href == object.href else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.rel == object.rel else { return false }
-                      guard self.schema == object.schema else { return false }
-                      guard self.targetSchema == object.targetSchema else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Links, rhs: Links) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The store address. */
-                public class Address: APIModel {
+                public struct Address: MailchimpModel {
 
                     /** The store's mailing address. */
                     public var address1: String?
@@ -430,7 +380,7 @@ extension API.Ecommerce {
                         self.provinceCode = provinceCode
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         address1 = try container.decodeIfPresent("address1")
@@ -460,28 +410,10 @@ extension API.Ecommerce {
                         try container.encodeIfPresent(provinceCode, forKey: "province_code")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Address else { return false }
-                      guard self.address1 == object.address1 else { return false }
-                      guard self.address2 == object.address2 else { return false }
-                      guard self.city == object.city else { return false }
-                      guard self.country == object.country else { return false }
-                      guard self.countryCode == object.countryCode else { return false }
-                      guard self.latitude == object.latitude else { return false }
-                      guard self.longitude == object.longitude else { return false }
-                      guard self.postalCode == object.postalCode else { return false }
-                      guard self.province == object.province else { return false }
-                      guard self.provinceCode == object.provinceCode else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Address, rhs: Address) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Details for the automations attached to this store. */
-                public class Automations: APIModel {
+                public struct Automations: MailchimpModel {
 
                     /** abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web. */
                     public var abandonedBrowse: AbandonedBrowse?
@@ -490,7 +422,7 @@ extension API.Ecommerce {
                     public var abandonedCart: AbandonedCart?
 
                     /** abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web. */
-                    public class AbandonedBrowse: APIModel {
+                    public struct AbandonedBrowse: MailchimpModel {
 
                         /** Status of the abandonedBrowse automation. */
                         public enum Status: String, Codable, Equatable, CaseIterable {
@@ -514,7 +446,7 @@ extension API.Ecommerce {
                             self.status = status
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             id = try container.decodeIfPresent("id")
@@ -530,21 +462,10 @@ extension API.Ecommerce {
                             try container.encodeIfPresent(status, forKey: "status")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? AbandonedBrowse else { return false }
-                          guard self.id == object.id else { return false }
-                          guard self.isSupported == object.isSupported else { return false }
-                          guard self.status == object.status else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: AbandonedBrowse, rhs: AbandonedBrowse) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     /** abandonedCart automation details. */
-                    public class AbandonedCart: APIModel {
+                    public struct AbandonedCart: MailchimpModel {
 
                         /** Status of the abandonedCart automation. */
                         public enum Status: String, Codable, Equatable, CaseIterable {
@@ -568,7 +489,7 @@ extension API.Ecommerce {
                             self.status = status
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             id = try container.decodeIfPresent("id")
@@ -584,17 +505,6 @@ extension API.Ecommerce {
                             try container.encodeIfPresent(status, forKey: "status")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? AbandonedCart else { return false }
-                          guard self.id == object.id else { return false }
-                          guard self.isSupported == object.isSupported else { return false }
-                          guard self.status == object.status else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: AbandonedCart, rhs: AbandonedCart) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(abandonedBrowse: AbandonedBrowse? = nil, abandonedCart: AbandonedCart? = nil) {
@@ -602,7 +512,7 @@ extension API.Ecommerce {
                         self.abandonedCart = abandonedCart
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         abandonedBrowse = try container.decodeIfPresent("abandoned_browse")
@@ -616,20 +526,10 @@ extension API.Ecommerce {
                         try container.encodeIfPresent(abandonedCart, forKey: "abandoned_cart")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Automations else { return false }
-                      guard self.abandonedBrowse == object.abandonedBrowse else { return false }
-                      guard self.abandonedCart == object.abandonedCart else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Automations, rhs: Automations) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The Connected Site associated with the store. */
-                public class ConnectedSite: APIModel {
+                public struct ConnectedSite: MailchimpModel {
 
                     /** The unique identifier for the connected site. */
                     public var siteForeignId: String?
@@ -638,7 +538,7 @@ extension API.Ecommerce {
                     public var siteScript: SiteScript?
 
                     /** The script used to connect your site with Mailchimp. */
-                    public class SiteScript: APIModel {
+                    public struct SiteScript: MailchimpModel {
 
                         /** A pre-built script that you can copy-and-paste into your site to integrate it with Mailchimp. */
                         public var fragment: String?
@@ -651,7 +551,7 @@ extension API.Ecommerce {
                             self.url = url
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             fragment = try container.decodeIfPresent("fragment")
@@ -665,16 +565,6 @@ extension API.Ecommerce {
                             try container.encodeIfPresent(url, forKey: "url")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? SiteScript else { return false }
-                          guard self.fragment == object.fragment else { return false }
-                          guard self.url == object.url else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: SiteScript, rhs: SiteScript) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(siteForeignId: String? = nil, siteScript: SiteScript? = nil) {
@@ -682,7 +572,7 @@ extension API.Ecommerce {
                         self.siteScript = siteScript
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         siteForeignId = try container.decodeIfPresent("site_foreign_id")
@@ -696,16 +586,6 @@ extension API.Ecommerce {
                         try container.encodeIfPresent(siteScript, forKey: "site_script")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? ConnectedSite else { return false }
-                      guard self.siteForeignId == object.siteForeignId else { return false }
-                      guard self.siteScript == object.siteScript else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: ConnectedSite, rhs: ConnectedSite) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(links: [Links]? = nil, address: Address? = nil, automations: Automations? = nil, connectedSite: ConnectedSite? = nil, createdAt: DateTime? = nil, currencyCode: String? = nil, domain: String? = nil, emailAddress: String? = nil, id: String? = nil, isSyncing: Bool? = nil, listId: String? = nil, listIsActive: Bool? = nil, moneyFormat: String? = nil, name: String? = nil, phone: String? = nil, platform: String? = nil, primaryLocale: String? = nil, timezone: String? = nil, updatedAt: DateTime? = nil) {
@@ -730,7 +610,7 @@ extension API.Ecommerce {
                     self.updatedAt = updatedAt
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     links = try container.decodeArrayIfPresent("_links")
@@ -778,37 +658,10 @@ extension API.Ecommerce {
                     try container.encodeIfPresent(updatedAt, forKey: "updated_at")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.links == object.links else { return false }
-                  guard self.address == object.address else { return false }
-                  guard self.automations == object.automations else { return false }
-                  guard self.connectedSite == object.connectedSite else { return false }
-                  guard self.createdAt == object.createdAt else { return false }
-                  guard self.currencyCode == object.currencyCode else { return false }
-                  guard self.domain == object.domain else { return false }
-                  guard self.emailAddress == object.emailAddress else { return false }
-                  guard self.id == object.id else { return false }
-                  guard self.isSyncing == object.isSyncing else { return false }
-                  guard self.listId == object.listId else { return false }
-                  guard self.listIsActive == object.listIsActive else { return false }
-                  guard self.moneyFormat == object.moneyFormat else { return false }
-                  guard self.name == object.name else { return false }
-                  guard self.phone == object.phone else { return false }
-                  guard self.platform == object.platform else { return false }
-                  guard self.primaryLocale == object.primaryLocale else { return false }
-                  guard self.timezone == object.timezone else { return false }
-                  guard self.updatedAt == object.updatedAt else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-            public class DefaultResponse: APIModel {
+            public struct DefaultResponse: MailchimpModel {
 
                 /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
                 public var detail: String
@@ -833,7 +686,7 @@ extension API.Ecommerce {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     detail = try container.decode("detail")
@@ -853,19 +706,6 @@ extension API.Ecommerce {
                     try container.encode(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? DefaultResponse else { return false }
-                  guard self.detail == object.detail else { return false }
-                  guard self.instance == object.instance else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: DefaultResponse, rhs: DefaultResponse) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
             case status200(Status200)

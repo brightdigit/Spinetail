@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.LandingPages {
+extension MailchimpKit.LandingPages {
 
     /**
     Update landing page
@@ -19,7 +19,7 @@ extension API.LandingPages {
         public final class Request: APIRequest<Response> {
 
             /** A summary of an individual page's properties. */
-            public class Body: APIModel {
+            public struct Body: MailchimpModel {
 
                 /** The description of this landing page. */
                 public var description: String?
@@ -40,7 +40,7 @@ extension API.LandingPages {
                 public var tracking: Tracking?
 
                 /** The tracking settings applied to this landing page. */
-                public class Tracking: APIModel {
+                public struct Tracking: MailchimpModel {
 
                     /** Google offers restricted data processing in connection with the California Consumer Privacy Act (CCPA) to restrict how Google uses certain identifiers and other data processed in the provision of its services. You can learn more about Google's restricted data processing within Google Ads [here](https://privacy.google.com/businesses/rdp/). */
                     public var enableRestrictedDataProcessing: Bool?
@@ -53,7 +53,7 @@ extension API.LandingPages {
                         self.trackWithMailchimp = trackWithMailchimp
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         enableRestrictedDataProcessing = try container.decodeIfPresent("enable_restricted_data_processing")
@@ -67,16 +67,6 @@ extension API.LandingPages {
                         try container.encodeIfPresent(trackWithMailchimp, forKey: "track_with_mailchimp")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Tracking else { return false }
-                      guard self.enableRestrictedDataProcessing == object.enableRestrictedDataProcessing else { return false }
-                      guard self.trackWithMailchimp == object.trackWithMailchimp else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Tracking, rhs: Tracking) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(description: String? = nil, listId: String? = nil, name: String? = nil, storeId: String? = nil, title: String? = nil, tracking: Tracking? = nil) {
@@ -88,7 +78,7 @@ extension API.LandingPages {
                     self.tracking = tracking
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     description = try container.decodeIfPresent("description")
@@ -110,20 +100,6 @@ extension API.LandingPages {
                     try container.encodeIfPresent(tracking, forKey: "tracking")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.description == object.description else { return false }
-                  guard self.listId == object.listId else { return false }
-                  guard self.name == object.name else { return false }
-                  guard self.storeId == object.storeId else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.tracking == object.tracking else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public struct Options {
@@ -162,7 +138,7 @@ extension API.LandingPages {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** A summary of an individual landing page's settings and content. */
-            public class Status200: APIModel {
+            public struct Status200: MailchimpModel {
 
                 /** The status of this landing page. */
                 public enum Status: String, Codable, Equatable, CaseIterable {
@@ -223,7 +199,7 @@ extension API.LandingPages {
                 public var webId: Int?
 
                 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                public class Links: APIModel {
+                public struct Links: MailchimpModel {
 
                     /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -259,7 +235,7 @@ extension API.LandingPages {
                         self.targetSchema = targetSchema
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         href = try container.decodeIfPresent("href")
@@ -279,23 +255,10 @@ extension API.LandingPages {
                         try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Links else { return false }
-                      guard self.href == object.href else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.rel == object.rel else { return false }
-                      guard self.schema == object.schema else { return false }
-                      guard self.targetSchema == object.targetSchema else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Links, rhs: Links) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** The tracking settings applied to this landing page. */
-                public class Tracking: APIModel {
+                public struct Tracking: MailchimpModel {
 
                     /** Google offers restricted data processing in connection with the California Consumer Privacy Act (CCPA) to restrict how Google uses certain identifiers and other data processed in the provision of its services. You can learn more about Google's restricted data processing within Google Ads [here](https://privacy.google.com/businesses/rdp/). */
                     public var enableRestrictedDataProcessing: Bool?
@@ -308,7 +271,7 @@ extension API.LandingPages {
                         self.trackWithMailchimp = trackWithMailchimp
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         enableRestrictedDataProcessing = try container.decodeIfPresent("enable_restricted_data_processing")
@@ -322,16 +285,6 @@ extension API.LandingPages {
                         try container.encodeIfPresent(trackWithMailchimp, forKey: "track_with_mailchimp")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Tracking else { return false }
-                      guard self.enableRestrictedDataProcessing == object.enableRestrictedDataProcessing else { return false }
-                      guard self.trackWithMailchimp == object.trackWithMailchimp else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Tracking, rhs: Tracking) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(links: [Links]? = nil, createdAt: DateTime? = nil, createdBySource: String? = nil, description: String? = nil, id: String? = nil, listId: String? = nil, name: String? = nil, publishedAt: DateTime? = nil, status: Status? = nil, storeId: String? = nil, templateId: Int? = nil, title: String? = nil, tracking: Tracking? = nil, unpublishedAt: DateTime? = nil, updatedAt: DateTime? = nil, url: String? = nil, webId: Int? = nil) {
@@ -354,7 +307,7 @@ extension API.LandingPages {
                     self.webId = webId
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     links = try container.decodeArrayIfPresent("_links")
@@ -398,35 +351,10 @@ extension API.LandingPages {
                     try container.encodeIfPresent(webId, forKey: "web_id")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.links == object.links else { return false }
-                  guard self.createdAt == object.createdAt else { return false }
-                  guard self.createdBySource == object.createdBySource else { return false }
-                  guard self.description == object.description else { return false }
-                  guard self.id == object.id else { return false }
-                  guard self.listId == object.listId else { return false }
-                  guard self.name == object.name else { return false }
-                  guard self.publishedAt == object.publishedAt else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.storeId == object.storeId else { return false }
-                  guard self.templateId == object.templateId else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.tracking == object.tracking else { return false }
-                  guard self.unpublishedAt == object.unpublishedAt else { return false }
-                  guard self.updatedAt == object.updatedAt else { return false }
-                  guard self.url == object.url else { return false }
-                  guard self.webId == object.webId else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-            public class DefaultResponse: APIModel {
+            public struct DefaultResponse: MailchimpModel {
 
                 /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
                 public var detail: String
@@ -451,7 +379,7 @@ extension API.LandingPages {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     detail = try container.decode("detail")
@@ -471,19 +399,6 @@ extension API.LandingPages {
                     try container.encode(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? DefaultResponse else { return false }
-                  guard self.detail == object.detail else { return false }
-                  guard self.instance == object.instance else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: DefaultResponse, rhs: DefaultResponse) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
             case status200(Status200)

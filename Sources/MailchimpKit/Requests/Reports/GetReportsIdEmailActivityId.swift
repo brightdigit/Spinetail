@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Reports {
+extension MailchimpKit.Reports {
 
     /**
     Get subscriber email activity
@@ -79,7 +79,7 @@ extension API.Reports {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces. */
-            public class Status200: APIModel {
+            public struct Status200: MailchimpModel {
 
                 /** A list of link types and descriptions for the API schema documents. */
                 public var links: [Links]?
@@ -103,7 +103,7 @@ extension API.Reports {
                 public var listIsActive: Bool?
 
                 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                public class Links: APIModel {
+                public struct Links: MailchimpModel {
 
                     /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -139,7 +139,7 @@ extension API.Reports {
                         self.targetSchema = targetSchema
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         href = try container.decodeIfPresent("href")
@@ -159,23 +159,10 @@ extension API.Reports {
                         try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Links else { return false }
-                      guard self.href == object.href else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.rel == object.rel else { return false }
-                      guard self.schema == object.schema else { return false }
-                      guard self.targetSchema == object.targetSchema else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Links, rhs: Links) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** A summary of the interaction with the campaign. */
-                public class Activity: APIModel {
+                public struct Activity: MailchimpModel {
 
                     /** One of the following actions: 'open', 'click', or 'bounce' */
                     public var action: String?
@@ -200,7 +187,7 @@ extension API.Reports {
                         self.url = url
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         action = try container.decodeIfPresent("action")
@@ -220,19 +207,6 @@ extension API.Reports {
                         try container.encodeIfPresent(url, forKey: "url")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Activity else { return false }
-                      guard self.action == object.action else { return false }
-                      guard self.ip == object.ip else { return false }
-                      guard self.timestamp == object.timestamp else { return false }
-                      guard self.type == object.type else { return false }
-                      guard self.url == object.url else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Activity, rhs: Activity) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(links: [Links]? = nil, activity: [Activity]? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, listId: String? = nil, listIsActive: Bool? = nil) {
@@ -245,7 +219,7 @@ extension API.Reports {
                     self.listIsActive = listIsActive
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     links = try container.decodeArrayIfPresent("_links")
@@ -269,25 +243,10 @@ extension API.Reports {
                     try container.encodeIfPresent(listIsActive, forKey: "list_is_active")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.links == object.links else { return false }
-                  guard self.activity == object.activity else { return false }
-                  guard self.campaignId == object.campaignId else { return false }
-                  guard self.emailAddress == object.emailAddress else { return false }
-                  guard self.emailId == object.emailId else { return false }
-                  guard self.listId == object.listId else { return false }
-                  guard self.listIsActive == object.listIsActive else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-            public class DefaultResponse: APIModel {
+            public struct DefaultResponse: MailchimpModel {
 
                 /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
                 public var detail: String
@@ -312,7 +271,7 @@ extension API.Reports {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     detail = try container.decode("detail")
@@ -332,19 +291,6 @@ extension API.Reports {
                     try container.encode(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? DefaultResponse else { return false }
-                  guard self.detail == object.detail else { return false }
-                  guard self.instance == object.instance else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: DefaultResponse, rhs: DefaultResponse) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
             case status200(Status200)

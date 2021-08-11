@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Batches {
+extension MailchimpKit.Batches {
 
     /**
     Start batch operation
@@ -19,13 +19,13 @@ extension API.Batches {
         public final class Request: APIRequest<Response> {
 
             /** Begin processing a batch operations request. */
-            public class Body: APIModel {
+            public struct Body: MailchimpModel {
 
                 /** An array of objects that describes operations to perform. */
                 public var operations: [Operations]
 
                 /** Begin processing a batch operations request. */
-                public class Operations: APIModel {
+                public struct Operations: MailchimpModel {
 
                     /** The HTTP method to use for the operation. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -48,9 +48,9 @@ extension API.Batches {
                     public var operationId: String?
 
                     /** Any request query parameters. Example parameters: {"count":10, "offset":0} */
-                    public var params: [String: Any]?
+                    public var params: [String: CodableAny]?
 
-                    public init(method: Method, path: String, body: String? = nil, operationId: String? = nil, params: [String: Any]? = nil) {
+                    public init(method: Method, path: String, body: String? = nil, operationId: String? = nil, params: [String: CodableAny]? = nil) {
                         self.method = method
                         self.path = path
                         self.body = body
@@ -58,7 +58,7 @@ extension API.Batches {
                         self.params = params
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         method = try container.decode("method")
@@ -78,26 +78,13 @@ extension API.Batches {
                         try container.encodeAnyIfPresent(params, forKey: "params")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Operations else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.path == object.path else { return false }
-                      guard self.body == object.body else { return false }
-                      guard self.operationId == object.operationId else { return false }
-                      guard NSDictionary(dictionary: self.params ?? [:]).isEqual(to: object.params ?? [:]) else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Operations, rhs: Operations) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(operations: [Operations]) {
                     self.operations = operations
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     operations = try container.decodeArray("operations")
@@ -109,15 +96,6 @@ extension API.Batches {
                     try container.encode(operations, forKey: "operations")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Body else { return false }
-                  guard self.operations == object.operations else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Body, rhs: Body) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             public var body: Body
@@ -133,7 +111,7 @@ extension API.Batches {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** The status of a batch request */
-            public class Status200: APIModel {
+            public struct Status200: MailchimpModel {
 
                 /** The status of the batch call. [Learn more](https://mailchimp.com/developer/marketing/guides/run-async-requests-batch-endpoint/#check-the-status-of-a-batch-operation) about the batch operation status. */
                 public enum Status: String, Codable, Equatable, CaseIterable {
@@ -172,7 +150,7 @@ extension API.Batches {
                 public var totalOperations: Int?
 
                 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                public class Links: APIModel {
+                public struct Links: MailchimpModel {
 
                     /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -208,7 +186,7 @@ extension API.Batches {
                         self.targetSchema = targetSchema
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         href = try container.decodeIfPresent("href")
@@ -228,19 +206,6 @@ extension API.Batches {
                         try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Links else { return false }
-                      guard self.href == object.href else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.rel == object.rel else { return false }
-                      guard self.schema == object.schema else { return false }
-                      guard self.targetSchema == object.targetSchema else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Links, rhs: Links) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(links: [Links]? = nil, completedAt: DateTime? = nil, erroredOperations: Int? = nil, finishedOperations: Int? = nil, id: String? = nil, responseBodyURL: String? = nil, status: Status? = nil, submittedAt: DateTime? = nil, totalOperations: Int? = nil) {
@@ -255,7 +220,7 @@ extension API.Batches {
                     self.totalOperations = totalOperations
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     links = try container.decodeArrayIfPresent("_links")
@@ -283,27 +248,10 @@ extension API.Batches {
                     try container.encodeIfPresent(totalOperations, forKey: "total_operations")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.links == object.links else { return false }
-                  guard self.completedAt == object.completedAt else { return false }
-                  guard self.erroredOperations == object.erroredOperations else { return false }
-                  guard self.finishedOperations == object.finishedOperations else { return false }
-                  guard self.id == object.id else { return false }
-                  guard self.responseBodyURL == object.responseBodyURL else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.submittedAt == object.submittedAt else { return false }
-                  guard self.totalOperations == object.totalOperations else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-            public class DefaultResponse: APIModel {
+            public struct DefaultResponse: MailchimpModel {
 
                 /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
                 public var detail: String
@@ -328,7 +276,7 @@ extension API.Batches {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     detail = try container.decode("detail")
@@ -348,19 +296,6 @@ extension API.Batches {
                     try container.encode(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? DefaultResponse else { return false }
-                  guard self.detail == object.detail else { return false }
-                  guard self.instance == object.instance else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: DefaultResponse, rhs: DefaultResponse) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
             case status200(Status200)

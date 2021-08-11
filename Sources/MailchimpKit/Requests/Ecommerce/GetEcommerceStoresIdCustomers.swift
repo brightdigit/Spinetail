@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Ecommerce {
+extension MailchimpKit.Ecommerce {
 
     /**
     List customers
@@ -89,7 +89,7 @@ extension API.Ecommerce {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** A collection of the store's customers. */
-            public class Status200: APIModel {
+            public struct Status200: MailchimpModel {
 
                 /** A list of link types and descriptions for the API schema documents. */
                 public var links: [Links]?
@@ -104,7 +104,7 @@ extension API.Ecommerce {
                 public var totalItems: Int?
 
                 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                public class Links: APIModel {
+                public struct Links: MailchimpModel {
 
                     /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -140,7 +140,7 @@ extension API.Ecommerce {
                         self.targetSchema = targetSchema
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         href = try container.decodeIfPresent("href")
@@ -160,23 +160,10 @@ extension API.Ecommerce {
                         try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Links else { return false }
-                      guard self.href == object.href else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.rel == object.rel else { return false }
-                      guard self.schema == object.schema else { return false }
-                      guard self.targetSchema == object.targetSchema else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Links, rhs: Links) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** Information about a specific customer. */
-                public class Customers: APIModel {
+                public struct Customers: MailchimpModel {
 
                     /** A list of link types and descriptions for the API schema documents. */
                     public var links: [Links]?
@@ -215,7 +202,7 @@ extension API.Ecommerce {
                     public var updatedAt: DateTime?
 
                     /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                    public class Links: APIModel {
+                    public struct Links: MailchimpModel {
 
                         /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                         public enum Method: String, Codable, Equatable, CaseIterable {
@@ -251,7 +238,7 @@ extension API.Ecommerce {
                             self.targetSchema = targetSchema
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             href = try container.decodeIfPresent("href")
@@ -271,23 +258,10 @@ extension API.Ecommerce {
                             try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Links else { return false }
-                          guard self.href == object.href else { return false }
-                          guard self.method == object.method else { return false }
-                          guard self.rel == object.rel else { return false }
-                          guard self.schema == object.schema else { return false }
-                          guard self.targetSchema == object.targetSchema else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Links, rhs: Links) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     /** The customer's address. */
-                    public class Address: APIModel {
+                    public struct Address: MailchimpModel {
 
                         /** The mailing address of the customer. */
                         public var address1: String?
@@ -324,7 +298,7 @@ extension API.Ecommerce {
                             self.provinceCode = provinceCode
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             address1 = try container.decodeIfPresent("address1")
@@ -350,22 +324,6 @@ extension API.Ecommerce {
                             try container.encodeIfPresent(provinceCode, forKey: "province_code")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Address else { return false }
-                          guard self.address1 == object.address1 else { return false }
-                          guard self.address2 == object.address2 else { return false }
-                          guard self.city == object.city else { return false }
-                          guard self.country == object.country else { return false }
-                          guard self.countryCode == object.countryCode else { return false }
-                          guard self.postalCode == object.postalCode else { return false }
-                          guard self.province == object.province else { return false }
-                          guard self.provinceCode == object.provinceCode else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Address, rhs: Address) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(links: [Links]? = nil, address: Address? = nil, company: String? = nil, createdAt: DateTime? = nil, emailAddress: String? = nil, firstName: String? = nil, id: String? = nil, lastName: String? = nil, optInStatus: Bool? = nil, ordersCount: Int? = nil, totalSpent: Double? = nil, updatedAt: DateTime? = nil) {
@@ -383,7 +341,7 @@ extension API.Ecommerce {
                         self.updatedAt = updatedAt
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         links = try container.decodeArrayIfPresent("_links")
@@ -417,26 +375,6 @@ extension API.Ecommerce {
                         try container.encodeIfPresent(updatedAt, forKey: "updated_at")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Customers else { return false }
-                      guard self.links == object.links else { return false }
-                      guard self.address == object.address else { return false }
-                      guard self.company == object.company else { return false }
-                      guard self.createdAt == object.createdAt else { return false }
-                      guard self.emailAddress == object.emailAddress else { return false }
-                      guard self.firstName == object.firstName else { return false }
-                      guard self.id == object.id else { return false }
-                      guard self.lastName == object.lastName else { return false }
-                      guard self.optInStatus == object.optInStatus else { return false }
-                      guard self.ordersCount == object.ordersCount else { return false }
-                      guard self.totalSpent == object.totalSpent else { return false }
-                      guard self.updatedAt == object.updatedAt else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Customers, rhs: Customers) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(links: [Links]? = nil, customers: [Customers]? = nil, storeId: String? = nil, totalItems: Int? = nil) {
@@ -446,7 +384,7 @@ extension API.Ecommerce {
                     self.totalItems = totalItems
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     links = try container.decodeArrayIfPresent("_links")
@@ -464,22 +402,10 @@ extension API.Ecommerce {
                     try container.encodeIfPresent(totalItems, forKey: "total_items")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.links == object.links else { return false }
-                  guard self.customers == object.customers else { return false }
-                  guard self.storeId == object.storeId else { return false }
-                  guard self.totalItems == object.totalItems else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-            public class DefaultResponse: APIModel {
+            public struct DefaultResponse: MailchimpModel {
 
                 /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
                 public var detail: String
@@ -504,7 +430,7 @@ extension API.Ecommerce {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     detail = try container.decode("detail")
@@ -524,19 +450,6 @@ extension API.Ecommerce {
                     try container.encode(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? DefaultResponse else { return false }
-                  guard self.detail == object.detail else { return false }
-                  guard self.instance == object.instance else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: DefaultResponse, rhs: DefaultResponse) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
             case status200(Status200)

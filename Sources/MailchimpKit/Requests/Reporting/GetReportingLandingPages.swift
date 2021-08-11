@@ -5,7 +5,7 @@
 
 import Foundation
 
-extension API.Reporting {
+extension MailchimpKit.Reporting {
 
     /**
     List landing pages reports
@@ -74,7 +74,7 @@ extension API.Reporting {
         public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
 
             /** A collection of landing pages. */
-            public class Status200: APIModel {
+            public struct Status200: MailchimpModel {
 
                 /** A list of link types and descriptions for the API schema documents. */
                 public var links: [Links]?
@@ -85,7 +85,7 @@ extension API.Reporting {
                 public var totalItems: Int?
 
                 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                public class Links: APIModel {
+                public struct Links: MailchimpModel {
 
                     /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                     public enum Method: String, Codable, Equatable, CaseIterable {
@@ -121,7 +121,7 @@ extension API.Reporting {
                         self.targetSchema = targetSchema
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         href = try container.decodeIfPresent("href")
@@ -141,23 +141,10 @@ extension API.Reporting {
                         try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? Links else { return false }
-                      guard self.href == object.href else { return false }
-                      guard self.method == object.method else { return false }
-                      guard self.rel == object.rel else { return false }
-                      guard self.schema == object.schema else { return false }
-                      guard self.targetSchema == object.targetSchema else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: Links, rhs: Links) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 /** A summary of an individual landing page's settings and content. */
-                public class LandingPages: APIModel {
+                public struct LandingPages: MailchimpModel {
 
                     /** A list of link types and descriptions for the API schema documents. */
                     public var links: [Links]?
@@ -215,7 +202,7 @@ extension API.Reporting {
                     public var webId: Int?
 
                     /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-                    public class Links: APIModel {
+                    public struct Links: MailchimpModel {
 
                         /** The HTTP method that should be used when accessing the URL defined in 'href'. */
                         public enum Method: String, Codable, Equatable, CaseIterable {
@@ -251,7 +238,7 @@ extension API.Reporting {
                             self.targetSchema = targetSchema
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             href = try container.decodeIfPresent("href")
@@ -271,23 +258,10 @@ extension API.Reporting {
                             try container.encodeIfPresent(targetSchema, forKey: "targetSchema")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Links else { return false }
-                          guard self.href == object.href else { return false }
-                          guard self.method == object.method else { return false }
-                          guard self.rel == object.rel else { return false }
-                          guard self.schema == object.schema else { return false }
-                          guard self.targetSchema == object.targetSchema else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Links, rhs: Links) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     /** A summary of an individual landing page's settings and content. */
-                    public class Ecommerce: APIModel {
+                    public struct Ecommerce: MailchimpModel {
 
                         /** The average order revenue of this landing page. */
                         public var averageOrderRevenue: Double?
@@ -308,7 +282,7 @@ extension API.Reporting {
                             self.totalRevenue = totalRevenue
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             averageOrderRevenue = try container.decodeIfPresent("average_order_revenue")
@@ -326,22 +300,10 @@ extension API.Reporting {
                             try container.encodeIfPresent(totalRevenue, forKey: "total_revenue")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Ecommerce else { return false }
-                          guard self.averageOrderRevenue == object.averageOrderRevenue else { return false }
-                          guard self.currencyCode == object.currencyCode else { return false }
-                          guard self.totalOrders == object.totalOrders else { return false }
-                          guard self.totalRevenue == object.totalRevenue else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Ecommerce, rhs: Ecommerce) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     /** A summary of an individual landing page's settings and content. */
-                    public class SignupTags: APIModel {
+                    public struct SignupTags: MailchimpModel {
 
                         /** The unique id for the tag. */
                         public var tagId: Int?
@@ -354,7 +316,7 @@ extension API.Reporting {
                             self.tagName = tagName
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             tagId = try container.decodeIfPresent("tag_id")
@@ -368,20 +330,10 @@ extension API.Reporting {
                             try container.encodeIfPresent(tagName, forKey: "tag_name")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? SignupTags else { return false }
-                          guard self.tagId == object.tagId else { return false }
-                          guard self.tagName == object.tagName else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: SignupTags, rhs: SignupTags) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     /** A summary of an individual landing page's settings and content. */
-                    public class Timeseries: APIModel {
+                    public struct Timeseries: MailchimpModel {
 
                         /** The clicks and visits data from the last seven days. */
                         public var dailyStats: DailyStats?
@@ -390,7 +342,7 @@ extension API.Reporting {
                         public var weeklyStats: WeeklyStats?
 
                         /** The clicks and visits data from the last seven days. */
-                        public class DailyStats: APIModel {
+                        public struct DailyStats: MailchimpModel {
 
                             public var clicks: [Clicks]?
 
@@ -399,7 +351,7 @@ extension API.Reporting {
                             public var visits: [Visits]?
 
                             /** The clicks and visits data from the last seven days. */
-                            public class Clicks: APIModel {
+                            public struct Clicks: MailchimpModel {
 
                                 public var date: String?
 
@@ -410,7 +362,7 @@ extension API.Reporting {
                                     self.val = val
                                 }
 
-                                public required init(from decoder: Decoder) throws {
+                                public init(from decoder: Decoder) throws {
                                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                                     date = try container.decodeIfPresent("date")
@@ -424,20 +376,10 @@ extension API.Reporting {
                                     try container.encodeIfPresent(val, forKey: "val")
                                 }
 
-                                public func isEqual(to object: Any?) -> Bool {
-                                  guard let object = object as? Clicks else { return false }
-                                  guard self.date == object.date else { return false }
-                                  guard self.val == object.val else { return false }
-                                  return true
-                                }
-
-                                public static func == (lhs: Clicks, rhs: Clicks) -> Bool {
-                                    return lhs.isEqual(to: rhs)
-                                }
                             }
 
                             /** The clicks and visits data from the last seven days. */
-                            public class UniqueVisits: APIModel {
+                            public struct UniqueVisits: MailchimpModel {
 
                                 public var date: String?
 
@@ -448,7 +390,7 @@ extension API.Reporting {
                                     self.val = val
                                 }
 
-                                public required init(from decoder: Decoder) throws {
+                                public init(from decoder: Decoder) throws {
                                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                                     date = try container.decodeIfPresent("date")
@@ -462,20 +404,10 @@ extension API.Reporting {
                                     try container.encodeIfPresent(val, forKey: "val")
                                 }
 
-                                public func isEqual(to object: Any?) -> Bool {
-                                  guard let object = object as? UniqueVisits else { return false }
-                                  guard self.date == object.date else { return false }
-                                  guard self.val == object.val else { return false }
-                                  return true
-                                }
-
-                                public static func == (lhs: UniqueVisits, rhs: UniqueVisits) -> Bool {
-                                    return lhs.isEqual(to: rhs)
-                                }
                             }
 
                             /** The clicks and visits data from the last seven days. */
-                            public class Visits: APIModel {
+                            public struct Visits: MailchimpModel {
 
                                 public var date: String?
 
@@ -486,7 +418,7 @@ extension API.Reporting {
                                     self.val = val
                                 }
 
-                                public required init(from decoder: Decoder) throws {
+                                public init(from decoder: Decoder) throws {
                                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                                     date = try container.decodeIfPresent("date")
@@ -500,16 +432,6 @@ extension API.Reporting {
                                     try container.encodeIfPresent(val, forKey: "val")
                                 }
 
-                                public func isEqual(to object: Any?) -> Bool {
-                                  guard let object = object as? Visits else { return false }
-                                  guard self.date == object.date else { return false }
-                                  guard self.val == object.val else { return false }
-                                  return true
-                                }
-
-                                public static func == (lhs: Visits, rhs: Visits) -> Bool {
-                                    return lhs.isEqual(to: rhs)
-                                }
                             }
 
                             public init(clicks: [Clicks]? = nil, uniqueVisits: [UniqueVisits]? = nil, visits: [Visits]? = nil) {
@@ -518,7 +440,7 @@ extension API.Reporting {
                                 self.visits = visits
                             }
 
-                            public required init(from decoder: Decoder) throws {
+                            public init(from decoder: Decoder) throws {
                                 let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                                 clicks = try container.decodeArrayIfPresent("clicks")
@@ -534,21 +456,10 @@ extension API.Reporting {
                                 try container.encodeIfPresent(visits, forKey: "visits")
                             }
 
-                            public func isEqual(to object: Any?) -> Bool {
-                              guard let object = object as? DailyStats else { return false }
-                              guard self.clicks == object.clicks else { return false }
-                              guard self.uniqueVisits == object.uniqueVisits else { return false }
-                              guard self.visits == object.visits else { return false }
-                              return true
-                            }
-
-                            public static func == (lhs: DailyStats, rhs: DailyStats) -> Bool {
-                                return lhs.isEqual(to: rhs)
-                            }
                         }
 
                         /** The clicks and visits data from the last five weeks. */
-                        public class WeeklyStats: APIModel {
+                        public struct WeeklyStats: MailchimpModel {
 
                             /** The total number of clicks in a week. */
                             public var clicks: [Clicks]?
@@ -559,7 +470,7 @@ extension API.Reporting {
                             public var visits: [Visits]?
 
                             /** The clicks and visits data from the last five weeks. */
-                            public class Clicks: APIModel {
+                            public struct Clicks: MailchimpModel {
 
                                 public var date: String?
 
@@ -570,7 +481,7 @@ extension API.Reporting {
                                     self.val = val
                                 }
 
-                                public required init(from decoder: Decoder) throws {
+                                public init(from decoder: Decoder) throws {
                                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                                     date = try container.decodeIfPresent("date")
@@ -584,20 +495,10 @@ extension API.Reporting {
                                     try container.encodeIfPresent(val, forKey: "val")
                                 }
 
-                                public func isEqual(to object: Any?) -> Bool {
-                                  guard let object = object as? Clicks else { return false }
-                                  guard self.date == object.date else { return false }
-                                  guard self.val == object.val else { return false }
-                                  return true
-                                }
-
-                                public static func == (lhs: Clicks, rhs: Clicks) -> Bool {
-                                    return lhs.isEqual(to: rhs)
-                                }
                             }
 
                             /** The clicks and visits data from the last five weeks. */
-                            public class UniqueVisits: APIModel {
+                            public struct UniqueVisits: MailchimpModel {
 
                                 public var date: String?
 
@@ -608,7 +509,7 @@ extension API.Reporting {
                                     self.val = val
                                 }
 
-                                public required init(from decoder: Decoder) throws {
+                                public init(from decoder: Decoder) throws {
                                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                                     date = try container.decodeIfPresent("date")
@@ -622,20 +523,10 @@ extension API.Reporting {
                                     try container.encodeIfPresent(val, forKey: "val")
                                 }
 
-                                public func isEqual(to object: Any?) -> Bool {
-                                  guard let object = object as? UniqueVisits else { return false }
-                                  guard self.date == object.date else { return false }
-                                  guard self.val == object.val else { return false }
-                                  return true
-                                }
-
-                                public static func == (lhs: UniqueVisits, rhs: UniqueVisits) -> Bool {
-                                    return lhs.isEqual(to: rhs)
-                                }
                             }
 
                             /** The clicks and visits data from the last five weeks. */
-                            public class Visits: APIModel {
+                            public struct Visits: MailchimpModel {
 
                                 public var date: String?
 
@@ -646,7 +537,7 @@ extension API.Reporting {
                                     self.val = val
                                 }
 
-                                public required init(from decoder: Decoder) throws {
+                                public init(from decoder: Decoder) throws {
                                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                                     date = try container.decodeIfPresent("date")
@@ -660,16 +551,6 @@ extension API.Reporting {
                                     try container.encodeIfPresent(val, forKey: "val")
                                 }
 
-                                public func isEqual(to object: Any?) -> Bool {
-                                  guard let object = object as? Visits else { return false }
-                                  guard self.date == object.date else { return false }
-                                  guard self.val == object.val else { return false }
-                                  return true
-                                }
-
-                                public static func == (lhs: Visits, rhs: Visits) -> Bool {
-                                    return lhs.isEqual(to: rhs)
-                                }
                             }
 
                             public init(clicks: [Clicks]? = nil, uniqueVisits: [UniqueVisits]? = nil, visits: [Visits]? = nil) {
@@ -678,7 +559,7 @@ extension API.Reporting {
                                 self.visits = visits
                             }
 
-                            public required init(from decoder: Decoder) throws {
+                            public init(from decoder: Decoder) throws {
                                 let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                                 clicks = try container.decodeArrayIfPresent("clicks")
@@ -694,17 +575,6 @@ extension API.Reporting {
                                 try container.encodeIfPresent(visits, forKey: "visits")
                             }
 
-                            public func isEqual(to object: Any?) -> Bool {
-                              guard let object = object as? WeeklyStats else { return false }
-                              guard self.clicks == object.clicks else { return false }
-                              guard self.uniqueVisits == object.uniqueVisits else { return false }
-                              guard self.visits == object.visits else { return false }
-                              return true
-                            }
-
-                            public static func == (lhs: WeeklyStats, rhs: WeeklyStats) -> Bool {
-                                return lhs.isEqual(to: rhs)
-                            }
                         }
 
                         public init(dailyStats: DailyStats? = nil, weeklyStats: WeeklyStats? = nil) {
@@ -712,7 +582,7 @@ extension API.Reporting {
                             self.weeklyStats = weeklyStats
                         }
 
-                        public required init(from decoder: Decoder) throws {
+                        public init(from decoder: Decoder) throws {
                             let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                             dailyStats = try container.decodeIfPresent("daily_stats")
@@ -726,16 +596,6 @@ extension API.Reporting {
                             try container.encodeIfPresent(weeklyStats, forKey: "weekly_stats")
                         }
 
-                        public func isEqual(to object: Any?) -> Bool {
-                          guard let object = object as? Timeseries else { return false }
-                          guard self.dailyStats == object.dailyStats else { return false }
-                          guard self.weeklyStats == object.weeklyStats else { return false }
-                          return true
-                        }
-
-                        public static func == (lhs: Timeseries, rhs: Timeseries) -> Bool {
-                            return lhs.isEqual(to: rhs)
-                        }
                     }
 
                     public init(links: [Links]? = nil, clicks: Int? = nil, conversionRate: Double? = nil, ecommerce: Ecommerce? = nil, id: String? = nil, listId: String? = nil, listName: String? = nil, name: String? = nil, publishedAt: DateTime? = nil, signupTags: [SignupTags]? = nil, status: String? = nil, subscribes: Int? = nil, timeseries: Timeseries? = nil, title: String? = nil, uniqueVisits: Int? = nil, unpublishedAt: DateTime? = nil, url: String? = nil, visits: Int? = nil, webId: Int? = nil) {
@@ -760,7 +620,7 @@ extension API.Reporting {
                         self.webId = webId
                     }
 
-                    public required init(from decoder: Decoder) throws {
+                    public init(from decoder: Decoder) throws {
                         let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                         links = try container.decodeArrayIfPresent("_links")
@@ -808,33 +668,6 @@ extension API.Reporting {
                         try container.encodeIfPresent(webId, forKey: "web_id")
                     }
 
-                    public func isEqual(to object: Any?) -> Bool {
-                      guard let object = object as? LandingPages else { return false }
-                      guard self.links == object.links else { return false }
-                      guard self.clicks == object.clicks else { return false }
-                      guard self.conversionRate == object.conversionRate else { return false }
-                      guard self.ecommerce == object.ecommerce else { return false }
-                      guard self.id == object.id else { return false }
-                      guard self.listId == object.listId else { return false }
-                      guard self.listName == object.listName else { return false }
-                      guard self.name == object.name else { return false }
-                      guard self.publishedAt == object.publishedAt else { return false }
-                      guard self.signupTags == object.signupTags else { return false }
-                      guard self.status == object.status else { return false }
-                      guard self.subscribes == object.subscribes else { return false }
-                      guard self.timeseries == object.timeseries else { return false }
-                      guard self.title == object.title else { return false }
-                      guard self.uniqueVisits == object.uniqueVisits else { return false }
-                      guard self.unpublishedAt == object.unpublishedAt else { return false }
-                      guard self.url == object.url else { return false }
-                      guard self.visits == object.visits else { return false }
-                      guard self.webId == object.webId else { return false }
-                      return true
-                    }
-
-                    public static func == (lhs: LandingPages, rhs: LandingPages) -> Bool {
-                        return lhs.isEqual(to: rhs)
-                    }
                 }
 
                 public init(links: [Links]? = nil, landingPages: [LandingPages]? = nil, totalItems: Int? = nil) {
@@ -843,7 +676,7 @@ extension API.Reporting {
                     self.totalItems = totalItems
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     links = try container.decodeArrayIfPresent("_links")
@@ -859,21 +692,10 @@ extension API.Reporting {
                     try container.encodeIfPresent(totalItems, forKey: "total_items")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? Status200 else { return false }
-                  guard self.links == object.links else { return false }
-                  guard self.landingPages == object.landingPages else { return false }
-                  guard self.totalItems == object.totalItems else { return false }
-                  return true
-                }
-
-                public static func == (lhs: Status200, rhs: Status200) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
 
             /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-            public class DefaultResponse: APIModel {
+            public struct DefaultResponse: MailchimpModel {
 
                 /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
                 public var detail: String
@@ -898,7 +720,7 @@ extension API.Reporting {
                     self.type = type
                 }
 
-                public required init(from decoder: Decoder) throws {
+                public init(from decoder: Decoder) throws {
                     let container = try decoder.container(keyedBy: StringCodingKey.self)
 
                     detail = try container.decode("detail")
@@ -918,19 +740,6 @@ extension API.Reporting {
                     try container.encode(type, forKey: "type")
                 }
 
-                public func isEqual(to object: Any?) -> Bool {
-                  guard let object = object as? DefaultResponse else { return false }
-                  guard self.detail == object.detail else { return false }
-                  guard self.instance == object.instance else { return false }
-                  guard self.status == object.status else { return false }
-                  guard self.title == object.title else { return false }
-                  guard self.type == object.type else { return false }
-                  return true
-                }
-
-                public static func == (lhs: DefaultResponse, rhs: DefaultResponse) -> Bool {
-                    return lhs.isEqual(to: rhs)
-                }
             }
             public typealias SuccessType = Status200
 
