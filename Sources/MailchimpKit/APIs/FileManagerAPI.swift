@@ -124,7 +124,7 @@ open class FileManagerAPI {
      - parameter sortDir: (query) Determines the order direction for sorted results. (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func getFileManagerFiles(fields: [String]? = nil, excludeFields: [String]? = nil, count: Int? = nil, offset: Int? = nil, type: String? = nil, createdBy: String? = nil, beforeCreatedAt: String? = nil, sinceCreatedAt: String? = nil, sortField: SortField_getFileManagerFiles? = nil, sortDir: SortDir_getFileManagerFiles? = nil, completion: @escaping ((_ data: FileManager?,_ error: Error?) -> Void)) {
+    open class func getFileManagerFiles(fields: [String]? = nil, excludeFields: [String]? = nil, count: Int? = nil, offset: Int? = nil, type: String? = nil, createdBy: String? = nil, beforeCreatedAt: String? = nil, sinceCreatedAt: String? = nil, sortField: SortField_getFileManagerFiles? = nil, sortDir: SortDir_getFileManagerFiles? = nil, completion: @escaping ((_ data: MailchimpFileManager?,_ error: Error?) -> Void)) {
         getFileManagerFilesWithRequestBuilder(fields: fields, excludeFields: excludeFields, count: count, offset: offset, type: type, createdBy: createdBy, beforeCreatedAt: beforeCreatedAt, sinceCreatedAt: sinceCreatedAt, sortField: sortField, sortDir: sortDir).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
@@ -207,7 +207,7 @@ open class FileManagerAPI {
 
      - returns: RequestBuilder<FileManager> 
      */
-    open class func getFileManagerFilesWithRequestBuilder(fields: [String]? = nil, excludeFields: [String]? = nil, count: Int? = nil, offset: Int? = nil, type: String? = nil, createdBy: String? = nil, beforeCreatedAt: String? = nil, sinceCreatedAt: String? = nil, sortField: SortField_getFileManagerFiles? = nil, sortDir: SortDir_getFileManagerFiles? = nil) -> RequestBuilder<FileManager> {
+    open class func getFileManagerFilesWithRequestBuilder(fields: [String]? = nil, excludeFields: [String]? = nil, count: Int? = nil, offset: Int? = nil, type: String? = nil, createdBy: String? = nil, beforeCreatedAt: String? = nil, sinceCreatedAt: String? = nil, sortField: SortField_getFileManagerFiles? = nil, sortDir: SortDir_getFileManagerFiles? = nil) -> RequestBuilder<MailchimpFileManager> {
         let path = "/file-manager/files"
         let URLString = SwaggerClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -226,7 +226,7 @@ open class FileManagerAPI {
         ])
 
 
-        let requestBuilder: RequestBuilder<FileManager>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<MailchimpFileManager>.Type = SwaggerClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
