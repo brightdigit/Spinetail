@@ -18,12 +18,12 @@
 import Foundation
 
 public class EventOperation: Operation {
-    let event: Event
+    let event: MCEvent
     var request: EventRequest?
     let result: Mailchimp.RequestCallback?
     public var dataTask: URLSessionDataTask?
 
-    init(_ event: Event, result: Mailchimp.RequestCallback? = nil) {
+    init(_ event: MCEvent, result: Mailchimp.RequestCallback? = nil) {
         self.event = event
         self.result = result
     }

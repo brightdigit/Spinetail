@@ -219,7 +219,7 @@ public class Mailchimp: NSObject {
     ///     - value: Address passed in for the Merge Field value
     /// - Returns: `ContactOperation?`
     @discardableResult
-    public class func setMergeField(emailAddress: String, name: String, address: Address, result: RequestCallback? = nil) -> ContactOperation? {
+    public class func setMergeField(emailAddress: String, name: String, address: MCAddress, result: RequestCallback? = nil) -> ContactOperation? {
         return updateMergeFields(emailAddress: emailAddress, fields: [name: MergeFieldValue(address: address)], result: result)
     }
     
@@ -245,12 +245,12 @@ public class Mailchimp: NSObject {
     ///     - result: Callback with the Result (success/failure) of the action
     /// - Returns: `EventOperation?`
     @discardableResult
-    public class func trackEventWithAttributes(event: Event, result: RequestCallback? = nil) -> EventOperation? {
+    public class func trackEventWithAttributes(event: MCEvent, result: RequestCallback? = nil) -> EventOperation? {
         return executeRequestForEvent(event: event, result: result)
     }
 
     @discardableResult
-    fileprivate class func executeRequestForEvent(event: Event, result: RequestCallback? = nil) -> EventOperation? {
+    fileprivate class func executeRequestForEvent(event: MCEvent, result: RequestCallback? = nil) -> EventOperation? {
         let eventOperation = EventOperation(event, result: result)
         serialOperationQueue.addOperation(eventOperation)
 

@@ -16,7 +16,7 @@
 //
 
 import XCTest
-@testable import MailchimpSDK
+@testable import MailchimpKit
 
 class MergeFieldTests: XCTestCase {
 
@@ -27,7 +27,7 @@ class MergeFieldTests: XCTestCase {
     }
 
     func testMergeFields() {
-        let address = Address(addressLineOne: "123 Chimp St.",
+        let address = MCAddress(addressLineOne: "123 Chimp St.",
                               addressLineTwo: "Suite 456",
                               city: "Atlanta",
                               state: "GA",
@@ -96,7 +96,7 @@ class MergeFieldTests: XCTestCase {
             XCTAssertEqual("Second Home", address.key)
             
             if case .address(let value) = address.value {
-                let a1 = Address(addressLineOne: "123 Chimp St.",
+                let a1 = MCAddress(addressLineOne: "123 Chimp St.",
                                  addressLineTwo: "Suite 456",
                                  city: "Atlanta",
                                  state: "GA",
@@ -109,7 +109,7 @@ class MergeFieldTests: XCTestCase {
         }
         
         let fieldName = "Second Home"
-        let address = Address(addressLineOne: "123 Chimp St.",
+        let address = MCAddress(addressLineOne: "123 Chimp St.",
                               addressLineTwo: "Suite 456",
                               city: "Atlanta",
                               state: "GA",
@@ -122,7 +122,7 @@ class MergeFieldTests: XCTestCase {
      class MockAnzeeAPI: API {
         var verifyRequest: ((ContactRequest?) -> Void)?
         
-        func process<T>(request: T) -> URLSessionDataTask? where T : APIRequest {
+        func process<T>(request: T) -> URLSessionDataTask? where T : MCAPIRequest {
             verifyRequest?(request as? ContactRequest)
 
             return nil

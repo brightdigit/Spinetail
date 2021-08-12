@@ -16,7 +16,7 @@
 //
 
 import XCTest
-@testable import MailchimpSDK
+@testable import MailchimpKit
 
 class EventTests: XCTestCase {
     func testValidEvent() {
@@ -24,7 +24,7 @@ class EventTests: XCTestCase {
         let name = "TestEventName"
         let properties = ["Attribute_One": "value"]
         
-        XCTAssertNoThrow(try Event(emailAddress: emailAddress, name: name, properties: properties))
+        XCTAssertNoThrow(try MCEvent(emailAddress: emailAddress, name: name, properties: properties))
     }
     
     func testInvalidEventName() {
@@ -32,7 +32,7 @@ class EventTests: XCTestCase {
         let name = "TestEventNamesLongerThan30Chars"
         let properties = ["Attribute_One": "value"]
         
-        XCTAssertThrowsError(try Event(emailAddress: emailAddress, name: name, properties: properties))
+        XCTAssertThrowsError(try MCEvent(emailAddress: emailAddress, name: name, properties: properties))
     }
     
     func testInvalidPropertyName() {
@@ -40,6 +40,6 @@ class EventTests: XCTestCase {
         let name = "TestEventName"
         let properties = ["Attribute-One": "value"]
         
-        XCTAssertThrowsError(try Event(emailAddress: emailAddress, name: name, properties: properties))
+        XCTAssertThrowsError(try MCEvent(emailAddress: emailAddress, name: name, properties: properties))
     }
 }

@@ -16,7 +16,7 @@
 //
 
 import XCTest
-@testable import MailchimpSDK
+@testable import MailchimpKit
 
 class ContactTests: XCTestCase {
     
@@ -75,7 +75,7 @@ class ContactTests: XCTestCase {
     class MockAnzeeAPI: API {
         var verifyRequest: ((ContactRequest?) -> Void)?
         
-        func process<T>(request: T) -> URLSessionDataTask? where T : APIRequest {
+        func process<T>(request: T) -> URLSessionDataTask? where T : MCAPIRequest {
             verifyRequest?(request as? ContactRequest)
              return nil
          }

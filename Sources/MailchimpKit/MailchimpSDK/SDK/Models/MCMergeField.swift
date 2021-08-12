@@ -19,7 +19,7 @@ import Foundation
 
 public enum MergeFieldValue: Codable {
     case string(String)
-    case address(Address)
+    case address(MCAddress)
 }
 
 extension MergeFieldValue {
@@ -29,7 +29,7 @@ extension MergeFieldValue {
         self = .string(string)
     }
 
-    public init(address: Address) {
+    public init(address: MCAddress) {
         self = .address(address)
     }
 
@@ -41,7 +41,7 @@ extension MergeFieldValue {
           return
         }
 
-        if let address = try? container.decode(Address.self) {
+        if let address = try? container.decode(MCAddress.self) {
           self = .address(address)
           return
         }

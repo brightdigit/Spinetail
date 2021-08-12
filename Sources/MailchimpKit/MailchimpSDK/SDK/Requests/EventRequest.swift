@@ -18,7 +18,7 @@
 import Foundation
 
 struct EventRequest: MCAPIRequest {
-    let event: Event
+    let event: MCEvent
     
     var params: [URLQueryItem]?
     
@@ -28,12 +28,12 @@ struct EventRequest: MCAPIRequest {
     public var callback: Mailchimp.RequestCallback?
     
     
-    init(event: Event, _ callback: Mailchimp.RequestCallback? = nil) {
+    init(event: MCEvent, _ callback: Mailchimp.RequestCallback? = nil) {
         self.event = event
         self.callback = callback
     }
     
-    func postBody() -> PostBody<Event, ParametersDefault>? {
+    func postBody() -> PostBody<MCEvent, ParametersDefault>? {
         return .object(event)
     }
     

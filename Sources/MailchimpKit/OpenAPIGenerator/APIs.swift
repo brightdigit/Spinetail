@@ -7,6 +7,24 @@
 import Foundation
 
 open class SwaggerClientAPI {
+  public static func setup(dc: String? = nil, apiKey: String) {
+    let actualDC : String?
+    if let _dc = dc {
+      actualDC = _dc
+    } else if let dc = apiKey.components(separatedBy: "-").last {
+      actualDC = dc
+    } else {
+      actualDC = nil
+    }
+    
+    if let dc = actualDC {
+      self.basePath = "https://\(dc).api.mailchimp.com/3.0"
+    }
+    
+    if let userAndPassword = "anystring:\(apiKey)".data(using: .utf8)?.base64EncodedString() {
+      self.customHeaders["Authorization"] = "Basic \(userAndPassword)"
+    }    
+  }
     public static var basePath = "https://server.api.mailchimp.com/3.0"
     public static var credential: URLCredential?
     public static var customHeaders: [String:String] = [:]

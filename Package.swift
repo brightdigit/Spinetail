@@ -19,6 +19,7 @@ let package = Package(
     targets: [
         .target(name: "MailchimpKit", dependencies: [
           "Alamofire",
-        ])
+        ]),
+        .testTarget(name: "MailchimpKitTests", dependencies: ["MailchimpKit"])
     ]
 )

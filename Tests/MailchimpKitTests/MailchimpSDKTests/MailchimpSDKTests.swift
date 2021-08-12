@@ -17,7 +17,7 @@
 
 
 import XCTest
-@testable import MailchimpSDK
+@testable import MailchimpKit
 
 class MailchimpSDKTests: XCTestCase {
 
@@ -64,7 +64,7 @@ class MailchimpSDKTests: XCTestCase {
     
     func testEventRequest() {
         let api = AnzeeAPI(token: token)
-        let event: Event = try! Event(emailAddress: "test@mailchimp.com", name: "TestEventName", properties: ["Attribute_One": "value"])
+        let event: MCEvent = try! MCEvent(emailAddress: "test@mailchimp.com", name: "TestEventName", properties: ["Attribute_One": "value"])
         
         XCTAssertNotNil(event)
 
@@ -118,7 +118,7 @@ class MailchimpSDKTests: XCTestCase {
     class MockAnzeeAPI: API {
         var contactRequest: ContactRequest?
 
-        func process<T>(request: T) -> URLSessionDataTask? where T : APIRequest {
+        func process<T>(request: T) -> URLSessionDataTask? where T : MCAPIRequest {
             if let request = request as? ContactRequest {
                 contactRequest = request
             }
