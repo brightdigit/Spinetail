@@ -750,9 +750,9 @@ extension MailchimpKit.Lists {
                 public var title: String
 
                 /** An absolute URI that identifies the problem type. When dereferenced, it should provide human-readable documentation for the problem type. */
-                public var type: String
+                public var type: String?
 
-                public init(detail: String, instance: String, status: Int, title: String, type: String) {
+                public init(detail: String, instance: String, status: Int, title: String, type: String?) {
                     self.detail = detail
                     self.instance = instance
                     self.status = status
@@ -767,7 +767,7 @@ extension MailchimpKit.Lists {
                     instance = try container.decode("instance")
                     status = try container.decode("status")
                     title = try container.decode("title")
-                    type = try container.decode("type")
+                  type = try container.decodeIfPresent("type")
                 }
 
                 public func encode(to encoder: Encoder) throws {
