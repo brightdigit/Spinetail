@@ -5,12 +5,12 @@
 //// https://github.com/swagger-api/swagger-codegen
 ////
 //
-//import Foundation
+// import Foundation
 //
 //
-///** Contains an array of facebook ads. */
+/// ** Contains an array of facebook ads. */
 //
-//public struct InlineResponse2008: Codable {
+// public struct InlineResponse2008: Codable {
 //
 //    public var facebookAds: [AllOfinlineResponse2008FacebookAdsItems]?
 //    /** The total number of items matching the query regardless of pagination. */
@@ -30,4 +30,4 @@
 //        case links = "_links"
 //    }
 //
-//}
+// }

@@ -5,11 +5,11 @@
 //// https://github.com/swagger-api/swagger-codegen
 ////
 //
-//import Foundation
-//import Alamofire
+// import Foundation
+// import Alamofire
 //
 //
-//open class ReportingAPI {
+// open class ReportingAPI {
 //    /**
 //     * enum for parameter sortField
 //     */
@@ -68,7 +68,7 @@
 //    "href" : "href"
 //  } ],
 //  "total_items" : 0
-//}}]
+// }}]
 //     - parameter fields: (query) A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. (optional)
 //     - parameter excludeFields: (query) A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. (optional)
 //     - parameter count: (query) The number of records to return. Default value is 10. Maximum value is 1000 (optional, default to 10)
@@ -253,7 +253,7 @@
 //  },
 //  "status" : "save",
 //  "was_canceled_by_facebook" : true
-//}}]
+// }}]
 //     - parameter outreachId: (path) The outreach id.
 //     - parameter fields: (query) A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. (optional)
 //     - parameter excludeFields: (query) A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. (optional)
@@ -346,7 +346,7 @@
 //    "sku" : "sku",
 //    "currency_code" : "currency_code"
 //  } ]
-//}}]
+// }}]
 //     - parameter outreachId: (path) The outreach id.
 //     - parameter fields: (query) A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. (optional)
 //     - parameter excludeFields: (query) A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. (optional)
@@ -572,7 +572,7 @@
 //    "status" : "status"
 //  } ],
 //  "total_items" : 2
-//}}]
+// }}]
 //     - parameter fields: (query) A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. (optional)
 //     - parameter excludeFields: (query) A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. (optional)
 //     - parameter count: (query) The number of records to return. Default value is 10. Maximum value is 1000 (optional, default to 10)
@@ -703,7 +703,7 @@
 //  "conversion_rate" : 5.637376656633329,
 //  "unpublished_at" : "2000-01-23T04:56:07.000+00:00",
 //  "status" : "status"
-//}}]
+// }}]
 //     - parameter outreachId: (path) The outreach id.
 //     - parameter fields: (query) A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. (optional)
 //     - parameter excludeFields: (query) A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. (optional)
@@ -728,4 +728,4 @@
 //
 //        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
 //    }
-//}
+// }

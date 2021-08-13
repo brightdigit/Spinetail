@@ -17,10 +17,10 @@
 import Foundation
 
 extension Result where Success == Data, Failure == APIError {
-    func decoded<T: Decodable>(using decoder: JSONDecoder = .init()) throws -> T {
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        
-        let data = try get()
-        return try decoder.decode(T.self, from: data)
-    }
+  func decoded<T: Decodable>(using decoder: JSONDecoder = .init()) throws -> T {
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+    let data = try get()
+    return try decoder.decode(T.self, from: data)
+  }
 }

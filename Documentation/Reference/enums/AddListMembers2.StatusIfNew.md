@@ -1,0 +1,38 @@
+**ENUM**
+
+# `AddListMembers2.StatusIfNew`
+
+```swift
+public enum StatusIfNew: String, Codable
+```
+
+## Cases
+### `subscribed`
+
+```swift
+case subscribed
+```
+
+### `unsubscribed`
+
+```swift
+case unsubscribed
+```
+
+### `cleaned`
+
+```swift
+case cleaned
+```
+
+### `pending`
+
+```swift
+case pending
+```
+
+### `transactional`
+
+```swift
+case transactional
+```

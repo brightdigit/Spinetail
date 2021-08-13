@@ -5,15 +5,15 @@
 //// https://github.com/swagger-api/swagger-codegen
 ////
 //
-//import Foundation
-//import Alamofire
+// import Foundation
+// import Alamofire
 //
 //
-//open class FacebookAdsAPI {
+// open class FacebookAdsAPI {
 //    /**
 //     * enum for parameter sortField
 //     */
-//    public enum SortField_getAllFacebookAds: String { 
+//    public enum SortField_getAllFacebookAds: String {
 //        case createdAt = "created_at"
 //        case updatedAt = "updated_at"
 //        case endTime = "end_time"
@@ -22,7 +22,7 @@
 //    /**
 //     * enum for parameter sortDir
 //     */
-//    public enum SortDir_getAllFacebookAds: String { 
+//    public enum SortDir_getAllFacebookAds: String {
 //        case asc = "ASC"
 //        case desc = "DESC"
 //    }
@@ -68,7 +68,7 @@
 //    "href" : "href"
 //  } ],
 //  "total_items" : 0
-//}}]
+// }}]
 //     - parameter fields: (query) A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. (optional)
 //     - parameter excludeFields: (query) A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. (optional)
 //     - parameter count: (query) The number of records to return. Default value is 10. Maximum value is 1000 (optional, default to 10)
@@ -76,7 +76,7 @@
 //     - parameter sortField: (query) Returns files sorted by the specified field. (optional)
 //     - parameter sortDir: (query) Determines the order direction for sorted results. (optional)
 //
-//     - returns: RequestBuilder<InlineResponse2008> 
+//     - returns: RequestBuilder<InlineResponse2008>
 //     */
 //    open class func getAllFacebookAdsWithRequestBuilder(fields: [String]? = nil, excludeFields: [String]? = nil, count: Int? = nil, offset: Int? = nil, sortField: SortField_getAllFacebookAds? = nil, sortDir: SortDir_getAllFacebookAds? = nil) -> RequestBuilder<InlineResponse2008> {
 //        let path = "/facebook-ads"
@@ -84,11 +84,11 @@
 //        let parameters: [String:Any]? = nil
 //        var url = URLComponents(string: URLString)
 //        url?.queryItems = APIHelper.mapValuesToQueryItems([
-//                        "fields": fields, 
-//                        "exclude_fields": excludeFields, 
-//                        "count": count?.encodeToJSON(), 
-//                        "offset": offset?.encodeToJSON(), 
-//                        "sort_field": sortField?.rawValue, 
+//                        "fields": fields,
+//                        "exclude_fields": excludeFields,
+//                        "count": count?.encodeToJSON(),
+//                        "offset": offset?.encodeToJSON(),
+//                        "sort_field": sortField?.rawValue,
 //                        "sort_dir": sortDir?.rawValue
 //        ])
 //
@@ -100,7 +100,7 @@
 //    /**
 //     Get facebook ad info
 //
-//     - parameter outreachId: (path) The outreach id. 
+//     - parameter outreachId: (path) The outreach id.
 //     - parameter fields: (query) A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. (optional)
 //     - parameter excludeFields: (query) A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. (optional)
 //     - parameter completion: completion handler to receive the data and the error objects
@@ -259,12 +259,12 @@
 //  },
 //  "status" : "save",
 //  "was_canceled_by_facebook" : true
-//}}]
-//     - parameter outreachId: (path) The outreach id. 
+// }}]
+//     - parameter outreachId: (path) The outreach id.
 //     - parameter fields: (query) A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. (optional)
 //     - parameter excludeFields: (query) A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. (optional)
 //
-//     - returns: RequestBuilder<InlineResponse2009> 
+//     - returns: RequestBuilder<InlineResponse2009>
 //     */
 //    open class func getFacebookAdsIdWithRequestBuilder(outreachId: String, fields: [String]? = nil, excludeFields: [String]? = nil) -> RequestBuilder<InlineResponse2009> {
 //        var path = "/facebook-ads/{outreach_id}"
@@ -275,7 +275,7 @@
 //        let parameters: [String:Any]? = nil
 //        var url = URLComponents(string: URLString)
 //        url?.queryItems = APIHelper.mapValuesToQueryItems([
-//                        "fields": fields, 
+//                        "fields": fields,
 //                        "exclude_fields": excludeFields
 //        ])
 //
@@ -284,4 +284,4 @@
 //
 //        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
 //    }
-//}
+// }

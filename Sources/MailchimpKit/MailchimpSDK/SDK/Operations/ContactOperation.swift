@@ -1,91 +1,75 @@
-//
-//  ContactOperation.swift
-//  MailchimpSDK
-//
-//  Created by Michael Patzer on 11/4/19.
-//  Copyright 2019 The Rocket Science Group LLC
-//
-//    Licensed under the Mailchimp Mobile SDK License Agreement (the "License");
-//    you may not use this file except in compliance with the License. Unless
-//    required by applicable law or agreed to in writing, software distributed
-//    under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
-//    OR CONDITIONS OF ANY KIND, either or express or implied.
-//
-//    See the License for the specific language governing permissions and
-//    limitations under the License.
-//
-
 import Foundation
 
 public class ContactOperation: Operation {
-    let contact: Contact
-    var request: ContactRequest?
-    let result: Mailchimp.RequestCallback?
-    public var dataTask: URLSessionDataTask?
+  let contact: Contact
+  var request: ContactRequest?
+  let result: Mailchimp.RequestCallback?
+  public var dataTask: URLSessionDataTask?
 
-    init(_ contact: Contact, result: Mailchimp.RequestCallback? = nil) {
-        self.contact = contact
-        self.result = result
+  init(_ contact: Contact, result: Mailchimp.RequestCallback? = nil) {
+    self.contact = contact
+    self.result = result
+  }
+
+  override public var isAsynchronous: Bool { false }
+  override public var isExecuting: Bool { state == .executing }
+  override public var isFinished: Bool { state == .finished }
+
+  var state = State.ready {
+    willSet {
+      willChangeValue(forKey: state.keyPath)
+      willChangeValue(forKey: newValue.keyPath)
     }
-
-    public override var isAsynchronous: Bool { return false }
-    public override var isExecuting: Bool { return state == .executing }
-    public override var isFinished: Bool { return state == .finished }
-
-    var state = State.ready {
-        willSet {
-            willChangeValue(forKey: state.keyPath)
-            willChangeValue(forKey: newValue.keyPath)
-        }
-        didSet {
-            didChangeValue(forKey: state.keyPath)
-            didChangeValue(forKey: oldValue.keyPath)
-        }
+    didSet {
+      didChangeValue(forKey: state.keyPath)
+      didChangeValue(forKey: oldValue.keyPath)
     }
+  }
 
-    enum State: String {
-        case ready = "Ready"
-        case executing = "Executing"
-        case finished = "Finished"
-        fileprivate var keyPath: String { return "is" + self.rawValue }
+  enum State: String {
+    case ready = "Ready"
+    case executing = "Executing"
+    case finished = "Finished"
+    fileprivate var keyPath: String { "is" + rawValue }
+  }
+
+  override public func start() {
+    if isCancelled {
+      state = .finished
+    } else {
+      state = .ready
+      main()
     }
+  }
 
-    public override func start() {
-        if isCancelled {
-            state = .finished
-        } else {
-            state = .ready
-            main()
-        }
-    }
+  override public func main() {
+    if isCancelled {
+      state = .finished
+    } else {
+      state = .executing
 
-    public override func main() {
-        if self.isCancelled {
-            state = .finished
-        } else {
-            state = .executing
+      request = ContactRequest(contact: contact) { requestResult in
+        self.result?(requestResult)
 
-            request = ContactRequest(contact: contact) { requestResult in
-                self.result?(requestResult)
+        if Mailchimp.debugMode {
+          switch requestResult {
+          case .success:
+            print("Contact request succeeded.")
 
-                if Mailchimp.debugMode {
-                    switch requestResult {
-                    case .success:
-                        print("Contact request succeeded.")
-                    case .failure(let error):
-                        print("Contact request failed with error: \(error.localizedDescription)")
-                        if case .apiError(let response) = error {
-                            print("API Error status: \(response.status)")
-                            print("API Error detail: \(response.detail)")
-                            print("API Error type: \(response.type)")
-                        }
-                    }
-                }
-
-                self.state = .finished
+          case let .failure(error):
+            print("Contact request failed with error: \(error.localizedDescription)")
+            if case let .apiError(response) = error {
+              print("API Error status: \(response.status)")
+              print("API Error detail: \(response.detail)")
+              print("API Error type: \(response.type)")
             }
-
-            self.dataTask = Mailchimp.api?.process(request: request!)
+          }
         }
+
+        self.state = .finished
+      }
+
+      dataTask = Mailchimp.api?.process(request: request!)
     }
+  }
 }

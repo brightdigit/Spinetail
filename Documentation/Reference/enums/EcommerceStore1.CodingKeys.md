@@ -1,0 +1,122 @@
+**ENUM**
+
+# `EcommerceStore1.CodingKeys`
+
+```swift
+public enum CodingKeys: String, CodingKey
+```
+
+## Cases
+### `_id`
+
+```swift
+case _id = "id"
+```
+
+### `listId`
+
+```swift
+case listId = "list_id"
+```
+
+### `name`
+
+```swift
+case name
+```
+
+### `platform`
+
+```swift
+case platform
+```
+
+### `domain`
+
+```swift
+case domain
+```
+
+### `isSyncing`
+
+```swift
+case isSyncing = "is_syncing"
+```
+
+### `emailAddress`
+
+```swift
+case emailAddress = "email_address"
+```
+
+### `currencyCode`
+
+```swift
+case currencyCode = "currency_code"
+```
+
+### `moneyFormat`
+
+```swift
+case moneyFormat = "money_format"
+```
+
+### `primaryLocale`
+
+```swift
+case primaryLocale = "primary_locale"
+```
+
+### `timezone`
+
+```swift
+case timezone
+```
+
+### `phone`
+
+```swift
+case phone
+```
+
+### `address`
+
+```swift
+case address
+```
+
+### `connectedSite`
+
+```swift
+case connectedSite = "connected_site"
+```
+
+### `automations`
+
+```swift
+case automations
+```
+
+### `listIsActive`
+
+```swift
+case listIsActive = "list_is_active"
+```
+
+### `createdAt`
+
+```swift
+case createdAt = "created_at"
+```
+
+### `updatedAt`
+
+```swift
+case updatedAt = "updated_at"
+```
+
+### `links`
+
+```swift
+case links = "_links"
+```
