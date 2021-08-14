@@ -1,5 +1,9 @@
 import Foundation
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 public typealias CodableAny = String
 public protocol APIResponseValue: CustomDebugStringConvertible, CustomStringConvertible {
   // associatedtype SuccessType : Codable
