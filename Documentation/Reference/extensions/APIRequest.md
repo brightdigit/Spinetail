@@ -2,7 +2,7 @@
 
 # `APIRequest`
 ```swift
-public extension APIRequest
+extension APIRequest: CustomStringConvertible
 ```
 
 ## Properties
@@ -19,20 +19,6 @@ public var debugDescription: String
 ```
 
 ## Methods
-### `makeRequest(complete:)`
-
-```swift
-func makeRequest(complete: @escaping (APIResponse<ResponseType>) -> Void)
-```
-
-makes a request using the default APIClient. Change your baseURL in APIClient.default.baseURL
-
-### `createURLRequest(baseURL:encoder:)`
-
-```swift
-func createURLRequest(baseURL: URL, encoder: RequestEncoder = JSONEncoder()) throws -> URLRequest
-```
-
 ### `asAny()`
 
 ```swift

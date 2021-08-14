@@ -14,7 +14,6 @@ let package = Package(
     .library(name: "MailchimpKit", targets: ["MailchimpKit"])
   ],
   dependencies: [
-    .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMinor(from: "5.4.3")),
     .package(url: "https://github.com/shibapm/Komondor", from: "1.1.0"), // dev
     .package(url: "https://github.com/eneko/SourceDocs", from: "1.2.1"), // dev
     .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.47.0"), // dev
@@ -29,9 +28,7 @@ let package = Package(
     ) // dev
   ],
   targets: [
-    .target(name: "MailchimpKit", dependencies: [
-      "Alamofire"
-    ]),
+    .target(name: "MailchimpKit", dependencies: []),
     .testTarget(name: "MailchimpKitTests", dependencies: ["MailchimpKit"])
   ]
 )
@@ -53,9 +50,9 @@ let package = Package(
         "swift run swiftformat .",
         "swift run swiftlint autocorrect",
         "swift run sourcedocs generate build --clean --reproducible-docs --spm-module MailchimpKit",
-        "git add .",
-        "swift run swiftformat --lint .",
-        "swift run swiftlint"
+        "git add ." // ,
+        // "swift run swiftformat --lint .",
+        // "swift run swiftlint"
       ]
     ]
   ]).write()

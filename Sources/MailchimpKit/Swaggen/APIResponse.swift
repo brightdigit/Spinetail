@@ -1,4 +1,3 @@
-import Alamofire
 import Foundation
 
 public typealias CodableAny = String
