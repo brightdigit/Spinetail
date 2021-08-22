@@ -16,55 +16,55 @@ final class MailchimpKitTests: XCTestCase {
 //        exp.fulfill()
 //      })
 
-//    let request = MailchimpKit.Lists.PostListsIdMembers.Request(listId: "6f357ca335", skipMergeValidation: true, body: .init(emailAddress: "leo.dion@gmail.com", status: .subscribed))
-//
-//    let session = URLSession.shared
-//    var urlRequest = try! request.createURLRequest(baseURL: URL(string: "https://us5.api.mailchimp.com/3.0")!)
-//    let apiKey = ProcessInfo.processInfo.environment["APIKEY"]!
-//    if let userAndPassword = "anystring:\(apiKey)".data(using: .utf8)?.base64EncodedString() {
-//      urlRequest.headers["Authorization"] = "Basic \(userAndPassword)"
-//    }
-//    urlRequest.headers["Content-type"] = "application/json; charset=utf-8"
-//
-//    session.dataTask(with: urlRequest) { data, urlResponse, _ in
-//      var _result: Result<MailchimpKit.Lists.PostListsIdMembers.Response, Error>
-//      if let httpStatus = (urlResponse as? HTTPURLResponse)?.statusCode, let data = data {
-//        _result = Result {
-//          try MailchimpKit.Lists.PostListsIdMembers.Response(statusCode: httpStatus, data: data, decoder: JSONDecoder())
-//        }
-//      } else {
-//        _result = .failure(APIError.jsonMissingData)
-//      }
-//      result = _result
-//      exp.fulfill()
-//    }.resume()
+    let request = MailchimpKit.Lists.PostListsIdMembers.Request(listId: "6f357ca335", skipMergeValidation: true, body: .init(emailAddress: "leo.dion@gmail.com", status: .subscribed))
 
-//    waitForExpectations(timeout: 10.0) { error in
-//      XCTAssertNil(error)
-//      let response: MailchimpKit.Lists.PostListsIdMembers.Response
-//      guard let result = result else {
-//        XCTAssertNotNil(result)
-//        return
-//      }
-//
-//      switch result {
-//      case let .failure(error):
-//        XCTAssertNil(error)
-//        return
-//
-//      case let .success(_response):
-//        response = _response
-//      }
-//
-//      switch response {
-//      case let .defaultResponse(statusCode: code, response):
-//        XCTAssert(response.detail.starts(with: "leo.dion@gmail.com"))
-//        XCTAssertEqual(code, 400)
-//
-//      case let .status200(status200):
-//        XCTAssertEqual(status200.emailAddress, "leo.dion@gmail.com")
-//      }
-//    }
+    let session = URLSession.shared
+    var urlRequest = try! request.createURLRequest(baseURL: URL(string: "https://us5.api.mailchimp.com/3.0")!)
+    let apiKey = ProcessInfo.processInfo.environment["API_KEY"]!
+    if let userAndPassword = "anystring:\(apiKey)".data(using: .utf8)?.base64EncodedString() {
+      urlRequest.addValue("Basic \(userAndPassword)", forHTTPHeaderField: "Authorization")
+    }
+    urlRequest.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-type")
+
+    session.dataTask(with: urlRequest) { data, urlResponse, _ in
+      var _result: Result<MailchimpKit.Lists.PostListsIdMembers.Response, Error>
+      if let httpStatus = (urlResponse as? HTTPURLResponse)?.statusCode, let data = data {
+        _result = Result {
+          try MailchimpKit.Lists.PostListsIdMembers.Response(statusCode: httpStatus, data: data, decoder: JSONDecoder())
+        }
+      } else {
+        _result = .failure(NSError())
+      }
+      result = _result
+      exp.fulfill()
+    }.resume()
+
+    waitForExpectations(timeout: 10.0) { error in
+      XCTAssertNil(error)
+      let response: MailchimpKit.Lists.PostListsIdMembers.Response
+      guard let result = result else {
+        XCTAssertNotNil(result)
+        return
+      }
+
+      switch result {
+      case let .failure(error):
+        XCTAssertNil(error)
+        return
+
+      case let .success(_response):
+        response = _response
+      }
+
+      switch response {
+      case let .defaultResponse(statusCode: code, response):
+        XCTAssert(response.detail.starts(with: "leo.dion@gmail.com"))
+        XCTAssertEqual(code, 400)
+
+      case let .status200(status200):
+        XCTAssertEqual(status200.emailAddress, "leo.dion@gmail.com")
+      }
+    }
 
     // PostListsIdMembers.Request.init()
     // This is an example of a functional test case.

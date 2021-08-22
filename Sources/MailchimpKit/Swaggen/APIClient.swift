@@ -1,5 +1,5 @@
 //
-// import Foundation
+import Foundation
 ////
 /////// Manages and sends APIRequests
 // public class APIClient {
@@ -207,40 +207,53 @@
 //  }
 // }
 //
-//// Create URLRequest
-// public extension APIRequest {
-//  func createURLRequest(baseURL: URL, encoder: RequestEncoder = JSONEncoder()) throws -> URLRequest {
-//    var urlRequest = URLRequest(url: baseURL.appendingPathComponent(path))
-//    urlRequest.httpMethod = service.method
-//    urlRequest.allHTTPHeaderFields = headers
-//
-//    // filter out parameters with empty string value
-//    var queryParams: [String: Any] = [:]
-//    for (key, value) in queryParameters {
-//      if !String(describing: value).isEmpty {
-//        queryParams[key] = value
-//      }
-//    }
-//
+// Create URLRequest
+ public extension APIRequest {
+  func createURLRequest(baseURL: URL, encoder: RequestEncoder = JSONEncoder()) throws -> URLRequest {
+    
+    
+    guard var componenets = URLComponents(url: baseURL.appendingPathComponent(path), resolvingAgainstBaseURL: false) else {
+      throw NSError()
+    }
+    
+
+    // filter out parameters with empty string value
+    var queryItems = [URLQueryItem]()
+    for (key, value) in queryParameters {
+      if !String(describing: value).isEmpty {
+        queryItems.append(URLQueryItem(name: key, value: String(describing: value)))
+      }
+    }
+    componenets.queryItems = queryItems
+    
+    guard let url = componenets.url else {
+      throw NSError()
+      
+    }
+    
+    
+    var urlRequest = URLRequest(url: url)
+    urlRequest.httpMethod = service.method
+    urlRequest.allHTTPHeaderFields = headers
 //    if !queryParams.isEmpty {
 //      urlRequest = try URLEncoding.queryString.encode(urlRequest, with: queryParams)
 //    }
-//
+
 //    var formParams: [String: Any] = [:]
 //    for (key, value) in formParameters {
 //      if !String(describing: value).isEmpty {
 //        formParams[key] = value
 //      }
 //    }
-//
+
 //    if !formParams.isEmpty {
 //      urlRequest = try URLEncoding.httpBody.encode(urlRequest, with: formParams)
 //    }
-//
-//    if let encodeBody = encodeBody {
-//      urlRequest.httpBody = try encodeBody(encoder)
-//      urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//    }
-//    return urlRequest
-//  }
-// }
+
+    if let encodeBody = encodeBody {
+      urlRequest.httpBody = try encodeBody(encoder)
+      urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    }
+    return urlRequest
+  }
+ }
