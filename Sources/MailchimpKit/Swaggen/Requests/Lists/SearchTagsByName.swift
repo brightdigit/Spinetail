@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.Lists {
+public extension Mailchimp.Lists {
   /**
    Search for tags on a list by name.
 

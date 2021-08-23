@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.AuthorizedApps {
+public extension Mailchimp.AuthorizedApps {
   /**
    Get authorized app info
 

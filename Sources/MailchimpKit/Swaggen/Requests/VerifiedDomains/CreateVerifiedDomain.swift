@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.VerifiedDomains {
+public extension Mailchimp.VerifiedDomains {
   /**
    Add domain to account
 

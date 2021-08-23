@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.CustomerJourneys {
+public extension Mailchimp.CustomerJourneys {
   /**
    Customer Journeys API trigger for a contact
 

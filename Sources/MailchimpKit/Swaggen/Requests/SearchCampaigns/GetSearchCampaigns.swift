@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.SearchCampaigns {
+public extension Mailchimp.SearchCampaigns {
   /**
    Search campaigns
 

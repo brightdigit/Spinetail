@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.Ping {
+public extension Mailchimp.Ping {
   /**
    Ping
 

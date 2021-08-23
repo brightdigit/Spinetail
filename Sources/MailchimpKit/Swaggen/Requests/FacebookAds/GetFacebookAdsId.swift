@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.FacebookAds {
+public extension Mailchimp.FacebookAds {
   /**
    Get facebook ad info
 

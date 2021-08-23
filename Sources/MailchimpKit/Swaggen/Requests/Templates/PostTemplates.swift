@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.Templates {
+public extension Mailchimp.Templates {
   /**
    Add template
 

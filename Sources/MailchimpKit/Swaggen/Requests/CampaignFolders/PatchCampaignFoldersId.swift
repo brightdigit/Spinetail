@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.CampaignFolders {
+public extension Mailchimp.CampaignFolders {
   /**
    Update campaign folder
 

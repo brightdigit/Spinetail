@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.Ecommerce {
+public extension Mailchimp.Ecommerce {
   /**
    Get promo code
 

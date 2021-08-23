@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.Batches {
+public extension Mailchimp.Batches {
   /**
    Start batch operation
 

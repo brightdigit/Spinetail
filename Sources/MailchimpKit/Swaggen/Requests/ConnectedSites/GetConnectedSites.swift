@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.ConnectedSites {
+public extension Mailchimp.ConnectedSites {
   /**
    List connected sites
 

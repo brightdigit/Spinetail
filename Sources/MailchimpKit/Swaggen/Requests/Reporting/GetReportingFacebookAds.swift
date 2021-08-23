@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.Reporting {
+public extension Mailchimp.Reporting {
   /**
    List facebook ads reports
 

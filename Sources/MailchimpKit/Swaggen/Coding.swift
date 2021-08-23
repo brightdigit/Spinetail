@@ -121,7 +121,7 @@ extension KeyedDecodingContainer {
     do {
       container = try nestedUnkeyedContainer(forKey: key)
     } catch {
-      if MailchimpKit.safeArrayDecoding {
+      if Mailchimp.safeArrayDecoding {
         return array
       } else {
         throw error
@@ -133,7 +133,7 @@ extension KeyedDecodingContainer {
         let element = try container.decode(T.self)
         array.append(element)
       } catch {
-        if MailchimpKit.safeArrayDecoding {
+        if Mailchimp.safeArrayDecoding {
           // hack to advance the current index
           _ = try? container.decode(AnyCodable.self)
         } else {
@@ -155,7 +155,7 @@ extension KeyedDecodingContainer {
   }
 
   private func decodeOptional<T>(_ closure: () throws -> T?) throws -> T? {
-    if MailchimpKit.safeOptionalDecoding {
+    if Mailchimp.safeOptionalDecoding {
       do {
         return try closure()
       } catch {
@@ -306,7 +306,7 @@ extension DateDay {
 
 extension Date {
   func encode() -> Any {
-    MailchimpKit.dateEncodingFormatter.string(from: self)
+    Mailchimp.dateEncodingFormatter.string(from: self)
   }
 }
 

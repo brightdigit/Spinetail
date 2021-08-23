@@ -1,6 +1,6 @@
 import Foundation
 
-public enum MailchimpKit {
+public enum Mailchimp {
   /// Whether to discard any errors when decoding optional properties
   public static var safeOptionalDecoding = false
 

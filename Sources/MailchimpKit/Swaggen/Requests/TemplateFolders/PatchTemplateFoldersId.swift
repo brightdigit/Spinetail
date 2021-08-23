@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.TemplateFolders {
+public extension Mailchimp.TemplateFolders {
   /**
    Update template folder
 

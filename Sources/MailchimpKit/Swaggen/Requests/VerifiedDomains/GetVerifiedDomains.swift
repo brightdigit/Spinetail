@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.VerifiedDomains {
+public extension Mailchimp.VerifiedDomains {
   /**
    List sending domains
 

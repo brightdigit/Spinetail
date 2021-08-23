@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.Campaigns {
+public extension Mailchimp.Campaigns {
   /**
    Get campaign send checklist
 

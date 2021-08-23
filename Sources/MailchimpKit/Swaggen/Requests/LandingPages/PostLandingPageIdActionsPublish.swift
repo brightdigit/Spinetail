@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.LandingPages {
+public extension Mailchimp.LandingPages {
   /**
    Publish landing page
 

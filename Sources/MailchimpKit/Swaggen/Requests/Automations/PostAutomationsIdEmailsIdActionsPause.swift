@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.Automations {
+public extension Mailchimp.Automations {
   /**
    Pause automated email
 

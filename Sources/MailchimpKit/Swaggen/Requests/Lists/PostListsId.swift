@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.Lists {
+public extension Mailchimp.Lists {
   /**
    Batch subscribe or unsubscribe
 

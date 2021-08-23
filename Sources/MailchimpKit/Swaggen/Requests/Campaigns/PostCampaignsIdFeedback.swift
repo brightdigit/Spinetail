@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.Campaigns {
+public extension Mailchimp.Campaigns {
   /**
    Add campaign feedback
 

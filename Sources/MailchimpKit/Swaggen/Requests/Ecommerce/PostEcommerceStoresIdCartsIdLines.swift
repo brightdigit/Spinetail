@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.Ecommerce {
+public extension Mailchimp.Ecommerce {
   /**
    Add cart line item
 

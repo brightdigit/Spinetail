@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.Reports {
+public extension Mailchimp.Reports {
   /**
    Get unsubscribed member
 

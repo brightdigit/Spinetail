@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MailchimpKit.FileManager {
+public extension Mailchimp.FileManager {
   /**
    Update folder
 
