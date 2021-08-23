@@ -25,7 +25,7 @@ public class APIClient<SessionType: Session> {
           return .failure(APIError.invalidResponse)
         }
         return Result {
-          try ResponseType(statusCode: httpStatus, data: data, decoder: JSONDecoder())
+          try ResponseType(statusCode: httpStatus, data: data, decoder: self.api.decoder)
         }
       }
       completion(newResult)

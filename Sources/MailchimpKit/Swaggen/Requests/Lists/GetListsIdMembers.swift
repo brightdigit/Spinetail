@@ -1,5 +1,70 @@
 import Foundation
 
+public enum JSONOptionalDate : Codable, Equatable {
+  case none
+  case some(Date)
+  var date : Date? {
+    switch self {
+    case .none:
+      return nil
+    case .some(let value):
+      return value
+    }
+  }
+  
+  public init(date: Date?) {
+  switch date {
+  case .none:
+    self = .none
+  case .some(let value):
+    self = .some(value)
+  }
+  }
+  
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.singleValueContainer()
+    
+    do {
+      self = try .some(container.decode(Date.self))
+    } catch {
+      let str = try container.decode(String.self)
+      guard str.isEmpty else {
+        throw error
+      }
+      self = .none
+    }
+  }
+}
+
+public enum MergeFieldValue : Codable, Equatable {
+  case value(String)
+  case dictionary([String : MergeFieldValue])
+  
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.singleValueContainer()
+    
+    if let dictionary = try? container.decode([String : MergeFieldValue].self) {
+      self = .dictionary(dictionary)
+    } else {
+      self = try .value(container.decode(String.self))
+    }
+  }
+}
+
+public enum MergeFieldDictionary : Codable, Equatable {
+case value(String)
+case dictionary([String : MergeFieldDictionary])
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.singleValueContainer()
+    
+    if let dictionary = try? container.decode([String : MergeFieldDictionary].self) {
+      self = .dictionary(dictionary)
+    } else {
+      self = try .value(container.decode(String.self))
+    }
+  }
+}
+
 public extension Mailchimp.Lists {
   /**
    List members info
@@ -338,7 +403,7 @@ public extension Mailchimp.Lists {
           public var memberRating: Int?
 
           /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-          public var mergeFields: [String: [String: CodableAny]]?
+          public var mergeFields: MergeFieldDictionary?
 
           /** The source from which the subscriber was added to this list. */
           public var source: String?
@@ -356,10 +421,10 @@ public extension Mailchimp.Lists {
           public var tagsCount: Int?
 
           /** The date and time the subscribe confirmed their opt-in status in ISO 8601 format. */
-          public var timestampOpt: DateTime?
+          public var timestampOpt: JSONOptionalDate
 
           /** The date and time the subscriber signed up for the list in ISO 8601 format. */
-          public var timestampSignup: DateTime?
+          public var timestampSignup: JSONOptionalDate
 
           /** An identifier for the address across all of Mailchimp. */
           public var uniqueEmailId: String?
@@ -652,7 +717,7 @@ public extension Mailchimp.Lists {
             }
           }
 
-          public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, fullName: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: DateTime? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, memberRating: Int? = nil, mergeFields: [String: [String: CodableAny]]? = nil, source: String? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: DateTime? = nil, timestampSignup: DateTime? = nil, uniqueEmailId: String? = nil, unsubscribeReason: String? = nil, vip: Bool? = nil, webId: Int? = nil) {
+          public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, fullName: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: DateTime? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, memberRating: Int? = nil, mergeFields: MergeFieldDictionary? = nil, source: String? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: DateTime? = nil, timestampSignup: DateTime? = nil, uniqueEmailId: String? = nil, unsubscribeReason: String? = nil, vip: Bool? = nil, webId: Int? = nil) {
             self.links = links
             self.emailAddress = emailAddress
             self.emailClient = emailClient
@@ -675,8 +740,8 @@ public extension Mailchimp.Lists {
             self.status = status
             self.tags = tags
             self.tagsCount = tagsCount
-            self.timestampOpt = timestampOpt
-            self.timestampSignup = timestampSignup
+            self.timestampOpt = JSONOptionalDate(date: timestampOpt)
+            self.timestampSignup = JSONOptionalDate(date: timestampSignup)
             self.uniqueEmailId = uniqueEmailId
             self.unsubscribeReason = unsubscribeReason
             self.vip = vip
@@ -702,14 +767,14 @@ public extension Mailchimp.Lists {
             location = try container.decodeIfPresent("location")
             marketingPermissions = try container.decodeArrayIfPresent("marketing_permissions")
             memberRating = try container.decodeIfPresent("member_rating")
-            mergeFields = try container.decodeAnyIfPresent("merge_fields")
+            mergeFields = try container.decodeIfPresent("merge_fields")
             source = try container.decodeIfPresent("source")
             stats = try container.decodeIfPresent("stats")
             status = try container.decodeIfPresent("status")
             tags = try container.decodeArrayIfPresent("tags")
             tagsCount = try container.decodeIfPresent("tags_count")
-            timestampOpt = try container.decodeIfPresent("timestamp_opt")
-            timestampSignup = try container.decodeIfPresent("timestamp_signup")
+            timestampOpt = try container.decodeIfPresent("timestamp_opt") ?? .none
+            timestampSignup = try container.decodeIfPresent("timestamp_signup") ?? .none
             uniqueEmailId = try container.decodeIfPresent("unique_email_id")
             unsubscribeReason = try container.decodeIfPresent("unsubscribe_reason")
             vip = try container.decodeIfPresent("vip")

@@ -16,7 +16,8 @@ extension URLSession: Session {
   public func createRequest<ResponseType>(_ request: APIRequest<ResponseType>, withBaseURL baseURL: URL, andHeaders headers: [String: String]) throws -> URLRequest where ResponseType: APIResponseValue {
     guard var componenets = URLComponents(url: baseURL.appendingPathComponent(request.path), resolvingAgainstBaseURL: false) else {
       throw APIError.badURL(baseURL, request.path)
-    }
+    } 
+    
 
     // filter out parameters with empty string value
     var queryItems = [URLQueryItem]()
@@ -38,24 +39,8 @@ extension URLSession: Session {
       requestHeaderKey
     })
 
-//    if !queryParams.isEmpty {
-//      urlRequest = try URLEncoding.queryString.encode(urlRequest, with: queryParams)
-//    }
-
-//    var formParams: [String: Any] = [:]
-//    for (key, value) in formParameters {
-//      if !String(describing: value).isEmpty {
-//        formParams[key] = value
-//      }
-//    }
-
-//    if !formParams.isEmpty {
-//      urlRequest = try URLEncoding.httpBody.encode(urlRequest, with: formParams)
-//    }
-
     if let encodeBody = request.encodeBody {
       urlRequest.httpBody = try encodeBody(JSONEncoder())
-      // urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
     }
     return urlRequest
   }

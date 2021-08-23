@@ -9,6 +9,11 @@ public struct MailchimpAPI: API {
   public let dc: String
   public let baseURL: URL
   public let headers: [String: String]
+  public let decoder: ResponseDecoder = {
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .formatted(Mailchimp.dateEncodingFormatter)
+    return decoder
+  }()
 
   public init?(apiKey: String) {
     self.apiKey = apiKey

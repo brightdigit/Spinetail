@@ -3,6 +3,40 @@ import XCTest
 
 final class MailchimpKitTests: XCTestCase {
   func testExample() throws {
+    let exp = expectation(description: "get members")
+    var members : [Mailchimp.Lists.GetListsIdMembers.Response.Status200.Members]?
+    
+    guard let apiKey = ProcessInfo.processInfo.environment["API_KEY"] else {
+      
+      return
+    }
+        guard let api = MailchimpAPI(apiKey: apiKey) else {
+          return
+        }
+    let client = APIClient(api: api, session: URLSession.shared)
+    
+    let request = Mailchimp.Lists.GetListsIdMembers.Request(listId: "6f357ca335")
+    
+    client.request(request) { result in
+      members = try? result.get().success?.members
+      exp.fulfill()
+    }
+    
+    waitForExpectations(timeout: 10.0) { error in
+      XCTAssertNil(error)
+      XCTAssertNotNil(members)
+      
+      guard let members = members else {
+        return
+      }
+
+      XCTAssertNotNil( members.first)
+      guard let member = members.first else {
+        return
+      }
+      
+      debugPrint(member.emailAddress)
+    }
 //    var result: Result<Mailchimp.Lists.PostListsIdMembers.Response, Error>!
 //    let exp = expectation(description: "added user")
 //
