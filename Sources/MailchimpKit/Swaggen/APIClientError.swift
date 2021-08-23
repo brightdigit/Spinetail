@@ -32,3 +32,6 @@ extension APIClientError: CustomStringConvertible {
     }
   }
 }
+enum APIError: Error {
+  case invalidResponse
+}
