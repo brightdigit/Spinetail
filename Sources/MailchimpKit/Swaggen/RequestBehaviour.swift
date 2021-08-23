@@ -1,9 +1,9 @@
 import Foundation
 
 #if canImport(FoundationNetworking)
-import FoundationNetworking
+  import FoundationNetworking
 #endif
- 
+
 public protocol RequestBehaviour {
   /// runs first and allows the requests to be modified. If modifying asynchronously use validate
   func modifyRequest(request: AnyRequest, urlRequest: URLRequest) -> URLRequest

@@ -2,7 +2,7 @@
 
 # `APIRequest`
 ```swift
-extension APIRequest: CustomStringConvertible
+public extension APIRequest
 ```
 
 ## Properties
@@ -19,6 +19,12 @@ public var debugDescription: String
 ```
 
 ## Methods
+### `createURLRequest(baseURL:encoder:)`
+
+```swift
+func createURLRequest(baseURL: URL, encoder: RequestEncoder = JSONEncoder()) throws -> URLRequest
+```
+
 ### `asAny()`
 
 ```swift

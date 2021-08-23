@@ -208,14 +208,11 @@ import Foundation
 // }
 //
 // Create URLRequest
- public extension APIRequest {
+public extension APIRequest {
   func createURLRequest(baseURL: URL, encoder: RequestEncoder = JSONEncoder()) throws -> URLRequest {
-    
-    
     guard var componenets = URLComponents(url: baseURL.appendingPathComponent(path), resolvingAgainstBaseURL: false) else {
       throw NSError()
     }
-    
 
     // filter out parameters with empty string value
     var queryItems = [URLQueryItem]()
@@ -225,13 +222,11 @@ import Foundation
       }
     }
     componenets.queryItems = queryItems
-    
+
     guard let url = componenets.url else {
       throw NSError()
-      
     }
-    
-    
+
     var urlRequest = URLRequest(url: url)
     urlRequest.httpMethod = service.method
     urlRequest.allHTTPHeaderFields = headers
@@ -256,4 +251,4 @@ import Foundation
     }
     return urlRequest
   }
- }
+}
