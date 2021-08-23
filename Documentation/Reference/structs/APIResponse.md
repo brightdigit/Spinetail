@@ -46,11 +46,3 @@ public let data: Data?
 ```
 
 The data returned by the server.
-
-### `metrics`
-
-```swift
-public let metrics: URLSessionTaskMetrics?
-```
-
-The timeline of the complete lifecycle of the request.

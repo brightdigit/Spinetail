@@ -41,9 +41,9 @@ let package = Package(
   let config = PackageConfiguration([
     "komondor": [
       "pre-push": [
-        "swift test --enable-code-coverage",
+        "swift test --enable-code-coverage"
         // swiftlint:disable:next line_length
-        //"swift run swift-test-codecov .build/debug/codecov/MailchimpKit.json --minimum \(requiredCoverage)"
+        // "swift run swift-test-codecov .build/debug/codecov/MailchimpKit.json --minimum \(requiredCoverage)"
       ],
       "pre-commit": [
         "swift test --enable-code-coverage --generate-linuxmain",

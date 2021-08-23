@@ -1,5 +1,4 @@
 @testable import MailchimpKit
-import SwiftUI
 import XCTest
 
 final class MailchimpKitTests: XCTestCase {
