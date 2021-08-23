@@ -32,6 +32,9 @@ extension APIClientError: CustomStringConvertible {
     }
   }
 }
+
 enum APIError: Error {
   case invalidResponse
+  case baseURL(URL, String)
+  case urlComponents(URLComponents)
 }

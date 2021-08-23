@@ -1,4 +1,3 @@
-
 struct BasicAuthentication: Authentication {
   static let name = "Basic"
   let userName: String

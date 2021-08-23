@@ -1,4 +1,3 @@
-
 import Foundation
 
 public protocol Response {
@@ -6,9 +5,8 @@ public protocol Response {
   var data: Data? { get }
 }
 
-
 #if canImport(FoundationNetworking)
-import FoundationNetworking
+  import FoundationNetworking
 #endif
 
 struct URLSessionResponse: Response {

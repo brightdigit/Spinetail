@@ -45,6 +45,5 @@ final class MailchimpKitTests: XCTestCase {
         XCTAssertEqual(status200.emailAddress, "leo.dion@gmail.com")
       }
     }
-
   }
 }

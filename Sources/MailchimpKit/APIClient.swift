@@ -1,6 +1,4 @@
-
 import Foundation
-
 
 public class APIClient<SessionType: Session> {
   public init(api: API, session: SessionType) {

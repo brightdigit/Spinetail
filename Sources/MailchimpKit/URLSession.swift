@@ -1,12 +1,10 @@
 import Foundation
 
 #if canImport(FoundationNetworking)
-import FoundationNetworking
+  import FoundationNetworking
 #endif
 
-
 extension URLSession: Session {
-
   public func beginRequest(_ request: URLRequest, _ completion: @escaping ((Result<Response, Error>) -> Void)) -> Task {
     let task = dataTask(with: request) { data, response, error in
       completion(URLSessionResponse.resultBasedOnResponse(response, data: data, error: error))
@@ -17,7 +15,7 @@ extension URLSession: Session {
 
   public func createRequest<ResponseType>(_ request: APIRequest<ResponseType>, withBaseURL baseURL: URL, andHeaders headers: [String: String]) throws -> URLRequest where ResponseType: APIResponseValue {
     guard var componenets = URLComponents(url: baseURL.appendingPathComponent(request.path), resolvingAgainstBaseURL: false) else {
-      throw NSError()
+      throw APIError.badURL(baseURL, request.path)
     }
 
     // filter out parameters with empty string value
@@ -30,7 +28,7 @@ extension URLSession: Session {
     componenets.queryItems = queryItems
 
     guard let url = componenets.url else {
-      throw NSError()
+      throw APIError.urlComponents(componenets)
     }
 
     var urlRequest = URLRequest(url: url)
