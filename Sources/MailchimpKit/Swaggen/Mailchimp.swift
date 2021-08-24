@@ -1,25 +1,16 @@
 import Foundation
 
-public enum Mailchimp {
-  /// Whether to discard any errors when decoding optional properties
-  public static var safeOptionalDecoding = false
-
-  /// Whether to remove invalid elements instead of throwing when decoding arrays
-  public static var safeArrayDecoding = false
-
-  /// Used to encode Dates when uses as string params
-  public static var dateEncodingFormatter = DateFormatter(formatString: "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
-                                                          locale: Locale(identifier: "en_US_POSIX"),
-                                                          calendar: Calendar(identifier: .gregorian))
-
-  public static let version = "3.0.55"
-
-
-
-  public enum Server {
-    public static let main = "https://server.api.mailchimp.com/3.0"
-  }
-}
+//public enum Mailchimp {
+//
+//
+////  public static let version = "3.0.55"
+////
+////
+////
+////  public enum Server {
+////    public static let main = "https://server.api.mailchimp.com/3.0"
+////  }
+//}
 public enum ActivityFeed {}
 public enum AuthorizedApps {}
 public enum Automations {}

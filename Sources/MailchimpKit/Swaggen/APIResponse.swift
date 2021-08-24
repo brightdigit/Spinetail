@@ -4,7 +4,7 @@ import Foundation
   import FoundationNetworking
 #endif
 
-public typealias CodableAny = String
+public typealias CodableAny = AnyCodable
 
 
 

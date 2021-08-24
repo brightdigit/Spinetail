@@ -5,7 +5,7 @@ import Foundation
 #endif
 
 extension URLSession: Session {
-  public func beginRequest(_ request: URLRequest, _ completion: @escaping ((Result<Response, Error>) -> Void)) -> Task {
+  public func beginRequest(_ request: URLRequest, _ completion: @escaping ((APIResult<Response>) -> Void)) -> Task {
     let task = dataTask(with: request) { data, response, error in
       completion(URLSessionResponse.resultBasedOnResponse(response, data: data, error: error))
     }

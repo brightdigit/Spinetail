@@ -7,6 +7,7 @@ public enum APIClientError: Error {
   case validationError(Error)
   case networkError(Error)
   case unknownError(Error)
+  case invalidResponse
 
   public var name: String {
     switch self {
@@ -16,6 +17,7 @@ public enum APIClientError: Error {
     case .requestEncodingError: return "Request encoding failed"
     case .networkError: return "Network error"
     case .unknownError: return "Unknown error"
+    case .invalidResponse: return "Invalid Response"
     }
   }
 }
@@ -29,6 +31,7 @@ extension APIClientError: CustomStringConvertible {
     case let .requestEncodingError(error): return "\(name): \(error)"
     case let .networkError(error): return "\(name): \(error.localizedDescription)"
     case let .unknownError(error): return "\(name): \(error.localizedDescription)"
+    case .invalidResponse: return  name
     }
   }
 }
