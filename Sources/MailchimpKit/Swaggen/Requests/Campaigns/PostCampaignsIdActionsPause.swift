@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.Campaigns {
+public extension Campaigns {
   /**
    Pause rss campaign
 

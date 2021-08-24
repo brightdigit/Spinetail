@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.BatchWebhooks {
+public extension BatchWebhooks {
   /**
    Get batch webhook info
 

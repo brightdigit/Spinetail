@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.Conversations {
+public extension Conversations {
   /**
    List messages
 

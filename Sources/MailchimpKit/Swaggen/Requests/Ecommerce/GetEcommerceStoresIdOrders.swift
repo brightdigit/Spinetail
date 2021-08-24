@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.Ecommerce {
+public extension Ecommerce {
   /**
    List orders
 

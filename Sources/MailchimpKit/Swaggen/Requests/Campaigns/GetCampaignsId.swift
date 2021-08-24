@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.Campaigns {
+public extension Campaigns {
   /**
    Get campaign info
 

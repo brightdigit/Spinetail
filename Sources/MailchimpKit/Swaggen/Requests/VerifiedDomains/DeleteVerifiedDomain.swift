@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.VerifiedDomains {
+public extension VerifiedDomains {
   /**
    Delete domain
 

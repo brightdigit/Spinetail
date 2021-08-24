@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.Lists {
+public extension Lists {
   /**
    Remove list member from segment
 

@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.Root {
+public extension Root {
   /**
    List api root resources
 

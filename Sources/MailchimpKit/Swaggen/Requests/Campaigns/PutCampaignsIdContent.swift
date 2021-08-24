@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.Campaigns {
+public extension Campaigns {
   /**
    Set campaign content
 

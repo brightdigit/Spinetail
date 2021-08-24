@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.Automations {
+public extension Automations {
   /**
    Start automated email
 

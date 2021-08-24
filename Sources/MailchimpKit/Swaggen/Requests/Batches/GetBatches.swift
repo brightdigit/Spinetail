@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.Batches {
+public extension Batches {
   /**
    List batch requests
 

@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.Lists {
+public extension Lists {
   /**
    Add or update list member
 

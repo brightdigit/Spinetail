@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.CampaignFolders {
+public extension CampaignFolders {
   /**
    Delete campaign folder
 

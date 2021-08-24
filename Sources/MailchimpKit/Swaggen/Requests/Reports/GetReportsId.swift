@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.Reports {
+public extension Reports {
   /**
    Get campaign report
 

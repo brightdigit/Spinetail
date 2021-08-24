@@ -4,7 +4,7 @@ import XCTest
 final class MailchimpKitTests: XCTestCase {
   func testExample() throws {
     let exp = expectation(description: "get members")
-    var members : [Mailchimp.Lists.GetListsIdMembers.Response.Status200.Members]?
+    var members : [Lists.GetListsIdMembers.Response.Status200.Members]?
     
     guard let apiKey = ProcessInfo.processInfo.environment["API_KEY"] else {
       
@@ -15,7 +15,7 @@ final class MailchimpKitTests: XCTestCase {
         }
     let client = APIClient(api: api, session: URLSession.shared)
     
-    let request = Mailchimp.Lists.GetListsIdMembers.Request(listId: "6f357ca335")
+    let request = Lists.GetListsIdMembers.Request(listId: "6f357ca335")
     
     client.request(request) { result in
       members = try? result.get().success?.members

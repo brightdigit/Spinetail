@@ -65,7 +65,7 @@ case dictionary([String : MergeFieldDictionary])
   }
 }
 
-public extension Mailchimp.Lists {
+public extension Lists {
   /**
    List members info
 

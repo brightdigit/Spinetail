@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.FileManager {
+public extension FileManager {
   /**
    Delete file
 

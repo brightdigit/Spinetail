@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.ConnectedSites {
+public extension ConnectedSites {
   /**
    List connected sites
 

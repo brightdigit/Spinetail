@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.SearchMembers {
+public extension SearchMembers {
   /**
    Search members
 

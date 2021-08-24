@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.Templates {
+public extension Templates {
   /**
    Delete template
 

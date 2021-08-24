@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.ActivityFeed {
+public extension ActivityFeed {
   /**
    Get latest chimp chatter
 

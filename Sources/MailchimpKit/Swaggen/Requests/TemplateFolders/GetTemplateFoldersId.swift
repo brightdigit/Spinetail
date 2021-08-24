@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.TemplateFolders {
+public extension TemplateFolders {
   /**
    Get template folder
 

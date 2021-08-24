@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Mailchimp.LandingPages {
+public extension LandingPages {
   /**
    Get landing page content
 
