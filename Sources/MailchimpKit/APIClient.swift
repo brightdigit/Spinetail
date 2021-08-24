@@ -19,29 +19,32 @@ public class APIClient<SessionType: Session> {
       return nil
     }
 
-    return session.beginRequest(sessionRequest) { result in      
+    return session.beginRequest(sessionRequest) { result in
       completion(.init(ResponseType.self, result: result, decoder: self.api.decoder))
     }
   }
 }
 
-extension Result  {
-  init(_ responseType: Success.Type, result: Result<Response, APIClientError>, decoder: ResponseDecoder) where Success : APIResponseValue,  Failure == APIClientError {
+extension Result {
+  init(_: Success.Type, result: Result<Response, APIClientError>, decoder: ResponseDecoder) where Success: APIResponseValue, Failure == APIClientError {
     self = result.flatMap { response -> APIResult<Success> in
       guard let httpStatus = response.statusCode, let data = response.data else {
         return .failure(APIClientError.invalidResponse)
       }
-      let result = Result<Success, Error>{
+      let result = Result<Success, Error> {
         try Success(statusCode: httpStatus, data: data, decoder: decoder)
       }
       switch result {
-      case .success(let value):
+      case let .success(value):
         return .success(value)
-      case .failure(let errorType as APIClientError):
+
+      case let .failure(errorType as APIClientError):
         return .failure(errorType)
-      case .failure(let errorType as DecodingError):
+
+      case let .failure(errorType as DecodingError):
         return .failure(APIClientError.decodingError(errorType))
-      case .failure(let errorType):
+
+      case let .failure(errorType):
         return .failure(APIClientError.unknownError(errorType))
       }
     }

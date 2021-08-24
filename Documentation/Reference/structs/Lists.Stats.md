@@ -36,7 +36,7 @@ The number of campaigns in any status that use this list.
 ### `campaignLastSent`
 
 ```swift
-public var campaignLastSent: DateTime?
+public var campaignLastSent: DateTime
 ```
 
 The date and time the last campaign was sent to this list in ISO 8601 format. This is updated when a campaign is sent to 10 or more recipients.
@@ -68,7 +68,7 @@ The average click rate (a percentage represented as a number between 0 and 100) 
 ### `lastSubDate`
 
 ```swift
-public var lastSubDate: DateTime?
+public var lastSubDate: DateTime
 ```
 
 The date and time of the last time someone subscribed to this list in ISO 8601 format.
@@ -76,7 +76,7 @@ The date and time of the last time someone subscribed to this list in ISO 8601 f
 ### `lastUnsubDate`
 
 ```swift
-public var lastUnsubDate: DateTime?
+public var lastUnsubDate: DateTime
 ```
 
 The date and time of the last time someone unsubscribed from this list in ISO 8601 format.
@@ -149,7 +149,7 @@ The number of members who have unsubscribed since the last campaign was sent.
 ### `init(avgSubRate:avgUnsubRate:campaignCount:campaignLastSent:cleanedCount:cleanedCountSinceSend:clickRate:lastSubDate:lastUnsubDate:memberCount:memberCountSinceSend:mergeFieldCount:openRate:targetSubRate:totalContacts:unsubscribeCount:unsubscribeCountSinceSend:)`
 
 ```swift
-public init(avgSubRate: Double? = nil, avgUnsubRate: Double? = nil, campaignCount: Int? = nil, campaignLastSent: DateTime? = nil, cleanedCount: Int? = nil, cleanedCountSinceSend: Int? = nil, clickRate: Double? = nil, lastSubDate: DateTime? = nil, lastUnsubDate: DateTime? = nil, memberCount: Int? = nil, memberCountSinceSend: Int? = nil, mergeFieldCount: Int? = nil, openRate: Double? = nil, targetSubRate: Double? = nil, totalContacts: Int? = nil, unsubscribeCount: Int? = nil, unsubscribeCountSinceSend: Int? = nil)
+public init(avgSubRate: Double? = nil, avgUnsubRate: Double? = nil, campaignCount: Int? = nil, campaignLastSent: Date? = nil, cleanedCount: Int? = nil, cleanedCountSinceSend: Int? = nil, clickRate: Double? = nil, lastSubDate: Date? = nil, lastUnsubDate: Date? = nil, memberCount: Int? = nil, memberCountSinceSend: Int? = nil, mergeFieldCount: Int? = nil, openRate: Double? = nil, targetSubRate: Double? = nil, totalContacts: Int? = nil, unsubscribeCount: Int? = nil, unsubscribeCountSinceSend: Int? = nil)
 ```
 
 ### `init(from:)`

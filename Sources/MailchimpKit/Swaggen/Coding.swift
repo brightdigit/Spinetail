@@ -105,12 +105,9 @@ extension KeyedDecodingContainer {
       try decodeIfPresent(T.self, forKey: key)
     }
   }
-  
+
   func decodeIfPresent(_ key: KeyedDecodingContainer.Key) throws -> DateTime {
-    
-    
     try decodeIfPresent(DateTime.self, forKey: key) ?? .none
-    
   }
 
   func decodeAny<T>(_ key: K) throws -> T {
@@ -319,7 +316,7 @@ extension Date {
 
 extension JSONOptionalDate {
   func encode() -> Any? {
-    self.date?.encode()
+    date?.encode()
   }
 }
 

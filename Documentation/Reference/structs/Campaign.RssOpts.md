@@ -36,7 +36,7 @@ The frequency of the RSS Campaign.
 ### `lastSent`
 
 ```swift
-public var lastSent: DateTime?
+public var lastSent: DateTime
 ```
 
 The date the campaign was last sent.
@@ -53,7 +53,7 @@ The schedule for sending the RSS Campaign.
 ### `init(constrainRssImg:feedURL:frequency:lastSent:schedule:)`
 
 ```swift
-public init(constrainRssImg: Bool? = nil, feedURL: URL? = nil, frequency: Frequency? = nil, lastSent: DateTime? = nil, schedule: Schedule? = nil)
+public init(constrainRssImg: Bool? = nil, feedURL: URL? = nil, frequency: Frequency? = nil, lastSent: Date? = nil, schedule: Schedule? = nil)
 ```
 
 ### `init(from:)`

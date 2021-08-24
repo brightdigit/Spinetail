@@ -239,7 +239,7 @@ public extension Reports {
               self.bounces = bounces
               self.forwards = forwards
               self.forwardsOpens = forwardsOpens
-              self.lastOpen =  lastOpen
+              self.lastOpen = lastOpen
               self.opens = opens
               self.recipientClicks = recipientClicks
               self.uniqueOpens = uniqueOpens

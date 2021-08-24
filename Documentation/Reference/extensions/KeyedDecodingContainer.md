@@ -6,10 +6,10 @@ extension KeyedDecodingContainer
 ```
 
 ## Methods
-### `decodeArray(_:)`
+### `decodeArray(_:safeArrayDecoding:)`
 
 ```swift
-public func decodeArray<T: Decodable>(_ key: K) throws -> [T]
+public func decodeArray<T: Decodable>(_ key: K, safeArrayDecoding: Bool = false) throws -> [T]
 ```
 
 ### `decodeArrayIfPresent(_:)`

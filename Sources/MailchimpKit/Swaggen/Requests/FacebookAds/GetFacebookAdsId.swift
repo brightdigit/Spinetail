@@ -911,7 +911,7 @@ public extension FacebookAds {
           self.name = name
           self.needsAttention = needsAttention
           self.pausedAt = .init(date: pausedAt)
-          self.publishedTime = .init(date:  publishedTime)
+          self.publishedTime = .init(date: publishedTime)
           self.recipients = recipients
           self.reportSummary = reportSummary
           self.showReport = showReport

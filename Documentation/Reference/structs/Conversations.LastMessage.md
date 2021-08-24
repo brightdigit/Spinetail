@@ -52,7 +52,7 @@ The subject of this message.
 ### `timestamp`
 
 ```swift
-public var timestamp: DateTime?
+public var timestamp: DateTime
 ```
 
 The date and time the message was either sent or received in ISO 8601 format.
@@ -61,7 +61,7 @@ The date and time the message was either sent or received in ISO 8601 format.
 ### `init(fromEmail:fromLabel:message:read:subject:timestamp:)`
 
 ```swift
-public init(fromEmail: String? = nil, fromLabel: String? = nil, message: String? = nil, read: Bool? = nil, subject: String? = nil, timestamp: DateTime? = nil)
+public init(fromEmail: String? = nil, fromLabel: String? = nil, message: String? = nil, read: Bool? = nil, subject: String? = nil, timestamp: Date? = nil)
 ```
 
 ### `init(from:)`

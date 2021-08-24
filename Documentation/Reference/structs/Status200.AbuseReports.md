@@ -28,7 +28,7 @@ The campaign id for the abuse report
 ### `date`
 
 ```swift
-public var date: DateTime?
+public var date: DateTime
 ```
 
 Date for the abuse report
@@ -93,7 +93,7 @@ public var vip: Bool?
 ### `init(links:campaignId:date:emailAddress:emailId:id:listId:listIsActive:mergeFields:vip:)`
 
 ```swift
-public init(links: [Links]? = nil, campaignId: String? = nil, date: DateTime? = nil, emailAddress: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: [String: CodableAny]]? = nil, vip: Bool? = nil)
+public init(links: [Links]? = nil, campaignId: String? = nil, date: Date? = nil, emailAddress: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: [String: CodableAny]]? = nil, vip: Bool? = nil)
 ```
 
 ### `init(from:)`

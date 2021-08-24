@@ -490,7 +490,7 @@ public extension Reports {
             public init(clickRate: Double? = nil, clicksTotal: Int? = nil, lastClick: Date? = nil, uniqueClicks: Int? = nil, uniqueSubscriberClicks: Int? = nil) {
               self.clickRate = clickRate
               self.clicksTotal = clicksTotal
-              self.lastClick = .init(date:  lastClick)
+              self.lastClick = .init(date: lastClick)
               self.uniqueClicks = uniqueClicks
               self.uniqueSubscriberClicks = uniqueSubscriberClicks
             }
@@ -784,7 +784,7 @@ public extension Reports {
             public var uniqueOpens: Int?
 
             public init(lastOpen: Date? = nil, openRate: Double? = nil, opensTotal: Int? = nil, uniqueOpens: Int? = nil) {
-              self.lastOpen = .init(date:  lastOpen)
+              self.lastOpen = .init(date: lastOpen)
               self.openRate = openRate
               self.opensTotal = opensTotal
               self.uniqueOpens = uniqueOpens
@@ -854,7 +854,7 @@ public extension Reports {
             public init(emailsSent: Int? = nil, recipientsClicks: Int? = nil, timestamp: Date? = nil, uniqueOpens: Int? = nil) {
               self.emailsSent = emailsSent
               self.recipientsClicks = recipientsClicks
-              self.timestamp = .init(date:  timestamp)
+              self.timestamp = .init(date: timestamp)
               self.uniqueOpens = uniqueOpens
             }
 
@@ -907,8 +907,8 @@ public extension Reports {
               self.bounces = bounces
               self.clicks = clicks
               self.gmtOffset = gmtOffset
-              self.lastClick = .init(date:  lastClick)
-              self.lastOpen = .init(date:  lastOpen)
+              self.lastClick = .init(date: lastClick)
+              self.lastOpen = .init(date: lastOpen)
               self.opens = opens
               self.uniqueClicks = uniqueClicks
               self.uniqueOpens = uniqueOpens

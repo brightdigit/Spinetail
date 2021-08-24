@@ -16,5 +16,5 @@ func createRequest<ResponseType: APIResponseValue>(_ request: APIRequest<Respons
 ### `beginRequest(_:_:)`
 
 ```swift
-@discardableResult func beginRequest(_ request: RequestType, _ completion: @escaping ((Result<Response, Error>) -> Void)) -> Task
+@discardableResult func beginRequest(_ request: RequestType, _ completion: @escaping ((APIResult<Response>) -> Void)) -> Task
 ```

@@ -84,7 +84,7 @@ The subject of this message
 ### `timestamp`
 
 ```swift
-public var timestamp: DateTime?
+public var timestamp: DateTime
 ```
 
 The date and time the message was either sent or received in ISO 8601 format.
@@ -93,7 +93,7 @@ The date and time the message was either sent or received in ISO 8601 format.
 ### `init(links:conversationId:fromEmail:fromLabel:id:listId:message:read:subject:timestamp:)`
 
 ```swift
-public init(links: [Links]? = nil, conversationId: String? = nil, fromEmail: String? = nil, fromLabel: String? = nil, id: String? = nil, listId: Int? = nil, message: String? = nil, read: Bool? = nil, subject: String? = nil, timestamp: DateTime? = nil)
+public init(links: [Links]? = nil, conversationId: String? = nil, fromEmail: String? = nil, fromLabel: String? = nil, id: String? = nil, listId: Int? = nil, message: String? = nil, read: Bool? = nil, subject: String? = nil, timestamp: Date? = nil)
 ```
 
 ### `init(from:)`

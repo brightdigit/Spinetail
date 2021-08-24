@@ -48,7 +48,7 @@ The type of activity
 ### `updateTime`
 
 ```swift
-public var updateTime: DateTime?
+public var updateTime: DateTime
 ```
 
 The date and time this activity was updated.
@@ -65,7 +65,7 @@ URL to a report that includes this activity
 ### `init(campaignId:listId:message:title:type:updateTime:url:)`
 
 ```swift
-public init(campaignId: String? = nil, listId: String? = nil, message: String? = nil, title: String? = nil, type: Type? = nil, updateTime: DateTime? = nil, url: String? = nil)
+public init(campaignId: String? = nil, listId: String? = nil, message: String? = nil, title: String? = nil, type: Type? = nil, updateTime: Date? = nil, url: String? = nil)
 ```
 
 ### `init(from:)`

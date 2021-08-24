@@ -77,7 +77,7 @@ The date and time the note was last updated in ISO 8601 format.
 ### `init(links:createdAt:createdBy:emailId:id:listId:note:updatedAt:)`
 
 ```swift
-public init(links: [Links]? = nil, createdAt: DateTime? = nil, createdBy: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, note: String? = nil, updatedAt: DateTime? = nil)
+public init(links: [Links]? = nil, createdAt: Date? = nil, createdBy: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, note: String? = nil, updatedAt: Date? = nil)
 ```
 
 ### `init(from:)`

@@ -20,7 +20,7 @@ The number of clicks a single referrer generated.
 ### `firstClick`
 
 ```swift
-public var firstClick: DateTime?
+public var firstClick: DateTime
 ```
 
 The timestamp for the first click from this referrer.
@@ -28,7 +28,7 @@ The timestamp for the first click from this referrer.
 ### `lastClick`
 
 ```swift
-public var lastClick: DateTime?
+public var lastClick: DateTime
 ```
 
 The timestamp for the last click from this referrer.
@@ -45,7 +45,7 @@ A referrer (truncated to 100 bytes).
 ### `init(clicks:firstClick:lastClick:referrer:)`
 
 ```swift
-public init(clicks: Int? = nil, firstClick: DateTime? = nil, lastClick: DateTime? = nil, referrer: String? = nil)
+public init(clicks: Int? = nil, firstClick: Date? = nil, lastClick: Date? = nil, referrer: String? = nil)
 ```
 
 ### `init(from:)`

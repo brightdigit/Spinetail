@@ -36,7 +36,7 @@ A string that uniquely identifies the campaign associated with an order.
 ### `cancelledAtForeign`
 
 ```swift
-public var cancelledAtForeign: DateTime?
+public var cancelledAtForeign: DateTime
 ```
 
 The date and time the order was cancelled in ISO 8601 format.
@@ -132,7 +132,7 @@ The outreach associated with this order. For example, an email campaign or Faceb
 ### `processedAtForeign`
 
 ```swift
-public var processedAtForeign: DateTime?
+public var processedAtForeign: DateTime
 ```
 
 The date and time the order was processed in ISO 8601 format.
@@ -188,7 +188,7 @@ The Mailchimp tracking code for the order. Uses the 'mc_tc' parameter in E-Comme
 ### `updatedAtForeign`
 
 ```swift
-public var updatedAtForeign: DateTime?
+public var updatedAtForeign: DateTime
 ```
 
 The date and time the order was updated in ISO 8601 format.
@@ -197,7 +197,7 @@ The date and time the order was updated in ISO 8601 format.
 ### `init(links:billingAddress:campaignId:cancelledAtForeign:currencyCode:customer:discountTotal:financialStatus:fulfillmentStatus:id:landingSite:lines:orderTotal:orderURL:outreach:processedAtForeign:promos:shippingAddress:shippingTotal:storeId:taxTotal:trackingCode:updatedAtForeign:)`
 
 ```swift
-public init(links: [Links]? = nil, billingAddress: BillingAddress? = nil, campaignId: String? = nil, cancelledAtForeign: DateTime? = nil, currencyCode: String? = nil, customer: Customer? = nil, discountTotal: Double? = nil, financialStatus: String? = nil, fulfillmentStatus: String? = nil, id: String? = nil, landingSite: String? = nil, lines: [Lines]? = nil, orderTotal: Double? = nil, orderURL: String? = nil, outreach: Outreach? = nil, processedAtForeign: DateTime? = nil, promos: [Promos]? = nil, shippingAddress: ShippingAddress? = nil, shippingTotal: Double? = nil, storeId: String? = nil, taxTotal: Double? = nil, trackingCode: TrackingCode? = nil, updatedAtForeign: DateTime? = nil)
+public init(links: [Links]? = nil, billingAddress: BillingAddress? = nil, campaignId: String? = nil, cancelledAtForeign: Date? = nil, currencyCode: String? = nil, customer: Customer? = nil, discountTotal: Double? = nil, financialStatus: String? = nil, fulfillmentStatus: String? = nil, id: String? = nil, landingSite: String? = nil, lines: [Lines]? = nil, orderTotal: Double? = nil, orderURL: String? = nil, outreach: Outreach? = nil, processedAtForeign: Date? = nil, promos: [Promos]? = nil, shippingAddress: ShippingAddress? = nil, shippingTotal: Double? = nil, storeId: String? = nil, taxTotal: Double? = nil, trackingCode: TrackingCode? = nil, updatedAtForeign: Date? = nil)
 ```
 
 ### `init(from:)`

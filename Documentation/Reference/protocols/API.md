@@ -18,3 +18,9 @@ var baseURL: URL
 ```swift
 var headers: [String: String]
 ```
+
+### `decoder`
+
+```swift
+var decoder: ResponseDecoder
+```

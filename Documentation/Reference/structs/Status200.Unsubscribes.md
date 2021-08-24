@@ -76,7 +76,7 @@ If available, the reason listed by the member for unsubscribing.
 ### `timestamp`
 
 ```swift
-public var timestamp: DateTime?
+public var timestamp: DateTime
 ```
 
 The date and time the member opted-out in ISO 8601 format.
@@ -93,7 +93,7 @@ public var vip: Bool?
 ### `init(links:campaignId:emailAddress:emailId:listId:listIsActive:mergeFields:reason:timestamp:vip:)`
 
 ```swift
-public init(links: [Links]? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: [String: CodableAny]]? = nil, reason: String? = nil, timestamp: DateTime? = nil, vip: Bool? = nil)
+public init(links: [Links]? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: [String: CodableAny]]? = nil, reason: String? = nil, timestamp: Date? = nil, vip: Bool? = nil)
 ```
 
 ### `init(from:)`

@@ -28,7 +28,7 @@ The discount code. Restricted to UTF-8 characters with max length 50.
 ### `createdAtForeign`
 
 ```swift
-public var createdAtForeign: DateTime?
+public var createdAtForeign: DateTime
 ```
 
 The date and time the promotion was created in ISO 8601 format.
@@ -60,7 +60,7 @@ The url that should be used in the promotion campaign restricted to UTF-8 charac
 ### `updatedAtForeign`
 
 ```swift
-public var updatedAtForeign: DateTime?
+public var updatedAtForeign: DateTime
 ```
 
 The date and time the promotion was updated in ISO 8601 format.
@@ -77,7 +77,7 @@ Number of times promo code has been used.
 ### `init(links:code:createdAtForeign:enabled:id:redemptionURL:updatedAtForeign:usageCount:)`
 
 ```swift
-public init(links: [Links]? = nil, code: String? = nil, createdAtForeign: DateTime? = nil, enabled: Bool? = nil, id: String? = nil, redemptionURL: String? = nil, updatedAtForeign: DateTime? = nil, usageCount: Int? = nil)
+public init(links: [Links]? = nil, code: String? = nil, createdAtForeign: Date? = nil, enabled: Bool? = nil, id: String? = nil, redemptionURL: String? = nil, updatedAtForeign: Date? = nil, usageCount: Int? = nil)
 ```
 
 ### `init(from:)`

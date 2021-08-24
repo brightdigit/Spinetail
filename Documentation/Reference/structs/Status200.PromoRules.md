@@ -28,7 +28,7 @@ The amount of the promo code discount. If 'type' is 'fixed', the amount is treat
 ### `createdAtForeign`
 
 ```swift
-public var createdAtForeign: DateTime?
+public var createdAtForeign: DateTime
 ```
 
 The date and time the promotion was created in ISO 8601 format.
@@ -68,7 +68,7 @@ A unique identifier for the promo rule. If Ecommerce platform does not support p
 ### `startsAt`
 
 ```swift
-public var startsAt: DateTime?
+public var startsAt: DateTime
 ```
 
 The date and time when the promotion is in effect in ISO 8601 format.
@@ -100,7 +100,7 @@ Type of discount. For free shipping set type to fixed.
 ### `updatedAtForeign`
 
 ```swift
-public var updatedAtForeign: DateTime?
+public var updatedAtForeign: DateTime
 ```
 
 The date and time the promotion was updated in ISO 8601 format.
@@ -109,7 +109,7 @@ The date and time the promotion was updated in ISO 8601 format.
 ### `init(links:amount:createdAtForeign:description:enabled:endsAt:id:startsAt:target:title:type:updatedAtForeign:)`
 
 ```swift
-public init(links: [Links]? = nil, amount: Float? = nil, createdAtForeign: DateTime? = nil, description: String? = nil, enabled: Bool? = nil, endsAt: String? = nil, id: String? = nil, startsAt: DateTime? = nil, target: Target? = nil, title: String? = nil, type: Type? = nil, updatedAtForeign: DateTime? = nil)
+public init(links: [Links]? = nil, amount: Float? = nil, createdAtForeign: Date? = nil, description: String? = nil, enabled: Bool? = nil, endsAt: String? = nil, id: String? = nil, startsAt: Date? = nil, target: Target? = nil, title: String? = nil, type: Type? = nil, updatedAtForeign: Date? = nil)
 ```
 
 ### `init(from:)`

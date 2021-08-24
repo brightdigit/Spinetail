@@ -6,8 +6,6 @@ import Foundation
 
 public typealias CodableAny = AnyCodable
 
-
-
 public protocol APIResponseValue: CustomDebugStringConvertible, CustomStringConvertible {
   associatedtype SuccessType
   var statusCode: Int { get }

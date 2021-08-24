@@ -20,7 +20,7 @@ A list of link types and descriptions for the API schema documents.
 ### `createdAt`
 
 ```swift
-public var createdAt: DateTime?
+public var createdAt: DateTime
 ```
 
 The date and time a file was added to the File Manager in ISO 8601 format.
@@ -109,7 +109,7 @@ The width of the image.
 ### `init(links:createdAt:createdBy:folderId:fullSizeURL:height:id:name:size:thumbnailURL:type:width:)`
 
 ```swift
-public init(links: [Links]? = nil, createdAt: DateTime? = nil, createdBy: String? = nil, folderId: Int? = nil, fullSizeURL: URL? = nil, height: Int? = nil, id: Int? = nil, name: String? = nil, size: Int? = nil, thumbnailURL: URL? = nil, type: Type? = nil, width: Int? = nil)
+public init(links: [Links]? = nil, createdAt: Date? = nil, createdBy: String? = nil, folderId: Int? = nil, fullSizeURL: URL? = nil, height: Int? = nil, id: Int? = nil, name: String? = nil, size: Int? = nil, thumbnailURL: URL? = nil, type: Type? = nil, width: Int? = nil)
 ```
 
 ### `init(from:)`

@@ -1,29 +1,31 @@
 import Foundation
 
-public enum JSONOptionalDate : Codable, Equatable {
+public enum JSONOptionalDate: Codable, Equatable {
   case none
   case some(Date)
-  var date : Date? {
+  var date: Date? {
     switch self {
     case .none:
       return nil
-    case .some(let value):
+
+    case let .some(value):
       return value
     }
   }
-  
+
   public init(date: Date?) {
-  switch date {
-  case .none:
-    self = .none
-  case .some(let value):
-    self = .some(value)
+    switch date {
+    case .none:
+      self = .none
+
+    case let .some(value):
+      self = .some(value)
+    }
   }
-  }
-  
+
   public init(from decoder: Decoder) throws {
     let container = try decoder.singleValueContainer()
-    
+
     do {
       self = try .some(container.decode(Date.self))
     } catch {
@@ -34,10 +36,10 @@ public enum JSONOptionalDate : Codable, Equatable {
       self = .none
     }
   }
-  
+
   public func encode(to encoder: Encoder) throws {
     var container = encoder.singleValueContainer()
-    
+
     if let date = self.date {
       try container.encode(date)
     } else {
@@ -698,7 +700,6 @@ public extension Lists {
             }
           }
 
-
           public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, fullName: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: Date? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, memberRating: Int? = nil, mergeFields: CodableAny? = nil, source: String? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, uniqueEmailId: String? = nil, unsubscribeReason: String? = nil, vip: Bool? = nil, webId: Int? = nil) {
             self.links = links
             self.emailAddress = emailAddress
@@ -722,8 +723,8 @@ public extension Lists {
             self.status = status
             self.tags = tags
             self.tagsCount = tagsCount
-            self.timestampOpt = JSONOptionalDate(date: timestampOpt) 
-            self.timestampSignup = JSONOptionalDate(date: timestampSignup) 
+            self.timestampOpt = JSONOptionalDate(date: timestampOpt)
+            self.timestampSignup = JSONOptionalDate(date: timestampSignup)
             self.uniqueEmailId = uniqueEmailId
             self.unsubscribeReason = unsubscribeReason
             self.vip = vip

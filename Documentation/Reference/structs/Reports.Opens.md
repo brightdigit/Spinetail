@@ -12,7 +12,7 @@ An object describing the open activity for the campaign.
 ### `lastOpen`
 
 ```swift
-public var lastOpen: DateTime?
+public var lastOpen: DateTime
 ```
 
 The date and time of the last recorded open in ISO 8601 format.
@@ -45,7 +45,7 @@ The total number of unique opens.
 ### `init(lastOpen:openRate:opensTotal:uniqueOpens:)`
 
 ```swift
-public init(lastOpen: DateTime? = nil, openRate: Double? = nil, opensTotal: Int? = nil, uniqueOpens: Int? = nil)
+public init(lastOpen: Date? = nil, openRate: Double? = nil, opensTotal: Int? = nil, uniqueOpens: Int? = nil)
 ```
 
 ### `init(from:)`

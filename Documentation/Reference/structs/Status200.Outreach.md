@@ -28,7 +28,7 @@ The name for the outreach.
 ### `publishedTime`
 
 ```swift
-public var publishedTime: DateTime?
+public var publishedTime: DateTime
 ```
 
 The date and time the Outreach was published in ISO 8601 format.
@@ -45,7 +45,7 @@ The type of the outreach.
 ### `init(id:name:publishedTime:type:)`
 
 ```swift
-public init(id: String? = nil, name: String? = nil, publishedTime: DateTime? = nil, type: String? = nil)
+public init(id: String? = nil, name: String? = nil, publishedTime: Date? = nil, type: String? = nil)
 ```
 
 ### `init(from:)`

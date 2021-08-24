@@ -20,7 +20,7 @@ A list of link types and descriptions for the API schema documents.
 ### `createdAt`
 
 ```swift
-public var createdAt: DateTime?
+public var createdAt: DateTime
 ```
 
 The date and time the connected site was created in ISO 8601 format.
@@ -68,7 +68,7 @@ The unique identifier for the ecommerce store that's associated with the connect
 ### `updatedAt`
 
 ```swift
-public var updatedAt: DateTime?
+public var updatedAt: DateTime
 ```
 
 The date and time the connected site was last updated in ISO 8601 format.
@@ -77,7 +77,7 @@ The date and time the connected site was last updated in ISO 8601 format.
 ### `init(links:createdAt:domain:foreignId:platform:siteScript:storeId:updatedAt:)`
 
 ```swift
-public init(links: [Links]? = nil, createdAt: DateTime? = nil, domain: String? = nil, foreignId: String? = nil, platform: String? = nil, siteScript: SiteScript? = nil, storeId: String? = nil, updatedAt: DateTime? = nil)
+public init(links: [Links]? = nil, createdAt: Date? = nil, domain: String? = nil, foreignId: String? = nil, platform: String? = nil, siteScript: SiteScript? = nil, storeId: String? = nil, updatedAt: Date? = nil)
 ```
 
 ### `init(from:)`

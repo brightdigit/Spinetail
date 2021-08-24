@@ -16,8 +16,7 @@ extension URLSession: Session {
   public func createRequest<ResponseType>(_ request: APIRequest<ResponseType>, withBaseURL baseURL: URL, andHeaders headers: [String: String]) throws -> URLRequest where ResponseType: APIResponseValue {
     guard var componenets = URLComponents(url: baseURL.appendingPathComponent(request.path), resolvingAgainstBaseURL: false) else {
       throw APIClientError.badURL(baseURL, request.path)
-    } 
-    
+    }
 
     // filter out parameters with empty string value
     var queryItems = [URLQueryItem]()

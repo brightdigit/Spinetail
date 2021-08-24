@@ -31,6 +31,16 @@ public let baseURL: URL
 public let headers: [String: String]
 ```
 
+### `decoder`
+
+```swift
+public let decoder: ResponseDecoder = {
+  let decoder = JSONDecoder()
+  decoder.dateDecodingStrategy = .formatted(Self.dateEncodingFormatter)
+  return decoder
+}()
+```
+
 ## Methods
 ### `init(apiKey:)`
 

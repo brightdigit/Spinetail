@@ -164,7 +164,7 @@ The preview text for the campaign.
 ### `rssLastSend`
 
 ```swift
-public var rssLastSend: DateTime?
+public var rssLastSend: DateTime
 ```
 
 For RSS campaigns, the date and time of the last send in ISO 8601 format.
@@ -172,7 +172,7 @@ For RSS campaigns, the date and time of the last send in ISO 8601 format.
 ### `sendTime`
 
 ```swift
-public var sendTime: DateTime?
+public var sendTime: DateTime
 ```
 
 The date and time a campaign was sent in ISO 8601 format.
@@ -229,7 +229,7 @@ The total number of unsubscribed members for this campaign.
 ### `init(links:abSplit:abuseReports:bounces:campaignTitle:clicks:deliveryStatus:ecommerce:emailsSent:facebookLikes:forwards:id:industryStats:listId:listIsActive:listName:listStats:opens:previewText:rssLastSend:sendTime:shareReport:subjectLine:timeseries:timewarp:type:unsubscribed:)`
 
 ```swift
-public init(links: [Links]? = nil, abSplit: AbSplit? = nil, abuseReports: Int? = nil, bounces: Bounces? = nil, campaignTitle: String? = nil, clicks: Clicks? = nil, deliveryStatus: DeliveryStatus? = nil, ecommerce: Ecommerce? = nil, emailsSent: Int? = nil, facebookLikes: FacebookLikes? = nil, forwards: Forwards? = nil, id: String? = nil, industryStats: IndustryStats? = nil, listId: String? = nil, listIsActive: Bool? = nil, listName: String? = nil, listStats: ListStats? = nil, opens: Opens? = nil, previewText: String? = nil, rssLastSend: DateTime? = nil, sendTime: DateTime? = nil, shareReport: ShareReport? = nil, subjectLine: String? = nil, timeseries: [Timeseries]? = nil, timewarp: [Timewarp]? = nil, type: String? = nil, unsubscribed: Int? = nil)
+public init(links: [Links]? = nil, abSplit: AbSplit? = nil, abuseReports: Int? = nil, bounces: Bounces? = nil, campaignTitle: String? = nil, clicks: Clicks? = nil, deliveryStatus: DeliveryStatus? = nil, ecommerce: Ecommerce? = nil, emailsSent: Int? = nil, facebookLikes: FacebookLikes? = nil, forwards: Forwards? = nil, id: String? = nil, industryStats: IndustryStats? = nil, listId: String? = nil, listIsActive: Bool? = nil, listName: String? = nil, listStats: ListStats? = nil, opens: Opens? = nil, previewText: String? = nil, rssLastSend: Date? = nil, sendTime: Date? = nil, shareReport: ShareReport? = nil, subjectLine: String? = nil, timeseries: [Timeseries]? = nil, timewarp: [Timewarp]? = nil, type: String? = nil, unsubscribed: Int? = nil)
 ```
 
 ### `init(from:)`

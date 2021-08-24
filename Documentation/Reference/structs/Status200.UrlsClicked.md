@@ -52,7 +52,7 @@ The unique id for the link.
 ### `lastClick`
 
 ```swift
-public var lastClick: DateTime?
+public var lastClick: DateTime
 ```
 
 The date and time for the last recorded click for a link in ISO 8601 format.
@@ -93,7 +93,7 @@ The URL for the link in the campaign.
 ### `init(links:abSplit:campaignId:clickPercentage:id:lastClick:totalClicks:uniqueClickPercentage:uniqueClicks:url:)`
 
 ```swift
-public init(links: [Links]? = nil, abSplit: AbSplit? = nil, campaignId: String? = nil, clickPercentage: Double? = nil, id: String? = nil, lastClick: DateTime? = nil, totalClicks: Int? = nil, uniqueClickPercentage: Double? = nil, uniqueClicks: Int? = nil, url: String? = nil)
+public init(links: [Links]? = nil, abSplit: AbSplit? = nil, campaignId: String? = nil, clickPercentage: Double? = nil, id: String? = nil, lastClick: Date? = nil, totalClicks: Int? = nil, uniqueClickPercentage: Double? = nil, uniqueClicks: Int? = nil, url: String? = nil)
 ```
 
 ### `init(from:)`

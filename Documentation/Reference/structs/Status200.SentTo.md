@@ -60,7 +60,7 @@ For campaigns sent with timewarp, the time zone group the member is apart of.
 ### `lastOpen`
 
 ```swift
-public var lastOpen: DateTime?
+public var lastOpen: DateTime
 ```
 
 The date and time of the last open for this member in ISO 8601 format.
@@ -117,7 +117,7 @@ public var vip: Bool?
 ### `init(links:absplitGroup:campaignId:emailAddress:emailId:gmtOffset:lastOpen:listId:listIsActive:mergeFields:openCount:status:vip:)`
 
 ```swift
-public init(links: [Links]? = nil, absplitGroup: String? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, gmtOffset: Int? = nil, lastOpen: DateTime? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: [String: CodableAny]]? = nil, openCount: Int? = nil, status: String? = nil, vip: Bool? = nil)
+public init(links: [Links]? = nil, absplitGroup: String? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, gmtOffset: Int? = nil, lastOpen: Date? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: [String: CodableAny]]? = nil, openCount: Int? = nil, status: String? = nil, vip: Bool? = nil)
 ```
 
 ### `init(from:)`

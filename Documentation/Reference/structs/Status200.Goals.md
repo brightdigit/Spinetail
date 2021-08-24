@@ -36,7 +36,7 @@ The id for a Goal event.
 ### `lastVisitedAt`
 
 ```swift
-public var lastVisitedAt: DateTime?
+public var lastVisitedAt: DateTime
 ```
 
 The date and time the user last triggered the Goal event in ISO 8601 format.
@@ -45,7 +45,7 @@ The date and time the user last triggered the Goal event in ISO 8601 format.
 ### `init(data:event:goalId:lastVisitedAt:)`
 
 ```swift
-public init(data: String? = nil, event: String? = nil, goalId: Int? = nil, lastVisitedAt: DateTime? = nil)
+public init(data: String? = nil, event: String? = nil, goalId: Int? = nil, lastVisitedAt: Date? = nil)
 ```
 
 ### `init(from:)`

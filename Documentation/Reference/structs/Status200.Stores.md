@@ -44,7 +44,7 @@ The Connected Site associated with the store.
 ### `createdAt`
 
 ```swift
-public var createdAt: DateTime?
+public var createdAt: DateTime
 ```
 
 The date and time the store was created in ISO 8601 format.
@@ -156,7 +156,7 @@ The timezone for the store.
 ### `updatedAt`
 
 ```swift
-public var updatedAt: DateTime?
+public var updatedAt: DateTime
 ```
 
 The date and time the store was last updated in ISO 8601 format.
@@ -165,7 +165,7 @@ The date and time the store was last updated in ISO 8601 format.
 ### `init(links:address:automations:connectedSite:createdAt:currencyCode:domain:emailAddress:id:isSyncing:listId:listIsActive:moneyFormat:name:phone:platform:primaryLocale:timezone:updatedAt:)`
 
 ```swift
-public init(links: [Links]? = nil, address: Address? = nil, automations: Automations? = nil, connectedSite: ConnectedSite? = nil, createdAt: DateTime? = nil, currencyCode: String? = nil, domain: String? = nil, emailAddress: String? = nil, id: String? = nil, isSyncing: Bool? = nil, listId: String? = nil, listIsActive: Bool? = nil, moneyFormat: String? = nil, name: String? = nil, phone: String? = nil, platform: String? = nil, primaryLocale: String? = nil, timezone: String? = nil, updatedAt: DateTime? = nil)
+public init(links: [Links]? = nil, address: Address? = nil, automations: Automations? = nil, connectedSite: ConnectedSite? = nil, createdAt: Date? = nil, currencyCode: String? = nil, domain: String? = nil, emailAddress: String? = nil, id: String? = nil, isSyncing: Bool? = nil, listId: String? = nil, listIsActive: Bool? = nil, moneyFormat: String? = nil, name: String? = nil, phone: String? = nil, platform: String? = nil, primaryLocale: String? = nil, timezone: String? = nil, updatedAt: Date? = nil)
 ```
 
 ### `init(from:)`

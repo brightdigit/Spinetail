@@ -28,7 +28,7 @@ The IP address recorded for the action.
 ### `timestamp`
 
 ```swift
-public var timestamp: DateTime?
+public var timestamp: DateTime
 ```
 
 The date and time recorded for the action in ISO 8601 format.
@@ -53,7 +53,7 @@ If the action is a 'click', the URL on which the member clicked.
 ### `init(action:ip:timestamp:type:url:)`
 
 ```swift
-public init(action: String? = nil, ip: String? = nil, timestamp: DateTime? = nil, type: String? = nil, url: String? = nil)
+public init(action: String? = nil, ip: String? = nil, timestamp: Date? = nil, type: String? = nil, url: String? = nil)
 ```
 
 ### `init(from:)`

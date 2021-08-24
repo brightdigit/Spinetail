@@ -9,7 +9,7 @@ extension URLSession: Session
 ### `beginRequest(_:_:)`
 
 ```swift
-public func beginRequest(_ request: URLRequest, _ completion: @escaping ((Result<Response, Error>) -> Void)) -> Task
+public func beginRequest(_ request: URLRequest, _ completion: @escaping ((APIResult<Response>) -> Void)) -> Task
 ```
 
 ### `createRequest(_:withBaseURL:andHeaders:)`

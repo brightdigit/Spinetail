@@ -35,7 +35,7 @@ public init(options: Options)
 ### `init(fields:excludeFields:conversationId:isRead:beforeTimestamp:sinceTimestamp:)`
 
 ```swift
-public convenience init(fields: [String]? = nil, excludeFields: [String]? = nil, conversationId: String, isRead: IsRead? = nil, beforeTimestamp: DateTime? = nil, sinceTimestamp: DateTime? = nil)
+public convenience init(fields: [String]? = nil, excludeFields: [String]? = nil, conversationId: String, isRead: IsRead? = nil, beforeTimestamp: Date? = nil, sinceTimestamp: Date? = nil)
 ```
 
 convenience initialiser so an Option doesn't have to be created

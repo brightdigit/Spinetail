@@ -20,7 +20,7 @@ The total number of clicks to the campaign's URL.
 ### `firstClick`
 
 ```swift
-public var firstClick: DateTime?
+public var firstClick: DateTime
 ```
 
 The timestamp for the first click to the URL.
@@ -28,7 +28,7 @@ The timestamp for the first click to the URL.
 ### `lastClick`
 
 ```swift
-public var lastClick: DateTime?
+public var lastClick: DateTime
 ```
 
 The timestamp for the last click to the URL.
@@ -45,7 +45,7 @@ A summary of the top click locations.
 ### `init(clicks:firstClick:lastClick:locations:)`
 
 ```swift
-public init(clicks: Int? = nil, firstClick: DateTime? = nil, lastClick: DateTime? = nil, locations: [Locations]? = nil)
+public init(clicks: Int? = nil, firstClick: Date? = nil, lastClick: Date? = nil, locations: [Locations]? = nil)
 ```
 
 ### `init(from:)`

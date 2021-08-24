@@ -44,7 +44,7 @@ public var contact: Contact?
 ### `dateCreated`
 
 ```swift
-public var dateCreated: DateTime?
+public var dateCreated: DateTime
 ```
 
 The date and time that this list was created in ISO 8601 format.
@@ -189,7 +189,7 @@ The ID used in the Mailchimp web application. View this list in your Mailchimp a
 ### `init(links:beamerAddress:campaignDefaults:contact:dateCreated:doubleOptin:emailTypeOption:hasWelcome:id:listRating:marketingPermissions:modules:name:notifyOnSubscribe:notifyOnUnsubscribe:permissionReminder:stats:subscribeURLLong:subscribeURLShort:useArchiveBar:visibility:webId:)`
 
 ```swift
-public init(links: [Links]? = nil, beamerAddress: String? = nil, campaignDefaults: CampaignDefaults? = nil, contact: Contact? = nil, dateCreated: DateTime? = nil, doubleOptin: Bool? = nil, emailTypeOption: Bool? = nil, hasWelcome: Bool? = nil, id: String? = nil, listRating: Int? = nil, marketingPermissions: Bool? = nil, modules: [String]? = nil, name: String? = nil, notifyOnSubscribe: String? = nil, notifyOnUnsubscribe: String? = nil, permissionReminder: String? = nil, stats: Stats? = nil, subscribeURLLong: String? = nil, subscribeURLShort: String? = nil, useArchiveBar: Bool? = nil, visibility: Visibility? = nil, webId: Int? = nil)
+public init(links: [Links]? = nil, beamerAddress: String? = nil, campaignDefaults: CampaignDefaults? = nil, contact: Contact? = nil, dateCreated: Date? = nil, doubleOptin: Bool? = nil, emailTypeOption: Bool? = nil, hasWelcome: Bool? = nil, id: String? = nil, listRating: Int? = nil, marketingPermissions: Bool? = nil, modules: [String]? = nil, name: String? = nil, notifyOnSubscribe: String? = nil, notifyOnUnsubscribe: String? = nil, permissionReminder: String? = nil, stats: Stats? = nil, subscribeURLLong: String? = nil, subscribeURLShort: String? = nil, useArchiveBar: Bool? = nil, visibility: Visibility? = nil, webId: Int? = nil)
 ```
 
 ### `init(from:)`

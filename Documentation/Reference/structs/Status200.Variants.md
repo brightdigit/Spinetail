@@ -28,7 +28,7 @@ The backorders of a product variant.
 ### `createdAt`
 
 ```swift
-public var createdAt: DateTime?
+public var createdAt: DateTime
 ```
 
 The date and time the product was created in ISO 8601 format.
@@ -84,7 +84,7 @@ The title of a product variant.
 ### `updatedAt`
 
 ```swift
-public var updatedAt: DateTime?
+public var updatedAt: DateTime
 ```
 
 The date and time the product was last updated in ISO 8601 format.
@@ -109,7 +109,7 @@ The visibility of a product variant.
 ### `init(links:backorders:createdAt:id:imageURL:inventoryQuantity:price:sku:title:updatedAt:url:visibility:)`
 
 ```swift
-public init(links: [Links]? = nil, backorders: String? = nil, createdAt: DateTime? = nil, id: String? = nil, imageURL: String? = nil, inventoryQuantity: Int? = nil, price: Double? = nil, sku: String? = nil, title: String? = nil, updatedAt: DateTime? = nil, url: String? = nil, visibility: String? = nil)
+public init(links: [Links]? = nil, backorders: String? = nil, createdAt: Date? = nil, id: String? = nil, imageURL: String? = nil, inventoryQuantity: Int? = nil, price: Double? = nil, sku: String? = nil, title: String? = nil, updatedAt: Date? = nil, url: String? = nil, visibility: String? = nil)
 ```
 
 ### `init(from:)`

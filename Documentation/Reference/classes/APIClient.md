@@ -16,5 +16,5 @@ public init(api: API, session: SessionType)
 ### `request(_:_:)`
 
 ```swift
-public func request<ResponseType>(_ request: APIRequest<ResponseType>, _ completion: @escaping (Result<ResponseType, Error>) -> Void) -> Task?
+public func request<ResponseType>(_ request: APIRequest<ResponseType>, _ completion: @escaping (APIResult<ResponseType>) -> Void) -> Task?
 ```

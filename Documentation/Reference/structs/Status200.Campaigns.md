@@ -44,7 +44,7 @@ How the campaign's content is put together.
 ### `createTime`
 
 ```swift
-public var createTime: DateTime?
+public var createTime: DateTime
 ```
 
 The date and time the campaign was created in ISO 8601 format.
@@ -132,7 +132,7 @@ public var rssOpts: RssOpts?
 ### `sendTime`
 
 ```swift
-public var sendTime: DateTime?
+public var sendTime: DateTime
 ```
 
 The date and time a campaign was sent.
@@ -197,7 +197,7 @@ The ID used in the Mailchimp web application. View this campaign in your Mailchi
 ### `init(links:abSplitOpts:archiveURL:contentType:createTime:deliveryStatus:emailsSent:id:longArchiveURL:needsBlockRefresh:parentCampaignId:recipients:reportSummary:resendable:rssOpts:sendTime:settings:socialCard:status:tracking:type:variateSettings:webId:)`
 
 ```swift
-public init(links: [Links]? = nil, abSplitOpts: AbSplitOpts? = nil, archiveURL: String? = nil, contentType: ContentType? = nil, createTime: DateTime? = nil, deliveryStatus: DeliveryStatus? = nil, emailsSent: Int? = nil, id: String? = nil, longArchiveURL: String? = nil, needsBlockRefresh: Bool? = nil, parentCampaignId: String? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, resendable: Bool? = nil, rssOpts: RssOpts? = nil, sendTime: DateTime? = nil, settings: Settings? = nil, socialCard: SocialCard? = nil, status: Status? = nil, tracking: Tracking? = nil, type: Type? = nil, variateSettings: VariateSettings? = nil, webId: Int? = nil)
+public init(links: [Links]? = nil, abSplitOpts: AbSplitOpts? = nil, archiveURL: String? = nil, contentType: ContentType? = nil, createTime: Date? = nil, deliveryStatus: DeliveryStatus? = nil, emailsSent: Int? = nil, id: String? = nil, longArchiveURL: String? = nil, needsBlockRefresh: Bool? = nil, parentCampaignId: String? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, resendable: Bool? = nil, rssOpts: RssOpts? = nil, sendTime: Date? = nil, settings: Settings? = nil, socialCard: SocialCard? = nil, status: Status? = nil, tracking: Tracking? = nil, type: Type? = nil, variateSettings: VariateSettings? = nil, webId: Int? = nil)
 ```
 
 ### `init(from:)`

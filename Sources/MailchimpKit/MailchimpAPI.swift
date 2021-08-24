@@ -9,7 +9,7 @@ public struct MailchimpAPI: API {
   public let dc: String
   public let baseURL: URL
   public let headers: [String: String]
-  
+
   /// Whether to discard any errors when decoding optional properties
   public static let safeOptionalDecoding = false
 

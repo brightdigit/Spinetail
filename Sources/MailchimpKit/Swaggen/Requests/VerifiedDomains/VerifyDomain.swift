@@ -86,7 +86,7 @@ public extension VerifiedDomains {
           self.authenticated = authenticated
           self.domain = domain
           self.verificationEmail = verificationEmail
-          self.verificationSent = .init(date:  verificationSent)
+          self.verificationSent = .init(date: verificationSent)
           self.verified = verified
         }
 

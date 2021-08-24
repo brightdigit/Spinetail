@@ -44,7 +44,7 @@ The login name for template's creator.
 ### `dateCreated`
 
 ```swift
-public var dateCreated: DateTime?
+public var dateCreated: DateTime
 ```
 
 The date and time the template was created in ISO 8601 format.
@@ -52,7 +52,7 @@ The date and time the template was created in ISO 8601 format.
 ### `dateEdited`
 
 ```swift
-public var dateEdited: DateTime?
+public var dateEdited: DateTime
 ```
 
 The date and time the template was edited in ISO 8601 format.
@@ -133,7 +133,7 @@ The type of template (user, base, or gallery).
 ### `init(links:active:category:createdBy:dateCreated:dateEdited:dragAndDrop:editedBy:folderId:id:name:responsive:shareURL:thumbnail:type:)`
 
 ```swift
-public init(links: [Links]? = nil, active: Bool? = nil, category: String? = nil, createdBy: String? = nil, dateCreated: DateTime? = nil, dateEdited: DateTime? = nil, dragAndDrop: Bool? = nil, editedBy: String? = nil, folderId: String? = nil, id: Int? = nil, name: String? = nil, responsive: Bool? = nil, shareURL: String? = nil, thumbnail: String? = nil, type: String? = nil)
+public init(links: [Links]? = nil, active: Bool? = nil, category: String? = nil, createdBy: String? = nil, dateCreated: Date? = nil, dateEdited: Date? = nil, dragAndDrop: Bool? = nil, editedBy: String? = nil, folderId: String? = nil, id: Int? = nil, name: String? = nil, responsive: Bool? = nil, shareURL: String? = nil, thumbnail: String? = nil, type: String? = nil)
 ```
 
 ### `init(from:)`

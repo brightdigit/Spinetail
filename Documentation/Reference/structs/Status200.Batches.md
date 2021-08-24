@@ -20,7 +20,7 @@ A list of link types and descriptions for the API schema documents.
 ### `completedAt`
 
 ```swift
-public var completedAt: DateTime?
+public var completedAt: DateTime
 ```
 
 The date and time when all operations in the batch request completed in ISO 8601 format.
@@ -68,7 +68,7 @@ The status of the batch call. [Learn more](https://mailchimp.com/developer/marke
 ### `submittedAt`
 
 ```swift
-public var submittedAt: DateTime?
+public var submittedAt: DateTime
 ```
 
 The date and time when the server received the batch request in ISO 8601 format.
@@ -85,7 +85,7 @@ The total number of operations to complete as part of this batch request. For GE
 ### `init(links:completedAt:erroredOperations:finishedOperations:id:responseBodyURL:status:submittedAt:totalOperations:)`
 
 ```swift
-public init(links: [Links]? = nil, completedAt: DateTime? = nil, erroredOperations: Int? = nil, finishedOperations: Int? = nil, id: String? = nil, responseBodyURL: String? = nil, status: Status? = nil, submittedAt: DateTime? = nil, totalOperations: Int? = nil)
+public init(links: [Links]? = nil, completedAt: Date? = nil, erroredOperations: Int? = nil, finishedOperations: Int? = nil, id: String? = nil, responseBodyURL: String? = nil, status: Status? = nil, submittedAt: Date? = nil, totalOperations: Int? = nil)
 ```
 
 ### `init(from:)`

@@ -12,7 +12,7 @@ An individual tweet.
 ### `datetime`
 
 ```swift
-public var datetime: DateTime?
+public var datetime: DateTime
 ```
 
 A timestamp for the tweet.
@@ -53,7 +53,7 @@ The individual id for the tweet.
 ### `init(datetime:isRetweet:screenName:status:statusId:)`
 
 ```swift
-public init(datetime: DateTime? = nil, isRetweet: Bool? = nil, screenName: String? = nil, status: String? = nil, statusId: String? = nil)
+public init(datetime: Date? = nil, isRetweet: Bool? = nil, screenName: String? = nil, status: String? = nil, statusId: String? = nil)
 ```
 
 ### `init(from:)`

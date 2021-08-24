@@ -84,7 +84,7 @@ Subscriber's current status.
 ### `timestampOpt`
 
 ```swift
-public var timestampOpt: DateTime?
+public var timestampOpt: DateTime
 ```
 
 The date and time the subscribe confirmed their opt-in status in ISO 8601 format.
@@ -92,7 +92,7 @@ The date and time the subscribe confirmed their opt-in status in ISO 8601 format
 ### `timestampSignup`
 
 ```swift
-public var timestampSignup: DateTime?
+public var timestampSignup: DateTime
 ```
 
 The date and time the subscriber signed up for the list in ISO 8601 format.
@@ -109,7 +109,7 @@ public var vip: Bool?
 ### `init(emailAddress:emailType:interests:ipOpt:ipSignup:language:location:mergeFields:status:timestampOpt:timestampSignup:vip:)`
 
 ```swift
-public init(emailAddress: String? = nil, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: Location? = nil, mergeFields: [String: [String: CodableAny]]? = nil, status: Status? = nil, timestampOpt: DateTime? = nil, timestampSignup: DateTime? = nil, vip: Bool? = nil)
+public init(emailAddress: String? = nil, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: Location? = nil, mergeFields: [String: [String: CodableAny]]? = nil, status: Status? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, vip: Bool? = nil)
 ```
 
 ### `init(from:)`

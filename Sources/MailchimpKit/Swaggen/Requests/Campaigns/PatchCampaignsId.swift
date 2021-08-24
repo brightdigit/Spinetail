@@ -1678,7 +1678,7 @@ public extension Campaigns {
               self.id = id
               self.recipients = recipients
               self.replyTo = replyTo
-              self.sendTime =  sendTime
+              self.sendTime = sendTime
               self.subjectLine = subjectLine
             }
 

@@ -166,7 +166,7 @@ public extension Reports {
           self.emailAddress = emailAddress
           self.emailId = emailId
           self.gmtOffset = gmtOffset
-          self.lastOpen = .init(date:  lastOpen)
+          self.lastOpen = .init(date: lastOpen)
           self.listId = listId
           self.listIsActive = listIsActive
           self.mergeFields = mergeFields

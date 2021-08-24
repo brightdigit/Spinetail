@@ -52,7 +52,7 @@ A string that uniquely identifies a list.
 ### `nextSend`
 
 ```swift
-public var nextSend: DateTime?
+public var nextSend: DateTime
 ```
 
 The date and time of the next send for the workflow email in ISO 8601 format.
@@ -69,7 +69,7 @@ A string that uniquely identifies an Automation workflow.
 ### `init(emailAddress:links:emailId:id:listId:nextSend:workflowId:)`
 
 ```swift
-public init(emailAddress: String, links: [Links]? = nil, emailId: String? = nil, id: String? = nil, listId: String? = nil, nextSend: DateTime? = nil, workflowId: String? = nil)
+public init(emailAddress: String, links: [Links]? = nil, emailId: String? = nil, id: String? = nil, listId: String? = nil, nextSend: Date? = nil, workflowId: String? = nil)
 ```
 
 ### `init(from:)`

@@ -84,7 +84,7 @@ If set/detected, the [subscriber's language](https://mailchimp.com/help/view-and
 ### `lastChanged`
 
 ```swift
-public var lastChanged: DateTime?
+public var lastChanged: DateTime
 ```
 
 The date and time the member's info was last changed in ISO 8601 format.
@@ -164,7 +164,7 @@ The number of tags applied to this member.
 ### `timestampOpt`
 
 ```swift
-public var timestampOpt: DateTime?
+public var timestampOpt: DateTime
 ```
 
 The date and time the subscriber confirmed their opt-in status in ISO 8601 format.
@@ -172,7 +172,7 @@ The date and time the subscriber confirmed their opt-in status in ISO 8601 forma
 ### `timestampSignup`
 
 ```swift
-public var timestampSignup: DateTime?
+public var timestampSignup: DateTime
 ```
 
 The date and time the subscriber signed up for the list in ISO 8601 format.
@@ -197,7 +197,7 @@ public var vip: Bool?
 ### `init(links:emailAddress:emailClient:emailType:id:interests:ipOpt:ipSignup:language:lastChanged:lastNote:listId:location:memberRating:mergeFields:stats:status:tags:tagsCount:timestampOpt:timestampSignup:uniqueEmailId:vip:)`
 
 ```swift
-public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: DateTime? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, memberRating: Int? = nil, mergeFields: [String: [String: CodableAny]]? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: DateTime? = nil, timestampSignup: DateTime? = nil, uniqueEmailId: String? = nil, vip: Bool? = nil)
+public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: Date? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, memberRating: Int? = nil, mergeFields: [String: [String: CodableAny]]? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, uniqueEmailId: String? = nil, vip: Bool? = nil)
 ```
 
 ### `init(from:)`

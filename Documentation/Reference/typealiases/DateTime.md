@@ -3,5 +3,5 @@
 # `DateTime`
 
 ```swift
-public typealias DateTime = Date
+public typealias DateTime = JSONOptionalDate
 ```

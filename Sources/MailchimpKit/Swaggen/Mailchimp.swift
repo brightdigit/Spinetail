@@ -1,6 +1,6 @@
 import Foundation
 
-//public enum Mailchimp {
+// public enum Mailchimp {
 //
 //
 ////  public static let version = "3.0.55"
@@ -10,7 +10,7 @@ import Foundation
 ////  public enum Server {
 ////    public static let main = "https://server.api.mailchimp.com/3.0"
 ////  }
-//}
+// }
 public enum ActivityFeed {}
 public enum AuthorizedApps {}
 public enum Automations {}

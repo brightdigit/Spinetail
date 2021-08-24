@@ -12,7 +12,7 @@ A summary of the interaction with the campaign.
 ### `timestamp`
 
 ```swift
-public var timestamp: DateTime?
+public var timestamp: DateTime
 ```
 
 The date and time recorded for the action in ISO 8601 format.
@@ -21,7 +21,7 @@ The date and time recorded for the action in ISO 8601 format.
 ### `init(timestamp:)`
 
 ```swift
-public init(timestamp: DateTime? = nil)
+public init(timestamp: Date? = nil)
 ```
 
 ### `init(from:)`

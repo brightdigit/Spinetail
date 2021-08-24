@@ -25,6 +25,12 @@ var successful: Bool
 var response: Any
 ```
 
+### `success`
+
+```swift
+var success: SuccessType?
+```
+
 ## Methods
 ### `init(statusCode:data:decoder:)`
 

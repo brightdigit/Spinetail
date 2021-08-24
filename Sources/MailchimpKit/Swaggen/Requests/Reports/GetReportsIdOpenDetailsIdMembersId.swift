@@ -159,7 +159,7 @@ public extension Reports {
           public var timestamp: DateTime
 
           public init(timestamp: Date? = nil) {
-            self.timestamp = .init(date:  timestamp)
+            self.timestamp = .init(date: timestamp)
           }
 
           public init(from decoder: Decoder) throws {

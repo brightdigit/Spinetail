@@ -74,7 +74,7 @@ The name of this landing page the user will see.
 ### `publishedAt`
 
 ```swift
-public var publishedAt: DateTime?
+public var publishedAt: DateTime
 ```
 
 The time this landing page was published.
@@ -128,7 +128,7 @@ The number of unique visits to this landing pages.
 ### `unpublishedAt`
 
 ```swift
-public var unpublishedAt: DateTime?
+public var unpublishedAt: DateTime
 ```
 
 The time this landing page was unpublished.
@@ -161,7 +161,7 @@ The ID used in the Mailchimp web application.
 ### `init(links:clicks:conversionRate:ecommerce:id:listId:listName:name:publishedAt:signupTags:status:subscribes:timeseries:title:uniqueVisits:unpublishedAt:url:visits:webId:)`
 
 ```swift
-public init(links: [Links]? = nil, clicks: Int? = nil, conversionRate: Double? = nil, ecommerce: Ecommerce? = nil, id: String? = nil, listId: String? = nil, listName: String? = nil, name: String? = nil, publishedAt: DateTime? = nil, signupTags: [SignupTags]? = nil, status: String? = nil, subscribes: Int? = nil, timeseries: Timeseries? = nil, title: String? = nil, uniqueVisits: Int? = nil, unpublishedAt: DateTime? = nil, url: String? = nil, visits: Int? = nil, webId: Int? = nil)
+public init(links: [Links]? = nil, clicks: Int? = nil, conversionRate: Double? = nil, ecommerce: Ecommerce? = nil, id: String? = nil, listId: String? = nil, listName: String? = nil, name: String? = nil, publishedAt: Date? = nil, signupTags: [SignupTags]? = nil, status: String? = nil, subscribes: Int? = nil, timeseries: Timeseries? = nil, title: String? = nil, uniqueVisits: Int? = nil, unpublishedAt: Date? = nil, url: String? = nil, visits: Int? = nil, webId: Int? = nil)
 ```
 
 ### `init(from:)`

@@ -43,6 +43,24 @@ case networkError(Error)
 case unknownError(Error)
 ```
 
+### `invalidResponse`
+
+```swift
+case invalidResponse
+```
+
+### `badURL(_:_:)`
+
+```swift
+case badURL(URL, String)
+```
+
+### `urlComponents(_:)`
+
+```swift
+case urlComponents(URLComponents)
+```
+
 ## Properties
 ### `name`
 

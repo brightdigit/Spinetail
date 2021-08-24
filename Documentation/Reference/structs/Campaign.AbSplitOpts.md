@@ -52,7 +52,7 @@ For campaigns split on 'From Name', the reply-to address for Group B.
 ### `sendTimea`
 
 ```swift
-public var sendTimea: DateTime?
+public var sendTimea: DateTime
 ```
 
 The send time for Group A.
@@ -60,7 +60,7 @@ The send time for Group A.
 ### `sendTimeb`
 
 ```swift
-public var sendTimeb: DateTime?
+public var sendTimeb: DateTime
 ```
 
 The send time for Group B.
@@ -125,7 +125,7 @@ How unit of time for measuring the winner ('hours' or 'days'). This cannot be ch
 ### `init(fromNamea:fromNameb:pickWinner:replyEmaila:replyEmailb:sendTimea:sendTimeb:sendTimeWinner:splitSize:splitTest:subjecta:subjectb:waitTime:waitUnits:)`
 
 ```swift
-public init(fromNamea: String? = nil, fromNameb: String? = nil, pickWinner: PickWinner? = nil, replyEmaila: String? = nil, replyEmailb: String? = nil, sendTimea: DateTime? = nil, sendTimeb: DateTime? = nil, sendTimeWinner: String? = nil, splitSize: Int? = nil, splitTest: SplitTest? = nil, subjecta: String? = nil, subjectb: String? = nil, waitTime: Int? = nil, waitUnits: WaitUnits? = nil)
+public init(fromNamea: String? = nil, fromNameb: String? = nil, pickWinner: PickWinner? = nil, replyEmaila: String? = nil, replyEmailb: String? = nil, sendTimea: Date? = nil, sendTimeb: Date? = nil, sendTimeWinner: String? = nil, splitSize: Int? = nil, splitTest: SplitTest? = nil, subjecta: String? = nil, subjectb: String? = nil, waitTime: Int? = nil, waitUnits: WaitUnits? = nil)
 ```
 
 ### `init(from:)`

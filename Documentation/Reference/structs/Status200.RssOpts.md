@@ -36,7 +36,7 @@ Whether to add CSS to images in the RSS feed to constrain their width in campaig
 ### `lastSent`
 
 ```swift
-public var lastSent: DateTime?
+public var lastSent: DateTime
 ```
 
 The date the campaign was last sent.
@@ -53,7 +53,7 @@ The schedule for sending the RSS Campaign.
 ### `init(feedURL:frequency:constrainRssImg:lastSent:schedule:)`
 
 ```swift
-public init(feedURL: URL, frequency: Frequency, constrainRssImg: Bool? = nil, lastSent: DateTime? = nil, schedule: Schedule? = nil)
+public init(feedURL: URL, frequency: Frequency, constrainRssImg: Bool? = nil, lastSent: Date? = nil, schedule: Schedule? = nil)
 ```
 
 ### `init(from:)`

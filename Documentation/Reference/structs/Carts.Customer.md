@@ -36,7 +36,7 @@ The customer's company.
 ### `createdAt`
 
 ```swift
-public var createdAt: DateTime?
+public var createdAt: DateTime
 ```
 
 The date and time the customer was created in ISO 8601 format.
@@ -100,7 +100,7 @@ The total amount the customer has spent.
 ### `updatedAt`
 
 ```swift
-public var updatedAt: DateTime?
+public var updatedAt: DateTime
 ```
 
 The date and time the customer was last updated in ISO 8601 format.
@@ -109,7 +109,7 @@ The date and time the customer was last updated in ISO 8601 format.
 ### `init(links:address:company:createdAt:emailAddress:firstName:id:lastName:optInStatus:ordersCount:totalSpent:updatedAt:)`
 
 ```swift
-public init(links: [Links]? = nil, address: Address? = nil, company: String? = nil, createdAt: DateTime? = nil, emailAddress: String? = nil, firstName: String? = nil, id: String? = nil, lastName: String? = nil, optInStatus: Bool? = nil, ordersCount: Int? = nil, totalSpent: Double? = nil, updatedAt: DateTime? = nil)
+public init(links: [Links]? = nil, address: Address? = nil, company: String? = nil, createdAt: Date? = nil, emailAddress: String? = nil, firstName: String? = nil, id: String? = nil, lastName: String? = nil, optInStatus: Bool? = nil, ordersCount: Int? = nil, totalSpent: Double? = nil, updatedAt: Date? = nil)
 ```
 
 ### `init(from:)`

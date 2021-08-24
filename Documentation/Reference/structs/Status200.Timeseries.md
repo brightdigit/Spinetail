@@ -28,7 +28,7 @@ The number of clicks in the timeseries.
 ### `timestamp`
 
 ```swift
-public var timestamp: DateTime?
+public var timestamp: DateTime
 ```
 
 The date and time for the series in ISO 8601 format.
@@ -45,7 +45,7 @@ The number of unique opens in the timeseries.
 ### `init(emailsSent:recipientsClicks:timestamp:uniqueOpens:)`
 
 ```swift
-public init(emailsSent: Int? = nil, recipientsClicks: Int? = nil, timestamp: DateTime? = nil, uniqueOpens: Int? = nil)
+public init(emailsSent: Int? = nil, recipientsClicks: Int? = nil, timestamp: Date? = nil, uniqueOpens: Int? = nil)
 ```
 
 ### `init(from:)`

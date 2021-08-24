@@ -36,7 +36,7 @@ For campaigns sent with timewarp, the time zone group the member is apart of.
 ### `lastClick`
 
 ```swift
-public var lastClick: DateTime?
+public var lastClick: DateTime
 ```
 
 The date and time of the last click in ISO 8601 format.
@@ -44,7 +44,7 @@ The date and time of the last click in ISO 8601 format.
 ### `lastOpen`
 
 ```swift
-public var lastOpen: DateTime?
+public var lastOpen: DateTime
 ```
 
 The date and time of the last open in ISO 8601 format.
@@ -77,7 +77,7 @@ The number of unique opens.
 ### `init(bounces:clicks:gmtOffset:lastClick:lastOpen:opens:uniqueClicks:uniqueOpens:)`
 
 ```swift
-public init(bounces: Int? = nil, clicks: Int? = nil, gmtOffset: Int? = nil, lastClick: DateTime? = nil, lastOpen: DateTime? = nil, opens: Int? = nil, uniqueClicks: Int? = nil, uniqueOpens: Int? = nil)
+public init(bounces: Int? = nil, clicks: Int? = nil, gmtOffset: Int? = nil, lastClick: Date? = nil, lastOpen: Date? = nil, opens: Int? = nil, uniqueClicks: Int? = nil, uniqueOpens: Int? = nil)
 ```
 
 ### `init(from:)`

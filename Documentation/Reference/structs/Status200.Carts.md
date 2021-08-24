@@ -36,7 +36,7 @@ The URL for the cart. This parameter is required for [Abandoned Cart](https://ma
 ### `createdAt`
 
 ```swift
-public var createdAt: DateTime?
+public var createdAt: DateTime
 ```
 
 The date and time the cart was created in ISO 8601 format.
@@ -92,7 +92,7 @@ The total tax for the cart.
 ### `updatedAt`
 
 ```swift
-public var updatedAt: DateTime?
+public var updatedAt: DateTime
 ```
 
 The date and time the cart was last updated in ISO 8601 format.
@@ -101,7 +101,7 @@ The date and time the cart was last updated in ISO 8601 format.
 ### `init(links:campaignId:checkoutURL:createdAt:currencyCode:customer:id:lines:orderTotal:taxTotal:updatedAt:)`
 
 ```swift
-public init(links: [Links]? = nil, campaignId: String? = nil, checkoutURL: String? = nil, createdAt: DateTime? = nil, currencyCode: String? = nil, customer: Customer? = nil, id: String? = nil, lines: [Lines]? = nil, orderTotal: Double? = nil, taxTotal: Double? = nil, updatedAt: DateTime? = nil)
+public init(links: [Links]? = nil, campaignId: String? = nil, checkoutURL: String? = nil, createdAt: Date? = nil, currencyCode: String? = nil, customer: Customer? = nil, id: String? = nil, lines: [Lines]? = nil, orderTotal: Double? = nil, taxTotal: Double? = nil, updatedAt: Date? = nil)
 ```
 
 ### `init(from:)`

@@ -29,7 +29,7 @@ public init(options: Options)
 ### `init(fields:excludeFields:count:offset:type:beforeSendTime:sinceSendTime:)`
 
 ```swift
-public convenience init(fields: [String]? = nil, excludeFields: [String]? = nil, count: Int? = nil, offset: Int? = nil, type: Type? = nil, beforeSendTime: DateTime? = nil, sinceSendTime: DateTime? = nil)
+public convenience init(fields: [String]? = nil, excludeFields: [String]? = nil, count: Int? = nil, offset: Int? = nil, type: Type? = nil, beforeSendTime: Date? = nil, sinceSendTime: Date? = nil)
 ```
 
 convenience initialiser so an Option doesn't have to be created

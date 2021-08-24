@@ -20,7 +20,7 @@ A list of link types and descriptions for the API schema documents.
 ### `createdAt`
 
 ```swift
-public var createdAt: DateTime?
+public var createdAt: DateTime
 ```
 
 The date and time the segment was created in ISO 8601 format.
@@ -76,7 +76,7 @@ The type of segment. Static segments are now known as tags. Learn more about [ta
 ### `updatedAt`
 
 ```swift
-public var updatedAt: DateTime?
+public var updatedAt: DateTime
 ```
 
 The date and time the segment was last updated in ISO 8601 format.
@@ -85,7 +85,7 @@ The date and time the segment was last updated in ISO 8601 format.
 ### `init(links:createdAt:id:listId:memberCount:name:options:type:updatedAt:)`
 
 ```swift
-public init(links: [Links]? = nil, createdAt: DateTime? = nil, id: Int? = nil, listId: String? = nil, memberCount: Int? = nil, name: String? = nil, options: Options? = nil, type: Type? = nil, updatedAt: DateTime? = nil)
+public init(links: [Links]? = nil, createdAt: Date? = nil, id: Int? = nil, listId: String? = nil, memberCount: Int? = nil, name: String? = nil, options: Options? = nil, type: Type? = nil, updatedAt: Date? = nil)
 ```
 
 ### `init(from:)`

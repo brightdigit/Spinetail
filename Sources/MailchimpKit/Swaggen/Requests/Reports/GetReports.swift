@@ -940,7 +940,7 @@ public extension Reports {
               self.bounces = bounces
               self.clicks = clicks
               self.gmtOffset = gmtOffset
-              
+
               self.lastClick = .init(date: lastClick)
               self.lastOpen = .init(date: lastOpen)
               self.opens = opens

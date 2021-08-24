@@ -310,7 +310,7 @@ public extension Templates {
             self.category = category
             self.createdBy = createdBy
             self.dateCreated = .init(date: dateCreated)
-            self.dateEdited = .init(date:  dateEdited)
+            self.dateEdited = .init(date: dateEdited)
             self.dragAndDrop = dragAndDrop
             self.editedBy = editedBy
             self.folderId = folderId

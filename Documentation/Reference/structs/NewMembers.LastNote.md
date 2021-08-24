@@ -12,7 +12,7 @@ The most recent Note added about this member.
 ### `createdAt`
 
 ```swift
-public var createdAt: DateTime?
+public var createdAt: DateTime
 ```
 
 The date and time the note was created in ISO 8601 format.
@@ -45,7 +45,7 @@ The note id.
 ### `init(createdAt:createdBy:note:noteId:)`
 
 ```swift
-public init(createdAt: DateTime? = nil, createdBy: String? = nil, note: String? = nil, noteId: Int? = nil)
+public init(createdAt: Date? = nil, createdBy: String? = nil, note: String? = nil, noteId: Int? = nil)
 ```
 
 ### `init(from:)`
