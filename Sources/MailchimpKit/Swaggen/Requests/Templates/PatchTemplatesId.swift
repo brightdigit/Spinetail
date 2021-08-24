@@ -92,10 +92,10 @@ public extension Templates {
         public var createdBy: String?
 
         /** The date and time the template was created in ISO 8601 format. */
-        public var dateCreated: DateTime?
+        public var dateCreated: DateTime
 
         /** The date and time the template was edited in ISO 8601 format. */
-        public var dateEdited: DateTime?
+        public var dateEdited: DateTime
 
         /** Whether the template uses the drag and drop editor. */
         public var dragAndDrop: Bool?
@@ -181,13 +181,13 @@ public extension Templates {
           }
         }
 
-        public init(links: [Links]? = nil, active: Bool? = nil, category: String? = nil, createdBy: String? = nil, dateCreated: DateTime? = nil, dateEdited: DateTime? = nil, dragAndDrop: Bool? = nil, editedBy: String? = nil, folderId: String? = nil, id: Int? = nil, name: String? = nil, responsive: Bool? = nil, shareURL: String? = nil, thumbnail: String? = nil, type: String? = nil) {
+        public init(links: [Links]? = nil, active: Bool? = nil, category: String? = nil, createdBy: String? = nil, dateCreated: Date? = nil, dateEdited: Date? = nil, dragAndDrop: Bool? = nil, editedBy: String? = nil, folderId: String? = nil, id: Int? = nil, name: String? = nil, responsive: Bool? = nil, shareURL: String? = nil, thumbnail: String? = nil, type: String? = nil) {
           self.links = links
           self.active = active
           self.category = category
           self.createdBy = createdBy
-          self.dateCreated = dateCreated
-          self.dateEdited = dateEdited
+          self.dateCreated = .init(date: dateCreated)
+          self.dateEdited = .init(date:  dateEdited)
           self.dragAndDrop = dragAndDrop
           self.editedBy = editedBy
           self.folderId = folderId

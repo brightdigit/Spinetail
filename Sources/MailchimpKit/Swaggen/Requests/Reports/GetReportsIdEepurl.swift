@@ -143,10 +143,10 @@ public extension Reports {
           public var clicks: Int?
 
           /** The timestamp for the first click to the URL. */
-          public var firstClick: DateTime?
+          public var firstClick: DateTime
 
           /** The timestamp for the last click to the URL. */
-          public var lastClick: DateTime?
+          public var lastClick: DateTime
 
           /** A summary of the top click locations. */
           public var locations: [Locations]?
@@ -179,10 +179,10 @@ public extension Reports {
             }
           }
 
-          public init(clicks: Int? = nil, firstClick: DateTime? = nil, lastClick: DateTime? = nil, locations: [Locations]? = nil) {
+          public init(clicks: Int? = nil, firstClick: Date? = nil, lastClick: Date? = nil, locations: [Locations]? = nil) {
             self.clicks = clicks
-            self.firstClick = firstClick
-            self.lastClick = lastClick
+            self.firstClick = .init(date: firstClick)
+            self.lastClick = .init(date: lastClick)
             self.locations = locations
           }
 
@@ -211,18 +211,18 @@ public extension Reports {
           public var clicks: Int?
 
           /** The timestamp for the first click from this referrer. */
-          public var firstClick: DateTime?
+          public var firstClick: DateTime
 
           /** The timestamp for the last click from this referrer. */
-          public var lastClick: DateTime?
+          public var lastClick: DateTime
 
           /** A referrer (truncated to 100 bytes). */
           public var referrer: String?
 
-          public init(clicks: Int? = nil, firstClick: DateTime? = nil, lastClick: DateTime? = nil, referrer: String? = nil) {
+          public init(clicks: Int? = nil, firstClick: Date? = nil, lastClick: Date? = nil, referrer: String? = nil) {
             self.clicks = clicks
-            self.firstClick = firstClick
-            self.lastClick = lastClick
+            self.firstClick = .init(date: firstClick)
+            self.lastClick = .init(date: lastClick)
             self.referrer = referrer
           }
 
@@ -265,7 +265,7 @@ public extension Reports {
           /** An individual tweet. */
           public struct Statuses: MailchimpModel {
             /** A timestamp for the tweet. */
-            public var datetime: DateTime?
+            public var datetime: DateTime
 
             /** A 'true' or 'false' status of whether the tweet is a retweet. */
             public var isRetweet: Bool?
@@ -279,8 +279,8 @@ public extension Reports {
             /** The individual id for the tweet. */
             public var statusId: String?
 
-            public init(datetime: DateTime? = nil, isRetweet: Bool? = nil, screenName: String? = nil, status: String? = nil, statusId: String? = nil) {
-              self.datetime = datetime
+            public init(datetime: Date? = nil, isRetweet: Bool? = nil, screenName: String? = nil, status: String? = nil, statusId: String? = nil) {
+              self.datetime = .init(date: datetime)
               self.isRetweet = isRetweet
               self.screenName = screenName
               self.status = status

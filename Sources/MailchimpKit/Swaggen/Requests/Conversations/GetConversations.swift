@@ -265,15 +265,15 @@ public extension Conversations {
             public var subject: String?
 
             /** The date and time the message was either sent or received in ISO 8601 format. */
-            public var timestamp: DateTime?
+            public var timestamp: DateTime
 
-            public init(fromEmail: String? = nil, fromLabel: String? = nil, message: String? = nil, read: Bool? = nil, subject: String? = nil, timestamp: DateTime? = nil) {
+            public init(fromEmail: String? = nil, fromLabel: String? = nil, message: String? = nil, read: Bool? = nil, subject: String? = nil, timestamp: Date? = nil) {
               self.fromEmail = fromEmail
               self.fromLabel = fromLabel
               self.message = message
               self.read = read
               self.subject = subject
-              self.timestamp = timestamp
+              self.timestamp = .init(date: timestamp)
             }
 
             public init(from decoder: Decoder) throws {

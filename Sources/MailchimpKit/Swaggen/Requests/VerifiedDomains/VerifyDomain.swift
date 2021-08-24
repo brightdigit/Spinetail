@@ -77,16 +77,16 @@ public extension VerifiedDomains {
         public var verificationEmail: String?
 
         /** The date/time that the two-factor challenge was sent to the verification email. */
-        public var verificationSent: DateTime?
+        public var verificationSent: DateTime
 
         /** Whether the domain has been verified for sending. */
         public var verified: Bool?
 
-        public init(authenticated: Bool? = nil, domain: String? = nil, verificationEmail: String? = nil, verificationSent: DateTime? = nil, verified: Bool? = nil) {
+        public init(authenticated: Bool? = nil, domain: String? = nil, verificationEmail: String? = nil, verificationSent: Date? = nil, verified: Bool? = nil) {
           self.authenticated = authenticated
           self.domain = domain
           self.verificationEmail = verificationEmail
-          self.verificationSent = verificationSent
+          self.verificationSent = .init(date:  verificationSent)
           self.verified = verified
         }
 

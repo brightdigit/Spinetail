@@ -117,10 +117,10 @@ public extension Reports {
         public var previewText: String?
 
         /** For RSS campaigns, the date and time of the last send in ISO 8601 format. */
-        public var rssLastSend: DateTime?
+        public var rssLastSend: DateTime
 
         /** The date and time a campaign was sent in ISO 8601 format. */
-        public var sendTime: DateTime?
+        public var sendTime: DateTime
 
         /** The url and password for the [VIP report](https://mailchimp.com/help/share-a-campaign-report/). */
         public var shareReport: ShareReport?
@@ -239,7 +239,7 @@ public extension Reports {
               self.bounces = bounces
               self.forwards = forwards
               self.forwardsOpens = forwardsOpens
-              self.lastOpen = lastOpen
+              self.lastOpen =  lastOpen
               self.opens = opens
               self.recipientClicks = recipientClicks
               self.uniqueOpens = uniqueOpens
@@ -408,7 +408,7 @@ public extension Reports {
           public var clicksTotal: Int?
 
           /** The date and time of the last recorded click for the campaign in ISO 8601 format. */
-          public var lastClick: DateTime?
+          public var lastClick: DateTime
 
           /** The total number of unique clicks for links across a campaign. */
           public var uniqueClicks: Int?
@@ -416,10 +416,10 @@ public extension Reports {
           /** The total number of subscribers who clicked on a campaign. */
           public var uniqueSubscriberClicks: Int?
 
-          public init(clickRate: Double? = nil, clicksTotal: Int? = nil, lastClick: DateTime? = nil, uniqueClicks: Int? = nil, uniqueSubscriberClicks: Int? = nil) {
+          public init(clickRate: Double? = nil, clicksTotal: Int? = nil, lastClick: Date? = nil, uniqueClicks: Int? = nil, uniqueSubscriberClicks: Int? = nil) {
             self.clickRate = clickRate
             self.clicksTotal = clicksTotal
-            self.lastClick = lastClick
+            self.lastClick = .init(date: lastClick)
             self.uniqueClicks = uniqueClicks
             self.uniqueSubscriberClicks = uniqueSubscriberClicks
           }
@@ -701,7 +701,7 @@ public extension Reports {
         /** An object describing the open activity for the campaign. */
         public struct Opens: MailchimpModel {
           /** The date and time of the last recorded open in ISO 8601 format. */
-          public var lastOpen: DateTime?
+          public var lastOpen: DateTime
 
           /** The number of unique opens divided by the total number of successful deliveries. */
           public var openRate: Double?
@@ -712,8 +712,8 @@ public extension Reports {
           /** The total number of unique opens. */
           public var uniqueOpens: Int?
 
-          public init(lastOpen: DateTime? = nil, openRate: Double? = nil, opensTotal: Int? = nil, uniqueOpens: Int? = nil) {
-            self.lastOpen = lastOpen
+          public init(lastOpen: Date? = nil, openRate: Double? = nil, opensTotal: Int? = nil, uniqueOpens: Int? = nil) {
+            self.lastOpen = .init(date: lastOpen)
             self.openRate = openRate
             self.opensTotal = opensTotal
             self.uniqueOpens = uniqueOpens
@@ -775,15 +775,15 @@ public extension Reports {
           public var recipientsClicks: Int?
 
           /** The date and time for the series in ISO 8601 format. */
-          public var timestamp: DateTime?
+          public var timestamp: DateTime
 
           /** The number of unique opens in the timeseries. */
           public var uniqueOpens: Int?
 
-          public init(emailsSent: Int? = nil, recipientsClicks: Int? = nil, timestamp: DateTime? = nil, uniqueOpens: Int? = nil) {
+          public init(emailsSent: Int? = nil, recipientsClicks: Int? = nil, timestamp: Date? = nil, uniqueOpens: Int? = nil) {
             self.emailsSent = emailsSent
             self.recipientsClicks = recipientsClicks
-            self.timestamp = timestamp
+            self.timestamp = .init(date: timestamp)
             self.uniqueOpens = uniqueOpens
           }
 
@@ -818,10 +818,10 @@ public extension Reports {
           public var gmtOffset: Int?
 
           /** The date and time of the last click in ISO 8601 format. */
-          public var lastClick: DateTime?
+          public var lastClick: DateTime
 
           /** The date and time of the last open in ISO 8601 format. */
-          public var lastOpen: DateTime?
+          public var lastOpen: DateTime
 
           /** The number of opens. */
           public var opens: Int?
@@ -832,12 +832,12 @@ public extension Reports {
           /** The number of unique opens. */
           public var uniqueOpens: Int?
 
-          public init(bounces: Int? = nil, clicks: Int? = nil, gmtOffset: Int? = nil, lastClick: DateTime? = nil, lastOpen: DateTime? = nil, opens: Int? = nil, uniqueClicks: Int? = nil, uniqueOpens: Int? = nil) {
+          public init(bounces: Int? = nil, clicks: Int? = nil, gmtOffset: Int? = nil, lastClick: Date? = nil, lastOpen: Date? = nil, opens: Int? = nil, uniqueClicks: Int? = nil, uniqueOpens: Int? = nil) {
             self.bounces = bounces
             self.clicks = clicks
             self.gmtOffset = gmtOffset
-            self.lastClick = lastClick
-            self.lastOpen = lastOpen
+            self.lastClick = .init(date: lastClick)
+            self.lastOpen = .init(date: lastOpen)
             self.opens = opens
             self.uniqueClicks = uniqueClicks
             self.uniqueOpens = uniqueOpens
@@ -870,7 +870,7 @@ public extension Reports {
           }
         }
 
-        public init(links: [Links]? = nil, abSplit: AbSplit? = nil, abuseReports: Int? = nil, bounces: Bounces? = nil, campaignTitle: String? = nil, clicks: Clicks? = nil, deliveryStatus: DeliveryStatus? = nil, ecommerce: Ecommerce? = nil, emailsSent: Int? = nil, facebookLikes: FacebookLikes? = nil, forwards: Forwards? = nil, id: String? = nil, industryStats: IndustryStats? = nil, listId: String? = nil, listIsActive: Bool? = nil, listName: String? = nil, listStats: ListStats? = nil, opens: Opens? = nil, previewText: String? = nil, rssLastSend: DateTime? = nil, sendTime: DateTime? = nil, shareReport: ShareReport? = nil, subjectLine: String? = nil, timeseries: [Timeseries]? = nil, timewarp: [Timewarp]? = nil, type: String? = nil, unsubscribed: Int? = nil) {
+        public init(links: [Links]? = nil, abSplit: AbSplit? = nil, abuseReports: Int? = nil, bounces: Bounces? = nil, campaignTitle: String? = nil, clicks: Clicks? = nil, deliveryStatus: DeliveryStatus? = nil, ecommerce: Ecommerce? = nil, emailsSent: Int? = nil, facebookLikes: FacebookLikes? = nil, forwards: Forwards? = nil, id: String? = nil, industryStats: IndustryStats? = nil, listId: String? = nil, listIsActive: Bool? = nil, listName: String? = nil, listStats: ListStats? = nil, opens: Opens? = nil, previewText: String? = nil, rssLastSend: Date? = nil, sendTime: Date? = nil, shareReport: ShareReport? = nil, subjectLine: String? = nil, timeseries: [Timeseries]? = nil, timewarp: [Timewarp]? = nil, type: String? = nil, unsubscribed: Int? = nil) {
           self.links = links
           self.abSplit = abSplit
           self.abuseReports = abuseReports
@@ -890,8 +890,8 @@ public extension Reports {
           self.listStats = listStats
           self.opens = opens
           self.previewText = previewText
-          self.rssLastSend = rssLastSend
-          self.sendTime = sendTime
+          self.rssLastSend = .init(date: rssLastSend)
+          self.sendTime = .init(date: sendTime)
           self.shareReport = shareReport
           self.subjectLine = subjectLine
           self.timeseries = timeseries

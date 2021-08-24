@@ -67,7 +67,7 @@ public extension Automations {
         public var listIsActive: Bool?
 
         /** The date and time of the next send for the workflow email in ISO 8601 format. */
-        public var nextSend: DateTime?
+        public var nextSend: DateTime
 
         /** A string that uniquely identifies an Automation workflow. */
         public var workflowId: String?
@@ -129,14 +129,14 @@ public extension Automations {
           }
         }
 
-        public init(links: [Links]? = nil, emailAddress: String? = nil, emailId: String? = nil, id: String? = nil, listId: String? = nil, listIsActive: Bool? = nil, nextSend: DateTime? = nil, workflowId: String? = nil) {
+        public init(links: [Links]? = nil, emailAddress: String? = nil, emailId: String? = nil, id: String? = nil, listId: String? = nil, listIsActive: Bool? = nil, nextSend: Date? = nil, workflowId: String? = nil) {
           self.links = links
           self.emailAddress = emailAddress
           self.emailId = emailId
           self.id = id
           self.listId = listId
           self.listIsActive = listIsActive
-          self.nextSend = nextSend
+          self.nextSend = .init(date: nextSend)
           self.workflowId = workflowId
         }
 

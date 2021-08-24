@@ -143,18 +143,18 @@ public extension ActivityFeed {
           public var type: `Type`?
 
           /** The date and time this activity was updated. */
-          public var updateTime: DateTime?
+          public var updateTime: DateTime
 
           /** URL to a report that includes this activity */
           public var url: String?
 
-          public init(campaignId: String? = nil, listId: String? = nil, message: String? = nil, title: String? = nil, type: Type? = nil, updateTime: DateTime? = nil, url: String? = nil) {
+          public init(campaignId: String? = nil, listId: String? = nil, message: String? = nil, title: String? = nil, type: Type? = nil, updateTime: Date? = nil, url: String? = nil) {
             self.campaignId = campaignId
             self.listId = listId
             self.message = message
             self.title = title
             self.type = type
-            self.updateTime = updateTime
+            self.updateTime = .init(date: updateTime)
             self.url = url
           }
 

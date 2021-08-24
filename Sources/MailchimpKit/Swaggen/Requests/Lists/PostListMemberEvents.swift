@@ -19,15 +19,15 @@ public extension Lists {
         public var isSyncing: Bool?
 
         /** The date and time the event occurred in ISO 8601 format. */
-        public var occurredAt: DateTime?
+        public var occurredAt: DateTime
 
         /** An optional list of properties */
         public var properties: [String: String]?
 
-        public init(name: String, isSyncing: Bool? = nil, occurredAt: DateTime? = nil, properties: [String: String]? = nil) {
+        public init(name: String, isSyncing: Bool? = nil, occurredAt: Date? = nil, properties: [String: String]? = nil) {
           self.name = name
           self.isSyncing = isSyncing
-          self.occurredAt = occurredAt
+          self.occurredAt = .init(date: occurredAt)
           self.properties = properties
         }
 

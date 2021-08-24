@@ -34,7 +34,7 @@ public extension Ecommerce {
         public var images: [Images]?
 
         /** The date and time the product was published. */
-        public var publishedAtForeign: DateTime?
+        public var publishedAtForeign: DateTime
 
         /** The type of product. */
         public var type: String?
@@ -149,7 +149,7 @@ public extension Ecommerce {
           }
         }
 
-        public init(id: String, title: String, variants: [Variants], description: String? = nil, handle: String? = nil, imageURL: String? = nil, images: [Images]? = nil, publishedAtForeign: DateTime? = nil, type: String? = nil, url: String? = nil, vendor: String? = nil) {
+        public init(id: String, title: String, variants: [Variants], description: String? = nil, handle: String? = nil, imageURL: String? = nil, images: [Images]? = nil, publishedAtForeign: Date? = nil, type: String? = nil, url: String? = nil, vendor: String? = nil) {
           self.id = id
           self.title = title
           self.variants = variants
@@ -157,7 +157,7 @@ public extension Ecommerce {
           self.handle = handle
           self.imageURL = imageURL
           self.images = images
-          self.publishedAtForeign = publishedAtForeign
+          self.publishedAtForeign = .init(date: publishedAtForeign)
           self.type = type
           self.url = url
           self.vendor = vendor
@@ -253,7 +253,7 @@ public extension Ecommerce {
         public var images: [Images]?
 
         /** The date and time the product was published in ISO 8601 format. */
-        public var publishedAtForeign: DateTime?
+        public var publishedAtForeign: DateTime
 
         /** The title of a product. */
         public var title: String?
@@ -433,7 +433,7 @@ public extension Ecommerce {
           public var backorders: String?
 
           /** The date and time the product was created in ISO 8601 format. */
-          public var createdAt: DateTime?
+          public var createdAt: DateTime
 
           /** A unique identifier for the product variant. */
           public var id: String?
@@ -454,7 +454,7 @@ public extension Ecommerce {
           public var title: String?
 
           /** The date and time the product was last updated in ISO 8601 format. */
-          public var updatedAt: DateTime?
+          public var updatedAt: DateTime
 
           /** The URL for a product variant. */
           public var url: String?
@@ -519,17 +519,17 @@ public extension Ecommerce {
             }
           }
 
-          public init(links: [Links]? = nil, backorders: String? = nil, createdAt: DateTime? = nil, id: String? = nil, imageURL: String? = nil, inventoryQuantity: Int? = nil, price: Double? = nil, sku: String? = nil, title: String? = nil, updatedAt: DateTime? = nil, url: String? = nil, visibility: String? = nil) {
+          public init(links: [Links]? = nil, backorders: String? = nil, createdAt: Date? = nil, id: String? = nil, imageURL: String? = nil, inventoryQuantity: Int? = nil, price: Double? = nil, sku: String? = nil, title: String? = nil, updatedAt: Date? = nil, url: String? = nil, visibility: String? = nil) {
             self.links = links
             self.backorders = backorders
-            self.createdAt = createdAt
+            self.createdAt = .init(date: createdAt)
             self.id = id
             self.imageURL = imageURL
             self.inventoryQuantity = inventoryQuantity
             self.price = price
             self.sku = sku
             self.title = title
-            self.updatedAt = updatedAt
+            self.updatedAt = .init(date: updatedAt)
             self.url = url
             self.visibility = visibility
           }
@@ -569,7 +569,7 @@ public extension Ecommerce {
           }
         }
 
-        public init(links: [Links]? = nil, currencyCode: String? = nil, description: String? = nil, handle: String? = nil, id: String? = nil, imageURL: String? = nil, images: [Images]? = nil, publishedAtForeign: DateTime? = nil, title: String? = nil, type: String? = nil, url: String? = nil, variants: [Variants]? = nil, vendor: String? = nil) {
+        public init(links: [Links]? = nil, currencyCode: String? = nil, description: String? = nil, handle: String? = nil, id: String? = nil, imageURL: String? = nil, images: [Images]? = nil, publishedAtForeign: Date? = nil, title: String? = nil, type: String? = nil, url: String? = nil, variants: [Variants]? = nil, vendor: String? = nil) {
           self.links = links
           self.currencyCode = currencyCode
           self.description = description
@@ -577,7 +577,7 @@ public extension Ecommerce {
           self.id = id
           self.imageURL = imageURL
           self.images = images
-          self.publishedAtForeign = publishedAtForeign
+          self.publishedAtForeign = .init(date: publishedAtForeign)
           self.title = title
           self.type = type
           self.url = url

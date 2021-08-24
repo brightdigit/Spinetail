@@ -2,7 +2,7 @@ import Foundation
 
 public protocol MailchimpModel: Codable, Equatable {}
 
-public typealias DateTime = Date
+public typealias DateTime = JSONOptionalDate
 public typealias File = Data
 public typealias ID = UUID
 
@@ -104,6 +104,13 @@ extension KeyedDecodingContainer {
     try decodeOptional {
       try decodeIfPresent(T.self, forKey: key)
     }
+  }
+  
+  func decodeIfPresent(_ key: KeyedDecodingContainer.Key) throws -> DateTime {
+    
+    
+    try decodeIfPresent(DateTime.self, forKey: key) ?? .none
+    
   }
 
   func decodeAny<T>(_ key: K) throws -> T {
@@ -307,6 +314,12 @@ extension DateDay {
 extension Date {
   func encode() -> Any {
     Mailchimp.dateEncodingFormatter.string(from: self)
+  }
+}
+
+extension JSONOptionalDate {
+  func encode() -> Any? {
+    self.date?.encode()
   }
 }
 

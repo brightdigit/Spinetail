@@ -85,7 +85,7 @@ public extension Lists {
         public var contact: Contact?
 
         /** The date and time that this list was created in ISO 8601 format. */
-        public var dateCreated: DateTime?
+        public var dateCreated: DateTime
 
         /** Whether or not to require the subscriber to confirm subscription via email. */
         public var doubleOptin: Bool?
@@ -311,7 +311,7 @@ public extension Lists {
           public var campaignCount: Int?
 
           /** The date and time the last campaign was sent to this list in ISO 8601 format. This is updated when a campaign is sent to 10 or more recipients. */
-          public var campaignLastSent: DateTime?
+          public var campaignLastSent: DateTime
 
           /** The number of members cleaned from the list. */
           public var cleanedCount: Int?
@@ -323,10 +323,10 @@ public extension Lists {
           public var clickRate: Double?
 
           /** The date and time of the last time someone subscribed to this list in ISO 8601 format. */
-          public var lastSubDate: DateTime?
+          public var lastSubDate: DateTime
 
           /** The date and time of the last time someone unsubscribed from this list in ISO 8601 format. */
-          public var lastUnsubDate: DateTime?
+          public var lastUnsubDate: DateTime
 
           /** The number of active members in the list. */
           public var memberCount: Int?
@@ -352,16 +352,16 @@ public extension Lists {
           /** The number of members who have unsubscribed since the last campaign was sent. */
           public var unsubscribeCountSinceSend: Int?
 
-          public init(avgSubRate: Double? = nil, avgUnsubRate: Double? = nil, campaignCount: Int? = nil, campaignLastSent: DateTime? = nil, cleanedCount: Int? = nil, cleanedCountSinceSend: Int? = nil, clickRate: Double? = nil, lastSubDate: DateTime? = nil, lastUnsubDate: DateTime? = nil, memberCount: Int? = nil, memberCountSinceSend: Int? = nil, mergeFieldCount: Int? = nil, openRate: Double? = nil, targetSubRate: Double? = nil, totalContacts: Int? = nil, unsubscribeCount: Int? = nil, unsubscribeCountSinceSend: Int? = nil) {
+          public init(avgSubRate: Double? = nil, avgUnsubRate: Double? = nil, campaignCount: Int? = nil, campaignLastSent: Date? = nil, cleanedCount: Int? = nil, cleanedCountSinceSend: Int? = nil, clickRate: Double? = nil, lastSubDate: Date? = nil, lastUnsubDate: Date? = nil, memberCount: Int? = nil, memberCountSinceSend: Int? = nil, mergeFieldCount: Int? = nil, openRate: Double? = nil, targetSubRate: Double? = nil, totalContacts: Int? = nil, unsubscribeCount: Int? = nil, unsubscribeCountSinceSend: Int? = nil) {
             self.avgSubRate = avgSubRate
             self.avgUnsubRate = avgUnsubRate
             self.campaignCount = campaignCount
-            self.campaignLastSent = campaignLastSent
+            self.campaignLastSent = .init(date: campaignLastSent)
             self.cleanedCount = cleanedCount
             self.cleanedCountSinceSend = cleanedCountSinceSend
             self.clickRate = clickRate
-            self.lastSubDate = lastSubDate
-            self.lastUnsubDate = lastUnsubDate
+            self.lastSubDate = .init(date: lastSubDate)
+            self.lastUnsubDate = .init(date: lastUnsubDate)
             self.memberCount = memberCount
             self.memberCountSinceSend = memberCountSinceSend
             self.mergeFieldCount = mergeFieldCount
@@ -417,12 +417,12 @@ public extension Lists {
           }
         }
 
-        public init(links: [Links]? = nil, beamerAddress: String? = nil, campaignDefaults: CampaignDefaults? = nil, contact: Contact? = nil, dateCreated: DateTime? = nil, doubleOptin: Bool? = nil, emailTypeOption: Bool? = nil, hasWelcome: Bool? = nil, id: String? = nil, listRating: Int? = nil, marketingPermissions: Bool? = nil, modules: [String]? = nil, name: String? = nil, notifyOnSubscribe: String? = nil, notifyOnUnsubscribe: String? = nil, permissionReminder: String? = nil, stats: Stats? = nil, subscribeURLLong: String? = nil, subscribeURLShort: String? = nil, useArchiveBar: Bool? = nil, visibility: Visibility? = nil, webId: Int? = nil) {
+        public init(links: [Links]? = nil, beamerAddress: String? = nil, campaignDefaults: CampaignDefaults? = nil, contact: Contact? = nil, dateCreated: Date? = nil, doubleOptin: Bool? = nil, emailTypeOption: Bool? = nil, hasWelcome: Bool? = nil, id: String? = nil, listRating: Int? = nil, marketingPermissions: Bool? = nil, modules: [String]? = nil, name: String? = nil, notifyOnSubscribe: String? = nil, notifyOnUnsubscribe: String? = nil, permissionReminder: String? = nil, stats: Stats? = nil, subscribeURLLong: String? = nil, subscribeURLShort: String? = nil, useArchiveBar: Bool? = nil, visibility: Visibility? = nil, webId: Int? = nil) {
           self.links = links
           self.beamerAddress = beamerAddress
           self.campaignDefaults = campaignDefaults
           self.contact = contact
-          self.dateCreated = dateCreated
+          self.dateCreated = .init(date: dateCreated)
           self.doubleOptin = doubleOptin
           self.emailTypeOption = emailTypeOption
           self.hasWelcome = hasWelcome

@@ -153,7 +153,7 @@ public extension Campaigns {
           public var campaignId: String?
 
           /** The date and time the feedback item was created in ISO 8601 format. */
-          public var createdAt: DateTime?
+          public var createdAt: DateTime
 
           /** The login name of the user who created the feedback. */
           public var createdBy: String?
@@ -171,7 +171,7 @@ public extension Campaigns {
           public var source: Source?
 
           /** The date and time the feedback was last updated in ISO 8601 format. */
-          public var updatedAt: DateTime?
+          public var updatedAt: DateTime
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
           public struct Links: MailchimpModel {
@@ -230,18 +230,18 @@ public extension Campaigns {
             }
           }
 
-          public init(message: String, links: [Links]? = nil, blockId: Int? = nil, campaignId: String? = nil, createdAt: DateTime? = nil, createdBy: String? = nil, feedbackId: Int? = nil, isComplete: Bool? = nil, parentId: Int? = nil, source: Source? = nil, updatedAt: DateTime? = nil) {
+          public init(message: String, links: [Links]? = nil, blockId: Int? = nil, campaignId: String? = nil, createdAt: Date? = nil, createdBy: String? = nil, feedbackId: Int? = nil, isComplete: Bool? = nil, parentId: Int? = nil, source: Source? = nil, updatedAt: Date? = nil) {
             self.message = message
             self.links = links
             self.blockId = blockId
             self.campaignId = campaignId
-            self.createdAt = createdAt
+            self.createdAt = .init(date: createdAt)
             self.createdBy = createdBy
             self.feedbackId = feedbackId
             self.isComplete = isComplete
             self.parentId = parentId
             self.source = source
-            self.updatedAt = updatedAt
+            self.updatedAt = .init(date: updatedAt)
           }
 
           public init(from decoder: Decoder) throws {

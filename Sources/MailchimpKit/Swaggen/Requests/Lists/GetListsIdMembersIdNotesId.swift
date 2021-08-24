@@ -71,7 +71,7 @@ public extension Lists {
         public var links: [Links]?
 
         /** The date and time the note was created in ISO 8601 format. */
-        public var createdAt: DateTime?
+        public var createdAt: DateTime
 
         /** The author of the note. */
         public var createdBy: String?
@@ -89,7 +89,7 @@ public extension Lists {
         public var note: String?
 
         /** The date and time the note was last updated in ISO 8601 format. */
-        public var updatedAt: DateTime?
+        public var updatedAt: DateTime
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
         public struct Links: MailchimpModel {
@@ -148,15 +148,15 @@ public extension Lists {
           }
         }
 
-        public init(links: [Links]? = nil, createdAt: DateTime? = nil, createdBy: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, note: String? = nil, updatedAt: DateTime? = nil) {
+        public init(links: [Links]? = nil, createdAt: Date? = nil, createdBy: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, note: String? = nil, updatedAt: Date? = nil) {
           self.links = links
-          self.createdAt = createdAt
+          self.createdAt = .init(date: createdAt)
           self.createdBy = createdBy
           self.emailId = emailId
           self.id = id
           self.listId = listId
           self.note = note
-          self.updatedAt = updatedAt
+          self.updatedAt = .init(date: updatedAt)
         }
 
         public init(from decoder: Decoder) throws {

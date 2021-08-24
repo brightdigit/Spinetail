@@ -156,7 +156,7 @@ public extension Reporting {
           public var name: String?
 
           /** The time this landing page was published. */
-          public var publishedAt: DateTime?
+          public var publishedAt: DateTime
 
           /** A list of tags associated to the landing page. */
           public var signupTags: [SignupTags]?
@@ -176,7 +176,7 @@ public extension Reporting {
           public var uniqueVisits: Int?
 
           /** The time this landing page was unpublished. */
-          public var unpublishedAt: DateTime?
+          public var unpublishedAt: DateTime
 
           /** The landing page url. */
           public var url: String?
@@ -560,7 +560,7 @@ public extension Reporting {
             }
           }
 
-          public init(links: [Links]? = nil, clicks: Int? = nil, conversionRate: Double? = nil, ecommerce: Ecommerce? = nil, id: String? = nil, listId: String? = nil, listName: String? = nil, name: String? = nil, publishedAt: DateTime? = nil, signupTags: [SignupTags]? = nil, status: String? = nil, subscribes: Int? = nil, timeseries: Timeseries? = nil, title: String? = nil, uniqueVisits: Int? = nil, unpublishedAt: DateTime? = nil, url: String? = nil, visits: Int? = nil, webId: Int? = nil) {
+          public init(links: [Links]? = nil, clicks: Int? = nil, conversionRate: Double? = nil, ecommerce: Ecommerce? = nil, id: String? = nil, listId: String? = nil, listName: String? = nil, name: String? = nil, publishedAt: Date? = nil, signupTags: [SignupTags]? = nil, status: String? = nil, subscribes: Int? = nil, timeseries: Timeseries? = nil, title: String? = nil, uniqueVisits: Int? = nil, unpublishedAt: Date? = nil, url: String? = nil, visits: Int? = nil, webId: Int? = nil) {
             self.links = links
             self.clicks = clicks
             self.conversionRate = conversionRate
@@ -569,14 +569,14 @@ public extension Reporting {
             self.listId = listId
             self.listName = listName
             self.name = name
-            self.publishedAt = publishedAt
+            self.publishedAt = .init(date: publishedAt)
             self.signupTags = signupTags
             self.status = status
             self.subscribes = subscribes
             self.timeseries = timeseries
             self.title = title
             self.uniqueVisits = uniqueVisits
-            self.unpublishedAt = unpublishedAt
+            self.unpublishedAt = .init(date: unpublishedAt)
             self.url = url
             self.visits = visits
             self.webId = webId

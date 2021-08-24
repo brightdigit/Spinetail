@@ -220,11 +220,11 @@ public extension Ecommerce {
           }
         }
 
-        public init(links: [Links]? = nil, address: Address? = nil, company: String? = nil, createdAt: DateTime? = nil, emailAddress: String? = nil, firstName: String? = nil, id: String? = nil, lastName: String? = nil, optInStatus: Bool? = nil, ordersCount: Int? = nil, totalSpent: Double? = nil, updatedAt: DateTime? = nil) {
+        public init(links: [Links]? = nil, address: Address? = nil, company: String? = nil, createdAt: Date? = nil, emailAddress: String? = nil, firstName: String? = nil, id: String? = nil, lastName: String? = nil, optInStatus: Bool? = nil, ordersCount: Int? = nil, totalSpent: Double? = nil, updatedAt: Date? = nil) {
           self.links = links
           self.address = address
           self.company = company
-          self.createdAt = createdAt
+          self.createdAt = .init(date: createdAt)
           self.emailAddress = emailAddress
           self.firstName = firstName
           self.id = id
@@ -232,7 +232,7 @@ public extension Ecommerce {
           self.optInStatus = optInStatus
           self.ordersCount = ordersCount
           self.totalSpent = totalSpent
-          self.updatedAt = updatedAt
+          self.updatedAt = .init(date: updatedAt)
         }
 
         public init(from decoder: Decoder) throws {

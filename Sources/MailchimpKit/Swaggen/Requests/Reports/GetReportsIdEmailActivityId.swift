@@ -157,7 +157,7 @@ public extension Reports {
           public var ip: String?
 
           /** The date and time recorded for the action in ISO 8601 format. */
-          public var timestamp: DateTime?
+          public var timestamp: DateTime
 
           /** If the action is a 'bounce', the type of bounce received: 'hard', 'soft'. */
           public var type: String?
@@ -165,10 +165,10 @@ public extension Reports {
           /** If the action is a 'click', the URL on which the member clicked. */
           public var url: String?
 
-          public init(action: String? = nil, ip: String? = nil, timestamp: DateTime? = nil, type: String? = nil, url: String? = nil) {
+          public init(action: String? = nil, ip: String? = nil, timestamp: Date? = nil, type: String? = nil, url: String? = nil) {
             self.action = action
             self.ip = ip
-            self.timestamp = timestamp
+            self.timestamp = .init(date: timestamp)
             self.type = type
             self.url = url
           }

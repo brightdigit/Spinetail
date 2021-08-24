@@ -147,13 +147,13 @@ public extension Lists {
           public var goalId: Int?
 
           /** The date and time the user last triggered the Goal event in ISO 8601 format. */
-          public var lastVisitedAt: DateTime?
+          public var lastVisitedAt: DateTime
 
-          public init(data: String? = nil, event: String? = nil, goalId: Int? = nil, lastVisitedAt: DateTime? = nil) {
+          public init(data: String? = nil, event: String? = nil, goalId: Int? = nil, lastVisitedAt: Date? = nil) {
             self.data = data
             self.event = event
             self.goalId = goalId
-            self.lastVisitedAt = lastVisitedAt
+            self.lastVisitedAt = .init(date: lastVisitedAt)
           }
 
           public init(from decoder: Decoder) throws {

@@ -200,7 +200,7 @@ public extension Automations {
         public var contentType: String?
 
         /** The date and time the campaign was created in ISO 8601 format. */
-        public var createTime: DateTime?
+        public var createTime: DateTime
 
         /** The delay settings for an Automation email. */
         public var delay: Delay?
@@ -227,7 +227,7 @@ public extension Automations {
         public var reportSummary: ReportSummary?
 
         /**  The date and time a campaign was sent in ISO 8601 format */
-        public var sendTime: DateTime?
+        public var sendTime: DateTime
 
         /** Settings for the campaign including the email subject, from name, and from email address. */
         public var settings: Settings?
@@ -236,7 +236,7 @@ public extension Automations {
         public var socialCard: SocialCard?
 
         /** The date and time the campaign was started in ISO 8601 format. */
-        public var startTime: DateTime?
+        public var startTime: DateTime
 
         /** The current status of the campaign. */
         public var status: Status?
@@ -940,11 +940,11 @@ public extension Automations {
           }
         }
 
-        public init(links: [Links]? = nil, archiveURL: String? = nil, contentType: String? = nil, createTime: DateTime? = nil, delay: Delay? = nil, emailsSent: Int? = nil, hasLogoMergeTag: Bool? = nil, id: String? = nil, needsBlockRefresh: Bool? = nil, position: Int? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, sendTime: DateTime? = nil, settings: Settings? = nil, socialCard: SocialCard? = nil, startTime: DateTime? = nil, status: Status? = nil, tracking: Tracking? = nil, triggerSettings: TriggerSettings? = nil, webId: Int? = nil, workflowId: String? = nil) {
+        public init(links: [Links]? = nil, archiveURL: String? = nil, contentType: String? = nil, createTime: Date? = nil, delay: Delay? = nil, emailsSent: Int? = nil, hasLogoMergeTag: Bool? = nil, id: String? = nil, needsBlockRefresh: Bool? = nil, position: Int? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, sendTime: Date? = nil, settings: Settings? = nil, socialCard: SocialCard? = nil, startTime: Date? = nil, status: Status? = nil, tracking: Tracking? = nil, triggerSettings: TriggerSettings? = nil, webId: Int? = nil, workflowId: String? = nil) {
           self.links = links
           self.archiveURL = archiveURL
           self.contentType = contentType
-          self.createTime = createTime
+          self.createTime = .init(date: createTime)
           self.delay = delay
           self.emailsSent = emailsSent
           self.hasLogoMergeTag = hasLogoMergeTag
@@ -953,10 +953,10 @@ public extension Automations {
           self.position = position
           self.recipients = recipients
           self.reportSummary = reportSummary
-          self.sendTime = sendTime
+          self.sendTime = .init(date: sendTime)
           self.settings = settings
           self.socialCard = socialCard
-          self.startTime = startTime
+          self.startTime = .init(date: startTime)
           self.status = status
           self.tracking = tracking
           self.triggerSettings = triggerSettings

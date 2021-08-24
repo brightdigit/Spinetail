@@ -63,7 +63,7 @@ public extension FileManager {
         public var links: [Links]?
 
         /** The date and time a file was added to the File Manager in ISO 8601 format. */
-        public var createdAt: DateTime?
+        public var createdAt: DateTime
 
         /** The username of the profile that created the folder. */
         public var createdBy: String?
@@ -134,9 +134,9 @@ public extension FileManager {
           }
         }
 
-        public init(links: [Links]? = nil, createdAt: DateTime? = nil, createdBy: String? = nil, fileCount: Int? = nil, id: Int? = nil, name: String? = nil) {
+        public init(links: [Links]? = nil, createdAt: Date? = nil, createdBy: String? = nil, fileCount: Int? = nil, id: Int? = nil, name: String? = nil) {
           self.links = links
-          self.createdAt = createdAt
+          self.createdAt = .init(date: createdAt)
           self.createdBy = createdBy
           self.fileCount = fileCount
           self.id = id

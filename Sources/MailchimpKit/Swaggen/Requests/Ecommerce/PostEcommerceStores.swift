@@ -206,7 +206,7 @@ public extension Ecommerce {
         public var connectedSite: ConnectedSite?
 
         /** The date and time the store was created in ISO 8601 format. */
-        public var createdAt: DateTime?
+        public var createdAt: DateTime
 
         /** The three-letter ISO 4217 code for the currency that the store accepts. */
         public var currencyCode: String?
@@ -248,7 +248,7 @@ public extension Ecommerce {
         public var timezone: String?
 
         /** The date and time the store was last updated in ISO 8601 format. */
-        public var updatedAt: DateTime?
+        public var updatedAt: DateTime
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
         public struct Links: MailchimpModel {
@@ -549,12 +549,12 @@ public extension Ecommerce {
           }
         }
 
-        public init(links: [Links]? = nil, address: Address? = nil, automations: Automations? = nil, connectedSite: ConnectedSite? = nil, createdAt: DateTime? = nil, currencyCode: String? = nil, domain: String? = nil, emailAddress: String? = nil, id: String? = nil, isSyncing: Bool? = nil, listId: String? = nil, listIsActive: Bool? = nil, moneyFormat: String? = nil, name: String? = nil, phone: String? = nil, platform: String? = nil, primaryLocale: String? = nil, timezone: String? = nil, updatedAt: DateTime? = nil) {
+        public init(links: [Links]? = nil, address: Address? = nil, automations: Automations? = nil, connectedSite: ConnectedSite? = nil, createdAt: Date? = nil, currencyCode: String? = nil, domain: String? = nil, emailAddress: String? = nil, id: String? = nil, isSyncing: Bool? = nil, listId: String? = nil, listIsActive: Bool? = nil, moneyFormat: String? = nil, name: String? = nil, phone: String? = nil, platform: String? = nil, primaryLocale: String? = nil, timezone: String? = nil, updatedAt: Date? = nil) {
           self.links = links
           self.address = address
           self.automations = automations
           self.connectedSite = connectedSite
-          self.createdAt = createdAt
+          self.createdAt = .init(date: createdAt)
           self.currencyCode = currencyCode
           self.domain = domain
           self.emailAddress = emailAddress
@@ -568,7 +568,7 @@ public extension Ecommerce {
           self.platform = platform
           self.primaryLocale = primaryLocale
           self.timezone = timezone
-          self.updatedAt = updatedAt
+          self.updatedAt = .init(date: updatedAt)
         }
 
         public init(from decoder: Decoder) throws {

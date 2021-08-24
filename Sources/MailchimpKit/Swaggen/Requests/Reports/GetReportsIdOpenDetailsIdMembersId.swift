@@ -156,10 +156,10 @@ public extension Reports {
         /** A summary of the interaction with the campaign. */
         public struct Opens: MailchimpModel {
           /** The date and time recorded for the action in ISO 8601 format. */
-          public var timestamp: DateTime?
+          public var timestamp: DateTime
 
-          public init(timestamp: DateTime? = nil) {
-            self.timestamp = timestamp
+          public init(timestamp: Date? = nil) {
+            self.timestamp = .init(date:  timestamp)
           }
 
           public init(from decoder: Decoder) throws {

@@ -106,18 +106,18 @@ public extension FacebookAds {
 
         public var budget: Budget?
 
-        public var canceledAt: DateTime?
+        public var canceledAt: DateTime
 
         /** Channel settings */
         public var channel: Channel?
 
         public var content: Content?
 
-        public var createTime: DateTime?
+        public var createTime: DateTime
 
         public var emailSourceName: String?
 
-        public var endTime: DateTime?
+        public var endTime: DateTime
 
         /** Check if this ad is connected to a facebook page */
         public var feedback: Feedback?
@@ -141,9 +141,9 @@ public extension FacebookAds {
 
         public var needsAttention: Bool?
 
-        public var pausedAt: DateTime?
+        public var pausedAt: DateTime
 
-        public var publishedTime: DateTime?
+        public var publishedTime: DateTime
 
         /** List settings for the outreach */
         public var recipients: Recipients?
@@ -156,7 +156,7 @@ public extension FacebookAds {
         /** Connected Site */
         public var site: Site?
 
-        public var startTime: DateTime?
+        public var startTime: DateTime
 
         /** Campaign, Ad, or Page status */
         public var status: Status?
@@ -167,7 +167,7 @@ public extension FacebookAds {
         /** Supported Campaign, Ad, Page type */
         public var type: `Type`?
 
-        public var updatedAt: DateTime?
+        public var updatedAt: DateTime
 
         public var wasCanceledByFacebook: Bool?
 
@@ -892,16 +892,16 @@ public extension FacebookAds {
           }
         }
 
-        public init(links: [Links]? = nil, audience: Audience? = nil, budget: Budget? = nil, canceledAt: DateTime? = nil, channel: Channel? = nil, content: Content? = nil, createTime: DateTime? = nil, emailSourceName: String? = nil, endTime: DateTime? = nil, feedback: Feedback? = nil, hasAudience: Bool? = nil, hasContent: Bool? = nil, hasSegment: Bool? = nil, id: String? = nil, isConnected: Bool? = nil, name: String? = nil, needsAttention: Bool? = nil, pausedAt: DateTime? = nil, publishedTime: DateTime? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, showReport: Bool? = nil, site: Site? = nil, startTime: DateTime? = nil, status: Status? = nil, thumbnail: String? = nil, type: Type? = nil, updatedAt: DateTime? = nil, wasCanceledByFacebook: Bool? = nil, webId: Int? = nil) {
+        public init(links: [Links]? = nil, audience: Audience? = nil, budget: Budget? = nil, canceledAt: Date? = nil, channel: Channel? = nil, content: Content? = nil, createTime: Date? = nil, emailSourceName: String? = nil, endTime: Date? = nil, feedback: Feedback? = nil, hasAudience: Bool? = nil, hasContent: Bool? = nil, hasSegment: Bool? = nil, id: String? = nil, isConnected: Bool? = nil, name: String? = nil, needsAttention: Bool? = nil, pausedAt: Date? = nil, publishedTime: Date? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, showReport: Bool? = nil, site: Site? = nil, startTime: Date? = nil, status: Status? = nil, thumbnail: String? = nil, type: Type? = nil, updatedAt: Date? = nil, wasCanceledByFacebook: Bool? = nil, webId: Int? = nil) {
           self.links = links
           self.audience = audience
           self.budget = budget
-          self.canceledAt = canceledAt
+          self.canceledAt = .init(date: canceledAt)
           self.channel = channel
           self.content = content
-          self.createTime = createTime
+          self.createTime = .init(date: createTime)
           self.emailSourceName = emailSourceName
-          self.endTime = endTime
+          self.endTime = .init(date: endTime)
           self.feedback = feedback
           self.hasAudience = hasAudience
           self.hasContent = hasContent
@@ -910,17 +910,17 @@ public extension FacebookAds {
           self.isConnected = isConnected
           self.name = name
           self.needsAttention = needsAttention
-          self.pausedAt = pausedAt
-          self.publishedTime = publishedTime
+          self.pausedAt = .init(date: pausedAt)
+          self.publishedTime = .init(date:  publishedTime)
           self.recipients = recipients
           self.reportSummary = reportSummary
           self.showReport = showReport
           self.site = site
-          self.startTime = startTime
+          self.startTime = .init(date: startTime)
           self.status = status
           self.thumbnail = thumbnail
           self.type = type
-          self.updatedAt = updatedAt
+          self.updatedAt = .init(date: updatedAt)
           self.wasCanceledByFacebook = wasCanceledByFacebook
           self.webId = webId
         }

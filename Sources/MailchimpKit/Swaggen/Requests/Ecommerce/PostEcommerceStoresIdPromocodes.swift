@@ -22,24 +22,24 @@ public extension Ecommerce {
         public var redemptionURL: String
 
         /** The date and time the promotion was created in ISO 8601 format. */
-        public var createdAtForeign: DateTime?
+        public var createdAtForeign: DateTime
 
         /** Whether the promo code is currently enabled. */
         public var enabled: Bool?
 
         /** The date and time the promotion was updated in ISO 8601 format. */
-        public var updatedAtForeign: DateTime?
+        public var updatedAtForeign: DateTime
 
         /** Number of times promo code has been used. */
         public var usageCount: Int?
 
-        public init(code: String, id: String, redemptionURL: String, createdAtForeign: DateTime? = nil, enabled: Bool? = nil, updatedAtForeign: DateTime? = nil, usageCount: Int? = nil) {
+        public init(code: String, id: String, redemptionURL: String, createdAtForeign: Date? = nil, enabled: Bool? = nil, updatedAtForeign: Date? = nil, usageCount: Int? = nil) {
           self.code = code
           self.id = id
           self.redemptionURL = redemptionURL
-          self.createdAtForeign = createdAtForeign
+          self.createdAtForeign = .init(date: createdAtForeign)
           self.enabled = enabled
-          self.updatedAtForeign = updatedAtForeign
+          self.updatedAtForeign = .init(date: updatedAtForeign)
           self.usageCount = usageCount
         }
 
@@ -114,7 +114,7 @@ public extension Ecommerce {
         public var code: String?
 
         /** The date and time the promotion was created in ISO 8601 format. */
-        public var createdAtForeign: DateTime?
+        public var createdAtForeign: DateTime
 
         /** Whether the promo code is currently enabled. */
         public var enabled: Bool?
@@ -126,7 +126,7 @@ public extension Ecommerce {
         public var redemptionURL: String?
 
         /** The date and time the promotion was updated in ISO 8601 format. */
-        public var updatedAtForeign: DateTime?
+        public var updatedAtForeign: DateTime
 
         /** Number of times promo code has been used. */
         public var usageCount: Int?
@@ -188,14 +188,14 @@ public extension Ecommerce {
           }
         }
 
-        public init(links: [Links]? = nil, code: String? = nil, createdAtForeign: DateTime? = nil, enabled: Bool? = nil, id: String? = nil, redemptionURL: String? = nil, updatedAtForeign: DateTime? = nil, usageCount: Int? = nil) {
+        public init(links: [Links]? = nil, code: String? = nil, createdAtForeign: Date? = nil, enabled: Bool? = nil, id: String? = nil, redemptionURL: String? = nil, updatedAtForeign: Date? = nil, usageCount: Int? = nil) {
           self.links = links
           self.code = code
-          self.createdAtForeign = createdAtForeign
+          self.createdAtForeign = .init(date: createdAtForeign)
           self.enabled = enabled
           self.id = id
           self.redemptionURL = redemptionURL
-          self.updatedAtForeign = updatedAtForeign
+          self.updatedAtForeign = .init(date: updatedAtForeign)
           self.usageCount = usageCount
         }
 

@@ -164,7 +164,7 @@ public extension Ecommerce {
           public var amount: Float?
 
           /** The date and time the promotion was created in ISO 8601 format. */
-          public var createdAtForeign: DateTime?
+          public var createdAtForeign: DateTime
 
           /** The description of a promotion restricted to UTF-8 characters with max length 255. */
           public var description: String?
@@ -179,7 +179,7 @@ public extension Ecommerce {
           public var id: String?
 
           /** The date and time when the promotion is in effect in ISO 8601 format. */
-          public var startsAt: DateTime?
+          public var startsAt: DateTime
 
           /** The target that the discount applies to. */
           public var target: Target?
@@ -191,7 +191,7 @@ public extension Ecommerce {
           public var type: `Type`?
 
           /** The date and time the promotion was updated in ISO 8601 format. */
-          public var updatedAtForeign: DateTime?
+          public var updatedAtForeign: DateTime
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
           public struct Links: MailchimpModel {
@@ -250,19 +250,19 @@ public extension Ecommerce {
             }
           }
 
-          public init(links: [Links]? = nil, amount: Float? = nil, createdAtForeign: DateTime? = nil, description: String? = nil, enabled: Bool? = nil, endsAt: String? = nil, id: String? = nil, startsAt: DateTime? = nil, target: Target? = nil, title: String? = nil, type: Type? = nil, updatedAtForeign: DateTime? = nil) {
+          public init(links: [Links]? = nil, amount: Float? = nil, createdAtForeign: Date? = nil, description: String? = nil, enabled: Bool? = nil, endsAt: String? = nil, id: String? = nil, startsAt: Date? = nil, target: Target? = nil, title: String? = nil, type: Type? = nil, updatedAtForeign: Date? = nil) {
             self.links = links
             self.amount = amount
-            self.createdAtForeign = createdAtForeign
+            self.createdAtForeign = .init(date: createdAtForeign)
             self.description = description
             self.enabled = enabled
             self.endsAt = endsAt
             self.id = id
-            self.startsAt = startsAt
+            self.startsAt = .init(date: startsAt)
             self.target = target
             self.title = title
             self.type = type
-            self.updatedAtForeign = updatedAtForeign
+            self.updatedAtForeign = .init(date: updatedAtForeign)
           }
 
           public init(from decoder: Decoder) throws {

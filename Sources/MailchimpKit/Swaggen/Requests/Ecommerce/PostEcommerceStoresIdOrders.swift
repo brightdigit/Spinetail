@@ -44,7 +44,7 @@ public extension Ecommerce {
         public var campaignId: String?
 
         /** The date and time the order was cancelled in ISO 8601 format. Note: passing a value for this parameter will cancel the order being created. */
-        public var cancelledAtForeign: DateTime?
+        public var cancelledAtForeign: DateTime
 
         /** The total amount of the discounts to be applied to the price of the order. */
         public var discountTotal: Double?
@@ -65,7 +65,7 @@ public extension Ecommerce {
         public var outreach: Outreach?
 
         /** The date and time the order was processed in ISO 8601 format. */
-        public var processedAtForeign: DateTime?
+        public var processedAtForeign: DateTime
 
         /** The promo codes applied on the order */
         public var promos: [Promos]?
@@ -83,7 +83,7 @@ public extension Ecommerce {
         public var trackingCode: TrackingCode?
 
         /** The date and time the order was updated in ISO 8601 format. */
-        public var updatedAtForeign: DateTime?
+        public var updatedAtForeign: DateTime
 
         /** Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body. */
         public struct Customer: MailchimpModel {
@@ -509,7 +509,7 @@ public extension Ecommerce {
           }
         }
 
-        public init(currencyCode: String, customer: Customer, id: String, lines: [Lines], orderTotal: Double, billingAddress: BillingAddress? = nil, campaignId: String? = nil, cancelledAtForeign: DateTime? = nil, discountTotal: Double? = nil, financialStatus: String? = nil, fulfillmentStatus: String? = nil, landingSite: String? = nil, orderURL: String? = nil, outreach: Outreach? = nil, processedAtForeign: DateTime? = nil, promos: [Promos]? = nil, shippingAddress: ShippingAddress? = nil, shippingTotal: Double? = nil, taxTotal: Double? = nil, trackingCode: TrackingCode? = nil, updatedAtForeign: DateTime? = nil) {
+        public init(currencyCode: String, customer: Customer, id: String, lines: [Lines], orderTotal: Double, billingAddress: BillingAddress? = nil, campaignId: String? = nil, cancelledAtForeign: Date? = nil, discountTotal: Double? = nil, financialStatus: String? = nil, fulfillmentStatus: String? = nil, landingSite: String? = nil, orderURL: String? = nil, outreach: Outreach? = nil, processedAtForeign: Date? = nil, promos: [Promos]? = nil, shippingAddress: ShippingAddress? = nil, shippingTotal: Double? = nil, taxTotal: Double? = nil, trackingCode: TrackingCode? = nil, updatedAtForeign: Date? = nil) {
           self.currencyCode = currencyCode
           self.customer = customer
           self.id = id
@@ -517,20 +517,20 @@ public extension Ecommerce {
           self.orderTotal = orderTotal
           self.billingAddress = billingAddress
           self.campaignId = campaignId
-          self.cancelledAtForeign = cancelledAtForeign
+          self.cancelledAtForeign = .init(date: cancelledAtForeign)
           self.discountTotal = discountTotal
           self.financialStatus = financialStatus
           self.fulfillmentStatus = fulfillmentStatus
           self.landingSite = landingSite
           self.orderURL = orderURL
           self.outreach = outreach
-          self.processedAtForeign = processedAtForeign
+          self.processedAtForeign = .init(date: processedAtForeign)
           self.promos = promos
           self.shippingAddress = shippingAddress
           self.shippingTotal = shippingTotal
           self.taxTotal = taxTotal
           self.trackingCode = trackingCode
-          self.updatedAtForeign = updatedAtForeign
+          self.updatedAtForeign = .init(date: updatedAtForeign)
         }
 
         public init(from decoder: Decoder) throws {
@@ -636,7 +636,7 @@ public extension Ecommerce {
         public var campaignId: String?
 
         /** The date and time the order was cancelled in ISO 8601 format. */
-        public var cancelledAtForeign: DateTime?
+        public var cancelledAtForeign: DateTime
 
         /** The three-letter ISO 4217 code for the currency that the store accepts. */
         public var currencyCode: String?
@@ -672,7 +672,7 @@ public extension Ecommerce {
         public var outreach: Outreach?
 
         /** The date and time the order was processed in ISO 8601 format. */
-        public var processedAtForeign: DateTime?
+        public var processedAtForeign: DateTime
 
         /** The promo codes applied on the order */
         public var promos: [Promos]?
@@ -693,7 +693,7 @@ public extension Ecommerce {
         public var trackingCode: TrackingCode?
 
         /** The date and time the order was updated in ISO 8601 format. */
-        public var updatedAtForeign: DateTime?
+        public var updatedAtForeign: DateTime
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
         public struct Links: MailchimpModel {
@@ -858,7 +858,7 @@ public extension Ecommerce {
           public var company: String?
 
           /** The date and time the customer was created in ISO 8601 format. */
-          public var createdAt: DateTime?
+          public var createdAt: DateTime
 
           /** The customer's email address. */
           public var emailAddress: String?
@@ -882,7 +882,7 @@ public extension Ecommerce {
           public var totalSpent: Double?
 
           /** The date and time the customer was last updated in ISO 8601 format. */
-          public var updatedAt: DateTime?
+          public var updatedAt: DateTime
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
           public struct Links: MailchimpModel {
@@ -1005,11 +1005,11 @@ public extension Ecommerce {
             }
           }
 
-          public init(links: [Links]? = nil, address: Address? = nil, company: String? = nil, createdAt: DateTime? = nil, emailAddress: String? = nil, firstName: String? = nil, id: String? = nil, lastName: String? = nil, optInStatus: Bool? = nil, ordersCount: Int? = nil, totalSpent: Double? = nil, updatedAt: DateTime? = nil) {
+          public init(links: [Links]? = nil, address: Address? = nil, company: String? = nil, createdAt: Date? = nil, emailAddress: String? = nil, firstName: String? = nil, id: String? = nil, lastName: String? = nil, optInStatus: Bool? = nil, ordersCount: Int? = nil, totalSpent: Double? = nil, updatedAt: Date? = nil) {
             self.links = links
             self.address = address
             self.company = company
-            self.createdAt = createdAt
+            self.createdAt = .init(date: createdAt)
             self.emailAddress = emailAddress
             self.firstName = firstName
             self.id = id
@@ -1017,7 +1017,7 @@ public extension Ecommerce {
             self.optInStatus = optInStatus
             self.ordersCount = ordersCount
             self.totalSpent = totalSpent
-            self.updatedAt = updatedAt
+            self.updatedAt = .init(date: updatedAt)
           }
 
           public init(from decoder: Decoder) throws {
@@ -1197,15 +1197,15 @@ public extension Ecommerce {
           public var name: String?
 
           /** The date and time the Outreach was published in ISO 8601 format. */
-          public var publishedTime: DateTime?
+          public var publishedTime: DateTime
 
           /** The type of the outreach. */
           public var type: String?
 
-          public init(id: String? = nil, name: String? = nil, publishedTime: DateTime? = nil, type: String? = nil) {
+          public init(id: String? = nil, name: String? = nil, publishedTime: Date? = nil, type: String? = nil) {
             self.id = id
             self.name = name
-            self.publishedTime = publishedTime
+            self.publishedTime = .init(date: publishedTime)
             self.type = type
           }
 
@@ -1362,11 +1362,11 @@ public extension Ecommerce {
           }
         }
 
-        public init(links: [Links]? = nil, billingAddress: BillingAddress? = nil, campaignId: String? = nil, cancelledAtForeign: DateTime? = nil, currencyCode: String? = nil, customer: Customer? = nil, discountTotal: Double? = nil, financialStatus: String? = nil, fulfillmentStatus: String? = nil, id: String? = nil, landingSite: String? = nil, lines: [Lines]? = nil, orderTotal: Double? = nil, orderURL: String? = nil, outreach: Outreach? = nil, processedAtForeign: DateTime? = nil, promos: [Promos]? = nil, shippingAddress: ShippingAddress? = nil, shippingTotal: Double? = nil, storeId: String? = nil, taxTotal: Double? = nil, trackingCode: TrackingCode? = nil, updatedAtForeign: DateTime? = nil) {
+        public init(links: [Links]? = nil, billingAddress: BillingAddress? = nil, campaignId: String? = nil, cancelledAtForeign: Date? = nil, currencyCode: String? = nil, customer: Customer? = nil, discountTotal: Double? = nil, financialStatus: String? = nil, fulfillmentStatus: String? = nil, id: String? = nil, landingSite: String? = nil, lines: [Lines]? = nil, orderTotal: Double? = nil, orderURL: String? = nil, outreach: Outreach? = nil, processedAtForeign: Date? = nil, promos: [Promos]? = nil, shippingAddress: ShippingAddress? = nil, shippingTotal: Double? = nil, storeId: String? = nil, taxTotal: Double? = nil, trackingCode: TrackingCode? = nil, updatedAtForeign: Date? = nil) {
           self.links = links
           self.billingAddress = billingAddress
           self.campaignId = campaignId
-          self.cancelledAtForeign = cancelledAtForeign
+          self.cancelledAtForeign = .init(date: cancelledAtForeign)
           self.currencyCode = currencyCode
           self.customer = customer
           self.discountTotal = discountTotal
@@ -1378,14 +1378,14 @@ public extension Ecommerce {
           self.orderTotal = orderTotal
           self.orderURL = orderURL
           self.outreach = outreach
-          self.processedAtForeign = processedAtForeign
+          self.processedAtForeign = .init(date: processedAtForeign)
           self.promos = promos
           self.shippingAddress = shippingAddress
           self.shippingTotal = shippingTotal
           self.storeId = storeId
           self.taxTotal = taxTotal
           self.trackingCode = trackingCode
-          self.updatedAtForeign = updatedAtForeign
+          self.updatedAtForeign = .init(date: updatedAtForeign)
         }
 
         public init(from decoder: Decoder) throws {

@@ -15,7 +15,7 @@ extension URLSession: Session {
 
   public func createRequest<ResponseType>(_ request: APIRequest<ResponseType>, withBaseURL baseURL: URL, andHeaders headers: [String: String]) throws -> URLRequest where ResponseType: APIResponseValue {
     guard var componenets = URLComponents(url: baseURL.appendingPathComponent(request.path), resolvingAgainstBaseURL: false) else {
-      throw APIError.badURL(baseURL, request.path)
+      throw APIClientError.badURL(baseURL, request.path)
     } 
     
 
@@ -29,7 +29,7 @@ extension URLSession: Session {
     componenets.queryItems = queryItems
 
     guard let url = componenets.url else {
-      throw APIError.urlComponents(componenets)
+      throw APIClientError.urlComponents(componenets)
     }
 
     var urlRequest = URLRequest(url: url)

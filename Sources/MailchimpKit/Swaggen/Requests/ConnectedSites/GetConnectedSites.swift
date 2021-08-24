@@ -137,7 +137,7 @@ public extension ConnectedSites {
           public var links: [Links]?
 
           /** The date and time the connected site was created in ISO 8601 format. */
-          public var createdAt: DateTime?
+          public var createdAt: DateTime
 
           /** The connected site domain. */
           public var domain: String?
@@ -155,7 +155,7 @@ public extension ConnectedSites {
           public var storeId: String?
 
           /** The date and time the connected site was last updated in ISO 8601 format. */
-          public var updatedAt: DateTime?
+          public var updatedAt: DateTime
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
           public struct Links: MailchimpModel {
@@ -242,15 +242,15 @@ public extension ConnectedSites {
             }
           }
 
-          public init(links: [Links]? = nil, createdAt: DateTime? = nil, domain: String? = nil, foreignId: String? = nil, platform: String? = nil, siteScript: SiteScript? = nil, storeId: String? = nil, updatedAt: DateTime? = nil) {
+          public init(links: [Links]? = nil, createdAt: Date? = nil, domain: String? = nil, foreignId: String? = nil, platform: String? = nil, siteScript: SiteScript? = nil, storeId: String? = nil, updatedAt: Date? = nil) {
             self.links = links
-            self.createdAt = createdAt
+            self.createdAt = .init(date: createdAt)
             self.domain = domain
             self.foreignId = foreignId
             self.platform = platform
             self.siteScript = siteScript
             self.storeId = storeId
-            self.updatedAt = updatedAt
+            self.updatedAt = .init(date: updatedAt)
           }
 
           public init(from decoder: Decoder) throws {

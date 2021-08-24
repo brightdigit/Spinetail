@@ -31,29 +31,29 @@ public extension Automations {
         public var excludeFields: [String]?
 
         /** Restrict the response to automations created before this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-        public var beforeCreateTime: DateTime?
+        public var beforeCreateTime: DateTime
 
         /** Restrict the response to automations created after this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-        public var sinceCreateTime: DateTime?
+        public var sinceCreateTime: DateTime
 
         /** Restrict the response to automations started before this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-        public var beforeStartTime: DateTime?
+        public var beforeStartTime: DateTime
 
         /** Restrict the response to automations started after this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-        public var sinceStartTime: DateTime?
+        public var sinceStartTime: DateTime
 
         /** Restrict the results to automations with the specified status. */
         public var status: Status?
 
-        public init(count: Int? = nil, offset: Int? = nil, fields: [String]? = nil, excludeFields: [String]? = nil, beforeCreateTime: DateTime? = nil, sinceCreateTime: DateTime? = nil, beforeStartTime: DateTime? = nil, sinceStartTime: DateTime? = nil, status: Status? = nil) {
+        public init(count: Int? = nil, offset: Int? = nil, fields: [String]? = nil, excludeFields: [String]? = nil, beforeCreateTime: Date? = nil, sinceCreateTime: Date? = nil, beforeStartTime: Date? = nil, sinceStartTime: Date? = nil, status: Status? = nil) {
           self.count = count
           self.offset = offset
           self.fields = fields
           self.excludeFields = excludeFields
-          self.beforeCreateTime = beforeCreateTime
-          self.sinceCreateTime = sinceCreateTime
-          self.beforeStartTime = beforeStartTime
-          self.sinceStartTime = sinceStartTime
+          self.beforeCreateTime = .init(date: beforeCreateTime)
+          self.sinceCreateTime = .init(date: sinceCreateTime)
+          self.beforeStartTime = .init(date: beforeStartTime)
+          self.sinceStartTime = .init(date: sinceStartTime)
           self.status = status
         }
       }
@@ -66,7 +66,7 @@ public extension Automations {
       }
 
       /// convenience initialiser so an Option doesn't have to be created
-      public convenience init(count: Int? = nil, offset: Int? = nil, fields: [String]? = nil, excludeFields: [String]? = nil, beforeCreateTime: DateTime? = nil, sinceCreateTime: DateTime? = nil, beforeStartTime: DateTime? = nil, sinceStartTime: DateTime? = nil, status: Status? = nil) {
+      public convenience init(count: Int? = nil, offset: Int? = nil, fields: [String]? = nil, excludeFields: [String]? = nil, beforeCreateTime: Date? = nil, sinceCreateTime: Date? = nil, beforeStartTime: Date? = nil, sinceStartTime: Date? = nil, status: Status? = nil) {
         let options = Options(count: count, offset: offset, fields: fields, excludeFields: excludeFields, beforeCreateTime: beforeCreateTime, sinceCreateTime: sinceCreateTime, beforeStartTime: beforeStartTime, sinceStartTime: sinceStartTime, status: status)
         self.init(options: options)
       }
@@ -85,16 +85,16 @@ public extension Automations {
         if let excludeFields = options.excludeFields?.joined(separator: ",") {
           params["exclude_fields"] = excludeFields
         }
-        if let beforeCreateTime = options.beforeCreateTime?.encode() {
+        if let beforeCreateTime = options.beforeCreateTime.encode() {
           params["before_create_time"] = beforeCreateTime
         }
-        if let sinceCreateTime = options.sinceCreateTime?.encode() {
+        if let sinceCreateTime = options.sinceCreateTime.encode() {
           params["since_create_time"] = sinceCreateTime
         }
-        if let beforeStartTime = options.beforeStartTime?.encode() {
+        if let beforeStartTime = options.beforeStartTime.encode() {
           params["before_start_time"] = beforeStartTime
         }
-        if let sinceStartTime = options.sinceStartTime?.encode() {
+        if let sinceStartTime = options.sinceStartTime.encode() {
           params["since_start_time"] = sinceStartTime
         }
         if let status = options.status?.encode() {
@@ -186,7 +186,7 @@ public extension Automations {
           public var links: [Links]?
 
           /** The date and time the Automation was created in ISO 8601 format. */
-          public var createTime: DateTime?
+          public var createTime: DateTime
 
           /** The total number of emails sent for the Automation. */
           public var emailsSent: Int?
@@ -204,7 +204,7 @@ public extension Automations {
           public var settings: Settings?
 
           /** The date and time the Automation was started in ISO 8601 format. */
-          public var startTime: DateTime?
+          public var startTime: DateTime
 
           /** The current status of the Automation. */
           public var status: Status?
@@ -723,15 +723,15 @@ public extension Automations {
             }
           }
 
-          public init(links: [Links]? = nil, createTime: DateTime? = nil, emailsSent: Int? = nil, id: String? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, settings: Settings? = nil, startTime: DateTime? = nil, status: Status? = nil, tracking: Tracking? = nil, triggerSettings: TriggerSettings? = nil) {
+          public init(links: [Links]? = nil, createTime: Date? = nil, emailsSent: Int? = nil, id: String? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, settings: Settings? = nil, startTime: Date? = nil, status: Status? = nil, tracking: Tracking? = nil, triggerSettings: TriggerSettings? = nil) {
             self.links = links
-            self.createTime = createTime
+            self.createTime = .init(date: createTime)
             self.emailsSent = emailsSent
             self.id = id
             self.recipients = recipients
             self.reportSummary = reportSummary
             self.settings = settings
-            self.startTime = startTime
+            self.startTime = .init(date: startTime)
             self.status = status
             self.tracking = tracking
             self.triggerSettings = triggerSettings

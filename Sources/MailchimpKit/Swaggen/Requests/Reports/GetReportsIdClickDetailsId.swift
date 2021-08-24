@@ -79,7 +79,7 @@ public extension Reports {
         public var id: String?
 
         /** The date and time for the last recorded click for a link in ISO 8601 format. */
-        public var lastClick: DateTime?
+        public var lastClick: DateTime
 
         /** The number of total clicks for a link. */
         public var totalClicks: Int?
@@ -258,13 +258,13 @@ public extension Reports {
           }
         }
 
-        public init(links: [Links]? = nil, abSplit: AbSplit? = nil, campaignId: String? = nil, clickPercentage: Double? = nil, id: String? = nil, lastClick: DateTime? = nil, totalClicks: Int? = nil, uniqueClickPercentage: Double? = nil, uniqueClicks: Int? = nil, url: String? = nil) {
+        public init(links: [Links]? = nil, abSplit: AbSplit? = nil, campaignId: String? = nil, clickPercentage: Double? = nil, id: String? = nil, lastClick: Date? = nil, totalClicks: Int? = nil, uniqueClickPercentage: Double? = nil, uniqueClicks: Int? = nil, url: String? = nil) {
           self.links = links
           self.abSplit = abSplit
           self.campaignId = campaignId
           self.clickPercentage = clickPercentage
           self.id = id
-          self.lastClick = lastClick
+          self.lastClick = .init(date: lastClick)
           self.totalClicks = totalClicks
           self.uniqueClickPercentage = uniqueClickPercentage
           self.uniqueClicks = uniqueClicks

@@ -82,7 +82,7 @@ public extension Reports {
         public var gmtOffset: Int?
 
         /** The date and time of the last open for this member in ISO 8601 format. */
-        public var lastOpen: DateTime?
+        public var lastOpen: DateTime
 
         /** The unique list id. */
         public var listId: String?
@@ -159,14 +159,14 @@ public extension Reports {
           }
         }
 
-        public init(links: [Links]? = nil, absplitGroup: String? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, gmtOffset: Int? = nil, lastOpen: DateTime? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: [String: CodableAny]]? = nil, openCount: Int? = nil, status: String? = nil, vip: Bool? = nil) {
+        public init(links: [Links]? = nil, absplitGroup: String? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, gmtOffset: Int? = nil, lastOpen: Date? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: [String: CodableAny]]? = nil, openCount: Int? = nil, status: String? = nil, vip: Bool? = nil) {
           self.links = links
           self.absplitGroup = absplitGroup
           self.campaignId = campaignId
           self.emailAddress = emailAddress
           self.emailId = emailId
           self.gmtOffset = gmtOffset
-          self.lastOpen = lastOpen
+          self.lastOpen = .init(date:  lastOpen)
           self.listId = listId
           self.listIsActive = listIsActive
           self.mergeFields = mergeFields

@@ -169,7 +169,7 @@ public extension Ecommerce {
         public var company: String?
 
         /** The date and time the customer was created in ISO 8601 format. */
-        public var createdAt: DateTime?
+        public var createdAt: DateTime
 
         /** The customer's email address. */
         public var emailAddress: String?
@@ -193,7 +193,7 @@ public extension Ecommerce {
         public var totalSpent: Double?
 
         /** The date and time the customer was last updated in ISO 8601 format. */
-        public var updatedAt: DateTime?
+        public var updatedAt: DateTime
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
         public struct Links: MailchimpModel {
@@ -316,11 +316,11 @@ public extension Ecommerce {
           }
         }
 
-        public init(links: [Links]? = nil, address: Address? = nil, company: String? = nil, createdAt: DateTime? = nil, emailAddress: String? = nil, firstName: String? = nil, id: String? = nil, lastName: String? = nil, optInStatus: Bool? = nil, ordersCount: Int? = nil, totalSpent: Double? = nil, updatedAt: DateTime? = nil) {
+        public init(links: [Links]? = nil, address: Address? = nil, company: String? = nil, createdAt: Date? = nil, emailAddress: String? = nil, firstName: String? = nil, id: String? = nil, lastName: String? = nil, optInStatus: Bool? = nil, ordersCount: Int? = nil, totalSpent: Double? = nil, updatedAt: Date? = nil) {
           self.links = links
           self.address = address
           self.company = company
-          self.createdAt = createdAt
+          self.createdAt = .init(date: createdAt)
           self.emailAddress = emailAddress
           self.firstName = firstName
           self.id = id
@@ -328,7 +328,7 @@ public extension Ecommerce {
           self.optInStatus = optInStatus
           self.ordersCount = ordersCount
           self.totalSpent = totalSpent
-          self.updatedAt = updatedAt
+          self.updatedAt = .init(date: updatedAt)
         }
 
         public init(from decoder: Decoder) throws {

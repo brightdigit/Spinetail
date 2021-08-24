@@ -30,18 +30,18 @@ public extension Conversations {
         public var isRead: IsRead?
 
         /** Restrict the response to messages created before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-        public var beforeTimestamp: DateTime?
+        public var beforeTimestamp: DateTime
 
         /** Restrict the response to messages created after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-        public var sinceTimestamp: DateTime?
+        public var sinceTimestamp: DateTime
 
-        public init(fields: [String]? = nil, excludeFields: [String]? = nil, conversationId: String, isRead: IsRead? = nil, beforeTimestamp: DateTime? = nil, sinceTimestamp: DateTime? = nil) {
+        public init(fields: [String]? = nil, excludeFields: [String]? = nil, conversationId: String, isRead: IsRead? = nil, beforeTimestamp: Date? = nil, sinceTimestamp: Date? = nil) {
           self.fields = fields
           self.excludeFields = excludeFields
           self.conversationId = conversationId
           self.isRead = isRead
-          self.beforeTimestamp = beforeTimestamp
-          self.sinceTimestamp = sinceTimestamp
+          self.beforeTimestamp = .init(date: beforeTimestamp)
+          self.sinceTimestamp = .init(date: sinceTimestamp)
         }
       }
 
@@ -53,7 +53,7 @@ public extension Conversations {
       }
 
       /// convenience initialiser so an Option doesn't have to be created
-      public convenience init(fields: [String]? = nil, excludeFields: [String]? = nil, conversationId: String, isRead: IsRead? = nil, beforeTimestamp: DateTime? = nil, sinceTimestamp: DateTime? = nil) {
+      public convenience init(fields: [String]? = nil, excludeFields: [String]? = nil, conversationId: String, isRead: IsRead? = nil, beforeTimestamp: Date? = nil, sinceTimestamp: Date? = nil) {
         let options = Options(fields: fields, excludeFields: excludeFields, conversationId: conversationId, isRead: isRead, beforeTimestamp: beforeTimestamp, sinceTimestamp: sinceTimestamp)
         self.init(options: options)
       }
@@ -73,10 +73,10 @@ public extension Conversations {
         if let isRead = options.isRead?.encode() {
           params["is_read"] = isRead
         }
-        if let beforeTimestamp = options.beforeTimestamp?.encode() {
+        if let beforeTimestamp = options.beforeTimestamp.encode() {
           params["before_timestamp"] = beforeTimestamp
         }
-        if let sinceTimestamp = options.sinceTimestamp?.encode() {
+        if let sinceTimestamp = options.sinceTimestamp.encode() {
           params["since_timestamp"] = sinceTimestamp
         }
         return params
@@ -185,7 +185,7 @@ public extension Conversations {
           public var subject: String?
 
           /** The date and time the message was either sent or received in ISO 8601 format. */
-          public var timestamp: DateTime?
+          public var timestamp: DateTime
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
           public struct Links: MailchimpModel {
@@ -244,7 +244,7 @@ public extension Conversations {
             }
           }
 
-          public init(links: [Links]? = nil, conversationId: String? = nil, fromEmail: String? = nil, fromLabel: String? = nil, id: String? = nil, listId: Int? = nil, message: String? = nil, read: Bool? = nil, subject: String? = nil, timestamp: DateTime? = nil) {
+          public init(links: [Links]? = nil, conversationId: String? = nil, fromEmail: String? = nil, fromLabel: String? = nil, id: String? = nil, listId: Int? = nil, message: String? = nil, read: Bool? = nil, subject: String? = nil, timestamp: Date? = nil) {
             self.links = links
             self.conversationId = conversationId
             self.fromEmail = fromEmail
@@ -254,7 +254,7 @@ public extension Conversations {
             self.message = message
             self.read = read
             self.subject = subject
-            self.timestamp = timestamp
+            self.timestamp = .init(date: timestamp)
           }
 
           public init(from decoder: Decoder) throws {

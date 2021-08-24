@@ -173,7 +173,7 @@ public extension SearchCampaigns {
             public var contentType: ContentType?
 
             /** The date and time the campaign was created in ISO 8601 format. */
-            public var createTime: DateTime?
+            public var createTime: DateTime
 
             /** Updates on campaigns in the process of sending. */
             public var deliveryStatus: DeliveryStatus?
@@ -206,7 +206,7 @@ public extension SearchCampaigns {
             public var rssOpts: RssOpts?
 
             /** The date and time a campaign was sent. */
-            public var sendTime: DateTime?
+            public var sendTime: DateTime
 
             /** The settings for your campaign, including subject, from name, reply-to address, and more. */
             public var settings: Settings?
@@ -324,10 +324,10 @@ public extension SearchCampaigns {
               public var replyEmailb: String?
 
               /** The send time for Group A. */
-              public var sendTimea: DateTime?
+              public var sendTimea: DateTime
 
               /** The send time for Group B. */
-              public var sendTimeb: DateTime?
+              public var sendTimeb: DateTime
 
               /** The send time for the winning version. */
               public var sendTimeWinner: String?
@@ -350,14 +350,14 @@ public extension SearchCampaigns {
               /** How unit of time for measuring the winner ('hours' or 'days'). This cannot be changed after a campaign is sent. */
               public var waitUnits: WaitUnits?
 
-              public init(fromNamea: String? = nil, fromNameb: String? = nil, pickWinner: PickWinner? = nil, replyEmaila: String? = nil, replyEmailb: String? = nil, sendTimea: DateTime? = nil, sendTimeb: DateTime? = nil, sendTimeWinner: String? = nil, splitSize: Int? = nil, splitTest: SplitTest? = nil, subjecta: String? = nil, subjectb: String? = nil, waitTime: Int? = nil, waitUnits: WaitUnits? = nil) {
+              public init(fromNamea: String? = nil, fromNameb: String? = nil, pickWinner: PickWinner? = nil, replyEmaila: String? = nil, replyEmailb: String? = nil, sendTimea: Date? = nil, sendTimeb: Date? = nil, sendTimeWinner: String? = nil, splitSize: Int? = nil, splitTest: SplitTest? = nil, subjecta: String? = nil, subjectb: String? = nil, waitTime: Int? = nil, waitUnits: WaitUnits? = nil) {
                 self.fromNamea = fromNamea
                 self.fromNameb = fromNameb
                 self.pickWinner = pickWinner
                 self.replyEmaila = replyEmaila
                 self.replyEmailb = replyEmailb
-                self.sendTimea = sendTimea
-                self.sendTimeb = sendTimeb
+                self.sendTimea = .init(date: sendTimea)
+                self.sendTimeb = .init(date: sendTimeb)
                 self.sendTimeWinner = sendTimeWinner
                 self.splitSize = splitSize
                 self.splitTest = splitTest
@@ -669,7 +669,7 @@ public extension SearchCampaigns {
               public var frequency: Frequency?
 
               /** The date the campaign was last sent. */
-              public var lastSent: DateTime?
+              public var lastSent: DateTime
 
               /** The schedule for sending the RSS Campaign. */
               public var schedule: Schedule?
@@ -783,11 +783,11 @@ public extension SearchCampaigns {
                 }
               }
 
-              public init(constrainRssImg: Bool? = nil, feedURL: URL? = nil, frequency: Frequency? = nil, lastSent: DateTime? = nil, schedule: Schedule? = nil) {
+              public init(constrainRssImg: Bool? = nil, feedURL: URL? = nil, frequency: Frequency? = nil, lastSent: Date? = nil, schedule: Schedule? = nil) {
                 self.constrainRssImg = constrainRssImg
                 self.feedURL = feedURL
                 self.frequency = frequency
-                self.lastSent = lastSent
+                self.lastSent = .init(date: lastSent)
                 self.schedule = schedule
               }
 
@@ -1232,12 +1232,12 @@ public extension SearchCampaigns {
               }
             }
 
-            public init(links: [Links]? = nil, abSplitOpts: AbSplitOpts? = nil, archiveURL: String? = nil, contentType: ContentType? = nil, createTime: DateTime? = nil, deliveryStatus: DeliveryStatus? = nil, emailsSent: Int? = nil, id: String? = nil, longArchiveURL: String? = nil, needsBlockRefresh: Bool? = nil, parentCampaignId: String? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, resendable: Bool? = nil, rssOpts: RssOpts? = nil, sendTime: DateTime? = nil, settings: Settings? = nil, socialCard: SocialCard? = nil, status: Status? = nil, tracking: Tracking? = nil, type: Type? = nil, variateSettings: VariateSettings? = nil, webId: Int? = nil) {
+            public init(links: [Links]? = nil, abSplitOpts: AbSplitOpts? = nil, archiveURL: String? = nil, contentType: ContentType? = nil, createTime: Date? = nil, deliveryStatus: DeliveryStatus? = nil, emailsSent: Int? = nil, id: String? = nil, longArchiveURL: String? = nil, needsBlockRefresh: Bool? = nil, parentCampaignId: String? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, resendable: Bool? = nil, rssOpts: RssOpts? = nil, sendTime: Date? = nil, settings: Settings? = nil, socialCard: SocialCard? = nil, status: Status? = nil, tracking: Tracking? = nil, type: Type? = nil, variateSettings: VariateSettings? = nil, webId: Int? = nil) {
               self.links = links
               self.abSplitOpts = abSplitOpts
               self.archiveURL = archiveURL
               self.contentType = contentType
-              self.createTime = createTime
+              self.createTime = .init(date: createTime)
               self.deliveryStatus = deliveryStatus
               self.emailsSent = emailsSent
               self.id = id
@@ -1248,7 +1248,7 @@ public extension SearchCampaigns {
               self.reportSummary = reportSummary
               self.resendable = resendable
               self.rssOpts = rssOpts
-              self.sendTime = sendTime
+              self.sendTime = .init(date: sendTime)
               self.settings = settings
               self.socialCard = socialCard
               self.status = status

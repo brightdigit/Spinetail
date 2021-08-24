@@ -68,17 +68,17 @@ public extension Ecommerce {
         /** The date and time the promotion was updated in ISO 8601 format. */
         public var updatedAtForeign: DateTime?
 
-        public init(amount: Float? = nil, createdAtForeign: DateTime? = nil, description: String? = nil, enabled: Bool? = nil, endsAt: String? = nil, startsAt: DateTime? = nil, target: Target? = nil, title: String? = nil, type: Type? = nil, updatedAtForeign: DateTime? = nil) {
+        public init(amount: Float? = nil, createdAtForeign: Date? = nil, description: String? = nil, enabled: Bool? = nil, endsAt: String? = nil, startsAt: Date? = nil, target: Target? = nil, title: String? = nil, type: Type? = nil, updatedAtForeign: Date? = nil) {
           self.amount = amount
-          self.createdAtForeign = createdAtForeign
+          self.createdAtForeign = .init(date: createdAtForeign)
           self.description = description
           self.enabled = enabled
           self.endsAt = endsAt
-          self.startsAt = startsAt
+          self.startsAt = .init(date: startsAt)
           self.target = target
           self.title = title
           self.type = type
-          self.updatedAtForeign = updatedAtForeign
+          self.updatedAtForeign = .init(date: updatedAtForeign)
         }
 
         public init(from decoder: Decoder) throws {
@@ -257,19 +257,19 @@ public extension Ecommerce {
           }
         }
 
-        public init(links: [Links]? = nil, amount: Float? = nil, createdAtForeign: DateTime? = nil, description: String? = nil, enabled: Bool? = nil, endsAt: String? = nil, id: String? = nil, startsAt: DateTime? = nil, target: Target? = nil, title: String? = nil, type: Type? = nil, updatedAtForeign: DateTime? = nil) {
+        public init(links: [Links]? = nil, amount: Float? = nil, createdAtForeign: Date? = nil, description: String? = nil, enabled: Bool? = nil, endsAt: String? = nil, id: String? = nil, startsAt: Date? = nil, target: Target? = nil, title: String? = nil, type: Type? = nil, updatedAtForeign: Date? = nil) {
           self.links = links
           self.amount = amount
-          self.createdAtForeign = createdAtForeign
+          self.createdAtForeign = .init(date: createdAtForeign)
           self.description = description
           self.enabled = enabled
           self.endsAt = endsAt
           self.id = id
-          self.startsAt = startsAt
+          self.startsAt = .init(date: startsAt)
           self.target = target
           self.title = title
           self.type = type
-          self.updatedAtForeign = updatedAtForeign
+          self.updatedAtForeign = .init(date: updatedAtForeign)
         }
 
         public init(from decoder: Decoder) throws {

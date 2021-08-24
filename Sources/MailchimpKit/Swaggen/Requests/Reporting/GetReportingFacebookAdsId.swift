@@ -108,16 +108,16 @@ public extension Reporting {
 
         public var budget: Budget?
 
-        public var canceledAt: DateTime?
+        public var canceledAt: DateTime
 
         /** Channel settings */
         public var channel: Channel?
 
-        public var createTime: DateTime?
+        public var createTime: DateTime
 
         public var emailSourceName: String?
 
-        public var endTime: DateTime?
+        public var endTime: DateTime
 
         public var hasSegment: Bool?
 
@@ -129,9 +129,9 @@ public extension Reporting {
 
         public var needsAttention: Bool?
 
-        public var pausedAt: DateTime?
+        public var pausedAt: DateTime
 
-        public var publishedTime: DateTime?
+        public var publishedTime: DateTime
 
         /** List settings for the outreach */
         public var recipients: Recipients?
@@ -142,7 +142,7 @@ public extension Reporting {
         /** Outreach report availability */
         public var showReport: Bool?
 
-        public var startTime: DateTime?
+        public var startTime: DateTime
 
         /** Campaign, Ad, or Page status */
         public var status: Status?
@@ -153,7 +153,7 @@ public extension Reporting {
         /** Supported Campaign, Ad, Page type */
         public var type: `Type`?
 
-        public var updatedAt: DateTime?
+        public var updatedAt: DateTime
 
         public var wasCanceledByFacebook: Bool?
 
@@ -935,30 +935,30 @@ public extension Reporting {
           }
         }
 
-        public init(links: [Links]? = nil, audience: Audience? = nil, audienceActivity: AudienceActivity? = nil, budget: Budget? = nil, canceledAt: DateTime? = nil, channel: Channel? = nil, createTime: DateTime? = nil, emailSourceName: String? = nil, endTime: DateTime? = nil, hasSegment: Bool? = nil, id: String? = nil, name: String? = nil, needsAttention: Bool? = nil, pausedAt: DateTime? = nil, publishedTime: DateTime? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, showReport: Bool? = nil, startTime: DateTime? = nil, status: Status? = nil, thumbnail: String? = nil, type: Type? = nil, updatedAt: DateTime? = nil, wasCanceledByFacebook: Bool? = nil, webId: Int? = nil) {
+        public init(links: [Links]? = nil, audience: Audience? = nil, audienceActivity: AudienceActivity? = nil, budget: Budget? = nil, canceledAt: Date? = nil, channel: Channel? = nil, createTime: Date? = nil, emailSourceName: String? = nil, endTime: Date? = nil, hasSegment: Bool? = nil, id: String? = nil, name: String? = nil, needsAttention: Bool? = nil, pausedAt: Date? = nil, publishedTime: Date? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, showReport: Bool? = nil, startTime: Date? = nil, status: Status? = nil, thumbnail: String? = nil, type: Type? = nil, updatedAt: Date? = nil, wasCanceledByFacebook: Bool? = nil, webId: Int? = nil) {
           self.links = links
           self.audience = audience
           self.audienceActivity = audienceActivity
           self.budget = budget
-          self.canceledAt = canceledAt
+          self.canceledAt = .init(date: canceledAt)
           self.channel = channel
-          self.createTime = createTime
+          self.createTime = .init(date: createTime)
           self.emailSourceName = emailSourceName
-          self.endTime = endTime
+          self.endTime = .init(date: endTime)
           self.hasSegment = hasSegment
           self.id = id
           self.name = name
           self.needsAttention = needsAttention
-          self.pausedAt = pausedAt
-          self.publishedTime = publishedTime
+          self.pausedAt = .init(date: pausedAt)
+          self.publishedTime = .init(date: publishedTime)
           self.recipients = recipients
           self.reportSummary = reportSummary
           self.showReport = showReport
-          self.startTime = startTime
+          self.startTime = .init(date: startTime)
           self.status = status
           self.thumbnail = thumbnail
           self.type = type
-          self.updatedAt = updatedAt
+          self.updatedAt = .init(date: updatedAt)
           self.wasCanceledByFacebook = wasCanceledByFacebook
           self.webId = webId
         }

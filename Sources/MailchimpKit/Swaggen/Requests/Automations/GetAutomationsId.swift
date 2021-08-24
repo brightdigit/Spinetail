@@ -70,7 +70,7 @@ public extension Automations {
         public var links: [Links]?
 
         /** The date and time the Automation was created in ISO 8601 format. */
-        public var createTime: DateTime?
+        public var createTime: DateTime
 
         /** The total number of emails sent for the Automation. */
         public var emailsSent: Int?
@@ -88,7 +88,7 @@ public extension Automations {
         public var settings: Settings?
 
         /** The date and time the Automation was started in ISO 8601 format. */
-        public var startTime: DateTime?
+        public var startTime: DateTime
 
         /** The current status of the Automation. */
         public var status: Status?
@@ -607,15 +607,15 @@ public extension Automations {
           }
         }
 
-        public init(links: [Links]? = nil, createTime: DateTime? = nil, emailsSent: Int? = nil, id: String? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, settings: Settings? = nil, startTime: DateTime? = nil, status: Status? = nil, tracking: Tracking? = nil, triggerSettings: TriggerSettings? = nil) {
+        public init(links: [Links]? = nil, createTime: Date? = nil, emailsSent: Int? = nil, id: String? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, settings: Settings? = nil, startTime: Date? = nil, status: Status? = nil, tracking: Tracking? = nil, triggerSettings: TriggerSettings? = nil) {
           self.links = links
-          self.createTime = createTime
+          self.createTime = .init(date: createTime)
           self.emailsSent = emailsSent
           self.id = id
           self.recipients = recipients
           self.reportSummary = reportSummary
           self.settings = settings
-          self.startTime = startTime
+          self.startTime = .init(date: startTime)
           self.status = status
           self.tracking = tracking
           self.triggerSettings = triggerSettings

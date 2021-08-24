@@ -259,15 +259,15 @@ public extension Lists {
             }
           }
 
-          public init(links: [Links]? = nil, createdAt: DateTime? = nil, createdBy: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, note: String? = nil, updatedAt: DateTime? = nil) {
+          public init(links: [Links]? = nil, createdAt: Date? = nil, createdBy: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, note: String? = nil, updatedAt: Date? = nil) {
             self.links = links
-            self.createdAt = createdAt
+            self.createdAt = .init(date: createdAt)
             self.createdBy = createdBy
             self.emailId = emailId
             self.id = id
             self.listId = listId
             self.note = note
-            self.updatedAt = updatedAt
+            self.updatedAt = .init(date: updatedAt)
           }
 
           public init(from decoder: Decoder) throws {

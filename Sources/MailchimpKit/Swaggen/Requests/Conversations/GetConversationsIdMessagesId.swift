@@ -91,7 +91,7 @@ public extension Conversations {
         public var subject: String?
 
         /** The date and time the message was either sent or received in ISO 8601 format. */
-        public var timestamp: DateTime?
+        public var timestamp: DateTime
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
         public struct Links: MailchimpModel {
@@ -150,7 +150,7 @@ public extension Conversations {
           }
         }
 
-        public init(links: [Links]? = nil, conversationId: String? = nil, fromEmail: String? = nil, fromLabel: String? = nil, id: String? = nil, listId: Int? = nil, message: String? = nil, read: Bool? = nil, subject: String? = nil, timestamp: DateTime? = nil) {
+        public init(links: [Links]? = nil, conversationId: String? = nil, fromEmail: String? = nil, fromLabel: String? = nil, id: String? = nil, listId: Int? = nil, message: String? = nil, read: Bool? = nil, subject: String? = nil, timestamp: Date? = nil) {
           self.links = links
           self.conversationId = conversationId
           self.fromEmail = fromEmail
@@ -160,7 +160,7 @@ public extension Conversations {
           self.message = message
           self.read = read
           self.subject = subject
-          self.timestamp = timestamp
+          self.timestamp = .init(date: timestamp)
         }
 
         public init(from decoder: Decoder) throws {

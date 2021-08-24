@@ -86,13 +86,13 @@ public extension Root {
         public var firstName: String?
 
         /** Date of first payment for monthly plans. */
-        public var firstPayment: DateTime?
+        public var firstPayment: DateTime
 
         /** The [average campaign statistics](https://mailchimp.com/resources/research/email-marketing-benchmarks/?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs) for all campaigns in the account's specified industry. */
         public var industryStats: IndustryStats?
 
         /** The date and time of the last login for this account in ISO 8601 format. */
-        public var lastLogin: DateTime?
+        public var lastLogin: DateTime
 
         /** The last name tied to the account. */
         public var lastName: String?
@@ -101,7 +101,7 @@ public extension Root {
         public var loginId: String?
 
         /** The date and time that the account was created in ISO 8601 format. */
-        public var memberSince: DateTime?
+        public var memberSince: DateTime
 
         /** The type of pricing plan the account is on. */
         public var pricingPlanType: PricingPlanType?
@@ -267,7 +267,7 @@ public extension Root {
           }
         }
 
-        public init(links: [Links]? = nil, accountId: String? = nil, accountIndustry: String? = nil, accountName: String? = nil, accountTimezone: String? = nil, avatarURL: String? = nil, contact: Contact? = nil, email: String? = nil, firstName: String? = nil, firstPayment: DateTime? = nil, industryStats: IndustryStats? = nil, lastLogin: DateTime? = nil, lastName: String? = nil, loginId: String? = nil, memberSince: DateTime? = nil, pricingPlanType: PricingPlanType? = nil, proEnabled: Bool? = nil, role: String? = nil, totalSubscribers: Int? = nil, username: String? = nil) {
+        public init(links: [Links]? = nil, accountId: String? = nil, accountIndustry: String? = nil, accountName: String? = nil, accountTimezone: String? = nil, avatarURL: String? = nil, contact: Contact? = nil, email: String? = nil, firstName: String? = nil, firstPayment: Date? = nil, industryStats: IndustryStats? = nil, lastLogin: Date? = nil, lastName: String? = nil, loginId: String? = nil, memberSince: Date? = nil, pricingPlanType: PricingPlanType? = nil, proEnabled: Bool? = nil, role: String? = nil, totalSubscribers: Int? = nil, username: String? = nil) {
           self.links = links
           self.accountId = accountId
           self.accountIndustry = accountIndustry
@@ -277,12 +277,12 @@ public extension Root {
           self.contact = contact
           self.email = email
           self.firstName = firstName
-          self.firstPayment = firstPayment
+          self.firstPayment = .init(date: firstPayment)
           self.industryStats = industryStats
-          self.lastLogin = lastLogin
+          self.lastLogin = .init(date: lastLogin)
           self.lastName = lastName
           self.loginId = loginId
-          self.memberSince = memberSince
+          self.memberSince = .init(date: memberSince)
           self.pricingPlanType = pricingPlanType
           self.proEnabled = proEnabled
           self.role = role

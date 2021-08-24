@@ -64,10 +64,10 @@ public extension Lists {
         public var tags: [String]?
 
         /** The date and time the subscribe confirmed their opt-in status in ISO 8601 format. */
-        public var timestampOpt: DateTime?
+        public var timestampOpt: DateTime
 
         /** The date and time the subscriber signed up for the list in ISO 8601 format. */
-        public var timestampSignup: DateTime?
+        public var timestampSignup: DateTime
 
         /** [VIP status](https://mailchimp.com/help/view-and-edit-contact-languages/) for subscriber. */
         public var vip: Bool?
@@ -128,7 +128,7 @@ public extension Lists {
           }
         }
 
-        public init(emailAddress: String, status: Status, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, mergeFields: [String: [String: CodableAny]]? = nil, tags: [String]? = nil, timestampOpt: DateTime? = nil, timestampSignup: DateTime? = nil, vip: Bool? = nil) {
+        public init(emailAddress: String, status: Status, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, mergeFields: [String: [String: CodableAny]]? = nil, tags: [String]? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, vip: Bool? = nil) {
           self.emailAddress = emailAddress
           self.status = status
           self.emailType = emailType
@@ -140,8 +140,8 @@ public extension Lists {
           self.marketingPermissions = marketingPermissions
           self.mergeFields = mergeFields
           self.tags = tags
-          self.timestampOpt = timestampOpt
-          self.timestampSignup = timestampSignup
+          self.timestampOpt = .init(date: timestampOpt)
+          self.timestampSignup = .init(date: timestampSignup)
           self.vip = vip
         }
 
@@ -272,7 +272,7 @@ public extension Lists {
         public var language: String?
 
         /** The date and time the member's info was last changed in ISO 8601 format. */
-        public var lastChanged: DateTime?
+        public var lastChanged: DateTime
 
         /** The most recent Note added about this member. */
         public var lastNote: LastNote?
@@ -308,10 +308,10 @@ public extension Lists {
         public var tagsCount: Int?
 
         /** The date and time the subscribe confirmed their opt-in status in ISO 8601 format. */
-        public var timestampOpt: DateTime?
+        public var timestampOpt: DateTime
 
         /** The date and time the subscriber signed up for the list in ISO 8601 format. */
-        public var timestampSignup: DateTime?
+        public var timestampSignup: DateTime
 
         /** An identifier for the address across all of Mailchimp. */
         public var uniqueEmailId: String?
@@ -385,7 +385,7 @@ public extension Lists {
         /** The most recent Note added about this member. */
         public struct LastNote: MailchimpModel {
           /** The date and time the note was created in ISO 8601 format. */
-          public var createdAt: DateTime?
+          public var createdAt: DateTime
 
           /** The author of the note. */
           public var createdBy: String?
@@ -396,8 +396,8 @@ public extension Lists {
           /** The note id. */
           public var noteId: Int?
 
-          public init(createdAt: DateTime? = nil, createdBy: String? = nil, note: String? = nil, noteId: Int? = nil) {
-            self.createdAt = createdAt
+          public init(createdAt: Date? = nil, createdBy: String? = nil, note: String? = nil, noteId: Int? = nil) {
+            self.createdAt = .init(date: createdAt)
             self.createdBy = createdBy
             self.note = note
             self.noteId = noteId
@@ -604,7 +604,7 @@ public extension Lists {
           }
         }
 
-        public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, fullName: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: DateTime? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, memberRating: Int? = nil, mergeFields: [String: [String: CodableAny]]? = nil, source: String? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: DateTime? = nil, timestampSignup: DateTime? = nil, uniqueEmailId: String? = nil, unsubscribeReason: String? = nil, vip: Bool? = nil, webId: Int? = nil) {
+        public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, fullName: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: Date? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, memberRating: Int? = nil, mergeFields: [String: [String: CodableAny]]? = nil, source: String? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, uniqueEmailId: String? = nil, unsubscribeReason: String? = nil, vip: Bool? = nil, webId: Int? = nil) {
           self.links = links
           self.emailAddress = emailAddress
           self.emailClient = emailClient
@@ -615,7 +615,7 @@ public extension Lists {
           self.ipOpt = ipOpt
           self.ipSignup = ipSignup
           self.language = language
-          self.lastChanged = lastChanged
+          self.lastChanged = .init(date: lastChanged)
           self.lastNote = lastNote
           self.listId = listId
           self.location = location
@@ -627,8 +627,8 @@ public extension Lists {
           self.status = status
           self.tags = tags
           self.tagsCount = tagsCount
-          self.timestampOpt = timestampOpt
-          self.timestampSignup = timestampSignup
+          self.timestampOpt = .init(date: timestampOpt)
+          self.timestampSignup = .init(date: timestampSignup)
           self.uniqueEmailId = uniqueEmailId
           self.unsubscribeReason = unsubscribeReason
           self.vip = vip

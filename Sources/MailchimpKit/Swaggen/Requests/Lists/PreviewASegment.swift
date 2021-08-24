@@ -211,7 +211,7 @@ public extension Lists {
           public var links: [Links]?
 
           /** The date and time the segment was created in ISO 8601 format. */
-          public var createdAt: DateTime?
+          public var createdAt: DateTime
 
           /** The unique id for the segment. */
           public var id: Int?
@@ -232,7 +232,7 @@ public extension Lists {
           public var type: `Type`?
 
           /** The date and time the segment was last updated in ISO 8601 format. */
-          public var updatedAt: DateTime?
+          public var updatedAt: DateTime
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
           public struct Links: MailchimpModel {
@@ -325,16 +325,16 @@ public extension Lists {
             }
           }
 
-          public init(links: [Links]? = nil, createdAt: DateTime? = nil, id: Int? = nil, listId: String? = nil, memberCount: Int? = nil, name: String? = nil, options: Options? = nil, type: Type? = nil, updatedAt: DateTime? = nil) {
+          public init(links: [Links]? = nil, createdAt: Date? = nil, id: Int? = nil, listId: String? = nil, memberCount: Int? = nil, name: String? = nil, options: Options? = nil, type: Type? = nil, updatedAt: Date? = nil) {
             self.links = links
-            self.createdAt = createdAt
+            self.createdAt = .init(date: createdAt)
             self.id = id
             self.listId = listId
             self.memberCount = memberCount
             self.name = name
             self.options = options
             self.type = type
-            self.updatedAt = updatedAt
+            self.updatedAt = .init(date: updatedAt)
           }
 
           public init(from decoder: Decoder) throws {

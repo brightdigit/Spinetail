@@ -163,7 +163,7 @@ public extension LandingPages {
           public var links: [Links]?
 
           /** The time this landing page was created. */
-          public var createdAt: DateTime?
+          public var createdAt: DateTime
 
           /** Created by mobile or web */
           public var createdBySource: String?
@@ -181,7 +181,7 @@ public extension LandingPages {
           public var name: String?
 
           /** The time this landing page was published. */
-          public var publishedAt: DateTime?
+          public var publishedAt: DateTime
 
           /** The status of this landing page. */
           public var status: Status?
@@ -199,10 +199,10 @@ public extension LandingPages {
           public var tracking: Tracking?
 
           /** The time this landing page was unpublished. */
-          public var unpublishedAt: DateTime?
+          public var unpublishedAt: DateTime
 
           /** The time this landing page was updated at. */
-          public var updatedAt: DateTime?
+          public var updatedAt: DateTime
 
           /** The url of the published landing page. */
           public var url: String?
@@ -295,22 +295,22 @@ public extension LandingPages {
             }
           }
 
-          public init(links: [Links]? = nil, createdAt: DateTime? = nil, createdBySource: String? = nil, description: String? = nil, id: String? = nil, listId: String? = nil, name: String? = nil, publishedAt: DateTime? = nil, status: Status? = nil, storeId: String? = nil, templateId: Int? = nil, title: String? = nil, tracking: Tracking? = nil, unpublishedAt: DateTime? = nil, updatedAt: DateTime? = nil, url: String? = nil, webId: Int? = nil) {
+          public init(links: [Links]? = nil, createdAt: Date? = nil, createdBySource: String? = nil, description: String? = nil, id: String? = nil, listId: String? = nil, name: String? = nil, publishedAt: Date? = nil, status: Status? = nil, storeId: String? = nil, templateId: Int? = nil, title: String? = nil, tracking: Tracking? = nil, unpublishedAt: Date? = nil, updatedAt: Date? = nil, url: String? = nil, webId: Int? = nil) {
             self.links = links
-            self.createdAt = createdAt
+            self.createdAt = .init(date: createdAt)
             self.createdBySource = createdBySource
             self.description = description
             self.id = id
             self.listId = listId
             self.name = name
-            self.publishedAt = publishedAt
+            self.publishedAt = .init(date: publishedAt)
             self.status = status
             self.storeId = storeId
             self.templateId = templateId
             self.title = title
             self.tracking = tracking
-            self.unpublishedAt = unpublishedAt
-            self.updatedAt = updatedAt
+            self.unpublishedAt = .init(date: unpublishedAt)
+            self.updatedAt = .init(date: updatedAt)
             self.url = url
             self.webId = webId
           }

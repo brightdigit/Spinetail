@@ -154,7 +154,7 @@ public extension Lists {
           public var parentCampaign: String?
 
           /** The date and time recorded for the action. */
-          public var timestamp: DateTime?
+          public var timestamp: DateTime
 
           /** If set, the campaign's title. */
           public var title: String?
@@ -165,11 +165,11 @@ public extension Lists {
           /** For clicks, the URL the subscriber clicked on. */
           public var url: String?
 
-          public init(action: String? = nil, campaignId: String? = nil, parentCampaign: String? = nil, timestamp: DateTime? = nil, title: String? = nil, type: String? = nil, url: String? = nil) {
+          public init(action: String? = nil, campaignId: String? = nil, parentCampaign: String? = nil, timestamp: Date? = nil, title: String? = nil, type: String? = nil, url: String? = nil) {
             self.action = action
             self.campaignId = campaignId
             self.parentCampaign = parentCampaign
-            self.timestamp = timestamp
+            self.timestamp = .init(date: timestamp)
             self.title = title
             self.type = type
             self.url = url

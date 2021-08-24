@@ -146,7 +146,7 @@ public extension Lists {
         /** A list of tags assigned to a list member. */
         public struct Tags: MailchimpModel {
           /** The date and time the tag was added to the list member in ISO 8601 format. */
-          public var dateAdded: DateTime?
+          public var dateAdded: DateTime
 
           /** The unique id for the tag. */
           public var id: Int?
@@ -154,8 +154,8 @@ public extension Lists {
           /** The name of the tag. */
           public var name: String?
 
-          public init(dateAdded: DateTime? = nil, id: Int? = nil, name: String? = nil) {
-            self.dateAdded = dateAdded
+          public init(dateAdded: Date? = nil, id: Int? = nil, name: String? = nil) {
+            self.dateAdded = .init(date: dateAdded)
             self.id = id
             self.name = name
           }

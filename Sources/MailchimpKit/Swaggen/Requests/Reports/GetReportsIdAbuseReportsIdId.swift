@@ -70,7 +70,7 @@ public extension Reports {
         public var campaignId: String?
 
         /** Date for the abuse report */
-        public var date: DateTime?
+        public var date: DateTime
 
         /** Email address for a subscriber. */
         public var emailAddress: String?
@@ -150,10 +150,10 @@ public extension Reports {
           }
         }
 
-        public init(links: [Links]? = nil, campaignId: String? = nil, date: DateTime? = nil, emailAddress: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: [String: CodableAny]]? = nil, vip: Bool? = nil) {
+        public init(links: [Links]? = nil, campaignId: String? = nil, date: Date? = nil, emailAddress: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: [String: CodableAny]]? = nil, vip: Bool? = nil) {
           self.links = links
           self.campaignId = campaignId
-          self.date = date
+          self.date = .init(date: date)
           self.emailAddress = emailAddress
           self.emailId = emailId
           self.id = id

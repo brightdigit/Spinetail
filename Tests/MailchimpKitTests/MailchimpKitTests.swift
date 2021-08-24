@@ -2,6 +2,50 @@
 import XCTest
 
 final class MailchimpKitTests: XCTestCase {
+  func testCampaign() throws {
+    let exp = expectation(description: "post campaign")
+    let request = Campaigns.PostCampaigns.Request(body: .init(type: .plaintext, contentType: .template, recipients: .init(listId: "6f357ca335")))
+    
+    guard let apiKey = ProcessInfo.processInfo.environment["API_KEY"] else {
+      
+      return
+    }
+        guard let api = MailchimpAPI(apiKey: apiKey) else {
+          return
+        }
+    let client = APIClient(api: api, session: URLSession.shared)
+    
+    client.request(request) { result in
+      switch result {
+      case .success(.status200(let response)):
+        guard let campaignId = response.id else {
+          debugPrint("response: \(response)")
+          break
+        }
+        client.request( Campaigns.PostCampaignsIdActionsSend.Request(campaignId: campaignId)) { result in
+          switch result {
+          case .success(.status204):
+            debugPrint("campaign sent")
+          case .success(.defaultResponse(statusCode: let code, let response)):
+            debugPrint("status: \(response)")
+          case .failure(let error):
+            debugPrint("error: \(error)")
+          }
+          exp.fulfill()
+        }
+        return
+      case .success(.defaultResponse(statusCode: let code, let response)):
+        debugPrint("status: \(response)")
+      case .failure(let error):
+        debugPrint("error: \(error)")
+      }
+      exp.fulfill()
+    }
+    
+    waitForExpectations(timeout: 20.0) { error in
+      XCTAssertNil(error)
+    }
+  }
   func testExample() throws {
     let exp = expectation(description: "get members")
     var members : [Lists.GetListsIdMembers.Response.Status200.Members]?

@@ -183,22 +183,22 @@ public extension LandingPages {
           }
         }
 
-        public init(links: [Links]? = nil, createdAt: DateTime? = nil, createdBySource: String? = nil, description: String? = nil, id: String? = nil, listId: String? = nil, name: String? = nil, publishedAt: DateTime? = nil, status: Status? = nil, storeId: String? = nil, templateId: Int? = nil, title: String? = nil, tracking: Tracking? = nil, unpublishedAt: DateTime? = nil, updatedAt: DateTime? = nil, url: String? = nil, webId: Int? = nil) {
+        public init(links: [Links]? = nil, createdAt: Date? = nil, createdBySource: String? = nil, description: String? = nil, id: String? = nil, listId: String? = nil, name: String? = nil, publishedAt: Date? = nil, status: Status? = nil, storeId: String? = nil, templateId: Int? = nil, title: String? = nil, tracking: Tracking? = nil, unpublishedAt: Date? = nil, updatedAt: Date? = nil, url: String? = nil, webId: Int? = nil) {
           self.links = links
-          self.createdAt = createdAt
+          self.createdAt = .init(date: createdAt)
           self.createdBySource = createdBySource
           self.description = description
           self.id = id
           self.listId = listId
           self.name = name
-          self.publishedAt = publishedAt
+          self.publishedAt = .init(date: publishedAt)
           self.status = status
           self.storeId = storeId
           self.templateId = templateId
           self.title = title
           self.tracking = tracking
-          self.unpublishedAt = unpublishedAt
-          self.updatedAt = updatedAt
+          self.unpublishedAt = .init(date: unpublishedAt)
+          self.updatedAt = .init(date: updatedAt)
           self.url = url
           self.webId = webId
         }

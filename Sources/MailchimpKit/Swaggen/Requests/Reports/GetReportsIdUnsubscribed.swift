@@ -169,7 +169,7 @@ public extension Reports {
           public var reason: String?
 
           /** The date and time the member opted-out in ISO 8601 format. */
-          public var timestamp: DateTime?
+          public var timestamp: DateTime
 
           /** [VIP status](https://mailchimp.com/help/designate-and-send-to-vip-contacts/) for subscriber. */
           public var vip: Bool?
@@ -231,7 +231,7 @@ public extension Reports {
             }
           }
 
-          public init(links: [Links]? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: [String: CodableAny]]? = nil, reason: String? = nil, timestamp: DateTime? = nil, vip: Bool? = nil) {
+          public init(links: [Links]? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: [String: CodableAny]]? = nil, reason: String? = nil, timestamp: Date? = nil, vip: Bool? = nil) {
             self.links = links
             self.campaignId = campaignId
             self.emailAddress = emailAddress
@@ -240,7 +240,7 @@ public extension Reports {
             self.listIsActive = listIsActive
             self.mergeFields = mergeFields
             self.reason = reason
-            self.timestamp = timestamp
+            self.timestamp = .init(date: timestamp)
             self.vip = vip
           }
 

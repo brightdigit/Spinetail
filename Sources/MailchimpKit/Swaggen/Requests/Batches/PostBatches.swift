@@ -112,7 +112,7 @@ public extension Batches {
         public var links: [Links]?
 
         /** The date and time when all operations in the batch request completed in ISO 8601 format. */
-        public var completedAt: DateTime?
+        public var completedAt: DateTime
 
         /** The number of completed operations that returned an error. */
         public var erroredOperations: Int?
@@ -130,7 +130,7 @@ public extension Batches {
         public var status: Status?
 
         /** The date and time when the server received the batch request in ISO 8601 format. */
-        public var submittedAt: DateTime?
+        public var submittedAt: DateTime
 
         /** The total number of operations to complete as part of this batch request. For GET requests requiring pagination, each page counts as a separate operation. */
         public var totalOperations: Int?
@@ -192,15 +192,15 @@ public extension Batches {
           }
         }
 
-        public init(links: [Links]? = nil, completedAt: DateTime? = nil, erroredOperations: Int? = nil, finishedOperations: Int? = nil, id: String? = nil, responseBodyURL: String? = nil, status: Status? = nil, submittedAt: DateTime? = nil, totalOperations: Int? = nil) {
+        public init(links: [Links]? = nil, completedAt: Date? = nil, erroredOperations: Int? = nil, finishedOperations: Int? = nil, id: String? = nil, responseBodyURL: String? = nil, status: Status? = nil, submittedAt: Date? = nil, totalOperations: Int? = nil) {
           self.links = links
-          self.completedAt = completedAt
+          self.completedAt = .init(date: completedAt)
           self.erroredOperations = erroredOperations
           self.finishedOperations = finishedOperations
           self.id = id
           self.responseBodyURL = responseBodyURL
           self.status = status
-          self.submittedAt = submittedAt
+          self.submittedAt = .init(date: submittedAt)
           self.totalOperations = totalOperations
         }
 
