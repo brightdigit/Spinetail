@@ -9,9 +9,20 @@ public struct MailchimpAPI: API {
   public let dc: String
   public let baseURL: URL
   public let headers: [String: String]
+  
+  /// Whether to discard any errors when decoding optional properties
+  public static let safeOptionalDecoding = false
+
+  /// Whether to remove invalid elements instead of throwing when decoding arrays
+  public static let safeArrayDecoding = false
+
+  /// Used to encode Dates when uses as string params
+  public static let dateEncodingFormatter = DateFormatter(formatString: "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
+                                                          locale: Locale(identifier: "en_US_POSIX"),
+                                                          calendar: Calendar(identifier: .gregorian))
   public let decoder: ResponseDecoder = {
     let decoder = JSONDecoder()
-    decoder.dateDecodingStrategy = .formatted(Mailchimp.dateEncodingFormatter)
+    decoder.dateDecodingStrategy = .formatted(Self.dateEncodingFormatter)
     return decoder
   }()
 

@@ -17,9 +17,9 @@ struct URLSessionResponse: Response {
     (response as? HTTPURLResponse)?.statusCode
   }
 
-  static func resultBasedOnResponse(_ response: URLResponse?, data: Data?, error: Error?) -> Result<Response, Error> {
+  static func resultBasedOnResponse(_ response: URLResponse?, data: Data?, error: Error?) -> APIResult<Response> {
     if let error = error {
-      return .failure(error)
+      return .failure(.networkError(error))
     } else {
       return .success(URLSessionResponse(response: response, data: data))
     }

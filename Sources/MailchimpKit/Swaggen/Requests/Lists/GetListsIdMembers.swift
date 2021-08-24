@@ -34,33 +34,14 @@ public enum JSONOptionalDate : Codable, Equatable {
       self = .none
     }
   }
-}
-
-public enum MergeFieldValue : Codable, Equatable {
-  case value(String)
-  case dictionary([String : MergeFieldValue])
   
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.singleValueContainer()
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.singleValueContainer()
     
-    if let dictionary = try? container.decode([String : MergeFieldValue].self) {
-      self = .dictionary(dictionary)
+    if let date = self.date {
+      try container.encode(date)
     } else {
-      self = try .value(container.decode(String.self))
-    }
-  }
-}
-
-public enum MergeFieldDictionary : Codable, Equatable {
-case value(String)
-case dictionary([String : MergeFieldDictionary])
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.singleValueContainer()
-    
-    if let dictionary = try? container.decode([String : MergeFieldDictionary].self) {
-      self = .dictionary(dictionary)
-    } else {
-      self = try .value(container.decode(String.self))
+      try container.encodeNil()
     }
   }
 }
@@ -403,7 +384,7 @@ public extension Lists {
           public var memberRating: Int?
 
           /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-          public var mergeFields: MergeFieldDictionary?
+          public var mergeFields: CodableAny?
 
           /** The source from which the subscriber was added to this list. */
           public var source: String?
@@ -717,7 +698,8 @@ public extension Lists {
             }
           }
 
-          public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, fullName: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: Date? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, memberRating: Int? = nil, mergeFields: MergeFieldDictionary? = nil, source: String? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, uniqueEmailId: String? = nil, unsubscribeReason: String? = nil, vip: Bool? = nil, webId: Int? = nil) {
+
+          public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, fullName: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: Date? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, memberRating: Int? = nil, mergeFields: CodableAny? = nil, source: String? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, uniqueEmailId: String? = nil, unsubscribeReason: String? = nil, vip: Bool? = nil, webId: Int? = nil) {
             self.links = links
             self.emailAddress = emailAddress
             self.emailClient = emailClient
@@ -740,8 +722,8 @@ public extension Lists {
             self.status = status
             self.tags = tags
             self.tagsCount = tagsCount
-            self.timestampOpt = JSONOptionalDate(date: timestampOpt) ?? .none
-            self.timestampSignup = JSONOptionalDate(date: timestampSignup) ?? .none
+            self.timestampOpt = JSONOptionalDate(date: timestampOpt) 
+            self.timestampSignup = JSONOptionalDate(date: timestampSignup) 
             self.uniqueEmailId = uniqueEmailId
             self.unsubscribeReason = unsubscribeReason
             self.vip = vip
