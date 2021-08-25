@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "MailchimpKit",
+  name: "Spinetail",
   platforms: [
     .macOS(.v10_12),
     .iOS(.v10),
@@ -11,7 +11,7 @@ let package = Package(
     .watchOS(.v3)
   ],
   products: [
-    .library(name: "MailchimpKit", targets: ["MailchimpKit"])
+    .library(name: "Spinetail", targets: ["Spinetail"])
   ],
   dependencies: [
     .package(url: "https://github.com/shibapm/Komondor", from: "1.1.0"), // dev
@@ -28,9 +28,9 @@ let package = Package(
     ) // dev
   ],
   targets: [
-    .target(name: "MailchimpKit", dependencies: [
+    .target(name: "Spinetail", dependencies: [
     ]),
-    .testTarget(name: "MailchimpKitTests", dependencies: ["MailchimpKit"])
+    .testTarget(name: "SpinetailTests", dependencies: ["Spinetail"])
   ]
 )
 

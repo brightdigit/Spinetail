@@ -25,8 +25,8 @@ public class APIClient<SessionType: Session> {
   }
 }
 
-extension Result {
-  init(_: Success.Type, result: Result<Response, APIClientError>, decoder: ResponseDecoder) where Success: APIResponseValue, Failure == APIClientError {
+extension Result where Success: APIResponseValue, Failure == APIClientError {
+  init(_: Success.Type, result: Result<Response, APIClientError>, decoder: ResponseDecoder) {
     self = result.flatMap { response -> APIResult<Success> in
       guard let httpStatus = response.statusCode, let data = response.data else {
         return .failure(APIClientError.invalidResponse)

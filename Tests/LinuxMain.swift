@@ -1,8 +1,8 @@
 import XCTest
 
-import MailchimpKitTests
+import SpinetailTests
 
 var tests = [XCTestCaseEntry]()
-tests += MailchimpKitTests.__allTests()
+tests += SpinetailTests.__allTests()
 
 XCTMain(tests)

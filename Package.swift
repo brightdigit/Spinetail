@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "MailchimpKit",
+  name: "Spinetail",
   platforms: [
     .macOS(.v10_12),
     .iOS(.v10),
@@ -11,7 +11,7 @@ let package = Package(
     .watchOS(.v3)
   ],
   products: [
-    .library(name: "MailchimpKit", targets: ["MailchimpKit"])
+    .library(name: "Spinetail", targets: ["Spinetail"])
   ],
   dependencies: [
     .package(url: "https://github.com/shibapm/Komondor", from: "1.1.0"), // dev
@@ -28,8 +28,8 @@ let package = Package(
     ) // dev
   ],
   targets: [
-    .target(name: "MailchimpKit", dependencies: []),
-    .testTarget(name: "MailchimpKitTests", dependencies: ["MailchimpKit"])
+    .target(name: "Spinetail", dependencies: []),
+    .testTarget(name: "SpinetailTests", dependencies: ["Spinetail"])
   ]
 )
 
@@ -43,13 +43,13 @@ let package = Package(
       "pre-push": [
         "swift test --enable-code-coverage"
         // swiftlint:disable:next line_length
-        // "swift run swift-test-codecov .build/debug/codecov/MailchimpKit.json --minimum \(requiredCoverage)"
+        // "swift run swift-test-codecov .build/debug/codecov/Spinetail.json --minimum \(requiredCoverage)"
       ],
       "pre-commit": [
         "swift test --enable-code-coverage --generate-linuxmain",
         "swift run swiftformat .",
         "swift run swiftlint autocorrect",
-        "swift run sourcedocs generate build --clean --reproducible-docs --spm-module MailchimpKit",
+        "swift run sourcedocs generate build --clean --reproducible-docs --spm-module Spinetail",
         "git add ." // ,
         // "swift run swiftformat --lint .",
         // "swift run swiftlint"
