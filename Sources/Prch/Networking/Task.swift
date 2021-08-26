@@ -1,9 +1,8 @@
 import Foundation
-import Prch
+
 
 #if canImport(FoundationNetworking)
-  import Foundation
-import PrchNetworking
+  import FoundationNetworking
 #endif
 
 public protocol Task {}

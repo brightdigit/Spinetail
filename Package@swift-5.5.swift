@@ -5,14 +5,16 @@ import PackageDescription
 let package = Package(
   name: "Spinetail",
   platforms: [
-    .macOS(.v10_12),
+    .macOS(.v10_15),
     .iOS(.v10),
     .tvOS(.v10),
     .watchOS(.v3)
   ],
   products: [
     .library(name: "Prch", targets: ["Prch"]),
-    .library(name: "Spinetail", targets: ["Spinetail"])
+    .library(name: "Spinetail", targets: ["Spinetail"]),
+    .library(name: "SpinetailNIO", targets: ["SpinetailNIO"]),
+    .library(name: "SpinetailVapor", targets: ["SpinetailVapor"])
   ],
   dependencies: [
     .package(url: "https://github.com/shibapm/Komondor", from: "1.1.0"), // dev
@@ -26,11 +28,15 @@ let package = Package(
     .package(
       url: "https://github.com/mattpolzin/swift-test-codecov",
       .branch("master")
-    ) // dev
+    ), // dev
+    .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.0.0"),
+  .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0")
   ],
   targets: [
     .target(name: "Prch"),
     .target(name: "Spinetail", dependencies: ["Prch"]),
+    .target(name: "SpinetailNIO", dependencies: ["Spinetail", .product(name: "AsyncHTTPClient", package: "async-http-client")]),
+    .target(name: "SpinetailVapor", dependencies: ["Spinetail", .product(name: "Vapor", package: "vapor")]),
     .testTarget(name: "SpinetailTests", dependencies: ["Spinetail"])
   ]
 )

@@ -1,5 +1,5 @@
 import Foundation
-import Prch
+
 
 public protocol Model: Codable, Equatable {}
 
