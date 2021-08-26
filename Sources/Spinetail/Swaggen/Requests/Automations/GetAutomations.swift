@@ -1,4 +1,5 @@
 import Foundation
+import Prch
 
 public extension Automations {
   /**
@@ -106,7 +107,7 @@ public extension Automations {
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
       /** An array of objects, each representing an Automation workflow. */
-      public struct Status200: MailchimpModel {
+      public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
         public var links: [Links]?
 
@@ -117,7 +118,7 @@ public extension Automations {
         public var totalItems: Int?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-        public struct Links: MailchimpModel {
+        public struct Links: Model {
           /** The HTTP method that should be used when accessing the URL defined in 'href'. */
           public enum Method: String, Codable, Equatable, CaseIterable {
             case get = "GET"
@@ -174,7 +175,7 @@ public extension Automations {
         }
 
         /** A summary of an individual Automation workflow's settings and content. */
-        public struct Automations: MailchimpModel {
+        public struct Automations: Model {
           /** The current status of the Automation. */
           public enum Status: String, Codable, Equatable, CaseIterable {
             case save
@@ -216,7 +217,7 @@ public extension Automations {
           public var triggerSettings: TriggerSettings?
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-          public struct Links: MailchimpModel {
+          public struct Links: Model {
             /** The HTTP method that should be used when accessing the URL defined in 'href'. */
             public enum Method: String, Codable, Equatable, CaseIterable {
               case get = "GET"
@@ -273,7 +274,7 @@ public extension Automations {
           }
 
           /** List settings for the Automation. */
-          public struct Recipients: MailchimpModel {
+          public struct Recipients: Model {
             /** The unique list id. */
             public var listId: String?
 
@@ -290,7 +291,7 @@ public extension Automations {
             public var storeId: String?
 
             /** An object representing all segmentation options. */
-            public struct SegmentOpts: MailchimpModel {
+            public struct SegmentOpts: Model {
               /** Segment match type. */
               public enum Match: String, Codable, Equatable, CaseIterable {
                 case any
@@ -359,7 +360,7 @@ public extension Automations {
           }
 
           /** A summary of opens and clicks for sent campaigns. */
-          public struct ReportSummary: MailchimpModel {
+          public struct ReportSummary: Model {
             /** The number of unique clicks, divided by the total number of successful deliveries. */
             public var clickRate: Double?
 
@@ -411,7 +412,7 @@ public extension Automations {
           }
 
           /** The settings for the Automation workflow. */
-          public struct Settings: MailchimpModel {
+          public struct Settings: Model {
             /** Whether Mailchimp [authenticated](https://mailchimp.com/help/about-email-authentication/) the Automation. Defaults to `true`. */
             public var authenticate: Bool?
 
@@ -475,7 +476,7 @@ public extension Automations {
           }
 
           /** The tracking options for the Automation. */
-          public struct Tracking: MailchimpModel {
+          public struct Tracking: Model {
             /** Deprecated */
             public var capsule: Capsule?
 
@@ -504,7 +505,7 @@ public extension Automations {
             public var textClicks: Bool?
 
             /** Deprecated */
-            public struct Capsule: MailchimpModel {
+            public struct Capsule: Model {
               /** Update contact notes for a campaign based on a subscriber's email addresses. */
               public var notes: Bool?
 
@@ -526,7 +527,7 @@ public extension Automations {
             }
 
             /** Deprecated */
-            public struct Salesforce: MailchimpModel {
+            public struct Salesforce: Model {
               /** Create a campaign in a connected Salesforce account. */
               public var campaign: Bool?
 
@@ -595,7 +596,7 @@ public extension Automations {
           }
 
           /** Available triggers for Automation workflows. */
-          public struct TriggerSettings: MailchimpModel {
+          public struct TriggerSettings: Model {
             /** The type of Automation workflow. */
             public enum WorkflowType: String, Codable, Equatable, CaseIterable {
               case abandonedBrowse
@@ -630,7 +631,7 @@ public extension Automations {
             public var workflowTitle: String?
 
             /** A workflow's runtime settings for an Automation. */
-            public struct Runtime: MailchimpModel {
+            public struct Runtime: Model {
               /** The days an Automation workflow can send. */
               public enum Days: String, Codable, Equatable, CaseIterable {
                 case sunday
@@ -649,7 +650,7 @@ public extension Automations {
               public var hours: Hours?
 
               /** The hours an Automation workflow can send. */
-              public struct Hours: MailchimpModel {
+              public struct Hours: Model {
                 /** When to send the Automation email. */
                 public enum `Type`: String, Codable, Equatable, CaseIterable {
                   case sendAsap = "send_asap"
@@ -794,7 +795,7 @@ public extension Automations {
       }
 
       /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-      public struct DefaultResponse: MailchimpModel {
+      public struct DefaultResponse: Model {
         /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
         public var detail: String
 

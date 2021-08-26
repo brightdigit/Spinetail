@@ -1,4 +1,5 @@
 import Foundation
+import Prch
 
 public extension Ecommerce {
   /**
@@ -16,7 +17,7 @@ public extension Ecommerce {
 
     public final class Request: APIRequest<Response> {
       /** Information about a specific order. */
-      public struct Body: MailchimpModel {
+      public struct Body: Model {
         /** The Mailchimp tracking code for the order. Uses the 'mc_tc' parameter in E-Commerce tracking URLs. */
         public enum TrackingCode: String, Codable, Equatable, CaseIterable {
           case prec
@@ -86,7 +87,7 @@ public extension Ecommerce {
         public var updatedAtForeign: DateTime
 
         /** Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body. */
-        public struct Customer: MailchimpModel {
+        public struct Customer: Model {
           /** A unique identifier for the customer. Limited to 50 characters. */
           public var id: String
 
@@ -109,7 +110,7 @@ public extension Ecommerce {
           public var optInStatus: Bool?
 
           /** The customer's address. */
-          public struct Address: MailchimpModel {
+          public struct Address: Model {
             /** The mailing address of the customer. */
             public var address1: String?
 
@@ -208,7 +209,7 @@ public extension Ecommerce {
         }
 
         /** Information about a specific order line. */
-        public struct Lines: MailchimpModel {
+        public struct Lines: Model {
           /** A unique identifier for the order line item. */
           public var id: String
 
@@ -260,7 +261,7 @@ public extension Ecommerce {
         }
 
         /** The billing address for the order. */
-        public struct BillingAddress: MailchimpModel {
+        public struct BillingAddress: Model {
           /** The billing address for the order. */
           public var address1: String?
 
@@ -354,7 +355,7 @@ public extension Ecommerce {
         }
 
         /** The outreach associated with this order. For example, an email campaign or Facebook ad. */
-        public struct Outreach: MailchimpModel {
+        public struct Outreach: Model {
           /** A unique identifier for the outreach. Can be an email campaign ID. */
           public var id: String?
 
@@ -376,7 +377,7 @@ public extension Ecommerce {
         }
 
         /** Information about a specific order. */
-        public struct Promos: MailchimpModel {
+        public struct Promos: Model {
           /** Type of discount. For free shipping set type to fixed */
           public enum `Type`: String, Codable, Equatable, CaseIterable {
             case fixed
@@ -416,7 +417,7 @@ public extension Ecommerce {
         }
 
         /** The shipping address for the order. */
-        public struct ShippingAddress: MailchimpModel {
+        public struct ShippingAddress: Model {
           /** The shipping address for the order. */
           public var address1: String?
 
@@ -620,7 +621,7 @@ public extension Ecommerce {
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
       /** Information about a specific order. */
-      public struct Status200: MailchimpModel {
+      public struct Status200: Model {
         /** The Mailchimp tracking code for the order. Uses the 'mc_tc' parameter in E-Commerce tracking URLs. */
         public enum TrackingCode: String, Codable, Equatable, CaseIterable {
           case prec
@@ -696,7 +697,7 @@ public extension Ecommerce {
         public var updatedAtForeign: DateTime
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-        public struct Links: MailchimpModel {
+        public struct Links: Model {
           /** The HTTP method that should be used when accessing the URL defined in 'href'. */
           public enum Method: String, Codable, Equatable, CaseIterable {
             case get = "GET"
@@ -753,7 +754,7 @@ public extension Ecommerce {
         }
 
         /** The billing address for the order. */
-        public struct BillingAddress: MailchimpModel {
+        public struct BillingAddress: Model {
           /** The billing address for the order. */
           public var address1: String?
 
@@ -847,7 +848,7 @@ public extension Ecommerce {
         }
 
         /** Information about a specific customer. */
-        public struct Customer: MailchimpModel {
+        public struct Customer: Model {
           /** A list of link types and descriptions for the API schema documents. */
           public var links: [Links]?
 
@@ -885,7 +886,7 @@ public extension Ecommerce {
           public var updatedAt: DateTime
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-          public struct Links: MailchimpModel {
+          public struct Links: Model {
             /** The HTTP method that should be used when accessing the URL defined in 'href'. */
             public enum Method: String, Codable, Equatable, CaseIterable {
               case get = "GET"
@@ -942,7 +943,7 @@ public extension Ecommerce {
           }
 
           /** The customer's address. */
-          public struct Address: MailchimpModel {
+          public struct Address: Model {
             /** The mailing address of the customer. */
             public var address1: String?
 
@@ -1056,7 +1057,7 @@ public extension Ecommerce {
         }
 
         /** Information about a specific order line. */
-        public struct Lines: MailchimpModel {
+        public struct Lines: Model {
           /** A list of link types and descriptions for the API schema documents. */
           public var links: [Links]?
 
@@ -1088,7 +1089,7 @@ public extension Ecommerce {
           public var quantity: Int?
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-          public struct Links: MailchimpModel {
+          public struct Links: Model {
             /** The HTTP method that should be used when accessing the URL defined in 'href'. */
             public enum Method: String, Codable, Equatable, CaseIterable {
               case get = "GET"
@@ -1189,7 +1190,7 @@ public extension Ecommerce {
         }
 
         /** The outreach associated with this order. For example, an email campaign or Facebook ad. */
-        public struct Outreach: MailchimpModel {
+        public struct Outreach: Model {
           /** A unique identifier for the outreach. Can be an email campaign ID. */
           public var id: String?
 
@@ -1229,7 +1230,7 @@ public extension Ecommerce {
         }
 
         /** Information about a specific order. */
-        public struct Promos: MailchimpModel {
+        public struct Promos: Model {
           /** Type of discount. For free shipping set type to fixed */
           public enum `Type`: String, Codable, Equatable, CaseIterable {
             case fixed
@@ -1269,7 +1270,7 @@ public extension Ecommerce {
         }
 
         /** The shipping address for the order. */
-        public struct ShippingAddress: MailchimpModel {
+        public struct ShippingAddress: Model {
           /** The shipping address for the order. */
           public var address1: String?
 
@@ -1446,7 +1447,7 @@ public extension Ecommerce {
       }
 
       /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-      public struct DefaultResponse: MailchimpModel {
+      public struct DefaultResponse: Model {
         /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
         public var detail: String
 

@@ -3,7 +3,7 @@
 # `LandingPages.Ecommerce`
 
 ```swift
-public struct Ecommerce: MailchimpModel
+public struct Ecommerce: Model
 ```
 
 A summary of an individual landing page's settings and content.

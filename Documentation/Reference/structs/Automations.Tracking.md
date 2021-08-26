@@ -3,7 +3,7 @@
 # `Automations.Tracking`
 
 ```swift
-public struct Tracking: MailchimpModel
+public struct Tracking: Model
 ```
 
 The tracking options for the Automation.

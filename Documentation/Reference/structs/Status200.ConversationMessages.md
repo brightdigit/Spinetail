@@ -3,7 +3,7 @@
 # `Status200.ConversationMessages`
 
 ```swift
-public struct ConversationMessages: MailchimpModel
+public struct ConversationMessages: Model
 ```
 
 An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.

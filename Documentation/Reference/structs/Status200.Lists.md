@@ -3,7 +3,7 @@
 # `Status200.Lists`
 
 ```swift
-public struct Lists: MailchimpModel
+public struct Lists: Model
 ```
 
 Information about a specific list.

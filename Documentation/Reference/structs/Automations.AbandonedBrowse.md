@@ -3,7 +3,7 @@
 # `Automations.AbandonedBrowse`
 
 ```swift
-public struct AbandonedBrowse: MailchimpModel
+public struct AbandonedBrowse: Model
 ```
 
 abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web.

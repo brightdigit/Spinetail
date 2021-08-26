@@ -3,7 +3,7 @@
 # `Status200.ListStats`
 
 ```swift
-public struct ListStats: MailchimpModel
+public struct ListStats: Model
 ```
 
 The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list.

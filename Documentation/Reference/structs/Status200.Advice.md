@@ -3,7 +3,7 @@
 # `Status200.Advice`
 
 ```swift
-public struct Advice: MailchimpModel
+public struct Advice: Model
 ```
 
 Campaign feedback details.

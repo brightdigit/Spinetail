@@ -3,7 +3,7 @@
 # `Status200.AudienceActivity`
 
 ```swift
-public struct AudienceActivity: MailchimpModel
+public struct AudienceActivity: Model
 ```
 
 Get report of a Facebook ad.

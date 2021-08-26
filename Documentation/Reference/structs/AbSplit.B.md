@@ -3,7 +3,7 @@
 # `AbSplit.B`
 
 ```swift
-public struct B: MailchimpModel
+public struct B: Model
 ```
 
 Stats for Campaign B.

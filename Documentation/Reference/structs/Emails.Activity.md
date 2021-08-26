@@ -3,7 +3,7 @@
 # `Emails.Activity`
 
 ```swift
-public struct Activity: MailchimpModel
+public struct Activity: Model
 ```
 
 A summary of the interaction with the campaign.

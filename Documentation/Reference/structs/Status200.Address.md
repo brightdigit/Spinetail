@@ -3,7 +3,7 @@
 # `Status200.Address`
 
 ```swift
-public struct Address: MailchimpModel
+public struct Address: Model
 ```
 
 The customer's address.

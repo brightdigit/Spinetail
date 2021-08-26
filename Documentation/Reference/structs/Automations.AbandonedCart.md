@@ -3,7 +3,7 @@
 # `Automations.AbandonedCart`
 
 ```swift
-public struct AbandonedCart: MailchimpModel
+public struct AbandonedCart: Model
 ```
 
 abandonedCart automation details.

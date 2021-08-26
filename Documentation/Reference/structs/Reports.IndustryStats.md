@@ -3,7 +3,7 @@
 # `Reports.IndustryStats`
 
 ```swift
-public struct IndustryStats: MailchimpModel
+public struct IndustryStats: Model
 ```
 
 The average campaign statistics for your industry.

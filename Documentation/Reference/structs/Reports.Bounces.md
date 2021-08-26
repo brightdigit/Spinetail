@@ -3,7 +3,7 @@
 # `Reports.Bounces`
 
 ```swift
-public struct Bounces: MailchimpModel
+public struct Bounces: Model
 ```
 
 An object describing the bounce summary for the campaign.

@@ -3,7 +3,7 @@
 # `Status200.ExactMatches`
 
 ```swift
-public struct ExactMatches: MailchimpModel
+public struct ExactMatches: Model
 ```
 
 Exact matches of the provided search query.

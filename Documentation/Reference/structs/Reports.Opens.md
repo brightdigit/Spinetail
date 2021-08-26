@@ -3,7 +3,7 @@
 # `Reports.Opens`
 
 ```swift
-public struct Opens: MailchimpModel
+public struct Opens: Model
 ```
 
 An object describing the open activity for the campaign.

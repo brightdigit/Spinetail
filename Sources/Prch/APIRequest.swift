@@ -1,8 +1,9 @@
 import Foundation
+import Prch
 
-public class APIRequest<ResponseType: APIResponseValue> {
+open class APIRequest<ResponseType: APIResponseValue> {
   public let service: APIService<ResponseType>
-  public private(set) var queryParameters: [String: Any]
+  open private(set) var queryParameters: [String: Any]
   public private(set) var formParameters: [String: Any]
   public let encodeBody: ((RequestEncoder) throws -> Data)?
   private(set) var headerParameters: [String: String]
@@ -12,7 +13,7 @@ public class APIRequest<ResponseType: APIResponseValue> {
     headerParameters.merging(customHeaders) { _, custom in custom }
   }
 
-  public var path: String {
+  open var path: String {
     service.path
   }
 

@@ -3,7 +3,7 @@
 # `Status200.Clients`
 
 ```swift
-public struct Clients: MailchimpModel
+public struct Clients: Model
 ```
 
 The email client.

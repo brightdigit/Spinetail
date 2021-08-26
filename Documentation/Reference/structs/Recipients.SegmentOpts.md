@@ -3,7 +3,7 @@
 # `Recipients.SegmentOpts`
 
 ```swift
-public struct SegmentOpts: MailchimpModel
+public struct SegmentOpts: Model
 ```
 
 An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.

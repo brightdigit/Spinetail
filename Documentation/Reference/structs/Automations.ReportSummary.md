@@ -3,7 +3,7 @@
 # `Automations.ReportSummary`
 
 ```swift
-public struct ReportSummary: MailchimpModel
+public struct ReportSummary: Model
 ```
 
 A summary of opens and clicks for sent campaigns.

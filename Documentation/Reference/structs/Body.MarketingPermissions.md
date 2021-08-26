@@ -3,7 +3,7 @@
 # `Body.MarketingPermissions`
 
 ```swift
-public struct MarketingPermissions: MailchimpModel
+public struct MarketingPermissions: Model
 ```
 
 A single marketing permission a subscriber has either opted-in to or opted-out of.

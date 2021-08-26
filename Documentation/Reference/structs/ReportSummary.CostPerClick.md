@@ -3,7 +3,7 @@
 # `ReportSummary.CostPerClick`
 
 ```swift
-public struct CostPerClick: MailchimpModel
+public struct CostPerClick: Model
 ```
 
 Report summary of facebook ad

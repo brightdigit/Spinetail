@@ -3,7 +3,7 @@
 # `Status200.Reports`
 
 ```swift
-public struct Reports: MailchimpModel
+public struct Reports: Model
 ```
 
 Report details about a sent campaign.

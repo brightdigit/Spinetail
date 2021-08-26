@@ -3,7 +3,7 @@
 # `LandingPages.SignupTags`
 
 ```swift
-public struct SignupTags: MailchimpModel
+public struct SignupTags: Model
 ```
 
 A summary of an individual landing page's settings and content.

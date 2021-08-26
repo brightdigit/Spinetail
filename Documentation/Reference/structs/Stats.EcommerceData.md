@@ -3,7 +3,7 @@
 # `Stats.EcommerceData`
 
 ```swift
-public struct EcommerceData: MailchimpModel
+public struct EcommerceData: Model
 ```
 
 Ecommerce stats for the list member if the list is attached to a store.

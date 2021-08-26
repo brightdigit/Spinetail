@@ -3,7 +3,7 @@
 # `NewMembers.LastNote`
 
 ```swift
-public struct LastNote: MailchimpModel
+public struct LastNote: Model
 ```
 
 The most recent Note added about this member.

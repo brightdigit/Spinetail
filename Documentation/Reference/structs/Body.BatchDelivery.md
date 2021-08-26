@@ -3,7 +3,7 @@
 # `Body.BatchDelivery`
 
 ```swift
-public struct BatchDelivery: MailchimpModel
+public struct BatchDelivery: Model
 ```
 
 Choose whether the campaign should use [Batch Delivery](https://mailchimp.com/help/schedule-batch-delivery/). Cannot be set to `true` for campaigns using [Timewarp](https://mailchimp.com/help/use-timewarp/).

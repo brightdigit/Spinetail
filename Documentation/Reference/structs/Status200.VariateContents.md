@@ -3,7 +3,7 @@
 # `Status200.VariateContents`
 
 ```swift
-public struct VariateContents: MailchimpModel
+public struct VariateContents: Model
 ```
 
 The HTML and plain-text content for a campaign.

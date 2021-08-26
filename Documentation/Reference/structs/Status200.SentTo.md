@@ -3,7 +3,7 @@
 # `Status200.SentTo`
 
 ```swift
-public struct SentTo: MailchimpModel
+public struct SentTo: Model
 ```
 
 A subscriber's status for a specific campaign.

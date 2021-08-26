@@ -1,4 +1,5 @@
 import Foundation
+import Prch
 
 public extension SearchCampaigns {
   /**
@@ -55,7 +56,7 @@ public extension SearchCampaigns {
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
       /** Campaigns and Snippets found for given search term. */
-      public struct Status200: MailchimpModel {
+      public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
         public var links: [Links]?
 
@@ -66,7 +67,7 @@ public extension SearchCampaigns {
         public var totalItems: Int?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-        public struct Links: MailchimpModel {
+        public struct Links: Model {
           /** The HTTP method that should be used when accessing the URL defined in 'href'. */
           public enum Method: String, Codable, Equatable, CaseIterable {
             case get = "GET"
@@ -123,14 +124,14 @@ public extension SearchCampaigns {
         }
 
         /** Campaigns and Snippets found for given search term. */
-        public struct Results: MailchimpModel {
+        public struct Results: Model {
           /** A summary of an individual campaign's settings and content. */
           public var campaign: Campaign?
 
           public var snippet: String?
 
           /** A summary of an individual campaign's settings and content. */
-          public struct Campaign: MailchimpModel {
+          public struct Campaign: Model {
             /** How the campaign's content is put together. */
             public enum ContentType: String, Codable, Equatable, CaseIterable {
               case template
@@ -230,7 +231,7 @@ public extension SearchCampaigns {
             public var webId: Int?
 
             /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-            public struct Links: MailchimpModel {
+            public struct Links: Model {
               /** The HTTP method that should be used when accessing the URL defined in 'href'. */
               public enum Method: String, Codable, Equatable, CaseIterable {
                 case get = "GET"
@@ -287,7 +288,7 @@ public extension SearchCampaigns {
             }
 
             /** [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign. */
-            public struct AbSplitOpts: MailchimpModel {
+            public struct AbSplitOpts: Model {
               /** How we should evaluate a winner. Based on 'opens', 'clicks', or 'manual'. */
               public enum PickWinner: String, Codable, Equatable, CaseIterable {
                 case opens
@@ -407,7 +408,7 @@ public extension SearchCampaigns {
             }
 
             /** Updates on campaigns in the process of sending. */
-            public struct DeliveryStatus: MailchimpModel {
+            public struct DeliveryStatus: Model {
               /** The current state of a campaign delivery. */
               public enum Status: String, Codable, Equatable, CaseIterable {
                 case delivering
@@ -461,7 +462,7 @@ public extension SearchCampaigns {
             }
 
             /** List settings for the campaign. */
-            public struct Recipients: MailchimpModel {
+            public struct Recipients: Model {
               /** The unique list id. */
               public var listId: String?
 
@@ -481,7 +482,7 @@ public extension SearchCampaigns {
               public var segmentText: String?
 
               /** An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options. */
-              public struct SegmentOpts: MailchimpModel {
+              public struct SegmentOpts: Model {
                 /** Segment match type. */
                 public enum Match: String, Codable, Equatable, CaseIterable {
                   case any
@@ -559,7 +560,7 @@ public extension SearchCampaigns {
             }
 
             /** For sent campaigns, a summary of opens, clicks, and e-commerce data. */
-            public struct ReportSummary: MailchimpModel {
+            public struct ReportSummary: Model {
               /** The number of unique clicks divided by the total number of successful deliveries. */
               public var clickRate: Double?
 
@@ -582,7 +583,7 @@ public extension SearchCampaigns {
               public var uniqueOpens: Int?
 
               /** E-Commerce stats for a campaign. */
-              public struct Ecommerce: MailchimpModel {
+              public struct Ecommerce: Model {
                 /** The total orders for a campaign. */
                 public var totalOrders: Int?
 
@@ -651,7 +652,7 @@ public extension SearchCampaigns {
             }
 
             /** [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign. */
-            public struct RssOpts: MailchimpModel {
+            public struct RssOpts: Model {
               /** The frequency of the RSS Campaign. */
               public enum Frequency: String, Codable, Equatable, CaseIterable {
                 case daily
@@ -675,7 +676,7 @@ public extension SearchCampaigns {
               public var schedule: Schedule?
 
               /** The schedule for sending the RSS Campaign. */
-              public struct Schedule: MailchimpModel {
+              public struct Schedule: Model {
                 /** The day of the week to send a weekly RSS Campaign. */
                 public enum WeeklySendDay: String, Codable, Equatable, CaseIterable {
                   case sunday
@@ -700,7 +701,7 @@ public extension SearchCampaigns {
                 public var weeklySendDay: WeeklySendDay?
 
                 /** The days of the week to send a daily RSS Campaign. */
-                public struct DailySend: MailchimpModel {
+                public struct DailySend: Model {
                   /** Sends the daily RSS Campaign on Fridays. */
                   public var friday: Bool?
 
@@ -813,7 +814,7 @@ public extension SearchCampaigns {
             }
 
             /** The settings for your campaign, including subject, from name, reply-to address, and more. */
-            public struct Settings: MailchimpModel {
+            public struct Settings: Model {
               /** Whether Mailchimp [authenticated](https://mailchimp.com/help/about-email-authentication/) the campaign. Defaults to `true`. */
               public var authenticate: Bool?
 
@@ -931,7 +932,7 @@ public extension SearchCampaigns {
             }
 
             /** The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/). */
-            public struct SocialCard: MailchimpModel {
+            public struct SocialCard: Model {
               /** A short summary of the campaign to display. */
               public var description: String?
 
@@ -965,7 +966,7 @@ public extension SearchCampaigns {
             }
 
             /** The tracking options for a campaign. */
-            public struct Tracking: MailchimpModel {
+            public struct Tracking: Model {
               /** Deprecated */
               public var capsule: Capsule?
 
@@ -994,7 +995,7 @@ public extension SearchCampaigns {
               public var textClicks: Bool?
 
               /** Deprecated */
-              public struct Capsule: MailchimpModel {
+              public struct Capsule: Model {
                 /** Update contact notes for a campaign based on subscriber email addresses. */
                 public var notes: Bool?
 
@@ -1016,7 +1017,7 @@ public extension SearchCampaigns {
               }
 
               /** Deprecated */
-              public struct Salesforce: MailchimpModel {
+              public struct Salesforce: Model {
                 /** Create a campaign in a connected Salesforce account. */
                 public var campaign: Bool?
 
@@ -1085,7 +1086,7 @@ public extension SearchCampaigns {
             }
 
             /** The settings specific to A/B test campaigns. */
-            public struct VariateSettings: MailchimpModel {
+            public struct VariateSettings: Model {
               /** The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application. */
               public enum WinnerCriteria: String, Codable, Equatable, CaseIterable {
                 case opens
@@ -1128,7 +1129,7 @@ public extension SearchCampaigns {
               public var winningCombinationId: String?
 
               /** The settings specific to A/B test campaigns. */
-              public struct Combinations: MailchimpModel {
+              public struct Combinations: Model {
                 /** The index of `variate_settings.contents` used. */
                 public var contentDescription: Int?
 
@@ -1359,7 +1360,7 @@ public extension SearchCampaigns {
       }
 
       /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-      public struct DefaultResponse: MailchimpModel {
+      public struct DefaultResponse: Model {
         /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
         public var detail: String
 

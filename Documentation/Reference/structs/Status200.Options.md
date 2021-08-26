@@ -3,7 +3,7 @@
 # `Status200.Options`
 
 ```swift
-public struct Options: MailchimpModel
+public struct Options: Model
 ```
 
 The conditions of the segment. Static segments (tags) and fuzzy segments don't have conditions.

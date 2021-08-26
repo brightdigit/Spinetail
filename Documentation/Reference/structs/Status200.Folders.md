@@ -3,7 +3,7 @@
 # `Status200.Folders`
 
 ```swift
-public struct Folders: MailchimpModel
+public struct Folders: Model
 ```
 
 A folder used to organize templates.

@@ -3,7 +3,7 @@
 # `Status200.Forwards`
 
 ```swift
-public struct Forwards: MailchimpModel
+public struct Forwards: Model
 ```
 
 An object describing the forwards and forward activity for the campaign.

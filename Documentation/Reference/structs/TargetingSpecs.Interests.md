@@ -3,7 +3,7 @@
 # `TargetingSpecs.Interests`
 
 ```swift
-public struct Interests: MailchimpModel
+public struct Interests: Model
 ```
 
 Audience settings

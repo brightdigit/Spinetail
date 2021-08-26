@@ -3,7 +3,7 @@
 # `ReportSummary.AverageOrderAmount`
 
 ```swift
-public struct AverageOrderAmount: MailchimpModel
+public struct AverageOrderAmount: Model
 ```
 
 Report summary of facebook ad

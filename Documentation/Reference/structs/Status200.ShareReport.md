@@ -3,7 +3,7 @@
 # `Status200.ShareReport`
 
 ```swift
-public struct ShareReport: MailchimpModel
+public struct ShareReport: Model
 ```
 
 The url and password for the [VIP report](https://mailchimp.com/help/share-a-campaign-report/).

@@ -1,4 +1,5 @@
 import Foundation
+import Prch
 
 public extension FacebookAds {
   /**
@@ -58,7 +59,7 @@ public extension FacebookAds {
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
       /** Get details of a Facebook ad. */
-      public struct Status200: MailchimpModel {
+      public struct Status200: Model {
         /** Campaign, Ad, or Page status */
         public enum Status: String, Codable, Equatable, CaseIterable {
           case save
@@ -175,7 +176,7 @@ public extension FacebookAds {
         public var webId: Int?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-        public struct Links: MailchimpModel {
+        public struct Links: Model {
           /** The HTTP method that should be used when accessing the URL defined in 'href'. */
           public enum Method: String, Codable, Equatable, CaseIterable {
             case get = "GET"
@@ -232,7 +233,7 @@ public extension FacebookAds {
         }
 
         /** Audience settings */
-        public struct Audience: MailchimpModel {
+        public struct Audience: Model {
           /** List or Facebook based audience */
           public enum SourceType: String, Codable, Equatable, CaseIterable {
             case facebook
@@ -263,7 +264,7 @@ public extension FacebookAds {
           public var type: `Type`?
 
           /** Audience settings */
-          public struct EmailSource: MailchimpModel {
+          public struct EmailSource: Model {
             /** Is the source reference a segment */
             public var isSegment: Bool?
 
@@ -309,7 +310,7 @@ public extension FacebookAds {
           }
 
           /** Audience settings */
-          public struct TargetingSpecs: MailchimpModel {
+          public struct TargetingSpecs: Model {
             public var gender: Int?
 
             public var interests: [Interests]?
@@ -321,7 +322,7 @@ public extension FacebookAds {
             public var minAge: Int?
 
             /** Audience settings */
-            public struct Interests: MailchimpModel {
+            public struct Interests: Model {
               public var name: String?
 
               public init(name: String? = nil) {
@@ -342,7 +343,7 @@ public extension FacebookAds {
             }
 
             /** Audience settings */
-            public struct Locations: MailchimpModel {
+            public struct Locations: Model {
               public var cities: [String]?
 
               public var countries: [String]?
@@ -439,7 +440,7 @@ public extension FacebookAds {
         }
 
         /** Get details of a Facebook ad. */
-        public struct Budget: MailchimpModel {
+        public struct Budget: Model {
           /** Currency code */
           public var currencyCode: String?
 
@@ -473,7 +474,7 @@ public extension FacebookAds {
         }
 
         /** Channel settings */
-        public struct Channel: MailchimpModel {
+        public struct Channel: Model {
           /** Is this for facebook audience */
           public var fbPlacementAudience: Bool?
 
@@ -507,7 +508,7 @@ public extension FacebookAds {
         }
 
         /** Get details of a Facebook ad. */
-        public struct Content: MailchimpModel {
+        public struct Content: Model {
           public var attachments: [Attachments]?
 
           public var callToAction: String?
@@ -523,7 +524,7 @@ public extension FacebookAds {
           public var title: String?
 
           /** Get details of a Facebook ad. */
-          public struct Attachments: MailchimpModel {
+          public struct Attachments: Model {
             public var callToAction: String?
 
             public var description: String?
@@ -599,7 +600,7 @@ public extension FacebookAds {
         }
 
         /** Check if this ad is connected to a facebook page */
-        public struct Feedback: MailchimpModel {
+        public struct Feedback: Model {
           /** Feedback regarding the audience of this Ad. */
           public var audience: String?
 
@@ -639,7 +640,7 @@ public extension FacebookAds {
         }
 
         /** List settings for the outreach */
-        public struct Recipients: MailchimpModel {
+        public struct Recipients: Model {
           /** The unique list id. */
           public var listId: String?
 
@@ -659,7 +660,7 @@ public extension FacebookAds {
           public var segmentText: String?
 
           /** An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options. */
-          public struct SegmentOpts: MailchimpModel {
+          public struct SegmentOpts: Model {
             /** Segment match type. */
             public enum Match: String, Codable, Equatable, CaseIterable {
               case any
@@ -737,7 +738,7 @@ public extension FacebookAds {
         }
 
         /** Get details of a Facebook ad. */
-        public struct ReportSummary: MailchimpModel {
+        public struct ReportSummary: Model {
           public var clickRate: Double?
 
           public var clicks: Int?
@@ -769,7 +770,7 @@ public extension FacebookAds {
           public var visits: Int?
 
           /** Get details of a Facebook ad. */
-          public struct Ecommerce: MailchimpModel {
+          public struct Ecommerce: Model {
             public var averageOrderRevenue: Double?
 
             public var currencyCode: String?
@@ -859,7 +860,7 @@ public extension FacebookAds {
         }
 
         /** Connected Site */
-        public struct Site: MailchimpModel {
+        public struct Site: Model {
           /** The ID of this connected site. */
           public var id: Int?
 
@@ -997,7 +998,7 @@ public extension FacebookAds {
       }
 
       /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-      public struct DefaultResponse: MailchimpModel {
+      public struct DefaultResponse: Model {
         /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
         public var detail: String
 

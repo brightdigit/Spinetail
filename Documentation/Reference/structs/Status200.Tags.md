@@ -3,7 +3,7 @@
 # `Status200.Tags`
 
 ```swift
-public struct Tags: MailchimpModel
+public struct Tags: Model
 ```
 
 A list of tags matching the input query.

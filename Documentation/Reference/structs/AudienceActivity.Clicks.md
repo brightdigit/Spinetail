@@ -3,7 +3,7 @@
 # `AudienceActivity.Clicks`
 
 ```swift
-public struct Clicks: MailchimpModel
+public struct Clicks: Model
 ```
 
 Get report of a Facebook ad.

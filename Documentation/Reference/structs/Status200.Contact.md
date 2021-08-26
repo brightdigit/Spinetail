@@ -3,7 +3,7 @@
 # `Status200.Contact`
 
 ```swift
-public struct Contact: MailchimpModel
+public struct Contact: Model
 ```
 
 Information about the account contact.

@@ -3,7 +3,7 @@
 # `Carts.Lines`
 
 ```swift
-public struct Lines: MailchimpModel
+public struct Lines: Model
 ```
 
 Information about a specific cart line item.

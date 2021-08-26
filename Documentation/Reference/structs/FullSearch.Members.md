@@ -3,7 +3,7 @@
 # `FullSearch.Members`
 
 ```swift
-public struct Members: MailchimpModel
+public struct Members: Model
 ```
 
 Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.

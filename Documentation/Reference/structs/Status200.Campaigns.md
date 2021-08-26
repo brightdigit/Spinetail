@@ -3,7 +3,7 @@
 # `Status200.Campaigns`
 
 ```swift
-public struct Campaigns: MailchimpModel
+public struct Campaigns: Model
 ```
 
 A summary of an individual campaign's settings and content.

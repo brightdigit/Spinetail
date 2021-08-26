@@ -1,7 +1,7 @@
 **PROTOCOL**
 
-# `MailchimpModel`
+# `Model`
 
 ```swift
-public protocol MailchimpModel: Codable, Equatable
+public protocol Model: Codable, Equatable
 ```

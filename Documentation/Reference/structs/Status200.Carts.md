@@ -3,7 +3,7 @@
 # `Status200.Carts`
 
 ```swift
-public struct Carts: MailchimpModel
+public struct Carts: Model
 ```
 
 Information about a specific cart.

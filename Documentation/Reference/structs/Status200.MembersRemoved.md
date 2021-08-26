@@ -3,7 +3,7 @@
 # `Status200.MembersRemoved`
 
 ```swift
-public struct MembersRemoved: MailchimpModel
+public struct MembersRemoved: Model
 ```
 
 Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.

@@ -3,7 +3,7 @@
 # `Styles.Options`
 
 ```swift
-public struct Options: MailchimpModel
+public struct Options: Model
 ```
 
 An option for Signup Form Styles.

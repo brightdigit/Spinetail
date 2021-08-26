@@ -3,7 +3,7 @@
 # `LandingPages.Timeseries`
 
 ```swift
-public struct Timeseries: MailchimpModel
+public struct Timeseries: Model
 ```
 
 A summary of an individual landing page's settings and content.

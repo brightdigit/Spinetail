@@ -3,7 +3,7 @@
 # `Automations.Settings`
 
 ```swift
-public struct Settings: MailchimpModel
+public struct Settings: Model
 ```
 
 The settings for the Automation workflow.

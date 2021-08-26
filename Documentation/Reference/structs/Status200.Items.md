@@ -3,7 +3,7 @@
 # `Status200.Items`
 
 ```swift
-public struct Items: MailchimpModel
+public struct Items: Model
 ```
 
 The send checklist for the campaign.

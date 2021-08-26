@@ -3,7 +3,7 @@
 # `Audience.EmailSource`
 
 ```swift
-public struct EmailSource: MailchimpModel
+public struct EmailSource: Model
 ```
 
 Audience settings

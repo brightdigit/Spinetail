@@ -3,7 +3,7 @@
 # `WeeklyStats.Visits`
 
 ```swift
-public struct Visits: MailchimpModel
+public struct Visits: Model
 ```
 
 The clicks and visits data from the last five weeks.

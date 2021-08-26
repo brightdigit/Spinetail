@@ -3,7 +3,7 @@
 # `Status200.Stores`
 
 ```swift
-public struct Stores: MailchimpModel
+public struct Stores: Model
 ```
 
 An individual store in an account.

@@ -3,7 +3,7 @@
 # `Content.Attachments`
 
 ```swift
-public struct Attachments: MailchimpModel
+public struct Attachments: Model
 ```
 
 Get details of a Facebook ad.

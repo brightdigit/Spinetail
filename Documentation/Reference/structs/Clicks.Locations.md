@@ -3,7 +3,7 @@
 # `Clicks.Locations`
 
 ```swift
-public struct Locations: MailchimpModel
+public struct Locations: Model
 ```
 
 An individual click location.

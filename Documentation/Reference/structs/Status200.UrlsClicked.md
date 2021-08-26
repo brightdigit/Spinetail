@@ -3,7 +3,7 @@
 # `Status200.UrlsClicked`
 
 ```swift
-public struct UrlsClicked: MailchimpModel
+public struct UrlsClicked: Model
 ```
 
 A report of links clicked in a specific campaign.

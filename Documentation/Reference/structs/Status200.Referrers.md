@@ -3,7 +3,7 @@
 # `Status200.Referrers`
 
 ```swift
-public struct Referrers: MailchimpModel
+public struct Referrers: Model
 ```
 
 A single instance of a campaign referral.

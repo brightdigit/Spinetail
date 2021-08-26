@@ -3,7 +3,7 @@
 # `Lists.Stats`
 
 ```swift
-public struct Stats: MailchimpModel
+public struct Stats: Model
 ```
 
 Stats for the list. Many of these are cached for at least five minutes.

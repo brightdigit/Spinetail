@@ -3,7 +3,7 @@
 # `Status200.Audience`
 
 ```swift
-public struct Audience: MailchimpModel
+public struct Audience: Model
 ```
 
 Audience settings

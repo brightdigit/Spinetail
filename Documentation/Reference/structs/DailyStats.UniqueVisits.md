@@ -3,7 +3,7 @@
 # `DailyStats.UniqueVisits`
 
 ```swift
-public struct UniqueVisits: MailchimpModel
+public struct UniqueVisits: Model
 ```
 
 The clicks and visits data from the last seven days.

@@ -3,7 +3,7 @@
 # `Status200.Results`
 
 ```swift
-public struct Results: MailchimpModel
+public struct Results: Model
 ```
 
 Campaigns and Snippets found for given search term.

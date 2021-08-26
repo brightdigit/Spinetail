@@ -3,7 +3,7 @@
 # `Response.Status200`
 
 ```swift
-public struct Status200: MailchimpModel
+public struct Status200: Model
 ```
 
 The verified domains currently on the account.

@@ -3,7 +3,7 @@
 # `Status200.Subscribers`
 
 ```swift
-public struct Subscribers: MailchimpModel
+public struct Subscribers: Model
 ```
 
 A summary of a subscriber removed from an Automation workflow.

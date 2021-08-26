@@ -1,10 +1,15 @@
 import Foundation
+import Prch
 
-public protocol MailchimpModel: Codable, Equatable {}
+public protocol Model: Codable, Equatable {}
 
 public typealias DateTime = JSONOptionalDate
 public typealias File = Data
 public typealias ID = UUID
+
+fileprivate let _dateEncodingFormatter = DateFormatter(formatString: "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
+                                                        locale: Locale(identifier: "en_US_POSIX"),
+                                                        calendar: Calendar(identifier: .gregorian))
 
 public protocol ResponseDecoder {
   func decode<T: Decodable>(_ type: T.Type, from: Data) throws -> T
@@ -18,7 +23,7 @@ public protocol RequestEncoder {
 
 extension JSONEncoder: RequestEncoder {}
 
-extension MailchimpModel {
+extension Model {
   func encode() -> [String: Any] {
     guard
       let jsonData = try? JSONEncoder().encode(self),
@@ -30,36 +35,36 @@ extension MailchimpModel {
   }
 }
 
-struct StringCodingKey: CodingKey, ExpressibleByStringLiteral {
+public struct StringCodingKey: CodingKey, ExpressibleByStringLiteral {
   private let string: String
   private let int: Int?
 
-  var stringValue: String { string }
+  public var stringValue: String { string }
 
-  init(string: String) {
+  public init(string: String) {
     self.string = string
     int = nil
   }
 
-  init?(stringValue: String) {
+  public init?(stringValue: String) {
     string = stringValue
     int = nil
   }
 
-  var intValue: Int? { int }
-  init?(intValue: Int) {
+  public var intValue: Int? { int }
+  public init?(intValue: Int) {
     string = String(describing: intValue)
     int = intValue
   }
 
-  init(stringLiteral value: String) {
+  public init(stringLiteral value: String) {
     string = value
     int = nil
   }
 }
 
 // any json decoding
-extension ResponseDecoder {
+public extension ResponseDecoder {
   func decodeAny<T>(_: T.Type, from data: Data) throws -> T {
     guard let decoded = try decode(AnyCodable.self, from: data) as? T else {
       throw DecodingError.typeMismatch(T.self, DecodingError.Context(codingPath: [StringCodingKey(string: "")], debugDescription: "Decoding of \(T.self) failed"))
@@ -69,7 +74,7 @@ extension ResponseDecoder {
 }
 
 // any decoding
-extension KeyedDecodingContainer {
+public extension KeyedDecodingContainer {
   func decodeAny<T>(_: T.Type, forKey key: K) throws -> T {
     guard let value = try decode(AnyCodable.self, forKey: key).value as? T else {
       throw DecodingError.typeMismatch(T.self, DecodingError.Context(codingPath: codingPath, debugDescription: "Decoding of \(T.self) failed"))
@@ -118,7 +123,7 @@ extension KeyedDecodingContainer {
     try decodeAnyIfPresent(T.self, forKey: key)
   }
 
-  public func decodeArray<T: Decodable>(_ key: K, safeArrayDecoding: Bool = false) throws -> [T] {
+  func decodeArray<T: Decodable>(_ key: K, safeArrayDecoding: Bool = false) throws -> [T] {
     var container: UnkeyedDecodingContainer
     var array: [T] = []
 
@@ -172,7 +177,7 @@ extension KeyedDecodingContainer {
 }
 
 // any encoding
-extension KeyedEncodingContainer {
+public extension KeyedEncodingContainer {
   mutating func encodeAnyIfPresent<T>(_ value: T?, forKey key: K) throws {
     guard let value = value else { return }
     try encodeIfPresent(AnyCodable(value), forKey: key)
@@ -185,7 +190,7 @@ extension KeyedEncodingContainer {
 
 // Date structs for date and date-time formats
 
-extension DateFormatter {
+public extension DateFormatter {
   convenience init(formatString: String, locale: Locale? = nil, timeZone: TimeZone? = nil, calendar: Calendar? = nil) {
     self.init()
     dateFormat = formatString
@@ -302,49 +307,49 @@ public extension DateFormatter {
 
 // for parameter encoding
 
-extension DateDay {
+public extension DateDay {
   func encode() -> Any {
     DateDay.dateFormatter.string(from: date)
   }
 }
 
-extension Date {
+public extension Date {
   func encode() -> Any {
-    MailchimpAPI.dateEncodingFormatter.string(from: self)
+    _dateEncodingFormatter.string(from: self)
   }
 }
 
-extension JSONOptionalDate {
+public extension JSONOptionalDate {
   func encode() -> Any? {
     date?.encode()
   }
 }
 
-extension URL {
+public extension URL {
   func encode() -> Any {
     absoluteString
   }
 }
 
-extension RawRepresentable {
+public extension RawRepresentable {
   func encode() -> Any {
     rawValue
   }
 }
 
-extension Array where Element: RawRepresentable {
+public extension Array where Element: RawRepresentable {
   func encode() -> [Any] {
     map { $0.rawValue }
   }
 }
 
-extension Dictionary where Key == String, Value: RawRepresentable {
+public extension Dictionary where Key == String, Value: RawRepresentable {
   func encode() -> [String: Any] {
     mapValues { $0.rawValue }
   }
 }
 
-extension UUID {
+public extension UUID {
   func encode() -> Any {
     uuidString
   }

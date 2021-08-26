@@ -3,7 +3,7 @@
 # `Status200.Segments`
 
 ```swift
-public struct Segments: MailchimpModel
+public struct Segments: Model
 ```
 
 Information about a specific segment.

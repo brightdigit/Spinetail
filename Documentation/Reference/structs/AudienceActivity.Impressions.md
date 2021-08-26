@@ -3,7 +3,7 @@
 # `AudienceActivity.Impressions`
 
 ```swift
-public struct Impressions: MailchimpModel
+public struct Impressions: Model
 ```
 
 Get report of a Facebook ad.

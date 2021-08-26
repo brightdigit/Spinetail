@@ -3,7 +3,7 @@
 # `Status200.Emails`
 
 ```swift
-public struct Emails: MailchimpModel
+public struct Emails: Model
 ```
 
 A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.

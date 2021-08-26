@@ -3,7 +3,7 @@
 # `Request.Body`
 
 ```swift
-public struct Body: MailchimpModel
+public struct Body: Model
 ```
 
 Submit a response to the verification challenge and verify a domain for sending.

@@ -3,7 +3,7 @@
 # `VariateSettings.Combinations`
 
 ```swift
-public struct Combinations: MailchimpModel
+public struct Combinations: Model
 ```
 
 The settings specific to A/B test campaigns.

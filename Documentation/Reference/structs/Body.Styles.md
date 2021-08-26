@@ -3,7 +3,7 @@
 # `Body.Styles`
 
 ```swift
-public struct Styles: MailchimpModel
+public struct Styles: Model
 ```
 
 Collection of Element style for List Signup Forms.

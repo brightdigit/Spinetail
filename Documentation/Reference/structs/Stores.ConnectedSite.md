@@ -3,7 +3,7 @@
 # `Stores.ConnectedSite`
 
 ```swift
-public struct ConnectedSite: MailchimpModel
+public struct ConnectedSite: Model
 ```
 
 The Connected Site associated with the store.

@@ -1,4 +1,5 @@
 import Foundation
+import Prch
 
 public extension Lists {
   /**
@@ -11,7 +12,7 @@ public extension Lists {
 
     public final class Request: APIRequest<Response> {
       /** Members to subscribe to or unsubscribe from a list. */
-      public struct Body: MailchimpModel {
+      public struct Body: Model {
         /** An array of objects, each representing an email address and the subscription status for a specific list. Up to 500 members may be added or updated with each API call. */
         public var members: [Members]
 
@@ -19,7 +20,7 @@ public extension Lists {
         public var updateExisting: Bool?
 
         /** Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed. */
-        public struct Members: MailchimpModel {
+        public struct Members: Model {
           /** Subscriber's current status. */
           public enum Status: String, Codable, Equatable, CaseIterable {
             case subscribed
@@ -65,7 +66,7 @@ public extension Lists {
           public var vip: Bool?
 
           /** Subscriber location information. */
-          public struct Location: MailchimpModel {
+          public struct Location: Model {
             /** The location latitude. */
             public var latitude: Double?
 
@@ -215,7 +216,7 @@ public extension Lists {
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
       /** Batch update list members. */
-      public struct Status200: MailchimpModel {
+      public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
         public var links: [Links]?
 
@@ -238,7 +239,7 @@ public extension Lists {
         public var updatedMembers: [UpdatedMembers]?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-        public struct Links: MailchimpModel {
+        public struct Links: Model {
           /** The HTTP method that should be used when accessing the URL defined in 'href'. */
           public enum Method: String, Codable, Equatable, CaseIterable {
             case get = "GET"
@@ -295,7 +296,7 @@ public extension Lists {
         }
 
         /** Batch update list members. */
-        public struct Errors: MailchimpModel {
+        public struct Errors: Model {
           /** A unique code that identifies this specifc error. */
           public enum ErrorCode: String, Codable, Equatable, CaseIterable {
             case errorContactExists = "ERROR_CONTACT_EXISTS"
@@ -335,7 +336,7 @@ public extension Lists {
         }
 
         /** Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed. */
-        public struct NewMembers: MailchimpModel {
+        public struct NewMembers: Model {
           /** Subscriber's current status. */
           public enum Status: String, Codable, Equatable, CaseIterable {
             case subscribed
@@ -415,7 +416,7 @@ public extension Lists {
           public var vip: Bool?
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-          public struct Links: MailchimpModel {
+          public struct Links: Model {
             /** The HTTP method that should be used when accessing the URL defined in 'href'. */
             public enum Method: String, Codable, Equatable, CaseIterable {
               case get = "GET"
@@ -472,7 +473,7 @@ public extension Lists {
           }
 
           /** The most recent Note added about this member. */
-          public struct LastNote: MailchimpModel {
+          public struct LastNote: Model {
             /** The date and time the note was created in ISO 8601 format. */
             public var createdAt: DateTime
 
@@ -512,7 +513,7 @@ public extension Lists {
           }
 
           /** Subscriber location information. */
-          public struct Location: MailchimpModel {
+          public struct Location: Model {
             /** The unique code for the location country. */
             public var countryCode: String?
 
@@ -564,7 +565,7 @@ public extension Lists {
           }
 
           /** Open and click rates for this subscriber. */
-          public struct Stats: MailchimpModel {
+          public struct Stats: Model {
             /** A subscriber's average clickthrough rate. */
             public var avgClickRate: Double?
 
@@ -592,7 +593,7 @@ public extension Lists {
           }
 
           /** Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed. */
-          public struct Tags: MailchimpModel {
+          public struct Tags: Model {
             /** The tag id. */
             public var id: Int?
 
@@ -703,7 +704,7 @@ public extension Lists {
         }
 
         /** Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed. */
-        public struct UpdatedMembers: MailchimpModel {
+        public struct UpdatedMembers: Model {
           /** Subscriber's current status. */
           public enum Status: String, Codable, Equatable, CaseIterable {
             case subscribed
@@ -783,7 +784,7 @@ public extension Lists {
           public var vip: Bool?
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-          public struct Links: MailchimpModel {
+          public struct Links: Model {
             /** The HTTP method that should be used when accessing the URL defined in 'href'. */
             public enum Method: String, Codable, Equatable, CaseIterable {
               case get = "GET"
@@ -840,7 +841,7 @@ public extension Lists {
           }
 
           /** The most recent Note added about this member. */
-          public struct LastNote: MailchimpModel {
+          public struct LastNote: Model {
             /** The date and time the note was created in ISO 8601 format. */
             public var createdAt: DateTime
 
@@ -880,7 +881,7 @@ public extension Lists {
           }
 
           /** Subscriber location information. */
-          public struct Location: MailchimpModel {
+          public struct Location: Model {
             /** The unique code for the location country. */
             public var countryCode: String?
 
@@ -932,7 +933,7 @@ public extension Lists {
           }
 
           /** Open and click rates for this subscriber. */
-          public struct Stats: MailchimpModel {
+          public struct Stats: Model {
             /** A subscriber's average clickthrough rate. */
             public var avgClickRate: Double?
 
@@ -960,7 +961,7 @@ public extension Lists {
           }
 
           /** Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed. */
-          public struct Tags: MailchimpModel {
+          public struct Tags: Model {
             /** The tag id. */
             public var id: Int?
 
@@ -1106,7 +1107,7 @@ public extension Lists {
       }
 
       /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-      public struct DefaultResponse: MailchimpModel {
+      public struct DefaultResponse: Model {
         /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
         public var detail: String
 

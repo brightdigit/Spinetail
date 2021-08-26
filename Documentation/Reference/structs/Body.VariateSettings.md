@@ -3,7 +3,7 @@
 # `Body.VariateSettings`
 
 ```swift
-public struct VariateSettings: MailchimpModel
+public struct VariateSettings: Model
 ```
 
 The settings specific to A/B test campaigns.

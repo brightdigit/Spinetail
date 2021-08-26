@@ -3,7 +3,7 @@
 # `Status200.Feedback`
 
 ```swift
-public struct Feedback: MailchimpModel
+public struct Feedback: Model
 ```
 
 Check if this ad is connected to a facebook page

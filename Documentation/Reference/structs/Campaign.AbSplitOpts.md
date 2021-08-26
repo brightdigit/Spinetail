@@ -3,7 +3,7 @@
 # `Campaign.AbSplitOpts`
 
 ```swift
-public struct AbSplitOpts: MailchimpModel
+public struct AbSplitOpts: Model
 ```
 
 [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign.

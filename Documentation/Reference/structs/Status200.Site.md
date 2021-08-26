@@ -3,7 +3,7 @@
 # `Status200.Site`
 
 ```swift
-public struct Site: MailchimpModel
+public struct Site: Model
 ```
 
 Connected Site

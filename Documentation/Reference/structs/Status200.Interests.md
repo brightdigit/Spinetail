@@ -3,7 +3,7 @@
 # `Status200.Interests`
 
 ```swift
-public struct Interests: MailchimpModel
+public struct Interests: Model
 ```
 
 Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.

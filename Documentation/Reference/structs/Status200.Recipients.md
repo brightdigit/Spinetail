@@ -3,7 +3,7 @@
 # `Status200.Recipients`
 
 ```swift
-public struct Recipients: MailchimpModel
+public struct Recipients: Model
 ```
 
 List settings for the outreach

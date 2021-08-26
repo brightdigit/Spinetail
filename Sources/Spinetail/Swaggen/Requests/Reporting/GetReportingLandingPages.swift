@@ -1,4 +1,5 @@
 import Foundation
+import Prch
 
 public extension Reporting {
   /**
@@ -64,7 +65,7 @@ public extension Reporting {
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
       /** A collection of landing pages. */
-      public struct Status200: MailchimpModel {
+      public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
         public var links: [Links]?
 
@@ -74,7 +75,7 @@ public extension Reporting {
         public var totalItems: Int?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-        public struct Links: MailchimpModel {
+        public struct Links: Model {
           /** The HTTP method that should be used when accessing the URL defined in 'href'. */
           public enum Method: String, Codable, Equatable, CaseIterable {
             case get = "GET"
@@ -131,7 +132,7 @@ public extension Reporting {
         }
 
         /** A summary of an individual landing page's settings and content. */
-        public struct LandingPages: MailchimpModel {
+        public struct LandingPages: Model {
           /** A list of link types and descriptions for the API schema documents. */
           public var links: [Links]?
 
@@ -188,7 +189,7 @@ public extension Reporting {
           public var webId: Int?
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-          public struct Links: MailchimpModel {
+          public struct Links: Model {
             /** The HTTP method that should be used when accessing the URL defined in 'href'. */
             public enum Method: String, Codable, Equatable, CaseIterable {
               case get = "GET"
@@ -245,7 +246,7 @@ public extension Reporting {
           }
 
           /** A summary of an individual landing page's settings and content. */
-          public struct Ecommerce: MailchimpModel {
+          public struct Ecommerce: Model {
             /** The average order revenue of this landing page. */
             public var averageOrderRevenue: Double?
 
@@ -285,7 +286,7 @@ public extension Reporting {
           }
 
           /** A summary of an individual landing page's settings and content. */
-          public struct SignupTags: MailchimpModel {
+          public struct SignupTags: Model {
             /** The unique id for the tag. */
             public var tagId: Int?
 
@@ -313,7 +314,7 @@ public extension Reporting {
           }
 
           /** A summary of an individual landing page's settings and content. */
-          public struct Timeseries: MailchimpModel {
+          public struct Timeseries: Model {
             /** The clicks and visits data from the last seven days. */
             public var dailyStats: DailyStats?
 
@@ -321,7 +322,7 @@ public extension Reporting {
             public var weeklyStats: WeeklyStats?
 
             /** The clicks and visits data from the last seven days. */
-            public struct DailyStats: MailchimpModel {
+            public struct DailyStats: Model {
               public var clicks: [Clicks]?
 
               public var uniqueVisits: [UniqueVisits]?
@@ -329,7 +330,7 @@ public extension Reporting {
               public var visits: [Visits]?
 
               /** The clicks and visits data from the last seven days. */
-              public struct Clicks: MailchimpModel {
+              public struct Clicks: Model {
                 public var date: String?
 
                 public var val: Int?
@@ -355,7 +356,7 @@ public extension Reporting {
               }
 
               /** The clicks and visits data from the last seven days. */
-              public struct UniqueVisits: MailchimpModel {
+              public struct UniqueVisits: Model {
                 public var date: String?
 
                 public var val: Int?
@@ -381,7 +382,7 @@ public extension Reporting {
               }
 
               /** The clicks and visits data from the last seven days. */
-              public struct Visits: MailchimpModel {
+              public struct Visits: Model {
                 public var date: String?
 
                 public var val: Int?
@@ -430,7 +431,7 @@ public extension Reporting {
             }
 
             /** The clicks and visits data from the last five weeks. */
-            public struct WeeklyStats: MailchimpModel {
+            public struct WeeklyStats: Model {
               /** The total number of clicks in a week. */
               public var clicks: [Clicks]?
 
@@ -440,7 +441,7 @@ public extension Reporting {
               public var visits: [Visits]?
 
               /** The clicks and visits data from the last five weeks. */
-              public struct Clicks: MailchimpModel {
+              public struct Clicks: Model {
                 public var date: String?
 
                 public var val: Int?
@@ -466,7 +467,7 @@ public extension Reporting {
               }
 
               /** The clicks and visits data from the last five weeks. */
-              public struct UniqueVisits: MailchimpModel {
+              public struct UniqueVisits: Model {
                 public var date: String?
 
                 public var val: Int?
@@ -492,7 +493,7 @@ public extension Reporting {
               }
 
               /** The clicks and visits data from the last five weeks. */
-              public struct Visits: MailchimpModel {
+              public struct Visits: Model {
                 public var date: String?
 
                 public var val: Int?
@@ -655,7 +656,7 @@ public extension Reporting {
       }
 
       /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-      public struct DefaultResponse: MailchimpModel {
+      public struct DefaultResponse: Model {
         /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
         public var detail: String
 

@@ -3,7 +3,7 @@
 # `Body.Tracking`
 
 ```swift
-public struct Tracking: MailchimpModel
+public struct Tracking: Model
 ```
 
 The tracking settings applied to this landing page.

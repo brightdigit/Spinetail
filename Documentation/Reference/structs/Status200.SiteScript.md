@@ -3,7 +3,7 @@
 # `Status200.SiteScript`
 
 ```swift
-public struct SiteScript: MailchimpModel
+public struct SiteScript: Model
 ```
 
 The script used to connect your site with Mailchimp.

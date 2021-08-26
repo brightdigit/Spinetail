@@ -3,7 +3,7 @@
 # `Status200.ReportSummary`
 
 ```swift
-public struct ReportSummary: MailchimpModel
+public struct ReportSummary: Model
 ```
 
 Report summary of facebook ad

@@ -3,7 +3,7 @@
 # `Status200.AbSplit`
 
 ```swift
-public struct AbSplit: MailchimpModel
+public struct AbSplit: Model
 ```
 
 A breakdown of clicks by different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.

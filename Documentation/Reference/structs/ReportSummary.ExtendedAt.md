@@ -3,7 +3,7 @@
 # `ReportSummary.ExtendedAt`
 
 ```swift
-public struct ExtendedAt: MailchimpModel
+public struct ExtendedAt: Model
 ```
 
 Report summary of facebook ad

@@ -3,7 +3,7 @@
 # `TriggerSettings.Runtime`
 
 ```swift
-public struct Runtime: MailchimpModel
+public struct Runtime: Model
 ```
 
 A workflow's runtime settings for an Automation.

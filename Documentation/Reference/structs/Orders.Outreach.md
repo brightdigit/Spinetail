@@ -3,7 +3,7 @@
 # `Orders.Outreach`
 
 ```swift
-public struct Outreach: MailchimpModel
+public struct Outreach: Model
 ```
 
 The outreach associated with this order. For example, an email campaign or Facebook ad.

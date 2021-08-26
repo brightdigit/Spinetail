@@ -3,7 +3,7 @@
 # `Status200.Constraints`
 
 ```swift
-public struct Constraints: MailchimpModel
+public struct Constraints: Model
 ```
 
 Do particular authorization constraints around this collection limit creation of new instances?

@@ -3,7 +3,7 @@
 # `Body.Variants`
 
 ```swift
-public struct Variants: MailchimpModel
+public struct Variants: Model
 ```
 
 Information about a specific product variant.

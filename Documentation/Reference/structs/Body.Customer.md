@@ -3,7 +3,7 @@
 # `Body.Customer`
 
 ```swift
-public struct Customer: MailchimpModel
+public struct Customer: Model
 ```
 
 Information about a specific customer. For existing customers include only the `id` parameter in the `customer` object body.

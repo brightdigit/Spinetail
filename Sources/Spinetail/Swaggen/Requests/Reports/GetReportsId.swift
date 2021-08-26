@@ -1,4 +1,5 @@
 import Foundation
+import Prch
 
 public extension Reports {
   /**
@@ -58,7 +59,7 @@ public extension Reports {
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
       /** Report details about a sent campaign. */
-      public struct Status200: MailchimpModel {
+      public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
         public var links: [Links]?
 
@@ -141,7 +142,7 @@ public extension Reports {
         public var unsubscribed: Int?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-        public struct Links: MailchimpModel {
+        public struct Links: Model {
           /** The HTTP method that should be used when accessing the URL defined in 'href'. */
           public enum Method: String, Codable, Equatable, CaseIterable {
             case get = "GET"
@@ -198,7 +199,7 @@ public extension Reports {
         }
 
         /** General stats about different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns. */
-        public struct AbSplit: MailchimpModel {
+        public struct AbSplit: Model {
           /** Stats for Campaign A. */
           public var a: A?
 
@@ -206,7 +207,7 @@ public extension Reports {
           public var b: B?
 
           /** Stats for Campaign A. */
-          public struct A: MailchimpModel {
+          public struct A: Model {
             /** Abuse reports for Campaign A. */
             public var abuseReports: Int?
 
@@ -276,7 +277,7 @@ public extension Reports {
           }
 
           /** Stats for Campaign B. */
-          public struct B: MailchimpModel {
+          public struct B: Model {
             /** Abuse reports for Campaign B. */
             public var abuseReports: Int?
 
@@ -366,7 +367,7 @@ public extension Reports {
         }
 
         /** An object describing the bounce summary for the campaign. */
-        public struct Bounces: MailchimpModel {
+        public struct Bounces: Model {
           /** The total number of hard bounced email addresses. */
           public var hardBounces: Int?
 
@@ -400,7 +401,7 @@ public extension Reports {
         }
 
         /** An object describing the click activity for the campaign. */
-        public struct Clicks: MailchimpModel {
+        public struct Clicks: Model {
           /** The number of unique clicks divided by the total number of successful deliveries. */
           public var clickRate: Double?
 
@@ -446,7 +447,7 @@ public extension Reports {
         }
 
         /** Updates on campaigns in the process of sending. */
-        public struct DeliveryStatus: MailchimpModel {
+        public struct DeliveryStatus: Model {
           /** The current state of a campaign delivery. */
           public enum Status: String, Codable, Equatable, CaseIterable {
             case delivering
@@ -500,7 +501,7 @@ public extension Reports {
         }
 
         /** E-Commerce stats for a campaign. */
-        public struct Ecommerce: MailchimpModel {
+        public struct Ecommerce: Model {
           public var currencyCode: String?
 
           /** The total orders for a campaign. */
@@ -539,7 +540,7 @@ public extension Reports {
         }
 
         /** An object describing campaign engagement on Facebook. */
-        public struct FacebookLikes: MailchimpModel {
+        public struct FacebookLikes: Model {
           /** The number of Facebook likes for the campaign. */
           public var facebookLikes: Int?
 
@@ -573,7 +574,7 @@ public extension Reports {
         }
 
         /** An object describing the forwards and forward activity for the campaign. */
-        public struct Forwards: MailchimpModel {
+        public struct Forwards: Model {
           /** How many times the campaign has been forwarded. */
           public var forwardsCount: Int?
 
@@ -601,7 +602,7 @@ public extension Reports {
         }
 
         /** The average campaign statistics for your industry. */
-        public struct IndustryStats: MailchimpModel {
+        public struct IndustryStats: Model {
           /** The industry abuse rate. */
           public var abuseRate: Double?
 
@@ -659,7 +660,7 @@ public extension Reports {
         }
 
         /** The average campaign statistics for your list. This won't be present if we haven't calculated it yet for this list. */
-        public struct ListStats: MailchimpModel {
+        public struct ListStats: Model {
           /** The average click rate (a percentage represented as a number between 0 and 100) per campaign for the list. */
           public var clickRate: Double?
 
@@ -699,7 +700,7 @@ public extension Reports {
         }
 
         /** An object describing the open activity for the campaign. */
-        public struct Opens: MailchimpModel {
+        public struct Opens: Model {
           /** The date and time of the last recorded open in ISO 8601 format. */
           public var lastOpen: DateTime
 
@@ -739,7 +740,7 @@ public extension Reports {
         }
 
         /** The url and password for the [VIP report](https://mailchimp.com/help/share-a-campaign-report/). */
-        public struct ShareReport: MailchimpModel {
+        public struct ShareReport: Model {
           /** If password protected, the password for the VIP report. */
           public var sharePassword: String?
 
@@ -767,7 +768,7 @@ public extension Reports {
         }
 
         /** Report details about a sent campaign. */
-        public struct Timeseries: MailchimpModel {
+        public struct Timeseries: Model {
           /** The number of emails sent in the timeseries. */
           public var emailsSent: Int?
 
@@ -807,7 +808,7 @@ public extension Reports {
         }
 
         /** Report details about a sent campaign. */
-        public struct Timewarp: MailchimpModel {
+        public struct Timewarp: Model {
           /** The number of bounces. */
           public var bounces: Int?
 
@@ -966,7 +967,7 @@ public extension Reports {
       }
 
       /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-      public struct DefaultResponse: MailchimpModel {
+      public struct DefaultResponse: Model {
         /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
         public var detail: String
 

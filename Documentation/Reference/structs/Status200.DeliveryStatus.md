@@ -3,7 +3,7 @@
 # `Status200.DeliveryStatus`
 
 ```swift
-public struct DeliveryStatus: MailchimpModel
+public struct DeliveryStatus: Model
 ```
 
 Updates on campaigns in the process of sending.

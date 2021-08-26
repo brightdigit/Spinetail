@@ -3,7 +3,7 @@
 # `Members.Stats`
 
 ```swift
-public struct Stats: MailchimpModel
+public struct Stats: Model
 ```
 
 Open and click rates for this subscriber.

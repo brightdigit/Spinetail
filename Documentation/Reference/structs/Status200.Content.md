@@ -3,7 +3,7 @@
 # `Status200.Content`
 
 ```swift
-public struct Content: MailchimpModel
+public struct Content: Model
 ```
 
 Get details of a Facebook ad.

@@ -3,7 +3,7 @@
 # `Emails.Tracking`
 
 ```swift
-public struct Tracking: MailchimpModel
+public struct Tracking: Model
 ```
 
 The tracking options for a campaign.

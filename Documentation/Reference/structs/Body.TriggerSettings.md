@@ -3,7 +3,7 @@
 # `Body.TriggerSettings`
 
 ```swift
-public struct TriggerSettings: MailchimpModel
+public struct TriggerSettings: Model
 ```
 
 Trigger settings for the Automation.

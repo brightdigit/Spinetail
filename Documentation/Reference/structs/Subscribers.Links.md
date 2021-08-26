@@ -3,7 +3,7 @@
 # `Subscribers.Links`
 
 ```swift
-public struct Links: MailchimpModel
+public struct Links: Model
 ```
 
 This object represents a link from the resource where it is found to another resource or action that may be performed.

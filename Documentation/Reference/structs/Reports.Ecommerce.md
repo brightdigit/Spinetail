@@ -3,7 +3,7 @@
 # `Reports.Ecommerce`
 
 ```swift
-public struct Ecommerce: MailchimpModel
+public struct Ecommerce: Model
 ```
 
 E-Commerce stats for a campaign.

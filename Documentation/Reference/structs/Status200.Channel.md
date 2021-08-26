@@ -3,7 +3,7 @@
 # `Status200.Channel`
 
 ```swift
-public struct Channel: MailchimpModel
+public struct Channel: Model
 ```
 
 Channel settings

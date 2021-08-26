@@ -3,7 +3,7 @@
 # `Status200.Members`
 
 ```swift
-public struct Members: MailchimpModel
+public struct Members: Model
 ```
 
 A list of a member's opens activity in a specific campaign.

@@ -3,7 +3,7 @@
 # `Status200.Twitter`
 
 ```swift
-public struct Twitter: MailchimpModel
+public struct Twitter: Model
 ```
 
 A summary of Twitter activity for a campaign.

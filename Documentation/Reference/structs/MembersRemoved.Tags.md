@@ -3,7 +3,7 @@
 # `MembersRemoved.Tags`
 
 ```swift
-public struct Tags: MailchimpModel
+public struct Tags: Model
 ```
 
 Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.

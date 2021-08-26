@@ -3,7 +3,7 @@
 # `Status200.CampaignDefaults`
 
 ```swift
-public struct CampaignDefaults: MailchimpModel
+public struct CampaignDefaults: Model
 ```
 
 [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list.

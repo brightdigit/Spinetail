@@ -3,7 +3,7 @@
 # `Status200.Webhooks`
 
 ```swift
-public struct Webhooks: MailchimpModel
+public struct Webhooks: Model
 ```
 
 Webhook configured for the given list.

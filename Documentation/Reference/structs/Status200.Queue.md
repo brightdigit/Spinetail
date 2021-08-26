@@ -3,7 +3,7 @@
 # `Status200.Queue`
 
 ```swift
-public struct Queue: MailchimpModel
+public struct Queue: Model
 ```
 
 Information about subscribers in an Automation email queue.

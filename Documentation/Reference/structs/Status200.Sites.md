@@ -3,7 +3,7 @@
 # `Status200.Sites`
 
 ```swift
-public struct Sites: MailchimpModel
+public struct Sites: Model
 ```
 
 Information about a specific connected site.

@@ -3,7 +3,7 @@
 # `Reports.Clicks`
 
 ```swift
-public struct Clicks: MailchimpModel
+public struct Clicks: Model
 ```
 
 An object describing the click activity for the campaign.

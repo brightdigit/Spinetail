@@ -3,7 +3,7 @@
 # `Status200.SignupForms`
 
 ```swift
-public struct SignupForms: MailchimpModel
+public struct SignupForms: Model
 ```
 
 List signup form.

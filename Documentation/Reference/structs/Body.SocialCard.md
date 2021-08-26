@@ -3,7 +3,7 @@
 # `Body.SocialCard`
 
 ```swift
-public struct SocialCard: MailchimpModel
+public struct SocialCard: Model
 ```
 
 The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/).

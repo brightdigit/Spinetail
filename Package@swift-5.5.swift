@@ -11,6 +11,7 @@ let package = Package(
     .watchOS(.v3)
   ],
   products: [
+    .library(name: "Prch", targets: ["Prch"]),
     .library(name: "Spinetail", targets: ["Spinetail"])
   ],
   dependencies: [
@@ -28,8 +29,8 @@ let package = Package(
     ) // dev
   ],
   targets: [
-    .target(name: "Spinetail", dependencies: [
-    ]),
+    .target(name: "Prch"),
+    .target(name: "Spinetail", dependencies: ["Prch"]),
     .testTarget(name: "SpinetailTests", dependencies: ["Spinetail"])
   ]
 )

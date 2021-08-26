@@ -3,7 +3,7 @@
 # `Status200.Customer`
 
 ```swift
-public struct Customer: MailchimpModel
+public struct Customer: Model
 ```
 
 Information about a specific customer.

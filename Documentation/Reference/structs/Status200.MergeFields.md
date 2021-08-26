@@ -3,7 +3,7 @@
 # `Status200.MergeFields`
 
 ```swift
-public struct MergeFields: MailchimpModel
+public struct MergeFields: Model
 ```
 
 A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.

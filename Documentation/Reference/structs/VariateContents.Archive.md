@@ -3,7 +3,7 @@
 # `VariateContents.Archive`
 
 ```swift
-public struct Archive: MailchimpModel
+public struct Archive: Model
 ```
 
 Available when uploading an archive to create campaign content. The archive should include all campaign content and images. [Learn more](https://mailchimp.com/help/import-a-custom-html-template/).

@@ -3,7 +3,7 @@
 # `Status200.FullSearch`
 
 ```swift
-public struct FullSearch: MailchimpModel
+public struct FullSearch: Model
 ```
 
 Partial matches of the provided search query.

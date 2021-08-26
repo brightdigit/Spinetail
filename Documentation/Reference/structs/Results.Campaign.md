@@ -3,7 +3,7 @@
 # `Results.Campaign`
 
 ```swift
-public struct Campaign: MailchimpModel
+public struct Campaign: Model
 ```
 
 A summary of an individual campaign's settings and content.

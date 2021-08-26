@@ -3,7 +3,7 @@
 # `Status200.AbuseReports`
 
 ```swift
-public struct AbuseReports: MailchimpModel
+public struct AbuseReports: Model
 ```
 
 Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.

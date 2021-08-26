@@ -3,7 +3,7 @@
 # `Status200.Errors`
 
 ```swift
-public struct Errors: MailchimpModel
+public struct Errors: Model
 ```
 
 Batch add/remove List members to/from static segment

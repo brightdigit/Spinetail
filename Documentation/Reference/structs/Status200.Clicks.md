@@ -3,7 +3,7 @@
 # `Status200.Clicks`
 
 ```swift
-public struct Clicks: MailchimpModel
+public struct Clicks: Model
 ```
 
 A summary of the click-throughs on the campaign's URL.

@@ -1,4 +1,5 @@
 import Foundation
+import Prch
 
 public extension Automations {
   /**
@@ -11,7 +12,7 @@ public extension Automations {
 
     public final class Request: APIRequest<Response> {
       /** Update information about an individual Automation workflow email. */
-      public struct Body: MailchimpModel {
+      public struct Body: Model {
         /** The delay settings for an automation email. */
         public var delay: Delay?
 
@@ -19,7 +20,7 @@ public extension Automations {
         public var settings: Settings?
 
         /** The delay settings for an automation email. */
-        public struct Delay: MailchimpModel {
+        public struct Delay: Model {
           /** The action that triggers the delay of an automation emails. */
           public enum Action: String, Codable, Equatable, CaseIterable {
             case signup
@@ -79,7 +80,7 @@ public extension Automations {
         }
 
         /** Settings for the campaign including the email subject, from name, and from email address. */
-        public struct Settings: MailchimpModel {
+        public struct Settings: Model {
           /** The 'from' name for the Automation (not an email address). */
           public var fromName: String?
 
@@ -182,7 +183,7 @@ public extension Automations {
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
       /** A summary of an individual Automation workflow email. */
-      public struct Status200: MailchimpModel {
+      public struct Status200: Model {
         /** The current status of the campaign. */
         public enum Status: String, Codable, Equatable, CaseIterable {
           case save
@@ -254,7 +255,7 @@ public extension Automations {
         public var workflowId: String?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-        public struct Links: MailchimpModel {
+        public struct Links: Model {
           /** The HTTP method that should be used when accessing the URL defined in 'href'. */
           public enum Method: String, Codable, Equatable, CaseIterable {
             case get = "GET"
@@ -311,7 +312,7 @@ public extension Automations {
         }
 
         /** The delay settings for an Automation email. */
-        public struct Delay: MailchimpModel {
+        public struct Delay: Model {
           /** The action that triggers the delay of an Automation email. */
           public enum Action: String, Codable, Equatable, CaseIterable {
             case previousCampaignSent = "previous_campaign_sent"
@@ -414,7 +415,7 @@ public extension Automations {
         }
 
         /** List settings for the campaign. */
-        public struct Recipients: MailchimpModel {
+        public struct Recipients: Model {
           /** The unique list id. */
           public var listId: String?
 
@@ -434,7 +435,7 @@ public extension Automations {
           public var segmentText: String?
 
           /** An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options. */
-          public struct SegmentOpts: MailchimpModel {
+          public struct SegmentOpts: Model {
             /** Segment match type. */
             public enum Match: String, Codable, Equatable, CaseIterable {
               case any
@@ -512,7 +513,7 @@ public extension Automations {
         }
 
         /** For sent campaigns, a summary of opens and clicks. */
-        public struct ReportSummary: MailchimpModel {
+        public struct ReportSummary: Model {
           /** The number of unique clicks divided by the total number of successful deliveries. */
           public var clickRate: Double?
 
@@ -564,7 +565,7 @@ public extension Automations {
         }
 
         /** Settings for the campaign including the email subject, from name, and from email address. */
-        public struct Settings: MailchimpModel {
+        public struct Settings: Model {
           /** Whether Mailchimp [authenticated](https://mailchimp.com/help/about-email-authentication/) the campaign. Defaults to `true`. */
           public var authenticate: Bool?
 
@@ -658,7 +659,7 @@ public extension Automations {
         }
 
         /** The preview for the campaign, rendered by social networks like Facebook and Twitter. [Learn more](https://mailchimp.com/help/enable-and-customize-social-cards/). */
-        public struct SocialCard: MailchimpModel {
+        public struct SocialCard: Model {
           /** A short summary of the campaign to display. */
           public var description: String?
 
@@ -692,7 +693,7 @@ public extension Automations {
         }
 
         /** The tracking options for a campaign. */
-        public struct Tracking: MailchimpModel {
+        public struct Tracking: Model {
           /** Deprecated */
           public var capsule: Capsule?
 
@@ -721,7 +722,7 @@ public extension Automations {
           public var textClicks: Bool?
 
           /** Deprecated */
-          public struct Capsule: MailchimpModel {
+          public struct Capsule: Model {
             /** Update contact notes for a campaign based on a subscriber's email address. */
             public var notes: Bool?
 
@@ -743,7 +744,7 @@ public extension Automations {
           }
 
           /** Deprecated */
-          public struct Salesforce: MailchimpModel {
+          public struct Salesforce: Model {
             /** Create a campaign in a connected Salesforce account. */
             public var campaign: Bool?
 
@@ -812,7 +813,7 @@ public extension Automations {
         }
 
         /** Available triggers for Automation workflows. */
-        public struct TriggerSettings: MailchimpModel {
+        public struct TriggerSettings: Model {
           /** The type of Automation workflow. */
           public enum WorkflowType: String, Codable, Equatable, CaseIterable {
             case abandonedBrowse
@@ -847,7 +848,7 @@ public extension Automations {
           public var workflowTitle: String?
 
           /** A workflow's runtime settings for an Automation. */
-          public struct Runtime: MailchimpModel {
+          public struct Runtime: Model {
             /** The days an Automation workflow can send. */
             public enum Days: String, Codable, Equatable, CaseIterable {
               case sunday
@@ -866,7 +867,7 @@ public extension Automations {
             public var hours: Hours?
 
             /** The hours an Automation workflow can send. */
-            public struct Hours: MailchimpModel {
+            public struct Hours: Model {
               /** When to send the Automation email. */
               public enum `Type`: String, Codable, Equatable, CaseIterable {
                 case sendAsap = "send_asap"
@@ -1018,7 +1019,7 @@ public extension Automations {
       }
 
       /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-      public struct DefaultResponse: MailchimpModel {
+      public struct DefaultResponse: Model {
         /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
         public var detail: String
 

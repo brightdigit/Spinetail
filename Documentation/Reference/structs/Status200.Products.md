@@ -3,7 +3,7 @@
 # `Status200.Products`
 
 ```swift
-public struct Products: MailchimpModel
+public struct Products: Model
 ```
 
 A collection of ecommerce products.

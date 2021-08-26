@@ -4,7 +4,7 @@
 
 -   [API](protocols/API.md)
 -   [APIResponseValue](protocols/APIResponseValue.md)
--   [MailchimpModel](protocols/MailchimpModel.md)
+-   [Model](protocols/Model.md)
 -   [RequestBehaviour](protocols/RequestBehaviour.md)
 -   [RequestEncoder](protocols/RequestEncoder.md)
 -   [Response](protocols/Response.md)

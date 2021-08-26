@@ -3,7 +3,7 @@
 # `TargetingSpecs.Locations`
 
 ```swift
-public struct Locations: MailchimpModel
+public struct Locations: Model
 ```
 
 Audience settings

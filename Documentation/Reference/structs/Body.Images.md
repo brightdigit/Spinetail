@@ -3,7 +3,7 @@
 # `Body.Images`
 
 ```swift
-public struct Images: MailchimpModel
+public struct Images: Model
 ```
 
 Information about a specific product image.

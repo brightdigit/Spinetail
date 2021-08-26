@@ -3,7 +3,7 @@
 # `Status200.RssOpts`
 
 ```swift
-public struct RssOpts: MailchimpModel
+public struct RssOpts: Model
 ```
 
 [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.

@@ -3,7 +3,7 @@
 # `Status200.Apps`
 
 ```swift
-public struct Apps: MailchimpModel
+public struct Apps: Model
 ```
 
 An authorized app.

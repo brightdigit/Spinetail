@@ -3,7 +3,7 @@
 # `Status200.LandingPages`
 
 ```swift
-public struct LandingPages: MailchimpModel
+public struct LandingPages: Model
 ```
 
 A summary of an individual landing page's settings and content.

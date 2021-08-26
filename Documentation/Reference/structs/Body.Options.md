@@ -3,7 +3,7 @@
 # `Body.Options`
 
 ```swift
-public struct Options: MailchimpModel
+public struct Options: Model
 ```
 
 The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.

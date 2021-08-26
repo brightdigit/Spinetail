@@ -3,7 +3,7 @@
 # `Emails.Delay`
 
 ```swift
-public struct Delay: MailchimpModel
+public struct Delay: Model
 ```
 
 The delay settings for an Automation email.

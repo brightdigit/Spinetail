@@ -1,4 +1,5 @@
 import Foundation
+import Prch
 
 public extension Reporting {
   /**
@@ -58,7 +59,7 @@ public extension Reporting {
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
       /** Get report of a Facebook ad. */
-      public struct Status200: MailchimpModel {
+      public struct Status200: Model {
         /** Campaign, Ad, or Page status */
         public enum Status: String, Codable, Equatable, CaseIterable {
           case save
@@ -161,7 +162,7 @@ public extension Reporting {
         public var webId: Int?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-        public struct Links: MailchimpModel {
+        public struct Links: Model {
           /** The HTTP method that should be used when accessing the URL defined in 'href'. */
           public enum Method: String, Codable, Equatable, CaseIterable {
             case get = "GET"
@@ -218,7 +219,7 @@ public extension Reporting {
         }
 
         /** Audience settings */
-        public struct Audience: MailchimpModel {
+        public struct Audience: Model {
           /** List or Facebook based audience */
           public enum SourceType: String, Codable, Equatable, CaseIterable {
             case facebook
@@ -249,7 +250,7 @@ public extension Reporting {
           public var type: `Type`?
 
           /** Audience settings */
-          public struct EmailSource: MailchimpModel {
+          public struct EmailSource: Model {
             /** Is the source reference a segment */
             public var isSegment: Bool?
 
@@ -295,7 +296,7 @@ public extension Reporting {
           }
 
           /** Audience settings */
-          public struct TargetingSpecs: MailchimpModel {
+          public struct TargetingSpecs: Model {
             public var gender: Int?
 
             public var interests: [Interests]?
@@ -307,7 +308,7 @@ public extension Reporting {
             public var minAge: Int?
 
             /** Audience settings */
-            public struct Interests: MailchimpModel {
+            public struct Interests: Model {
               public var name: String?
 
               public init(name: String? = nil) {
@@ -328,7 +329,7 @@ public extension Reporting {
             }
 
             /** Audience settings */
-            public struct Locations: MailchimpModel {
+            public struct Locations: Model {
               public var cities: [String]?
 
               public var countries: [String]?
@@ -425,7 +426,7 @@ public extension Reporting {
         }
 
         /** Get report of a Facebook ad. */
-        public struct AudienceActivity: MailchimpModel {
+        public struct AudienceActivity: Model {
           public var clicks: [Clicks]?
 
           public var impressions: [Impressions]?
@@ -433,7 +434,7 @@ public extension Reporting {
           public var revenue: [Revenue]?
 
           /** Get report of a Facebook ad. */
-          public struct Clicks: MailchimpModel {
+          public struct Clicks: Model {
             public var clicks: Int?
 
             public var date: String?
@@ -459,7 +460,7 @@ public extension Reporting {
           }
 
           /** Get report of a Facebook ad. */
-          public struct Impressions: MailchimpModel {
+          public struct Impressions: Model {
             public var date: String?
 
             public var impressions: Int?
@@ -485,7 +486,7 @@ public extension Reporting {
           }
 
           /** Get report of a Facebook ad. */
-          public struct Revenue: MailchimpModel {
+          public struct Revenue: Model {
             public var date: String?
 
             public var revenue: Double?
@@ -534,7 +535,7 @@ public extension Reporting {
         }
 
         /** Get report of a Facebook ad. */
-        public struct Budget: MailchimpModel {
+        public struct Budget: Model {
           /** Currency code */
           public var currencyCode: String?
 
@@ -568,7 +569,7 @@ public extension Reporting {
         }
 
         /** Channel settings */
-        public struct Channel: MailchimpModel {
+        public struct Channel: Model {
           /** Is this for facebook audience */
           public var fbPlacementAudience: Bool?
 
@@ -602,7 +603,7 @@ public extension Reporting {
         }
 
         /** List settings for the outreach */
-        public struct Recipients: MailchimpModel {
+        public struct Recipients: Model {
           /** The unique list id. */
           public var listId: String?
 
@@ -622,7 +623,7 @@ public extension Reporting {
           public var segmentText: String?
 
           /** An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options. */
-          public struct SegmentOpts: MailchimpModel {
+          public struct SegmentOpts: Model {
             /** Segment match type. */
             public enum Match: String, Codable, Equatable, CaseIterable {
               case any
@@ -700,7 +701,7 @@ public extension Reporting {
         }
 
         /** Report summary of facebook ad */
-        public struct ReportSummary: MailchimpModel {
+        public struct ReportSummary: Model {
           public var averageDailyBudget: AverageDailyBudget?
 
           public var averageOrderAmount: AverageOrderAmount?
@@ -738,7 +739,7 @@ public extension Reporting {
           public var uniqueClicks: Int?
 
           /** Report summary of facebook ad */
-          public struct AverageDailyBudget: MailchimpModel {
+          public struct AverageDailyBudget: Model {
             public var amount: Double?
 
             public var currencyCode: String?
@@ -764,7 +765,7 @@ public extension Reporting {
           }
 
           /** Report summary of facebook ad */
-          public struct AverageOrderAmount: MailchimpModel {
+          public struct AverageOrderAmount: Model {
             public var amount: Double?
 
             public var currencyCode: String?
@@ -790,7 +791,7 @@ public extension Reporting {
           }
 
           /** Report summary of facebook ad */
-          public struct CostPerClick: MailchimpModel {
+          public struct CostPerClick: Model {
             public var amount: Double?
 
             public var currencyCode: String?
@@ -816,7 +817,7 @@ public extension Reporting {
           }
 
           /** Report summary of facebook ad */
-          public struct Ecommerce: MailchimpModel {
+          public struct Ecommerce: Model {
             public var currencyCode: String?
 
             public var totalRevenue: Double?
@@ -842,7 +843,7 @@ public extension Reporting {
           }
 
           /** Report summary of facebook ad */
-          public struct ExtendedAt: MailchimpModel {
+          public struct ExtendedAt: Model {
             public var datetime: String?
 
             public var timezone: String?
@@ -1025,7 +1026,7 @@ public extension Reporting {
       }
 
       /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-      public struct DefaultResponse: MailchimpModel {
+      public struct DefaultResponse: Model {
         /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
         public var detail: String
 

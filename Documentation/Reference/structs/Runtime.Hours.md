@@ -3,7 +3,7 @@
 # `Runtime.Hours`
 
 ```swift
-public struct Hours: MailchimpModel
+public struct Hours: Model
 ```
 
 The hours an Automation workflow can send.

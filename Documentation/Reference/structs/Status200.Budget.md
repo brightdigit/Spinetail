@@ -3,7 +3,7 @@
 # `Status200.Budget`
 
 ```swift
-public struct Budget: MailchimpModel
+public struct Budget: Model
 ```
 
 Get report of a Facebook ad.

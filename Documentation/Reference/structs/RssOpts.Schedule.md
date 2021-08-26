@@ -3,7 +3,7 @@
 # `RssOpts.Schedule`
 
 ```swift
-public struct Schedule: MailchimpModel
+public struct Schedule: Model
 ```
 
 The schedule for sending the RSS Campaign.

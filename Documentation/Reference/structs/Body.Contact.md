@@ -3,7 +3,7 @@
 # `Body.Contact`
 
 ```swift
-public struct Contact: MailchimpModel
+public struct Contact: Model
 ```
 
 [Contact information displayed in campaign footers](https://mailchimp.com/help/about-campaign-footers/) to comply with international spam laws.

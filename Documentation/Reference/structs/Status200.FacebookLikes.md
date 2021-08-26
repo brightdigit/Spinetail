@@ -3,7 +3,7 @@
 # `Status200.FacebookLikes`
 
 ```swift
-public struct FacebookLikes: MailchimpModel
+public struct FacebookLikes: Model
 ```
 
 An object describing campaign engagement on Facebook.

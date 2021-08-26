@@ -3,7 +3,7 @@
 # `Status200.Timeseries`
 
 ```swift
-public struct Timeseries: MailchimpModel
+public struct Timeseries: Model
 ```
 
 Report details about a sent campaign.

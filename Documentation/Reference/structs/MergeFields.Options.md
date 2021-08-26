@@ -3,7 +3,7 @@
 # `MergeFields.Options`
 
 ```swift
-public struct Options: MailchimpModel
+public struct Options: Model
 ```
 
 Extra options for some merge field types.

@@ -3,7 +3,7 @@
 # `Reports.AbSplit`
 
 ```swift
-public struct AbSplit: MailchimpModel
+public struct AbSplit: Model
 ```
 
 General stats about different groups of an A/B Split campaign. Does not return information about Multivariate Campaigns.

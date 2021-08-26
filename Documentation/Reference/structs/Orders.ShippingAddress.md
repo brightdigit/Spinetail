@@ -3,7 +3,7 @@
 # `Orders.ShippingAddress`
 
 ```swift
-public struct ShippingAddress: MailchimpModel
+public struct ShippingAddress: Model
 ```
 
 The shipping address for the order.

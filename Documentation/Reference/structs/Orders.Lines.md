@@ -3,7 +3,7 @@
 # `Orders.Lines`
 
 ```swift
-public struct Lines: MailchimpModel
+public struct Lines: Model
 ```
 
 Information about a specific order line.

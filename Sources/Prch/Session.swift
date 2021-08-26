@@ -1,7 +1,9 @@
 import Foundation
+import Prch
 
 #if canImport(FoundationNetworking)
-  import FoundationNetworking
+  import Foundation
+import PrchNetworking
 #endif
 
 public protocol Session {

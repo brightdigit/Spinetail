@@ -3,7 +3,7 @@
 # `Status200.Orders`
 
 ```swift
-public struct Orders: MailchimpModel
+public struct Orders: Model
 ```
 
 Information about a specific order.

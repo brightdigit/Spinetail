@@ -3,7 +3,7 @@
 # `Status200.PromoRules`
 
 ```swift
-public struct PromoRules: MailchimpModel
+public struct PromoRules: Model
 ```
 
 Information about an Ecommerce Store's specific Promo Rule

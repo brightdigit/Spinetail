@@ -3,7 +3,7 @@
 # `Status200.Templates`
 
 ```swift
-public struct Templates: MailchimpModel
+public struct Templates: Model
 ```
 
 Information about a specific template.

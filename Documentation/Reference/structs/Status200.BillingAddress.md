@@ -3,7 +3,7 @@
 # `Status200.BillingAddress`
 
 ```swift
-public struct BillingAddress: MailchimpModel
+public struct BillingAddress: Model
 ```
 
 The billing address for the order.

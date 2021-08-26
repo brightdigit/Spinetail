@@ -3,7 +3,7 @@
 # `Tracking.Capsule`
 
 ```swift
-public struct Capsule: MailchimpModel
+public struct Capsule: Model
 ```
 
 Deprecated

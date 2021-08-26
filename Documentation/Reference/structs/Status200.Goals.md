@@ -3,7 +3,7 @@
 # `Status200.Goals`
 
 ```swift
-public struct Goals: MailchimpModel
+public struct Goals: Model
 ```
 
 A single instance of a goal activity.

@@ -3,7 +3,7 @@
 # `Status200.Files`
 
 ```swift
-public struct Files: MailchimpModel
+public struct Files: Model
 ```
 
 An individual file listed in the File Manager.

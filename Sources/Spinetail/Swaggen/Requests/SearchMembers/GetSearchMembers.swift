@@ -1,4 +1,5 @@
 import Foundation
+import Prch
 
 public extension SearchMembers {
   /**
@@ -62,7 +63,7 @@ public extension SearchMembers {
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
       /** Members found for given search term */
-      public struct Status200: MailchimpModel {
+      public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
         public var links: [Links]?
 
@@ -73,7 +74,7 @@ public extension SearchMembers {
         public var fullSearch: FullSearch?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-        public struct Links: MailchimpModel {
+        public struct Links: Model {
           /** The HTTP method that should be used when accessing the URL defined in 'href'. */
           public enum Method: String, Codable, Equatable, CaseIterable {
             case get = "GET"
@@ -130,7 +131,7 @@ public extension SearchMembers {
         }
 
         /** Exact matches of the provided search query. */
-        public struct ExactMatches: MailchimpModel {
+        public struct ExactMatches: Model {
           /** An array of objects, each representing a specific list member. */
           public var members: [Members]?
 
@@ -138,7 +139,7 @@ public extension SearchMembers {
           public var totalItems: Int?
 
           /** Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed. */
-          public struct Members: MailchimpModel {
+          public struct Members: Model {
             /** Subscriber's current status. */
             public enum Status: String, Codable, Equatable, CaseIterable {
               case subscribed
@@ -234,7 +235,7 @@ public extension SearchMembers {
             public var webId: Int?
 
             /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-            public struct Links: MailchimpModel {
+            public struct Links: Model {
               /** The HTTP method that should be used when accessing the URL defined in 'href'. */
               public enum Method: String, Codable, Equatable, CaseIterable {
                 case get = "GET"
@@ -291,7 +292,7 @@ public extension SearchMembers {
             }
 
             /** The most recent Note added about this member. */
-            public struct LastNote: MailchimpModel {
+            public struct LastNote: Model {
               /** The date and time the note was created in ISO 8601 format. */
               public var createdAt: DateTime
 
@@ -331,7 +332,7 @@ public extension SearchMembers {
             }
 
             /** Subscriber location information. */
-            public struct Location: MailchimpModel {
+            public struct Location: Model {
               /** The unique code for the location country. */
               public var countryCode: String?
 
@@ -383,7 +384,7 @@ public extension SearchMembers {
             }
 
             /** A single marketing permission a subscriber has either opted-in to or opted-out of. */
-            public struct MarketingPermissions: MailchimpModel {
+            public struct MarketingPermissions: Model {
               /** If the subscriber has opted-in to the marketing permission. */
               public var enabled: Bool?
 
@@ -417,7 +418,7 @@ public extension SearchMembers {
             }
 
             /** Open and click rates for this subscriber. */
-            public struct Stats: MailchimpModel {
+            public struct Stats: Model {
               /** A subscriber's average clickthrough rate. */
               public var avgClickRate: Double?
 
@@ -428,7 +429,7 @@ public extension SearchMembers {
               public var ecommerceData: EcommerceData?
 
               /** Ecommerce stats for the list member if the list is attached to a store. */
-              public struct EcommerceData: MailchimpModel {
+              public struct EcommerceData: Model {
                 /** The three-letter ISO 4217 code for the currency that the store accepts. */
                 public var currencyCode: String?
 
@@ -485,7 +486,7 @@ public extension SearchMembers {
             }
 
             /** Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed. */
-            public struct Tags: MailchimpModel {
+            public struct Tags: Model {
               /** The tag id. */
               public var id: Int?
 
@@ -631,7 +632,7 @@ public extension SearchMembers {
         }
 
         /** Partial matches of the provided search query. */
-        public struct FullSearch: MailchimpModel {
+        public struct FullSearch: Model {
           /** An array of objects, each representing a specific list member. */
           public var members: [Members]?
 
@@ -639,7 +640,7 @@ public extension SearchMembers {
           public var totalItems: Int?
 
           /** Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed. */
-          public struct Members: MailchimpModel {
+          public struct Members: Model {
             /** Subscriber's current status. */
             public enum Status: String, Codable, Equatable, CaseIterable {
               case subscribed
@@ -735,7 +736,7 @@ public extension SearchMembers {
             public var webId: Int?
 
             /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
-            public struct Links: MailchimpModel {
+            public struct Links: Model {
               /** The HTTP method that should be used when accessing the URL defined in 'href'. */
               public enum Method: String, Codable, Equatable, CaseIterable {
                 case get = "GET"
@@ -792,7 +793,7 @@ public extension SearchMembers {
             }
 
             /** The most recent Note added about this member. */
-            public struct LastNote: MailchimpModel {
+            public struct LastNote: Model {
               /** The date and time the note was created in ISO 8601 format. */
               public var createdAt: DateTime
 
@@ -832,7 +833,7 @@ public extension SearchMembers {
             }
 
             /** Subscriber location information. */
-            public struct Location: MailchimpModel {
+            public struct Location: Model {
               /** The unique code for the location country. */
               public var countryCode: String?
 
@@ -884,7 +885,7 @@ public extension SearchMembers {
             }
 
             /** A single marketing permission a subscriber has either opted-in to or opted-out of. */
-            public struct MarketingPermissions: MailchimpModel {
+            public struct MarketingPermissions: Model {
               /** If the subscriber has opted-in to the marketing permission. */
               public var enabled: Bool?
 
@@ -918,7 +919,7 @@ public extension SearchMembers {
             }
 
             /** Open and click rates for this subscriber. */
-            public struct Stats: MailchimpModel {
+            public struct Stats: Model {
               /** A subscriber's average clickthrough rate. */
               public var avgClickRate: Double?
 
@@ -929,7 +930,7 @@ public extension SearchMembers {
               public var ecommerceData: EcommerceData?
 
               /** Ecommerce stats for the list member if the list is attached to a store. */
-              public struct EcommerceData: MailchimpModel {
+              public struct EcommerceData: Model {
                 /** The three-letter ISO 4217 code for the currency that the store accepts. */
                 public var currencyCode: String?
 
@@ -986,7 +987,7 @@ public extension SearchMembers {
             }
 
             /** Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed. */
-            public struct Tags: MailchimpModel {
+            public struct Tags: Model {
               /** The tag id. */
               public var id: Int?
 
@@ -1155,7 +1156,7 @@ public extension SearchMembers {
       }
 
       /** An error generated by the Mailchimp API. Conforms to IETF draft 'draft-nottingham-http-problem-06'. */
-      public struct DefaultResponse: MailchimpModel {
+      public struct DefaultResponse: Model {
         /** A human-readable explanation specific to this occurrence of the problem. [Learn more about errors](/developer/guides/get-started-with-mailchimp-api-3/#Errors). */
         public var detail: String
 

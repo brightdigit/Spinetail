@@ -3,7 +3,7 @@
 # `Status200.NewMembers`
 
 ```swift
-public struct NewMembers: MailchimpModel
+public struct NewMembers: Model
 ```
 
 Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.

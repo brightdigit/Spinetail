@@ -3,7 +3,7 @@
 # `Reports.Timewarp`
 
 ```swift
-public struct Timewarp: MailchimpModel
+public struct Timewarp: Model
 ```
 
 Report details about a sent campaign.

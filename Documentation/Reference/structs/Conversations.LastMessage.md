@@ -3,7 +3,7 @@
 # `Conversations.LastMessage`
 
 ```swift
-public struct LastMessage: MailchimpModel
+public struct LastMessage: Model
 ```
 
 The most recent message in the conversation.

@@ -3,7 +3,7 @@
 # `Status200.Sources`
 
 ```swift
-public struct Sources: MailchimpModel
+public struct Sources: Model
 ```
 
 The possible sources of any events that can trigger the webhook and whether they are enabled.

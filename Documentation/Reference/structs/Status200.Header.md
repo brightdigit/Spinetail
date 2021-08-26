@@ -3,7 +3,7 @@
 # `Status200.Header`
 
 ```swift
-public struct Header: MailchimpModel
+public struct Header: Model
 ```
 
 Options for customizing your signup form header.

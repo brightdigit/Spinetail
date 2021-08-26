@@ -3,7 +3,7 @@
 # `Body.Tags`
 
 ```swift
-public struct Tags: MailchimpModel
+public struct Tags: Model
 ```
 
 Add or remove tags on a member by declaring a tag either active or inactive on a member.

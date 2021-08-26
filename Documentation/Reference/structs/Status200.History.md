@@ -3,7 +3,7 @@
 # `Status200.History`
 
 ```swift
-public struct History: MailchimpModel
+public struct History: Model
 ```
 
 A summary of a specific list's growth activity for a specific month and year.

@@ -3,7 +3,7 @@
 # `ReportSummary.AverageDailyBudget`
 
 ```swift
-public struct AverageDailyBudget: MailchimpModel
+public struct AverageDailyBudget: Model
 ```
 
 Report summary of facebook ad

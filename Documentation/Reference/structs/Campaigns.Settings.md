@@ -3,7 +3,7 @@
 # `Campaigns.Settings`
 
 ```swift
-public struct Settings: MailchimpModel
+public struct Settings: Model
 ```
 
 The settings for your campaign, including subject, from name, reply-to address, and more.

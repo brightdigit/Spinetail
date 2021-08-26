@@ -3,7 +3,7 @@
 # `Body.Operations`
 
 ```swift
-public struct Operations: MailchimpModel
+public struct Operations: Model
 ```
 
 Begin processing a batch operations request.

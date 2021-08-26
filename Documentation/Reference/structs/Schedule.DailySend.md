@@ -3,7 +3,7 @@
 # `Schedule.DailySend`
 
 ```swift
-public struct DailySend: MailchimpModel
+public struct DailySend: Model
 ```
 
 The days of the week to send a daily RSS Campaign.

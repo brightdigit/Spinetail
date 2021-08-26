@@ -3,7 +3,7 @@
 # `Tracking.Salesforce`
 
 ```swift
-public struct Salesforce: MailchimpModel
+public struct Salesforce: Model
 ```
 
 Deprecated

@@ -3,7 +3,7 @@
 # `Status200.ChimpChatter`
 
 ```swift
-public struct ChimpChatter: MailchimpModel
+public struct ChimpChatter: Model
 ```
 
 A Chimp Chatter message

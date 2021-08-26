@@ -3,7 +3,7 @@
 # `Status200.Unsubscribes`
 
 ```swift
-public struct Unsubscribes: MailchimpModel
+public struct Unsubscribes: Model
 ```
 
 A member who unsubscribed from a specific campaign.

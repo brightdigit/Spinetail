@@ -3,7 +3,7 @@
 # `Status200.Locations`
 
 ```swift
-public struct Locations: MailchimpModel
+public struct Locations: Model
 ```
 
 Top open locations for a specific campaign.

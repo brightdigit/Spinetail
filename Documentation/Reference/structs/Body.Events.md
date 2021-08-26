@@ -3,7 +3,7 @@
 # `Body.Events`
 
 ```swift
-public struct Events: MailchimpModel
+public struct Events: Model
 ```
 
 The events that can trigger the webhook and whether they are enabled.

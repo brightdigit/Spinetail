@@ -3,7 +3,7 @@
 # `Stores.Automations`
 
 ```swift
-public struct Automations: MailchimpModel
+public struct Automations: Model
 ```
 
 Details for the automations attached to this store.

@@ -3,7 +3,7 @@
 # `Status200.Categories`
 
 ```swift
-public struct Categories: MailchimpModel
+public struct Categories: Model
 ```
 
 Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.

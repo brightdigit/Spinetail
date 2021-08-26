@@ -3,7 +3,7 @@
 # `MembersRemoved.Location`
 
 ```swift
-public struct Location: MailchimpModel
+public struct Location: Model
 ```
 
 Subscriber location information.

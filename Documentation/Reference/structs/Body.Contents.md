@@ -3,7 +3,7 @@
 # `Body.Contents`
 
 ```swift
-public struct Contents: MailchimpModel
+public struct Contents: Model
 ```
 
 Collection of Content for List Signup Forms.

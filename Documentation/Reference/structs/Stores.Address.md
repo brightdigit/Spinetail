@@ -3,7 +3,7 @@
 # `Stores.Address`
 
 ```swift
-public struct Address: MailchimpModel
+public struct Address: Model
 ```
 
 The store address.

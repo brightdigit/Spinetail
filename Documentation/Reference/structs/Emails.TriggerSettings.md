@@ -3,7 +3,7 @@
 # `Emails.TriggerSettings`
 
 ```swift
-public struct TriggerSettings: MailchimpModel
+public struct TriggerSettings: Model
 ```
 
 Available triggers for Automation workflows.

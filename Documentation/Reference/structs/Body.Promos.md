@@ -3,7 +3,7 @@
 # `Body.Promos`
 
 ```swift
-public struct Promos: MailchimpModel
+public struct Promos: Model
 ```
 
 Information about a specific order.

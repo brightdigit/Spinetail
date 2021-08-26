@@ -3,7 +3,7 @@
 # `Status200.Batches`
 
 ```swift
-public struct Batches: MailchimpModel
+public struct Batches: Model
 ```
 
 The status of a batch request

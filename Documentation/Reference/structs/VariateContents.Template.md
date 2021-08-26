@@ -3,7 +3,7 @@
 # `VariateContents.Template`
 
 ```swift
-public struct Template: MailchimpModel
+public struct Template: Model
 ```
 
 Use this template to generate the HTML content for the campaign.

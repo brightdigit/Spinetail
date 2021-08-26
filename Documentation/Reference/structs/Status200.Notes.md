@@ -3,7 +3,7 @@
 # `Status200.Notes`
 
 ```swift
-public struct Notes: MailchimpModel
+public struct Notes: Model
 ```
 
 A specific note for a specific member.

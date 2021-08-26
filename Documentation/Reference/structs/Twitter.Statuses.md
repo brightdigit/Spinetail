@@ -3,7 +3,7 @@
 # `Twitter.Statuses`
 
 ```swift
-public struct Statuses: MailchimpModel
+public struct Statuses: Model
 ```
 
 An individual tweet.
