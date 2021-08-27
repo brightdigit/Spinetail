@@ -24,65 +24,68 @@ import Spinetail
 
 public struct MailchimpAPIKey : StorageKey {
   public typealias Value = MailchimpAPI
-  
-  
 }
 
-public protocol MailchimpClient {
-  
+
+extension Application {
+  public class Mailchimp {
+    public struct API : StorageKey {
+      public typealias Value = MailchimpAPI
+    }
+    public struct APIClient : StorageKey {
+      public typealias Value = MailchimpAPI
+    }
+    let application : Application
+    
+    var apiKey: String?
+    var api: MailchimpAPI!
+    var client: APIClient<VaporSession>
+  }
 }
 
 extension Application {
   var mailchimpAPIKey: String? {
-      get {
-        self.storage[MailchimpAPIKey.self]?.apiKey
-      }
-      set {
-        if let value = newValue {
+    get {
+      self.storage[MailchimpAPIKey.self]?.apiKey
+    }
+    set {
+      if let value = newValue {
         if let mailchimpAPI = MailchimpAPI(apiKey: value) {
           self.storage[MailchimpAPIKey.self] = mailchimpAPI
         }
-        }
       }
+    }
   }
   
-  var mailchimpAPI : MailchimpAPI? {
+  var mailchimpAPI : MailchimpAPI! {
     get {
       return self.storage[MailchimpAPIKey.self]
     }
   }
   
   public var mailchimp : APIClient<VaporSession>{
-        guard let apiKey = self.mailchimpAPIKey else {
-            fatalError("set mailchimp API Key")
-        }
-    guard let mailchimpAPI = MailchimpAPI(apiKey: apiKey) else {
-      fatalError("invalid API KEY")
+    guard let apiKey = self.mailchimpAPIKey else {
+      fatalError("set mailchimp API Key")
     }
-    let item = APIClient(api: mailchimpAPI, session: VaporSession(client: self.client))
-    return item
-    }
+    return APIClient(api: mailchimpAPI, session: VaporSession(client: self.client))
+  }
 }
 
-//extension Request {
-//    private struct StripeKey: StorageKey {
-//        typealias Value = StripeClient
-//    }
-//    public var stripe: StripeClient {
-//        if let existing = application.storage[StripeKey.self] {
-//            return existing.hopped(to: self.eventLoop)
-//        } else {
-//            guard let stripeKey = Environment.get("STRIPE_API_KEY") else {
-//                fatalError("STRIPE_API_KEY env var required")
-//            }
-//            let new = StripeClient(httpClient: self.application.http.client.shared,
-//                                   eventLoop: self.eventLoop,
-//                                   apiKey: stripeKey)
-//            self.application.storage[StripeKey.self] = new
-//            return new
-//        }
-//    }
-//}
+extension Request {
+  private struct MailchimpKey: StorageKey {
+    typealias Value = APIClient<VaporSession>
+  }
+  
+  public var mailchimp: APIClient<VaporSession> {
+    if let existing = application.storage[MailchimpKey.self] {
+      return existing.hopped(to: self.eventLoop)
+    }
+    let client = return APIClient(api: self.application.mailchimpAPI, session: VaporSession(client: self.client))
+    self.application.storage[StripeKey.self] = client
+    return client
+  }
+}
+}
 
 
 extension ClientResponse : Response {
@@ -96,17 +99,7 @@ extension ClientResponse : Response {
     }
   }
 }
-//struct VaporResponse : Response {
-//  var statusCode: Int? {
-//    response.status.code as Int
-//  }
-//
-//  var data: Data? {
-//    response.body.map(Data.init(buffer:))
-//  }
-//
-//  let response : ClientResponse
-//}
+
 
 extension EventLoopFuture : Task {
   
@@ -117,9 +110,9 @@ public struct VaporSession : Session {
       let newResult : APIResult<Response>
       switch result {
       case .failure(let error):
-          newResult = .failure(.networkError(error))
+        newResult = .failure(.networkError(error))
       case .success(let response):
-          newResult = .success( response)
+        newResult = .success( response)
       }
       completion(newResult)
     })
@@ -129,19 +122,10 @@ public struct VaporSession : Session {
   public typealias RequestType = ClientRequest
   
   public func createRequest<ResponseType>(_ request: APIRequest<ResponseType>, withBaseURL baseURL: URL, andHeaders headers: [String : String]) throws -> ClientRequest where ResponseType : APIResponseValue {
-//    URI(scheme: <#T##URI.Scheme#>, host: <#T##String?#>, port: <#T##Int?#>, path: <#T##String#>, query: <#T##String?#>, fragment: <#T##String?#>)
-//
-//    let scheme = URI.Scheme(baseURL.scheme)
-//    let host = baseURL.host
-//    let port = baseURL.port
-//    let path = baseURL.appendingPathComponent(request.path).path
-//    fatalError()
-    //ClientRequest.init(method: <#T##HTTPMethod#>, url: <#T##URI#>, headers: <#T##HTTPHeaders#>, body: <#T##ByteBuffer?#>)
     guard var componenets = URLComponents(url: baseURL.appendingPathComponent(request.path), resolvingAgainstBaseURL: false) else {
       throw APIClientError.badURL(baseURL, request.path)
     }
-
-    // filter out parameters with empty string value
+    
     var queryItems = [URLQueryItem]()
     for (key, value) in request.queryParameters {
       if !String(describing: value).isEmpty {
@@ -149,21 +133,19 @@ public struct VaporSession : Session {
       }
     }
     componenets.queryItems = queryItems
-
+    
     var urlRequest = ClientRequest()
     
     let uri = URI(scheme: .init(componenets.scheme), host: componenets.host, port: componenets.port, path: componenets.path, query: componenets.query, fragment: componenets.fragment)
     
     urlRequest.url = uri
     
-//    var urlRequest = URLRequest(url: url)
     urlRequest.method = HTTPMethod(rawValue: request.service.method)
-    //urlRequest.headers =
-//
+    
     urlRequest.headers = HTTPHeaders(request.headers.merging(headers, uniquingKeysWith: { requestHeaderKey, _ in
       requestHeaderKey
     }).map({$0}))
-//
+    
     if let encodeBody = request.encodeBody {
       urlRequest.body = try  ByteBuffer(data: encodeBody(JSONEncoder()))
     }
