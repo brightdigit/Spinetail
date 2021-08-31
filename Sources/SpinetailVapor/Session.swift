@@ -22,70 +22,94 @@ import NIO
 
 import Spinetail
 
-public struct MailchimpAPIKey : StorageKey {
-  public typealias Value = MailchimpAPI
+enum MailchimpError : Error {
+  case invalidAPIKey(String)
 }
-
-
 extension Application {
   public class Mailchimp {
-    public struct API : StorageKey {
-      public typealias Value = MailchimpAPI
+    internal init(application: Application) {
+      self.application = application
+      self.savedClient = nil
     }
-    public struct APIClient : StorageKey {
-      public typealias Value = MailchimpAPI
+    
+
+
+    public struct Key : StorageKey {
+      public typealias Value = Mailchimp
     }
     let application : Application
+    var savedClient: APIClient<VaporSession>?
     
-    var apiKey: String?
-    var api: MailchimpAPI!
-    var client: APIClient<VaporSession>
+    public func configure(withAPIKey apiKey: String) throws {
+      guard let api = MailchimpAPI(apiKey: apiKey) else {
+        throw MailchimpError.invalidAPIKey(apiKey)
+      }
+      self.savedClient = .init(api: api, session: VaporSession(client: application.client))
+    }
+    
+    
+    public var client : APIClient<VaporSession> {
+      guard let client = self.savedClient else {
+        fatalError("Missing configure with APIKey call.")
+      }
+      return client
+    }
+    
   }
 }
 
 extension Application {
-  var mailchimpAPIKey: String? {
+  public var mailchimp : Application.Mailchimp {
     get {
-      self.storage[MailchimpAPIKey.self]?.apiKey
-    }
-    set {
-      if let value = newValue {
-        if let mailchimpAPI = MailchimpAPI(apiKey: value) {
-          self.storage[MailchimpAPIKey.self] = mailchimpAPI
-        }
+      guard let mailchimp = self.storage[Mailchimp.Key] else {
+        let mailchimp = Mailchimp(application: self)
+        self.storage[Mailchimp.Key] = mailchimp
+        return mailchimp
       }
-    }
+      return mailchimp
+    }      
   }
-  
-  var mailchimpAPI : MailchimpAPI! {
-    get {
-      return self.storage[MailchimpAPIKey.self]
-    }
-  }
-  
-  public var mailchimp : APIClient<VaporSession>{
-    guard let apiKey = self.mailchimpAPIKey else {
-      fatalError("set mailchimp API Key")
-    }
-    return APIClient(api: mailchimpAPI, session: VaporSession(client: self.client))
-  }
+//  public var mailchimpAPIKey: String? {
+//    get {
+//      self.storage[MailchimpAPIKey.self]?.apiKey
+//    }
+//    set {
+//      if let value = newValue {
+//        if let mailchimpAPI = MailchimpAPI(apiKey: value) {
+//          self.storage[MailchimpAPIKey.self] = mailchimpAPI
+//        }
+//      }
+//    }
+//  }
+//
+//  var mailchimpAPI : MailchimpAPI! {
+//    get {
+//      return self.storage[MailchimpAPIKey.self]
+//    }
+//  }
+//
+//  public var mailchimp : APIClient<VaporSession>{
+//    guard let apiKey = self.mailchimpAPIKey else {
+//      fatalError("set mailchimp API Key")
+//    }
+//    return APIClient(api: mailchimpAPI, session: VaporSession(client: self.client))
+//  }
 }
 
 extension Request {
-  private struct MailchimpKey: StorageKey {
-    typealias Value = APIClient<VaporSession>
-  }
+
   
   public var mailchimp: APIClient<VaporSession> {
-    if let existing = application.storage[MailchimpKey.self] {
-      return existing.hopped(to: self.eventLoop)
-    }
-    let client = return APIClient(api: self.application.mailchimpAPI, session: VaporSession(client: self.client))
-    self.application.storage[StripeKey.self] = client
-    return client
+    let mailchimp = self.storage[Application.Mailchimp.Key]
+    
+    fatalError()
+//    if let existing = application.storage[MailchimpKey.self] {
+//      return existing.hopped(to: self.eventLoop)
+//    }
+
   }
 }
-}
+
 
 
 extension ClientResponse : Response {

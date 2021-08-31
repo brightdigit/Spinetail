@@ -14,7 +14,7 @@ let package = Package(
     .library(name: "Prch", targets: ["Prch"]),
     .library(name: "Spinetail", targets: ["Spinetail"]),
     .library(name: "SpinetailNIO", targets: ["SpinetailNIO"]),
-    .library(name: "SpinetailVapor", targets: ["SpinetailVapor"])
+    .library(name: "SpinetailVapor", targets: ["SpinetailVapor"]),
   ],
   dependencies: [
     .package(url: "https://github.com/shibapm/Komondor", from: "1.1.0"), // dev
@@ -37,6 +37,9 @@ let package = Package(
     .target(name: "Spinetail", dependencies: ["Prch"]),
     .target(name: "SpinetailNIO", dependencies: ["Spinetail", .product(name: "AsyncHTTPClient", package: "async-http-client")]),
     .target(name: "SpinetailVapor", dependencies: ["Spinetail", .product(name: "Vapor", package: "vapor")]),
+    .executableTarget(name: "SpinetailFoundationApp", dependencies: ["Spinetail"]),
+    .executableTarget(name: "SpinetailNIOApp", dependencies: ["SpinetailNIO"]),
+    .executableTarget(name: "SpinetailVaporApp", dependencies: ["SpinetailVapor"]),
     .testTarget(name: "SpinetailTests", dependencies: ["Spinetail"])
   ]
 )

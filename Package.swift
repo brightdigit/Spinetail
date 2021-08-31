@@ -13,8 +13,9 @@ let package = Package(
   products: [
     .library(name: "Prch", targets: ["Prch"]),
     .library(name: "Spinetail", targets: ["Spinetail"]),
-      .library(name: "SpinetailNIO", targets: ["SpinetailNIO"]),
-      .library(name: "SpinetailVapor", targets: ["SpinetailVapor"])
+    .library(name: "SpinetailNIO", targets: ["SpinetailNIO"]),
+    .library(name: "SpinetailVapor", targets: ["SpinetailVapor"]),
+    
   ],
   dependencies: [
     .package(url: "https://github.com/shibapm/Komondor", from: "1.1.0"), // dev

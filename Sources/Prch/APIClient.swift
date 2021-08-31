@@ -24,6 +24,8 @@ public class APIClient<SessionType: Session> {
       completion(.init(ResponseType.self, result: result, decoder: self.api.decoder))
     }
   }
+  
+  
 }
 
 extension Result where Success: APIResponseValue, Failure == APIClientError {
