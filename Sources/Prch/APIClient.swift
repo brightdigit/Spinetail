@@ -7,8 +7,8 @@ public class APIClient<SessionType: Session> {
     self.session = session
   }
 
-  let api: API
-  let session: SessionType
+  public let api: API
+  public let session: SessionType
 
   @discardableResult
   public func request<ResponseType>(_ request: APIRequest<ResponseType>, _ completion: @escaping (APIResult<ResponseType>) -> Void) -> Task? {
