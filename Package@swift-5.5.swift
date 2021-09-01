@@ -36,7 +36,7 @@ let package = Package(
     .target(name: "Prch"),
     .target(name: "Spinetail", dependencies: ["Prch"]),
     .target(name: "SpinetailNIO", dependencies: ["Spinetail", .product(name: "AsyncHTTPClient", package: "async-http-client")]),
-    .target(name: "SpinetailVapor", dependencies: ["Spinetail", .product(name: "Vapor", package: "vapor")]),
+    .target(name: "SpinetailVapor", dependencies: ["Spinetail", "SpinetailNIO", .product(name: "Vapor", package: "vapor")]),
     .executableTarget(name: "SpinetailFoundationApp", dependencies: ["Spinetail"]),
     .executableTarget(name: "SpinetailNIOApp", dependencies: ["SpinetailNIO"]),
     .executableTarget(name: "SpinetailVaporApp", dependencies: ["SpinetailVapor"]),

@@ -19,161 +19,90 @@ import Vapor
 import NIOHTTP1
 import NIOCore
 import NIO
-
 import Spinetail
+import AsyncHTTPClient
 
 enum MailchimpError : Error {
   case invalidAPIKey(String)
 }
-extension Application {
-  public class Mailchimp {
-    internal init(application: Application) {
-      self.application = application
-      self.savedClient = nil
-    }
-    
 
-
-    public struct Key : StorageKey {
-      public typealias Value = Mailchimp
-    }
-    let application : Application
-    var savedClient: APIClient<VaporSession>?
-    
-    public func configure(withAPIKey apiKey: String) throws {
-      guard let api = MailchimpAPI(apiKey: apiKey) else {
-        throw MailchimpError.invalidAPIKey(apiKey)
-      }
-      self.savedClient = .init(api: api, session: VaporSession(client: application.client))
-    }
-    
-    
-    public var client : APIClient<VaporSession> {
-      guard let client = self.savedClient else {
-        fatalError("Missing configure with APIKey call.")
-      }
-      return client
-    }
-    
-  }
-}
-
-extension Application {
-  public var mailchimp : Application.Mailchimp {
-    get {
-      guard let mailchimp = self.storage[Mailchimp.Key] else {
-        let mailchimp = Mailchimp(application: self)
-        self.storage[Mailchimp.Key] = mailchimp
-        return mailchimp
-      }
-      return mailchimp
-    }      
-  }
-//  public var mailchimpAPIKey: String? {
-//    get {
-//      self.storage[MailchimpAPIKey.self]?.apiKey
-//    }
-//    set {
-//      if let value = newValue {
-//        if let mailchimpAPI = MailchimpAPI(apiKey: value) {
-//          self.storage[MailchimpAPIKey.self] = mailchimpAPI
-//        }
-//      }
-//    }
-//  }
-//
-//  var mailchimpAPI : MailchimpAPI! {
-//    get {
-//      return self.storage[MailchimpAPIKey.self]
-//    }
-//  }
-//
-//  public var mailchimp : APIClient<VaporSession>{
-//    guard let apiKey = self.mailchimpAPIKey else {
-//      fatalError("set mailchimp API Key")
-//    }
-//    return APIClient(api: mailchimpAPI, session: VaporSession(client: self.client))
-//  }
+public protocol Mailchimp {
+  var client : APIClient<SessionClient> { get }
 }
 
 extension Request {
 
-  
-  public var mailchimp: APIClient<VaporSession> {
-    let mailchimp = self.storage[Application.Mailchimp.Key]
+  public var mailchimp : Mailchimp {
+    guard let mailchimp = self.application.storage[MailchimpImpl.Key.self] else {
+      fatalError("Mailchimp is not configured.")
+    }
     
-    fatalError()
-//    if let existing = application.storage[MailchimpKey.self] {
-//      return existing.hopped(to: self.eventLoop)
-//    }
-
+    return mailchimp.forRequest(self)
   }
 }
 
 
-
-extension ClientResponse : Response {
-  public var statusCode: Int? {
-    Int(self.status.code)
-  }
-  
-  public var data: Data? {
-    return self.body.map{
-      Data(buffer: $0)
-    }
-  }
+public protocol ApplicationMailchimp : Mailchimp {
+   func configure(withAPIKey apiKey: String) throws
 }
 
+protocol ClientContainer {
+  var client : Client { get }
+}
 
-extension EventLoopFuture : Task {
+extension Request : ClientContainer {
   
 }
-public struct VaporSession : Session {
-  public func beginRequest(_ request: ClientRequest, _ completion: @escaping ((APIResult<Response>) -> Void)) -> Task {
-    client.send(request).always({ result in
-      let newResult : APIResult<Response>
-      switch result {
-      case .failure(let error):
-        newResult = .failure(.networkError(error))
-      case .success(let response):
-        newResult = .success( response)
-      }
-      completion(newResult)
-    })
+
+extension Application : ClientContainer {
+  
+}
+class MailchimpImpl : ApplicationMailchimp{
+  internal init(application: ClientContainer, api: MailchimpAPI? = nil) {
+    self.application = application
+    self.api = api
   }
   
-  let client: Client
-  public typealias RequestType = ClientRequest
+
+
+  public struct Key : StorageKey {
+    public typealias Value = MailchimpImpl
+  }
+  let application : ClientContainer
+  var api : MailchimpAPI?
   
-  public func createRequest<ResponseType>(_ request: APIRequest<ResponseType>, withBaseURL baseURL: URL, andHeaders headers: [String : String]) throws -> ClientRequest where ResponseType : APIResponseValue {
-    guard var componenets = URLComponents(url: baseURL.appendingPathComponent(request.path), resolvingAgainstBaseURL: false) else {
-      throw APIClientError.badURL(baseURL, request.path)
+  public func configure(withAPIKey apiKey: String) throws {
+    guard let api = MailchimpAPI(apiKey: apiKey) else {
+      throw MailchimpError.invalidAPIKey(apiKey)
+    }
+    self.api = api
+  }
+  
+  var client: APIClient<SessionClient> {
+    guard let api = self.api else {
+      fatalError("Mailchimp is not configured.")
     }
     
-    var queryItems = [URLQueryItem]()
-    for (key, value) in request.queryParameters {
-      if !String(describing: value).isEmpty {
-        queryItems.append(URLQueryItem(name: key, value: String(describing: value)))
-      }
-    }
-    componenets.queryItems = queryItems
-    
-    var urlRequest = ClientRequest()
-    
-    let uri = URI(scheme: .init(componenets.scheme), host: componenets.host, port: componenets.port, path: componenets.path, query: componenets.query, fragment: componenets.fragment)
-    
-    urlRequest.url = uri
-    
-    urlRequest.method = HTTPMethod(rawValue: request.service.method)
-    
-    urlRequest.headers = HTTPHeaders(request.headers.merging(headers, uniquingKeysWith: { requestHeaderKey, _ in
-      requestHeaderKey
-    }).map({$0}))
-    
-    if let encodeBody = request.encodeBody {
-      urlRequest.body = try  ByteBuffer(data: encodeBody(JSONEncoder()))
-    }
-    return urlRequest
+    return APIClient(api: api, session: SessionClient(client: self.application.client))
+  }
+  
+  func forRequest(_ request: Request) -> Mailchimp {
+    return MailchimpImpl(application: request, api: api)
   }
   
 }
+
+extension Application {
+  
+
+  
+  public var mailchimp : ApplicationMailchimp {
+    guard let mailchimp = self.storage[MailchimpImpl.Key.self] else {
+      let mailchimp = MailchimpImpl(application: self)
+      self.storage[MailchimpImpl.Key.self] = mailchimp
+      return mailchimp
+    }
+    return mailchimp
+  }
+}
+
