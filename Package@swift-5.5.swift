@@ -12,8 +12,9 @@ let package = Package(
   ],
   products: [
     .library(name: "Prch", targets: ["Prch"]),
+    .library(name: "PrchNIO", targets: ["PrchNIO"]),
+    .library(name: "PrchVapor", targets: ["PrchVapor"]),
     .library(name: "Spinetail", targets: ["Spinetail"]),
-    .library(name: "SpinetailNIO", targets: ["SpinetailNIO"]),
     .library(name: "SpinetailVapor", targets: ["SpinetailVapor"]),
   ],
   dependencies: [
@@ -35,10 +36,11 @@ let package = Package(
   targets: [
     .target(name: "Prch"),
     .target(name: "Spinetail", dependencies: ["Prch"]),
-    .target(name: "SpinetailNIO", dependencies: ["Spinetail", .product(name: "AsyncHTTPClient", package: "async-http-client")]),
-    .target(name: "SpinetailVapor", dependencies: ["Spinetail", "SpinetailNIO", .product(name: "Vapor", package: "vapor")]),
+    .target(name: "PrchNIO", dependencies: ["Prch", .product(name: "AsyncHTTPClient", package: "async-http-client")]),
+    .target(name: "PrchVapor", dependencies: ["PrchNIO", .product(name: "Vapor", package: "vapor")]),
+    .target(name: "SpinetailVapor", dependencies: ["Spinetail", "PrchVapor"]),
     .executableTarget(name: "SpinetailFoundationApp", dependencies: ["Spinetail"]),
-    .executableTarget(name: "SpinetailNIOApp", dependencies: ["SpinetailNIO"]),
+    .executableTarget(name: "SpinetailNIOApp", dependencies: ["PrchNIO", "Spinetail"]),
     .executableTarget(name: "SpinetailVaporApp", dependencies: ["SpinetailVapor"]),
     .testTarget(name: "SpinetailTests", dependencies: ["Spinetail"])
   ]

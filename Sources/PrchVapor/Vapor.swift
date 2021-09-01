@@ -7,7 +7,7 @@
 
 import Prch
 import Vapor
-import SpinetailNIO
+import PrchNIO
 
 extension ClientResponse : Prch.Response {
   public var data: Data? {
@@ -21,6 +21,10 @@ extension ClientResponse : Prch.Response {
   }
 }
 public struct SessionClient : EventLoopSession {
+  public init(client: Client) {
+    self.client = client
+  }
+  
   public func nextEventLoop() -> EventLoop {
     self.client.eventLoop
   }

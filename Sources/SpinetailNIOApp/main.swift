@@ -2,7 +2,7 @@
 import Foundation
 import Prch
 import Spinetail
-import SpinetailNIO
+import PrchNIO
 import AsyncHTTPClient
 
 let httpClient = HTTPClient(eventLoopGroupProvider: .createNew)
@@ -44,48 +44,3 @@ let response = try! client.request(
 
 
 dump(response)
-//
-//{ result in
-//  guard let templateId = try? result.get().success?.id else {
-//    return
-//  }
-//  let request = Campaigns.PostCampaigns.Request(body:
-//    .init(
-//      type: .regular,
-//      contentType: .template,
-//      recipients: .init(
-//        listId: "6f357ca335"
-//      ),
-//      settings: .init(fromName: "Leo", replyTo: "leogdion+mailchimpdev@brightdigit.com", subjectLine: "Hello World", templateId: templateId)
-//    ))
-//  client.request(request) { result in
-//    switch result {
-//    case let .success(.status200(response)):
-//      guard let campaignId = response.id else {
-//        debugPrint("response: \(response)")
-//        break
-//      }
-//      client.request(Campaigns.PostCampaignsIdActionsSend.Request(campaignId: campaignId)) { result in
-//        switch result {
-//        case .success(.status204):
-//          debugPrint("campaign sent")
-//
-//        case let .success(.defaultResponse(statusCode: code, response)):
-//          debugPrint("status: \(response)")
-//
-//        case let .failure(error):
-//          debugPrint("error: \(error)")
-//        }
-//        exp.fulfill()
-//      }
-//      return
-//
-//    case let .success(.defaultResponse(statusCode: code, response)):
-//      debugPrint("status: \(response)")
-//
-//    case let .failure(error):
-//      debugPrint("error: \(error)")
-//    }
-//    exp.fulfill()
-//  }
-//}

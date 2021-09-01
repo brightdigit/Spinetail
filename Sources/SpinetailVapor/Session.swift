@@ -21,6 +21,7 @@ import NIOCore
 import NIO
 import Spinetail
 import AsyncHTTPClient
+import PrchVapor
 
 enum MailchimpError : Error {
   case invalidAPIKey(String)

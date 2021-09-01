@@ -1,11 +1,8 @@
-import NIOCore
 import Foundation
-import AsyncHTTPClient
-import NIOHTTP1
 import Prch
-import Spinetail
-
-
+import AsyncHTTPClient
+import NIOCore
+import NIOHTTP1
 
 public protocol EventLoopSession : Session {
   func beginRequest(_ request: RequestType) -> EventLoopFuture<Response>
