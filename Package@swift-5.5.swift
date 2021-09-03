@@ -11,7 +11,6 @@ let package = Package(
     .watchOS(.v3)
   ],
   products: [
-    .library(name: "Prch", targets: ["Prch"]),
     .library(name: "PrchNIO", targets: ["PrchNIO"]),
     .library(name: "PrchVapor", targets: ["PrchVapor"]),
     .library(name: "Spinetail", targets: ["Spinetail"]),
@@ -31,10 +30,10 @@ let package = Package(
       .branch("master")
     ), // dev
     .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.0.0"),
-  .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0")
+  .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
+    .package(url: "https://github.com/brightdigit/Prch.git", .branch("develop"))
   ],
   targets: [
-    .target(name: "Prch"),
     .target(name: "Spinetail", dependencies: ["Prch"]),
     .target(name: "PrchNIO", dependencies: ["Prch", .product(name: "AsyncHTTPClient", package: "async-http-client")]),
     .target(name: "PrchVapor", dependencies: ["PrchNIO", .product(name: "Vapor", package: "vapor")]),
