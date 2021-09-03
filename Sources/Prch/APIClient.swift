@@ -1,5 +1,4 @@
 import Foundation
-import Prch
 
 public class APIClient<SessionType: Session> {
   public init(api: API, session: SessionType) {
@@ -7,8 +6,8 @@ public class APIClient<SessionType: Session> {
     self.session = session
   }
 
-  let api: API
-  let session: SessionType
+  public let api: API
+  public let session: SessionType
 
   @discardableResult
   public func request<ResponseType>(_ request: APIRequest<ResponseType>, _ completion: @escaping (APIResult<ResponseType>) -> Void) -> Task? {
@@ -24,6 +23,8 @@ public class APIClient<SessionType: Session> {
       completion(.init(ResponseType.self, result: result, decoder: self.api.decoder))
     }
   }
+  
+  
 }
 
 extension Result where Success: APIResponseValue, Failure == APIClientError {

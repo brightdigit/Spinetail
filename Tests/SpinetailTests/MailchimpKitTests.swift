@@ -1,6 +1,6 @@
 @testable import Spinetail
 import XCTest
-
+import Prch
 final class SpinetailTests: XCTestCase {
   func testCampaign() throws {
     let exp = expectation(description: "post campaign")

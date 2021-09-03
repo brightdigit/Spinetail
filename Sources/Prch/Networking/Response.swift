@@ -1,5 +1,4 @@
 import Foundation
-import Prch
 
 public protocol Response {
   var statusCode: Int? { get }
@@ -7,8 +6,7 @@ public protocol Response {
 }
 
 #if canImport(FoundationNetworking)
-  import Foundation
-import PrchNetworking
+  import FoundationNetworking
 #endif
 
 struct URLSessionResponse: Response {

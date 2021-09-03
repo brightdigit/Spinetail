@@ -1,10 +1,8 @@
 import Foundation
 import Prch
-import Prch
 
 #if canImport(FoundationNetworking)
-  import Foundation
-import PrchNetworking
+  import FoundationNetworking
 #endif
 
 public struct MailchimpAPI: API {
