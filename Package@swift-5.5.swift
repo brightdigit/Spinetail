@@ -11,10 +11,7 @@ let package = Package(
     .watchOS(.v3)
   ],
   products: [
-    .library(name: "PrchNIO", targets: ["PrchNIO"]),
-    .library(name: "PrchVapor", targets: ["PrchVapor"]),
     .library(name: "Spinetail", targets: ["Spinetail"]),
-    .library(name: "SpinetailVapor", targets: ["SpinetailVapor"]),
   ],
   dependencies: [
     .package(url: "https://github.com/shibapm/Komondor", from: "1.1.0"), // dev
@@ -30,17 +27,12 @@ let package = Package(
       .branch("master")
     ), // dev
     .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.0.0"),
-  .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
+    .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
     .package(url: "https://github.com/brightdigit/Prch.git", .branch("develop"))
   ],
   targets: [
     .target(name: "Spinetail", dependencies: ["Prch"]),
-    .target(name: "PrchNIO", dependencies: ["Prch", .product(name: "AsyncHTTPClient", package: "async-http-client")]),
-    .target(name: "PrchVapor", dependencies: ["PrchNIO", .product(name: "Vapor", package: "vapor")]),
-    .target(name: "SpinetailVapor", dependencies: ["Spinetail", "PrchVapor"]),
     .executableTarget(name: "SpinetailFoundationApp", dependencies: ["Spinetail"]),
-    .executableTarget(name: "SpinetailNIOApp", dependencies: ["PrchNIO", "Spinetail"]),
-    .executableTarget(name: "SpinetailVaporApp", dependencies: ["SpinetailVapor"]),
     .testTarget(name: "SpinetailTests", dependencies: ["Spinetail"])
   ]
 )
