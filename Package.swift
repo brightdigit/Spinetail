@@ -14,12 +14,12 @@ let package = Package(
     .library(name: "Spinetail", targets: ["Spinetail"])
   ],
   dependencies: [
-    .package(url: "https://github.com/shibapm/Komondor", from: "1.1.0"), // dev
-    .package(url: "https://github.com/eneko/SourceDocs", from: "1.2.1"), // dev
-    .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.47.0"), // dev
-    .package(url: "https://github.com/realm/SwiftLint", from: "0.43.0"), // dev
-    .package(url: "https://github.com/shibapm/Rocket.git", from: "1.2.0"), // dev
-    .package(url: "https://github.com/mattpolzin/swift-test-codecov", .branch("master")), // dev
+//    .package(url: "https://github.com/shibapm/Komondor", from: "1.1.0"), // dev
+//    .package(url: "https://github.com/eneko/SourceDocs", from: "1.2.1"), // dev
+//    .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.47.0"), // dev
+//    .package(url: "https://github.com/realm/SwiftLint", from: "0.43.0"), // dev
+//    .package(url: "https://github.com/shibapm/Rocket.git", from: "1.2.0"), // dev
+//    .package(url: "https://github.com/mattpolzin/swift-test-codecov", .branch("master")), // dev
     .package(url: "https://github.com/brightdigit/Prch.git", from: "0.1.0")
   ],
   targets: [
