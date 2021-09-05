@@ -1,4 +1,3 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/macos,swift,SwiftPackageManager,Xcode
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,swift,SwiftPackageManager,Xcode
 
@@ -47,6 +46,9 @@ xcuserdata/
 build/
 DerivedData/
 *.moved-aside
+=======
+# Xcode
+>>>>>>> sdk
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -55,6 +57,7 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+<<<<<<< HEAD
 
 ## Obj-C/Swift specific
 *.hmap
@@ -72,8 +75,8 @@ playground.xcworkspace
 # Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
 # Packages/
 # Package.pins
-# Package.resolved
-# *.xcodeproj
+Package.resolved
+*.xcodeproj
 # Xcode automatically generates this directory with a .xcworkspacedata file and xcuserdata
 # hence it is not needed unless you have added a package configuration file to your project
 .swiftpm
@@ -139,3 +142,5 @@ xcuserdata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,swift,SwiftPackageManager,Xcode
+
+*.pxd/QuickLook
