@@ -12,7 +12,7 @@
   }
 
   public func __allTests() -> [XCTestCaseEntry] {
-    return [
+    [
       testCase(SpinetailTests.__allTests__SpinetailTests)
     ]
   }
