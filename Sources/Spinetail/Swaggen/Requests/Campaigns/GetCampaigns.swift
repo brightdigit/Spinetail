@@ -585,7 +585,7 @@ public extension Campaigns {
             public var recipientCount: Int?
 
             /** An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options. */
-            public var segmentOpts: SegmentOpts?
+            //public var segmentOpts: SegmentOpts?
 
             /** A description of the [segment](https://mailchimp.com/help/create-and-send-to-a-segment/) used for the campaign. Formatted as a string marked up with HTML. */
             public var segmentText: String?
@@ -641,7 +641,7 @@ public extension Campaigns {
               self.listIsActive = listIsActive
               self.listName = listName
               self.recipientCount = recipientCount
-              self.segmentOpts = segmentOpts
+              //self.segmentOpts = segmentOpts
               self.segmentText = segmentText
             }
 
@@ -652,7 +652,7 @@ public extension Campaigns {
               listIsActive = try container.decodeIfPresent("list_is_active")
               listName = try container.decodeIfPresent("list_name")
               recipientCount = try container.decodeIfPresent("recipient_count")
-              segmentOpts = try container.decodeIfPresent("segment_opts")
+              //segmentOpts = try container.decodeIfPresent("segment_opts")
               segmentText = try container.decodeIfPresent("segment_text")
             }
 
@@ -663,7 +663,7 @@ public extension Campaigns {
               try container.encodeIfPresent(listIsActive, forKey: "list_is_active")
               try container.encodeIfPresent(listName, forKey: "list_name")
               try container.encodeIfPresent(recipientCount, forKey: "recipient_count")
-              try container.encodeIfPresent(segmentOpts, forKey: "segment_opts")
+              //try container.encodeIfPresent(segmentOpts, forKey: "segment_opts")
               try container.encodeIfPresent(segmentText, forKey: "segment_text")
             }
           }
