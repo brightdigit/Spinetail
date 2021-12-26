@@ -6,8 +6,7 @@
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__SpinetailTests = [
-      ("testCampaign", testCampaign),
-      ("testExample", testExample)
+      ("testCampaign", testCampaign)
     ]
   }
 
