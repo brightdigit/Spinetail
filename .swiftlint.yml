@@ -102,17 +102,22 @@ cyclomatic_complexity:
   - 9
 file_length:
   - 200
-  - 550
+  - 2000
+type_body_length:
+  - 200
+  - 1600
 function_body_length:
   - 15
-  - 25
+  - 50
 function_parameter_count: 8
 line_length:
   - 90
-  - 90
+  - 800
 identifier_name:
   excluded:
     - id
+    - a 
+    - b
 excluded:
   - Tests/*/XCTestManifests.swift
   - DerivedData
