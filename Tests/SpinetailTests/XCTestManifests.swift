@@ -6,13 +6,12 @@
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__SpinetailTests = [
-      ("testCampaign", testCampaign),
-      ("testExample", testExample)
+      ("testCampaign", testCampaign)
     ]
   }
 
   public func __allTests() -> [XCTestCaseEntry] {
-    [
+    return [
       testCase(SpinetailTests.__allTests__SpinetailTests)
     ]
   }
