@@ -1,12 +1,749 @@
 <p align="center">
-    <img alt="Spinetail" title="Spinetail" src="Assets/logo.svg" height="200">
+	<img alt="Spinetail" title="Spinetail" src="Assets/logo.svg" height="200">
 </p>
 
-# Spinetail
+<h1 align="center"> Spinetail </h1>
 
-Swift Package for working with the Mailchimp API.
+Work with Mailchimp's API in Swift.
 
-This is an api generated from a OpenAPI 3.0 spec with [SwagGen](https://github.com/yonaskolb/SwagGen)
+[![SwiftPM](https://img.shields.io/badge/SPM-Linux%20%7C%20iOS%20%7C%20macOS%20%7C%20watchOS%20%7C%20tvOS-success?logo=swift)](https://swift.org)
+[![Twitter](https://img.shields.io/badge/twitter-@brightdigit-blue.svg?style=flat)](http://twitter.com/brightdigit)
+![GitHub](https://img.shields.io/github/license/brightdigit/Spinetail)
+![GitHub issues](https://img.shields.io/github/issues/brightdigit/Spinetail)
+
+[![macOS](https://github.com/brightdigit/Spinetail/workflows/macOS/badge.svg)](https://github.com/brightdigit/Spinetail/actions?query=workflow%3AmacOS)
+[![ubuntu](https://github.com/brightdigit/Spinetail/workflows/ubuntu/badge.svg)](https://github.com/brightdigit/Spinetail/actions?query=workflow%3Aubuntu)
+[![Travis (.com)](https://img.shields.io/travis/com/brightdigit/Spinetail?logo=travis&?label=travis-ci)](https://travis-ci.com/brightdigit/Spinetail)
+[![Bitrise](https://img.shields.io/bitrise/b2595eab70c25d1b?logo=bitrise&?label=bitrise&token=rHUhEUFkU2RUL-KGmrKX1Q)](https://app.bitrise.io/app/b2595eab70c25d1b)
+[![CircleCI](https://img.shields.io/circleci/build/github/brightdigit/Spinetail?logo=circleci&?label=circle-ci&token=45c9ff6a86f9ac6c1ec8c85c3bc02f4d8859aa6b)](https://app.circleci.com/pipelines/github/brightdigit/Spinetail)
+
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FSpinetail%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/brightdigit/Spinetail)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FSpinetail%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/brightdigit/Spinetail)
+
+
+[![Codecov](https://img.shields.io/codecov/c/github/brightdigit/Spinetail)](https://codecov.io/gh/brightdigit/Spinetail)
+[![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/brightdigit/Spinetail)](https://www.codefactor.io/repository/github/brightdigit/Spinetail)
+[![codebeat badge](https://codebeat.co/badges/c47b7e58-867c-410b-80c5-57e10140ba0f)](https://codebeat.co/projects/github-com-brightdigit-Spinetail-main)
+[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/brightdigit/Spinetail)](https://codeclimate.com/github/brightdigit/Spinetail)
+[![Code Climate technical debt](https://img.shields.io/codeclimate/tech-debt/brightdigit/Spinetail?label=debt)](https://codeclimate.com/github/brightdigit/Spinetail)
+[![Code Climate issues](https://img.shields.io/codeclimate/issues/brightdigit/Spinetail)](https://codeclimate.com/github/brightdigit/Spinetail)
+[![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
+
+![Demonstration of Spinetail via Command-Line App `mistdemoc`](Assets/SpinetailDemo.gif)
+
+# Table of Contents
+
+   * [**Introduction**](#introduction)
+   * [**Features**](#features)
+   * [**Installation**](#installation)
+   * [**Usage**](#usage)
+	  * [Composing Web Service Requests](#composing-web-service-requests)
+		* [Setting Up Authenticated Requests](#setting-up-authenticated-requests)
+		* [CloudKit and Vapor](#cloudkit-and-vapor)
+	  * [Fetching Records Using a Query (records/query)](#fetching-records-using-a-query-recordsquery)
+	  * [Fetching Records by Record Name (records/lookup)](#fetching-records-by-record-name-recordslookup)
+	  * [Fetching Current User Identity (users/caller)](#fetching-current-user-identity-userscaller)
+	  * [Modifying Records (records/modify)](#modifying-records-recordsmodify)
+	  * [Using SwiftNIO](#using-swiftnio)
+		 * [Using EventLoops](#using-eventloops)
+		 * [Choosing an HTTP Client](#choosing-an-http-client)
+	  * [Examples](#examples)
+	  * [Further Code Documentation](#further-code-documentation)
+   * [**Roadmap**](#roadmap)
+	  * [0.2.0](#020)
+	  * [**0.4.0**](#040)
+	  * [0.6.0](#060)
+	  * [0.8.0](#080)
+	  * [0.9.0](#090)
+	  * [v1.0.0](#v100)
+   * [**License**](#license)
+
+
+
+# Introduction
+
+Rather than the CloudKit framework this Swift package uses [CloudKit Web Services.](https://developer.apple.com/library/archive/documentation/DataManagement/Conceptual/CloudKitWebServicesReference/index.html#//apple_ref/doc/uid/TP40015240-CH41-SW1). Why?
+
+* Building a **Command Line Application**
+* Use on **Linux** (or any other non-Apple OS)
+* Required for **Server-Side Integration (via Vapor)**
+* Access via **AWS Lambda**
+* **Migrating Data from/to CloudKit**
+
+... and more
+
+In my case, I was using this for **the Vapor back-end for my Apple Watch app [Heartwitch](https://heartwitch.app)**. Here's some example code showing how to setup and use **MistKit** with CloudKit container.
+
+### Demo Example
+
+#### CloudKit Dashboard Schema
+
+![Sample Schema for Todo List](Assets/CloudKitDB-Demo-Schema.jpg)
+
+#### Sample Code using **MistKit**
+
+```swift
+// Example for pulling a todo list from CloudKit
+import MistKit
+import MistKitNIOHTTP1Token
+
+// setup your connection to CloudKit
+let connection = MKDatabaseConnection(
+  container: "iCloud.com.brightdigit.MistDemo", 
+  apiToken: "****", 
+  environment: .development
+)
+
+// setup how to manager your user's web authentication token 
+let manager = MKTokenManager(storage: MKUserDefaultsStorage(), client: MKNIOHTTP1TokenClient())
+
+// setup your database manager
+let database = MKDatabase(
+  connection: connection,
+  tokenManager: manager
+)
+
+// create your request to CloudKit
+let query = MKQuery(recordType: TodoListItem.self)
+
+let request = FetchRecordQueryRequest(
+  database: .private, 
+  query: FetchRecordQuery(query: query))
+
+// handle the result
+database.query(request) { result in
+  dump(result)
+}
+
+// wait for query here...
+```
+
+To wait for the CloudKit query to complete synchronously, you can use [CFRunLoop](https://developer.apple.com/documentation/corefoundation/cfrunloop-rht):
+
+```swift
+...
+// handle the result
+database.query(request) { result in
+  dump(result)
+
+  // nessecary if you need run this synchronously
+  CFRunLoopStop(CFRunLoopGetMain())
+}
+
+// nessecary if you need run this synchronously
+CFRunLoopRun()
+```
+
+# Features 
+
+Here's what's currently implemented with this library:
+
+- [x] Composing Web Service Requests
+- [x] Modifying Records (records/modify)
+- [x] Fetching Records Using a Query (records/query)
+- [x] Fetching Records by Record Name (records/lookup)
+- [x] Fetching Current User Identity (users/caller)
+
+
+# Installation
+
+Swift Package Manager is Apple's decentralized dependency manager to integrate libraries to your Swift projects. It is now fully integrated with Xcode 11.
+
+To integrate **MistKit** into your project using SPM, specify it in your Package.swift file:
+
+```swift    
+let package = Package(
+  ...
+  dependencies: [
+	.package(url: "https://github.com/brightdigit/MistKit", from: "0.2.0")
+  ],
+  targets: [
+	  .target(
+		  name: "YourTarget",
+		  dependencies: ["MistKit", ...]),
+	  ...
+  ]
+)
+```
+
+There are also products for SwiftNIO as well as Vapor if you are building server-side implmentation:
+
+```swift      
+	  .target(
+		  name: "YourTarget",
+		  dependencies: ["MistKit", 
+			.product(name: "MistKitNIO", package: "MistKit"),  // if you are building a server-side application
+			.product(name: "MistKitVapor", package: "MistKit") // if you are building a Vapor application
+			...]
+	  ),
+```
+
+# Usage 
+
+## Composing Web Service Requests
+
+**MistKit** requires a connection be setup with the following properties:
+
+* `container` name in the format of `iCloud.com.*.*` such as `iCloud.com.brightdigit.MistDemo`
+* `apiToken` which can be [created through the CloudKit Dashboard](https://developer.apple.com/library/archive/documentation/DataManagement/Conceptual/CloudKitWebServicesReference/SettingUpWebServices.html#//apple_ref/doc/uid/TP40015240-CH24-SW1)
+* `environment` which can be either `development` or `production`
+
+Here's an example of how to setup an `MKDatabase`:
+
+```swift
+let connection = MKDatabaseConnection(
+  container: options.container, 
+  apiToken: options.apiKey, 
+  environment: options.environment)
+
+// setup your database manager
+let database = MKDatabase(
+  connection: connection,
+  tokenManager: manager
+)
+```
+
+Before getting into make an actual request, you should probably know how to make authenticated request for `private` or `shared` databases.
+
+### Setting Up Authenticated Requests
+
+In order to have access to `private` or `shared` databases, the Cloud Web Services API require a web authentication token. In order for the MistKit to obtain this, an http server is setup to listen to the callback from CloudKit.
+
+Therefore when you setup your API token, make sure to setup a url for the Sign-In Callback:
+
+![CloudKit Dashboard](Assets/CloudKitDB-APIToken.png)
+
+Once that's setup, you can setup a `MKTokenManager`.
+
+![CloudKit Dashboard Callback](Assets/CloudKitDB-APIToken-Callback.png)
+
+#### Managing Web Authentication Tokens
+
+`MKTokenManager` requires a `MKTokenStorage` for storing the token for later.
+There are a few implementations you can use:
+  * `MKFileStorage` stores the token as a simple text file
+  * `MKUserDefaultsStorage` stores the token using `UserDefaults`
+  * `MKVaporModelStorage` stores the token in a database `Model` object via `Fluent`
+  * `MKVaporSessionStorage` stores the token the Vapor `Session` data
+
+Optionally **MistKit** can setup a web server for you if needed to listen to web authentication via a `MKTokenClient`:
+There are a few implementations you can use:
+  * `MKNIOHTTP1TokenClient` sets up an http server using SwiftNIO
+
+Here's an example of how you `MKDatabase`:
+
+```swift
+let connection = MKDatabaseConnection(
+  container: options.container, 
+  apiToken: options.apiKey, 
+  environment: options.environment
+ )
+
+// setup how to manager your user's web authentication token
+let manager = MKTokenManager(
+  // store the token in UserDefaults
+  storage: MKUserDefaultsStorage(), 
+  // setup an http server at localhost for port 7000
+  client: MKNIOHTTP1TokenClient(bindTo: .ipAddress(host: "127.0.0.1", port: 7000))
+)
+
+// setup your database manager
+let database = MKDatabase(
+  connection: connection,
+  tokenManager: manager
+)
+```
+
+##### Using `MKNIOHTTP1TokenClient`
+
+If you are not building a server-side application, you can use `MKNIOHTTP1TokenClient`, by adding `MistKitNIO` to your package dependency:
+
+```swift
+let package = Package(
+  ...
+  dependencies: [
+	.package(url: "https://github.com/brightdigit/MistKit", .branch("main")
+  ],
+  targets: [
+	  .target(
+		  name: "YourTarget",
+		  dependencies: ["MistKit", "MistKitNIOHTTP1Token", ...]),
+	  ...
+  ]
+)
+```
+
+When a request fails due to authentication failure, `MKNIOHTTP1TokenClient` will start an http server to begin listening to web authentication token. By default, `MKNIOHTTP1TokenClient` will simply print the url but you can override the `onRequestURL`:
+
+```swift
+public class MKNIOHTTP1TokenClient: MKTokenClient {
+  
+  public init(bindTo: BindTo, onRedirectURL : ((URL) -> Void)? = nil) {
+	self.bindTo = bindTo
+	self.onRedirectURL = onRedirectURL ?? {print($0)}
+  }
+  ...
+}
+```
+
+### CloudKit and Vapor
+
+#### Static Web Authentication Tokens
+
+If you may already have a `webAuthenticationToken`, you can use `MKStaticTokenManager`. This is a read-only implementation of `MKTokenManagerProtocol` which takes a read-only `String?` for the `webAuthenticationToken`.
+
+Here's some sample code I use in my Vapor app **[Heartwitch](https://heartwitch.app)** for pulling the `webAuthenticationToken` from my database and using that token when I create a `MKDatabase` instance.
+
+```swift
+import MistKit
+import MistKitVapor
+
+extension Application {
+  ...
+  var cloudKitConnection: MKDatabaseConnection {
+	MKDatabaseConnection(
+	  container: configuration.cloudkitContainer,
+	  apiToken: configuration.cloudkitAPIKey,
+	  environment: environment.cloudKitEnvironment
+	)
+  }
+
+  func cloudKitDatabase(using client: Client, withWebAuthenticationToken webAuthenticationToken: String? = nil) -> MKDatabase<MKVaporClient> {
+	MKDatabase(
+	  connection: cloudKitConnection,
+	  client: MKVaporClient(client: client),
+	  tokenManager: MKStaticTokenManager(token: webAuthenticationToken, client: nil)
+	)
+  }
+}
+
+struct DeviceController {
+
+  func fetch(_ request: Request) throws -> EventLoopFuture<MKServerResponse<[DeviceResponseItem]>> {
+	let user = try request.auth.require(User.self)
+	let userID = try user.requireID()
+	let token = user.$appleUsers.query(on: request.db).field(\.$webAuthenticationToken).first().map { $0?.webAuthenticationToken }
+
+	let cloudKitDatabase: EventLoopFuture<MKDatabase> = token.map {
+	  request.application.cloudKitDatabase(using: request.client, withWebAuthenticationToken: $0)
+	}
+	
+	let cloudKitRequest = FetchRecordQueryRequest(
+	  database: .private,
+	  query: FetchRecordQuery(query: query)
+	)
+	
+	let newEntries = cloudKitDatabase.flatMap {
+	  let cloudKitResult = cloudKitDatabase.query(cloudKitRequest, on: request.eventLoop)
+	}
+
+	return newEntries.mistKitResponse()
+  }
+  
+  ...
+}
+```
+
+Besides static strings, you can store your tokens in the session or in your database.
+
+#### Storing Web Authentication Tokens in Databases and Sessions
+
+In the `mistdemod` demo Vapor application, there's an example of how to create an `MKDatabase` based on the request using both `MKVaporModelStorage` and `MKVaporSessionStorage`:
+
+```swift
+extension MKDatabase where HttpClient == MKVaporClient {
+  init(request: Request) {
+	let storage: MKTokenStorage
+	if let user = request.auth.get(User.self) {
+	  storage = MKVaporModelStorage(model: user)
+	} else {
+	  storage = MKVaporSessionStorage(session: request.session)
+	}
+	let manager = MKTokenManager(storage: storage, client: nil)
+
+	let options = MistDemoDefaultConfiguration(apiKey: request.application.cloudKitAPIKey)
+	let connection = MKDatabaseConnection(container: options.container, apiToken: options.apiKey, environment: options.environment)
+
+	// use the webAuthenticationToken which is passed
+	if let token = options.token {
+	  manager.webAuthenticationToken = token
+	}
+
+	self.init(connection: connection, factory: nil, client: MKVaporClient(client: request.client), tokenManager: manager)
+  }
+}
+```
+
+In this case, for the `User` model needs to implement `MKModelStorable`.
+
+```swift
+final class User: Model, Content {
+  ...
+
+  @Field(key: "cloudKitToken")
+  var cloudKitToken: String?
+}
+
+extension User: MKModelStorable {
+  static var tokenKey: KeyPath<User, Field<String?>> = \User.$cloudKitToken
+}
+```
+
+The `MKModelStorable` protocol ensures that the `Model` contains the properties needed for storing the web authentication token.
+
+While the command line tool needs a `MKTokenClient` to listen for the callback from CloudKit, with a server-side application you can just add a API call. Here's an example which listens for the `ckWebAuthToken` and saves it to the `User`:
+
+```swift
+struct CloudKitController: RouteCollection {
+  func token(_ request: Request) -> EventLoopFuture<HTTPStatus> {
+	guard let token: String = request.query["ckWebAuthToken"] else {
+	  return request.eventLoop.makeSucceededFuture(.notFound)
+	}
+
+	guard let user = request.auth.get(User.self) else {
+	  request.cloudKitAPI.webAuthenticationToken = token
+	  return request.eventLoop.makeSucceededFuture(.accepted)
+	}
+
+	user.cloudKitToken = token
+	return user.save(on: request.db).transform(to: .accepted)
+  }
+
+  func boot(routes: RoutesBuilder) throws {
+	routes.get(["token"], use: token)
+  }
+}
+```
+
+If you have an app which already uses Apple's existing CloudKit API, you can also [save the webAuthenticationToken to your database with a `CKFetchWebAuthTokenOperation`](https://developer.apple.com/documentation/cloudkit/ckfetchwebauthtokenoperation).
+
+## Fetching Records Using a Query (records/query)
+
+There are two ways to fetch records:
+
+* using an `MKAnyQuery` to fetch `MKAnyRecord` items
+* using a custom type which implements `MKQueryRecord`
+
+### Setting Up Queries
+
+To fetch as `MKAnyRecord`, simply create `MKAnyQuery` with the matching `recordType` (i.e. schema name). 
+
+```swift
+// create your request to CloudKit
+let query = MKAnyQuery(recordType: "TodoListItem")
+
+let request = FetchRecordQueryRequest(
+  database: .private,
+  query: FetchRecordQuery(query: query)
+)
+
+// handle the result
+database.perform(request: request) { result in
+  do {
+	try print(result.get().records.information)
+  } catch {
+	completed(error)
+	return
+  }
+  completed(nil)
+}
+```
+
+This will give you `MKAnyRecord` items which contain a `fields` property with your values:
+
+```swift
+public struct MKAnyRecord: Codable {
+  public let recordType: String
+  public let recordName: UUID?
+  public let recordChangeTag: String?
+  public let fields: [String: MKValue]
+  ...
+```
+
+The `MKValue` type is an enum which contains the type and value of the field.
+
+### Strong-Typed Queries
+
+In order to use a custom type for requests, you need to implement `MKQueryRecord`. Here's an example of a todo item which contains a title property:
+
+```swift
+public class TodoListItem: MKQueryRecord {
+  // required property and methods for MKQueryRecord
+  public static var recordType: String = "TodoItem"
+  public static var desiredKeys: [String]? = ["title"]
+
+  public let recordName: UUID?
+  public let recordChangeTag: String?
+  
+  public required init(record: MKAnyRecord) throws {
+	recordName = record.recordName
+	recordChangeTag = record.recordChangeTag
+	title = try record.string(fromKey: "title")
+  }
+  
+  public var fields: [String: MKValue] {
+	return ["title": .string(title)]
+  }
+  
+  // custom fields and methods to `TodoListItem`
+  public var title: String
+  
+  public init(title: String) {
+	self.title = title
+	recordName = nil
+	recordChangeTag = nil
+  }
+}
+```
+
+Now you can create an `MKQuery` using your custom type.
+
+```swift
+// create your request to CloudKit
+let query = MKQuery(recordType: TodoListItem.self)
+
+let request = FetchRecordQueryRequest(
+  database: .private,
+  query: FetchRecordQuery(query: query)
+)
+
+// handle the result
+database.query(request) { result in
+  do {
+	try print(result.get().information)
+  } catch {
+	completed(error)
+	return
+  }
+  completed(nil)
+}
+```
+
+Rather than using `MKDatabase.perform(request:)`, use `MKDatabase.query(_ query:)` and `MKDatabase` will decode the value to your custom type.
+
+### Filters 
+
+_Coming Soon_
+
+## Fetching Records by Record Name (records/lookup)
+
+```swift
+let recordNames : [UUID] = [...]
+
+let query = LookupRecordQuery(TodoListItem.self, recordNames: recordNames)
+
+let request = LookupRecordQueryRequest(database: .private, query: query)
+
+database.lookup(request) { result in
+  try? print(result.get().count)
+}
+```
+
+_Coming Soon_
+
+## Fetching Current User Identity (users/caller)
+
+```swift
+let request = GetCurrentUserIdentityRequest()
+database.perform(request: request) { (result) in
+  try? print(result.get().userRecordName)
+}
+```
+
+_Coming Soon_
+
+## Modifying Records (records/modify)
+
+### Creating Records
+
+```swift
+let item = TodoListItem(title: title)
+
+let operation = ModifyOperation(operationType: .create, record: item)
+
+let query = ModifyRecordQuery(operations: [operation])
+
+let request = ModifyRecordQueryRequest(database: .private, query: query)
+
+database.perform(operations: request) { result in
+  do {
+	try print(result.get().updated.information)
+  } catch {
+	completed(error)
+	return
+  }
+  completed(nil)
+}
+```
+
+### Deleting Records
+
+In order to delete and update records, you are required to already have the object fetched from CloudKit. Therefore you'll need to run a `LookupRecordQueryRequest` or `FetchRecordQueryRequest` to get access to the record. Once you have access to the records, simply create a delete operation with your record:
+
+```swift
+let query = LookupRecordQuery(TodoListItem.self, recordNames: recordNames)
+
+let request = LookupRecordQueryRequest(database: .private, query: query)
+
+database.lookup(request) { result in
+  let items: [TodoListItem]
+  
+  do {
+	items = try result.get()
+  } catch {
+	completed(error)
+	return
+  }
+  
+  let operations = items.map { (item) in
+	ModifyOperation(operationType: .delete, record: item)
+  }
+
+  let query = ModifyRecordQuery(operations: operations)
+
+  let request = ModifyRecordQueryRequest(database: .private, query: query)
+  
+  database.perform(operations: request) { result in
+	do {
+	  try print("Deleted \(result.get().deleted.count) items.")
+	} catch {
+	  completed(error)
+	  return
+	}
+	completed(nil)
+  }
+}
+```
+
+### Updating Records
+
+Similarly with updating records, you are required to already have the object fetched from CloudKit. Again, run a `LookupRecordQueryRequest` or `FetchRecordQueryRequest` to get access to the record. Once you have access to the records, simply create a update operation with your record:
+
+```swift
+let query = LookupRecordQuery(TodoListItem.self, recordNames: [recordName])
+
+let request = LookupRecordQueryRequest(database: .private, query: query)
+
+database.lookup(request) { result in
+  let items: [TodoListItem]
+  do {
+	items = try result.get()
+
+  } catch {
+	completed(error)
+	return
+  }
+  let operations = items.map { (item) -> ModifyOperation<TodoListItem> in
+	item.title = self.newTitle
+	return ModifyOperation(operationType: .update, record: item)
+  }
+
+  let query = ModifyRecordQuery(operations: operations)
+
+  let request = ModifyRecordQueryRequest(database: .private, query: query)
+  database.perform(operations: request) { result in
+	do {
+	  try print("Updated \(result.get().updated.count) items.")
+	} catch {
+	  completed(error)
+	  return
+	}
+	completed(nil)
+  }
+}
+```
+
+## Using SwiftNIO
+
+If you are building a server-side application and already using [SwiftNIO](https://github.com/apple/swift-nio), you might want to take advantage of some helpers which will work already existing patterns and APIs available. Primarily **[EventLoops](https://apple.github.io/swift-nio/docs/current/NIO/Protocols/EventLoop.html)** from [SwiftNIO](https://github.com/apple/swift-nio) and the respective **HTTP clients** from [SwiftNIO](https://github.com/apple/swift-nio) and [Vapor](https://vapor.codes/).
+
+### Using EventLoops
+
+If you are building a server-side application in [SwiftNIO](https://github.com/apple/swift-nio) (or [Vapor](https://vapor.codes/)), you are likely using [EventLoops](https://apple.github.io/swift-nio/docs/current/NIO/Protocols/EventLoop.html) and [EventLoopFuture](https://apple.github.io/swift-nio/docs/current/NIO/Classes/EventLoopFuture.html) for asyncronous programming. EventLoopFutures are essentially the Future/Promise implementation of [SwiftNIO](https://github.com/apple/swift-nio). Luckily there are helper methods in MistKit which provide [EventLoopFutures](https://apple.github.io/swift-nio/docs/current/NIO/Classes/EventLoopFuture.html) similar to the way they implmented in [SwiftNIO](https://github.com/apple/swift-nio). These implementations augment the already existing callback:
+
+
+```swift
+public extension MKDatabase {
+  func query<RecordType>(
+	_ query: FetchRecordQueryRequest<MKQuery<RecordType>>,
+	on eventLoop: EventLoop
+  ) -> EventLoopFuture<[RecordType]>
+
+  func perform<RecordType>(
+	operations: ModifyRecordQueryRequest<RecordType>,
+	on eventLoop: EventLoop
+  ) -> EventLoopFuture<ModifiedRecordQueryResult<RecordType>>
+  
+  func lookup<RecordType>(
+	_ lookup: LookupRecordQueryRequest<RecordType>,
+	on eventLoop: EventLoop
+  ) -> EventLoopFuture<[RecordType]>
+
+  func perform<RequestType: MKRequest, ResponseType>(
+	request: RequestType,
+	on eventLoop: EventLoop
+  ) -> EventLoopFuture<ResponseType> -> EventLoopFuture<ResponseType>
+	where RequestType.Response == ResponseType
+}
+```
+
+Also if you are using the results as `Content` for a [Vapor](https://vapor.codes/) HTTP response, **MistKit** provides a `MKServerResponse` enum type which distinguishes between an authentication failure (with the redirect URL) and an actual success. 
+
+```swift
+public enum MKServerResponse<Success>: Codable where Success: Codable {
+  public init(attemptRecoveryFrom error: Error) throws
+
+  case failure(URL)
+  case success(Success)
+}
+```
+
+Besides [EventLoopFuture](https://apple.github.io/swift-nio/docs/current/NIO/Classes/EventLoopFuture.html), you can also use a different HTTP client for calling CloudKit Web Services.  
+
+### Choosing an HTTP Client
+
+By default, MistKit uses `URLSession` for making HTTP calls to the CloudKit Web Service via the `MKURLSessionClient`:
+
+```swift
+public struct MKURLSessionClient: MKHttpClient {
+  public init(session: URLSession) {
+	self.session = session
+  }
+
+  public func request(withURL url: URL, data: Data?) -> MKURLRequest
+}
+```
+
+However if you are using [SwiftNIO](https://github.com/apple/swift-nio) or [Vapor](https://vapor.codes/), it makes more sense the use their HTTP clients for making those calls:
+* For **SwiftNIO**, there's **`MKAsyncClient`** which uses an `HTTPClient` provided by the `AsyncHTTPClient` library
+* For **Vapor**, there's **`MKVaporClient`** which uses an `Client` provided by the `Vapor` library
+
+In the mistdemod example, you can see how to use a Vapor `Request` to create an `MKDatabase` with the `client` property of the `Request`:
+
+```swift
+extension MKDatabase where HttpClient == MKVaporClient {
+  init(request: Request) {
+	let manager: MKTokenManager    
+	let connection : MKDatabaseConnection
+	self.init(
+	  connection: connection, 
+	  factory: nil, 
+	  client: MKVaporClient(client: request.client), 
+	  tokenManager: manager
+	)
+  }
+}
+```
+
+## Examples
+
+There are two examples on how to do basic CRUD methods in CloudKit via MistKit: 
+* As a command line tool using Swift Argument Parser checkout [the `mistdemoc` Swift package executable here](https://github.com/brightdigit/MistKit/tree/main/Sources/mistdemoc)
+* And a server-side Vapor application [`mistdemod` here](https://github.com/brightdigit/MistKit/tree/main/Sources/mistdemoc)
+
+## Further Code Documentation
+
+[Documentation Here](/Documentation/Reference/README.md)
 
 ## Operation
 
@@ -63,24 +800,24 @@ Example request (that is not neccessarily in this api):
 
 ```swift
 
-let getUserRequest = MailchimpKit.User.GetUser.Request(id: 123)
+let getUserRequest = User.GetUser.Request(id: 123)
 let apiClient = APIClient.default
 
 apiClient.makeRequest(getUserRequest) { apiResponse in
-    switch apiResponse {
-        case .result(let apiResponseValue):
-        	if let user = apiResponseValue.success {
-        		print("GetUser returned user \(user)")
-        	} else {
-        		print("GetUser returned \(apiResponseValue)")
-        	}
-        case .error(let apiError):
-        	print("GetUser failed with \(apiError)")
-    }
+	switch apiResponse {
+		case .result(let apiResponseValue):
+			if let user = apiResponseValue.success {
+				print("GetUser returned user \(user)")
+			} else {
+				print("GetUser returned \(apiResponseValue)")
+			}
+		case .error(let apiError):
+			print("GetUser failed with \(apiError)")
+	}
 }
 ```
 
-Each [Request](#request) also has a `makeRequest` convenience function that uses `MailchimpKit.shared`.
+Each [Request](#request) also has a `makeRequest` convenience function that uses `shared`.
 
 #### APIResponse
 The `APIResponse` that gets passed to the completion closure contains the following properties:
@@ -101,22 +838,22 @@ There are some options to control how invalid JSON is handled when decoding and 
 
 Dates are encoded and decoded differently according to the swagger date format. They use different `DateFormatter`'s that you can set.
 - `date-time`
-    - `DateTime.dateEncodingFormatter`: defaults to `yyyy-MM-dd'T'HH:mm:ss.Z`
-    - `DateTime.dateDecodingFormatters`: an array of date formatters. The first one to decode successfully will be used
+	- `DateTime.dateEncodingFormatter`: defaults to `yyyy-MM-dd'T'HH:mm:ss.Z`
+	- `DateTime.dateDecodingFormatters`: an array of date formatters. The first one to decode successfully will be used
 - `date`
-    - `DateDay.dateFormatter`: defaults to `yyyy-MM-dd`
+	- `DateDay.dateFormatter`: defaults to `yyyy-MM-dd`
 
 #### APIClientError
 This is error enum that `APIResponse.result` may contain:
 
 ```swift
 public enum APIClientError: Error {
-    case unexpectedStatusCode(statusCode: Int, data: Data)
-    case decodingError(DecodingError)
-    case requestEncodingError(String)
-    case validationError(String)
-    case networkError(Error)
-    case unknownError(Error)
+	case unexpectedStatusCode(statusCode: Int, data: Data)
+	case decodingError(DecodingError)
+	case requestEncodingError(String)
+	case validationError(String)
+	case networkError(Error)
+	case unknownError(Error)
 }
 ```
 
@@ -128,23 +865,23 @@ Request behaviours are used to modify, authorize, monitor or respond to requests
 ```swift
 public protocol RequestBehaviour {
 
-    /// runs first and allows the requests to be modified. If modifying asynchronously use validate
-    func modifyRequest(request: AnyRequest, urlRequest: URLRequest) -> URLRequest
+	/// runs first and allows the requests to be modified. If modifying asynchronously use validate
+	func modifyRequest(request: AnyRequest, urlRequest: URLRequest) -> URLRequest
 
-    /// validates and modifies the request. complete must be called with either .success or .fail
-    func validate(request: AnyRequest, urlRequest: URLRequest, complete: @escaping (RequestValidationResult) -> Void)
+	/// validates and modifies the request. complete must be called with either .success or .fail
+	func validate(request: AnyRequest, urlRequest: URLRequest, complete: @escaping (RequestValidationResult) -> Void)
 
-    /// called before request is sent
-    func beforeSend(request: AnyRequest)
+	/// called before request is sent
+	func beforeSend(request: AnyRequest)
 
-    /// called when request successfuly returns a 200 range response
-    func onSuccess(request: AnyRequest, result: Any)
+	/// called when request successfuly returns a 200 range response
+	func onSuccess(request: AnyRequest, result: Any)
 
-    /// called when request fails with an error. This will not be called if the request returns a known response even if the a status code is out of the 200 range
-    func onFailure(request: AnyRequest, error: APIClientError)
+	/// called when request fails with an error. This will not be called if the request returns a known response even if the a status code is out of the 200 range
+	func onFailure(request: AnyRequest, error: APIClientError)
 
-    /// called if the request recieves a network response. This is not called if request fails validation or encoding
-    func onResponse(request: AnyRequest, response: AnyResponse)
+	/// called if the request recieves a network response. This is not called if request fails validation or encoding
+	func onResponse(request: AnyRequest, response: AnyResponse)
 }
 ```
 
@@ -159,12 +896,12 @@ To add support for a specific asynchronous library, just add an extension on `AP
 
 ## Requests
 
-- **MailchimpKit.ActivityFeed**
+- **ActivityFeed**
 	- **GetActivityFeedChimpChatter**: GET `/activity-feed/chimp-chatter`
-- **MailchimpKit.AuthorizedApps**
+- **AuthorizedApps**
 	- **GetAuthorizedApps**: GET `/authorized-apps`
 	- **GetAuthorizedAppsId**: GET `/authorized-apps/{app_id}`
-- **MailchimpKit.Automations**
+- **Automations**
 	- **ArchiveAutomations**: POST `/automations/{workflow_id}/actions/archive`
 	- **DeleteAutomationsIdEmailsId**: DELETE `/automations/{workflow_id}/emails/{workflow_email_id}`
 	- **GetAutomations**: GET `/automations`
@@ -183,24 +920,24 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PostAutomationsIdEmailsIdActionsStart**: POST `/automations/{workflow_id}/emails/{workflow_email_id}/actions/start`
 	- **PostAutomationsIdEmailsIdQueue**: POST `/automations/{workflow_id}/emails/{workflow_email_id}/queue`
 	- **PostAutomationsIdRemovedSubscribers**: POST `/automations/{workflow_id}/removed-subscribers`
-- **MailchimpKit.Batches**
+- **Batches**
 	- **DeleteBatchesId**: DELETE `/batches/{batch_id}`
 	- **GetBatches**: GET `/batches`
 	- **GetBatchesId**: GET `/batches/{batch_id}`
 	- **PostBatches**: POST `/batches`
-- **MailchimpKit.BatchWebhooks**
+- **BatchWebhooks**
 	- **DeleteBatchWebhookId**: DELETE `/batch-webhooks/{batch_webhook_id}`
 	- **GetBatchWebhook**: GET `/batch-webhooks/{batch_webhook_id}`
 	- **GetBatchWebhooks**: GET `/batch-webhooks`
 	- **PatchBatchWebhooks**: PATCH `/batch-webhooks/{batch_webhook_id}`
 	- **PostBatchWebhooks**: POST `/batch-webhooks`
-- **MailchimpKit.CampaignFolders**
+- **CampaignFolders**
 	- **DeleteCampaignFoldersId**: DELETE `/campaign-folders/{folder_id}`
 	- **GetCampaignFolders**: GET `/campaign-folders`
 	- **GetCampaignFoldersId**: GET `/campaign-folders/{folder_id}`
 	- **PatchCampaignFoldersId**: PATCH `/campaign-folders/{folder_id}`
 	- **PostCampaignFolders**: POST `/campaign-folders`
-- **MailchimpKit.Campaigns**
+- **Campaigns**
 	- **DeleteCampaignsId**: DELETE `/campaigns/{campaign_id}`
 	- **DeleteCampaignsIdFeedbackId**: DELETE `/campaigns/{campaign_id}/feedback/{feedback_id}`
 	- **GetCampaigns**: GET `/campaigns`
@@ -223,20 +960,20 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PostCampaignsIdActionsUnschedule**: POST `/campaigns/{campaign_id}/actions/unschedule`
 	- **PostCampaignsIdFeedback**: POST `/campaigns/{campaign_id}/feedback`
 	- **PutCampaignsIdContent**: PUT `/campaigns/{campaign_id}/content`
-- **MailchimpKit.ConnectedSites**
+- **ConnectedSites**
 	- **DeleteConnectedSitesId**: DELETE `/connected-sites/{connected_site_id}`
 	- **GetConnectedSites**: GET `/connected-sites`
 	- **GetConnectedSitesId**: GET `/connected-sites/{connected_site_id}`
 	- **PostConnectedSites**: POST `/connected-sites`
 	- **PostConnectedSitesIdActionsVerifyScriptInstallation**: POST `/connected-sites/{connected_site_id}/actions/verify-script-installation`
-- **MailchimpKit.Conversations**
+- **Conversations**
 	- **GetConversations**: GET `/conversations`
 	- **GetConversationsId**: GET `/conversations/{conversation_id}`
 	- **GetConversationsIdMessages**: GET `/conversations/{conversation_id}/messages`
 	- **GetConversationsIdMessagesId**: GET `/conversations/{conversation_id}/messages/{message_id}`
-- **MailchimpKit.CustomerJourneys**
+- **CustomerJourneys**
 	- **PostCustomerJourneysJourneysIdStepsIdActionsTrigger**: POST `/customer-journeys/journeys/{journey_id}/steps/{step_id}/actions/trigger`
-- **MailchimpKit.Ecommerce**
+- **Ecommerce**
 	- **DeleteEcommerceStoresId**: DELETE `/ecommerce/stores/{store_id}`
 	- **DeleteEcommerceStoresIdCartsId**: DELETE `/ecommerce/stores/{store_id}/carts/{cart_id}`
 	- **DeleteEcommerceStoresIdCartsLinesId**: DELETE `/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}`
@@ -295,10 +1032,10 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PostEcommerceStoresIdPromorules**: POST `/ecommerce/stores/{store_id}/promo-rules`
 	- **PutEcommerceStoresIdCustomersId**: PUT `/ecommerce/stores/{store_id}/customers/{customer_id}`
 	- **PutEcommerceStoresIdProductsIdVariantsId**: PUT `/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}`
-- **MailchimpKit.FacebookAds**
+- **FacebookAds**
 	- **GetAllFacebookAds**: GET `/facebook-ads`
 	- **GetFacebookAdsId**: GET `/facebook-ads/{outreach_id}`
-- **MailchimpKit.FileManager**
+- **FileManager**
 	- **DeleteFileManagerFilesId**: DELETE `/file-manager/files/{file_id}`
 	- **DeleteFileManagerFoldersId**: DELETE `/file-manager/folders/{folder_id}`
 	- **GetFileManagerFiles**: GET `/file-manager/files`
@@ -309,7 +1046,7 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PatchFileManagerFoldersId**: PATCH `/file-manager/folders/{folder_id}`
 	- **PostFileManagerFiles**: POST `/file-manager/files`
 	- **PostFileManagerFolders**: POST `/file-manager/folders`
-- **MailchimpKit.LandingPages**
+- **LandingPages**
 	- **DeleteLandingPageId**: DELETE `/landing-pages/{page_id}`
 	- **GetAllLandingPages**: GET `/landing-pages`
 	- **GetLandingPageId**: GET `/landing-pages/{page_id}`
@@ -318,7 +1055,7 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PostAllLandingPages**: POST `/landing-pages`
 	- **PostLandingPageIdActionsPublish**: POST `/landing-pages/{page_id}/actions/publish`
 	- **PostLandingPageIdActionsUnpublish**: POST `/landing-pages/{page_id}/actions/unpublish`
-- **MailchimpKit.Lists**
+- **Lists**
 	- **DeleteListsId**: DELETE `/lists/{list_id}`
 	- **DeleteListsIdInterestCategoriesId**: DELETE `/lists/{list_id}/interest-categories/{interest_category_id}`
 	- **DeleteListsIdInterestCategoriesIdInterestsId**: DELETE `/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}`
@@ -383,15 +1120,15 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PreviewASegment**: GET `/lists/{list_id}/segments`
 	- **PutListsIdMembersId**: PUT `/lists/{list_id}/members/{subscriber_hash}`
 	- **SearchTagsByName**: GET `/lists/{list_id}/tag-search`
-- **MailchimpKit.Ping**
+- **Ping**
 	- **GetPing**: GET `/ping`
-- **MailchimpKit.Reporting**
+- **Reporting**
 	- **GetReportingFacebookAds**: GET `/reporting/facebook-ads`
 	- **GetReportingFacebookAdsId**: GET `/reporting/facebook-ads/{outreach_id}`
 	- **GetReportingFacebookAdsIdEcommerceProductActivity**: GET `/reporting/facebook-ads/{outreach_id}/ecommerce-product-activity`
 	- **GetReportingLandingPages**: GET `/reporting/landing-pages`
 	- **GetReportingLandingPagesId**: GET `/reporting/landing-pages/{outreach_id}`
-- **MailchimpKit.Reports**
+- **Reports**
 	- **GetReports**: GET `/reports`
 	- **GetReportsId**: GET `/reports/{campaign_id}`
 	- **GetReportsIdAbuseReportsId**: GET `/reports/{campaign_id}/abuse-reports`
@@ -414,266 +1151,107 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **GetReportsIdSubReportsId**: GET `/reports/{campaign_id}/sub-reports`
 	- **GetReportsIdUnsubscribed**: GET `/reports/{campaign_id}/unsubscribed`
 	- **GetReportsIdUnsubscribedId**: GET `/reports/{campaign_id}/unsubscribed/{subscriber_hash}`
-- **MailchimpKit.Root**
+- **Root**
 	- **GetRoot**: GET `/`
-- **MailchimpKit.SearchCampaigns**
+- **SearchCampaigns**
 	- **GetSearchCampaigns**: GET `/search-campaigns`
-- **MailchimpKit.SearchMembers**
+- **SearchMembers**
 	- **GetSearchMembers**: GET `/search-members`
-- **MailchimpKit.TemplateFolders**
+- **TemplateFolders**
 	- **DeleteTemplateFoldersId**: DELETE `/template-folders/{folder_id}`
 	- **GetTemplateFolders**: GET `/template-folders`
 	- **GetTemplateFoldersId**: GET `/template-folders/{folder_id}`
 	- **PatchTemplateFoldersId**: PATCH `/template-folders/{folder_id}`
 	- **PostTemplateFolders**: POST `/template-folders`
-- **MailchimpKit.Templates**
+- **Templates**
 	- **DeleteTemplatesId**: DELETE `/templates/{template_id}`
 	- **GetTemplates**: GET `/templates`
 	- **GetTemplatesId**: GET `/templates/{template_id}`
 	- **GetTemplatesIdDefaultContent**: GET `/templates/{template_id}/default-content`
 	- **PatchTemplatesId**: PATCH `/templates/{template_id}`
 	- **PostTemplates**: POST `/templates`
-- **MailchimpKit.VerifiedDomains**
+- **VerifiedDomains**
 	- **CreateVerifiedDomain**: POST `/verified-domains`
 	- **DeleteVerifiedDomain**: DELETE `/verified-domains/{domain_name}`
 	- **GetVerifiedDomain**: GET `/verified-domains/{domain_name}`
 	- **GetVerifiedDomains**: GET `/verified-domains`
 	- **VerifyDomain**: POST `/verified-domains/{domain_name}/actions/verify`
 
-# MailchimpSDK-iOS
+	
+# Roadmap
 
-##### Table of Contents  
-[Getting Started](#getting-started)  
-[Installation](#installation)  
-[Initializing the SDK](#initializing-the-sdk)  
-[Collecting contact information](#collecting-contact-information)  
-[Contact Schema](#contact-schema)  
-[Collecting contact events](#collecting-contact-events)  
-[Event Schema](#event-schema)
-
-## Getting Started
-
-### Requirements
-
-* Deployment target iOS 12.0 or above
-* Xcode version 11 or above
-* Ruby 2.4 or above (for fastlane)
-
-### Retrieving SDK Key
-
-* See the [Mailchimp SDK documentation](https://mailchimp.com/developer/guides/mobile-sdk-ios/#Step_1._Retrieve_the_SDK_Key) for details on retrieving the key.
-
-## Installation
-### Option 1: Cocoapods
-For the latest version of our SDK, add the following to your project's Podfile:
-```
-pod 'MailchimpSDK'
-```
-
-### Option 2: Manual
-1. Clone this repository
-2. Run `bundle exec fastlane create_binary_framework` to build the Swift binary framework for iOS and iOS Simulator.
-3. Add the XCFramework:
-
-  Click on the Project navigator, select your app’s target, go to the General tab, scroll down to Frameworks, Libraries, and Embedded Content. Drag the Mailchimp.xcframework from this repo into this section.
-
-  ![Drag the framework into Frameworks, Libraries, and Embedded Content](https://user-images.githubusercontent.com/42216769/69161161-8f641480-0a9f-11ea-93ec-5599aac85423.gif)
-  
-  ### Option 3: Swift Package Manager
-  To use Swift Package Manager, in Xcode, click File -> Swift Packages -> Add Package Dependency, enter MailchimpSDK repo's URL or you can log into Xcode with your GitHub account and just type MailchimpSDK to search.
-
-
-## Initializing the SDK
+<!-- https://developer.apple.com/library/archive/documentation/DataManagement/Conceptual/CloudKitWebServicesReference/index.html#//apple_ref/doc/uid/TP40015240-CH41-SW1 -->
 
-The initialize method has three different fields.
+## 0.1.0
 
-* SDK Key (Required): The SDK key gives you access to your audience.
-* Debug Mode (Optional): Debug Mode enables additional debug only functionality such as extra logging. This is off by default.
-* Auto Tagging (Optional): Auto Tagging automatically tags contacts with information such as Device Type and Platform. This is on by default.
+- [x] Composing Web Service Requests
+- [x] Modifying Records (records/modify)
+- [x] Fetching Records Using a Query (records/query)
+- [x] Fetching Records by Record Name (records/lookup)
+- [x] Fetching Current User Identity (users/caller)
 
-```swift
-Mailchimp.initialize(token: sdkKey)
-```
+## 0.2.0 
 
-## Collecting contact information
+- [x] Vapor Token Client
+- [x] Vapor Token Storage
+- [x] Vapor URL Client
+- [x] Swift NIO URL Client
 
-### Adding A Contact
+## 0.4.0 
 
-To add a contact to your Mailchimp audience, first instantiate a new Contact struct. Then pass the contact into the `createOrUpdate()` method. This will add the contact to your Mailchimp audience with applied merge fields and/or tags. If the contact already exists, their information will be updated with the values that were passed in.
+- [X] Date Field Types
+- [X] Location Field Types
+- [ ] List Field Types
+- [ ] System Field Integration
 
-```swift
-var contact: Contact = Contact(emailAddress: "example@email.com")
-let mergeFields = ["FNAME": MergeFieldValue.string("Example"),
-                   "LNAME": MergeFieldValue.string("User")]
-contact.status = .subscribed
-contact.mergeFields = mergeFields
-contact.tags = [Contact.Tag(name: "mobile-signup", status: .active)]
-Mailchimp.createOrUpdate(contact: contact) { result in
-    switch result {
-    case .success:
-        print("Successfully added or updated contact")
-    case .failure(let error):
-        print("Error: \(error.localizedDescription)")
-    }
-}
-```
+## 0.6.0
 
-### Updating a Contact
+- [ ] Name Component Types
+- [ ] Discovering User Identities (POST users/discover)
+- [ ] Discovering All User Identities (GET users/discover)
+- [ ] Support `postMessage` for Authentication Requests
 
-You may update a contact by using the same `createOrUpdate()` method described in the Adding a Contact section.
+## 0.8.0
 
-In addition to updating a whole contact, we provide a number of methods to update a single fields on a contact. These are executed as separate network requests. To update multiple fields at once, use the `createOrUpdate()` method.
+- [ ] Uploading Assets (assets/upload)
+- [ ] Referencing Existing Assets (assets/rereference)
+- [ ] Fetching Records Using a Query (records/query) w/ basic filtering
 
-Single field update methods include
+## 0.9.0
 
-* `addTag()`: Adds a tag to the given user.
-* `addTags()`: Adds multiple tags to the given user.
-* `removeTag()`: Removes a tag from the given user.
-* `removeTags()`: Removes multiple tags from the given user.
-* `setMergeField()`: Sets or updates the merge field for a given user.
+- [ ] Fetching Contacts (users/lookup/contacts)
+- [ ] Fetching Users by Email (users/lookup/email)
+- [ ] Fetching Users by Record Name (users/lookup/id)
 
-### Add/Remove Tags
+## v1.0.0
 
-```swift
-Mailchimp.addTag(name: tagName,
-                   emailAddress: "example@email.com") { result in
-                   switch result {
-                   case .success:
-                       print("Successfully added tag: \(tagName)")
-                   case .failure(let error):
-                       print("Error: \(error.localizedDescription)")
-                   }
-               }
+- [ ] Reference Field Types
+- [ ] Error Codes
+- [ ] Handle Data Size Limits
 
-Mailchimp.removeTag(name: tagName,
-                      emailAddress: "example@email.com") { result in
-                      switch result {
-                      case .success:
-                         print("Successfully removed tag: \(tagName)")
-                      case .failure(let error):
-                         print("Error: \(error.localizedDescription)")
-                      }
-               }
-```
+## v1.x.x+
 
-### Set Merge Fields
+- [ ] Fetching Record Changes (records/changes)
+- [ ] Fetching Record Information (records/resolve)
+- [ ] Accepting Share Records (records/accept)
+- [ ] Fetching Zones (zones/list)
+- [ ] Fetching Zones by Identifier (zones/lookup)
+- [ ] Modifying Zones (zones/modify)
+- [ ] Fetching Database Changes (changes/database)
+- [ ] Fetching Record Zone Changes (changes/zone)
+- [ ] Fetching Zone Changes (zones/changes)
+- [ ] Fetching Subscriptions (subscriptions/list)
+- [ ] Fetching Subscriptions by Identifier (subscriptions/lookup)
+- [ ] Modifying Subscriptions (subscriptions/modify)
+- [ ] Creating APNs Tokens (tokens/create)
+- [ ] Registering Tokens (tokens/register)
 
-```swift
-Mailchimp.setMergeField(emailAddress: "example@email.com",
-                          name: fieldName,
-                          value: fieldValue) { result in
-                          switch result {
-                          case .success:
-                               print("Successfully added merge field: \(fieldName), \(fieldValue)")
-                          case .failure(let error):
-                               print("Error: \(error.localizedDescription)")
-                          }
-               }
-```
-## Contact Schema
+<!-- Explain Demo Application -->
 
-### Email
+## Not Planned
 
-The Email Address is the unique identifier for each contact in an audience. An email address is required for every interaction with the SDK.
+- [ ] Fetching Current User (users/current) _deprecated_
 
-### Tags
+# License 
 
-Users can add or remove tags from their contact information. Each tag is identified using a String. If a tag has not been previously used on your account, it will be created.
-
-#### Autotagging
-
-If autotagging is enabled, all created or updated contacts will be automatically tagged with `iOS` and either `Phone` or `Tablet`.
-
-### Merge Fields
-
-Merge fields are key value pairs that can be set on each contact. They can be customized for each audience. Common examples of merge fields are first name, last name, and phone number.
-The value of a merge field can be set and updated from the SDK. Merge fields are keyed off of a capitalized string. The Key does not include vertical bars on either end (ex. FNAME and not |FNAME|).
-
-While Merge Fields can be marked as required on the audience settings, those requirements will not be enforced when using the Mailchimp SDK.
-
-#### String Merge Fields
-The majority of merge field types are represented as a String. This includes Text, Number, Radio Buttons, Drop Downs, Dates, Birthday, Phone Numbers, and Websites.
-
-#### Address Merge Fields
-
-Merge Fields of type address are represented as an Address struct. Addresses have three required fields, Address Line One, City, and Zip.
-In addition there are three optional fields, Address Line Two, State, and Country. Below is an example of an Address object.
-
-```swift
-let address = Address(addressLineOne: "123 Chimp St.",
-                      addressLineTwo: "Suite 456",
-                      city: "Atlanta",
-                      state: "GA",
-                      zipCode: "30308",
-                      country: CountryCode.USA)
-```
-
-### Contact Status
-
-The Contact Status represents what type of communication the user has consented to. This can either be Subscribed (will receive general marketing campaigns) or Transactional (will only receive transactional emails).
-This value can only be set when the contact is created. If this is set at any other time, the new value will be ignored. By default all users will be marked as transactional if this value is not set at creation.
-
-You can subscribe a new contact to general marketing campaigns by setting `status`.
-
-```swift
-contact.status = .subscribed
-```
-
-### Marketing Permissions
-
-Appropriate marketing permissions need to be set to communicate with any contact/s added to an audience with GDPR enabled fields. These fields specify how a contact would like their information to be used (ex: for direct mail or for customized online advertising).
-
-Marketing permissions are set by instantiating a MarketingPermission struct with the corresponding `marketingPermissionsId` and setting `enabled` if the user granted permission for that permission ID.
-
-```swift
-let permission1 = Contact.MarketingPermission(marketingPermissionId: "permission1", enabled: true)
-```
-
-## Collecting contact events
-
-### Adding an event
-
-To add an event associated with a contact, first instantiate a new Event struct. Then pass the event into the `trackEventWithAttributes()` method. This will add the event to the specified contact.
-
-```swift
-let event: Event = try! Event(emailAddress: "example@email.com", name: "signup", properties: ["source": "iOS"])
-Mailchimp.trackEventWithAttributes(event: event) { result in
-    switch result {
-    case .success:
-        print("Successfully tracked an event")
-    case .failure(let error):
-        print("Error: \(error.localizedDescription)")
-    }
-}
-```
-
-## Event Schema
-
-### Email
-
-The Email Address is the unique identifier for each contact in an audience. An email address is required for every interaction with the SDK.
-
-### Name
-
-Each event is identified using a String. The maximum length of an event name is 30 characters.
-
-### Properties
-
-Any event can have properties associated with it. These properties have a String key and String value. Property names are limited to A-z and underscores.
-
-## FAQ
-
-Do you have an Android version?
->Yes! You can find it [here](https://github.com/mailchimp/Mailchimp-SDK-Android)
-
-Why is the SDK throwing an error when I try to create a contact?
->Check that you are initializing the SDK with the correct token format. The token includes the `-us` suffix.
-
-Why do calls silently fail?
->For security, our SDK is write-only. Contact data cannot be retrieved via the SDK. Calls fail silently so that contact data cannot be deduced from error messages. (e.g. If adding a contact failed loudly, one could deduce that the contact exists on your list.)
-
-How do I use the SDK in my Objective-C project?
->The best way to interact with an Objective-C project is to create a Swift wrapper object that can initialize the SDK and create a contact for you.
-
-Does the Mailchimp mobile SDK track my users?
->The Mailchimp mobile SDK does not track your users. The Mailchimp mobile SDK automatically adds your mobile application users to your Mailchimp audience so that you can send them marketing communications. Mailchimp does not provide information about your app’s users to data brokers. The mobile SDK does not combine user data from your app with information from other apps in order to place targeted advertisements. For more information regarding Mailchimp’s mobile SDK, please click [here](https://mailchimp.com/help/mobile-sdk/).
+This code is distributed under the MIT license. See the [LICENSE](LICENSE) file for more info.
