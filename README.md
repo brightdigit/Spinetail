@@ -77,7 +77,6 @@ Spinetail is a Swift pacakge for interfacing with your Mailchimp account, audien
 // TODO: Sample Code
 ```
 
-
 # Features 
 
 Here's what's currently implemented with this library:
