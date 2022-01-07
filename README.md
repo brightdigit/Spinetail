@@ -76,62 +76,8 @@ In my case, I was using this for **the Vapor back-end for my Apple Watch app [He
 
 ### Demo Example
 
-#### CloudKit Dashboard Schema
-
-![Sample Schema for Todo List](Assets/CloudKitDB-Demo-Schema.jpg)
-
-#### Sample Code using **MistKit**
-
 ```swift
-// Example for pulling a todo list from CloudKit
-import MistKit
-import MistKitNIOHTTP1Token
-
-// setup your connection to CloudKit
-let connection = MKDatabaseConnection(
-  container: "iCloud.com.brightdigit.MistDemo", 
-  apiToken: "****", 
-  environment: .development
-)
-
-// setup how to manager your user's web authentication token 
-let manager = MKTokenManager(storage: MKUserDefaultsStorage(), client: MKNIOHTTP1TokenClient())
-
-// setup your database manager
-let database = MKDatabase(
-  connection: connection,
-  tokenManager: manager
-)
-
-// create your request to CloudKit
-let query = MKQuery(recordType: TodoListItem.self)
-
-let request = FetchRecordQueryRequest(
-  database: .private, 
-  query: FetchRecordQuery(query: query))
-
-// handle the result
-database.query(request) { result in
-  dump(result)
-}
-
-// wait for query here...
-```
-
-To wait for the CloudKit query to complete synchronously, you can use [CFRunLoop](https://developer.apple.com/documentation/corefoundation/cfrunloop-rht):
-
-```swift
-...
-// handle the result
-database.query(request) { result in
-  dump(result)
-
-  // nessecary if you need run this synchronously
-  CFRunLoopStop(CFRunLoopGetMain())
-}
-
-// nessecary if you need run this synchronously
-CFRunLoopRun()
+// TODO: Sample Code
 ```
 
 # Features 
