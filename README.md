@@ -71,6 +71,18 @@ Spinetail is a Swift pacakge for interfacing with your Mailchimp account, audien
 // TODO: Sample Code
 ```
 
+
+# Features 
+
+Here's what's currently implemented with this library:
+
+- [x] Pulling Your Current List of Newsletters and Campaigns
+- [x] Get Your Audience List
+- [x] Add to Your Audience List
+- [x] Updating Subscriber Tags
+
+... and more
+
 # Installation
 
 To integrate **Spinetail** into your project using SPM, specify it in your Package.swift file:
@@ -134,25 +146,19 @@ The SpinetailVapor package adds helper properties and methods to help with setti
 
 # Usage 
 
-## Search for Audience Members
+## Search for Audience List Subscribers
 
-## Adding new Audience Members
+## Adding new Audience List Subscribers
 
-## Updating Existing Audience Members
+## Updating Existing Audience List Subscribers
 
 ## Pulling List of Campaigns
 
 ## Get Newsletter Content
 
-## Examples
+## Updating Audience List Subscriber Tags
 
-There are two examples on how to do basic CRUD methods in CloudKit via MistKit: 
-* As a command line tool using Swift Argument Parser checkout [the `mistdemoc` Swift package executable here](https://github.com/brightdigit/MistKit/tree/main/Sources/mistdemoc)
-* And a server-side Vapor application [`mistdemod` here](https://github.com/brightdigit/MistKit/tree/main/Sources/mistdemoc)
-
-## Further Code Documentation
-
-[Documentation Here](/Documentation/Reference/README.md)
+# Making Requests via Prch
 
 ## Operation
 
@@ -297,9 +303,6 @@ Each request has an optional `securityRequirement`. You can create a `RequestBeh
 
 #### Reactive and Promises
 To add support for a specific asynchronous library, just add an extension on `APIClient` and add a function that wraps the `makeRequest` function and converts from a closure based syntax to returning the object of choice (stream, future...ect)
-
-## Models
-
 
 ## Requests
 
