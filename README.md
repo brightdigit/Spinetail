@@ -32,34 +32,40 @@ A Swift pacakge for interfacing with your Mailchimp account, audiences, campaign
 
 ![Demonstration of Spinetail](Assets/SpinetailDemo.gif)
 
+<!--ts-->
 # Table of Contents
 
-   * [**Introduction**](#introduction)
-   * [**Features**](#features)
-   * [**Installation**](#installation)
-   * [**Usage**](#usage)
-	  * [Composing Web Service Requests](#composing-web-service-requests)
-		* [Setting Up Authenticated Requests](#setting-up-authenticated-requests)
-		* [CloudKit and Vapor](#cloudkit-and-vapor)
-	  * [Fetching Records Using a Query (records/query)](#fetching-records-using-a-query-recordsquery)
-	  * [Fetching Records by Record Name (records/lookup)](#fetching-records-by-record-name-recordslookup)
-	  * [Fetching Current User Identity (users/caller)](#fetching-current-user-identity-userscaller)
-	  * [Modifying Records (records/modify)](#modifying-records-recordsmodify)
-	  * [Using SwiftNIO](#using-swiftnio)
-		 * [Using EventLoops](#using-eventloops)
-		 * [Choosing an HTTP Client](#choosing-an-http-client)
-	  * [Examples](#examples)
-	  * [Further Code Documentation](#further-code-documentation)
-   * [**Roadmap**](#roadmap)
-	  * [0.2.0](#020)
-	  * [**0.4.0**](#040)
-	  * [0.6.0](#060)
-	  * [0.8.0](#080)
-	  * [0.9.0](#090)
-	  * [v1.0.0](#v100)
-   * [**License**](#license)
+* [Introduction](#introduction)
+* [Features](#features)
+* [Installation](#installation)
+* [Usage](#usage)
+	* [Search for Audience List Subscribers](#search-for-audience-list-subscribers)
+	* [Adding new Audience List Subscribers](#adding-new-audience-list-subscribers)
+	* [Updating Existing Audience List Subscribers](#updating-existing-audience-list-subscribers)
+	* [Pulling List of Campaigns](#pulling-list-of-campaigns)
+	* [Get Newsletter Content](#get-newsletter-content)
+	* [Updating Audience List Subscriber Tags](#updating-audience-list-subscriber-tags)
+* [Making Requests via Prch](#making-requests-via-prch)
+	* [Operation](#operation)
+		* [Service](#service)
+		* [Request](#request)
+		* [Response](#response)
+	* [Model](#model)
+	* [APIClient](#apiclient)
+	 	* [APIClient properties](#apiclient-properties)
+	 	* [Making a request](#making-a-request)
+	 	* [APIResponse](#apiresponse)
+	 	* [Encoding and Decoding](#encoding-and-decoding)
+	 	* [APIClientError](#apiclienterror)
+	 	* [RequestBehaviour](#requestbehaviour)
+  	* [Authorization](#authorization)
+	 	* [Reactive and Promises](#reactive-and-promises)
+   * [Requests](#requests)
+* [License](#license)
 
 
+
+<!--te-->
 
 # Introduction
 
