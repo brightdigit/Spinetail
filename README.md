@@ -151,11 +151,11 @@ The SpinetailVapor package adds helper properties and methods to help with setti
 
 # Usage 
 
-## Search for Audience List Subscribers
+## Search for Audience List Members
 
-## Adding new Audience List Subscribers
+## Adding new Audience List Members
 
-## Updating Existing Audience List Subscribers
+## Updating Existing Audience List Members
 
 ## Pulling List of Campaigns
 
