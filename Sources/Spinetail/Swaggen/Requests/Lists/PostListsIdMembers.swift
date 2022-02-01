@@ -160,7 +160,7 @@ public extension Lists {
           marketingPermissions = try container.decodeArrayIfPresent("marketing_permissions")
           mergeFields = try container.decodeAnyIfPresent("merge_fields")
           tags = try container.decodeArrayIfPresent("tags")
-          
+
           timestampOpt = try container.decode("timestamp_opt")
           timestampSignup = try container.decode("timestamp_signup")
           vip = try container.decodeIfPresent("vip")
