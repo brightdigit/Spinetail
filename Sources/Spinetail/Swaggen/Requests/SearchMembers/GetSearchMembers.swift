@@ -700,7 +700,7 @@ public extension SearchMembers {
             public var memberRating: Int?
 
             /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-            public var mergeFields: [String: [String: CodableAny]]?
+            // public var mergeFields: [String: [String: CodableAny]]?
 
             /** The source from which the subscriber was added to this list. */
             public var source: String?
@@ -1014,7 +1014,7 @@ public extension SearchMembers {
               }
             }
 
-            public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, fullName: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: Date? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, memberRating: Int? = nil, mergeFields: [String: [String: CodableAny]]? = nil, source: String? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, uniqueEmailId: String? = nil, unsubscribeReason: String? = nil, vip: Bool? = nil, webId: Int? = nil) {
+            public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, fullName: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: Date? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, memberRating: Int? = nil, mergeFields _: [String: [String: CodableAny]]? = nil, source: String? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, uniqueEmailId: String? = nil, unsubscribeReason: String? = nil, vip: Bool? = nil, webId: Int? = nil) {
               self.links = links
               self.emailAddress = emailAddress
               self.emailClient = emailClient
@@ -1031,7 +1031,7 @@ public extension SearchMembers {
               self.location = location
               self.marketingPermissions = marketingPermissions
               self.memberRating = memberRating
-              self.mergeFields = mergeFields
+              // self.mergeFields = mergeFields
               self.source = source
               self.stats = stats
               self.status = status
@@ -1064,7 +1064,7 @@ public extension SearchMembers {
               location = try container.decodeIfPresent("location")
               marketingPermissions = try container.decodeArrayIfPresent("marketing_permissions")
               memberRating = try container.decodeIfPresent("member_rating")
-              mergeFields = try container.decodeAnyIfPresent("merge_fields")
+              // mergeFields = try container.decodeAnyIfPresent("merge_fields")
               source = try container.decodeIfPresent("source")
               stats = try container.decodeIfPresent("stats")
               status = try container.decodeIfPresent("status")
@@ -1097,7 +1097,7 @@ public extension SearchMembers {
               try container.encodeIfPresent(location, forKey: "location")
               try container.encodeIfPresent(marketingPermissions, forKey: "marketing_permissions")
               try container.encodeIfPresent(memberRating, forKey: "member_rating")
-              try container.encodeAnyIfPresent(mergeFields, forKey: "merge_fields")
+              // try container.encodeAnyIfPresent(mergeFields, forKey: "merge_fields")
               try container.encodeIfPresent(source, forKey: "source")
               try container.encodeIfPresent(stats, forKey: "stats")
               try container.encodeIfPresent(status, forKey: "status")
