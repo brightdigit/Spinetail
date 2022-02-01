@@ -2,6 +2,20 @@ import Prch
 @testable import Spinetail
 import XCTest
 
+enum MailchimpError : Error {
+  case apiError(Any)
+}
+extension APIResponseResult {
+  func get() throws -> SuccessType {
+    switch self {
+    case let .success(value):
+      return value
+    case let .failure(failure):
+      throw MailchimpError.apiError(failure)
+    }
+  }
+}
+
 struct TimeoutError: Error {}
 
 public extension APIClient {
@@ -16,9 +30,7 @@ public extension APIClient {
       result = $0
       semaphore.signal()
     }
-    guard semaphore.wait(timeout: timeout) == .success else {
-      throw TimeoutError()
-    }
+    semaphore.wait()
 
     return try result.get()
 //    var sessionRequest: SessionType.RequestType
@@ -40,9 +52,10 @@ public extension APIClient {
 }
 
 final class SpinetailTests: XCTestCase {
+  let email = "leo.dion+helloWorld@gmail.com"
+  let listID = "6f357ca335"
+  let interestID = "57c6bddb73"
   func testUpsert() throws {
-    let email = "leogdion+mailchimpdev@brightdigit.com"
-    let listID = "6f357ca335"
 
     guard let apiKey = ProcessInfo.processInfo.environment["API_KEY"] else {
       return
@@ -51,8 +64,44 @@ final class SpinetailTests: XCTestCase {
       return
     }
     let client = APIClient(api: api, session: URLSession.shared)
-    let request = SearchMembers.GetSearchMembers.Request(fields: nil, excludeFields: nil, query: email, listId: listID)
-    try client.requestSync(request)
+//    let getGroups = Lists.GetListsIdInterestCategories.Request(listId: listID)
+//    let categoryID = try (client.requestSync(getGroups).responseResult.get().categories?.first?.id).unsafelyUnwrapped
+//
+//    let getInterests = Lists.GetListsIdInterestCategoriesIdInterests.Request(listId: listID, interestCategoryId: categoryID)
+//    let interestID = try (client.requestSync(getInterests).responseResult.get().interests?.first?.id).unsafelyUnwrapped
+//    print(interestID)
+//    return
+    
+    let getMember = Lists.GetListsIdMembersId.Request(listId: listID, subscriberHash: email)
+    let memberResult = try client.requestSync(getMember)
+    
+    let member : Lists.GetListsIdMembersId.Response.Status200?
+    let interested : Bool
+    if memberResult.failure?.status == 404 {
+      interested = false
+      member = nil
+    } else {
+      member = try memberResult.responseResult.get()
+      interested = member?.interests?[interestID] ?? false
+    }
+    
+    
+
+    
+    let successful : Bool
+    guard !interested else {
+      return
+    }
+    if let subscriberHash = member?.id {
+      
+                  let patch = Lists.PatchListsIdMembersId.Request(body: .init(emailAddress: email, emailType: nil, interests: [interestID: true]), options: Lists.PatchListsIdMembersId.Request.Options(listId: listID, subscriberHash: subscriberHash))
+      successful = try client.requestSync(patch).responseResult.successful
+    } else {
+      let post = Lists.PostListsIdMembers.Request(listId: listID, body: .init(emailAddress: email, status: Lists.PostListsIdMembers.Request.Body.Status.subscribed, interests: [interestID: true]))
+      successful = try client.requestSync(post).responseResult.successful
+    }
+    XCTAssertTrue(successful)
+    
 //        return client.request(request).flatMapThrowing { response in
 //          try response.responseResult.get()
 //        }.map { members in

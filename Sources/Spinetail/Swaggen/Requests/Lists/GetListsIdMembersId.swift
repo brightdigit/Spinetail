@@ -123,7 +123,7 @@ public extension Lists {
         public var memberRating: Int?
 
         /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-        public var mergeFields: [String: [String: CodableAny]]?
+        //public var mergeFields: [String: [String: CodableAny]]?
 
         /** The source from which the subscriber was added to this list. */
         public var source: String?
@@ -454,7 +454,7 @@ public extension Lists {
           self.location = location
           self.marketingPermissions = marketingPermissions
           self.memberRating = memberRating
-          self.mergeFields = mergeFields
+          //self.mergeFields = mergeFields
           self.source = source
           self.stats = stats
           self.status = status
@@ -487,7 +487,7 @@ public extension Lists {
           location = try container.decodeIfPresent("location")
           marketingPermissions = try container.decodeArrayIfPresent("marketing_permissions")
           memberRating = try container.decodeIfPresent("member_rating")
-          mergeFields = try container.decodeAnyIfPresent("merge_fields")
+          //mergeFields = try container.decodeAnyIfPresent("merge_fields")
           source = try container.decodeIfPresent("source")
           stats = try container.decodeIfPresent("stats")
           status = try container.decodeIfPresent("status")
@@ -520,7 +520,7 @@ public extension Lists {
           try container.encodeIfPresent(location, forKey: "location")
           try container.encodeIfPresent(marketingPermissions, forKey: "marketing_permissions")
           try container.encodeIfPresent(memberRating, forKey: "member_rating")
-          try container.encodeAnyIfPresent(mergeFields, forKey: "merge_fields")
+          //try container.encodeAnyIfPresent(mergeFields, forKey: "merge_fields")
           try container.encodeIfPresent(source, forKey: "source")
           try container.encodeIfPresent(stats, forKey: "stats")
           try container.encodeIfPresent(status, forKey: "status")

@@ -65,10 +65,10 @@ public extension Lists {
         public var tags: [String]?
 
         /** The date and time the subscribe confirmed their opt-in status in ISO 8601 format. */
-        public var timestampOpt: DateTime
+        public var timestampOpt: Date
 
         /** The date and time the subscriber signed up for the list in ISO 8601 format. */
-        public var timestampSignup: DateTime
+        public var timestampSignup: Date
 
         /** [VIP status](https://mailchimp.com/help/view-and-edit-contact-languages/) for subscriber. */
         public var vip: Bool?
@@ -129,7 +129,7 @@ public extension Lists {
           }
         }
 
-        public init(emailAddress: String, status: Status, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, mergeFields: [String: [String: CodableAny]]? = nil, tags: [String]? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, vip: Bool? = nil) {
+        public init(emailAddress: String, status: Status, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, mergeFields: [String: [String: CodableAny]]? = nil, tags: [String]? = nil, timestampOpt: Date, timestampSignup: Date, vip: Bool? = nil) {
           self.emailAddress = emailAddress
           self.status = status
           self.emailType = emailType
@@ -141,8 +141,8 @@ public extension Lists {
           self.marketingPermissions = marketingPermissions
           self.mergeFields = mergeFields
           self.tags = tags
-          self.timestampOpt = .init(date: timestampOpt)
-          self.timestampSignup = .init(date: timestampSignup)
+          self.timestampOpt = timestampOpt
+          self.timestampSignup = timestampSignup
           self.vip = vip
         }
 
@@ -160,8 +160,9 @@ public extension Lists {
           marketingPermissions = try container.decodeArrayIfPresent("marketing_permissions")
           mergeFields = try container.decodeAnyIfPresent("merge_fields")
           tags = try container.decodeArrayIfPresent("tags")
-          timestampOpt = try container.decodeIfPresent("timestamp_opt")
-          timestampSignup = try container.decodeIfPresent("timestamp_signup")
+          
+          timestampOpt = try container.decode("timestamp_opt")
+          timestampSignup = try container.decode("timestamp_signup")
           vip = try container.decodeIfPresent("vip")
         }
 
