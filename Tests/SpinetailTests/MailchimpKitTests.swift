@@ -1,7 +1,74 @@
 import Prch
 @testable import Spinetail
 import XCTest
+
+struct TimeoutError: Error {}
+
+public extension APIClient {
+  func requestSync<ResponseType>(
+    _ request: APIRequest<ResponseType>,
+    timeout: DispatchTime = .now().advanced(by: .seconds(5))
+    // _ completion: @escaping (APIResult<ResponseType>) -> Void
+  ) throws -> ResponseType {
+    var result: APIResult<ResponseType>!
+    let semaphore = DispatchSemaphore(value: 0)
+    self.request(request) {
+      result = $0
+      semaphore.signal()
+    }
+    guard semaphore.wait(timeout: timeout) == .success else {
+      throw TimeoutError()
+    }
+
+    return try result.get()
+//    var sessionRequest: SessionType.RequestType
+//    do {
+//      sessionRequest = try session.createRequest(
+//        request,
+//        withBaseURL: api.baseURL,
+//        andHeaders: api.headers
+//      )
+//    } catch {
+//      completion(.failure(.requestEncodingError(error)))
+//      return nil
+//    }
+//
+//    return session.beginRequest(sessionRequest) { result in
+//      completion(.init(ResponseType.self, result: result, decoder: self.api.decoder))
+//    }
+  }
+}
+
 final class SpinetailTests: XCTestCase {
+  func testUpsert() throws {
+    let email = "leogdion+mailchimpdev@brightdigit.com"
+    let listID = "6f357ca335"
+
+    guard let apiKey = ProcessInfo.processInfo.environment["API_KEY"] else {
+      return
+    }
+    guard let api = MailchimpAPI(apiKey: apiKey) else {
+      return
+    }
+    let client = APIClient(api: api, session: URLSession.shared)
+    let request = SearchMembers.GetSearchMembers.Request(fields: nil, excludeFields: nil, query: email, listId: listID)
+    try client.requestSync(request)
+//        return client.request(request).flatMapThrowing { response in
+//          try response.responseResult.get()
+//        }.map { members in
+//          members.exactMatches?.members?.first?.id
+//        }.flatMap { subscriberHash in
+//          if let subscriberHash = subscriberHash {
+//            let request = Lists.PatchListsIdMembersId.Request(body: .init(emailAddress: user.email, emailType: nil, interests: [self.interestID: true]), options: Lists.PatchListsIdMembersId.Request.Options(listId: self.listID, subscriberHash: subscriberHash))
+//            return self.client.request(request).asVoidResult(fromKey: \.responseResult)
+//          } else {
+//            let request = Lists.PostListsIdMembers.Request(listId: listID, body: .init(emailAddress: user.email, status: Lists.PostListsIdMembers.Request.Body.Status.subscribed, interests: [self.interestID: true]))
+//
+//            return self.client.request(request).asVoidResult(fromKey: \.responseResult)
+//          }
+//        }
+  }
+
   // swiftlint:disable:next cyclomatic_complexity
   func testCampaign() throws {
 //    let exp = expectation(description: "post campaign")
