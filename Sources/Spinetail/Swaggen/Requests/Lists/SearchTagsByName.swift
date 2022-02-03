@@ -10,7 +10,7 @@ public extension Lists {
   enum SearchTagsByName {
     public static let service = APIService<Response>(id: "searchTagsByName", tag: "lists", method: "GET", path: "/lists/{list_id}/tag-search", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** The unique ID for the list. */
         public var listId: String
@@ -51,6 +51,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A list of tags matching the input query. */
       public struct Status200: Model {
         /** A list of matching tags. */

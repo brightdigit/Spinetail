@@ -10,7 +10,7 @@ public extension Campaigns {
   enum PatchCampaignsId {
     public static let service = APIService<Response>(id: "patchCampaignsId", tag: "campaigns", method: "PATCH", path: "/campaigns/{campaign_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** A summary of an individual campaign's settings and content. */
       public struct Body: Model {
         /** The settings for your campaign, including subject, from name, reply-to address, and more. */
@@ -652,6 +652,7 @@ public extension Campaigns {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A summary of an individual campaign's settings and content. */
       public struct Status200: Model {
         /** How the campaign's content is put together. */

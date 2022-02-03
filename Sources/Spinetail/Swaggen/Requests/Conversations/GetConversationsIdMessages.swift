@@ -16,7 +16,7 @@ public extension Conversations {
       case `false`
     }
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -85,6 +85,7 @@ public extension Conversations {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Messages from a specific conversation. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

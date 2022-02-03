@@ -23,7 +23,7 @@ public extension Lists {
       case desc = "DESC"
     }
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** The unique ID for the list. */
         public var listId: String
@@ -103,6 +103,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** The last 10 notes for a specific list member, based on date created. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

@@ -10,7 +10,7 @@ public extension Lists {
   enum PostListsIdSignupForms {
     public static let service = APIService<Response>(id: "postListsIdSignupForms", tag: "lists", method: "POST", path: "/lists/{list_id}/signup-forms", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** List signup form. */
       public struct Body: Model {
         /** The signup form body content. */
@@ -296,6 +296,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** List signup form. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

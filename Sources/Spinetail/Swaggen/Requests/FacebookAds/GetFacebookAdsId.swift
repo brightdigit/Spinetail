@@ -10,7 +10,7 @@ public extension FacebookAds {
   enum GetFacebookAdsId {
     public static let service = APIService<Response>(id: "getFacebookAdsId", tag: "facebookAds", method: "GET", path: "/facebook-ads/{outreach_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -58,6 +58,7 @@ public extension FacebookAds {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Get details of a Facebook ad. */
       public struct Status200: Model {
         /** Campaign, Ad, or Page status */

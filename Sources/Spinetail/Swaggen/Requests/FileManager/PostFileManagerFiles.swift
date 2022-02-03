@@ -10,7 +10,7 @@ public extension FileManager {
   enum PostFileManagerFiles {
     public static let service = APIService<Response>(id: "postFileManagerFiles", tag: "fileManager", method: "POST", path: "/file-manager/files", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** An individual file listed in the File Manager. */
       public struct Body: Model {
         /** The base64-encoded contents of the file. */
@@ -56,6 +56,7 @@ public extension FileManager {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** An individual file listed in the File Manager. */
       public struct Status200: Model {
         /** The type of file in the File Manager. */

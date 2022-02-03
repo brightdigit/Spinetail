@@ -10,7 +10,7 @@ public extension Reports {
   enum GetReportsIdSentToId {
     public static let service = APIService<Response>(id: "getReportsIdSentToId", tag: "reports", method: "GET", path: "/reports/{campaign_id}/sent-to/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -62,6 +62,7 @@ public extension Reports {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A subscriber's status for a specific campaign. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
@@ -92,7 +93,7 @@ public extension Reports {
         public var listIsActive: Bool?
 
         /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-        public var mergeFields: [String: [String: CodableAny]]?
+        public var mergeFields: [String: CodableAny]?
 
         /** The number of times a campaign was opened by this member. */
         public var openCount: Int?
@@ -160,7 +161,7 @@ public extension Reports {
           }
         }
 
-        public init(links: [Links]? = nil, absplitGroup: String? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, gmtOffset: Int? = nil, lastOpen: Date? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: [String: CodableAny]]? = nil, openCount: Int? = nil, status: String? = nil, vip: Bool? = nil) {
+        public init(links: [Links]? = nil, absplitGroup: String? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, gmtOffset: Int? = nil, lastOpen: Date? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: CodableAny]? = nil, openCount: Int? = nil, status: String? = nil, vip: Bool? = nil) {
           self.links = links
           self.absplitGroup = absplitGroup
           self.campaignId = campaignId
@@ -188,7 +189,7 @@ public extension Reports {
           lastOpen = try container.decodeIfPresent("last_open")
           listId = try container.decodeIfPresent("list_id")
           listIsActive = try container.decodeIfPresent("list_is_active")
-          mergeFields = try container.decodeAnyIfPresent("merge_fields")
+          mergeFields = try container.decodeAnyCodableDictionary("merge_fields")
           openCount = try container.decodeIfPresent("open_count")
           status = try container.decodeIfPresent("status")
           vip = try container.decodeIfPresent("vip")

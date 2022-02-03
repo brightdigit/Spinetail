@@ -10,7 +10,7 @@ public extension Lists {
   enum PostLists {
     public static let service = APIService<Response>(id: "postLists", tag: "lists", method: "POST", path: "/lists", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Information about a specific list. */
       public struct Body: Model {
         /** [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list. */
@@ -202,6 +202,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Information about a specific list. */
       public struct Status200: Model {
         /** Legacy - visibility settings are no longer used */

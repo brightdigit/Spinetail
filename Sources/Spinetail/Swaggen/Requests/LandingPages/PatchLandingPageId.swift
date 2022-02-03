@@ -10,7 +10,7 @@ public extension LandingPages {
   enum PatchLandingPageId {
     public static let service = APIService<Response>(id: "patchLandingPageId", tag: "landingPages", method: "PATCH", path: "/landing-pages/{page_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** A summary of an individual page's properties. */
       public struct Body: Model {
         /** The description of this landing page. */
@@ -124,6 +124,7 @@ public extension LandingPages {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A summary of an individual landing page's settings and content. */
       public struct Status200: Model {
         /** The status of this landing page. */

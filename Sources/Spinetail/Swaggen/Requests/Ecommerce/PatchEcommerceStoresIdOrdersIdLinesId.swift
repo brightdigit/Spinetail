@@ -10,7 +10,7 @@ public extension Ecommerce {
   enum PatchEcommerceStoresIdOrdersIdLinesId {
     public static let service = APIService<Response>(id: "patchEcommerceStoresIdOrdersIdLinesId", tag: "ecommerce", method: "PATCH", path: "/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Information about a specific order line. */
       public struct Body: Model {
         /** The total discount amount applied to this line item. */
@@ -98,6 +98,7 @@ public extension Ecommerce {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Information about a specific order line. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

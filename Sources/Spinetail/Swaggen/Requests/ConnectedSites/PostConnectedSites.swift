@@ -10,7 +10,7 @@ public extension ConnectedSites {
   enum PostConnectedSites {
     public static let service = APIService<Response>(id: "postConnectedSites", tag: "connectedSites", method: "POST", path: "/connected-sites", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Information about a specific connected site. */
       public struct Body: Model {
         /** The connected site domain. */
@@ -50,6 +50,7 @@ public extension ConnectedSites {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Information about a specific connected site. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

@@ -10,7 +10,7 @@ public extension SearchMembers {
   enum GetSearchMembers {
     public static let service = APIService<Response>(id: "getSearchMembers", tag: "searchMembers", method: "GET", path: "/search-members", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -62,6 +62,7 @@ public extension SearchMembers {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Members found for given search term */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
@@ -199,7 +200,7 @@ public extension SearchMembers {
             public var memberRating: Int?
 
             /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-            public var mergeFields: [String: [String: CodableAny]]?
+            public var mergeFields: [String: CodableAny]?
 
             /** The source from which the subscriber was added to this list. */
             public var source: String?
@@ -513,7 +514,7 @@ public extension SearchMembers {
               }
             }
 
-            public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, fullName: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: Date? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, memberRating: Int? = nil, mergeFields: [String: [String: CodableAny]]? = nil, source: String? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, uniqueEmailId: String? = nil, unsubscribeReason: String? = nil, vip: Bool? = nil, webId: Int? = nil) {
+            public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, fullName: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: Date? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, memberRating: Int? = nil, mergeFields: [String: CodableAny]? = nil, source: String? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, uniqueEmailId: String? = nil, unsubscribeReason: String? = nil, vip: Bool? = nil, webId: Int? = nil) {
               self.links = links
               self.emailAddress = emailAddress
               self.emailClient = emailClient
@@ -563,7 +564,7 @@ public extension SearchMembers {
               location = try container.decodeIfPresent("location")
               marketingPermissions = try container.decodeArrayIfPresent("marketing_permissions")
               memberRating = try container.decodeIfPresent("member_rating")
-              mergeFields = try container.decodeAnyIfPresent("merge_fields")
+              mergeFields = try container.decodeAnyCodableDictionary("merge_fields")
               source = try container.decodeIfPresent("source")
               stats = try container.decodeIfPresent("stats")
               status = try container.decodeIfPresent("status")
@@ -700,7 +701,7 @@ public extension SearchMembers {
             public var memberRating: Int?
 
             /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-            // public var mergeFields: [String: [String: CodableAny]]?
+            // public var mergeFields: [String: CodableAny]?
 
             /** The source from which the subscriber was added to this list. */
             public var source: String?
@@ -1064,7 +1065,7 @@ public extension SearchMembers {
               location = try container.decodeIfPresent("location")
               marketingPermissions = try container.decodeArrayIfPresent("marketing_permissions")
               memberRating = try container.decodeIfPresent("member_rating")
-              // mergeFields = try container.decodeAnyIfPresent("merge_fields")
+              // mergeFields = try container.decodeAnyCodableDictionary("merge_fields")
               source = try container.decodeIfPresent("source")
               stats = try container.decodeIfPresent("stats")
               status = try container.decodeIfPresent("status")

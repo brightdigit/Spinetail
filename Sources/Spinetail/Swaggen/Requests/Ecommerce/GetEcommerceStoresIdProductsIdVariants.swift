@@ -10,7 +10,7 @@ public extension Ecommerce {
   enum GetEcommerceStoresIdProductsIdVariants {
     public static let service = APIService<Response>(id: "getEcommerceStoresIdProductsIdVariants", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/products/{product_id}/variants", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -76,6 +76,7 @@ public extension Ecommerce {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A collection of a product's variants. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

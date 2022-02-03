@@ -10,7 +10,7 @@ public extension ConnectedSites {
   enum GetConnectedSitesId {
     public static let service = APIService<Response>(id: "getConnectedSitesId", tag: "connectedSites", method: "GET", path: "/connected-sites/{connected_site_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -58,6 +58,7 @@ public extension ConnectedSites {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Information about a specific connected site. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

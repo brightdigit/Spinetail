@@ -10,7 +10,7 @@ public extension Campaigns {
   enum PostCampaignsIdActionsCreateResend {
     public static let service = APIService<Response>(id: "postCampaignsIdActionsCreateResend", tag: "campaigns", method: "POST", path: "/campaigns/{campaign_id}/actions/create-resend", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** The unique id for the campaign. */
         public var campaignId: String
@@ -39,6 +39,7 @@ public extension Campaigns {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A summary of an individual campaign's settings and content. */
       public struct Status200: Model {
         /** There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead. */

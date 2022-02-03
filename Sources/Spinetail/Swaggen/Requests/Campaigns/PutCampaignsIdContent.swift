@@ -10,7 +10,7 @@ public extension Campaigns {
   enum PutCampaignsIdContent {
     public static let service = APIService<Response>(id: "putCampaignsIdContent", tag: "campaigns", method: "PUT", path: "/campaigns/{campaign_id}/content", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** The HTML and plain-text content for a campaign */
       public struct Body: Model {
         /** Available when uploading an archive to create campaign content. The archive should include all campaign content and images. [Learn more](https://mailchimp.com/help/import-a-custom-html-template/). */
@@ -280,6 +280,7 @@ public extension Campaigns {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** The HTML and plain-text content for a campaign. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

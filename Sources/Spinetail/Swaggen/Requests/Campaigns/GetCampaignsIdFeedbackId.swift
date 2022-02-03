@@ -10,7 +10,7 @@ public extension Campaigns {
   enum GetCampaignsIdFeedbackId {
     public static let service = APIService<Response>(id: "getCampaignsIdFeedbackId", tag: "campaigns", method: "GET", path: "/campaigns/{campaign_id}/feedback/{feedback_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -62,6 +62,7 @@ public extension Campaigns {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A specific feedback message from a specific campaign. */
       public struct Status200: Model {
         /** The source of the feedback. */

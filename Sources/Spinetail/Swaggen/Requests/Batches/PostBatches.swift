@@ -10,7 +10,7 @@ public extension Batches {
   enum PostBatches {
     public static let service = APIService<Response>(id: "postBatches", tag: "batches", method: "POST", path: "/batches", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Begin processing a batch operations request. */
       public struct Body: Model {
         /** An array of objects that describes operations to perform. */
@@ -98,6 +98,7 @@ public extension Batches {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** The status of a batch request */
       public struct Status200: Model {
         /** The status of the batch call. [Learn more](https://mailchimp.com/developer/marketing/guides/run-async-requests-batch-endpoint/#check-the-status-of-a-batch-operation) about the batch operation status. */

@@ -10,7 +10,7 @@ public extension BatchWebhooks {
   enum PostBatchWebhooks {
     public static let service = APIService<Response>(id: "postBatchWebhooks", tag: "batchWebhooks", method: "POST", path: "/batch-webhooks", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Add a new Batch Webook. */
       public struct Body: Model {
         /** A valid URL for the Webhook. */
@@ -44,6 +44,7 @@ public extension BatchWebhooks {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A webhook configured for batch status updates. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

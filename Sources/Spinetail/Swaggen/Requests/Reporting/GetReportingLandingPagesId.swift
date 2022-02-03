@@ -10,7 +10,7 @@ public extension Reporting {
   enum GetReportingLandingPagesId {
     public static let service = APIService<Response>(id: "getReportingLandingPagesId", tag: "reporting", method: "GET", path: "/reporting/landing-pages/{outreach_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -58,6 +58,7 @@ public extension Reporting {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A summary of an individual landing page's settings and content. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

@@ -10,7 +10,7 @@ public extension Automations {
   enum PatchAutomationEmailWorkflowId {
     public static let service = APIService<Response>(id: "patchAutomationEmailWorkflowId", tag: "automations", method: "PATCH", path: "/automations/{workflow_id}/emails/{workflow_email_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Update information about an individual Automation workflow email. */
       public struct Body: Model {
         /** The delay settings for an automation email. */
@@ -182,6 +182,7 @@ public extension Automations {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A summary of an individual Automation workflow email. */
       public struct Status200: Model {
         /** The current status of the campaign. */

@@ -23,7 +23,7 @@ public extension Ecommerce {
       case percentage
     }
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Information about an Ecommerce Store's specific Promo Rule. */
       public struct Body: Model {
         /** The target that the discount applies to. */
@@ -152,6 +152,7 @@ public extension Ecommerce {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Information about an Ecommerce Store's specific Promo Rule */
       public struct Status200: Model {
         /** The target that the discount applies to. */

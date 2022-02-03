@@ -10,7 +10,7 @@ public extension Lists {
   enum PatchListsIdInterestCategoriesIdInterestsId {
     public static let service = APIService<Response>(id: "patchListsIdInterestCategoriesIdInterestsId", tag: "lists", method: "PATCH", path: "/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application. */
       public struct Body: Model {
         /** The name of the interest. This can be shown publicly on a subscription form. */
@@ -80,6 +80,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

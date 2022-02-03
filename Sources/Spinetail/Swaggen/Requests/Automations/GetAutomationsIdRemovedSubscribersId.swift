@@ -10,7 +10,7 @@ public extension Automations {
   enum GetAutomationsIdRemovedSubscribersId {
     public static let service = APIService<Response>(id: "getAutomationsIdRemovedSubscribersId", tag: "automations", method: "GET", path: "/automations/{workflow_id}/removed-subscribers/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** The unique id for the Automation workflow. */
         public var workflowId: String
@@ -43,6 +43,7 @@ public extension Automations {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A summary of a subscriber removed from an Automation workflow. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

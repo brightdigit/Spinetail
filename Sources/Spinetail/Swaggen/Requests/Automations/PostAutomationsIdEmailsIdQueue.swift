@@ -10,7 +10,7 @@ public extension Automations {
   enum PostAutomationsIdEmailsIdQueue {
     public static let service = APIService<Response>(id: "postAutomationsIdEmailsIdQueue", tag: "automations", method: "POST", path: "/automations/{workflow_id}/emails/{workflow_email_id}/queue", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Information about subscribers in an Automation email queue. */
       public struct Body: Model {
         /** The list member's email address. */
@@ -70,6 +70,7 @@ public extension Automations {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Information about subscribers in an Automation email queue. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

@@ -10,7 +10,7 @@ public extension ActivityFeed {
   enum GetActivityFeedChimpChatter {
     public static let service = APIService<Response>(id: "getActivityFeedChimpChatter", tag: "activityFeed", method: "GET", path: "/activity-feed/chimp-chatter", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** The number of records to return. Default value is 10. Maximum value is 1000 */
         public var count: Int?
@@ -50,6 +50,7 @@ public extension ActivityFeed {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

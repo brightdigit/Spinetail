@@ -10,13 +10,14 @@ public extension Ping {
   enum GetPing {
     public static let service = APIService<Response>(id: "getPing", tag: "ping", method: "GET", path: "/ping", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public init() {
         super.init(service: GetPing.service)
       }
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** API health status. */
       public struct Status200: Model {
         /** This will return a constant string value if the request is successful. Ex. "Everything's Chimpy!" */

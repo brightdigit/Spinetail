@@ -22,8 +22,7 @@ struct TimeoutError: Error {}
 
 public extension APIClient {
   func requestSync<ResponseType>(
-    _ request: APIRequest<ResponseType>,
-    timeout _: DispatchTime = .now().advanced(by: .seconds(5))
+    _ request: APIRequest<ResponseType, APIType>
     // _ completion: @escaping (APIResult<ResponseType>) -> Void
   ) throws -> ResponseType {
     var result: APIResult<ResponseType>!
@@ -54,54 +53,50 @@ public extension APIClient {
 }
 
 final class SpinetailTests: XCTestCase {
-  let email = ""
-  let listID = ""
-  let interestID = ""
+  let email = "669408F7A804430BAF74878BFCEBD128@brightdigit.com"
+  let listID = "6f357ca335"
+  let interestID = "57c6bddb73"
   func testUpsert() throws {
-//    guard let apiKey = ProcessInfo.processInfo.environment["API_KEY"] else {
-//      return
-//    }
-//    guard let api = MailchimpAPI(apiKey: apiKey) else {
-//      return
-//    }
-//    let client = APIClient(api: api, session: URLSession.shared)
-    ////    let getGroups = Lists.GetListsIdInterestCategories.Request(listId: listID)
-    ////    let categoryID = try (client.requestSync(getGroups).responseResult.get().categories?.first?.id).unsafelyUnwrapped
-    ////
-    ////    let getInterests = Lists.GetListsIdInterestCategoriesIdInterests.Request(listId: listID, interestCategoryId: categoryID)
-    ////    let interestID = try (client.requestSync(getInterests).responseResult.get().interests?.first?.id).unsafelyUnwrapped
-    ////    print(interestID)
-    ////    return
+    guard let apiKey = ProcessInfo.processInfo.environment["API_KEY"] else {
+      return
+    }
+    guard let api = MailchimpAPI(apiKey: apiKey) else {
+      return
+    }
+    let client = APIClient(api: api, session: URLSession.shared)
+//    let getGroups = Lists.GetListsIdInterestCategories.Request(listId: listID)
+//    let categoryID = try (client.requestSync(getGroups).responseResult.get().categories?.first?.id).unsafelyUnwrapped
 //
-//    let getMember = Lists.GetListsIdMembersId.Request(listId: listID, subscriberHash: email)
-//    let memberResult = try client.requestSync(getMember)
-//
-//    let member : Lists.GetListsIdMembersId.Response.Status200?
-//    let interested : Bool
-//    if memberResult.failure?.status == 404 {
-//      interested = false
-//      member = nil
-//    } else {
-//      member = try memberResult.responseResult.get()
-//      interested = member?.interests?[interestID] ?? false
-//    }
-//
-//
-//
-//
-//    let successful : Bool
-//    guard !interested else {
-//      return
-//    }
-//    if let subscriberHash = member?.id {
-//
-//                  let patch = Lists.PatchListsIdMembersId.Request(body: .init(emailAddress: email, emailType: nil, interests: [interestID: true]), options: Lists.PatchListsIdMembersId.Request.Options(listId: listID, subscriberHash: subscriberHash))
-//      successful = try client.requestSync(patch).responseResult.successful
-//    } else {
-//      let post = Lists.PostListsIdMembers.Request(listId: listID, body: .init(emailAddress: email, status: Lists.PostListsIdMembers.Request.Body.Status.subscribed, interests: [interestID: true]))
-//      successful = try client.requestSync(post).responseResult.successful
-//    }
-//    XCTAssertTrue(successful)
+//    let getInterests = Lists.GetListsIdInterestCategoriesIdInterests.Request(listId: listID, interestCategoryId: categoryID)
+//    let interestID = try (client.requestSync(getInterests).responseResult.get().interests?.first?.id).unsafelyUnwrapped
+//    print(interestID)
+//    return
+
+    let getMember = Lists.GetListsIdMembersId.Request(listId: listID, subscriberHash: email)
+    let memberResult = try client.requestSync(getMember)
+
+    let member: Lists.GetListsIdMembersId.Response.Status200?
+    let interested: Bool
+    if memberResult.failure?.status == 404 {
+      interested = false
+      member = nil
+    } else {
+      member = try memberResult.responseResult.get()
+      interested = member?.interests?[interestID] ?? false
+    }
+
+    let successful: Bool
+    guard !interested else {
+      return
+    }
+    if let subscriberHash = member?.id {
+      let patch = Lists.PatchListsIdMembersId.Request(body: .init(emailAddress: email, emailType: nil, interests: [interestID: true]), options: Lists.PatchListsIdMembersId.Request.Options(listId: listID, subscriberHash: subscriberHash))
+      successful = try client.requestSync(patch).responseResult.successful
+    } else {
+      let post = Lists.PostListsIdMembers.Request(listId: listID, body: .init(emailAddress: email, status: Lists.PostListsIdMembers.Request.Body.Status.subscribed, interests: [interestID: true], timestampOpt: .init(), timestampSignup: .init()))
+      successful = try client.requestSync(post).responseResult.successful
+    }
+    XCTAssertTrue(successful)
 
 //        return client.request(request).flatMapThrowing { response in
 //          try response.responseResult.get()

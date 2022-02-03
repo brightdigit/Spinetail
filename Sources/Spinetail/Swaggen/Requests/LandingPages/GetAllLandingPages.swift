@@ -22,7 +22,7 @@ public extension LandingPages {
       case updatedAt = "updated_at"
     }
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** Determines the order direction for sorted results. */
         public var sortDir: SortDir?
@@ -83,6 +83,7 @@ public extension LandingPages {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A collection of landing pages. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

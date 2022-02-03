@@ -10,7 +10,7 @@ public extension Root {
   enum GetRoot {
     public static let service = APIService<Response>(id: "getRoot", tag: "root", method: "GET", path: "/", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -50,6 +50,7 @@ public extension Root {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** The API root resource links to all other resources available in the API. */
       public struct Status200: Model {
         /** The type of pricing plan the account is on. */

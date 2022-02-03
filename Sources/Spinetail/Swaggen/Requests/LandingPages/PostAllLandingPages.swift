@@ -16,7 +16,7 @@ public extension LandingPages {
       case product
     }
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** A summary of an individual page's properties. */
       public struct Body: Model {
         /** The type of template the landing page has. */
@@ -152,6 +152,7 @@ public extension LandingPages {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A summary of an individual landing page's settings and content. */
       public struct Status200: Model {
         /** The status of this landing page. */

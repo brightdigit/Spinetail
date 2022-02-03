@@ -10,7 +10,7 @@ public extension FileManager {
   enum GetFileManagerFilesId {
     public static let service = APIService<Response>(id: "getFileManagerFilesId", tag: "fileManager", method: "GET", path: "/file-manager/files/{file_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -58,6 +58,7 @@ public extension FileManager {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** An individual file listed in the File Manager. */
       public struct Status200: Model {
         /** The type of file in the File Manager. */

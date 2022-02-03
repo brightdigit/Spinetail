@@ -10,7 +10,7 @@ public extension Ecommerce {
   enum PostEcommerceStoresIdCartsIdLines {
     public static let service = APIService<Response>(id: "postEcommerceStoresIdCartsIdLines", tag: "ecommerce", method: "POST", path: "/ecommerce/stores/{store_id}/carts/{cart_id}/lines", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Information about a specific cart line item. */
       public struct Body: Model {
         /** A unique identifier for the cart line item. */
@@ -94,6 +94,7 @@ public extension Ecommerce {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Information about a specific cart line item. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

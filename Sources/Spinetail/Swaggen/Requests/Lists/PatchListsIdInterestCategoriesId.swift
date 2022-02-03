@@ -18,7 +18,7 @@ public extension Lists {
       case hidden
     }
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application. */
       public struct Body: Model {
         /** Determines how this category’s interests appear on signup forms. */
@@ -98,6 +98,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application. */
       public struct Status200: Model {
         /** Determines how this category’s interests appear on signup forms. */

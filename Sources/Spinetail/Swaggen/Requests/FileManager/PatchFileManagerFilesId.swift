@@ -10,7 +10,7 @@ public extension FileManager {
   enum PatchFileManagerFilesId {
     public static let service = APIService<Response>(id: "patchFileManagerFilesId", tag: "fileManager", method: "PATCH", path: "/file-manager/files/{file_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** An individual file listed in the File Manager. */
       public struct Body: Model {
         /** The id of the folder. Setting `folder_id` to `0` will remove a file from its current folder. */
@@ -72,6 +72,7 @@ public extension FileManager {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** An individual file listed in the File Manager. */
       public struct Status200: Model {
         /** The type of file in the File Manager. */

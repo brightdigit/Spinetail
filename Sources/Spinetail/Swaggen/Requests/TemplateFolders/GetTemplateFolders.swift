@@ -10,7 +10,7 @@ public extension TemplateFolders {
   enum GetTemplateFolders {
     public static let service = APIService<Response>(id: "getTemplateFolders", tag: "templateFolders", method: "GET", path: "/template-folders", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -64,6 +64,7 @@ public extension TemplateFolders {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A list of template folders */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

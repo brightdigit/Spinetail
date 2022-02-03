@@ -10,7 +10,7 @@ public extension Reports {
   enum GetReportsIdAbuseReportsIdId {
     public static let service = APIService<Response>(id: "getReportsIdAbuseReportsIdId", tag: "reports", method: "GET", path: "/reports/{campaign_id}/abuse-reports/{report_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -62,6 +62,7 @@ public extension Reports {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
@@ -89,7 +90,7 @@ public extension Reports {
         public var listIsActive: Bool?
 
         /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-        public var mergeFields: [String: [String: CodableAny]]?
+        public var mergeFields: [String: CodableAny]?
 
         /** [VIP status](https://mailchimp.com/help/designate-and-send-to-vip-contacts/) for subscriber. */
         public var vip: Bool?
@@ -151,7 +152,7 @@ public extension Reports {
           }
         }
 
-        public init(links: [Links]? = nil, campaignId: String? = nil, date: Date? = nil, emailAddress: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: [String: CodableAny]]? = nil, vip: Bool? = nil) {
+        public init(links: [Links]? = nil, campaignId: String? = nil, date: Date? = nil, emailAddress: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: CodableAny]? = nil, vip: Bool? = nil) {
           self.links = links
           self.campaignId = campaignId
           self.date = .init(date: date)
@@ -175,7 +176,7 @@ public extension Reports {
           id = try container.decodeIfPresent("id")
           listId = try container.decodeIfPresent("list_id")
           listIsActive = try container.decodeIfPresent("list_is_active")
-          mergeFields = try container.decodeAnyIfPresent("merge_fields")
+          mergeFields = try container.decodeAnyCodableDictionary("merge_fields")
           vip = try container.decodeIfPresent("vip")
         }
 

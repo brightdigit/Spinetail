@@ -10,7 +10,7 @@ public extension VerifiedDomains {
   enum CreateVerifiedDomain {
     public static let service = APIService<Response>(id: "createVerifiedDomain", tag: "verifiedDomains", method: "POST", path: "/verified-domains", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** The verified domains currently on the account. */
       public struct Body: Model {
         /** The e-mail address at the domain you want to verify. This will receive a two-factor challenge to be used in the verify action. */
@@ -44,6 +44,7 @@ public extension VerifiedDomains {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** The verified domains currently on the account. */
       public struct Status200: Model {
         /** Whether domain authentication is enabled for this domain. */

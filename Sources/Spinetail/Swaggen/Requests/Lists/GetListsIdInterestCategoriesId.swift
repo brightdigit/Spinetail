@@ -10,7 +10,7 @@ public extension Lists {
   enum GetListsIdInterestCategoriesId {
     public static let service = APIService<Response>(id: "getListsIdInterestCategoriesId", tag: "lists", method: "GET", path: "/lists/{list_id}/interest-categories/{interest_category_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** The unique ID for the list. */
         public var listId: String
@@ -62,6 +62,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application. */
       public struct Status200: Model {
         /** Determines how this category’s interests appear on signup forms. */

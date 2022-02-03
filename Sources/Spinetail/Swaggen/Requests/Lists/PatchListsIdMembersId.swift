@@ -18,7 +18,7 @@ public extension Lists {
       case pending
     }
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed. */
       public struct Body: Model {
         /** Subscriber's current status. */
@@ -54,7 +54,7 @@ public extension Lists {
         public var marketingPermissions: [MarketingPermissions]?
 
         /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-        public var mergeFields: [String: [String: CodableAny]]?
+        public var mergeFields: [String: CodableAny]?
 
         /** Subscriber's current status. */
         public var status: Status?
@@ -151,7 +151,7 @@ public extension Lists {
           language = try container.decodeIfPresent("language")
           location = try container.decodeIfPresent("location")
           marketingPermissions = try container.decodeArrayIfPresent("marketing_permissions")
-          // mergeFields = try container.decodeAnyIfPresent("merge_fields")
+          // mergeFields = try container.decodeAnyCodableDictionary("merge_fields")
           status = try container.decodeIfPresent("status")
           timestampOpt = try container.decodeIfPresent("timestamp_opt")
           timestampSignup = try container.decodeIfPresent("timestamp_signup")
@@ -226,6 +226,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed. */
       public struct Status200: Model {
         /** Subscriber's current status. */
@@ -287,7 +288,7 @@ public extension Lists {
         public var memberRating: Int?
 
         /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-        // public var mergeFields: [String: [String: CodableAny]]?
+        // public var mergeFields: [String: CodableAny]?
 
         /** The source from which the subscriber was added to this list. */
         public var source: String?
@@ -651,7 +652,7 @@ public extension Lists {
           location = try container.decodeIfPresent("location")
           marketingPermissions = try container.decodeArrayIfPresent("marketing_permissions")
           memberRating = try container.decodeIfPresent("member_rating")
-          // mergeFields = try container.decodeAnyIfPresent("merge_fields")
+          // mergeFields = try container.decodeAnyCodableDictionary("merge_fields")
           source = try container.decodeIfPresent("source")
           stats = try container.decodeIfPresent("stats")
           status = try container.decodeIfPresent("status")

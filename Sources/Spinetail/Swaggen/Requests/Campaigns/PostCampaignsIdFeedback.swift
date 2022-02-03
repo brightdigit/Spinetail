@@ -10,7 +10,7 @@ public extension Campaigns {
   enum PostCampaignsIdFeedback {
     public static let service = APIService<Response>(id: "postCampaignsIdFeedback", tag: "campaigns", method: "POST", path: "/campaigns/{campaign_id}/feedback", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** A specific feedback message from a specific campaign. */
       public struct Body: Model {
         /** The content of the feedback. */
@@ -78,6 +78,7 @@ public extension Campaigns {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A specific feedback message from a specific campaign. */
       public struct Status200: Model {
         /** The source of the feedback. */

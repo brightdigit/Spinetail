@@ -10,7 +10,7 @@ public extension Ecommerce {
   enum PatchEcommerceStoresIdProductsIdVariantsId {
     public static let service = APIService<Response>(id: "patchEcommerceStoresIdProductsIdVariantsId", tag: "ecommerce", method: "PATCH", path: "/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Information about a specific product variant. */
       public struct Body: Model {
         /** The backorders of a product variant. */
@@ -116,6 +116,7 @@ public extension Ecommerce {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Information about a specific product variant. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

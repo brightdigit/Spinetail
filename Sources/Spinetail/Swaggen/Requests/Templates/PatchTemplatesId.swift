@@ -10,7 +10,7 @@ public extension Templates {
   enum PatchTemplatesId {
     public static let service = APIService<Response>(id: "patchTemplatesId", tag: "templates", method: "PATCH", path: "/templates/{template_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Information about a specific template. */
       public struct Body: Model {
         /** The raw HTML for the template. We  support the Mailchimp [Template Language](https://mailchimp.com/help/getting-started-with-mailchimps-template-language/) in any HTML code passed via the API. */
@@ -78,6 +78,7 @@ public extension Templates {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Information about a specific template. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

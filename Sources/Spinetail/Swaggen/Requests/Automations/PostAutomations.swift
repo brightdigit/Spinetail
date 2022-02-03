@@ -10,7 +10,7 @@ public extension Automations {
   enum PostAutomations {
     public static let service = APIService<Response>(id: "postAutomations", tag: "automations", method: "POST", path: "/automations", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** A summary of an individual Automation workflow's settings and content. */
       public struct Body: Model {
         /** List settings for the Automation. */
@@ -134,6 +134,7 @@ public extension Automations {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A summary of an individual Automation workflow's settings and content. */
       public struct Status200: Model {
         /** The current status of the Automation. */

@@ -10,7 +10,7 @@ public extension Reports {
   enum GetReportsIdSubReportsId {
     public static let service = APIService<Response>(id: "getReportsIdSubReportsId", tag: "reports", method: "GET", path: "/reports/{campaign_id}/sub-reports", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -58,6 +58,7 @@ public extension Reports {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A list of reports containing child campaigns for a specific campaign. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

@@ -10,7 +10,7 @@ public extension Lists {
   enum PatchListsIdSegmentsId {
     public static let service = APIService<Response>(id: "patchListsIdSegmentsId", tag: "lists", method: "PATCH", path: "/lists/{list_id}/segments/{segment_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Information about a specific list segment. */
       public struct Body: Model {
         /** The name of the segment. */
@@ -116,6 +116,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Information about a specific segment. */
       public struct Status200: Model {
         /** The type of segment. Static segments are now known as tags. Learn more about [tags](https://mailchimp.com/help/getting-started-tags?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs). */

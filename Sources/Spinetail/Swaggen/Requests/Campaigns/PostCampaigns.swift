@@ -25,7 +25,7 @@ public extension Campaigns {
       case multichannel
     }
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** A summary of an individual campaign's settings and content. */
       public struct Body: Model {
         /** There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead. */
@@ -666,6 +666,7 @@ public extension Campaigns {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A summary of an individual campaign's settings and content. */
       public struct Status200: Model {
         /** How the campaign's content is put together. */

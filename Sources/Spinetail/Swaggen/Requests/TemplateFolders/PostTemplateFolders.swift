@@ -10,7 +10,7 @@ public extension TemplateFolders {
   enum PostTemplateFolders {
     public static let service = APIService<Response>(id: "postTemplateFolders", tag: "templateFolders", method: "POST", path: "/template-folders", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** A folder used to organize templates. */
       public struct Body: Model {
         /** The name of the folder. */
@@ -44,6 +44,7 @@ public extension TemplateFolders {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A folder used to organize templates. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

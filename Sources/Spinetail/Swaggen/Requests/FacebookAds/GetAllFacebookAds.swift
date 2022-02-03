@@ -23,7 +23,7 @@ public extension FacebookAds {
       case desc = "DESC"
     }
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -91,6 +91,7 @@ public extension FacebookAds {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Contains an array of facebook ads. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

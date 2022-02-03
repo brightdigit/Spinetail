@@ -10,7 +10,7 @@ public extension Lists {
   enum PostListsIdMembersIdNotes {
     public static let service = APIService<Response>(id: "postListsIdMembersIdNotes", tag: "lists", method: "POST", path: "/lists/{list_id}/members/{subscriber_hash}/notes", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** A specific note for a specific member. */
       public struct Body: Model {
         /** The content of the note. Note length is limited to 1,000 characters. */
@@ -70,6 +70,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A specific note for a specific member. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

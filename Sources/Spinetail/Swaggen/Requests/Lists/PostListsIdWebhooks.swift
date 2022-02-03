@@ -10,7 +10,7 @@ public extension Lists {
   enum PostListsIdWebhooks {
     public static let service = APIService<Response>(id: "postListsIdWebhooks", tag: "lists", method: "POST", path: "/lists/{list_id}/webhooks", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Configure a webhook for the given list. */
       public struct Body: Model {
         /** The events that can trigger the webhook and whether they are enabled. */
@@ -164,6 +164,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Webhook configured for the given list. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

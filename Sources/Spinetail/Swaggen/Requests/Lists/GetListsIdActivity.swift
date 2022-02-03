@@ -10,7 +10,7 @@ public extension Lists {
   enum GetListsIdActivity {
     public static let service = APIService<Response>(id: "getListsIdActivity", tag: "lists", method: "GET", path: "/lists/{list_id}/activity", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -58,6 +58,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

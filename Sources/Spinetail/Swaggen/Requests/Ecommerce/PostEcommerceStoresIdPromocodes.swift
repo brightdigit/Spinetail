@@ -10,7 +10,7 @@ public extension Ecommerce {
   enum PostEcommerceStoresIdPromocodes {
     public static let service = APIService<Response>(id: "postEcommerceStoresIdPromocodes", tag: "ecommerce", method: "POST", path: "/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Information about an Ecommerce Store's specific Promo Code. */
       public struct Body: Model {
         /** The discount code. Restricted to UTF-8 characters with max length 50. */
@@ -106,6 +106,7 @@ public extension Ecommerce {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Information about an Ecommerce Store's specific Promo Code */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

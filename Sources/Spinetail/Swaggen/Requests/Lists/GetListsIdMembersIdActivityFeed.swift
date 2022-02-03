@@ -10,7 +10,7 @@ public extension Lists {
   enum GetListsIdMembersIdActivityFeed {
     public static let service = APIService<Response>(id: "getListsIdMembersIdActivityFeed", tag: "lists", method: "GET", path: "/lists/{list_id}/members/{subscriber_hash}/activity-feed", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** The unique ID for the list. */
         public var listId: String
@@ -83,6 +83,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** The member activity events for a given member. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

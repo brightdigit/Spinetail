@@ -10,7 +10,7 @@ public extension Lists {
   enum PostListsId {
     public static let service = APIService<Response>(id: "postListsId", tag: "lists", method: "POST", path: "/lists/{list_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** Members to subscribe to or unsubscribe from a list. */
       public struct Body: Model {
         /** An array of objects, each representing an email address and the subscription status for a specific list. Up to 500 members may be added or updated with each API call. */
@@ -51,7 +51,7 @@ public extension Lists {
           public var location: Location?
 
           /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-          public var mergeFields: [String: [String: CodableAny]]?
+          public var mergeFields: [String: CodableAny]?
 
           /** Subscriber's current status. */
           public var status: Status?
@@ -93,7 +93,7 @@ public extension Lists {
             }
           }
 
-          public init(emailAddress: String? = nil, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: Location? = nil, mergeFields: [String: [String: CodableAny]]? = nil, status: Status? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, vip: Bool? = nil) {
+          public init(emailAddress: String? = nil, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: Location? = nil, mergeFields: [String: CodableAny]? = nil, status: Status? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, vip: Bool? = nil) {
             self.emailAddress = emailAddress
             self.emailType = emailType
             self.interests = interests
@@ -118,7 +118,7 @@ public extension Lists {
             ipSignup = try container.decodeIfPresent("ip_signup")
             language = try container.decodeIfPresent("language")
             location = try container.decodeIfPresent("location")
-            mergeFields = try container.decodeAnyIfPresent("merge_fields")
+            mergeFields = try container.decodeAnyCodableDictionary("merge_fields")
             status = try container.decodeIfPresent("status")
             timestampOpt = try container.decodeIfPresent("timestamp_opt")
             timestampSignup = try container.decodeIfPresent("timestamp_signup")
@@ -215,6 +215,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Batch update list members. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
@@ -389,7 +390,7 @@ public extension Lists {
           public var memberRating: Int?
 
           /** An individual merge var and value for a member. */
-          public var mergeFields: [String: [String: CodableAny]]?
+          public var mergeFields: [String: CodableAny]?
 
           /** Open and click rates for this subscriber. */
           public var stats: Stats?
@@ -620,7 +621,7 @@ public extension Lists {
             }
           }
 
-          public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: Date? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, memberRating: Int? = nil, mergeFields: [String: [String: CodableAny]]? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, uniqueEmailId: String? = nil, vip: Bool? = nil) {
+          public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: Date? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, memberRating: Int? = nil, mergeFields: [String: CodableAny]? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, uniqueEmailId: String? = nil, vip: Bool? = nil) {
             self.links = links
             self.emailAddress = emailAddress
             self.emailClient = emailClient
@@ -663,7 +664,7 @@ public extension Lists {
             listId = try container.decodeIfPresent("list_id")
             location = try container.decodeIfPresent("location")
             memberRating = try container.decodeIfPresent("member_rating")
-            mergeFields = try container.decodeAnyIfPresent("merge_fields")
+            mergeFields = try container.decodeAnyCodableDictionary("merge_fields")
             stats = try container.decodeIfPresent("stats")
             status = try container.decodeIfPresent("status")
             tags = try container.decodeArrayIfPresent("tags")
@@ -757,7 +758,7 @@ public extension Lists {
           public var memberRating: Int?
 
           /** An individual merge var and value for a member. */
-          public var mergeFields: [String: [String: CodableAny]]?
+          public var mergeFields: [String: CodableAny]?
 
           /** Open and click rates for this subscriber. */
           public var stats: Stats?
@@ -988,7 +989,7 @@ public extension Lists {
             }
           }
 
-          public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: Date? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, memberRating: Int? = nil, mergeFields: [String: [String: CodableAny]]? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, uniqueEmailId: String? = nil, vip: Bool? = nil) {
+          public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: Date? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, memberRating: Int? = nil, mergeFields: [String: CodableAny]? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, uniqueEmailId: String? = nil, vip: Bool? = nil) {
             self.links = links
             self.emailAddress = emailAddress
             self.emailClient = emailClient
@@ -1031,7 +1032,7 @@ public extension Lists {
             listId = try container.decodeIfPresent("list_id")
             location = try container.decodeIfPresent("location")
             memberRating = try container.decodeIfPresent("member_rating")
-            mergeFields = try container.decodeAnyIfPresent("merge_fields")
+            mergeFields = try container.decodeAnyCodableDictionary("merge_fields")
             stats = try container.decodeIfPresent("stats")
             status = try container.decodeIfPresent("status")
             tags = try container.decodeArrayIfPresent("tags")

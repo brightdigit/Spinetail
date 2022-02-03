@@ -10,7 +10,7 @@ public extension Automations {
   enum GetAutomationsId {
     public static let service = APIService<Response>(id: "getAutomationsId", tag: "automations", method: "GET", path: "/automations/{workflow_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -58,6 +58,7 @@ public extension Automations {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A summary of an individual Automation workflow's settings and content. */
       public struct Status200: Model {
         /** The current status of the Automation. */

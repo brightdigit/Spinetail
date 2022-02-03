@@ -10,7 +10,7 @@ public extension Lists {
   enum GetListsId {
     public static let service = APIService<Response>(id: "getListsId", tag: "lists", method: "GET", path: "/lists/{list_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -65,6 +65,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Information about a specific list. */
       public struct Status200: Model {
         /** Legacy - visibility settings are no longer used */

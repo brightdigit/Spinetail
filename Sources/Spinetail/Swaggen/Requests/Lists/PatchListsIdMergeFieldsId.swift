@@ -10,7 +10,7 @@ public extension Lists {
   enum PatchListsIdMergeFieldsId {
     public static let service = APIService<Response>(id: "patchListsIdMergeFieldsId", tag: "lists", method: "PATCH", path: "/lists/{list_id}/merge-fields/{merge_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list. */
       public struct Body: Model {
         /** The name of the merge field (audience field). */
@@ -152,6 +152,7 @@ public extension Lists {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list. */
       public struct Status200: Model {
         /** The [type](https://mailchimp.com/help/manage-audience-signup-form-fields/#Audience_field_types) for the merge field. */

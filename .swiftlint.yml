@@ -123,5 +123,6 @@ excluded:
   - DerivedData
   - .build
   - Tests/LinuxMain.swift
+  - Packages
 indentation_width:
   indentation_width: 2

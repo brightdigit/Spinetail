@@ -10,7 +10,7 @@ public extension Conversations {
   enum GetConversationsId {
     public static let service = APIService<Response>(id: "getConversationsId", tag: "conversations", method: "GET", path: "/conversations/{conversation_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -58,6 +58,7 @@ public extension Conversations {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */

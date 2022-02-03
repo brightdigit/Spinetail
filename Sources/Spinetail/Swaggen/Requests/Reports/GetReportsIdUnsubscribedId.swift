@@ -10,7 +10,7 @@ public extension Reports {
   enum GetReportsIdUnsubscribedId {
     public static let service = APIService<Response>(id: "getReportsIdUnsubscribedId", tag: "reports", method: "GET", path: "/reports/{campaign_id}/unsubscribed/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -62,6 +62,7 @@ public extension Reports {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A member who unsubscribed from a specific campaign. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
@@ -83,7 +84,7 @@ public extension Reports {
         public var listIsActive: Bool?
 
         /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-        public var mergeFields: [String: [String: CodableAny]]?
+        public var mergeFields: [String: CodableAny]?
 
         /** If available, the reason listed by the member for unsubscribing. */
         public var reason: String?
@@ -151,7 +152,7 @@ public extension Reports {
           }
         }
 
-        public init(links: [Links]? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: [String: CodableAny]]? = nil, reason: String? = nil, timestamp: Date? = nil, vip: Bool? = nil) {
+        public init(links: [Links]? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: CodableAny]? = nil, reason: String? = nil, timestamp: Date? = nil, vip: Bool? = nil) {
           self.links = links
           self.campaignId = campaignId
           self.emailAddress = emailAddress
@@ -173,7 +174,7 @@ public extension Reports {
           emailId = try container.decodeIfPresent("email_id")
           listId = try container.decodeIfPresent("list_id")
           listIsActive = try container.decodeIfPresent("list_is_active")
-          mergeFields = try container.decodeAnyIfPresent("merge_fields")
+          mergeFields = try container.decodeAnyCodableDictionary("merge_fields")
           reason = try container.decodeIfPresent("reason")
           timestamp = try container.decodeIfPresent("timestamp")
           vip = try container.decodeIfPresent("vip")

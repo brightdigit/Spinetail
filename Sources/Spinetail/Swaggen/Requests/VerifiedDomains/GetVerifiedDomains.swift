@@ -10,13 +10,14 @@ public extension VerifiedDomains {
   enum GetVerifiedDomains {
     public static let service = APIService<Response>(id: "getVerifiedDomains", tag: "verifiedDomains", method: "GET", path: "/verified-domains", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public init() {
         super.init(service: GetVerifiedDomains.service)
       }
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** The verified domains currently on the account. */
       public struct Status200: Model {
         /** The domains on the account */

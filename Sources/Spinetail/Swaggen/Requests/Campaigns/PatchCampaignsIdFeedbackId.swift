@@ -10,7 +10,7 @@ public extension Campaigns {
   enum PatchCampaignsIdFeedbackId {
     public static let service = APIService<Response>(id: "patchCampaignsIdFeedbackId", tag: "campaigns", method: "PATCH", path: "/campaigns/{campaign_id}/feedback/{feedback_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       /** A specific feedback message from a specific campaign. */
       public struct Body: Model {
         /** The block id for the editable block that the feedback addresses. */
@@ -82,6 +82,7 @@ public extension Campaigns {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A specific feedback message from a specific campaign. */
       public struct Status200: Model {
         /** The source of the feedback. */

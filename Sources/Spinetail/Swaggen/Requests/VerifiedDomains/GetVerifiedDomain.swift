@@ -10,7 +10,7 @@ public extension VerifiedDomains {
   enum GetVerifiedDomain {
     public static let service = APIService<Response>(id: "getVerifiedDomain", tag: "verifiedDomains", method: "GET", path: "/verified-domains/{domain_name}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: APIRequest<Response, MailchimpAPI> {
       public struct Options {
         /** The domain name. */
         public var domainName: String
@@ -39,6 +39,7 @@ public extension VerifiedDomains {
     }
 
     public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** The verified domains currently on the account. */
       public struct Status200: Model {
         /** Whether domain authentication is enabled for this domain. */
