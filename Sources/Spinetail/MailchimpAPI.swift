@@ -27,6 +27,12 @@ public struct MailchimpAPI: API {
     return decoder
   }()
 
+  public let encoder: RequestEncoder = {
+    let encoder = JSONEncoder()
+    encoder.dateEncodingStrategy = .formatted(Self.dateEncodingFormatter)
+    return encoder
+  }()
+
   public init?(apiKey: String) {
     self.apiKey = apiKey
     let apiKeyComponents = apiKey.components(separatedBy: "-")

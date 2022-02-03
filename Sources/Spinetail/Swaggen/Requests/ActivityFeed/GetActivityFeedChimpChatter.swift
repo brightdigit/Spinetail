@@ -8,9 +8,9 @@ public extension ActivityFeed {
    Return the Chimp Chatter for this account ordered by most recent.
    */
   enum GetActivityFeedChimpChatter {
-    public static let service = APIService<Response>(id: "getActivityFeedChimpChatter", tag: "activityFeed", method: "GET", path: "/activity-feed/chimp-chatter", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getActivityFeedChimpChatter", tag: "activityFeed", method: "GET", path: "/activity-feed/chimp-chatter", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** The number of records to return. Default value is 10. Maximum value is 1000 */
         public var count: Int?
@@ -49,7 +49,8 @@ public extension ActivityFeed {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
@@ -144,7 +145,7 @@ public extension ActivityFeed {
           public var type: `Type`?
 
           /** The date and time this activity was updated. */
-          public var updateTime: DateTime
+          public var updateTime: Date?
 
           /** URL to a report that includes this activity */
           public var url: String?
@@ -155,7 +156,7 @@ public extension ActivityFeed {
             self.message = message
             self.title = title
             self.type = type
-            self.updateTime = .init(date: updateTime)
+            self.updateTime = updateTime
             self.url = url
           }
 
@@ -254,6 +255,7 @@ public extension ActivityFeed {
       }
 
       public typealias SuccessType = Status200
+      public typealias FailureType = DefaultResponse
 
       /** ChimpChatter Collection */
       case status200(Status200)
@@ -276,7 +278,8 @@ public extension ActivityFeed {
       }
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
-      public var responseResult: APIResponseResult<Status200, DefaultResponse> {
+      @available(*, unavailable)
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {
@@ -286,7 +289,7 @@ public extension ActivityFeed {
         }
       }
 
-      public var response: Any {
+      public var anyResponse: Any {
         switch self {
         case let .status200(response): return response
         case let .defaultResponse(_, response): return response
@@ -320,7 +323,7 @@ public extension ActivityFeed {
 
       public var debugDescription: String {
         var string = description
-        let responseString = "\(response)"
+        let responseString = "\(anyResponse)"
         if responseString != "()" {
           string += "\n\(responseString)"
         }

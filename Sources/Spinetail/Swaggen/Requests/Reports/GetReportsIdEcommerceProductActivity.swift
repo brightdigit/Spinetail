@@ -8,7 +8,7 @@ public extension Reports {
    Get breakdown of product activity for a campaign
    */
   enum GetReportsIdEcommerceProductActivity {
-    public static let service = APIService<Response>(id: "getReportsIdEcommerceProductActivity", tag: "reports", method: "GET", path: "/reports/{campaign_id}/ecommerce-product-activity", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getReportsIdEcommerceProductActivity", tag: "reports", method: "GET", path: "/reports/{campaign_id}/ecommerce-product-activity", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** Returns files sorted by the specified field. */
     public enum SortField: String, Codable, Equatable, CaseIterable {
@@ -17,7 +17,7 @@ public extension Reports {
       case totalPurchased = "total_purchased"
     }
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -85,7 +85,8 @@ public extension Reports {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A collection of ecommerce products. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
@@ -279,6 +280,7 @@ public extension Reports {
       }
 
       public typealias SuccessType = Status200
+      public typealias FailureType = DefaultResponse
 
       /** Ecommerce Product Activity Instance */
       case status200(Status200)
@@ -301,7 +303,8 @@ public extension Reports {
       }
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
-      public var responseResult: APIResponseResult<Status200, DefaultResponse> {
+      @available(*, unavailable)
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {
@@ -311,7 +314,7 @@ public extension Reports {
         }
       }
 
-      public var response: Any {
+      public var anyResponse: Any {
         switch self {
         case let .status200(response): return response
         case let .defaultResponse(_, response): return response
@@ -345,7 +348,7 @@ public extension Reports {
 
       public var debugDescription: String {
         var string = description
-        let responseString = "\(response)"
+        let responseString = "\(anyResponse)"
         if responseString != "()" {
           string += "\n\(responseString)"
         }

@@ -8,7 +8,7 @@ public extension Automations {
    Get a summary of an account's classic automations.
    */
   enum GetAutomations {
-    public static let service = APIService<Response>(id: "getAutomations", tag: "automations", method: "GET", path: "/automations", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getAutomations", tag: "automations", method: "GET", path: "/automations", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** Restrict the results to automations with the specified status. */
     public enum Status: String, Codable, Equatable, CaseIterable {
@@ -17,7 +17,7 @@ public extension Automations {
       case sending
     }
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** The number of records to return. Default value is 10. Maximum value is 1000 */
         public var count: Int?
@@ -32,16 +32,16 @@ public extension Automations {
         public var excludeFields: [String]?
 
         /** Restrict the response to automations created before this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-        public var beforeCreateTime: DateTime
+        public var beforeCreateTime: Date?
 
         /** Restrict the response to automations created after this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-        public var sinceCreateTime: DateTime
+        public var sinceCreateTime: Date?
 
         /** Restrict the response to automations started before this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-        public var beforeStartTime: DateTime
+        public var beforeStartTime: Date?
 
         /** Restrict the response to automations started after this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-        public var sinceStartTime: DateTime
+        public var sinceStartTime: Date?
 
         /** Restrict the results to automations with the specified status. */
         public var status: Status?
@@ -51,10 +51,10 @@ public extension Automations {
           self.offset = offset
           self.fields = fields
           self.excludeFields = excludeFields
-          self.beforeCreateTime = .init(date: beforeCreateTime)
-          self.sinceCreateTime = .init(date: sinceCreateTime)
-          self.beforeStartTime = .init(date: beforeStartTime)
-          self.sinceStartTime = .init(date: sinceStartTime)
+          self.beforeCreateTime = beforeCreateTime
+          self.sinceCreateTime = sinceCreateTime
+          self.beforeStartTime = beforeStartTime
+          self.sinceStartTime = sinceStartTime
           self.status = status
         }
       }
@@ -86,16 +86,16 @@ public extension Automations {
         if let excludeFields = options.excludeFields?.joined(separator: ",") {
           params["exclude_fields"] = excludeFields
         }
-        if let beforeCreateTime = options.beforeCreateTime.encode() {
+        if let beforeCreateTime = options.beforeCreateTime.encode(with: MailchimpAPI.dateEncodingFormatter) {
           params["before_create_time"] = beforeCreateTime
         }
-        if let sinceCreateTime = options.sinceCreateTime.encode() {
+        if let sinceCreateTime = options.sinceCreateTime.encode(with: MailchimpAPI.dateEncodingFormatter) {
           params["since_create_time"] = sinceCreateTime
         }
-        if let beforeStartTime = options.beforeStartTime.encode() {
+        if let beforeStartTime = options.beforeStartTime.encode(with: MailchimpAPI.dateEncodingFormatter) {
           params["before_start_time"] = beforeStartTime
         }
-        if let sinceStartTime = options.sinceStartTime.encode() {
+        if let sinceStartTime = options.sinceStartTime.encode(with: MailchimpAPI.dateEncodingFormatter) {
           params["since_start_time"] = sinceStartTime
         }
         if let status = options.status?.encode() {
@@ -105,7 +105,8 @@ public extension Automations {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** An array of objects, each representing an Automation workflow. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
@@ -187,7 +188,7 @@ public extension Automations {
           public var links: [Links]?
 
           /** The date and time the Automation was created in ISO 8601 format. */
-          public var createTime: DateTime
+          public var createTime: Date?
 
           /** The total number of emails sent for the Automation. */
           public var emailsSent: Int?
@@ -205,7 +206,7 @@ public extension Automations {
           public var settings: Settings?
 
           /** The date and time the Automation was started in ISO 8601 format. */
-          public var startTime: DateTime
+          public var startTime: Date?
 
           /** The current status of the Automation. */
           public var status: Status?
@@ -299,7 +300,7 @@ public extension Automations {
               }
 
               /** Segment match conditions. There are multiple possible types, see the [condition types documentation](https://mailchimp.com/developer/marketing/docs/alternative-schemas/#segment-condition-schemas). */
-              public var conditions: [[String: CodableAny]]?
+              public var conditions: [[String: AnyCodable]]?
 
               /** Segment match type. */
               public var match: Match?
@@ -307,7 +308,7 @@ public extension Automations {
               /** The id for an existing saved segment. */
               public var savedSegmentId: Int?
 
-              public init(conditions: [[String: CodableAny]]? = nil, match: Match? = nil, savedSegmentId: Int? = nil) {
+              public init(conditions: [[String: AnyCodable]]? = nil, match: Match? = nil, savedSegmentId: Int? = nil) {
                 self.conditions = conditions
                 self.match = match
                 self.savedSegmentId = savedSegmentId
@@ -726,13 +727,13 @@ public extension Automations {
 
           public init(links: [Links]? = nil, createTime: Date? = nil, emailsSent: Int? = nil, id: String? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, settings: Settings? = nil, startTime: Date? = nil, status: Status? = nil, tracking: Tracking? = nil, triggerSettings: TriggerSettings? = nil) {
             self.links = links
-            self.createTime = .init(date: createTime)
+            self.createTime = createTime
             self.emailsSent = emailsSent
             self.id = id
             self.recipients = recipients
             self.reportSummary = reportSummary
             self.settings = settings
-            self.startTime = .init(date: startTime)
+            self.startTime = startTime
             self.status = status
             self.tracking = tracking
             self.triggerSettings = triggerSettings
@@ -841,6 +842,7 @@ public extension Automations {
       }
 
       public typealias SuccessType = Status200
+      public typealias FailureType = DefaultResponse
       case status200(Status200)
 
       /** An error generated by the Mailchimp API. */
@@ -861,7 +863,8 @@ public extension Automations {
       }
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
-      public var responseResult: APIResponseResult<Status200, DefaultResponse> {
+      @available(*, unavailable)
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {
@@ -871,7 +874,7 @@ public extension Automations {
         }
       }
 
-      public var response: Any {
+      public var anyResponse: Any {
         switch self {
         case let .status200(response): return response
         case let .defaultResponse(_, response): return response
@@ -905,7 +908,7 @@ public extension Automations {
 
       public var debugDescription: String {
         var string = description
-        let responseString = "\(response)"
+        let responseString = "\(anyResponse)"
         if responseString != "()" {
           string += "\n\(responseString)"
         }

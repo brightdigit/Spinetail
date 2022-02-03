@@ -8,9 +8,9 @@ public extension Ecommerce {
    Get information about a specific order.
    */
   enum GetEcommerceStoresIdOrdersId {
-    public static let service = APIService<Response>(id: "getEcommerceStoresIdOrdersId", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/orders/{order_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getEcommerceStoresIdOrdersId", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/orders/{order_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -61,7 +61,8 @@ public extension Ecommerce {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Information about a specific order. */
       public struct Status200: Model {
         /** The Mailchimp tracking code for the order. Uses the 'mc_tc' parameter in E-Commerce tracking URLs. */
@@ -79,7 +80,7 @@ public extension Ecommerce {
         public var campaignId: String?
 
         /** The date and time the order was cancelled in ISO 8601 format. */
-        public var cancelledAtForeign: DateTime
+        public var cancelledAtForeign: Date?
 
         /** The three-letter ISO 4217 code for the currency that the store accepts. */
         public var currencyCode: String?
@@ -115,7 +116,7 @@ public extension Ecommerce {
         public var outreach: Outreach?
 
         /** The date and time the order was processed in ISO 8601 format. */
-        public var processedAtForeign: DateTime
+        public var processedAtForeign: Date?
 
         /** The promo codes applied on the order */
         public var promos: [Promos]?
@@ -136,7 +137,7 @@ public extension Ecommerce {
         public var trackingCode: TrackingCode?
 
         /** The date and time the order was updated in ISO 8601 format. */
-        public var updatedAtForeign: DateTime
+        public var updatedAtForeign: Date?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
         public struct Links: Model {
@@ -301,7 +302,7 @@ public extension Ecommerce {
           public var company: String?
 
           /** The date and time the customer was created in ISO 8601 format. */
-          public var createdAt: DateTime
+          public var createdAt: Date?
 
           /** The customer's email address. */
           public var emailAddress: String?
@@ -325,7 +326,7 @@ public extension Ecommerce {
           public var totalSpent: Double?
 
           /** The date and time the customer was last updated in ISO 8601 format. */
-          public var updatedAt: DateTime
+          public var updatedAt: Date?
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
           public struct Links: Model {
@@ -452,7 +453,7 @@ public extension Ecommerce {
             self.links = links
             self.address = address
             self.company = company
-            self.createdAt = .init(date: createdAt)
+            self.createdAt = createdAt
             self.emailAddress = emailAddress
             self.firstName = firstName
             self.id = id
@@ -460,7 +461,7 @@ public extension Ecommerce {
             self.optInStatus = optInStatus
             self.ordersCount = ordersCount
             self.totalSpent = totalSpent
-            self.updatedAt = .init(date: updatedAt)
+            self.updatedAt = updatedAt
           }
 
           public init(from decoder: Decoder) throws {
@@ -640,7 +641,7 @@ public extension Ecommerce {
           public var name: String?
 
           /** The date and time the Outreach was published in ISO 8601 format. */
-          public var publishedTime: DateTime
+          public var publishedTime: Date?
 
           /** The type of the outreach. */
           public var type: String?
@@ -648,7 +649,7 @@ public extension Ecommerce {
           public init(id: String? = nil, name: String? = nil, publishedTime: Date? = nil, type: String? = nil) {
             self.id = id
             self.name = name
-            self.publishedTime = .init(date: publishedTime)
+            self.publishedTime = publishedTime
             self.type = type
           }
 
@@ -809,7 +810,7 @@ public extension Ecommerce {
           self.links = links
           self.billingAddress = billingAddress
           self.campaignId = campaignId
-          self.cancelledAtForeign = .init(date: cancelledAtForeign)
+          self.cancelledAtForeign = cancelledAtForeign
           self.currencyCode = currencyCode
           self.customer = customer
           self.discountTotal = discountTotal
@@ -821,14 +822,14 @@ public extension Ecommerce {
           self.orderTotal = orderTotal
           self.orderURL = orderURL
           self.outreach = outreach
-          self.processedAtForeign = .init(date: processedAtForeign)
+          self.processedAtForeign = processedAtForeign
           self.promos = promos
           self.shippingAddress = shippingAddress
           self.shippingTotal = shippingTotal
           self.storeId = storeId
           self.taxTotal = taxTotal
           self.trackingCode = trackingCode
-          self.updatedAtForeign = .init(date: updatedAtForeign)
+          self.updatedAtForeign = updatedAtForeign
         }
 
         public init(from decoder: Decoder) throws {
@@ -935,6 +936,7 @@ public extension Ecommerce {
       }
 
       public typealias SuccessType = Status200
+      public typealias FailureType = DefaultResponse
       case status200(Status200)
 
       /** An error generated by the Mailchimp API. */
@@ -955,7 +957,8 @@ public extension Ecommerce {
       }
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
-      public var responseResult: APIResponseResult<Status200, DefaultResponse> {
+      @available(*, unavailable)
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {
@@ -965,7 +968,7 @@ public extension Ecommerce {
         }
       }
 
-      public var response: Any {
+      public var anyResponse: Any {
         switch self {
         case let .status200(response): return response
         case let .defaultResponse(_, response): return response
@@ -999,7 +1002,7 @@ public extension Ecommerce {
 
       public var debugDescription: String {
         var string = description
-        let responseString = "\(response)"
+        let responseString = "\(anyResponse)"
         if responseString != "()" {
           string += "\n\(responseString)"
         }

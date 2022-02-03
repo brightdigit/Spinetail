@@ -8,7 +8,7 @@ public extension Ecommerce {
    Add a new promo rule to a store.
    */
   enum PostEcommerceStoresIdPromorules {
-    public static let service = APIService<Response>(id: "postEcommerceStoresIdPromorules", tag: "ecommerce", method: "POST", path: "/ecommerce/stores/{store_id}/promo-rules", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "postEcommerceStoresIdPromorules", tag: "ecommerce", method: "POST", path: "/ecommerce/stores/{store_id}/promo-rules", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** The target that the discount applies to. */
     public enum Target: String, Codable, Equatable, CaseIterable {
@@ -23,7 +23,7 @@ public extension Ecommerce {
       case percentage
     }
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** Information about an Ecommerce Store's specific Promo Rule. */
       public struct Body: Model {
         /** The target that the discount applies to. */
@@ -55,7 +55,7 @@ public extension Ecommerce {
         public var type: `Type`
 
         /** The date and time the promotion was created in ISO 8601 format. */
-        public var createdAtForeign: DateTime
+        public var createdAtForeign: Date?
 
         /** Whether the promo rule is currently enabled. */
         public var enabled: Bool?
@@ -64,13 +64,13 @@ public extension Ecommerce {
         public var endsAt: String?
 
         /** The date and time when the promotion is in effect in ISO 8601 format. */
-        public var startsAt: DateTime
+        public var startsAt: Date?
 
         /** The title that will show up in promotion campaign. Restricted to UTF-8 characters with max length of 100 bytes. */
         public var title: String?
 
         /** The date and time the promotion was updated in ISO 8601 format. */
-        public var updatedAtForeign: DateTime
+        public var updatedAtForeign: Date?
 
         public init(amount: Float, description: String, id: String, target: Target, type: Type, createdAtForeign: Date? = nil, enabled: Bool? = nil, endsAt: String? = nil, startsAt: Date? = nil, title: String? = nil, updatedAtForeign: Date? = nil) {
           self.amount = amount
@@ -78,12 +78,12 @@ public extension Ecommerce {
           self.id = id
           self.target = target
           self.type = type
-          self.createdAtForeign = .init(date: createdAtForeign)
+          self.createdAtForeign = createdAtForeign
           self.enabled = enabled
           self.endsAt = endsAt
-          self.startsAt = .init(date: startsAt)
+          self.startsAt = startsAt
           self.title = title
-          self.updatedAtForeign = .init(date: updatedAtForeign)
+          self.updatedAtForeign = updatedAtForeign
         }
 
         public init(from decoder: Decoder) throws {
@@ -151,7 +151,8 @@ public extension Ecommerce {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Information about an Ecommerce Store's specific Promo Rule */
       public struct Status200: Model {
         /** The target that the discount applies to. */
@@ -174,7 +175,7 @@ public extension Ecommerce {
         public var amount: Float?
 
         /** The date and time the promotion was created in ISO 8601 format. */
-        public var createdAtForeign: DateTime
+        public var createdAtForeign: Date?
 
         /** The description of a promotion restricted to UTF-8 characters with max length 255. */
         public var description: String?
@@ -189,7 +190,7 @@ public extension Ecommerce {
         public var id: String?
 
         /** The date and time when the promotion is in effect in ISO 8601 format. */
-        public var startsAt: DateTime
+        public var startsAt: Date?
 
         /** The target that the discount applies to. */
         public var target: Target?
@@ -201,7 +202,7 @@ public extension Ecommerce {
         public var type: `Type`?
 
         /** The date and time the promotion was updated in ISO 8601 format. */
-        public var updatedAtForeign: DateTime
+        public var updatedAtForeign: Date?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
         public struct Links: Model {
@@ -263,16 +264,16 @@ public extension Ecommerce {
         public init(links: [Links]? = nil, amount: Float? = nil, createdAtForeign: Date? = nil, description: String? = nil, enabled: Bool? = nil, endsAt: String? = nil, id: String? = nil, startsAt: Date? = nil, target: Target? = nil, title: String? = nil, type: Type? = nil, updatedAtForeign: Date? = nil) {
           self.links = links
           self.amount = amount
-          self.createdAtForeign = .init(date: createdAtForeign)
+          self.createdAtForeign = createdAtForeign
           self.description = description
           self.enabled = enabled
           self.endsAt = endsAt
           self.id = id
-          self.startsAt = .init(date: startsAt)
+          self.startsAt = startsAt
           self.target = target
           self.title = title
           self.type = type
-          self.updatedAtForeign = .init(date: updatedAtForeign)
+          self.updatedAtForeign = updatedAtForeign
         }
 
         public init(from decoder: Decoder) throws {
@@ -357,6 +358,7 @@ public extension Ecommerce {
       }
 
       public typealias SuccessType = Status200
+      public typealias FailureType = DefaultResponse
       case status200(Status200)
 
       /** An error generated by the Mailchimp API. */
@@ -377,7 +379,8 @@ public extension Ecommerce {
       }
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
-      public var responseResult: APIResponseResult<Status200, DefaultResponse> {
+      @available(*, unavailable)
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {
@@ -387,7 +390,7 @@ public extension Ecommerce {
         }
       }
 
-      public var response: Any {
+      public var anyResponse: Any {
         switch self {
         case let .status200(response): return response
         case let .defaultResponse(_, response): return response
@@ -421,7 +424,7 @@ public extension Ecommerce {
 
       public var debugDescription: String {
         var string = description
-        let responseString = "\(response)"
+        let responseString = "\(anyResponse)"
         if responseString != "()" {
           string += "\n\(responseString)"
         }

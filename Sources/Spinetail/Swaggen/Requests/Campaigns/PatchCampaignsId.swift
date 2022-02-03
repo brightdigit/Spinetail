@@ -8,9 +8,9 @@ public extension Campaigns {
    Update some or all of the settings for a specific campaign.
    */
   enum PatchCampaignsId {
-    public static let service = APIService<Response>(id: "patchCampaignsId", tag: "campaigns", method: "PATCH", path: "/campaigns/{campaign_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "patchCampaignsId", tag: "campaigns", method: "PATCH", path: "/campaigns/{campaign_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** A summary of an individual campaign's settings and content. */
       public struct Body: Model {
         /** The settings for your campaign, including subject, from name, reply-to address, and more. */
@@ -154,7 +154,7 @@ public extension Campaigns {
             }
 
             /** Segment match conditions. There are multiple possible types, see the [condition types documentation](https://mailchimp.com/developer/marketing/docs/alternative-schemas/#segment-condition-schemas). */
-            public var conditions: [[String: CodableAny]]?
+            public var conditions: [[String: AnyCodable]]?
 
             /** Segment match type. */
             public var match: Match?
@@ -165,7 +165,7 @@ public extension Campaigns {
             /** The id for an existing saved segment. */
             public var savedSegmentId: Int?
 
-            public init(conditions: [[String: CodableAny]]? = nil, match: Match? = nil, prebuiltSegmentId: String? = nil, savedSegmentId: Int? = nil) {
+            public init(conditions: [[String: AnyCodable]]? = nil, match: Match? = nil, prebuiltSegmentId: String? = nil, savedSegmentId: Int? = nil) {
               self.conditions = conditions
               self.match = match
               self.prebuiltSegmentId = prebuiltSegmentId
@@ -541,7 +541,7 @@ public extension Campaigns {
           public var replyToAddresses: [String]?
 
           /** The possible send times to test. The times provided should be in the format YYYY-MM-DD HH:MM:SS. If send_times are provided to test, the test_size will be set to 100% and winner_criteria will be ignored. */
-          public var sendTimes: [DateTime]?
+          public var sendTimes: [Date?]?
 
           /** The possible subject lines to test. If no subject lines are provided, settings.subject_line will be used. */
           public var subjectLines: [String]?
@@ -552,7 +552,7 @@ public extension Campaigns {
           /** The number of minutes to wait before choosing the winning campaign. The value of wait_time must be greater than 0 and in whole hours, specified in minutes. */
           public var waitTime: Int?
 
-          public init(winnerCriteria: WinnerCriteria, fromNames: [String]? = nil, replyToAddresses: [String]? = nil, sendTimes: [DateTime]? = nil, subjectLines: [String]? = nil, testSize: Int? = nil, waitTime: Int? = nil) {
+          public init(winnerCriteria: WinnerCriteria, fromNames: [String]? = nil, replyToAddresses: [String]? = nil, sendTimes: [Date?]? = nil, subjectLines: [String]? = nil, testSize: Int? = nil, waitTime: Int? = nil) {
             self.winnerCriteria = winnerCriteria
             self.fromNames = fromNames
             self.replyToAddresses = replyToAddresses
@@ -651,7 +651,8 @@ public extension Campaigns {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A summary of an individual campaign's settings and content. */
       public struct Status200: Model {
         /** How the campaign's content is put together. */
@@ -696,7 +697,7 @@ public extension Campaigns {
         public var contentType: ContentType?
 
         /** The date and time the campaign was created in ISO 8601 format. */
-        public var createTime: DateTime
+        public var createTime: Date?
 
         /** Updates on campaigns in the process of sending. */
         public var deliveryStatus: DeliveryStatus?
@@ -729,7 +730,7 @@ public extension Campaigns {
         public var rssOpts: RssOpts?
 
         /** The date and time a campaign was sent. */
-        public var sendTime: DateTime
+        public var sendTime: Date?
 
         /** The settings for your campaign, including subject, from name, reply-to address, and more. */
         public var settings: Settings?
@@ -847,10 +848,10 @@ public extension Campaigns {
           public var replyEmailb: String?
 
           /** The send time for Group A. */
-          public var sendTimea: DateTime
+          public var sendTimea: Date?
 
           /** The send time for Group B. */
-          public var sendTimeb: DateTime
+          public var sendTimeb: Date?
 
           /** The send time for the winning version. */
           public var sendTimeWinner: String?
@@ -879,8 +880,8 @@ public extension Campaigns {
             self.pickWinner = pickWinner
             self.replyEmaila = replyEmaila
             self.replyEmailb = replyEmailb
-            self.sendTimea = .init(date: sendTimea)
-            self.sendTimeb = .init(date: sendTimeb)
+            self.sendTimea = sendTimea
+            self.sendTimeb = sendTimeb
             self.sendTimeWinner = sendTimeWinner
             self.splitSize = splitSize
             self.splitTest = splitTest
@@ -1012,7 +1013,7 @@ public extension Campaigns {
             }
 
             /** Segment match conditions. There are multiple possible types, see the [condition types documentation](https://mailchimp.com/developer/marketing/docs/alternative-schemas/#segment-condition-schemas). */
-            public var conditions: [[String: CodableAny]]?
+            public var conditions: [[String: AnyCodable]]?
 
             /** Segment match type. */
             public var match: Match?
@@ -1023,7 +1024,7 @@ public extension Campaigns {
             /** The id for an existing saved segment. */
             public var savedSegmentId: Int?
 
-            public init(conditions: [[String: CodableAny]]? = nil, match: Match? = nil, prebuiltSegmentId: String? = nil, savedSegmentId: Int? = nil) {
+            public init(conditions: [[String: AnyCodable]]? = nil, match: Match? = nil, prebuiltSegmentId: String? = nil, savedSegmentId: Int? = nil) {
               self.conditions = conditions
               self.match = match
               self.prebuiltSegmentId = prebuiltSegmentId
@@ -1192,7 +1193,7 @@ public extension Campaigns {
           public var frequency: Frequency?
 
           /** The date the campaign was last sent. */
-          public var lastSent: DateTime
+          public var lastSent: Date?
 
           /** The schedule for sending the RSS Campaign. */
           public var schedule: Schedule?
@@ -1310,7 +1311,7 @@ public extension Campaigns {
             self.constrainRssImg = constrainRssImg
             self.feedURL = feedURL
             self.frequency = frequency
-            self.lastSent = .init(date: lastSent)
+            self.lastSent = lastSent
             self.schedule = schedule
           }
 
@@ -1630,7 +1631,7 @@ public extension Campaigns {
           public var replyToAddresses: [String]?
 
           /** The possible send times to test. The times provided should be in the format YYYY-MM-DD HH:MM:SS. If send_times are provided to test, the test_size will be set to 100% and winner_criteria will be ignored. */
-          public var sendTimes: [DateTime]?
+          public var sendTimes: [Date?]?
 
           /** The possible subject lines to test. If no subject lines are provided, settings.subject_line will be used. */
           public var subjectLines: [String]?
@@ -1708,7 +1709,7 @@ public extension Campaigns {
             }
           }
 
-          public init(combinations: [Combinations]? = nil, contents: [String]? = nil, fromNames: [String]? = nil, replyToAddresses: [String]? = nil, sendTimes: [DateTime]? = nil, subjectLines: [String]? = nil, testSize: Int? = nil, waitTime: Int? = nil, winnerCriteria: WinnerCriteria? = nil, winningCampaignId: String? = nil, winningCombinationId: String? = nil) {
+          public init(combinations: [Combinations]? = nil, contents: [String]? = nil, fromNames: [String]? = nil, replyToAddresses: [String]? = nil, sendTimes: [Date?]? = nil, subjectLines: [String]? = nil, testSize: Int? = nil, waitTime: Int? = nil, winnerCriteria: WinnerCriteria? = nil, winningCampaignId: String? = nil, winningCombinationId: String? = nil) {
             self.combinations = combinations
             self.contents = contents
             self.fromNames = fromNames
@@ -1760,7 +1761,7 @@ public extension Campaigns {
           self.abSplitOpts = abSplitOpts
           self.archiveURL = archiveURL
           self.contentType = contentType
-          self.createTime = .init(date: createTime)
+          self.createTime = createTime
           self.deliveryStatus = deliveryStatus
           self.emailsSent = emailsSent
           self.id = id
@@ -1771,7 +1772,7 @@ public extension Campaigns {
           self.reportSummary = reportSummary
           self.resendable = resendable
           self.rssOpts = rssOpts
-          self.sendTime = .init(date: sendTime)
+          self.sendTime = sendTime
           self.settings = settings
           self.socialCard = socialCard
           self.status = status
@@ -1885,6 +1886,7 @@ public extension Campaigns {
       }
 
       public typealias SuccessType = Status200
+      public typealias FailureType = DefaultResponse
       case status200(Status200)
 
       /** An error generated by the Mailchimp API. */
@@ -1905,7 +1907,8 @@ public extension Campaigns {
       }
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
-      public var responseResult: APIResponseResult<Status200, DefaultResponse> {
+      @available(*, unavailable)
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {
@@ -1915,7 +1918,7 @@ public extension Campaigns {
         }
       }
 
-      public var response: Any {
+      public var anyResponse: Any {
         switch self {
         case let .status200(response): return response
         case let .defaultResponse(_, response): return response
@@ -1949,7 +1952,7 @@ public extension Campaigns {
 
       public var debugDescription: String {
         var string = description
-        let responseString = "\(response)"
+        let responseString = "\(anyResponse)"
         if responseString != "()" {
           string += "\n\(responseString)"
         }

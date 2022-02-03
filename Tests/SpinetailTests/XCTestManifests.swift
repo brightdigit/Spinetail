@@ -7,7 +7,10 @@
     // to regenerate.
     static let __allTests__SpinetailTests = [
       ("testCampaign", testCampaign),
-      ("testUpsert", testUpsert)
+      ("testUpsertExistingWithInterestID", testUpsertExistingWithInterestID),
+      ("testUpsertExistingWithoutInterestID", testUpsertExistingWithoutInterestID),
+      ("testUpsertNewThenWithInterestID", testUpsertNewThenWithInterestID),
+      ("testUpsertNewWithInterestID", testUpsertNewWithInterestID)
     ]
   }
 

@@ -8,9 +8,9 @@ public extension Reporting {
    Get reports of landing pages.
    */
   enum GetReportingLandingPages {
-    public static let service = APIService<Response>(id: "getReportingLandingPages", tag: "reporting", method: "GET", path: "/reporting/landing-pages", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getReportingLandingPages", tag: "reporting", method: "GET", path: "/reporting/landing-pages", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -63,7 +63,8 @@ public extension Reporting {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** A collection of landing pages. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
@@ -157,7 +158,7 @@ public extension Reporting {
           public var name: String?
 
           /** The time this landing page was published. */
-          public var publishedAt: DateTime
+          public var publishedAt: Date?
 
           /** A list of tags associated to the landing page. */
           public var signupTags: [SignupTags]?
@@ -177,7 +178,7 @@ public extension Reporting {
           public var uniqueVisits: Int?
 
           /** The time this landing page was unpublished. */
-          public var unpublishedAt: DateTime
+          public var unpublishedAt: Date?
 
           /** The landing page url. */
           public var url: String?
@@ -570,14 +571,14 @@ public extension Reporting {
             self.listId = listId
             self.listName = listName
             self.name = name
-            self.publishedAt = .init(date: publishedAt)
+            self.publishedAt = publishedAt
             self.signupTags = signupTags
             self.status = status
             self.subscribes = subscribes
             self.timeseries = timeseries
             self.title = title
             self.uniqueVisits = uniqueVisits
-            self.unpublishedAt = .init(date: unpublishedAt)
+            self.unpublishedAt = unpublishedAt
             self.url = url
             self.visits = visits
             self.webId = webId
@@ -702,6 +703,7 @@ public extension Reporting {
       }
 
       public typealias SuccessType = Status200
+      public typealias FailureType = DefaultResponse
 
       /** List of Landing Page Report Instances */
       case status200(Status200)
@@ -724,7 +726,8 @@ public extension Reporting {
       }
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
-      public var responseResult: APIResponseResult<Status200, DefaultResponse> {
+      @available(*, unavailable)
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {
@@ -734,7 +737,7 @@ public extension Reporting {
         }
       }
 
-      public var response: Any {
+      public var anyResponse: Any {
         switch self {
         case let .status200(response): return response
         case let .defaultResponse(_, response): return response
@@ -768,7 +771,7 @@ public extension Reporting {
 
       public var debugDescription: String {
         var string = description
-        let responseString = "\(response)"
+        let responseString = "\(anyResponse)"
         if responseString != "()" {
           string += "\n\(responseString)"
         }

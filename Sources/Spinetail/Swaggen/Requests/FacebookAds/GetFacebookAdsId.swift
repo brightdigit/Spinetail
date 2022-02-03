@@ -8,9 +8,9 @@ public extension FacebookAds {
    Get details of a Facebook ad.
    */
   enum GetFacebookAdsId {
-    public static let service = APIService<Response>(id: "getFacebookAdsId", tag: "facebookAds", method: "GET", path: "/facebook-ads/{outreach_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getFacebookAdsId", tag: "facebookAds", method: "GET", path: "/facebook-ads/{outreach_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -57,7 +57,8 @@ public extension FacebookAds {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
+      public typealias APIType = MailchimpAPI
       /** Get details of a Facebook ad. */
       public struct Status200: Model {
         /** Campaign, Ad, or Page status */
@@ -107,18 +108,18 @@ public extension FacebookAds {
 
         public var budget: Budget?
 
-        public var canceledAt: DateTime
+        public var canceledAt: Date?
 
         /** Channel settings */
         public var channel: Channel?
 
         public var content: Content?
 
-        public var createTime: DateTime
+        public var createTime: Date?
 
         public var emailSourceName: String?
 
-        public var endTime: DateTime
+        public var endTime: Date?
 
         /** Check if this ad is connected to a facebook page */
         public var feedback: Feedback?
@@ -142,9 +143,9 @@ public extension FacebookAds {
 
         public var needsAttention: Bool?
 
-        public var pausedAt: DateTime
+        public var pausedAt: Date?
 
-        public var publishedTime: DateTime
+        public var publishedTime: Date?
 
         /** List settings for the outreach */
         public var recipients: Recipients?
@@ -157,7 +158,7 @@ public extension FacebookAds {
         /** Connected Site */
         public var site: Site?
 
-        public var startTime: DateTime
+        public var startTime: Date?
 
         /** Campaign, Ad, or Page status */
         public var status: Status?
@@ -168,7 +169,7 @@ public extension FacebookAds {
         /** Supported Campaign, Ad, Page type */
         public var type: `Type`?
 
-        public var updatedAt: DateTime
+        public var updatedAt: Date?
 
         public var wasCanceledByFacebook: Bool?
 
@@ -668,7 +669,7 @@ public extension FacebookAds {
             }
 
             /** Segment match conditions. There are multiple possible types, see the [condition types documentation](https://mailchimp.com/developer/marketing/docs/alternative-schemas/#segment-condition-schemas). */
-            public var conditions: [[String: CodableAny]]?
+            public var conditions: [[String: AnyCodable]]?
 
             /** Segment match type. */
             public var match: Match?
@@ -679,7 +680,7 @@ public extension FacebookAds {
             /** The id for an existing saved segment. */
             public var savedSegmentId: Int?
 
-            public init(conditions: [[String: CodableAny]]? = nil, match: Match? = nil, prebuiltSegmentId: String? = nil, savedSegmentId: Int? = nil) {
+            public init(conditions: [[String: AnyCodable]]? = nil, match: Match? = nil, prebuiltSegmentId: String? = nil, savedSegmentId: Int? = nil) {
               self.conditions = conditions
               self.match = match
               self.prebuiltSegmentId = prebuiltSegmentId
@@ -897,12 +898,12 @@ public extension FacebookAds {
           self.links = links
           self.audience = audience
           self.budget = budget
-          self.canceledAt = .init(date: canceledAt)
+          self.canceledAt = canceledAt
           self.channel = channel
           self.content = content
-          self.createTime = .init(date: createTime)
+          self.createTime = createTime
           self.emailSourceName = emailSourceName
-          self.endTime = .init(date: endTime)
+          self.endTime = endTime
           self.feedback = feedback
           self.hasAudience = hasAudience
           self.hasContent = hasContent
@@ -911,17 +912,17 @@ public extension FacebookAds {
           self.isConnected = isConnected
           self.name = name
           self.needsAttention = needsAttention
-          self.pausedAt = .init(date: pausedAt)
-          self.publishedTime = .init(date: publishedTime)
+          self.pausedAt = pausedAt
+          self.publishedTime = publishedTime
           self.recipients = recipients
           self.reportSummary = reportSummary
           self.showReport = showReport
           self.site = site
-          self.startTime = .init(date: startTime)
+          self.startTime = startTime
           self.status = status
           self.thumbnail = thumbnail
           self.type = type
-          self.updatedAt = .init(date: updatedAt)
+          self.updatedAt = updatedAt
           self.wasCanceledByFacebook = wasCanceledByFacebook
           self.webId = webId
         }
@@ -1044,6 +1045,7 @@ public extension FacebookAds {
       }
 
       public typealias SuccessType = Status200
+      public typealias FailureType = DefaultResponse
 
       /** Facebook Ad Instance */
       case status200(Status200)
@@ -1066,7 +1068,8 @@ public extension FacebookAds {
       }
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
-      public var responseResult: APIResponseResult<Status200, DefaultResponse> {
+      @available(*, unavailable)
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {
@@ -1076,7 +1079,7 @@ public extension FacebookAds {
         }
       }
 
-      public var response: Any {
+      public var anyResponse: Any {
         switch self {
         case let .status200(response): return response
         case let .defaultResponse(_, response): return response
@@ -1110,7 +1113,7 @@ public extension FacebookAds {
 
       public var debugDescription: String {
         var string = description
-        let responseString = "\(response)"
+        let responseString = "\(anyResponse)"
         if responseString != "()" {
           string += "\n\(responseString)"
         }
