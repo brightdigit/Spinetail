@@ -358,10 +358,10 @@ public extension Lists {
           public var tagsCount: Int?
 
           /** The date and time the subscribe confirmed their opt-in status in ISO 8601 format. */
-          public var timestampOpt: JSONOptionalDate
+          public var timestampOpt: Date?
 
           /** The date and time the subscriber signed up for the list in ISO 8601 format. */
-          public var timestampSignup: JSONOptionalDate
+          public var timestampSignup: Date?
 
           /** An identifier for the address across all of Mailchimp. */
           public var uniqueEmailId: String?
@@ -677,8 +677,8 @@ public extension Lists {
             self.status = status
             self.tags = tags
             self.tagsCount = tagsCount
-            self.timestampOpt = JSONOptionalDate(date: timestampOpt)
-            self.timestampSignup = JSONOptionalDate(date: timestampSignup)
+            self.timestampOpt = timestampOpt
+            self.timestampSignup = timestampSignup
             self.uniqueEmailId = uniqueEmailId
             self.unsubscribeReason = unsubscribeReason
             self.vip = vip
