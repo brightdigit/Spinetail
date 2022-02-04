@@ -81,7 +81,7 @@ final class SpinetailTests: XCTestCase {
       interested = false
       member = nil
     } else {
-      member = try memberResult.responseResult.get()
+      member = try memberResult.result.get()
       interested = member?.interests?[interestID] ?? false
     }
 
@@ -91,10 +91,10 @@ final class SpinetailTests: XCTestCase {
     }
     if let subscriberHash = member?.id {
       let patch = Lists.PatchListsIdMembersId.Request(body: .init(emailAddress: email, emailType: nil, interests: [interestID: true]), options: Lists.PatchListsIdMembersId.Request.Options(listId: listID, subscriberHash: subscriberHash))
-      successful = try client.requestSync(patch).responseResult.successful
+      successful = try client.requestSync(patch).result.successful
     } else {
       let post = Lists.PostListsIdMembers.Request(listId: listID, body: .init(emailAddress: email, status: Lists.PostListsIdMembers.Request.Body.Status.subscribed, interests: [interestID: true], timestampOpt: .init(), timestampSignup: .init()))
-      successful = try client.requestSync(post).responseResult.successful
+      successful = try client.requestSync(post).result.successful
     }
     XCTAssertTrue(successful)
 

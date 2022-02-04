@@ -118,6 +118,7 @@ public extension CustomerJourneys {
       }
 
       public typealias SuccessType = [String: CodableAny]
+      public typealias FailureType = DefaultResponse
 
       /** An empty response */
       case status204([String: CodableAny])
@@ -140,7 +141,8 @@ public extension CustomerJourneys {
       }
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
-      public var responseResult: APIResponseResult<[String: CodableAny], DefaultResponse> {
+      @available(*, unavailable)
+      public var _obsolete_responseResult: APIResponseResult<[String: CodableAny], DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {
@@ -150,7 +152,7 @@ public extension CustomerJourneys {
         }
       }
 
-      public var response: Any {
+      public var anyResponse: Any {
         switch self {
         case let .status204(response): return response
         case let .defaultResponse(_, response): return response
@@ -184,7 +186,7 @@ public extension CustomerJourneys {
 
       public var debugDescription: String {
         var string = description
-        let responseString = "\(response)"
+        let responseString = "\(anyResponse)"
         if responseString != "()" {
           string += "\n\(responseString)"
         }

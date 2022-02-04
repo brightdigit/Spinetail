@@ -118,6 +118,7 @@ identifier_name:
     - id
     - a 
     - b
+    - _obsolete_responseResult
 excluded:
   - Tests/*/XCTestManifests.swift
   - DerivedData

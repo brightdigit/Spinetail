@@ -91,6 +91,7 @@ public extension Lists {
       }
 
       public typealias SuccessType = Void
+      public typealias FailureType = DefaultResponse
 
       /** Empty Response */
       case status204
@@ -113,7 +114,8 @@ public extension Lists {
       }
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
-      public var responseResult: APIResponseResult<Void, DefaultResponse> {
+      @available(*, unavailable)
+      public var _obsolete_responseResult: APIResponseResult<Void, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {
@@ -123,7 +125,7 @@ public extension Lists {
         }
       }
 
-      public var response: Any {
+      public var anyResponse: Any {
         switch self {
         case let .defaultResponse(_, response): return response
         default: return ()
@@ -157,7 +159,7 @@ public extension Lists {
 
       public var debugDescription: String {
         var string = description
-        let responseString = "\(response)"
+        let responseString = "\(anyResponse)"
         if responseString != "()" {
           string += "\n\(responseString)"
         }
