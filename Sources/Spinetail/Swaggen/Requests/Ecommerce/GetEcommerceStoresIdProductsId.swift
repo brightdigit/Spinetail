@@ -8,9 +8,9 @@ public extension Ecommerce {
    Get information about a specific product.
    */
   enum GetEcommerceStoresIdProductsId {
-    public static let service = APIService<Response>(id: "getEcommerceStoresIdProductsId", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/products/{product_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getEcommerceStoresIdProductsId", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/products/{product_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -61,7 +61,7 @@ public extension Ecommerce {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Information about a specific product. */
       public struct Status200: Model {
@@ -87,7 +87,7 @@ public extension Ecommerce {
         public var images: [Images]?
 
         /** The date and time the product was published in ISO 8601 format. */
-        public var publishedAtForeign: DateTime
+        public var publishedAtForeign: Date?
 
         /** The title of a product. */
         public var title: String?
@@ -267,7 +267,7 @@ public extension Ecommerce {
           public var backorders: String?
 
           /** The date and time the product was created in ISO 8601 format. */
-          public var createdAt: DateTime
+          public var createdAt: Date?
 
           /** A unique identifier for the product variant. */
           public var id: String?
@@ -288,7 +288,7 @@ public extension Ecommerce {
           public var title: String?
 
           /** The date and time the product was last updated in ISO 8601 format. */
-          public var updatedAt: DateTime
+          public var updatedAt: Date?
 
           /** The URL for a product variant. */
           public var url: String?
@@ -356,14 +356,14 @@ public extension Ecommerce {
           public init(links: [Links]? = nil, backorders: String? = nil, createdAt: Date? = nil, id: String? = nil, imageURL: String? = nil, inventoryQuantity: Int? = nil, price: Double? = nil, sku: String? = nil, title: String? = nil, updatedAt: Date? = nil, url: String? = nil, visibility: String? = nil) {
             self.links = links
             self.backorders = backorders
-            self.createdAt = .init(date: createdAt)
+            self.createdAt = createdAt
             self.id = id
             self.imageURL = imageURL
             self.inventoryQuantity = inventoryQuantity
             self.price = price
             self.sku = sku
             self.title = title
-            self.updatedAt = .init(date: updatedAt)
+            self.updatedAt = updatedAt
             self.url = url
             self.visibility = visibility
           }
@@ -411,7 +411,7 @@ public extension Ecommerce {
           self.id = id
           self.imageURL = imageURL
           self.images = images
-          self.publishedAtForeign = .init(date: publishedAtForeign)
+          self.publishedAtForeign = publishedAtForeign
           self.title = title
           self.type = type
           self.url = url
@@ -525,7 +525,7 @@ public extension Ecommerce {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

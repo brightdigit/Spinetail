@@ -8,9 +8,9 @@ public extension LandingPages {
    Get the the HTML for your landing page.
    */
   enum GetLandingPageIdContent {
-    public static let service = APIService<Response>(id: "getLandingPageIdContent", tag: "landingPages", method: "GET", path: "/landing-pages/{page_id}/content", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getLandingPageIdContent", tag: "landingPages", method: "GET", path: "/landing-pages/{page_id}/content", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -57,7 +57,7 @@ public extension LandingPages {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** The HTML content for a landing page. */
       public struct Status200: Model {
@@ -219,7 +219,7 @@ public extension LandingPages {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

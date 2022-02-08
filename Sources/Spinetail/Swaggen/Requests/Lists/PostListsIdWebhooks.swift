@@ -8,9 +8,9 @@ public extension Lists {
    Create a new webhook for a specific list.
    */
   enum PostListsIdWebhooks {
-    public static let service = APIService<Response>(id: "postListsIdWebhooks", tag: "lists", method: "POST", path: "/lists/{list_id}/webhooks", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "postListsIdWebhooks", tag: "lists", method: "POST", path: "/lists/{list_id}/webhooks", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** Configure a webhook for the given list. */
       public struct Body: Model {
         /** The events that can trigger the webhook and whether they are enabled. */
@@ -163,7 +163,7 @@ public extension Lists {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Webhook configured for the given list. */
       public struct Status200: Model {
@@ -429,7 +429,7 @@ public extension Lists {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

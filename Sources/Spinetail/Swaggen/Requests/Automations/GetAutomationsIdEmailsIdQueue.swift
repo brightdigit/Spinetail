@@ -8,9 +8,9 @@ public extension Automations {
    Get information about a classic automation email queue.
    */
   enum GetAutomationsIdEmailsIdQueue {
-    public static let service = APIService<Response>(id: "getAutomationsIdEmailsIdQueue", tag: "automations", method: "GET", path: "/automations/{workflow_id}/emails/{workflow_email_id}/queue", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getAutomationsIdEmailsIdQueue", tag: "automations", method: "GET", path: "/automations/{workflow_id}/emails/{workflow_email_id}/queue", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** The unique id for the Automation workflow. */
         public var workflowId: String
@@ -42,7 +42,7 @@ public extension Automations {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** An automation workflow */
       public struct Status200: Model {
@@ -136,7 +136,7 @@ public extension Automations {
           public var listId: String?
 
           /** The date and time of the next send for the workflow email in ISO 8601 format. */
-          public var nextSend: DateTime
+          public var nextSend: Date?
 
           /** A string that uniquely identifies an Automation workflow. */
           public var workflowId: String?
@@ -204,7 +204,7 @@ public extension Automations {
             self.emailId = emailId
             self.id = id
             self.listId = listId
-            self.nextSend = .init(date: nextSend)
+            self.nextSend = nextSend
             self.workflowId = workflowId
           }
 
@@ -331,7 +331,7 @@ public extension Automations {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

@@ -8,9 +8,9 @@ public extension Lists {
    Update interests or 'group names' for a specific category.
    */
   enum PatchListsIdInterestCategoriesIdInterestsId {
-    public static let service = APIService<Response>(id: "patchListsIdInterestCategoriesIdInterestsId", tag: "lists", method: "PATCH", path: "/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "patchListsIdInterestCategoriesIdInterestsId", tag: "lists", method: "PATCH", path: "/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application. */
       public struct Body: Model {
         /** The name of the interest. This can be shown publicly on a subscription form. */
@@ -79,7 +79,7 @@ public extension Lists {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application. */
       public struct Status200: Model {
@@ -265,7 +265,7 @@ public extension Lists {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

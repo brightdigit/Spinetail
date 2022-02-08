@@ -8,9 +8,9 @@ public extension Ecommerce {
    Update a specific order line item.
    */
   enum PatchEcommerceStoresIdOrdersIdLinesId {
-    public static let service = APIService<Response>(id: "patchEcommerceStoresIdOrdersIdLinesId", tag: "ecommerce", method: "PATCH", path: "/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "patchEcommerceStoresIdOrdersIdLinesId", tag: "ecommerce", method: "PATCH", path: "/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** Information about a specific order line. */
       public struct Body: Model {
         /** The total discount amount applied to this line item. */
@@ -97,7 +97,7 @@ public extension Ecommerce {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Information about a specific order line. */
       public struct Status200: Model {
@@ -301,7 +301,7 @@ public extension Ecommerce {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

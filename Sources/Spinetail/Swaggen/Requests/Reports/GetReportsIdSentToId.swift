@@ -8,9 +8,9 @@ public extension Reports {
    Get information about a specific campaign recipient.
    */
   enum GetReportsIdSentToId {
-    public static let service = APIService<Response>(id: "getReportsIdSentToId", tag: "reports", method: "GET", path: "/reports/{campaign_id}/sent-to/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getReportsIdSentToId", tag: "reports", method: "GET", path: "/reports/{campaign_id}/sent-to/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -61,7 +61,7 @@ public extension Reports {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A subscriber's status for a specific campaign. */
       public struct Status200: Model {
@@ -84,7 +84,7 @@ public extension Reports {
         public var gmtOffset: Int?
 
         /** The date and time of the last open for this member in ISO 8601 format. */
-        public var lastOpen: DateTime
+        public var lastOpen: Date?
 
         /** The unique list id. */
         public var listId: String?
@@ -93,7 +93,7 @@ public extension Reports {
         public var listIsActive: Bool?
 
         /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-        public var mergeFields: [String: CodableAny]?
+        public var mergeFields: [String: AnyCodable]?
 
         /** The number of times a campaign was opened by this member. */
         public var openCount: Int?
@@ -161,14 +161,14 @@ public extension Reports {
           }
         }
 
-        public init(links: [Links]? = nil, absplitGroup: String? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, gmtOffset: Int? = nil, lastOpen: Date? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: CodableAny]? = nil, openCount: Int? = nil, status: String? = nil, vip: Bool? = nil) {
+        public init(links: [Links]? = nil, absplitGroup: String? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, gmtOffset: Int? = nil, lastOpen: Date? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: AnyCodable]? = nil, openCount: Int? = nil, status: String? = nil, vip: Bool? = nil) {
           self.links = links
           self.absplitGroup = absplitGroup
           self.campaignId = campaignId
           self.emailAddress = emailAddress
           self.emailId = emailId
           self.gmtOffset = gmtOffset
-          self.lastOpen = .init(date: lastOpen)
+          self.lastOpen = lastOpen
           self.listId = listId
           self.listIsActive = listIsActive
           self.mergeFields = mergeFields
@@ -283,7 +283,7 @@ public extension Reports {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

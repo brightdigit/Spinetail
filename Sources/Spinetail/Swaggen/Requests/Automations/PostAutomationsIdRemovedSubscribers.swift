@@ -8,9 +8,9 @@ public extension Automations {
    Remove a subscriber from a specific classic automation workflow. You can remove a subscriber at any point in an automation workflow, regardless of how many emails they've been sent from that workflow. Once they're removed, they can never be added back to the same workflow.
    */
   enum PostAutomationsIdRemovedSubscribers {
-    public static let service = APIService<Response>(id: "postAutomationsIdRemovedSubscribers", tag: "automations", method: "POST", path: "/automations/{workflow_id}/removed-subscribers", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "postAutomationsIdRemovedSubscribers", tag: "automations", method: "POST", path: "/automations/{workflow_id}/removed-subscribers", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** Information about subscribers in an Automation email queue. */
       public struct Body: Model {
         /** The list member's email address. */
@@ -65,7 +65,7 @@ public extension Automations {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A summary of a subscriber removed from an Automation workflow. */
       public struct Status200: Model {
@@ -239,7 +239,7 @@ public extension Automations {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

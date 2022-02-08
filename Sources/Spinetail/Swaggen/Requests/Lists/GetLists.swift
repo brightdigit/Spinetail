@@ -8,7 +8,7 @@ public extension Lists {
    Get information about all lists in the account.
    */
   enum GetLists {
-    public static let service = APIService<Response>(id: "getLists", tag: "lists", method: "GET", path: "/lists", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getLists", tag: "lists", method: "GET", path: "/lists", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** Returns files sorted by the specified field. */
     public enum SortField: String, Codable, Equatable, CaseIterable {
@@ -21,7 +21,7 @@ public extension Lists {
       case desc = "DESC"
     }
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -137,7 +137,7 @@ public extension Lists {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization. */
       public struct Status200: Model {
@@ -174,7 +174,7 @@ public extension Lists {
           public var contact: Contact?
 
           /** The date and time that this list was created in ISO 8601 format. */
-          public var dateCreated: DateTime
+          public var dateCreated: Date?
 
           /** Whether or not to require the subscriber to confirm subscription via email. */
           public var doubleOptin: Bool?
@@ -400,7 +400,7 @@ public extension Lists {
             public var campaignCount: Int?
 
             /** The date and time the last campaign was sent to this list in ISO 8601 format. This is updated when a campaign is sent to 10 or more recipients. */
-            public var campaignLastSent: DateTime
+            public var campaignLastSent: Date?
 
             /** The number of members cleaned from the list. */
             public var cleanedCount: Int?
@@ -412,10 +412,10 @@ public extension Lists {
             public var clickRate: Double?
 
             /** The date and time of the last time someone subscribed to this list in ISO 8601 format. */
-            public var lastSubDate: DateTime
+            public var lastSubDate: Date?
 
             /** The date and time of the last time someone unsubscribed from this list in ISO 8601 format. */
-            public var lastUnsubDate: DateTime
+            public var lastUnsubDate: Date?
 
             /** The number of active members in the list. */
             public var memberCount: Int?
@@ -445,12 +445,12 @@ public extension Lists {
               self.avgSubRate = avgSubRate
               self.avgUnsubRate = avgUnsubRate
               self.campaignCount = campaignCount
-              self.campaignLastSent = .init(date: campaignLastSent)
+              self.campaignLastSent = campaignLastSent
               self.cleanedCount = cleanedCount
               self.cleanedCountSinceSend = cleanedCountSinceSend
               self.clickRate = clickRate
-              self.lastSubDate = .init(date: lastSubDate)
-              self.lastUnsubDate = .init(date: lastUnsubDate)
+              self.lastSubDate = lastSubDate
+              self.lastUnsubDate = lastUnsubDate
               self.memberCount = memberCount
               self.memberCountSinceSend = memberCountSinceSend
               self.mergeFieldCount = mergeFieldCount
@@ -511,7 +511,7 @@ public extension Lists {
             self.beamerAddress = beamerAddress
             self.campaignDefaults = campaignDefaults
             self.contact = contact
-            self.dateCreated = .init(date: dateCreated)
+            self.dateCreated = dateCreated
             self.doubleOptin = doubleOptin
             self.emailTypeOption = emailTypeOption
             self.hasWelcome = hasWelcome
@@ -772,7 +772,7 @@ public extension Lists {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

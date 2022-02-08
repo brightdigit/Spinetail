@@ -8,9 +8,9 @@ public extension Lists {
    Get information about a specific list member, including a currently subscribed, unsubscribed, or bounced member.
    */
   enum GetListsIdMembersId {
-    public static let service = APIService<Response>(id: "getListsIdMembersId", tag: "lists", method: "GET", path: "/lists/{list_id}/members/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getListsIdMembersId", tag: "lists", method: "GET", path: "/lists/{list_id}/members/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -61,7 +61,7 @@ public extension Lists {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed. */
       public struct Status200: Model {
@@ -106,7 +106,7 @@ public extension Lists {
         public var language: String?
 
         /** The date and time the member's info was last changed in ISO 8601 format. */
-        public var lastChanged: DateTime
+        public var lastChanged: Date?
 
         /** The most recent Note added about this member. */
         public var lastNote: LastNote?
@@ -124,7 +124,7 @@ public extension Lists {
         public var memberRating: Int?
 
         /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-        // public var mergeFields: [String: CodableAny]?
+        // public var mergeFields: [String: AnyCodable]?
 
         /** The source from which the subscriber was added to this list. */
         public var source: String?
@@ -142,10 +142,10 @@ public extension Lists {
         public var tagsCount: Int?
 
         /** The date and time the subscribe confirmed their opt-in status in ISO 8601 format. */
-        public var timestampOpt: DateTime
+        public var timestampOpt: Date?
 
         /** The date and time the subscriber signed up for the list in ISO 8601 format. */
-        public var timestampSignup: DateTime
+        public var timestampSignup: Date?
 
         /** An identifier for the address across all of Mailchimp. */
         public var uniqueEmailId: String?
@@ -219,7 +219,7 @@ public extension Lists {
         /** The most recent Note added about this member. */
         public struct LastNote: Model {
           /** The date and time the note was created in ISO 8601 format. */
-          public var createdAt: DateTime
+          public var createdAt: Date?
 
           /** The author of the note. */
           public var createdBy: String?
@@ -231,7 +231,7 @@ public extension Lists {
           public var noteId: Int?
 
           public init(createdAt: Date? = nil, createdBy: String? = nil, note: String? = nil, noteId: Int? = nil) {
-            self.createdAt = .init(date: createdAt)
+            self.createdAt = createdAt
             self.createdBy = createdBy
             self.note = note
             self.noteId = noteId
@@ -438,7 +438,7 @@ public extension Lists {
           }
         }
 
-        public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, fullName: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: Date? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, memberRating: Int? = nil, mergeFields _: [String: [String: CodableAny]]? = nil, source: String? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, uniqueEmailId: String? = nil, unsubscribeReason: String? = nil, vip: Bool? = nil, webId: Int? = nil) {
+        public init(links: [Links]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, fullName: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: Date? = nil, lastNote: LastNote? = nil, listId: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, memberRating: Int? = nil, mergeFields _: [String: [String: AnyCodable]]? = nil, source: String? = nil, stats: Stats? = nil, status: Status? = nil, tags: [Tags]? = nil, tagsCount: Int? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, uniqueEmailId: String? = nil, unsubscribeReason: String? = nil, vip: Bool? = nil, webId: Int? = nil) {
           self.links = links
           self.emailAddress = emailAddress
           self.emailClient = emailClient
@@ -449,7 +449,7 @@ public extension Lists {
           self.ipOpt = ipOpt
           self.ipSignup = ipSignup
           self.language = language
-          self.lastChanged = .init(date: lastChanged)
+          self.lastChanged = lastChanged
           self.lastNote = lastNote
           self.listId = listId
           self.location = location
@@ -461,8 +461,8 @@ public extension Lists {
           self.status = status
           self.tags = tags
           self.tagsCount = tagsCount
-          self.timestampOpt = .init(date: timestampOpt)
-          self.timestampSignup = .init(date: timestampSignup)
+          self.timestampOpt = timestampOpt
+          self.timestampSignup = timestampSignup
           self.uniqueEmailId = uniqueEmailId
           self.unsubscribeReason = unsubscribeReason
           self.vip = vip
@@ -605,7 +605,7 @@ public extension Lists {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

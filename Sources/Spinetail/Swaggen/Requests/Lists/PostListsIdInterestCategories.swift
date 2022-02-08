@@ -8,7 +8,7 @@ public extension Lists {
    Create a new interest category.
    */
   enum PostListsIdInterestCategories {
-    public static let service = APIService<Response>(id: "postListsIdInterestCategories", tag: "lists", method: "POST", path: "/lists/{list_id}/interest-categories", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "postListsIdInterestCategories", tag: "lists", method: "POST", path: "/lists/{list_id}/interest-categories", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** Determines how this category’s interests appear on signup forms. */
     public enum `Type`: String, Codable, Equatable, CaseIterable {
@@ -18,7 +18,7 @@ public extension Lists {
       case hidden
     }
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application. */
       public struct Body: Model {
         /** Determines how this category’s interests appear on signup forms. */
@@ -93,7 +93,7 @@ public extension Lists {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application. */
       public struct Status200: Model {
@@ -281,7 +281,7 @@ public extension Lists {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

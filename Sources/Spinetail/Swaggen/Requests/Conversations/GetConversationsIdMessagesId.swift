@@ -8,9 +8,9 @@ public extension Conversations {
    Get an individual message in a conversation. Conversations has been deprecated in favor of Inbox and these endpoints don't include Inbox data. Past Conversations are still available via this endpoint, but new campaign replies and other Inbox messages aren’t available using this endpoint.
    */
   enum GetConversationsIdMessagesId {
-    public static let service = APIService<Response>(id: "getConversationsIdMessagesId", tag: "conversations", method: "GET", path: "/conversations/{conversation_id}/messages/{message_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getConversationsIdMessagesId", tag: "conversations", method: "GET", path: "/conversations/{conversation_id}/messages/{message_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -61,7 +61,7 @@ public extension Conversations {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account. */
       public struct Status200: Model {
@@ -93,7 +93,7 @@ public extension Conversations {
         public var subject: String?
 
         /** The date and time the message was either sent or received in ISO 8601 format. */
-        public var timestamp: DateTime
+        public var timestamp: Date?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
         public struct Links: Model {
@@ -162,7 +162,7 @@ public extension Conversations {
           self.message = message
           self.read = read
           self.subject = subject
-          self.timestamp = .init(date: timestamp)
+          self.timestamp = timestamp
         }
 
         public init(from decoder: Decoder) throws {
@@ -265,7 +265,7 @@ public extension Conversations {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

@@ -8,9 +8,9 @@ public extension ConnectedSites {
    Get information about a specific connected site.
    */
   enum GetConnectedSitesId {
-    public static let service = APIService<Response>(id: "getConnectedSitesId", tag: "connectedSites", method: "GET", path: "/connected-sites/{connected_site_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getConnectedSitesId", tag: "connectedSites", method: "GET", path: "/connected-sites/{connected_site_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -57,7 +57,7 @@ public extension ConnectedSites {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Information about a specific connected site. */
       public struct Status200: Model {
@@ -65,7 +65,7 @@ public extension ConnectedSites {
         public var links: [Links]?
 
         /** The date and time the connected site was created in ISO 8601 format. */
-        public var createdAt: DateTime
+        public var createdAt: Date?
 
         /** The connected site domain. */
         public var domain: String?
@@ -83,7 +83,7 @@ public extension ConnectedSites {
         public var storeId: String?
 
         /** The date and time the connected site was last updated in ISO 8601 format. */
-        public var updatedAt: DateTime
+        public var updatedAt: Date?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
         public struct Links: Model {
@@ -172,13 +172,13 @@ public extension ConnectedSites {
 
         public init(links: [Links]? = nil, createdAt: Date? = nil, domain: String? = nil, foreignId: String? = nil, platform: String? = nil, siteScript: SiteScript? = nil, storeId: String? = nil, updatedAt: Date? = nil) {
           self.links = links
-          self.createdAt = .init(date: createdAt)
+          self.createdAt = createdAt
           self.domain = domain
           self.foreignId = foreignId
           self.platform = platform
           self.siteScript = siteScript
           self.storeId = storeId
-          self.updatedAt = .init(date: updatedAt)
+          self.updatedAt = updatedAt
         }
 
         public init(from decoder: Decoder) throws {
@@ -277,7 +277,7 @@ public extension ConnectedSites {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

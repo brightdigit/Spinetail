@@ -8,7 +8,7 @@ public extension FacebookAds {
    Get list of Facebook ads.
    */
   enum GetAllFacebookAds {
-    public static let service = APIService<Response>(id: "getAllFacebookAds", tag: "facebookAds", method: "GET", path: "/facebook-ads", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getAllFacebookAds", tag: "facebookAds", method: "GET", path: "/facebook-ads", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** Returns files sorted by the specified field. */
     public enum SortField: String, Codable, Equatable, CaseIterable {
@@ -23,7 +23,7 @@ public extension FacebookAds {
       case desc = "DESC"
     }
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -90,14 +90,14 @@ public extension FacebookAds {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Contains an array of facebook ads. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
         public var links: [Links]?
 
-        public var facebookAds: [[String: CodableAny]]?
+        public var facebookAds: [[String: AnyCodable]]?
 
         /** The total number of items matching the query regardless of pagination. */
         public var totalItems: Int?
@@ -159,7 +159,7 @@ public extension FacebookAds {
           }
         }
 
-        public init(links: [Links]? = nil, facebookAds: [[String: CodableAny]]? = nil, totalItems: Int? = nil) {
+        public init(links: [Links]? = nil, facebookAds: [[String: AnyCodable]]? = nil, totalItems: Int? = nil) {
           self.links = links
           self.facebookAds = facebookAds
           self.totalItems = totalItems
@@ -253,7 +253,7 @@ public extension FacebookAds {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

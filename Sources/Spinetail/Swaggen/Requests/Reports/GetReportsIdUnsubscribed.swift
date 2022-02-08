@@ -8,9 +8,9 @@ public extension Reports {
    Get information about members who have unsubscribed from a specific campaign.
    */
   enum GetReportsIdUnsubscribed {
-    public static let service = APIService<Response>(id: "getReportsIdUnsubscribed", tag: "reports", method: "GET", path: "/reports/{campaign_id}/unsubscribed", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getReportsIdUnsubscribed", tag: "reports", method: "GET", path: "/reports/{campaign_id}/unsubscribed", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -71,7 +71,7 @@ public extension Reports {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A list of members who have unsubscribed from a specific campaign. */
       public struct Status200: Model {
@@ -165,13 +165,13 @@ public extension Reports {
           public var listIsActive: Bool?
 
           /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-          public var mergeFields: [String: CodableAny]?
+          public var mergeFields: [String: AnyCodable]?
 
           /** If available, the reason listed by the member for unsubscribing. */
           public var reason: String?
 
           /** The date and time the member opted-out in ISO 8601 format. */
-          public var timestamp: DateTime
+          public var timestamp: Date?
 
           /** [VIP status](https://mailchimp.com/help/designate-and-send-to-vip-contacts/) for subscriber. */
           public var vip: Bool?
@@ -233,7 +233,7 @@ public extension Reports {
             }
           }
 
-          public init(links: [Links]? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: CodableAny]? = nil, reason: String? = nil, timestamp: Date? = nil, vip: Bool? = nil) {
+          public init(links: [Links]? = nil, campaignId: String? = nil, emailAddress: String? = nil, emailId: String? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: AnyCodable]? = nil, reason: String? = nil, timestamp: Date? = nil, vip: Bool? = nil) {
             self.links = links
             self.campaignId = campaignId
             self.emailAddress = emailAddress
@@ -242,7 +242,7 @@ public extension Reports {
             self.listIsActive = listIsActive
             self.mergeFields = mergeFields
             self.reason = reason
-            self.timestamp = .init(date: timestamp)
+            self.timestamp = timestamp
             self.vip = vip
           }
 
@@ -372,7 +372,7 @@ public extension Reports {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

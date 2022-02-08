@@ -8,9 +8,9 @@ public extension Templates {
    Create a new template for the account. Only Classic templates are supported.
    */
   enum PostTemplates {
-    public static let service = APIService<Response>(id: "postTemplates", tag: "templates", method: "POST", path: "/templates", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "postTemplates", tag: "templates", method: "POST", path: "/templates", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** Information about a specific template. */
       public struct Body: Model {
         /** The raw HTML for the template. We  support the Mailchimp [Template Language](https://mailchimp.com/help/getting-started-with-mailchimps-template-language/) in any HTML code passed via the API. */
@@ -55,7 +55,7 @@ public extension Templates {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Information about a specific template. */
       public struct Status200: Model {
@@ -72,10 +72,10 @@ public extension Templates {
         public var createdBy: String?
 
         /** The date and time the template was created in ISO 8601 format. */
-        public var dateCreated: DateTime
+        public var dateCreated: Date?
 
         /** The date and time the template was edited in ISO 8601 format. */
-        public var dateEdited: DateTime
+        public var dateEdited: Date?
 
         /** Whether the template uses the drag and drop editor. */
         public var dragAndDrop: Bool?
@@ -166,8 +166,8 @@ public extension Templates {
           self.active = active
           self.category = category
           self.createdBy = createdBy
-          self.dateCreated = .init(date: dateCreated)
-          self.dateEdited = .init(date: dateEdited)
+          self.dateCreated = dateCreated
+          self.dateEdited = dateEdited
           self.dragAndDrop = dragAndDrop
           self.editedBy = editedBy
           self.folderId = folderId
@@ -289,7 +289,7 @@ public extension Templates {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

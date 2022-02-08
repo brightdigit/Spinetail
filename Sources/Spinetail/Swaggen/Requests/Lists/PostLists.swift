@@ -8,9 +8,9 @@ public extension Lists {
    Create a new list in your Mailchimp account.
    */
   enum PostLists {
-    public static let service = APIService<Response>(id: "postLists", tag: "lists", method: "POST", path: "/lists", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "postLists", tag: "lists", method: "POST", path: "/lists", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** Information about a specific list. */
       public struct Body: Model {
         /** [Default values for campaigns](https://mailchimp.com/help/edit-your-emails-subject-preview-text-from-name-or-from-email-address/) created for this list. */
@@ -201,7 +201,7 @@ public extension Lists {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Information about a specific list. */
       public struct Status200: Model {
@@ -224,7 +224,7 @@ public extension Lists {
         public var contact: Contact?
 
         /** The date and time that this list was created in ISO 8601 format. */
-        public var dateCreated: DateTime
+        public var dateCreated: Date?
 
         /** Whether or not to require the subscriber to confirm subscription via email. */
         public var doubleOptin: Bool?
@@ -450,7 +450,7 @@ public extension Lists {
           public var campaignCount: Int?
 
           /** The date and time the last campaign was sent to this list in ISO 8601 format. This is updated when a campaign is sent to 10 or more recipients. */
-          public var campaignLastSent: DateTime
+          public var campaignLastSent: Date?
 
           /** The number of members cleaned from the list. */
           public var cleanedCount: Int?
@@ -462,10 +462,10 @@ public extension Lists {
           public var clickRate: Double?
 
           /** The date and time of the last time someone subscribed to this list in ISO 8601 format. */
-          public var lastSubDate: DateTime
+          public var lastSubDate: Date?
 
           /** The date and time of the last time someone unsubscribed from this list in ISO 8601 format. */
-          public var lastUnsubDate: DateTime
+          public var lastUnsubDate: Date?
 
           /** The number of active members in the list. */
           public var memberCount: Int?
@@ -495,12 +495,12 @@ public extension Lists {
             self.avgSubRate = avgSubRate
             self.avgUnsubRate = avgUnsubRate
             self.campaignCount = campaignCount
-            self.campaignLastSent = .init(date: campaignLastSent)
+            self.campaignLastSent = campaignLastSent
             self.cleanedCount = cleanedCount
             self.cleanedCountSinceSend = cleanedCountSinceSend
             self.clickRate = clickRate
-            self.lastSubDate = .init(date: lastSubDate)
-            self.lastUnsubDate = .init(date: lastUnsubDate)
+            self.lastSubDate = lastSubDate
+            self.lastUnsubDate = lastUnsubDate
             self.memberCount = memberCount
             self.memberCountSinceSend = memberCountSinceSend
             self.mergeFieldCount = mergeFieldCount
@@ -561,7 +561,7 @@ public extension Lists {
           self.beamerAddress = beamerAddress
           self.campaignDefaults = campaignDefaults
           self.contact = contact
-          self.dateCreated = .init(date: dateCreated)
+          self.dateCreated = dateCreated
           self.doubleOptin = doubleOptin
           self.emailTypeOption = emailTypeOption
           self.hasWelcome = hasWelcome
@@ -705,7 +705,7 @@ public extension Lists {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

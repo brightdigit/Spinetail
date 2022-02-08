@@ -8,9 +8,9 @@ public extension BatchWebhooks {
    Configure a webhook that will fire whenever any batch request completes processing.
    */
   enum PostBatchWebhooks {
-    public static let service = APIService<Response>(id: "postBatchWebhooks", tag: "batchWebhooks", method: "POST", path: "/batch-webhooks", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "postBatchWebhooks", tag: "batchWebhooks", method: "POST", path: "/batch-webhooks", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** Add a new Batch Webook. */
       public struct Body: Model {
         /** A valid URL for the Webhook. */
@@ -43,7 +43,7 @@ public extension BatchWebhooks {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A webhook configured for batch status updates. */
       public struct Status200: Model {
@@ -205,7 +205,7 @@ public extension BatchWebhooks {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

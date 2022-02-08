@@ -2,116 +2,132 @@ import Prch
 @testable import Spinetail
 import XCTest
 
-enum MailchimpError: Error {
-  case apiError(Any)
-}
-
-extension APIResponseResult {
-  func get() throws -> SuccessType {
-    switch self {
-    case let .success(value):
-      return value
-
-    case let .failure(failure):
-      throw MailchimpError.apiError(failure)
-    }
+extension String {
+  static func randomEmailAddress(withDomain domain: String) -> String {
+    [UUID().uuidString.replacingOccurrences(of: "-", with: ""), domain].joined(separator: "@")
   }
 }
 
-struct TimeoutError: Error {}
+struct Settings: Codable {
+  internal init(apiKey: String?, listID: String?, interestID: String?) {
+    self.apiKey = apiKey
+    self.listID = listID
+    self.interestID = interestID
+  }
 
-public extension APIClient {
-  func requestSync<ResponseType>(
-    _ request: APIRequest<ResponseType, APIType>
-    // _ completion: @escaping (APIResult<ResponseType>) -> Void
-  ) throws -> ResponseType {
-    var result: APIResult<ResponseType>!
-    let semaphore = DispatchSemaphore(value: 0)
-    self.request(request) {
-      result = $0
-      semaphore.signal()
+  let apiKey: String?
+  let listID: String?
+  let interestID: String?
+}
+
+extension Settings {
+  init(environment: [String: String]) {
+    self.init(
+      apiKey: environment["MAILCHIMP_API_KEY"],
+      listID: environment["MAILCHIMP_LIST_ID"],
+      interestID: environment["MAILCHIMP_INTEREST_ID"]
+    )
+  }
+
+  init(processInfo: ProcessInfo = .processInfo) {
+    self.init(environment: processInfo.environment)
+  }
+
+  func mergeWith(other: Settings) -> Settings {
+    Settings(
+      apiKey: apiKey ?? other.apiKey,
+      listID: listID ?? other.listID,
+      interestID: interestID ?? other.interestID
+    )
+  }
+
+  static func parse() -> Settings {
+    let decoder = JSONDecoder()
+    let directory = URL(fileURLWithPath: #file).deletingLastPathComponent()
+    let envURL = directory.appendingPathComponent("env.json")
+    let data = try? Data(contentsOf: envURL)
+    let envSettings = Settings()
+    if let jsonSettings = data.flatMap({ try? decoder.decode(Settings.self, from: $0) }) {
+      return jsonSettings.mergeWith(other: envSettings)
+    } else {
+      return envSettings
     }
-    semaphore.wait()
-
-    return try result.get()
-//    var sessionRequest: SessionType.RequestType
-//    do {
-//      sessionRequest = try session.createRequest(
-//        request,
-//        withBaseURL: api.baseURL,
-//        andHeaders: api.headers
-//      )
-//    } catch {
-//      completion(.failure(.requestEncodingError(error)))
-//      return nil
-//    }
-//
-//    return session.beginRequest(sessionRequest) { result in
-//      completion(.init(ResponseType.self, result: result, decoder: self.api.decoder))
-//    }
   }
 }
 
 final class SpinetailTests: XCTestCase {
-  let email = "669408F7A804430BAF74878BFCEBD128@brightdigit.com"
-  let listID = "6f357ca335"
-  let interestID = "57c6bddb73"
-  func testUpsert() throws {
-    guard let apiKey = ProcessInfo.processInfo.environment["API_KEY"] else {
-      return
-    }
-    guard let api = MailchimpAPI(apiKey: apiKey) else {
-      return
-    }
-    let client = APIClient(api: api, session: URLSession.shared)
-//    let getGroups = Lists.GetListsIdInterestCategories.Request(listId: listID)
-//    let categoryID = try (client.requestSync(getGroups).responseResult.get().categories?.first?.id).unsafelyUnwrapped
-//
-//    let getInterests = Lists.GetListsIdInterestCategoriesIdInterests.Request(listId: listID, interestCategoryId: categoryID)
-//    let interestID = try (client.requestSync(getInterests).responseResult.get().interests?.first?.id).unsafelyUnwrapped
-//    print(interestID)
-//    return
+  let existingEmailAddress = "669408F7A804430BAF74878BFCEBD128@brightdigit.com"
+  static var listID: String!
+  static var interestID: String!
+  static var api: MailchimpAPI!
 
-    let getMember = Lists.GetListsIdMembersId.Request(listId: listID, subscriberHash: email)
-    let memberResult = try client.requestSync(getMember)
+  override class func setUp() {
+    let settings = Settings.parse()
+
+    listID = settings.listID
+    interestID = settings.interestID
+    api = settings.apiKey.flatMap(MailchimpAPI.init(apiKey:))
+  }
+
+  func upsertEmailAddress(_ emailAddress: String, withInterestID interestID: String?) throws -> Bool? {
+    let client = Client(api: Self.api, session: URLSession.shared)
+    let getMember = Lists.GetListsIdMembersId.Request(listId: Self.listID, subscriberHash: emailAddress)
 
     let member: Lists.GetListsIdMembersId.Response.Status200?
     let interested: Bool
-    if memberResult.failure?.status == 404 {
+
+    do {
+      member = try client.requestSync(getMember)
+      if let interestID = interestID {
+        interested = member?.interests?[interestID] ?? false
+      } else {
+        interested = true
+      }
+    } catch let error as RequestResponse<Lists.GetListsIdMembersId.Response>.FailedResponseError {
+      guard error.statusCode == 404 else {
+        throw error
+      }
       interested = false
       member = nil
-    } else {
-      member = try memberResult.result.get()
-      interested = member?.interests?[interestID] ?? false
     }
 
-    let successful: Bool
+    let interests: [String: Bool] = interestID.map { [$0: true] } ?? [:]
     guard !interested else {
-      return
+      return nil
     }
     if let subscriberHash = member?.id {
-      let patch = Lists.PatchListsIdMembersId.Request(body: .init(emailAddress: email, emailType: nil, interests: [interestID: true]), options: Lists.PatchListsIdMembersId.Request.Options(listId: listID, subscriberHash: subscriberHash))
-      successful = try client.requestSync(patch).result.successful
+      let patch = Lists.PatchListsIdMembersId.Request(body: .init(emailAddress: emailAddress, emailType: nil, interests: interests), options: Lists.PatchListsIdMembersId.Request.Options(listId: Self.listID, subscriberHash: subscriberHash))
+      _ = try client.requestSync(patch)
+      return false
     } else {
-      let post = Lists.PostListsIdMembers.Request(listId: listID, body: .init(emailAddress: email, status: Lists.PostListsIdMembers.Request.Body.Status.subscribed, interests: [interestID: true], timestampOpt: .init(), timestampSignup: .init()))
-      successful = try client.requestSync(post).result.successful
+      let post = Lists.PostListsIdMembers.Request(listId: Self.listID, body: .init(emailAddress: emailAddress, status: Lists.PostListsIdMembers.Request.Body.Status.subscribed, interests: interests, timestampOpt: .init(), timestampSignup: .init()))
+      _ = try client.requestSync(post)
+      return true
     }
-    XCTAssertTrue(successful)
+  }
 
-//        return client.request(request).flatMapThrowing { response in
-//          try response.responseResult.get()
-//        }.map { members in
-//          members.exactMatches?.members?.first?.id
-//        }.flatMap { subscriberHash in
-//          if let subscriberHash = subscriberHash {
-//            let request = Lists.PatchListsIdMembersId.Request(body: .init(emailAddress: user.email, emailType: nil, interests: [self.interestID: true]), options: Lists.PatchListsIdMembersId.Request.Options(listId: self.listID, subscriberHash: subscriberHash))
-//            return self.client.request(request).asVoidResult(fromKey: \.responseResult)
-//          } else {
-//            let request = Lists.PostListsIdMembers.Request(listId: listID, body: .init(emailAddress: user.email, status: Lists.PostListsIdMembers.Request.Body.Status.subscribed, interests: [self.interestID: true]))
-//
-//            return self.client.request(request).asVoidResult(fromKey: \.responseResult)
-//          }
-//        }
+  func testUpsertExistingWithInterestID() throws {
+    let actual = try upsertEmailAddress(existingEmailAddress, withInterestID: Self.interestID)
+    XCTAssertNil(actual)
+  }
+
+  func testUpsertExistingWithoutInterestID() throws {
+    let actual = try upsertEmailAddress(existingEmailAddress, withInterestID: nil)
+    XCTAssertNil(actual)
+  }
+
+  func testUpsertNewWithInterestID() throws {
+    let emailAddress = String.randomEmailAddress(withDomain: "brightdigit.com")
+    let actual = try upsertEmailAddress(emailAddress, withInterestID: Self.interestID)
+    XCTAssertEqual(actual, true)
+  }
+
+  func testUpsertNewThenWithInterestID() throws {
+    let emailAddress = String.randomEmailAddress(withDomain: "brightdigit.com")
+    let actualCreate = try upsertEmailAddress(emailAddress, withInterestID: nil)
+    XCTAssertEqual(actualCreate, true)
+    let actualUpdate = try upsertEmailAddress(emailAddress, withInterestID: Self.interestID)
+    XCTAssertEqual(actualUpdate, false)
   }
 
   // swiftlint:disable:next cyclomatic_complexity

@@ -8,9 +8,9 @@ public extension Campaigns {
    Get team feedback while you're working together on a Mailchimp campaign.
    */
   enum GetCampaignsIdFeedback {
-    public static let service = APIService<Response>(id: "getCampaignsIdFeedback", tag: "campaigns", method: "GET", path: "/campaigns/{campaign_id}/feedback", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getCampaignsIdFeedback", tag: "campaigns", method: "GET", path: "/campaigns/{campaign_id}/feedback", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -57,7 +57,7 @@ public extension Campaigns {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A summary of the comment feedback for a specific campaign. */
       public struct Status200: Model {
@@ -155,7 +155,7 @@ public extension Campaigns {
           public var campaignId: String?
 
           /** The date and time the feedback item was created in ISO 8601 format. */
-          public var createdAt: DateTime
+          public var createdAt: Date?
 
           /** The login name of the user who created the feedback. */
           public var createdBy: String?
@@ -173,7 +173,7 @@ public extension Campaigns {
           public var source: Source?
 
           /** The date and time the feedback was last updated in ISO 8601 format. */
-          public var updatedAt: DateTime
+          public var updatedAt: Date?
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
           public struct Links: Model {
@@ -237,13 +237,13 @@ public extension Campaigns {
             self.links = links
             self.blockId = blockId
             self.campaignId = campaignId
-            self.createdAt = .init(date: createdAt)
+            self.createdAt = createdAt
             self.createdBy = createdBy
             self.feedbackId = feedbackId
             self.isComplete = isComplete
             self.parentId = parentId
             self.source = source
-            self.updatedAt = .init(date: updatedAt)
+            self.updatedAt = updatedAt
           }
 
           public init(from decoder: Decoder) throws {
@@ -374,7 +374,7 @@ public extension Campaigns {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

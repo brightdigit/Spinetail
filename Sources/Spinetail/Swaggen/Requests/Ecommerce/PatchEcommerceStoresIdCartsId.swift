@@ -8,9 +8,9 @@ public extension Ecommerce {
    Update a specific cart.
    */
   enum PatchEcommerceStoresIdCartsId {
-    public static let service = APIService<Response>(id: "patchEcommerceStoresIdCartsId", tag: "ecommerce", method: "PATCH", path: "/ecommerce/stores/{store_id}/carts/{cart_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "patchEcommerceStoresIdCartsId", tag: "ecommerce", method: "PATCH", path: "/ecommerce/stores/{store_id}/carts/{cart_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** Information about a specific cart. */
       public struct Body: Model {
         /** A string that uniquely identifies the campaign associated with a cart. */
@@ -255,7 +255,7 @@ public extension Ecommerce {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Information about a specific cart. */
       public struct Status200: Model {
@@ -269,7 +269,7 @@ public extension Ecommerce {
         public var checkoutURL: String?
 
         /** The date and time the cart was created in ISO 8601 format. */
-        public var createdAt: DateTime
+        public var createdAt: Date?
 
         /** The three-letter ISO 4217 code for the currency that the cart uses. */
         public var currencyCode: String?
@@ -290,7 +290,7 @@ public extension Ecommerce {
         public var taxTotal: Double?
 
         /** The date and time the cart was last updated in ISO 8601 format. */
-        public var updatedAt: DateTime
+        public var updatedAt: Date?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
         public struct Links: Model {
@@ -361,7 +361,7 @@ public extension Ecommerce {
           public var company: String?
 
           /** The date and time the customer was created in ISO 8601 format. */
-          public var createdAt: DateTime
+          public var createdAt: Date?
 
           /** The customer's email address. */
           public var emailAddress: String?
@@ -385,7 +385,7 @@ public extension Ecommerce {
           public var totalSpent: Double?
 
           /** The date and time the customer was last updated in ISO 8601 format. */
-          public var updatedAt: DateTime
+          public var updatedAt: Date?
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
           public struct Links: Model {
@@ -512,7 +512,7 @@ public extension Ecommerce {
             self.links = links
             self.address = address
             self.company = company
-            self.createdAt = .init(date: createdAt)
+            self.createdAt = createdAt
             self.emailAddress = emailAddress
             self.firstName = firstName
             self.id = id
@@ -520,7 +520,7 @@ public extension Ecommerce {
             self.optInStatus = optInStatus
             self.ordersCount = ordersCount
             self.totalSpent = totalSpent
-            self.updatedAt = .init(date: updatedAt)
+            self.updatedAt = updatedAt
           }
 
           public init(from decoder: Decoder) throws {
@@ -683,14 +683,14 @@ public extension Ecommerce {
           self.links = links
           self.campaignId = campaignId
           self.checkoutURL = checkoutURL
-          self.createdAt = .init(date: createdAt)
+          self.createdAt = createdAt
           self.currencyCode = currencyCode
           self.customer = customer
           self.id = id
           self.lines = lines
           self.orderTotal = orderTotal
           self.taxTotal = taxTotal
-          self.updatedAt = .init(date: updatedAt)
+          self.updatedAt = updatedAt
         }
 
         public init(from decoder: Decoder) throws {
@@ -795,7 +795,7 @@ public extension Ecommerce {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

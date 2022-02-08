@@ -8,7 +8,7 @@ public extension Conversations {
    Get messages from a specific conversation. Conversations has been deprecated in favor of Inbox and these endpoints don't include Inbox data. Past Conversations are still available via this endpoint, but new campaign replies and other Inbox messages aren’t available using this endpoint.
    */
   enum GetConversationsIdMessages {
-    public static let service = APIService<Response>(id: "getConversationsIdMessages", tag: "conversations", method: "GET", path: "/conversations/{conversation_id}/messages", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getConversationsIdMessages", tag: "conversations", method: "GET", path: "/conversations/{conversation_id}/messages", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** Whether a conversation message has been marked as read. */
     public enum IsRead: String, Codable, Equatable, CaseIterable {
@@ -16,7 +16,7 @@ public extension Conversations {
       case `false`
     }
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -31,18 +31,18 @@ public extension Conversations {
         public var isRead: IsRead?
 
         /** Restrict the response to messages created before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-        public var beforeTimestamp: DateTime
+        public var beforeTimestamp: Date?
 
         /** Restrict the response to messages created after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-        public var sinceTimestamp: DateTime
+        public var sinceTimestamp: Date?
 
         public init(fields: [String]? = nil, excludeFields: [String]? = nil, conversationId: String, isRead: IsRead? = nil, beforeTimestamp: Date? = nil, sinceTimestamp: Date? = nil) {
           self.fields = fields
           self.excludeFields = excludeFields
           self.conversationId = conversationId
           self.isRead = isRead
-          self.beforeTimestamp = .init(date: beforeTimestamp)
-          self.sinceTimestamp = .init(date: sinceTimestamp)
+          self.beforeTimestamp = beforeTimestamp
+          self.sinceTimestamp = sinceTimestamp
         }
       }
 
@@ -74,17 +74,18 @@ public extension Conversations {
         if let isRead = options.isRead?.encode() {
           params["is_read"] = isRead
         }
-        if let beforeTimestamp = options.beforeTimestamp.encode() {
+
+        if let beforeTimestamp = options.beforeTimestamp.encode(with: MailchimpAPI.dateEncodingFormatter) {
           params["before_timestamp"] = beforeTimestamp
         }
-        if let sinceTimestamp = options.sinceTimestamp.encode() {
+        if let sinceTimestamp = options.sinceTimestamp.encode(with: MailchimpAPI.dateEncodingFormatter) {
           params["since_timestamp"] = sinceTimestamp
         }
         return params
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Messages from a specific conversation. */
       public struct Status200: Model {
@@ -187,7 +188,7 @@ public extension Conversations {
           public var subject: String?
 
           /** The date and time the message was either sent or received in ISO 8601 format. */
-          public var timestamp: DateTime
+          public var timestamp: Date?
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
           public struct Links: Model {
@@ -256,7 +257,7 @@ public extension Conversations {
             self.message = message
             self.read = read
             self.subject = subject
-            self.timestamp = .init(date: timestamp)
+            self.timestamp = timestamp
           }
 
           public init(from decoder: Decoder) throws {
@@ -385,7 +386,7 @@ public extension Conversations {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

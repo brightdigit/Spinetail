@@ -8,9 +8,9 @@ public extension FileManager {
    Create a new folder in the File Manager.
    */
   enum PostFileManagerFolders {
-    public static let service = APIService<Response>(id: "postFileManagerFolders", tag: "fileManager", method: "POST", path: "/file-manager/folders", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "postFileManagerFolders", tag: "fileManager", method: "POST", path: "/file-manager/folders", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** An individual folder listed in the File Manager. */
       public struct Body: Model {
         /** The name of the folder. */
@@ -43,7 +43,7 @@ public extension FileManager {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** An individual folder listed in the File Manager. */
       public struct Status200: Model {
@@ -51,7 +51,7 @@ public extension FileManager {
         public var links: [Links]?
 
         /** The date and time a file was added to the File Manager in ISO 8601 format. */
-        public var createdAt: DateTime
+        public var createdAt: Date?
 
         /** The username of the profile that created the folder. */
         public var createdBy: String?
@@ -124,7 +124,7 @@ public extension FileManager {
 
         public init(links: [Links]? = nil, createdAt: Date? = nil, createdBy: String? = nil, fileCount: Int? = nil, id: Int? = nil, name: String? = nil) {
           self.links = links
-          self.createdAt = .init(date: createdAt)
+          self.createdAt = createdAt
           self.createdBy = createdBy
           self.fileCount = fileCount
           self.id = id
@@ -223,7 +223,7 @@ public extension FileManager {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

@@ -8,9 +8,9 @@ public extension Reports {
    Get a specific list member's activity in a campaign including opens, clicks, and bounces.
    */
   enum GetReportsIdEmailActivityId {
-    public static let service = APIService<Response>(id: "getReportsIdEmailActivityId", tag: "reports", method: "GET", path: "/reports/{campaign_id}/email-activity/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getReportsIdEmailActivityId", tag: "reports", method: "GET", path: "/reports/{campaign_id}/email-activity/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -68,7 +68,7 @@ public extension Reports {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces. */
       public struct Status200: Model {
@@ -159,7 +159,7 @@ public extension Reports {
           public var ip: String?
 
           /** The date and time recorded for the action in ISO 8601 format. */
-          public var timestamp: DateTime
+          public var timestamp: Date?
 
           /** If the action is a 'bounce', the type of bounce received: 'hard', 'soft'. */
           public var type: String?
@@ -170,7 +170,7 @@ public extension Reports {
           public init(action: String? = nil, ip: String? = nil, timestamp: Date? = nil, type: String? = nil, url: String? = nil) {
             self.action = action
             self.ip = ip
-            self.timestamp = .init(date: timestamp)
+            self.timestamp = timestamp
             self.type = type
             self.url = url
           }
@@ -300,7 +300,7 @@ public extension Reports {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

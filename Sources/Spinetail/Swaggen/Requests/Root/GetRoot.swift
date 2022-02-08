@@ -8,9 +8,9 @@ public extension Root {
    Get links to all other resources available in the API.
    */
   enum GetRoot {
-    public static let service = APIService<Response>(id: "getRoot", tag: "root", method: "GET", path: "/", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getRoot", tag: "root", method: "GET", path: "/", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -49,7 +49,7 @@ public extension Root {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** The API root resource links to all other resources available in the API. */
       public struct Status200: Model {
@@ -88,13 +88,13 @@ public extension Root {
         public var firstName: String?
 
         /** Date of first payment for monthly plans. */
-        public var firstPayment: DateTime
+        public var firstPayment: Date?
 
         /** The [average campaign statistics](https://mailchimp.com/resources/research/email-marketing-benchmarks/?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs) for all campaigns in the account's specified industry. */
         public var industryStats: IndustryStats?
 
         /** The date and time of the last login for this account in ISO 8601 format. */
-        public var lastLogin: DateTime
+        public var lastLogin: Date?
 
         /** The last name tied to the account. */
         public var lastName: String?
@@ -103,7 +103,7 @@ public extension Root {
         public var loginId: String?
 
         /** The date and time that the account was created in ISO 8601 format. */
-        public var memberSince: DateTime
+        public var memberSince: Date?
 
         /** The type of pricing plan the account is on. */
         public var pricingPlanType: PricingPlanType?
@@ -279,12 +279,12 @@ public extension Root {
           self.contact = contact
           self.email = email
           self.firstName = firstName
-          self.firstPayment = .init(date: firstPayment)
+          self.firstPayment = firstPayment
           self.industryStats = industryStats
-          self.lastLogin = .init(date: lastLogin)
+          self.lastLogin = lastLogin
           self.lastName = lastName
           self.loginId = loginId
-          self.memberSince = .init(date: memberSince)
+          self.memberSince = memberSince
           self.pricingPlanType = pricingPlanType
           self.proEnabled = proEnabled
           self.role = role
@@ -412,7 +412,7 @@ public extension Root {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

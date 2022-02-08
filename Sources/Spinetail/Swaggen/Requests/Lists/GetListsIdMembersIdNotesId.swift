@@ -8,9 +8,9 @@ public extension Lists {
    Get a specific note for a specific list member.
    */
   enum GetListsIdMembersIdNotesId {
-    public static let service = APIService<Response>(id: "getListsIdMembersIdNotesId", tag: "lists", method: "GET", path: "/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getListsIdMembersIdNotesId", tag: "lists", method: "GET", path: "/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** The unique ID for the list. */
         public var listId: String
@@ -65,7 +65,7 @@ public extension Lists {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A specific note for a specific member. */
       public struct Status200: Model {
@@ -73,7 +73,7 @@ public extension Lists {
         public var links: [Links]?
 
         /** The date and time the note was created in ISO 8601 format. */
-        public var createdAt: DateTime
+        public var createdAt: Date?
 
         /** The author of the note. */
         public var createdBy: String?
@@ -91,7 +91,7 @@ public extension Lists {
         public var note: String?
 
         /** The date and time the note was last updated in ISO 8601 format. */
-        public var updatedAt: DateTime
+        public var updatedAt: Date?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
         public struct Links: Model {
@@ -152,13 +152,13 @@ public extension Lists {
 
         public init(links: [Links]? = nil, createdAt: Date? = nil, createdBy: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, note: String? = nil, updatedAt: Date? = nil) {
           self.links = links
-          self.createdAt = .init(date: createdAt)
+          self.createdAt = createdAt
           self.createdBy = createdBy
           self.emailId = emailId
           self.id = id
           self.listId = listId
           self.note = note
-          self.updatedAt = .init(date: updatedAt)
+          self.updatedAt = updatedAt
         }
 
         public init(from decoder: Decoder) throws {
@@ -257,7 +257,7 @@ public extension Lists {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

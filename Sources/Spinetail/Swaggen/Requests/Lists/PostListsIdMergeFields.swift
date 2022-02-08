@@ -8,7 +8,7 @@ public extension Lists {
    Add a new merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a specific list.
    */
   enum PostListsIdMergeFields {
-    public static let service = APIService<Response>(id: "postListsIdMergeFields", tag: "lists", method: "POST", path: "/lists/{list_id}/merge-fields", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "postListsIdMergeFields", tag: "lists", method: "POST", path: "/lists/{list_id}/merge-fields", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** The [type](https://mailchimp.com/help/manage-audience-signup-form-fields/#Audience_field_types) for the merge field. */
     public enum `Type`: String, Codable, Equatable, CaseIterable {
@@ -25,7 +25,7 @@ public extension Lists {
       case zip
     }
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list. */
       public struct Body: Model {
         /** The [type](https://mailchimp.com/help/manage-audience-signup-form-fields/#Audience_field_types) for the merge field. */
@@ -189,7 +189,7 @@ public extension Lists {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list. */
       public struct Status200: Model {
@@ -466,7 +466,7 @@ public extension Lists {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

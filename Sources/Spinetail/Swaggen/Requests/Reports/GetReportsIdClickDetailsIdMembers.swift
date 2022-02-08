@@ -8,9 +8,9 @@ public extension Reports {
    Get information about list members who clicked on a specific link in a campaign.
    */
   enum GetReportsIdClickDetailsIdMembers {
-    public static let service = APIService<Response>(id: "getReportsIdClickDetailsIdMembers", tag: "reports", method: "GET", path: "/reports/{campaign_id}/click-details/{link_id}/members", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getReportsIdClickDetailsIdMembers", tag: "reports", method: "GET", path: "/reports/{campaign_id}/click-details/{link_id}/members", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -75,7 +75,7 @@ public extension Reports {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A collection of members who clicked on a specific link within a campaign. */
       public struct Status200: Model {
@@ -175,7 +175,7 @@ public extension Reports {
           public var listIsActive: Bool?
 
           /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-          public var mergeFields: [String: CodableAny]?
+          public var mergeFields: [String: AnyCodable]?
 
           /** The id for the tracked URL in the campaign. */
           public var uRLId: String?
@@ -240,7 +240,7 @@ public extension Reports {
             }
           }
 
-          public init(links: [Links]? = nil, campaignId: String? = nil, clicks: Int? = nil, contactStatus: String? = nil, emailAddress: String? = nil, emailId: String? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: CodableAny]? = nil, uRLId: String? = nil, vip: Bool? = nil) {
+          public init(links: [Links]? = nil, campaignId: String? = nil, clicks: Int? = nil, contactStatus: String? = nil, emailAddress: String? = nil, emailId: String? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: AnyCodable]? = nil, uRLId: String? = nil, vip: Bool? = nil) {
             self.links = links
             self.campaignId = campaignId
             self.clicks = clicks
@@ -382,7 +382,7 @@ public extension Reports {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

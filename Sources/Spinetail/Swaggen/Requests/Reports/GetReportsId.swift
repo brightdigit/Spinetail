@@ -8,9 +8,9 @@ public extension Reports {
    Get report details for a specific sent campaign.
    */
   enum GetReportsId {
-    public static let service = APIService<Response>(id: "getReportsId", tag: "reports", method: "GET", path: "/reports/{campaign_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getReportsId", tag: "reports", method: "GET", path: "/reports/{campaign_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -57,7 +57,7 @@ public extension Reports {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Report details about a sent campaign. */
       public struct Status200: Model {
@@ -119,10 +119,10 @@ public extension Reports {
         public var previewText: String?
 
         /** For RSS campaigns, the date and time of the last send in ISO 8601 format. */
-        public var rssLastSend: DateTime
+        public var rssLastSend: Date?
 
         /** The date and time a campaign was sent in ISO 8601 format. */
-        public var sendTime: DateTime
+        public var sendTime: Date?
 
         /** The url and password for the [VIP report](https://mailchimp.com/help/share-a-campaign-report/). */
         public var shareReport: ShareReport?
@@ -410,7 +410,7 @@ public extension Reports {
           public var clicksTotal: Int?
 
           /** The date and time of the last recorded click for the campaign in ISO 8601 format. */
-          public var lastClick: DateTime
+          public var lastClick: Date?
 
           /** The total number of unique clicks for links across a campaign. */
           public var uniqueClicks: Int?
@@ -421,7 +421,7 @@ public extension Reports {
           public init(clickRate: Double? = nil, clicksTotal: Int? = nil, lastClick: Date? = nil, uniqueClicks: Int? = nil, uniqueSubscriberClicks: Int? = nil) {
             self.clickRate = clickRate
             self.clicksTotal = clicksTotal
-            self.lastClick = .init(date: lastClick)
+            self.lastClick = lastClick
             self.uniqueClicks = uniqueClicks
             self.uniqueSubscriberClicks = uniqueSubscriberClicks
           }
@@ -703,7 +703,7 @@ public extension Reports {
         /** An object describing the open activity for the campaign. */
         public struct Opens: Model {
           /** The date and time of the last recorded open in ISO 8601 format. */
-          public var lastOpen: DateTime
+          public var lastOpen: Date?
 
           /** The number of unique opens divided by the total number of successful deliveries. */
           public var openRate: Double?
@@ -715,7 +715,7 @@ public extension Reports {
           public var uniqueOpens: Int?
 
           public init(lastOpen: Date? = nil, openRate: Double? = nil, opensTotal: Int? = nil, uniqueOpens: Int? = nil) {
-            self.lastOpen = .init(date: lastOpen)
+            self.lastOpen = lastOpen
             self.openRate = openRate
             self.opensTotal = opensTotal
             self.uniqueOpens = uniqueOpens
@@ -777,7 +777,7 @@ public extension Reports {
           public var recipientsClicks: Int?
 
           /** The date and time for the series in ISO 8601 format. */
-          public var timestamp: DateTime
+          public var timestamp: Date?
 
           /** The number of unique opens in the timeseries. */
           public var uniqueOpens: Int?
@@ -785,7 +785,7 @@ public extension Reports {
           public init(emailsSent: Int? = nil, recipientsClicks: Int? = nil, timestamp: Date? = nil, uniqueOpens: Int? = nil) {
             self.emailsSent = emailsSent
             self.recipientsClicks = recipientsClicks
-            self.timestamp = .init(date: timestamp)
+            self.timestamp = timestamp
             self.uniqueOpens = uniqueOpens
           }
 
@@ -820,10 +820,10 @@ public extension Reports {
           public var gmtOffset: Int?
 
           /** The date and time of the last click in ISO 8601 format. */
-          public var lastClick: DateTime
+          public var lastClick: Date?
 
           /** The date and time of the last open in ISO 8601 format. */
-          public var lastOpen: DateTime
+          public var lastOpen: Date?
 
           /** The number of opens. */
           public var opens: Int?
@@ -838,8 +838,8 @@ public extension Reports {
             self.bounces = bounces
             self.clicks = clicks
             self.gmtOffset = gmtOffset
-            self.lastClick = .init(date: lastClick)
-            self.lastOpen = .init(date: lastOpen)
+            self.lastClick = lastClick
+            self.lastOpen = lastOpen
             self.opens = opens
             self.uniqueClicks = uniqueClicks
             self.uniqueOpens = uniqueOpens
@@ -892,8 +892,8 @@ public extension Reports {
           self.listStats = listStats
           self.opens = opens
           self.previewText = previewText
-          self.rssLastSend = .init(date: rssLastSend)
-          self.sendTime = .init(date: sendTime)
+          self.rssLastSend = rssLastSend
+          self.sendTime = sendTime
           self.shareReport = shareReport
           self.subjectLine = subjectLine
           self.timeseries = timeseries
@@ -1036,7 +1036,7 @@ public extension Reports {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

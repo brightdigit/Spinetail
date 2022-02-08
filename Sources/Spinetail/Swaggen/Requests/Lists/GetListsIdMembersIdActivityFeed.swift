@@ -8,9 +8,9 @@ public extension Lists {
    Get a member's activity on a specific list, including opens, clicks, and unsubscribes.
    */
   enum GetListsIdMembersIdActivityFeed {
-    public static let service = APIService<Response>(id: "getListsIdMembersIdActivityFeed", tag: "lists", method: "GET", path: "/lists/{list_id}/members/{subscriber_hash}/activity-feed", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getListsIdMembersIdActivityFeed", tag: "lists", method: "GET", path: "/lists/{list_id}/members/{subscriber_hash}/activity-feed", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** The unique ID for the list. */
         public var listId: String
@@ -82,7 +82,7 @@ public extension Lists {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** The member activity events for a given member. */
       public struct Status200: Model {
@@ -90,7 +90,7 @@ public extension Lists {
         public var links: [Links]?
 
         /** An array of objects, each representing a contact event. There are multiple possible types, see the [activity schema documentation](https://mailchimp.com/developer/marketing/docs/alternative-schemas/#activity-schemas). */
-        public var activity: [[String: CodableAny]]?
+        public var activity: [[String: AnyCodable]]?
 
         /** The MD5 hash of the lowercase version of the list member's email address. */
         public var emailId: String?
@@ -155,7 +155,7 @@ public extension Lists {
           }
         }
 
-        public init(links: [Links]? = nil, activity: [[String: CodableAny]]? = nil, emailId: String? = nil, listId: String? = nil) {
+        public init(links: [Links]? = nil, activity: [[String: AnyCodable]]? = nil, emailId: String? = nil, listId: String? = nil) {
           self.links = links
           self.activity = activity
           self.emailId = emailId
@@ -250,7 +250,7 @@ public extension Lists {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

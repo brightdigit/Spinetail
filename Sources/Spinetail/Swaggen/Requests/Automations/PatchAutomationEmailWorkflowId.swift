@@ -8,9 +8,9 @@ public extension Automations {
    Update settings for a classic automation workflow email
    */
   enum PatchAutomationEmailWorkflowId {
-    public static let service = APIService<Response>(id: "patchAutomationEmailWorkflowId", tag: "automations", method: "PATCH", path: "/automations/{workflow_id}/emails/{workflow_email_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "patchAutomationEmailWorkflowId", tag: "automations", method: "PATCH", path: "/automations/{workflow_id}/emails/{workflow_email_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** Update information about an individual Automation workflow email. */
       public struct Body: Model {
         /** The delay settings for an automation email. */
@@ -181,7 +181,7 @@ public extension Automations {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A summary of an individual Automation workflow email. */
       public struct Status200: Model {
@@ -202,7 +202,7 @@ public extension Automations {
         public var contentType: String?
 
         /** The date and time the campaign was created in ISO 8601 format. */
-        public var createTime: DateTime
+        public var createTime: Date?
 
         /** The delay settings for an Automation email. */
         public var delay: Delay?
@@ -229,7 +229,7 @@ public extension Automations {
         public var reportSummary: ReportSummary?
 
         /**  The date and time a campaign was sent in ISO 8601 format */
-        public var sendTime: DateTime
+        public var sendTime: Date?
 
         /** Settings for the campaign including the email subject, from name, and from email address. */
         public var settings: Settings?
@@ -238,7 +238,7 @@ public extension Automations {
         public var socialCard: SocialCard?
 
         /** The date and time the campaign was started in ISO 8601 format. */
-        public var startTime: DateTime
+        public var startTime: Date?
 
         /** The current status of the campaign. */
         public var status: Status?
@@ -444,7 +444,7 @@ public extension Automations {
             }
 
             /** Segment match conditions. There are multiple possible types, see the [condition types documentation](https://mailchimp.com/developer/marketing/docs/alternative-schemas/#segment-condition-schemas). */
-            public var conditions: [[String: CodableAny]]?
+            public var conditions: [[String: AnyCodable]]?
 
             /** Segment match type. */
             public var match: Match?
@@ -455,7 +455,7 @@ public extension Automations {
             /** The id for an existing saved segment. */
             public var savedSegmentId: Int?
 
-            public init(conditions: [[String: CodableAny]]? = nil, match: Match? = nil, prebuiltSegmentId: String? = nil, savedSegmentId: Int? = nil) {
+            public init(conditions: [[String: AnyCodable]]? = nil, match: Match? = nil, prebuiltSegmentId: String? = nil, savedSegmentId: Int? = nil) {
               self.conditions = conditions
               self.match = match
               self.prebuiltSegmentId = prebuiltSegmentId
@@ -946,7 +946,7 @@ public extension Automations {
           self.links = links
           self.archiveURL = archiveURL
           self.contentType = contentType
-          self.createTime = .init(date: createTime)
+          self.createTime = createTime
           self.delay = delay
           self.emailsSent = emailsSent
           self.hasLogoMergeTag = hasLogoMergeTag
@@ -955,10 +955,10 @@ public extension Automations {
           self.position = position
           self.recipients = recipients
           self.reportSummary = reportSummary
-          self.sendTime = .init(date: sendTime)
+          self.sendTime = sendTime
           self.settings = settings
           self.socialCard = socialCard
-          self.startTime = .init(date: startTime)
+          self.startTime = startTime
           self.status = status
           self.tracking = tracking
           self.triggerSettings = triggerSettings
@@ -1088,7 +1088,7 @@ public extension Automations {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

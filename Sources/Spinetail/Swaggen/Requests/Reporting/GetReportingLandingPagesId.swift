@@ -8,9 +8,9 @@ public extension Reporting {
    Get report of a landing page.
    */
   enum GetReportingLandingPagesId {
-    public static let service = APIService<Response>(id: "getReportingLandingPagesId", tag: "reporting", method: "GET", path: "/reporting/landing-pages/{outreach_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getReportingLandingPagesId", tag: "reporting", method: "GET", path: "/reporting/landing-pages/{outreach_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -57,7 +57,7 @@ public extension Reporting {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A summary of an individual landing page's settings and content. */
       public struct Status200: Model {
@@ -85,7 +85,7 @@ public extension Reporting {
         public var name: String?
 
         /** The time this landing page was published. */
-        public var publishedAt: DateTime
+        public var publishedAt: Date?
 
         /** A list of tags associated to the landing page. */
         public var signupTags: [SignupTags]?
@@ -105,7 +105,7 @@ public extension Reporting {
         public var uniqueVisits: Int?
 
         /** The time this landing page was unpublished. */
-        public var unpublishedAt: DateTime
+        public var unpublishedAt: Date?
 
         /** The landing page url. */
         public var url: String?
@@ -498,14 +498,14 @@ public extension Reporting {
           self.listId = listId
           self.listName = listName
           self.name = name
-          self.publishedAt = .init(date: publishedAt)
+          self.publishedAt = publishedAt
           self.signupTags = signupTags
           self.status = status
           self.subscribes = subscribes
           self.timeseries = timeseries
           self.title = title
           self.uniqueVisits = uniqueVisits
-          self.unpublishedAt = .init(date: unpublishedAt)
+          self.unpublishedAt = unpublishedAt
           self.url = url
           self.visits = visits
           self.webId = webId
@@ -631,7 +631,7 @@ public extension Reporting {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

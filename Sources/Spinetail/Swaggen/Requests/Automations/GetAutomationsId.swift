@@ -8,9 +8,9 @@ public extension Automations {
    Get a summary of an individual classic automation workflow's settings and content. The `trigger_settings` object returns information for the first email in the workflow.
    */
   enum GetAutomationsId {
-    public static let service = APIService<Response>(id: "getAutomationsId", tag: "automations", method: "GET", path: "/automations/{workflow_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getAutomationsId", tag: "automations", method: "GET", path: "/automations/{workflow_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -57,7 +57,7 @@ public extension Automations {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A summary of an individual Automation workflow's settings and content. */
       public struct Status200: Model {
@@ -72,7 +72,7 @@ public extension Automations {
         public var links: [Links]?
 
         /** The date and time the Automation was created in ISO 8601 format. */
-        public var createTime: DateTime
+        public var createTime: Date?
 
         /** The total number of emails sent for the Automation. */
         public var emailsSent: Int?
@@ -90,7 +90,7 @@ public extension Automations {
         public var settings: Settings?
 
         /** The date and time the Automation was started in ISO 8601 format. */
-        public var startTime: DateTime
+        public var startTime: Date?
 
         /** The current status of the Automation. */
         public var status: Status?
@@ -184,7 +184,7 @@ public extension Automations {
             }
 
             /** Segment match conditions. There are multiple possible types, see the [condition types documentation](https://mailchimp.com/developer/marketing/docs/alternative-schemas/#segment-condition-schemas). */
-            public var conditions: [[String: CodableAny]]?
+            public var conditions: [[String: AnyCodable]]?
 
             /** Segment match type. */
             public var match: Match?
@@ -192,7 +192,7 @@ public extension Automations {
             /** The id for an existing saved segment. */
             public var savedSegmentId: Int?
 
-            public init(conditions: [[String: CodableAny]]? = nil, match: Match? = nil, savedSegmentId: Int? = nil) {
+            public init(conditions: [[String: AnyCodable]]? = nil, match: Match? = nil, savedSegmentId: Int? = nil) {
               self.conditions = conditions
               self.match = match
               self.savedSegmentId = savedSegmentId
@@ -611,13 +611,13 @@ public extension Automations {
 
         public init(links: [Links]? = nil, createTime: Date? = nil, emailsSent: Int? = nil, id: String? = nil, recipients: Recipients? = nil, reportSummary: ReportSummary? = nil, settings: Settings? = nil, startTime: Date? = nil, status: Status? = nil, tracking: Tracking? = nil, triggerSettings: TriggerSettings? = nil) {
           self.links = links
-          self.createTime = .init(date: createTime)
+          self.createTime = createTime
           self.emailsSent = emailsSent
           self.id = id
           self.recipients = recipients
           self.reportSummary = reportSummary
           self.settings = settings
-          self.startTime = .init(date: startTime)
+          self.startTime = startTime
           self.status = status
           self.tracking = tracking
           self.triggerSettings = triggerSettings
@@ -725,7 +725,7 @@ public extension Automations {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

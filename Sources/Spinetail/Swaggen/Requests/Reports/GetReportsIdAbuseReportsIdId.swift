@@ -8,9 +8,9 @@ public extension Reports {
    Get information about a specific abuse report for a campaign.
    */
   enum GetReportsIdAbuseReportsIdId {
-    public static let service = APIService<Response>(id: "getReportsIdAbuseReportsIdId", tag: "reports", method: "GET", path: "/reports/{campaign_id}/abuse-reports/{report_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getReportsIdAbuseReportsIdId", tag: "reports", method: "GET", path: "/reports/{campaign_id}/abuse-reports/{report_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -61,7 +61,7 @@ public extension Reports {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program. */
       public struct Status200: Model {
@@ -72,7 +72,7 @@ public extension Reports {
         public var campaignId: String?
 
         /** Date for the abuse report */
-        public var date: DateTime
+        public var date: Date?
 
         /** Email address for a subscriber. */
         public var emailAddress: String?
@@ -90,7 +90,7 @@ public extension Reports {
         public var listIsActive: Bool?
 
         /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-        public var mergeFields: [String: CodableAny]?
+        public var mergeFields: [String: AnyCodable]?
 
         /** [VIP status](https://mailchimp.com/help/designate-and-send-to-vip-contacts/) for subscriber. */
         public var vip: Bool?
@@ -152,10 +152,10 @@ public extension Reports {
           }
         }
 
-        public init(links: [Links]? = nil, campaignId: String? = nil, date: Date? = nil, emailAddress: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: CodableAny]? = nil, vip: Bool? = nil) {
+        public init(links: [Links]? = nil, campaignId: String? = nil, date: Date? = nil, emailAddress: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: AnyCodable]? = nil, vip: Bool? = nil) {
           self.links = links
           self.campaignId = campaignId
-          self.date = .init(date: date)
+          self.date = date
           self.emailAddress = emailAddress
           self.emailId = emailId
           self.id = id
@@ -265,7 +265,7 @@ public extension Reports {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

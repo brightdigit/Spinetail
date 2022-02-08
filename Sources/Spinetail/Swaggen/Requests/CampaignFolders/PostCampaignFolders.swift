@@ -8,9 +8,9 @@ public extension CampaignFolders {
    Create a new campaign folder.
    */
   enum PostCampaignFolders {
-    public static let service = APIService<Response>(id: "postCampaignFolders", tag: "campaignFolders", method: "POST", path: "/campaign-folders", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "postCampaignFolders", tag: "campaignFolders", method: "POST", path: "/campaign-folders", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** A folder used to organize campaigns. */
       public struct Body: Model {
         /** Name to associate with the folder. */
@@ -43,7 +43,7 @@ public extension CampaignFolders {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A folder used to organize campaigns. */
       public struct Status200: Model {
@@ -211,7 +211,7 @@ public extension CampaignFolders {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

@@ -8,9 +8,9 @@ public extension Lists {
    Search for tags on a list by name. If no name is provided, will return all tags on the list.
    */
   enum SearchTagsByName {
-    public static let service = APIService<Response>(id: "searchTagsByName", tag: "lists", method: "GET", path: "/lists/{list_id}/tag-search", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "searchTagsByName", tag: "lists", method: "GET", path: "/lists/{list_id}/tag-search", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** The unique ID for the list. */
         public var listId: String
@@ -50,7 +50,7 @@ public extension Lists {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A list of tags matching the input query. */
       public struct Status200: Model {
@@ -177,7 +177,7 @@ public extension Lists {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

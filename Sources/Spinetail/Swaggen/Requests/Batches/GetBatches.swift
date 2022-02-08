@@ -8,9 +8,9 @@ public extension Batches {
    Get a summary of batch requests that have been made.
    */
   enum GetBatches {
-    public static let service = APIService<Response>(id: "getBatches", tag: "batches", method: "GET", path: "/batches", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getBatches", tag: "batches", method: "GET", path: "/batches", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -63,7 +63,7 @@ public extension Batches {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A summary of batch requests that have been made. */
       public struct Status200: Model {
@@ -148,7 +148,7 @@ public extension Batches {
           public var links: [Links]?
 
           /** The date and time when all operations in the batch request completed in ISO 8601 format. */
-          public var completedAt: DateTime
+          public var completedAt: Date?
 
           /** The number of completed operations that returned an error. */
           public var erroredOperations: Int?
@@ -166,7 +166,7 @@ public extension Batches {
           public var status: Status?
 
           /** The date and time when the server received the batch request in ISO 8601 format. */
-          public var submittedAt: DateTime
+          public var submittedAt: Date?
 
           /** The total number of operations to complete as part of this batch request. For GET requests requiring pagination, each page counts as a separate operation. */
           public var totalOperations: Int?
@@ -230,13 +230,13 @@ public extension Batches {
 
           public init(links: [Links]? = nil, completedAt: Date? = nil, erroredOperations: Int? = nil, finishedOperations: Int? = nil, id: String? = nil, responseBodyURL: String? = nil, status: Status? = nil, submittedAt: Date? = nil, totalOperations: Int? = nil) {
             self.links = links
-            self.completedAt = .init(date: completedAt)
+            self.completedAt = completedAt
             self.erroredOperations = erroredOperations
             self.finishedOperations = finishedOperations
             self.id = id
             self.responseBodyURL = responseBodyURL
             self.status = status
-            self.submittedAt = .init(date: submittedAt)
+            self.submittedAt = submittedAt
             self.totalOperations = totalOperations
           }
 
@@ -250,6 +250,7 @@ public extension Batches {
             id = try container.decodeIfPresent("id")
             responseBodyURL = try container.decodeIfPresent("response_body_url")
             status = try container.decodeIfPresent("status")
+
             submittedAt = try container.decodeIfPresent("submitted_at")
             totalOperations = try container.decodeIfPresent("total_operations")
           }
@@ -361,7 +362,7 @@ public extension Batches {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

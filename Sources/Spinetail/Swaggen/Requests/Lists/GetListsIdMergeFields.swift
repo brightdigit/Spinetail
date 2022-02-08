@@ -8,9 +8,9 @@ public extension Lists {
    Get a list of all merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
    */
   enum GetListsIdMergeFields {
-    public static let service = APIService<Response>(id: "getListsIdMergeFields", tag: "lists", method: "GET", path: "/lists/{list_id}/merge-fields", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getListsIdMergeFields", tag: "lists", method: "GET", path: "/lists/{list_id}/merge-fields", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** The unique ID for the list. */
         public var listId: String
@@ -85,7 +85,7 @@ public extension Lists {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience. */
       public struct Status200: Model {
@@ -459,7 +459,7 @@ public extension Lists {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

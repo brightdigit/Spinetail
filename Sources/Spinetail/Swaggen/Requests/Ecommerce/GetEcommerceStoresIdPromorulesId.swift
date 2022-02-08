@@ -8,9 +8,9 @@ public extension Ecommerce {
    Get information about a specific promo rule.
    */
   enum GetEcommerceStoresIdPromorulesId {
-    public static let service = APIService<Response>(id: "getEcommerceStoresIdPromorulesId", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getEcommerceStoresIdPromorulesId", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -61,7 +61,7 @@ public extension Ecommerce {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Information about an Ecommerce Store's specific Promo Rule */
       public struct Status200: Model {
@@ -85,7 +85,7 @@ public extension Ecommerce {
         public var amount: Float?
 
         /** The date and time the promotion was created in ISO 8601 format. */
-        public var createdAtForeign: DateTime
+        public var createdAtForeign: Date?
 
         /** The description of a promotion restricted to UTF-8 characters with max length 255. */
         public var description: String?
@@ -100,7 +100,7 @@ public extension Ecommerce {
         public var id: String?
 
         /** The date and time when the promotion is in effect in ISO 8601 format. */
-        public var startsAt: DateTime
+        public var startsAt: Date?
 
         /** The target that the discount applies to. */
         public var target: Target?
@@ -112,7 +112,7 @@ public extension Ecommerce {
         public var type: `Type`?
 
         /** The date and time the promotion was updated in ISO 8601 format. */
-        public var updatedAtForeign: DateTime
+        public var updatedAtForeign: Date?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
         public struct Links: Model {
@@ -174,16 +174,16 @@ public extension Ecommerce {
         public init(links: [Links]? = nil, amount: Float? = nil, createdAtForeign: Date? = nil, description: String? = nil, enabled: Bool? = nil, endsAt: String? = nil, id: String? = nil, startsAt: Date? = nil, target: Target? = nil, title: String? = nil, type: Type? = nil, updatedAtForeign: Date? = nil) {
           self.links = links
           self.amount = amount
-          self.createdAtForeign = .init(date: createdAtForeign)
+          self.createdAtForeign = createdAtForeign
           self.description = description
           self.enabled = enabled
           self.endsAt = endsAt
           self.id = id
-          self.startsAt = .init(date: startsAt)
+          self.startsAt = startsAt
           self.target = target
           self.title = title
           self.type = type
-          self.updatedAtForeign = .init(date: updatedAtForeign)
+          self.updatedAtForeign = updatedAtForeign
         }
 
         public init(from decoder: Decoder) throws {
@@ -290,7 +290,7 @@ public extension Ecommerce {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

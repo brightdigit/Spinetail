@@ -8,9 +8,9 @@ public extension Lists {
    Update a specific segment in a list.
    */
   enum PatchListsIdSegmentsId {
-    public static let service = APIService<Response>(id: "patchListsIdSegmentsId", tag: "lists", method: "PATCH", path: "/lists/{list_id}/segments/{segment_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "patchListsIdSegmentsId", tag: "lists", method: "PATCH", path: "/lists/{list_id}/segments/{segment_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** Information about a specific list segment. */
       public struct Body: Model {
         /** The name of the segment. */
@@ -31,12 +31,12 @@ public extension Lists {
           }
 
           /** An array of segment conditions. */
-          public var conditions: [[[String: CodableAny]]]?
+          public var conditions: [[[String: AnyCodable]]]?
 
           /** Match type. */
           public var match: Match?
 
-          public init(conditions: [[[String: CodableAny]]]? = nil, match: Match? = nil) {
+          public init(conditions: [[[String: AnyCodable]]]? = nil, match: Match? = nil) {
             self.conditions = conditions
             self.match = match
           }
@@ -115,7 +115,7 @@ public extension Lists {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Information about a specific segment. */
       public struct Status200: Model {
@@ -130,7 +130,7 @@ public extension Lists {
         public var links: [Links]?
 
         /** The date and time the segment was created in ISO 8601 format. */
-        public var createdAt: DateTime
+        public var createdAt: Date?
 
         /** The unique id for the segment. */
         public var id: Int?
@@ -151,7 +151,7 @@ public extension Lists {
         public var type: `Type`?
 
         /** The date and time the segment was last updated in ISO 8601 format. */
-        public var updatedAt: DateTime
+        public var updatedAt: Date?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
         public struct Links: Model {
@@ -219,12 +219,12 @@ public extension Lists {
           }
 
           /** Segment match conditions. There are multiple possible types, see the [condition types documentation](https://mailchimp.com/developer/marketing/docs/alternative-schemas/#segment-condition-schemas). */
-          public var conditions: [[String: CodableAny]]?
+          public var conditions: [[String: AnyCodable]]?
 
           /** Match type. */
           public var match: Match?
 
-          public init(conditions: [[String: CodableAny]]? = nil, match: Match? = nil) {
+          public init(conditions: [[String: AnyCodable]]? = nil, match: Match? = nil) {
             self.conditions = conditions
             self.match = match
           }
@@ -246,14 +246,14 @@ public extension Lists {
 
         public init(links: [Links]? = nil, createdAt: Date? = nil, id: Int? = nil, listId: String? = nil, memberCount: Int? = nil, name: String? = nil, options: Options? = nil, type: Type? = nil, updatedAt: Date? = nil) {
           self.links = links
-          self.createdAt = .init(date: createdAt)
+          self.createdAt = createdAt
           self.id = id
           self.listId = listId
           self.memberCount = memberCount
           self.name = name
           self.options = options
           self.type = type
-          self.updatedAt = .init(date: updatedAt)
+          self.updatedAt = updatedAt
         }
 
         public init(from decoder: Decoder) throws {
@@ -354,7 +354,7 @@ public extension Lists {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

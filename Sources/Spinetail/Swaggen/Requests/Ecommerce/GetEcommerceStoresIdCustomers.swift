@@ -8,9 +8,9 @@ public extension Ecommerce {
    Get information about a store's customers.
    */
   enum GetEcommerceStoresIdCustomers {
-    public static let service = APIService<Response>(id: "getEcommerceStoresIdCustomers", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/customers", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getEcommerceStoresIdCustomers", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/customers", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -78,7 +78,7 @@ public extension Ecommerce {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A collection of the store's customers. */
       public struct Status200: Model {
@@ -163,7 +163,7 @@ public extension Ecommerce {
           public var company: String?
 
           /** The date and time the customer was created in ISO 8601 format. */
-          public var createdAt: DateTime
+          public var createdAt: Date?
 
           /** The customer's email address. */
           public var emailAddress: String?
@@ -187,7 +187,7 @@ public extension Ecommerce {
           public var totalSpent: Double?
 
           /** The date and time the customer was last updated in ISO 8601 format. */
-          public var updatedAt: DateTime
+          public var updatedAt: Date?
 
           /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
           public struct Links: Model {
@@ -314,7 +314,7 @@ public extension Ecommerce {
             self.links = links
             self.address = address
             self.company = company
-            self.createdAt = .init(date: createdAt)
+            self.createdAt = createdAt
             self.emailAddress = emailAddress
             self.firstName = firstName
             self.id = id
@@ -322,7 +322,7 @@ public extension Ecommerce {
             self.optInStatus = optInStatus
             self.ordersCount = ordersCount
             self.totalSpent = totalSpent
-            self.updatedAt = .init(date: updatedAt)
+            self.updatedAt = updatedAt
           }
 
           public init(from decoder: Decoder) throws {
@@ -455,7 +455,7 @@ public extension Ecommerce {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

@@ -8,9 +8,9 @@ public extension Reports {
    Get a summary of social activity for the campaign, tracked by EepURL.
    */
   enum GetReportsIdEepurl {
-    public static let service = APIService<Response>(id: "getReportsIdEepurl", tag: "reports", method: "GET", path: "/reports/{campaign_id}/eepurl", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getReportsIdEepurl", tag: "reports", method: "GET", path: "/reports/{campaign_id}/eepurl", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -57,7 +57,7 @@ public extension Reports {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A summary of social activity for the campaign, tracked by EepURL. */
       public struct Status200: Model {
@@ -145,10 +145,10 @@ public extension Reports {
           public var clicks: Int?
 
           /** The timestamp for the first click to the URL. */
-          public var firstClick: DateTime
+          public var firstClick: Date?
 
           /** The timestamp for the last click to the URL. */
-          public var lastClick: DateTime
+          public var lastClick: Date?
 
           /** A summary of the top click locations. */
           public var locations: [Locations]?
@@ -183,8 +183,8 @@ public extension Reports {
 
           public init(clicks: Int? = nil, firstClick: Date? = nil, lastClick: Date? = nil, locations: [Locations]? = nil) {
             self.clicks = clicks
-            self.firstClick = .init(date: firstClick)
-            self.lastClick = .init(date: lastClick)
+            self.firstClick = firstClick
+            self.lastClick = lastClick
             self.locations = locations
           }
 
@@ -213,18 +213,18 @@ public extension Reports {
           public var clicks: Int?
 
           /** The timestamp for the first click from this referrer. */
-          public var firstClick: DateTime
+          public var firstClick: Date?
 
           /** The timestamp for the last click from this referrer. */
-          public var lastClick: DateTime
+          public var lastClick: Date?
 
           /** A referrer (truncated to 100 bytes). */
           public var referrer: String?
 
           public init(clicks: Int? = nil, firstClick: Date? = nil, lastClick: Date? = nil, referrer: String? = nil) {
             self.clicks = clicks
-            self.firstClick = .init(date: firstClick)
-            self.lastClick = .init(date: lastClick)
+            self.firstClick = firstClick
+            self.lastClick = lastClick
             self.referrer = referrer
           }
 
@@ -267,7 +267,7 @@ public extension Reports {
           /** An individual tweet. */
           public struct Statuses: Model {
             /** A timestamp for the tweet. */
-            public var datetime: DateTime
+            public var datetime: Date?
 
             /** A 'true' or 'false' status of whether the tweet is a retweet. */
             public var isRetweet: Bool?
@@ -282,7 +282,7 @@ public extension Reports {
             public var statusId: String?
 
             public init(datetime: Date? = nil, isRetweet: Bool? = nil, screenName: String? = nil, status: String? = nil, statusId: String? = nil) {
-              self.datetime = .init(date: datetime)
+              self.datetime = datetime
               self.isRetweet = isRetweet
               self.screenName = screenName
               self.status = status
@@ -443,7 +443,7 @@ public extension Reports {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

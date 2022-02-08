@@ -8,9 +8,9 @@ public extension LandingPages {
    Get information about a specific page.
    */
   enum GetLandingPageId {
-    public static let service = APIService<Response>(id: "getLandingPageId", tag: "landingPages", method: "GET", path: "/landing-pages/{page_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getLandingPageId", tag: "landingPages", method: "GET", path: "/landing-pages/{page_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -57,7 +57,7 @@ public extension LandingPages {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A summary of an individual landing page's settings and content. */
       public struct Status200: Model {
@@ -72,7 +72,7 @@ public extension LandingPages {
         public var links: [Links]?
 
         /** The time this landing page was created. */
-        public var createdAt: DateTime
+        public var createdAt: Date?
 
         /** Created by mobile or web */
         public var createdBySource: String?
@@ -90,7 +90,7 @@ public extension LandingPages {
         public var name: String?
 
         /** The time this landing page was published. */
-        public var publishedAt: DateTime
+        public var publishedAt: Date?
 
         /** The status of this landing page. */
         public var status: Status?
@@ -108,10 +108,10 @@ public extension LandingPages {
         public var tracking: Tracking?
 
         /** The time this landing page was unpublished. */
-        public var unpublishedAt: DateTime
+        public var unpublishedAt: Date?
 
         /** The time this landing page was updated at. */
-        public var updatedAt: DateTime
+        public var updatedAt: Date?
 
         /** The url of the published landing page. */
         public var url: String?
@@ -206,20 +206,20 @@ public extension LandingPages {
 
         public init(links: [Links]? = nil, createdAt: Date? = nil, createdBySource: String? = nil, description: String? = nil, id: String? = nil, listId: String? = nil, name: String? = nil, publishedAt: Date? = nil, status: Status? = nil, storeId: String? = nil, templateId: Int? = nil, title: String? = nil, tracking: Tracking? = nil, unpublishedAt: Date? = nil, updatedAt: Date? = nil, url: String? = nil, webId: Int? = nil) {
           self.links = links
-          self.createdAt = .init(date: createdAt)
+          self.createdAt = createdAt
           self.createdBySource = createdBySource
           self.description = description
           self.id = id
           self.listId = listId
           self.name = name
-          self.publishedAt = .init(date: publishedAt)
+          self.publishedAt = publishedAt
           self.status = status
           self.storeId = storeId
           self.templateId = templateId
           self.title = title
           self.tracking = tracking
-          self.unpublishedAt = .init(date: unpublishedAt)
-          self.updatedAt = .init(date: updatedAt)
+          self.unpublishedAt = unpublishedAt
+          self.updatedAt = updatedAt
           self.url = url
           self.webId = webId
         }
@@ -340,7 +340,7 @@ public extension LandingPages {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

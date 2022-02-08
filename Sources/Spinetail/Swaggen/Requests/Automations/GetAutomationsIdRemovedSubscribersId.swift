@@ -8,9 +8,9 @@ public extension Automations {
    Get information about a specific subscriber who was removed from a classic automation workflow.
    */
   enum GetAutomationsIdRemovedSubscribersId {
-    public static let service = APIService<Response>(id: "getAutomationsIdRemovedSubscribersId", tag: "automations", method: "GET", path: "/automations/{workflow_id}/removed-subscribers/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getAutomationsIdRemovedSubscribersId", tag: "automations", method: "GET", path: "/automations/{workflow_id}/removed-subscribers/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** The unique id for the Automation workflow. */
         public var workflowId: String
@@ -42,7 +42,7 @@ public extension Automations {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A summary of a subscriber removed from an Automation workflow. */
       public struct Status200: Model {
@@ -216,7 +216,7 @@ public extension Automations {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

@@ -8,9 +8,9 @@ public extension Campaigns {
    Review the send checklist for a campaign, and resolve any issues before sending.
    */
   enum GetCampaignsIdSendChecklist {
-    public static let service = APIService<Response>(id: "getCampaignsIdSendChecklist", tag: "campaigns", method: "GET", path: "/campaigns/{campaign_id}/send-checklist", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getCampaignsIdSendChecklist", tag: "campaigns", method: "GET", path: "/campaigns/{campaign_id}/send-checklist", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -57,7 +57,7 @@ public extension Campaigns {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** The send checklist for the campaign. */
       public struct Status200: Model {
@@ -266,7 +266,7 @@ public extension Campaigns {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

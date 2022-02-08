@@ -8,9 +8,9 @@ public extension Reports {
    Get information about a specific subscriber who opened a campaign.
    */
   enum GetReportsIdOpenDetailsIdMembersId {
-    public static let service = APIService<Response>(id: "getReportsIdOpenDetailsIdMembersId", tag: "reports", method: "GET", path: "/reports/{campaign_id}/open-details/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getReportsIdOpenDetailsIdMembersId", tag: "reports", method: "GET", path: "/reports/{campaign_id}/open-details/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -61,7 +61,7 @@ public extension Reports {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A list of a member's opens activity in a specific campaign. */
       public struct Status200: Model {
@@ -87,7 +87,7 @@ public extension Reports {
         public var listIsActive: Bool?
 
         /** A dictionary of merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) where the keys are the merge tags. For example, {"FNAME":"Freddie"} */
-        public var mergeFields: [String: CodableAny]?
+        public var mergeFields: [String: AnyCodable]?
 
         /** An array of timestamps for each time a list member opened the campaign. If a list member opens an email multiple times, this will return a separate timestamp for each open event. */
         public var opens: [Opens]?
@@ -158,10 +158,10 @@ public extension Reports {
         /** A summary of the interaction with the campaign. */
         public struct Opens: Model {
           /** The date and time recorded for the action in ISO 8601 format. */
-          public var timestamp: DateTime
+          public var timestamp: Date?
 
           public init(timestamp: Date? = nil) {
-            self.timestamp = .init(date: timestamp)
+            self.timestamp = timestamp
           }
 
           public init(from decoder: Decoder) throws {
@@ -177,7 +177,7 @@ public extension Reports {
           }
         }
 
-        public init(links: [Links]? = nil, campaignId: String? = nil, contactStatus: String? = nil, emailAddress: String? = nil, emailId: String? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: CodableAny]? = nil, opens: [Opens]? = nil, opensCount: Int? = nil, vip: Bool? = nil) {
+        public init(links: [Links]? = nil, campaignId: String? = nil, contactStatus: String? = nil, emailAddress: String? = nil, emailId: String? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: AnyCodable]? = nil, opens: [Opens]? = nil, opensCount: Int? = nil, vip: Bool? = nil) {
           self.links = links
           self.campaignId = campaignId
           self.contactStatus = contactStatus
@@ -293,7 +293,7 @@ public extension Reports {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

@@ -8,9 +8,9 @@ public extension Lists {
    Get the last 50 events of a member's activity on a specific list, including opens, clicks, and unsubscribes.
    */
   enum GetListsIdMembersIdActivity {
-    public static let service = APIService<Response>(id: "getListsIdMembersIdActivity", tag: "lists", method: "GET", path: "/lists/{list_id}/members/{subscriber_hash}/activity", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getListsIdMembersIdActivity", tag: "lists", method: "GET", path: "/lists/{list_id}/members/{subscriber_hash}/activity", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** The unique ID for the list. */
         public var listId: String
@@ -68,7 +68,7 @@ public extension Lists {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** The last 50 member events for a list. */
       public struct Status200: Model {
@@ -156,7 +156,7 @@ public extension Lists {
           public var parentCampaign: String?
 
           /** The date and time recorded for the action. */
-          public var timestamp: DateTime
+          public var timestamp: Date?
 
           /** If set, the campaign's title. */
           public var title: String?
@@ -171,7 +171,7 @@ public extension Lists {
             self.action = action
             self.campaignId = campaignId
             self.parentCampaign = parentCampaign
-            self.timestamp = .init(date: timestamp)
+            self.timestamp = timestamp
             self.title = title
             self.type = type
             self.url = url
@@ -300,7 +300,7 @@ public extension Lists {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

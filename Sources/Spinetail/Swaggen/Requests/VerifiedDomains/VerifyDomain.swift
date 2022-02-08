@@ -8,9 +8,9 @@ public extension VerifiedDomains {
    Verify a domain for sending.
    */
   enum VerifyDomain {
-    public static let service = APIService<Response>(id: "verifyDomain", tag: "verifiedDomains", method: "POST", path: "/verified-domains/{domain_name}/actions/verify", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "verifyDomain", tag: "verifiedDomains", method: "POST", path: "/verified-domains/{domain_name}/actions/verify", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** Submit a response to the verification challenge and verify a domain for sending. */
       public struct Body: Model {
         /** The code that was sent to the email address provided when adding a new domain to verify. */
@@ -65,7 +65,7 @@ public extension VerifiedDomains {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** The verified domains currently on the account. */
       public struct Status200: Model {
@@ -79,7 +79,7 @@ public extension VerifiedDomains {
         public var verificationEmail: String?
 
         /** The date/time that the two-factor challenge was sent to the verification email. */
-        public var verificationSent: DateTime
+        public var verificationSent: Date?
 
         /** Whether the domain has been verified for sending. */
         public var verified: Bool?
@@ -88,7 +88,7 @@ public extension VerifiedDomains {
           self.authenticated = authenticated
           self.domain = domain
           self.verificationEmail = verificationEmail
-          self.verificationSent = .init(date: verificationSent)
+          self.verificationSent = verificationSent
           self.verified = verified
         }
 
@@ -184,7 +184,7 @@ public extension VerifiedDomains {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

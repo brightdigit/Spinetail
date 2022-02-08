@@ -8,9 +8,9 @@ public extension Ecommerce {
    Get information about a store's promo codes.
    */
   enum GetEcommerceStoresIdPromocodes {
-    public static let service = APIService<Response>(id: "getEcommerceStoresIdPromocodes", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getEcommerceStoresIdPromocodes", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -75,7 +75,7 @@ public extension Ecommerce {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A collection of the store's promo codes. */
       public struct Status200: Model {
@@ -157,7 +157,7 @@ public extension Ecommerce {
           public var code: String?
 
           /** The date and time the promotion was created in ISO 8601 format. */
-          public var createdAtForeign: DateTime
+          public var createdAtForeign: Date?
 
           /** Whether the promo code is currently enabled. */
           public var enabled: Bool?
@@ -169,7 +169,7 @@ public extension Ecommerce {
           public var redemptionURL: String?
 
           /** The date and time the promotion was updated in ISO 8601 format. */
-          public var updatedAtForeign: DateTime
+          public var updatedAtForeign: Date?
 
           /** Number of times promo code has been used. */
           public var usageCount: Int?
@@ -234,11 +234,11 @@ public extension Ecommerce {
           public init(links: [Links]? = nil, code: String? = nil, createdAtForeign: Date? = nil, enabled: Bool? = nil, id: String? = nil, redemptionURL: String? = nil, updatedAtForeign: Date? = nil, usageCount: Int? = nil) {
             self.links = links
             self.code = code
-            self.createdAtForeign = .init(date: createdAtForeign)
+            self.createdAtForeign = createdAtForeign
             self.enabled = enabled
             self.id = id
             self.redemptionURL = redemptionURL
-            self.updatedAtForeign = .init(date: updatedAtForeign)
+            self.updatedAtForeign = updatedAtForeign
             self.usageCount = usageCount
           }
 
@@ -364,7 +364,7 @@ public extension Ecommerce {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

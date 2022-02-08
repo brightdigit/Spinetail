@@ -8,7 +8,7 @@ public extension Lists {
    Get a month-by-month summary of a specific list's growth activity.
    */
   enum GetListsIdGrowthHistory {
-    public static let service = APIService<Response>(id: "getListsIdGrowthHistory", tag: "lists", method: "GET", path: "/lists/{list_id}/growth-history", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getListsIdGrowthHistory", tag: "lists", method: "GET", path: "/lists/{list_id}/growth-history", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** Returns files sorted by the specified field. */
     public enum SortField: String, Codable, Equatable, CaseIterable {
@@ -21,7 +21,7 @@ public extension Lists {
       case desc = "DESC"
     }
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -96,7 +96,7 @@ public extension Lists {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** A month-by-month summary of a specific list's growth activity. */
       public struct Status200: Model {
@@ -415,7 +415,7 @@ public extension Lists {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

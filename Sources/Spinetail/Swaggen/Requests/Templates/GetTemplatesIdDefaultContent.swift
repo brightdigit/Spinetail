@@ -8,9 +8,9 @@ public extension Templates {
    Get the sections that you can edit in a template, including each section's default content.
    */
   enum GetTemplatesIdDefaultContent {
-    public static let service = APIService<Response>(id: "getTemplatesIdDefaultContent", tag: "templates", method: "GET", path: "/templates/{template_id}/default-content", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getTemplatesIdDefaultContent", tag: "templates", method: "GET", path: "/templates/{template_id}/default-content", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
@@ -57,7 +57,7 @@ public extension Templates {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** Default content for a template. */
       public struct Status200: Model {
@@ -65,7 +65,7 @@ public extension Templates {
         public var links: [Links]?
 
         /** The sections that you can edit in the template, including each section's default content. */
-        public var sections: [String: [String: CodableAny]]?
+        public var sections: [String: [String: AnyCodable]]?
 
         /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
         public struct Links: Model {
@@ -124,7 +124,7 @@ public extension Templates {
           }
         }
 
-        public init(links: [Links]? = nil, sections: [String: [String: CodableAny]]? = nil) {
+        public init(links: [Links]? = nil, sections: [String: [String: AnyCodable]]? = nil) {
           self.links = links
           self.sections = sections
         }
@@ -213,7 +213,7 @@ public extension Templates {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

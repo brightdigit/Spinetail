@@ -8,9 +8,9 @@ public extension FileManager {
    Update a file in the File Manager.
    */
   enum PatchFileManagerFilesId {
-    public static let service = APIService<Response>(id: "patchFileManagerFilesId", tag: "fileManager", method: "PATCH", path: "/file-manager/files/{file_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "patchFileManagerFilesId", tag: "fileManager", method: "PATCH", path: "/file-manager/files/{file_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       /** An individual file listed in the File Manager. */
       public struct Body: Model {
         /** The id of the folder. Setting `folder_id` to `0` will remove a file from its current folder. */
@@ -71,7 +71,7 @@ public extension FileManager {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** An individual file listed in the File Manager. */
       public struct Status200: Model {
@@ -85,7 +85,7 @@ public extension FileManager {
         public var links: [Links]?
 
         /** The date and time a file was added to the File Manager in ISO 8601 format. */
-        public var createdAt: DateTime
+        public var createdAt: Date?
 
         /** The username of the profile that uploaded the file. */
         public var createdBy: String?
@@ -176,7 +176,7 @@ public extension FileManager {
 
         public init(links: [Links]? = nil, createdAt: Date? = nil, createdBy: String? = nil, folderId: Int? = nil, fullSizeURL: URL? = nil, height: Int? = nil, id: Int? = nil, name: String? = nil, size: Int? = nil, thumbnailURL: URL? = nil, type: Type? = nil, width: Int? = nil) {
           self.links = links
-          self.createdAt = .init(date: createdAt)
+          self.createdAt = createdAt
           self.createdBy = createdBy
           self.folderId = folderId
           self.fullSizeURL = fullSizeURL
@@ -293,7 +293,7 @@ public extension FileManager {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {

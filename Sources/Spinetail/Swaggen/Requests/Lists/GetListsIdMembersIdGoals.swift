@@ -8,9 +8,9 @@ public extension Lists {
    Get the last 50 Goal events for a member on a specific list.
    */
   enum GetListsIdMembersIdGoals {
-    public static let service = APIService<Response>(id: "getListsIdMembersIdGoals", tag: "lists", method: "GET", path: "/lists/{list_id}/members/{subscriber_hash}/goals", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public static let service = Service<Response>(id: "getListsIdMembersIdGoals", tag: "lists", method: "GET", path: "/lists/{list_id}/members/{subscriber_hash}/goals", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-    public final class Request: APIRequest<Response, MailchimpAPI> {
+    public final class Request: Prch.Request<Response, MailchimpAPI> {
       public struct Options {
         /** The unique ID for the list. */
         public var listId: String
@@ -61,7 +61,7 @@ public extension Lists {
       }
     }
 
-    public enum Response: APIResponseValue, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
       public typealias APIType = MailchimpAPI
       /** The last 50 Goal events for a member on a specific list. */
       public struct Status200: Model {
@@ -149,13 +149,13 @@ public extension Lists {
           public var goalId: Int?
 
           /** The date and time the user last triggered the Goal event in ISO 8601 format. */
-          public var lastVisitedAt: DateTime
+          public var lastVisitedAt: Date?
 
           public init(data: String? = nil, event: String? = nil, goalId: Int? = nil, lastVisitedAt: Date? = nil) {
             self.data = data
             self.event = event
             self.goalId = goalId
-            self.lastVisitedAt = .init(date: lastVisitedAt)
+            self.lastVisitedAt = lastVisitedAt
           }
 
           public init(from decoder: Decoder) throws {
@@ -275,7 +275,7 @@ public extension Lists {
 
       /// either success or failure value. Success is anything in the 200..<300 status code range
       @available(*, unavailable)
-      public var _obsolete_responseResult: APIResponseResult<Status200, DefaultResponse> {
+      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
         if let successValue = success {
           return .success(successValue)
         } else if let failureValue = failure {
