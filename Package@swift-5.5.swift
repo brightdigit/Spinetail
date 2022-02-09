@@ -23,7 +23,6 @@ let package = Package(
   ],
   targets: [
     .target(name: "Spinetail", dependencies: ["Prch"]),
-    .executableTarget(name: "SpinetailFoundationApp", dependencies: ["Spinetail"]),
     .testTarget(name: "SpinetailTests", dependencies: ["Spinetail"])
   ]
 )
