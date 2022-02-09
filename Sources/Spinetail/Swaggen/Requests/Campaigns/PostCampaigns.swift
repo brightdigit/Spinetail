@@ -1814,7 +1814,7 @@ public extension Campaigns {
           reportSummary = try container.decodeIfPresent("report_summary")
           resendable = try container.decodeIfPresent("resendable")
           rssOpts = try container.decodeIfPresent("rss_opts")
-          sendTime = try container.decodeIfPresent("send_time")
+          sendTime = try container.decodeIfPresent("send_time", safeOptionalDecoding: true)
           settings = try container.decodeIfPresent("settings")
           socialCard = try container.decodeIfPresent("social_card")
           status = try container.decodeIfPresent("status")
