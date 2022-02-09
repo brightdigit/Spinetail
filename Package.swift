@@ -19,7 +19,7 @@ let package = Package(
     .package(url: "https://github.com/realm/SwiftLint", from: "0.43.0"), // dev
     .package(url: "https://github.com/brightdigit/swift-test-codecov", from: "1.0.0"), // dev
     .package(url: "https://github.com/shibapm/Rocket", from: "1.2.0"), // dev
-    .package(path: "Packages/Prch")
+    .package(path: "../Prch")
   ],
   targets: [
     .target(name: "Spinetail", dependencies: ["Prch"]),
