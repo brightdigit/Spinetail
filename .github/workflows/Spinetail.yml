@@ -7,6 +7,10 @@ on:
       - 'release/*'
       - 'bugfix/*'
     tags: '*'
+env:
+  MAILCHIMP_API_KEY:  ${{ secrets.MAILCHIMP_API_KEY }}
+  MAILCHIMP_LIST_ID:  ${{ secrets.MAILCHIMP_LIST_ID }}
+  MAILCHIMP_INTEREST_ID:  ${{ secrets.MAILCHIMP_INTEREST_ID }}
 jobs:
   build-ubuntu:
     name: Build on Ubuntu
