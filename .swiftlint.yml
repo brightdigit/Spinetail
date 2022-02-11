@@ -118,10 +118,12 @@ identifier_name:
     - id
     - a 
     - b
+    - _obsolete_responseResult
 excluded:
   - Tests/*/XCTestManifests.swift
   - DerivedData
   - .build
   - Tests/LinuxMain.swift
+  - Packages
 indentation_width:
   indentation_width: 2

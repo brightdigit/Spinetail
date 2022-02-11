@@ -1,0 +1,4 @@
+[submodule "Packages/Prch"]
+	path = Packages/Prch
+	url = git@github.com:brightdigit/Prch.git
+	branch = feature/fix-encoder
