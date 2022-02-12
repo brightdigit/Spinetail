@@ -34,7 +34,7 @@ final class ListsTests: XCTestCase {
       } else {
         interested = true
       }
-    } catch let error as RequestResponse<Lists.GetListsIdMembersId.Response>.FailedResponseError {
+    } catch let error as ClientResponseResult<Lists.GetListsIdMembersId.Response>.FailedResponseError {
       guard error.statusCode == 404 else {
         throw error
       }
