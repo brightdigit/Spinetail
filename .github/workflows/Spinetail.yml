@@ -2,7 +2,6 @@ name: Spinetail
 on:
   push:
     branches:
-      - '*'
       - 'feature/*'
       - 'release/*'
       - 'bugfix/*'
