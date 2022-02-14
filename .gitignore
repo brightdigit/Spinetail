@@ -46,9 +46,8 @@ xcuserdata/
 build/
 DerivedData/
 *.moved-aside
-=======
+
 # Xcode
->>>>>>> sdk
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -57,7 +56,6 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-<<<<<<< HEAD
 
 ## Obj-C/Swift specific
 *.hmap
@@ -75,7 +73,7 @@ playground.xcworkspace
 # Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
 # Packages/
 # Package.pins
-Package.resolved
+# Package.resolved
 *.xcodeproj
 # Xcode automatically generates this directory with a .xcworkspacedata file and xcuserdata
 # hence it is not needed unless you have added a package configuration file to your project
@@ -119,7 +117,7 @@ fastlane/test_output
 iOSInjectionProject/
 
 ### SwiftPackageManager ###
-Packages
+# Packages
 xcuserdata
 *.xcodeproj
 
@@ -144,3 +142,4 @@ xcuserdata
 # End of https://www.toptal.com/developers/gitignore/api/macos,swift,SwiftPackageManager,Xcode
 
 *.pxd/QuickLook
+env.json

@@ -19,11 +19,10 @@ let package = Package(
     .package(url: "https://github.com/realm/SwiftLint", from: "0.43.0"), // dev
     .package(url: "https://github.com/brightdigit/swift-test-codecov", from: "1.0.0"), // dev
     .package(url: "https://github.com/shibapm/Rocket", from: "1.2.0"), // dev
-    .package(url: "https://github.com/brightdigit/Prch.git", from: "0.1.0")
+    .package(url: "https://github.com/brightdigit/Prch.git", from: "0.2.0-beta.1")
   ],
   targets: [
     .target(name: "Spinetail", dependencies: ["Prch"]),
-    .executableTarget(name: "SpinetailFoundationApp", dependencies: ["Spinetail"]),
     .testTarget(name: "SpinetailTests", dependencies: ["Spinetail"])
   ]
 )
