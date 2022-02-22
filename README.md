@@ -30,13 +30,12 @@ A Swift pacakge for interfacing with your Mailchimp account, audiences, campaign
 [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
 -->
 
-![Demonstration of Spinetail](Assets/SpinetailDemo.gif)
+![Demonstration of Spinetail](Assets/SpinetailDemo.mp4)
 
 <!--ts-->
 # Table of Contents
 
 * [Introduction](#introduction)
-	  * [Demo Example](#demo-example)
 * [Features](#features)
 * [Installation](#installation)
 * [Setting Up Your Mailchimp Client with Prch](#setting-up-your-mailchimp-client-with-prch)
@@ -52,7 +51,33 @@ A Swift pacakge for interfacing with your Mailchimp account, audiences, campaign
    * [Templates and Campaigns](#templates-and-campaigns)
 	  * [Pulling List of Campaigns](#pulling-list-of-campaigns)
 	  * [Get Newsletter Content](#get-newsletter-content)
+	  * [Creating a Template](#creating-a-template)
+	  * [Send an Campaign Email to Our Audience List](#send-an-campaign-email-to-our-audience-list)
 * [Requests](#requests)
+   * [Fully Supported](#fully-supported)
+	  * [Campaigns](#campaigns)
+	  * [Lists](#lists)
+	  * [Templates](#templates)
+   * [Testing Pending](#testing-pending)
+	  * [Template Folders](#template-folders)
+	  * [Search Campaigns](#search-campaigns)
+	  * [Search Members](#search-members)
+	  * [Reports](#reports)
+	  * [Root](#root)
+   * [Pending Next Support](#pending-next-support)
+	  * [File Manager](#file-manager)
+	  * [Batches](#batches)
+	  * [Automations](#automations)
+   * [Remaining Requests](#remaining-requests)
+	  * [Activity Feed](#activity-feed)
+	  * [Authorized Apps](#authorized-apps)
+	  * [Connected Sites](#connected-sites)
+	  * [Conversations](#conversations)
+	  * [Customer Journeys](#customer-journeys)
+	  * [Ecommerce Stores](#ecommerce-stores)
+	  * [Facebook Ads](#facebook-ads)
+	  * [Landing Pages](#landing-pages)
+	  * [Verified Domains](#verified-domains)
 * [License](#license)
 
 
@@ -64,9 +89,7 @@ Spinetail is a Swift package for interfacing with your Mailchimp account, audien
 
 ### Demo Example
 
-```swift
-// TODO: Sample Code
-```
+
 
 # Features 
 
@@ -461,287 +484,368 @@ await client.request(request)
 
 # Requests
 
-- **ActivityFeed**
-	- **GetActivityFeedChimpChatter**: GET `/activity-feed/chimp-chatter`
-- **AuthorizedApps**
-	- **GetAuthorizedApps**: GET `/authorized-apps`
-	- **GetAuthorizedAppsId**: GET `/authorized-apps/{app_id}`
-- **Automations**
-	- **ArchiveAutomations**: POST `/automations/{workflow_id}/actions/archive`
-	- **DeleteAutomationsIdEmailsId**: DELETE `/automations/{workflow_id}/emails/{workflow_email_id}`
-	- **GetAutomations**: GET `/automations`
-	- **GetAutomationsId**: GET `/automations/{workflow_id}`
-	- **GetAutomationsIdEmails**: GET `/automations/{workflow_id}/emails`
-	- **GetAutomationsIdEmailsId**: GET `/automations/{workflow_id}/emails/{workflow_email_id}`
-	- **GetAutomationsIdEmailsIdQueue**: GET `/automations/{workflow_id}/emails/{workflow_email_id}/queue`
-	- **GetAutomationsIdEmailsIdQueueId**: GET `/automations/{workflow_id}/emails/{workflow_email_id}/queue/{subscriber_hash}`
-	- **GetAutomationsIdRemovedSubscribers**: GET `/automations/{workflow_id}/removed-subscribers`
-	- **GetAutomationsIdRemovedSubscribersId**: GET `/automations/{workflow_id}/removed-subscribers/{subscriber_hash}`
-	- **PatchAutomationEmailWorkflowId**: PATCH `/automations/{workflow_id}/emails/{workflow_email_id}`
-	- **PostAutomations**: POST `/automations`
-	- **PostAutomationsIdActionsPauseAllEmails**: POST `/automations/{workflow_id}/actions/pause-all-emails`
-	- **PostAutomationsIdActionsStartAllEmails**: POST `/automations/{workflow_id}/actions/start-all-emails`
-	- **PostAutomationsIdEmailsIdActionsPause**: POST `/automations/{workflow_id}/emails/{workflow_email_id}/actions/pause`
-	- **PostAutomationsIdEmailsIdActionsStart**: POST `/automations/{workflow_id}/emails/{workflow_email_id}/actions/start`
-	- **PostAutomationsIdEmailsIdQueue**: POST `/automations/{workflow_id}/emails/{workflow_email_id}/queue`
-	- **PostAutomationsIdRemovedSubscribers**: POST `/automations/{workflow_id}/removed-subscribers`
-- **Batches**
-	- **DeleteBatchesId**: DELETE `/batches/{batch_id}`
-	- **GetBatches**: GET `/batches`
-	- **GetBatchesId**: GET `/batches/{batch_id}`
-	- **PostBatches**: POST `/batches`
-- **BatchWebhooks**
-	- **DeleteBatchWebhookId**: DELETE `/batch-webhooks/{batch_webhook_id}`
-	- **GetBatchWebhook**: GET `/batch-webhooks/{batch_webhook_id}`
-	- **GetBatchWebhooks**: GET `/batch-webhooks`
-	- **PatchBatchWebhooks**: PATCH `/batch-webhooks/{batch_webhook_id}`
-	- **PostBatchWebhooks**: POST `/batch-webhooks`
-- **CampaignFolders**
-	- **DeleteCampaignFoldersId**: DELETE `/campaign-folders/{folder_id}`
-	- **GetCampaignFolders**: GET `/campaign-folders`
-	- **GetCampaignFoldersId**: GET `/campaign-folders/{folder_id}`
-	- **PatchCampaignFoldersId**: PATCH `/campaign-folders/{folder_id}`
-	- **PostCampaignFolders**: POST `/campaign-folders`
-- **Campaigns**
-	- **DeleteCampaignsId**: DELETE `/campaigns/{campaign_id}`
-	- **DeleteCampaignsIdFeedbackId**: DELETE `/campaigns/{campaign_id}/feedback/{feedback_id}`
-	- **GetCampaigns**: GET `/campaigns`
-	- **GetCampaignsId**: GET `/campaigns/{campaign_id}`
-	- **GetCampaignsIdContent**: GET `/campaigns/{campaign_id}/content`
-	- **GetCampaignsIdFeedback**: GET `/campaigns/{campaign_id}/feedback`
-	- **GetCampaignsIdFeedbackId**: GET `/campaigns/{campaign_id}/feedback/{feedback_id}`
-	- **GetCampaignsIdSendChecklist**: GET `/campaigns/{campaign_id}/send-checklist`
-	- **PatchCampaignsId**: PATCH `/campaigns/{campaign_id}`
-	- **PatchCampaignsIdFeedbackId**: PATCH `/campaigns/{campaign_id}/feedback/{feedback_id}`
-	- **PostCampaigns**: POST `/campaigns`
-	- **PostCampaignsIdActionsCancelSend**: POST `/campaigns/{campaign_id}/actions/cancel-send`
-	- **PostCampaignsIdActionsCreateResend**: POST `/campaigns/{campaign_id}/actions/create-resend`
-	- **PostCampaignsIdActionsPause**: POST `/campaigns/{campaign_id}/actions/pause`
-	- **PostCampaignsIdActionsReplicate**: POST `/campaigns/{campaign_id}/actions/replicate`
-	- **PostCampaignsIdActionsResume**: POST `/campaigns/{campaign_id}/actions/resume`
-	- **PostCampaignsIdActionsSchedule**: POST `/campaigns/{campaign_id}/actions/schedule`
-	- **PostCampaignsIdActionsSend**: POST `/campaigns/{campaign_id}/actions/send`
-	- **PostCampaignsIdActionsTest**: POST `/campaigns/{campaign_id}/actions/test`
-	- **PostCampaignsIdActionsUnschedule**: POST `/campaigns/{campaign_id}/actions/unschedule`
-	- **PostCampaignsIdFeedback**: POST `/campaigns/{campaign_id}/feedback`
-	- **PutCampaignsIdContent**: PUT `/campaigns/{campaign_id}/content`
-- **ConnectedSites**
-	- **DeleteConnectedSitesId**: DELETE `/connected-sites/{connected_site_id}`
-	- **GetConnectedSites**: GET `/connected-sites`
-	- **GetConnectedSitesId**: GET `/connected-sites/{connected_site_id}`
-	- **PostConnectedSites**: POST `/connected-sites`
-	- **PostConnectedSitesIdActionsVerifyScriptInstallation**: POST `/connected-sites/{connected_site_id}/actions/verify-script-installation`
-- **Conversations**
-	- **GetConversations**: GET `/conversations`
-	- **GetConversationsId**: GET `/conversations/{conversation_id}`
-	- **GetConversationsIdMessages**: GET `/conversations/{conversation_id}/messages`
-	- **GetConversationsIdMessagesId**: GET `/conversations/{conversation_id}/messages/{message_id}`
-- **CustomerJourneys**
-	- **PostCustomerJourneysJourneysIdStepsIdActionsTrigger**: POST `/customer-journeys/journeys/{journey_id}/steps/{step_id}/actions/trigger`
-- **Ecommerce**
-	- **DeleteEcommerceStoresId**: DELETE `/ecommerce/stores/{store_id}`
-	- **DeleteEcommerceStoresIdCartsId**: DELETE `/ecommerce/stores/{store_id}/carts/{cart_id}`
-	- **DeleteEcommerceStoresIdCartsLinesId**: DELETE `/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}`
-	- **DeleteEcommerceStoresIdCustomersId**: DELETE `/ecommerce/stores/{store_id}/customers/{customer_id}`
-	- **DeleteEcommerceStoresIdOrdersId**: DELETE `/ecommerce/stores/{store_id}/orders/{order_id}`
-	- **DeleteEcommerceStoresIdOrdersIdLinesId**: DELETE `/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}`
-	- **DeleteEcommerceStoresIdProductsId**: DELETE `/ecommerce/stores/{store_id}/products/{product_id}`
-	- **DeleteEcommerceStoresIdProductsIdImagesId**: DELETE `/ecommerce/stores/{store_id}/products/{product_id}/images/{image_id}`
-	- **DeleteEcommerceStoresIdProductsIdVariantsId**: DELETE `/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}`
-	- **DeleteEcommerceStoresIdPromocodesId**: DELETE `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}`
-	- **DeleteEcommerceStoresIdPromorulesId**: DELETE `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}`
-	- **GetEcommerceOrders**: GET `/ecommerce/orders`
-	- **GetEcommerceStores**: GET `/ecommerce/stores`
-	- **GetEcommerceStoresId**: GET `/ecommerce/stores/{store_id}`
-	- **GetEcommerceStoresIdCarts**: GET `/ecommerce/stores/{store_id}/carts`
-	- **GetEcommerceStoresIdCartsId**: GET `/ecommerce/stores/{store_id}/carts/{cart_id}`
-	- **GetEcommerceStoresIdCartsIdLines**: GET `/ecommerce/stores/{store_id}/carts/{cart_id}/lines`
-	- **GetEcommerceStoresIdCartsIdLinesId**: GET `/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}`
-	- **GetEcommerceStoresIdCustomers**: GET `/ecommerce/stores/{store_id}/customers`
-	- **GetEcommerceStoresIdCustomersId**: GET `/ecommerce/stores/{store_id}/customers/{customer_id}`
-	- **GetEcommerceStoresIdOrders**: GET `/ecommerce/stores/{store_id}/orders`
-	- **GetEcommerceStoresIdOrdersId**: GET `/ecommerce/stores/{store_id}/orders/{order_id}`
-	- **GetEcommerceStoresIdOrdersIdLines**: GET `/ecommerce/stores/{store_id}/orders/{order_id}/lines`
-	- **GetEcommerceStoresIdOrdersIdLinesId**: GET `/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}`
-	- **GetEcommerceStoresIdProducts**: GET `/ecommerce/stores/{store_id}/products`
-	- **GetEcommerceStoresIdProductsId**: GET `/ecommerce/stores/{store_id}/products/{product_id}`
-	- **GetEcommerceStoresIdProductsIdImages**: GET `/ecommerce/stores/{store_id}/products/{product_id}/images`
-	- **GetEcommerceStoresIdProductsIdImagesId**: GET `/ecommerce/stores/{store_id}/products/{product_id}/images/{image_id}`
-	- **GetEcommerceStoresIdProductsIdVariants**: GET `/ecommerce/stores/{store_id}/products/{product_id}/variants`
-	- **GetEcommerceStoresIdProductsIdVariantsId**: GET `/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}`
-	- **GetEcommerceStoresIdPromocodes**: GET `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes`
-	- **GetEcommerceStoresIdPromocodesId**: GET `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}`
-	- **GetEcommerceStoresIdPromorules**: GET `/ecommerce/stores/{store_id}/promo-rules`
-	- **GetEcommerceStoresIdPromorulesId**: GET `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}`
-	- **PatchEcommerceStoresId**: PATCH `/ecommerce/stores/{store_id}`
-	- **PatchEcommerceStoresIdCartsId**: PATCH `/ecommerce/stores/{store_id}/carts/{cart_id}`
-	- **PatchEcommerceStoresIdCartsIdLinesId**: PATCH `/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}`
-	- **PatchEcommerceStoresIdCustomersId**: PATCH `/ecommerce/stores/{store_id}/customers/{customer_id}`
-	- **PatchEcommerceStoresIdOrdersId**: PATCH `/ecommerce/stores/{store_id}/orders/{order_id}`
-	- **PatchEcommerceStoresIdOrdersIdLinesId**: PATCH `/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}`
-	- **PatchEcommerceStoresIdProductsId**: PATCH `/ecommerce/stores/{store_id}/products/{product_id}`
-	- **PatchEcommerceStoresIdProductsIdImagesId**: PATCH `/ecommerce/stores/{store_id}/products/{product_id}/images/{image_id}`
-	- **PatchEcommerceStoresIdProductsIdVariantsId**: PATCH `/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}`
-	- **PatchEcommerceStoresIdPromocodesId**: PATCH `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}`
-	- **PatchEcommerceStoresIdPromorulesId**: PATCH `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}`
-	- **PostEcommerceStores**: POST `/ecommerce/stores`
-	- **PostEcommerceStoresIdCarts**: POST `/ecommerce/stores/{store_id}/carts`
-	- **PostEcommerceStoresIdCartsIdLines**: POST `/ecommerce/stores/{store_id}/carts/{cart_id}/lines`
-	- **PostEcommerceStoresIdCustomers**: POST `/ecommerce/stores/{store_id}/customers`
-	- **PostEcommerceStoresIdOrders**: POST `/ecommerce/stores/{store_id}/orders`
-	- **PostEcommerceStoresIdOrdersIdLines**: POST `/ecommerce/stores/{store_id}/orders/{order_id}/lines`
-	- **PostEcommerceStoresIdProducts**: POST `/ecommerce/stores/{store_id}/products`
-	- **PostEcommerceStoresIdProductsIdImages**: POST `/ecommerce/stores/{store_id}/products/{product_id}/images`
-	- **PostEcommerceStoresIdProductsIdVariants**: POST `/ecommerce/stores/{store_id}/products/{product_id}/variants`
-	- **PostEcommerceStoresIdPromocodes**: POST `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes`
-	- **PostEcommerceStoresIdPromorules**: POST `/ecommerce/stores/{store_id}/promo-rules`
-	- **PutEcommerceStoresIdCustomersId**: PUT `/ecommerce/stores/{store_id}/customers/{customer_id}`
-	- **PutEcommerceStoresIdProductsIdVariantsId**: PUT `/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}`
-- **FacebookAds**
-	- **GetAllFacebookAds**: GET `/facebook-ads`
-	- **GetFacebookAdsId**: GET `/facebook-ads/{outreach_id}`
-- **FileManager**
-	- **DeleteFileManagerFilesId**: DELETE `/file-manager/files/{file_id}`
-	- **DeleteFileManagerFoldersId**: DELETE `/file-manager/folders/{folder_id}`
-	- **GetFileManagerFiles**: GET `/file-manager/files`
-	- **GetFileManagerFilesId**: GET `/file-manager/files/{file_id}`
-	- **GetFileManagerFolders**: GET `/file-manager/folders`
-	- **GetFileManagerFoldersId**: GET `/file-manager/folders/{folder_id}`
-	- **PatchFileManagerFilesId**: PATCH `/file-manager/files/{file_id}`
-	- **PatchFileManagerFoldersId**: PATCH `/file-manager/folders/{folder_id}`
-	- **PostFileManagerFiles**: POST `/file-manager/files`
-	- **PostFileManagerFolders**: POST `/file-manager/folders`
-- **LandingPages**
-	- **DeleteLandingPageId**: DELETE `/landing-pages/{page_id}`
-	- **GetAllLandingPages**: GET `/landing-pages`
-	- **GetLandingPageId**: GET `/landing-pages/{page_id}`
-	- **GetLandingPageIdContent**: GET `/landing-pages/{page_id}/content`
-	- **PatchLandingPageId**: PATCH `/landing-pages/{page_id}`
-	- **PostAllLandingPages**: POST `/landing-pages`
-	- **PostLandingPageIdActionsPublish**: POST `/landing-pages/{page_id}/actions/publish`
-	- **PostLandingPageIdActionsUnpublish**: POST `/landing-pages/{page_id}/actions/unpublish`
-- **Lists**
-	- **DeleteListsId**: DELETE `/lists/{list_id}`
-	- **DeleteListsIdInterestCategoriesId**: DELETE `/lists/{list_id}/interest-categories/{interest_category_id}`
-	- **DeleteListsIdInterestCategoriesIdInterestsId**: DELETE `/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}`
-	- **DeleteListsIdMembersId**: DELETE `/lists/{list_id}/members/{subscriber_hash}`
-	- **DeleteListsIdMembersIdNotesId**: DELETE `/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}`
-	- **DeleteListsIdMergeFieldsId**: DELETE `/lists/{list_id}/merge-fields/{merge_id}`
-	- **DeleteListsIdSegmentsId**: DELETE `/lists/{list_id}/segments/{segment_id}`
-	- **DeleteListsIdSegmentsIdMembersId**: DELETE `/lists/{list_id}/segments/{segment_id}/members/{subscriber_hash}`
-	- **DeleteListsIdWebhooksId**: DELETE `/lists/{list_id}/webhooks/{webhook_id}`
-	- **GetListMemberTags**: GET `/lists/{list_id}/members/{subscriber_hash}/tags`
-	- **GetLists**: GET `/lists`
-	- **GetListsId**: GET `/lists/{list_id}`
-	- **GetListsIdAbuseReports**: GET `/lists/{list_id}/abuse-reports`
-	- **GetListsIdAbuseReportsId**: GET `/lists/{list_id}/abuse-reports/{report_id}`
-	- **GetListsIdActivity**: GET `/lists/{list_id}/activity`
-	- **GetListsIdClients**: GET `/lists/{list_id}/clients`
-	- **GetListsIdGrowthHistory**: GET `/lists/{list_id}/growth-history`
-	- **GetListsIdGrowthHistoryId**: GET `/lists/{list_id}/growth-history/{month}`
-	- **GetListsIdInterestCategories**: GET `/lists/{list_id}/interest-categories`
-	- **GetListsIdInterestCategoriesId**: GET `/lists/{list_id}/interest-categories/{interest_category_id}`
-	- **GetListsIdInterestCategoriesIdInterests**: GET `/lists/{list_id}/interest-categories/{interest_category_id}/interests`
-	- **GetListsIdInterestCategoriesIdInterestsId**: GET `/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}`
-	- **GetListsIdLocations**: GET `/lists/{list_id}/locations`
-	- **GetListsIdMembers**: GET `/lists/{list_id}/members`
-	- **GetListsIdMembersId**: GET `/lists/{list_id}/members/{subscriber_hash}`
-	- **GetListsIdMembersIdActivity**: GET `/lists/{list_id}/members/{subscriber_hash}/activity`
-	- **GetListsIdMembersIdActivityFeed**: GET `/lists/{list_id}/members/{subscriber_hash}/activity-feed`
-	- **GetListsIdMembersIdEvents**: GET `/lists/{list_id}/members/{subscriber_hash}/events`
-	- **GetListsIdMembersIdGoals**: GET `/lists/{list_id}/members/{subscriber_hash}/goals`
-	- **GetListsIdMembersIdNotes**: GET `/lists/{list_id}/members/{subscriber_hash}/notes`
-	- **GetListsIdMembersIdNotesId**: GET `/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}`
-	- **GetListsIdMergeFields**: GET `/lists/{list_id}/merge-fields`
-	- **GetListsIdMergeFieldsId**: GET `/lists/{list_id}/merge-fields/{merge_id}`
-	- **GetListsIdSegmentsId**: GET `/lists/{list_id}/segments/{segment_id}`
-	- **GetListsIdSegmentsIdMembers**: GET `/lists/{list_id}/segments/{segment_id}/members`
-	- **GetListsIdSignupForms**: GET `/lists/{list_id}/signup-forms`
-	- **GetListsIdWebhooks**: GET `/lists/{list_id}/webhooks`
-	- **GetListsIdWebhooksId**: GET `/lists/{list_id}/webhooks/{webhook_id}`
-	- **PatchListsId**: PATCH `/lists/{list_id}`
-	- **PatchListsIdInterestCategoriesId**: PATCH `/lists/{list_id}/interest-categories/{interest_category_id}`
-	- **PatchListsIdInterestCategoriesIdInterestsId**: PATCH `/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}`
-	- **PatchListsIdMembersId**: PATCH `/lists/{list_id}/members/{subscriber_hash}`
-	- **PatchListsIdMembersIdNotesId**: PATCH `/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}`
-	- **PatchListsIdMergeFieldsId**: PATCH `/lists/{list_id}/merge-fields/{merge_id}`
-	- **PatchListsIdSegmentsId**: PATCH `/lists/{list_id}/segments/{segment_id}`
-	- **PatchListsIdWebhooksId**: PATCH `/lists/{list_id}/webhooks/{webhook_id}`
-	- **PostListMemberEvents**: POST `/lists/{list_id}/members/{subscriber_hash}/events`
-	- **PostListMemberTags**: POST `/lists/{list_id}/members/{subscriber_hash}/tags`
-	- **PostLists**: POST `/lists`
-	- **PostListsId**: POST `/lists/{list_id}`
-	- **PostListsIdInterestCategories**: POST `/lists/{list_id}/interest-categories`
-	- **PostListsIdInterestCategoriesIdInterests**: POST `/lists/{list_id}/interest-categories/{interest_category_id}/interests`
-	- **PostListsIdMembers**: POST `/lists/{list_id}/members`
-	- **PostListsIdMembersHashActionsDeletePermanent**: POST `/lists/{list_id}/members/{subscriber_hash}/actions/delete-permanent`
-	- **PostListsIdMembersIdNotes**: POST `/lists/{list_id}/members/{subscriber_hash}/notes`
-	- **PostListsIdMergeFields**: POST `/lists/{list_id}/merge-fields`
-	- **PostListsIdSegments**: POST `/lists/{list_id}/segments`
-	- **PostListsIdSegmentsId**: POST `/lists/{list_id}/segments/{segment_id}`
-	- **PostListsIdSegmentsIdMembers**: POST `/lists/{list_id}/segments/{segment_id}/members`
-	- **PostListsIdSignupForms**: POST `/lists/{list_id}/signup-forms`
-	- **PostListsIdWebhooks**: POST `/lists/{list_id}/webhooks`
-	- **PreviewASegment**: GET `/lists/{list_id}/segments`
-	- **PutListsIdMembersId**: PUT `/lists/{list_id}/members/{subscriber_hash}`
-	- **SearchTagsByName**: GET `/lists/{list_id}/tag-search`
-- **Ping**
-	- **GetPing**: GET `/ping`
-- **Reporting**
-	- **GetReportingFacebookAds**: GET `/reporting/facebook-ads`
-	- **GetReportingFacebookAdsId**: GET `/reporting/facebook-ads/{outreach_id}`
-	- **GetReportingFacebookAdsIdEcommerceProductActivity**: GET `/reporting/facebook-ads/{outreach_id}/ecommerce-product-activity`
-	- **GetReportingLandingPages**: GET `/reporting/landing-pages`
-	- **GetReportingLandingPagesId**: GET `/reporting/landing-pages/{outreach_id}`
-- **Reports**
-	- **GetReports**: GET `/reports`
-	- **GetReportsId**: GET `/reports/{campaign_id}`
-	- **GetReportsIdAbuseReportsId**: GET `/reports/{campaign_id}/abuse-reports`
-	- **GetReportsIdAbuseReportsIdId**: GET `/reports/{campaign_id}/abuse-reports/{report_id}`
-	- **GetReportsIdAdvice**: GET `/reports/{campaign_id}/advice`
-	- **GetReportsIdClickDetails**: GET `/reports/{campaign_id}/click-details`
-	- **GetReportsIdClickDetailsId**: GET `/reports/{campaign_id}/click-details/{link_id}`
-	- **GetReportsIdClickDetailsIdMembers**: GET `/reports/{campaign_id}/click-details/{link_id}/members`
-	- **GetReportsIdClickDetailsIdMembersId**: GET `/reports/{campaign_id}/click-details/{link_id}/members/{subscriber_hash}`
-	- **GetReportsIdDomainPerformance**: GET `/reports/{campaign_id}/domain-performance`
-	- **GetReportsIdEcommerceProductActivity**: GET `/reports/{campaign_id}/ecommerce-product-activity`
-	- **GetReportsIdEepurl**: GET `/reports/{campaign_id}/eepurl`
-	- **GetReportsIdEmailActivity**: GET `/reports/{campaign_id}/email-activity`
-	- **GetReportsIdEmailActivityId**: GET `/reports/{campaign_id}/email-activity/{subscriber_hash}`
-	- **GetReportsIdLocations**: GET `/reports/{campaign_id}/locations`
-	- **GetReportsIdOpenDetails**: GET `/reports/{campaign_id}/open-details`
-	- **GetReportsIdOpenDetailsIdMembersId**: GET `/reports/{campaign_id}/open-details/{subscriber_hash}`
-	- **GetReportsIdSentTo**: GET `/reports/{campaign_id}/sent-to`
-	- **GetReportsIdSentToId**: GET `/reports/{campaign_id}/sent-to/{subscriber_hash}`
-	- **GetReportsIdSubReportsId**: GET `/reports/{campaign_id}/sub-reports`
-	- **GetReportsIdUnsubscribed**: GET `/reports/{campaign_id}/unsubscribed`
-	- **GetReportsIdUnsubscribedId**: GET `/reports/{campaign_id}/unsubscribed/{subscriber_hash}`
-- **Root**
-	- **GetRoot**: GET `/`
-- **SearchCampaigns**
-	- **GetSearchCampaigns**: GET `/search-campaigns`
-- **SearchMembers**
-	- **GetSearchMembers**: GET `/search-members`
-- **TemplateFolders**
-	- **DeleteTemplateFoldersId**: DELETE `/template-folders/{folder_id}`
-	- **GetTemplateFolders**: GET `/template-folders`
-	- **GetTemplateFoldersId**: GET `/template-folders/{folder_id}`
-	- **PatchTemplateFoldersId**: PATCH `/template-folders/{folder_id}`
-	- **PostTemplateFolders**: POST `/template-folders`
-- **Templates**
-	- **DeleteTemplatesId**: DELETE `/templates/{template_id}`
-	- **GetTemplates**: GET `/templates`
-	- **GetTemplatesId**: GET `/templates/{template_id}`
-	- **GetTemplatesIdDefaultContent**: GET `/templates/{template_id}/default-content`
-	- **PatchTemplatesId**: PATCH `/templates/{template_id}`
-	- **PostTemplates**: POST `/templates`
-- **VerifiedDomains**
-	- **CreateVerifiedDomain**: POST `/verified-domains`
-	- **DeleteVerifiedDomain**: DELETE `/verified-domains/{domain_name}`
-	- **GetVerifiedDomain**: GET `/verified-domains/{domain_name}`
-	- **GetVerifiedDomains**: GET `/verified-domains`
-	- **VerifyDomain**: POST `/verified-domains/{domain_name}/actions/verify`
+## Fully Supported
 
+### Campaigns
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| DeleteCampaignsId                                   |        |            | ✅       |
+| DeleteCampaignsIdFeedbackId                         |        |            | ✅       |
+| GetCampaigns                                        |        |            | ✅       |
+| GetCampaignsId                                      |        |            | ✅       |
+| GetCampaignsIdContent                               |        | ✅          | ✅       |
+| GetCampaignsIdFeedback                              |        |            | ✅       |
+| GetCampaignsIdFeedbackId                            |        |            | ✅       |
+| GetCampaignsIdSendChecklist                         |        |            | ✅       |
+| PatchCampaignsId                                    |        |            | ✅       |
+| PatchCampaignsIdFeedbackId                          |        |            | ✅       |
+| PostCampaigns                                       | ✅      | ✅          | ✅       |
+| PostCampaignsIdActionsCancelSend                    |        |            | ✅       |
+| PostCampaignsIdActionsCreateResend                  |        |            | ✅       |
+| PostCampaignsIdActionsPause                         |        |            | ✅       |
+| PostCampaignsIdActionsReplicate                     |        |            | ✅       |
+| PostCampaignsIdActionsResume                        |        |            | ✅       |
+| PostCampaignsIdActionsSchedule                      |        |            | ✅       |
+| PostCampaignsIdActionsSend                          |        |            | ✅       |
+| PostCampaignsIdActionsTest                          |        |            | ✅       |
+| PostCampaignsIdActionsUnschedule                    |        |            | ✅       |
+| PostCampaignsIdFeedback                             |        |            | ✅       |
+| PutCampaignsIdContent                               |        |            | ✅       |
+
+### Lists
+
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| DeleteListsId                                       |        |            | ✅       |
+| DeleteListsIdInterestCategoriesId                   |        |            | ✅       |
+| DeleteListsIdInterestCategoriesIdInterestsId        |        |            | ✅       |
+| DeleteListsIdMembersId                              |        |            | ✅       |
+| DeleteListsIdMembersIdNotesId                       |        |            | ✅       |
+| DeleteListsIdMergeFieldsId                          |        |            | ✅       |
+| DeleteListsIdSegmentsId                             |        |            | ✅       |
+| DeleteListsIdSegmentsIdMembersId                    |        |            | ✅       |
+| DeleteListsIdWebhooksId                             |        |            | ✅       |
+| GetListMemberTags                                   |        |            | ✅       |
+| GetLists                                            |        |            | ✅       |
+| GetListsId                                          |        |            | ✅       |
+| GetListsIdAbuseReports                              |        |            | ✅       |
+| GetListsIdAbuseReportsId                            |        |            | ✅       |
+| GetListsIdActivity                                  |        |            | ✅       |
+| GetListsIdClients                                   |        |            | ✅       |
+| GetListsIdGrowthHistory                             |        |            | ✅       |
+| GetListsIdGrowthHistoryId                           |        |            | ✅       |
+| GetListsIdInterestCategories                        |        |            | ✅       |
+| GetListsIdInterestCategoriesId                      |        |            | ✅       |
+| GetListsIdInterestCategoriesIdInterests             |        |            | ✅       |
+| GetListsIdInterestCategoriesIdInterestsId           |        |            | ✅       |
+| GetListsIdLocations                                 |        |            | ✅       |
+| GetListsIdMembers                                   |        |            | ✅       |
+| GetListsIdMembersId                                 | ✅      | ✅          | ✅       |
+| GetListsIdMembersIdActivity                         |        |            | ✅       |
+| GetListsIdMembersIdActivityFeed                     |        |            | ✅       |
+| GetListsIdMembersIdEvents                           |        |            | ✅       |
+| GetListsIdMembersIdGoals                            |        |            | ✅       |
+| GetListsIdMembersIdNotes                            |        |            | ✅       |
+| GetListsIdMembersIdNotesId                          |        |            | ✅       |
+| GetListsIdMergeFields                               |        |            | ✅       |
+| GetListsIdMergeFieldsId                             |        |            | ✅       |
+| GetListsIdSegmentsId                                |        |            | ✅       |
+| GetListsIdSegmentsIdMembers                         |        |            | ✅       |
+| GetListsIdSignupForms                               |        |            | ✅       |
+| GetListsIdWebhooks                                  |        |            | ✅       |
+| GetListsIdWebhooksId                                |        |            | ✅       |
+| PatchListsId                                        |        |            | ✅       |
+| PatchListsIdInterestCategoriesId                    |        |            | ✅       |
+| PatchListsIdInterestCategoriesIdInterestsId         |        |            | ✅       |
+| PatchListsIdMembersId                               | ✅      | ✅          | ✅       |
+| PatchListsIdMembersIdNotesId                        |        |            | ✅       |
+| PatchListsIdMergeFieldsId                           |        |            | ✅       |
+| PatchListsIdSegmentsId                              |        |            | ✅       |
+| PatchListsIdWebhooksId                              |        |            | ✅       |
+| PostListMemberEvents                                |        |            | ✅       |
+| PostListMemberTags                                  |        |            | ✅       |
+| PostLists                                           |        |            | ✅       |
+| PostListsId                                         |        |            | ✅       |
+| PostListsIdInterestCategories                       |        |            | ✅       |
+| PostListsIdInterestCategoriesIdInterests            |        |            | ✅       |
+| PostListsIdMembers                                  | ✅      | ✅          | ✅       |
+| PostListsIdMembersHashActionsDeletePermanent        |        |            | ✅       |
+| PostListsIdMembersIdNotes                           |        |            | ✅       |
+| PostListsIdMergeFields                              |        |            | ✅       |
+| PostListsIdSegments                                 |        |            | ✅       |
+| PostListsIdSegmentsId                               |        |            | ✅       |
+| PostListsIdSegmentsIdMembers                        |        |            | ✅       |
+| PostListsIdSignupForms                              |        |            | ✅       |
+| PostListsIdWebhooks                                 |        |            | ✅       |
+| PreviewASegment                                     |        |            | ✅       |
+| PutListsIdMembersId                                 |        |            | ✅       |
+| SearchTagsByName                                    |        |            | ✅       |
+
+### Templates
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| GetTemplates                                        |        |            | ✅       |
+| GetTemplatesId                                      |        |            | ✅       |
+| GetTemplatesIdDefaultContent                        |        |            | ✅       |
+| PatchTemplatesId                                    |        |            | ✅       |
+| PostTemplates                                       | ✅      | ✅          | ✅       |
+
+## Testing Pending
+
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| DeleteCampaignFoldersId                             |        |            | ✅      |
+| GetCampaignFolders                                  |        |            | ✅      |
+| GetCampaignFoldersId                                |        |            | ✅      |
+| PatchCampaignFoldersId                              |        |            | ✅      |
+| PostCampaignFolders                                 |        |            | ✅      |
+
+### Template Folders
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| DeleteTemplateFoldersId                             |        |            | ✅       |
+| GetTemplateFolders                                  |        |            | ✅       |
+| GetTemplateFoldersId                                |        |            | ✅       |
+| PatchTemplateFoldersId                              |        |            | ✅       |
+| PostTemplateFolders                                 |        |            | ✅       |
+| DeleteTemplatesId                                   |        |            | ✅       |
+
+### Search Campaigns
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| GetSearchCampaigns                                  |        |            | ✅       |
+
+### Search Members
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| GetSearchMembers                                    |        |            | ✅       |
+
+### Reports
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| GetReports                                          |        |            | ✅       |
+| GetReportsId                                        |        |            | ✅       |
+| GetReportsIdAbuseReportsId                          |        |            | ✅       |
+| GetReportsIdAbuseReportsIdId                        |        |            | ✅       |
+| GetReportsIdAdvice                                  |        |            | ✅       |
+| GetReportsIdClickDetails                            |        |            | ✅       |
+| GetReportsIdClickDetailsId                          |        |            | ✅       |
+| GetReportsIdClickDetailsIdMembers                   |        |            | ✅       |
+| GetReportsIdClickDetailsIdMembersId                 |        |            | ✅       |
+| GetReportsIdDomainPerformance                       |        |            | ✅       |
+| GetReportsIdEcommerceProductActivity                |        |            | ✅       |
+| GetReportsIdEepurl                                  |        |            | ✅       |
+| GetReportsIdEmailActivity                           |        |            | ✅       |
+| GetReportsIdEmailActivityId                         |        |            | ✅       |
+| GetReportsIdLocations                               |        |            | ✅       |
+| GetReportsIdOpenDetails                             |        |            | ✅       |
+| GetReportsIdOpenDetailsIdMembersId                  |        |            | ✅       |
+| GetReportsIdSentTo                                  |        |            | ✅       |
+| GetReportsIdSentToId                                |        |            | ✅       |
+| GetReportsIdSubReportsId                            |        |            | ✅       |
+| GetReportsIdUnsubscribed                            |        |            | ✅       |
+| GetReportsIdUnsubscribedId                          |        |            | ✅       |
+
+### Root
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| GetRoot                                             |        |            | ✅       |
+
+## Pending Next Support
+
+### File Manager
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| DeleteFileManagerFilesId                            |        |            |         |
+| DeleteFileManagerFoldersId                          |        |            |         |
+| GetFileManagerFiles                                 |        |            |         |
+| GetFileManagerFilesId                               |        |            |         |
+| GetFileManagerFolders                               |        |            |         |
+| GetFileManagerFoldersId                             |        |            |         |
+| PatchFileManagerFilesId                             |        |            |         |
+| PatchFileManagerFoldersId                           |        |            |         |
+| PostFileManagerFiles                                |        |            |         |
+| PostFileManagerFolders                              |        |            |         |
+
+### Batches
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| DeleteBatchesId                                     |        |            |         |
+| GetBatches                                          |        |            |         |
+| GetBatchesId                                        |        |            |         |
+| PostBatches                                         |        |            |         |
+| DeleteBatchWebhookId                                |        |            |         |
+| GetBatchWebhook                                     |        |            |         |
+| GetBatchWebhooks                                    |        |            |         |
+| PatchBatchWebhooks                                  |        |            |         |
+| PostBatchWebhooks                                   |        |            |         |
+
+### Automations
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| ArchiveAutomations                                  |        |            |         |
+| DeleteAutomationsIdEmailsId                         |        |            |         |
+| GetAutomations                                      |        |            |         |
+| GetAutomationsId                                    |        |            |         |
+| GetAutomationsIdEmails                              |        |            |         |
+| GetAutomationsIdEmailsId                            |        |            |         |
+| GetAutomationsIdEmailsIdQueue                       |        |            |         |
+| GetAutomationsIdEmailsIdQueueId                     |        |            |         |
+| GetAutomationsIdRemovedSubscribers                  |        |            |         |
+| GetAutomationsIdRemovedSubscribersId                |        |            |         |
+| PatchAutomationEmailWorkflowId                      |        |            |         |
+| PostAutomations                                     |        |            |         |
+| PostAutomationsIdActionsPauseAllEmails              |        |            |         |
+| PostAutomationsIdActionsStartAllEmails              |        |            |         |
+| PostAutomationsIdEmailsIdActionsPause               |        |            |         |
+| PostAutomationsIdEmailsIdActionsStart               |        |            |         |
+| PostAutomationsIdEmailsIdQueue                      |        |            |         |
+| PostAutomationsIdRemovedSubscribers                 |        |            |         |
+
+## Remaining Requests
+
+### Activity Feed
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| GetActivityFeedChimpChatter                         |        |            |         |
+
+### Authorized Apps
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| GetAuthorizedApps                                   |        |            |         |
+| GetAuthorizedAppsId                                 |        |            |         |
+
+### Connected Sites
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| DeleteConnectedSitesId                              |        |            |         |
+| GetConnectedSites                                   |        |            |         |
+| GetConnectedSitesId                                 |        |            |         |
+| PostConnectedSites                                  |        |            |         |
+| PostConnectedSitesIdActionsVerifyScriptInstallation |        |            |         |
+
+### Conversations
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| GetConversations                                    |        |            |         |
+| GetConversationsId                                  |        |            |         |
+| GetConversationsIdMessages                          |        |            |         |
+| GetConversationsIdMessagesId                        |        |            |         |
+
+### Customer Journeys
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| PostCustomerJourneysJourneysIdStepsIdActionsTrigger |        |            |         |
+
+### Ecommerce Stores
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| DeleteEcommerceStoresId                             |        |            |         |
+| DeleteEcommerceStoresIdCartsId                      |        |            |         |
+| DeleteEcommerceStoresIdCartsLinesId                 |        |            |         |
+| DeleteEcommerceStoresIdCustomersId                  |        |            |         |
+| DeleteEcommerceStoresIdOrdersId                     |        |            |         |
+| DeleteEcommerceStoresIdOrdersIdLinesId              |        |            |         |
+| DeleteEcommerceStoresIdProductsId                   |        |            |         |
+| DeleteEcommerceStoresIdProductsIdImagesId           |        |            |         |
+| DeleteEcommerceStoresIdProductsIdVariantsId         |        |            |         |
+| DeleteEcommerceStoresIdPromocodesId                 |        |            |         |
+| DeleteEcommerceStoresIdPromorulesId                 |        |            |         |
+| GetEcommerceOrders                                  |        |            |         |
+| GetEcommerceStores                                  |        |            |         |
+| GetEcommerceStoresId                                |        |            |         |
+| GetEcommerceStoresIdCarts                           |        |            |         |
+| GetEcommerceStoresIdCartsId                         |        |            |         |
+| GetEcommerceStoresIdCartsIdLines                    |        |            |         |
+| GetEcommerceStoresIdCartsIdLinesId                  |        |            |         |
+| GetEcommerceStoresIdCustomers                       |        |            |         |
+| GetEcommerceStoresIdCustomersId                     |        |            |         |
+| GetEcommerceStoresIdOrders                          |        |            |         |
+| GetEcommerceStoresIdOrdersId                        |        |            |         |
+| GetEcommerceStoresIdOrdersIdLines                   |        |            |         |
+| GetEcommerceStoresIdOrdersIdLinesId                 |        |            |         |
+| GetEcommerceStoresIdProducts                        |        |            |         |
+| GetEcommerceStoresIdProductsId                      |        |            |         |
+| GetEcommerceStoresIdProductsIdImages                |        |            |         |
+| GetEcommerceStoresIdProductsIdImagesId              |        |            |         |
+| GetEcommerceStoresIdProductsIdVariants              |        |            |         |
+| GetEcommerceStoresIdProductsIdVariantsId            |        |            |         |
+| GetEcommerceStoresIdPromocodes                      |        |            |         |
+| GetEcommerceStoresIdPromocodesId                    |        |            |         |
+| GetEcommerceStoresIdPromorules                      |        |            |         |
+| GetEcommerceStoresIdPromorulesId                    |        |            |         |
+| PatchEcommerceStoresId                              |        |            |         |
+| PatchEcommerceStoresIdCartsId                       |        |            |         |
+| PatchEcommerceStoresIdCartsIdLinesId                |        |            |         |
+| PatchEcommerceStoresIdCustomersId                   |        |            |         |
+| PatchEcommerceStoresIdOrdersId                      |        |            |         |
+| PatchEcommerceStoresIdOrdersIdLinesId               |        |            |         |
+| PatchEcommerceStoresIdProductsId                    |        |            |         |
+| PatchEcommerceStoresIdProductsIdImagesId            |        |            |         |
+| PatchEcommerceStoresIdProductsIdVariantsId          |        |            |         |
+| PatchEcommerceStoresIdPromocodesId                  |        |            |         |
+| PatchEcommerceStoresIdPromorulesId                  |        |            |         |
+| PostEcommerceStores                                 |        |            |         |
+| PostEcommerceStoresIdCarts                          |        |            |         |
+| PostEcommerceStoresIdCartsIdLines                   |        |            |         |
+| PostEcommerceStoresIdCustomers                      |        |            |         |
+| PostEcommerceStoresIdOrders                         |        |            |         |
+| PostEcommerceStoresIdOrdersIdLines                  |        |            |         |
+| PostEcommerceStoresIdProducts                       |        |            |         |
+| PostEcommerceStoresIdProductsIdImages               |        |            |         |
+| PostEcommerceStoresIdProductsIdVariants             |        |            |         |
+| PostEcommerceStoresIdPromocodes                     |        |            |         |
+| PostEcommerceStoresIdPromorules                     |        |            |         |
+| PutEcommerceStoresIdCustomersId                     |        |            |         |
+| PutEcommerceStoresIdProductsIdVariantsId            |        |            |         |
+
+### Facebook Ads
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| GetAllFacebookAds                                   |        |            |         |
+| GetFacebookAdsId                                    |        |            |         |
+
+### Landing Pages
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| DeleteLandingPageId                                 |        |            |         |
+| GetAllLandingPages                                  |        |            |         |
+| GetLandingPageId                                    |        |            |         |
+| GetLandingPageIdContent                             |        |            |         |
+| PatchLandingPageId                                  |        |            |         |
+| PostAllLandingPages                                 |        |            |         |
+| PostLandingPageIdActionsPublish                     |        |            |         |
+| PostLandingPageIdActionsUnpublish                   |        |            |         |
+
+### Verified Domains
+
+| Request                                             | Tested | Documented | watchOS |
+| --------------------------------------------------- | ------ | ---------- | ------- |
+| CreateVerifiedDomain                                |        |            |         |
+| DeleteVerifiedDomain                                |        |            |         |
+| GetVerifiedDomain                                   |        |            |         |
+| GetVerifiedDomains                                  |        |            |         |
+| VerifyDomain                                        |        |		   |         |
 
 # License 
 
