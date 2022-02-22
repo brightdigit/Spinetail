@@ -36,40 +36,30 @@ A Swift pacakge for interfacing with your Mailchimp account, audiences, campaign
 # Table of Contents
 
 * [Introduction](#introduction)
+	  * [Demo Example](#demo-example)
 * [Features](#features)
 * [Installation](#installation)
+* [Setting Up Your Mailchimp Client with Prch](#setting-up-your-mailchimp-client-with-prch)
 * [Usage](#usage)
-	* [Search for Audience List Subscribers](#search-for-audience-list-subscribers)
-	* [Adding new Audience List Subscribers](#adding-new-audience-list-subscribers)
-	* [Updating Existing Audience List Subscribers](#updating-existing-audience-list-subscribers)
-	* [Pulling List of Campaigns](#pulling-list-of-campaigns)
-	* [Get Newsletter Content](#get-newsletter-content)
-	* [Updating Audience List Subscriber Tags](#updating-audience-list-subscriber-tags)
-* [Making Requests via Prch](#making-requests-via-prch)
-	* [Operation](#operation)
-		* [Service](#service)
-		* [Request](#request)
-		* [Response](#response)
-	* [Model](#model)
-	* [APIClient](#apiclient)
-	 	* [APIClient properties](#apiclient-properties)
-	 	* [Making a request](#making-a-request)
-	 	* [APIResponse](#apiresponse)
-	 	* [Encoding and Decoding](#encoding-and-decoding)
-	 	* [APIClientError](#apiclienterror)
-	 	* [RequestBehaviour](#requestbehaviour)
-  	* [Authorization](#authorization)
-	 	* [Reactive and Promises](#reactive-and-promises)
-   * [Requests](#requests)
+   * [Audience List Members](#audience-list-members)
+	  * [Getting an Audience List Member](#getting-an-audience-list-member)
+		 * [Closure-based Completion](#closure-based-completion)
+		 * [Async/Await](#asyncawait)
+		 * [Synchronous](#synchronous)
+	  * [Adding new Audience List Members](#adding-new-audience-list-members)
+	  * [Updating Existing Audience List Members](#updating-existing-audience-list-members)
+   * [Templates and Campaigns](#templates-and-campaigns)
+	  * [Pulling List of Campaigns](#pulling-list-of-campaigns)
+	  * [Get Newsletter Content](#get-newsletter-content)
+* [Requests](#requests)
 * [License](#license)
-
 
 
 <!--te-->
 
 # Introduction
 
-Spinetail is a Swift pacakge for interfacing with your Mailchimp account, audiences, campaigns, and more. 
+Spinetail is a Swift package for interfacing with your Mailchimp account, audiences, campaigns, and more. 
 
 ### Demo Example
 
@@ -180,9 +170,11 @@ To make a request via `Prch`, we have three options using our `client`:
 * async/await 
 * synchronous calls
 
-Let's start with an example by find a member of our audience.
+Let's start with an example using audience member lists.
 
-## Getting an Audience List Member
+## Audience List Members
+
+### Getting an Audience List Member
 
 According to [the documentation for the Mailchimp API](https://mailchimp.com/developer/marketing/api/list-members/get-member-info/), we can get a member of our audience list based on their _subscriber_hash_.
 This is described as:
@@ -206,53 +198,110 @@ import Spinetail
 
 let api = MailchimpAPI(apiKey: "")
 let client = Client(api: api, session: URLSession.shared)
-let request = Lists.GetListsIdMembersId.Request(listId: "", subscriberHash: emailAddress)
+let request = Lists.GetListsIdMembersId.Request(listId: listId, subscriberHash: emailAddress)
 ```
 
+As previously noted there are three ways to execute a call:
 
+#### Closure-based Completion
 
 ```swift
 client.request(request) { result in
   switch result {
   case let .success(member):
-  
+  	// Successful Retrieval
 	break
   case let .defaultResponse(statusCode, response):
+  	// Non-2xx Response (ex. 404 member not found)
 	break
   case let .failure(error):
+  	// Other Errors (ex. networking, decoding or encoding JSON...)
 	break
   }
 }
+```
 
+
+#### Async/Await 
+
+```swift
 do {
+  // Successful Retrieval
   let member = try await client.request(request)
 } catch let error as ClientResponseResult<Lists.GetListsIdMembersId.Response>.FailedResponseError {
-
+  // Non-2xx Response (ex. 404 member not found)
 } catch  {
-  
-}
-
-do {
-  let member = try client.requestSync(request)
-} catch let error as ClientResponseResult<Lists.GetListsIdMembersId.Response>.FailedResponseError {
-  
-} catch  {
-  
+  // Other Errors (ex. networking, decoding or encoding JSON...)
 }
 ```
 
-## Adding new Audience List Members
+#### Synchronous
 
-## Updating Existing Audience List Members
+```swift
+do {
+  // Successful Retrieval
+  let member = try client.requestSync(request)
+} catch let error as ClientResponseResult<Lists.GetListsIdMembersId.Response>.FailedResponseError {
+  // Non-2xx Response (ex. 404 member not found)
+} catch  {
+  // Other Errors (ex. networking, decoding or encoding JSON...)
+}
+```
 
-## Pulling List of Campaigns
+In each case there are possible results:
 
-## Get Newsletter Content
+* The call was successful
+* The call failed but the response was valid such as a 4xx status code
+* The call failed due to an internal error (ex. decoding, encoding, networking, etc...)
 
-## Updating Audience List Subscriber Tags
+An example of where we'd want to handle a 404 for instance is when we want to add or update a subscriber 
+when someone signs up for a service. If the member is not found, we want go ahead and add that subscriber.
+
+### Adding new Audience List Members
+
+To [add a new audience member](https://mailchimp.com/developer/marketing/api/list-members/add-member-to-list/) we need to create a `Lists.PostListsIdMembers.Request`:
+
+```swift
+let request = Lists.PostListsIdMembers.Request(
+  listId: listID, 
+  body: .init(
+    emailAddress: emailAddress, 
+	status: .subscribed, 
+	timestampOpt: .init(), 
+	timestampSignup: .init()
+  )
+)
+```
+
+Now that we have a request let's use the completion handler call for adding a new member:
+
+```swift
+client.request(request) { result in
+  switch result {
+  case let .success(newMember):
+	  // Successful Adding
+	break
+  case let .defaultResponse(statusCode, response):
+	  // Non-2xx Response
+	break
+  case let .failure(error):
+	  // Other Errors (ex. networking, decoding or encoding JSON...)
+	break
+  }
+}
+```
+
+### Updating Existing Audience List Members
+
+## Templates and Campaigns
+
+### Pulling List of Campaigns
+
+### Get Newsletter Content
 
 
-## Requests
+
+# Requests
 
 - **ActivityFeed**
 	- **GetActivityFeedChimpChatter**: GET `/activity-feed/chimp-chatter`
