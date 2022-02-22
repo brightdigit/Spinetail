@@ -149,9 +149,97 @@ let package = Package(
 
 The SpinetailVapor package adds helper properties and methods to help with setting up and accessing the APIClient.
 
+# Setting Up Your Mailchimp Client with Prch
+
+In order to get started with the Mailchimp API, [make sure you have created an API key](https://mailchimp.com/developer/marketing/guides/quick-start/#generate-your-api-key). Typically the API key looks something like this:
+
+```
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us00
+```
+
+Once you have that, decide what you'll be using for your session depending on your platform:
+
+* `URLSession` - iOS, tvOS, watchOS, macOS
+* `AsyncHTTPClient` via `PrchNIO` - Linux Server
+* `Vapor.Client` via `PrchVapor` - Vapor
+
+Here's an example for setting up a client for Mailchimp on a standard Apple platform app:
+ 
+```swift
+let api = MailchimpAPI(apiKey: "")
+let client = Client(api: api, session: URLSession.shared)
+```
+
+Now that we have setup the client, we'll be using let's begin to access the Mailchimp API.
+
 # Usage 
 
-## Search for Audience List Members
+To make a request via `Prch`, we have three options using our `client`:
+
+* closure-based completion calls
+* async/await 
+* synchronous calls
+
+Let's start with an example by find a member of our audience.
+
+## Getting an Audience List Member
+
+According to [the documentation for the Mailchimp API](https://mailchimp.com/developer/marketing/api/list-members/get-member-info/), we can get a member of our audience list based on their _subscriber_hash_.
+This is described as:
+
+> The MD5 hash of the lowercase version of the list member's email address. This endpoint also accepts a list member's email address or contact_id.
+
+The means we can use:
+* MD5 hash of the lowercase version of the list member's email address _but also_
+* email address or
+* `contact_id`
+
+In our case, we'll be using an email address to see if we have someone subscribed. 
+Additionally we need our audience's `listID` which is found on the audience settings page.
+
+![ListID at the Mailchimp Admin Page](Assets/Mailchimp-listID.png)
+
+With that email address, we can create a `Request`:
+
+```swift
+import Spinetail 
+
+let api = MailchimpAPI(apiKey: "")
+let client = Client(api: api, session: URLSession.shared)
+let request = Lists.GetListsIdMembersId.Request(listId: "", subscriberHash: emailAddress)
+```
+
+
+
+```swift
+client.request(request) { result in
+  switch result {
+  case let .success(member):
+  
+	break
+  case let .defaultResponse(statusCode, response):
+	break
+  case let .failure(error):
+	break
+  }
+}
+
+do {
+  let member = try await client.request(request)
+} catch let error as ClientResponseResult<Lists.GetListsIdMembersId.Response>.FailedResponseError {
+
+} catch  {
+  
+}
+
+do {
+  let member = try client.requestSync(request)
+} catch let error as ClientResponseResult<Lists.GetListsIdMembersId.Response>.FailedResponseError {
+  
+} catch  {
+  
+}
+```
 
 ## Adding new Audience List Members
 
@@ -163,151 +251,6 @@ The SpinetailVapor package adds helper properties and methods to help with setti
 
 ## Updating Audience List Subscriber Tags
 
-# Making Requests via Prch
-
-## Operation
-
-Each operation has a nested `Request` and a `Response`, as well as a static `service` property
-
-#### Service
-
-This is the struct that contains the static information about an operation including it's id, tag, method, pre-modified path, and authorization requirements. It has a generic `ResponseType` type which maps to the `Response` type.
-You shouldn't really need to interact with this service type.
-
-#### Request
-
-Each request is a subclass of `APIRequest` and has an `init` with a body param if it has a body, and a `options` struct for other url and path parameters. There is also a convenience init for passing parameters directly.
-The `options` and `body` structs are both mutable so they can be modified before actually sending the request.
-
-#### Response
-
-The response is an enum of all the possible responses the request can return. it also contains getters for the `statusCode`, whether it was `successful`, and the actual decoded optional `success` response. If the operation only has one type of failure type there is also an optional `failure` type.
-
-## Model
-Models that are sent and returned from the API are mutable classes. Each model is `Equatable` and `Codable`.
-
-`Required` properties are non optional and non-required are optional
-
-All properties can be passed into the initializer, with `required` properties being mandatory.
-
-If a model has `additionalProperties` it will have a subscript to access these by string
-
-## APIClient
-The `APIClient` is used to encode, authorize, send, monitor, and decode the requests. There is a `APIClient.default` that uses the default `baseURL` otherwise a custom one can be initialized:
-
-```swift
-public init(baseURL: String, sessionManager: SessionManager = .default, defaultHeaders: [String: String] = [:], behaviours: [RequestBehaviour] = [])
-```
-
-#### APIClient properties
-
-- `baseURL`: The base url that every request `path` will be appended to
-- `behaviours`: A list of [Request Behaviours](#requestbehaviour) to add to every request
-- `sessionManager`: An `Alamofire.SessionManager` that can be customized
-- `defaultHeaders`: Headers that will be applied to every request
-- `decodingQueue`: The `DispatchQueue` to decode responses on
-
-#### Making a request
-To make a request first initialize a [Request](#request) and then pass it to `makeRequest`. The `complete` closure will be called with an `APIResponse`
-
-```swift
-func makeRequest<T>(_ request: APIRequest<T>, behaviours: [RequestBehaviour] = [], queue: DispatchQueue = DispatchQueue.main, complete: @escaping (APIResponse<T>) -> Void) -> Request? {
-```
-
-Example request (that is not neccessarily in this api):
-
-```swift
-
-let getUserRequest = User.GetUser.Request(id: 123)
-let apiClient = APIClient.default
-
-apiClient.makeRequest(getUserRequest) { apiResponse in
-	switch apiResponse {
-		case .result(let apiResponseValue):
-			if let user = apiResponseValue.success {
-				print("GetUser returned user \(user)")
-			} else {
-				print("GetUser returned \(apiResponseValue)")
-			}
-		case .error(let apiError):
-			print("GetUser failed with \(apiError)")
-	}
-}
-```
-
-Each [Request](#request) also has a `makeRequest` convenience function that uses `shared`.
-
-#### APIResponse
-The `APIResponse` that gets passed to the completion closure contains the following properties:
-
-- `request`: The original request
-- `result`: A `Result` type either containing an `APIClientError` or the [Response](#response) of the request
-- `urlRequest`: The `URLRequest` used to send the request
-- `urlResponse`: The `HTTPURLResponse` that was returned by the request
-- `data`: The `Data` returned by the request.
-- `timeline`: The `Alamofire.Timeline` of the request which contains timing information.
-
-#### Encoding and Decoding
-Only JSON requests and responses are supported. These are encoded and decoded by `JSONEncoder` and `JSONDecoder` respectively, using Swift's `Codable` apis.
-There are some options to control how invalid JSON is handled when decoding and these are available as static properties on `MailchimpKit`:
-
-- `safeOptionalDecoding`: Whether to discard any errors when decoding optional properties. Defaults to `true`.
-- `safeArrayDecoding`: Whether to remove invalid elements instead of throwing when decoding arrays. Defaults to `true`.
-
-Dates are encoded and decoded differently according to the swagger date format. They use different `DateFormatter`'s that you can set.
-- `date-time`
-	- `DateTime.dateEncodingFormatter`: defaults to `yyyy-MM-dd'T'HH:mm:ss.Z`
-	- `DateTime.dateDecodingFormatters`: an array of date formatters. The first one to decode successfully will be used
-- `date`
-	- `DateDay.dateFormatter`: defaults to `yyyy-MM-dd`
-
-#### APIClientError
-This is error enum that `APIResponse.result` may contain:
-
-```swift
-public enum APIClientError: Error {
-	case unexpectedStatusCode(statusCode: Int, data: Data)
-	case decodingError(DecodingError)
-	case requestEncodingError(String)
-	case validationError(String)
-	case networkError(Error)
-	case unknownError(Error)
-}
-```
-
-#### RequestBehaviour
-Request behaviours are used to modify, authorize, monitor or respond to requests. They can be added to the `APIClient.behaviours` for all requests, or they can passed into `makeRequest` for just that single request.
-
-`RequestBehaviour` is a protocol you can conform to with each function being optional. As the behaviours must work across multiple different request types, they only have access to a typed erased `AnyRequest`.
-
-```swift
-public protocol RequestBehaviour {
-
-	/// runs first and allows the requests to be modified. If modifying asynchronously use validate
-	func modifyRequest(request: AnyRequest, urlRequest: URLRequest) -> URLRequest
-
-	/// validates and modifies the request. complete must be called with either .success or .fail
-	func validate(request: AnyRequest, urlRequest: URLRequest, complete: @escaping (RequestValidationResult) -> Void)
-
-	/// called before request is sent
-	func beforeSend(request: AnyRequest)
-
-	/// called when request successfuly returns a 200 range response
-	func onSuccess(request: AnyRequest, result: Any)
-
-	/// called when request fails with an error. This will not be called if the request returns a known response even if the a status code is out of the 200 range
-	func onFailure(request: AnyRequest, error: APIClientError)
-
-	/// called if the request recieves a network response. This is not called if request fails validation or encoding
-	func onResponse(request: AnyRequest, response: AnyResponse)
-}
-```
-
-### Authorization
-Each request has an optional `securityRequirement`. You can create a `RequestBehaviour` that checks this requirement and adds some form of authorization (usually via headers) in `validate` or `modifyRequest`. An alternative way is to set the `APIClient.defaultHeaders` which applies to all requests.
-
-#### Reactive and Promises
-To add support for a specific asynchronous library, just add an extension on `APIClient` and add a function that wraps the `makeRequest` function and converts from a closure based syntax to returning the object of choice (stream, future...ect)
 
 ## Requests
 
