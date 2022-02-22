@@ -48,6 +48,7 @@ A Swift pacakge for interfacing with your Mailchimp account, audiences, campaign
 		 * [Synchronous](#synchronous)
 	  * [Adding new Audience List Members](#adding-new-audience-list-members)
 	  * [Updating Existing Audience List Members](#updating-existing-audience-list-members)
+	  * [Putting it together in Vapor](#putting-it-together-in-vapor)
    * [Templates and Campaigns](#templates-and-campaigns)
 	  * [Pulling List of Campaigns](#pulling-list-of-campaigns)
 	  * [Get Newsletter Content](#get-newsletter-content)
@@ -292,6 +293,90 @@ client.request(request) { result in
 ```
 
 ### Updating Existing Audience List Members
+
+Let's say our attempt to find an existing subscriber member succeeds but we need to [update the member's interests](https://mailchimp.com/developer/marketing/api/list-members/update-list-member/). 
+We can get `subscriberHash` from our found member and the [`interestID` can be queried](https://mailchimp.com/developer/marketing/api/interests/list-interests-in-category/). 
+
+```swift
+// get the subscriber hash id
+let subscriberHash = member.id
+let patch = Lists.PatchListsIdMembersId.Request(
+  body: .init(
+    emailAddress: emailAddress,
+	emailType: nil, 
+	interests: [interestID: true] 
+  ), 
+  options: .init(
+    listId: Self.listID, 
+	subscriberHash: subscriberHash
+  )
+)
+```
+
+### Putting it together in Vapor
+
+Here's an example in Vapor using Fluent Middleware
+
+```swift
+import Fluent
+import Prch
+import PrchVapor
+import Spinetail
+import Vapor
+
+struct MailchimpMiddleware: ModelMiddleware {
+  // our client created during server initialization
+  let client: Prch.Client<PrchVapor.SessionClient, Spinetail.Mailchimp.API>
+  
+  // the list id
+  let listID: String
+  
+  // the interest id 
+  let interestID : String
+
+  func upsertSubscriptionForUser(_ user: User, withEventLoop eventLoop: EventLoop) -> EventLoopFuture<Void> {
+	let memberRequest = Lists.GetListsIdMembersId.Request(listId: listID, subscriberHash: user.email)
+	// find the subscription member
+	return client.request(memberRequest).flatMapThrowing { response -> in
+	  switch response {
+	  case .defaultResponse(statusCode: 404, _):
+		return nil
+	  case let .status200(member):
+		return member
+	  default:
+		throw ClientError.invalidResponse
+	  }
+
+	}.flatMap { member in
+	  // if the subscriber already exists and has the interest id, don't do anything
+	  if member?.interests?[self.interestID] == true {
+		return eventLoop.future()
+	  // if the subscriber already exists but doesn't have the interest id
+	  } else if let subscriberHash = member?.id {
+	  	// update the subscriber
+		let patch = Lists.PatchListsIdMembersId.Request(body: .init(emailAddress: user.email, emailType: nil, interests: [self.interestID: true]), options: Lists.PatchListsIdMembersId.Request.Options(listId: self.listID, subscriberHash: subscriberHash))
+		// transform to `Void` on success
+		return client.request(patch).success()
+	  // if the subscriber doesn't already exists
+	  } else {
+	  	// update the subscriber add them
+		let post = Lists.PostListsIdMembers.Request(listId: self.listID, body: .init(emailAddress: user.email, status: Lists.PostListsIdMembers.Request.Body.Status.subscribed, interests: [self.interestID: true], timestampOpt: .init(), timestampSignup: .init()))
+		// transform to `Void` on success
+		return client.request(post).success()
+	  }
+	}
+  }
+
+  // after adding the row to the db, add the user to our subscription list with the interest id
+  func create(model: User, on db: Database, next: AnyModelResponder) -> EventLoopFuture<Void> {
+	next.create(model, on: db).transform(to: model).flatMap { user in
+	  self.upsertSubscriptionForUser(user, withEventLoop: db.eventLoop)
+	}
+  }
+}
+```
+
+Now that we have an example dealing with managing members, let's look at how to get a list of campaigns and email our subscribers in Swift.
 
 ## Templates and Campaigns
 
