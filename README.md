@@ -4,7 +4,7 @@
 
 <h1 align="center"> Spinetail </h1>
 
-A Swift pacakge for interfacing with your Mailchimp account, audiences, campaigns, and more. 
+A Swift package for interfacing with your Mailchimp account, audiences, campaigns, and more. 
 
 [![SwiftPM](https://img.shields.io/badge/SPM-Linux%20%7C%20iOS%20%7C%20macOS%20%7C%20watchOS%20%7C%20tvOS-success?logo=swift)](https://swift.org)
 [![Twitter](https://img.shields.io/badge/twitter-@brightdigit-blue.svg?style=flat)](http://twitter.com/brightdigit)
@@ -30,7 +30,7 @@ A Swift pacakge for interfacing with your Mailchimp account, audiences, campaign
 [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
 -->
 
-https://user-images.githubusercontent.com/1036388/155226233-1814f188-fc39-4729-876a-98ac5667ffd0.mp4
+![Demonstration of Spinetail](Assets/SpinetailDemo.gif)
 
 <!--ts-->
 # Table of Contents
@@ -80,16 +80,47 @@ https://user-images.githubusercontent.com/1036388/155226233-1814f188-fc39-4729-8
 	  * [Verified Domains](#verified-domains)
 * [License](#license)
 
-
 <!--te-->
 
 # Introduction
 
 Spinetail is a Swift package for interfacing with your Mailchimp account, audiences, campaigns, and more. 
 
-### Demo Example
+## How to create and send an email campaign
 
+```swift
+let listID : String = "[Your List ID]"
+let mailchimpAPI = try Mailchimp.API(apiKey: "[ Your API Key : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us00 ]")
+let client = Client(api: mailchimpAPI, session: URLSession.shared)
 
+// create the campaign template
+let templateRequest = Templates.PostTemplates.Request(body: .init(html: html, name: name))
+let template = try await self.request(templateRequest)
+
+// get the templateID
+guard let templateID = template.id else { 
+  return
+}
+
+// setup the email
+let settings: Campaigns.PostCampaigns.Request.Body.Settings = .init(
+  fromName: "Leo", 
+  replyTo: "leo@brightdigit.com", 
+  subjectLine: "Hello World - Test Email", 
+  templateId: templateID
+)
+
+// setup the campaign
+let body: Campaigns.PostCampaigns.Request.Body = .init(
+  type: .regular, 
+  contentType: .template, 
+  recipients: .init(listId: listID), 
+  settings: settings
+)
+
+let request = Campaigns.PostCampaigns.Request(body: body)
+try await client.request(request)
+```
 
 # Features 
 
