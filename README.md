@@ -380,11 +380,84 @@ Now that we have an example dealing with managing members, let's look at how to 
 
 ## Templates and Campaigns
 
+With newsletters there are [campaigns](https://mailchimp.com/developer/marketing/api/campaigns/) and [templates](https://mailchimp.com/developer/marketing/api/templates/). 
+_Campaigns_ are how you send emails to your Mailchimp list. A _template_ is an HTML file used to create the layout and basic design for a campaign.
+Before creating our own campaign and template, let's look at how to pull a list of campaigns.
+
 ### Pulling List of Campaigns
+
+On the BrightDigit web site, I want to link to each newsletter that's sent out. To do this you just need the `listID` again.
+We'll be pulling up to 1000 sent campaigns sorted from last sent to first sent:
+
+```swift
+let request = Campaigns.GetCampaigns.Request(
+  count: 1000, 
+  status: .sent, 
+  listId: listID, 
+  sortField: .sendTime, 
+  sortDir: .desc
+)
+let response = try self.requestSync(request)
+let campaigns = response.campaigns ?? []
+```
+
+To get the content we to grab it based on each campaign's `campaignID`.
 
 ### Get Newsletter Content
 
+Before grabbing the content, we need to grab the `campaignID` from the campaign:
 
+```swift
+let campaign : Campaigns.GetCampaigns.Response.Status200.Campaigns
+let html: String
+
+guard let campaignID = campaign.id else {
+  return
+}
+
+html = try self.htmlFromCampaign(withID: campaignProperties.campaignID)
+```
+
+### Creating a Template
+
+To actually send we need to create an [template](https://mailchimp.com/developer/marketing/api/templates/) using [the
+`POST` request](https://mailchimp.com/developer/marketing/api/templates/add-template/). Here's an example with async and await:
+
+```swift
+let templateName = "Example Email"
+let templateHTML = "<strong>Hello World</strong>"
+let templateRequest = Templates.PostTemplates.Request(body: .init(html: templateHTML, name: templateName))
+let template = try await client.request(templateRequest)
+```
+
+Let's use the template to create a campaign and send it.
+
+
+### Send an Campaign Email to Our Audience List
+
+```swift
+// make sure to get the templateID
+guard let templateID = template.id else {
+  return
+}
+
+// set the email settings
+let settings: Campaigns.PostCampaigns.Request.Body.Settings = .init(
+  fromName: "Leo", 
+  replyTo: "leo@brightdigit.com", 
+  subjectLine: "Hello World - Test Email", 
+  templateId: templateID
+)
+// set the type and list you're sending to
+let body: Campaigns.PostCampaigns.Request.Body = .init(
+  type: .regular, 
+  contentType: .template, 
+  recipients: .init(listId: listID), 
+  settings: settings
+)
+let request = Campaigns.PostCampaigns.Request(body: body)
+await client.request(request)
+```
 
 # Requests
 
