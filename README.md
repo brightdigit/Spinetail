@@ -30,7 +30,7 @@ A Swift pacakge for interfacing with your Mailchimp account, audiences, campaign
 [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
 -->
 
-![Demonstration of Spinetail](Assets/SpinetailDemo.mp4)
+https://user-images.githubusercontent.com/1036388/155226233-1814f188-fc39-4729-876a-98ac5667ffd0.mp4
 
 <!--ts-->
 # Table of Contents
