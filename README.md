@@ -13,7 +13,6 @@ A Swift package for interfacing with your Mailchimp account, audiences, campaign
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/brightdigit/Spinetail/Spinetail?label=Actions&logo=github)
 [![Bitrise](https://img.shields.io/bitrise/b2595eab70c25d1b?logo=bitrise&?label=bitrise&token=rHUhEUFkU2RUL-KGmrKX1Q)](https://app.bitrise.io/app/b2595eab70c25d1b)
-[![CircleCI](https://img.shields.io/circleci/build/github/brightdigit/Spinetail?logo=circleci&?label=circle-ci&token=45c9ff6a86f9ac6c1ec8c85c3bc02f4d8859aa6b)](https://app.circleci.com/pipelines/github/brightdigit/Spinetail)
 
 <!--
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FSpinetail%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/brightdigit/Spinetail)
@@ -84,7 +83,11 @@ A Swift package for interfacing with your Mailchimp account, audiences, campaign
 
 # Introduction
 
-Spinetail is a Swift package for interfacing with your Mailchimp account, audiences, campaigns, and more. 
+**Spinetail** is a Swift package for interfacing with your Mailchimp account, audiences, campaigns, and more. 
+
+## What's a _Spinetail_?
+
+A [Spinetail](https://en.wikipedia.org/wiki/Mottled_spinetail) is a type of Swift bird which shares it's habitat with chimps (such as the chimp in Mail_chimp_).
 
 ## How to create and send an email campaign
 
@@ -126,10 +129,11 @@ try await client.request(request)
 
 Here's what's currently implemented with this library:
 
-- [x] Pulling Your Current List of Newsletters and Campaigns
+- [x] Pulling Your Current List of Campaigns
+- [x] Send Email Campaigns to Your Lists 
 - [x] Get Your Audience List
 - [x] Add to Your Audience List
-- [x] Updating Subscriber Tags
+- [x] Updating Subscribers Tags and Interests
 
 ... and more
 
@@ -192,7 +196,7 @@ let package = Package(
 )
 ```
 
-The SpinetailVapor package adds helper properties and methods to help with setting up and accessing the APIClient.
+The [SpinetailVapor](https://github.com/brightdigit/SpinetailVapor) package adds helper properties and methods to help with setting up and accessing the `Prch.Client`.
 
 # Setting Up Your Mailchimp Client with Prch
 
@@ -204,9 +208,9 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us00
 
 Once you have that, decide what you'll be using for your session depending on your platform:
 
-* `URLSession` - iOS, tvOS, watchOS, macOS
-* `AsyncHTTPClient` via `PrchNIO` - Linux Server
-* `Vapor.Client` via `PrchVapor` - Vapor
+* `URLSession` - iOS, tvOS, watchOS, macOS _from [Prch](https://github.com/brightdigit/Prch)_
+* `AsyncHTTPClient` - Linux/Server _from [PrchNIO](https://github.com/brightdigit/PrchNIO)_
+* `Vapor.Client` - Vapor _from [PrchVapor](https://github.com/brightdigit/PrchVapor)_
 
 Here's an example for setting up a client for Mailchimp on a standard Apple platform app:
  
