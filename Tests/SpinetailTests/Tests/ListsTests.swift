@@ -6,23 +6,31 @@ import XCTest
   import FoundationNetworking
 #endif
 
+typealias DefaultResponseError<ResponseType: Response> = ClientResponseResult<ResponseType>.FailedResponseError
+
 final class ListsTests: XCTestCase {
   let existingEmailAddress = "669408F7A804430BAF74878BFCEBD128@brightdigit.com"
   static var listID: String!
   static var interestID: String!
-  static var api: MailchimpAPI!
+  static var api: Mailchimp.API!
 
   override class func setUp() {
-    let settings = Settings.parse()
+    let settings = Settings.parseAll()
 
     listID = settings.listID
     interestID = settings.interestID
-    api = settings.apiKey.flatMap(MailchimpAPI.init(apiKey:))
+    api = settings.apiKey.flatMap(Mailchimp.API.init(apiKey:))
   }
 
-  func upsertEmailAddress(_ emailAddress: String, withInterestID interestID: String?) throws -> Bool? {
+  func upsertEmailAddress(
+    _ emailAddress: String,
+    withInterestID interestID: String?
+  ) throws -> Bool? {
     let client = Client(api: Self.api, session: URLSession.shared)
-    let getMember = Lists.GetListsIdMembersId.Request(listId: Self.listID, subscriberHash: emailAddress)
+    let getMember = Lists.GetListsIdMembersId.Request(
+      listId: Self.listID,
+      subscriberHash: emailAddress
+    )
 
     let member: Lists.GetListsIdMembersId.Response.Status200?
     let interested: Bool
@@ -34,7 +42,7 @@ final class ListsTests: XCTestCase {
       } else {
         interested = true
       }
-    } catch let error as ClientResponseResult<Lists.GetListsIdMembersId.Response>.FailedResponseError {
+    } catch let error as DefaultResponseError<Lists.GetListsIdMembersId.Response> {
       guard error.statusCode == 404 else {
         throw error
       }

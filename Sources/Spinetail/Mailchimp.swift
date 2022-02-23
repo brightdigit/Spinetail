@@ -8,6 +8,7 @@ public enum Root {}
 public enum SearchCampaigns {}
 public enum SearchMembers {}
 public enum TemplateFolders {}
+public enum CampaignFolders {}
 
 #if !os(watchOS)
   public enum ActivityFeed {}
@@ -15,7 +16,6 @@ public enum TemplateFolders {}
   public enum Automations {}
   public enum BatchWebhooks {}
   public enum Batches {}
-  public enum CampaignFolders {}
   public enum ConnectedSites {}
   public enum Conversations {}
   public enum CustomerJourneys {}

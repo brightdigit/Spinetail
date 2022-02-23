@@ -33,13 +33,26 @@ extension Settings {
     )
   }
 
-  static func parse() -> Settings {
+  fileprivate static func parseFile(
+    withName name: String = "env.json"
+  ) -> Settings? {
+    var data: Data?
     let decoder = JSONDecoder()
-    let directory = URL(fileURLWithPath: #file).deletingLastPathComponent()
-    let envURL = directory.appendingPathComponent("env.json")
-    let data = try? Data(contentsOf: envURL)
+    var lastDirectory: URL?
+    var directory = URL(fileURLWithPath: #file)
+    while data == nil, lastDirectory?.standardized != directory.standardized {
+      lastDirectory = directory
+      directory.deleteLastPathComponent()
+      let envURL = directory.appendingPathComponent(name)
+      data = try? Data(contentsOf: envURL)
+    }
+    return data.flatMap { try? decoder.decode(Settings.self, from: $0) }
+  }
+
+  static func parseAll(withName name: String = "env.json") -> Settings {
+    let jsonSettings = Self.parseFile(withName: name)
     let envSettings = Settings()
-    if let jsonSettings = data.flatMap({ try? decoder.decode(Settings.self, from: $0) }) {
+    if let jsonSettings = jsonSettings {
       return jsonSettings.mergeWith(other: envSettings)
     } else {
       return envSettings
