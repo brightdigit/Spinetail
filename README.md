@@ -22,40 +22,43 @@ A Swift package for interfacing with your Mailchimp account, audiences, campaign
 <!--ts-->
 # Table of Contents
 
-* [Introduction](#introduction)
-* [Features](#features)
-* [Installation](#installation)
-* [Setting Up Your Mailchimp Client with _Prch_](#setting-up-your-mailchimp-client-with-prch)
-* [Usage](#usage)
-   * [Audience List Members](#audience-list-members)
-	  * [Getting an Audience List Member](#getting-an-audience-list-member)
+* [🎬 Introduction](#-introduction)
+   * [What's a <em>Spinetail</em>?](#whats-a-spinetail)
+   * [How to create and send an email campaign](#how-to-create-and-send-an-email-campaign)
+* [🎁 Features](#-features)
+* [🏗 Installation](#-installation)
+   * [Setting Up Your Mailchimp Client with Prch](#setting-up-your-mailchimp-client-with-prch)
+* [💪 Usage](#-usage)
+   * [🕊 _Prch_ Basics](#-prch-basics)
 		 * [Closure-based Completion](#closure-based-completion)
 		 * [Async/Await](#asyncawait)
 		 * [Synchronous](#synchronous)
+   * [👩 Audience List Members](#-audience-list-members)
+	  * [Getting an Audience List Member](#getting-an-audience-list-member)
 	  * [Adding new Audience List Members](#adding-new-audience-list-members)
 	  * [Updating Existing Audience List Members](#updating-existing-audience-list-members)
 	  * [Putting it together in Vapor](#putting-it-together-in-vapor)
-   * [Templates and Campaigns](#templates-and-campaigns)
+   * [📩 Templates and Campaigns](#-templates-and-campaigns)
 	  * [Pulling List of Campaigns](#pulling-list-of-campaigns)
 	  * [Get Newsletter Content](#get-newsletter-content)
 	  * [Creating a Template](#creating-a-template)
 	  * [Send an Campaign Email to Our Audience List](#send-an-campaign-email-to-our-audience-list)
-* [Requests](#requests)
-   * [Fully Supported](#fully-supported)
+* [📞 Requests](#-requests)
+   * [😁 Fully Supported](#-fully-supported)
 	  * [Campaigns](#campaigns)
 	  * [Lists](#lists)
 	  * [Templates](#templates)
-   * [Testing Pending](#testing-pending)
+   * [😊 Testing Pending](#testing-pending)
 	  * [Template Folders](#template-folders)
 	  * [Search Campaigns](#search-campaigns)
 	  * [Search Members](#search-members)
 	  * [Reports](#reports)
 	  * [Root](#root)
-   * [Pending Next Support](#pending-next-support)
+   * [😊 Pending Next Support](#-pending-next-support)
 	  * [File Manager](#file-manager)
 	  * [Batches](#batches)
 	  * [Automations](#automations)
-   * [Remaining Requests](#remaining-requests)
+   * [😌 Remaining Requests](#-remaining-requests)
 	  * [Activity Feed](#activity-feed)
 	  * [Authorized Apps](#authorized-apps)
 	  * [Connected Sites](#connected-sites)
@@ -65,12 +68,12 @@ A Swift package for interfacing with your Mailchimp account, audiences, campaign
 	  * [Facebook Ads](#facebook-ads)
 	  * [Landing Pages](#landing-pages)
 	  * [Verified Domains](#verified-domains)
-* [Acknowledgments](#acknowledgments)
-* [License](#license)
+* [🙏 Acknowledgments](#-acknowledgments)
+* [📜 License](#-license)
 
 <!--te-->
 
-# Introduction
+# 🎬 Introduction
 
 **Spinetail** is a Swift package for interfacing with your Mailchimp account, audiences, campaigns, and more. 
 
@@ -116,7 +119,7 @@ let request = Campaigns.PostCampaigns.Request(body: body)
 try await client.request(request)
 ```
 
-# Features 
+# 🎁 Features 
 
 Here's what's currently implemented with this library:
 
@@ -128,7 +131,7 @@ Here's what's currently implemented with this library:
 
 ... and more
 
-# Installation
+# 🏗 Installation
 
 To integrate **Spinetail** into your project using SPM, specify it in your Package.swift file:
 
@@ -136,7 +139,7 @@ To integrate **Spinetail** into your project using SPM, specify it in your Packa
 let package = Package(
   ...
   dependencies: [
-	.package(url: "https://github.com/brightdigit/Spinetail", from: "0.1.1")
+	.package(url: "https://github.com/brightdigit/Spinetail", from: "0.2.0")
   ],
   targets: [
 	  .target(
@@ -155,8 +158,8 @@ However if you are building a server-side application in Swift and wish to take 
 let package = Package(
   ...
   dependencies: [
-	.package(url: "https://github.com/brightdigit/Spinetail", from: "0.1.1"),
-	.package(url: "https://github.com/brightdigit/PrchNIO", from: "0.1.1")
+	.package(url: "https://github.com/brightdigit/Spinetail", from: "0.2.0"),
+	.package(url: "https://github.com/brightdigit/PrchNIO", from: "0.2.0")
   ],
   targets: [
 	  .target(
@@ -175,8 +178,8 @@ If you are using [Vapor](https://vapor.codes), then you may also want to conside
 let package = Package(
   ...
   dependencies: [
-	.package(url: "https://github.com/brightdigit/Spinetail", from: "0.1.1"),
-	.package(url: "https://github.com/brightdigit/SpinetailVapor", from: "0.1.1")
+	.package(url: "https://github.com/brightdigit/Spinetail", from: "0.2.0"),
+	.package(url: "https://github.com/brightdigit/SpinetailVapor", from: "0.2.0")
   ],
   targets: [
 	  .target(
@@ -189,7 +192,7 @@ let package = Package(
 
 The [SpinetailVapor](https://github.com/brightdigit/SpinetailVapor) package adds helper properties and methods to help with setting up and accessing the `Prch.Client`.
 
-# Setting Up Your Mailchimp Client with Prch
+## Setting Up Your Mailchimp Client with Prch
 
 In order to get started with the Mailchimp API, [make sure you have created an API key](https://mailchimp.com/developer/marketing/guides/quick-start/#generate-your-api-key). Typically the API key looks something like this:
 
@@ -210,7 +213,7 @@ let api = Mailchimp,API(apiKey: "")
 let client = Client(api: api, session: URLSession.shared)
 ```
 
-If you are using **Vapor** then you'll want to configure your client and application configuration:
+If you are using **Vapor** then you'll want to configure your client inside your application configuration:
 
 ```swift
 app.mailchimp.configure(withAPIKey: "")
@@ -225,7 +228,9 @@ application.mailchimp.client.request(...)
 
 Now that we have setup the client, we'll be using let's begin to access the Mailchimp API.
 
-# Usage 
+# 💪 Usage 
+
+## 🕊 _Prch_ Basics
 
 To make a request via `Prch`, we have three options using our `client`:
 
@@ -233,52 +238,19 @@ To make a request via `Prch`, we have three options using our `client`:
 * async/await 
 * synchronous calls
 
-Let's start with an example using audience member lists.
-
-## Audience List Members
-
-### Getting an Audience List Member
-
-According to [the documentation for the Mailchimp API](https://mailchimp.com/developer/marketing/api/list-members/get-member-info/), we can get a member of our audience list based on their _subscriber_hash_.
-This is described as:
-
-> The MD5 hash of the lowercase version of the list member's email address. This endpoint also accepts a list member's email address or contact_id.
-
-The means we can use:
-* MD5 hash of the lowercase version of the list member's email address _but also_
-* email address or
-* `contact_id`
-
-In our case, we'll be using an email address to see if we have someone subscribed. 
-Additionally we need our audience's `listID` which is found on the audience settings page.
-
-![ListID at the Mailchimp Admin Page](Assets/Mailchimp-listID.png)
-
-With that email address, we can create a `Request`:
-
-```swift
-import Spinetail 
-
-let api = MailchimpAPI(apiKey: "")
-let client = Client(api: api, session: URLSession.shared)
-let request = Lists.GetListsIdMembersId.Request(listId: listId, subscriberHash: emailAddress)
-```
-
-As previously noted there are three ways to execute a call:
-
 #### Closure-based Completion
 
 ```swift
 client.request(request) { result in
   switch result {
   case let .success(member):
-  	// Successful Retrieval
+	  // Successful Retrieval
 	break
   case let .defaultResponse(statusCode, response):
-  	// Non-2xx Response (ex. 404 member not found)
+	  // Non-2xx Response (ex. 404 member not found)
 	break
   case let .failure(error):
-  	// Other Errors (ex. networking, decoding or encoding JSON...)
+	  // Other Errors (ex. networking, decoding or encoding JSON...)
 	break
   }
 }
@@ -317,8 +289,51 @@ In each case there are possible results:
 * The call failed but the response was valid such as a 4xx status code
 * The call failed due to an internal error (ex. decoding, encoding, networking, etc...)
 
-An example of where we'd want to handle a 404 for instance is when we want to add or update a subscriber 
-when someone signs up for a service. If the member is not found, we want go ahead and add that subscriber.
+Let's start with an example using audience member lists.
+
+## 👩 Audience List Members
+
+### Getting an Audience List Member
+
+According to [the documentation for the Mailchimp API](https://mailchimp.com/developer/marketing/api/list-members/get-member-info/), we can get a member of our audience list based on their _subscriber_hash_.
+This is described as:
+
+> The MD5 hash of the lowercase version of the list member's email address. This endpoint also accepts a list member's email address or contact_id.
+
+The means we can use:
+* MD5 hash of the lowercase version of the list member's email address _but also_
+* email address or
+* `contact_id`
+
+In our case, we'll be using an email address to see if we have someone subscribed. 
+Additionally we need our audience's `listID` which is found on the audience settings page.
+
+![ListID at the Mailchimp Admin Page](Assets/Mailchimp-listID.png)
+
+With that email address, we can create a `Request`:
+
+```swift
+import Spinetail 
+
+let api = MailchimpAPI(apiKey: "")
+let client = Client(api: api, session: URLSession.shared)
+let request = Lists.GetListsIdMembersId.Request(listId: listId, subscriberHash: emailAddress)
+```
+
+As previously noted there are three ways to execute a call. In this case, let's use the synchronous call:
+
+```swift
+do {
+  // Successful Retrieval
+  let member = try client.requestSync(request)
+} catch let error as ClientResponseResult<Lists.GetListsIdMembersId.Response>.FailedResponseError {
+  // Non-2xx Response (ex. 404 member not found)
+} catch  {
+  // Other Errors (ex. networking, decoding or encoding JSON...)
+}
+```
+
+This is a good example of where we'd want to handle a `404`. If the member is found, we may need to just update them, otherwise we want go ahead and add that subscriber.
 
 ### Adding new Audience List Members
 
@@ -377,7 +392,7 @@ let patch = Lists.PatchListsIdMembersId.Request(
 
 ### Putting it together in Vapor
 
-Here's an example in Vapor using Fluent Middleware
+Here's an example in [Vapor](https://vapor.codes) using [Model Middleware provided by Fluent](https://docs.vapor.codes/4.0/fluent/model/#lifecycle):
 
 ```swift
 import Fluent
@@ -440,7 +455,7 @@ struct MailchimpMiddleware: ModelMiddleware {
 
 Now that we have an example dealing with managing members, let's look at how to get a list of campaigns and email our subscribers in Swift.
 
-## Templates and Campaigns
+## 📩 Templates and Campaigns
 
 With newsletters there are [campaigns](https://mailchimp.com/developer/marketing/api/campaigns/) and [templates](https://mailchimp.com/developer/marketing/api/templates/). 
 _Campaigns_ are how you send emails to your Mailchimp list. A _template_ is an HTML file used to create the layout and basic design for a campaign.
@@ -521,9 +536,16 @@ let request = Campaigns.PostCampaigns.Request(body: body)
 await client.request(request)
 ```
 
-# Requests
+# 📞 Requests
 
-## Fully Supported
+List of APIs and the status of their support. 
+If you have any requests feel free to [submit an issue](https://github.com/brightdigit/Spinetail/issues/new/choose) or [pull-request](https://github.com/brightdigit/Spinetail/compare) to improve current support.
+For more information on [the Mailchimp Marketing API, checkout their API documentation.](https://mailchimp.com/developer/marketing/)
+
+## 😁 Fully Supported
+
+Due to the limitation of existing 32-bit watchOS devices, the library need to exclude certain APIs to limit size. 
+Therefore these sets of APIs are available on all operating systems and platforms including watchOS.
 
 ### Campaigns
 
@@ -699,7 +721,10 @@ await client.request(request)
 | --------------------------------------------------- | ------ | ---------- | ------- |
 | GetRoot                                             |        |            | ✅       |
 
-## Pending Next Support
+## 😊 Pending Next Support
+
+These are the next set of API for which migrating to watchOS is desired as well as more robust testing and documentation.
+If you have any requests feel free to [submit an issue](https://github.com/brightdigit/Spinetail/issues/new/choose) or [pull-request](https://github.com/brightdigit/Spinetail/compare) to improve current support.
 
 ### File Manager
 
@@ -753,7 +778,11 @@ await client.request(request)
 | PostAutomationsIdEmailsIdQueue                      |        |            |         |
 | PostAutomationsIdRemovedSubscribers                 |        |            |         |
 
-## Remaining Requests
+## 😌 Remaining Requests
+
+These are the least priority set of API for which migrating to watchOS as well as robust testing and documentation have been prioritized.
+If you have any requests feel free to [submit an issue](https://github.com/brightdigit/Spinetail/issues/new/choose) or [pull-request](https://github.com/brightdigit/Spinetail/compare) to improve current support.
+
 
 ### Activity Feed
 
@@ -886,10 +915,10 @@ await client.request(request)
 | GetVerifiedDomains                                  |        |            |         |
 | VerifyDomain                                        |        |		   |         |
 
-# Acknowledgments
+# 🙏 Acknowledgments
 
 Thanks to [Yonas Kolb](https://github.com/yonaskolb/swaggen) for his work on a variety of project but especially [Swaggen](https://github.com/yonaskolb).
 
-# License 
+# 📜 License 
 
 This code is distributed under the MIT license. See the [LICENSE](LICENSE) file for more info.
