@@ -87,11 +87,15 @@ A [Spinetail](https://en.wikipedia.org/wiki/Mottled_spinetail) is a type of Swif
 
 ```swift
 let listID : String = "[Your List ID]"
-let mailchimpAPI = try Mailchimp.API(apiKey: "[ Your API Key : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us00 ]")
+let mailchimpAPI = try Mailchimp.API(
+  apiKey: "[ Your API Key : xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us00 ]"
+)
 let client = Client(api: mailchimpAPI, session: URLSession.shared)
 
 // create the campaign template
-let templateRequest = Templates.PostTemplates.Request(body: .init(html: html, name: name))
+let templateRequest = Templates.PostTemplates.Request(
+  body: .init(html: html, name: name)
+)
 let template = try await self.request(templateRequest)
 
 // get the templateID
@@ -411,14 +415,17 @@ struct MailchimpMiddleware: ModelMiddleware {
   // the interest id 
   let interestID : String
 
-  func upsertSubscriptionForUser(_ user: User, withEventLoop eventLoop: EventLoop) -> EventLoopFuture<Void> {
+  func upsertSubscriptionForUser(
+    _ user: User, 
+    withEventLoop eventLoop: EventLoop
+  ) -> EventLoopFuture<Void> {
 	let memberRequest = Lists.GetListsIdMembersId.Request(listId: listID, subscriberHash: user.email)
 	// find the subscription member
 	return client.request(memberRequest).flatMapThrowing { response -> in
 	  switch response {
 	  case .defaultResponse(statusCode: 404, _):
 		return nil
-	  case let .status200(member):
+	  case let .success(member):
 		return member
 	  default:
 		throw ClientError.invalidResponse
@@ -431,13 +438,31 @@ struct MailchimpMiddleware: ModelMiddleware {
 	  // if the subscriber already exists but doesn't have the interest id
 	  } else if let subscriberHash = member?.id {
 	  	// update the subscriber
-		let patch = Lists.PatchListsIdMembersId.Request(body: .init(emailAddress: user.email, emailType: nil, interests: [self.interestID: true]), options: Lists.PatchListsIdMembersId.Request.Options(listId: self.listID, subscriberHash: subscriberHash))
+		let patch = Lists.PatchListsIdMembersId.Request(body: 
+		  .init(
+		    emailAddress: user.email, 
+		    emailType: nil, 
+		    interests: [self.interestID: true]), 
+		    options: Lists.PatchListsIdMembersId.Request.Options(
+		      listId: self.listID, 
+		      subscriberHash: subscriberHash
+		      )
+		    )
 		// transform to `Void` on success
 		return client.request(patch).success()
 	  // if the subscriber doesn't already exists
 	  } else {
 	  	// update the subscriber add them
-		let post = Lists.PostListsIdMembers.Request(listId: self.listID, body: .init(emailAddress: user.email, status: Lists.PostListsIdMembers.Request.Body.Status.subscribed, interests: [self.interestID: true], timestampOpt: .init(), timestampSignup: .init()))
+		let post = Lists.PostListsIdMembers.Request(
+		  listId: self.listID, 
+		  body: .init(
+		    emailAddress: user.email, 
+		    status: .subscribed, 
+		    interests: [self.interestID: true], 
+		    timestampOpt: .init(), 
+		    timestampSignup: .init()
+		  )
+		)
 		// transform to `Void` on success
 		return client.request(post).success()
 	  }
