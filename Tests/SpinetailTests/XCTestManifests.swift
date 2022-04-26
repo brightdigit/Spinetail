@@ -15,9 +15,13 @@
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__ListsTests = [
+      ("testUpsertExistingWithInterestIDandName", testUpsertExistingWithInterestIDandName),
       ("testUpsertExistingWithInterestID", testUpsertExistingWithInterestID),
+      ("testUpsertExistingWithoutInterestIDandName", testUpsertExistingWithoutInterestIDandName),
       ("testUpsertExistingWithoutInterestID", testUpsertExistingWithoutInterestID),
+      ("testUpsertNewThenWithInterestIDandName", testUpsertNewThenWithInterestIDandName),
       ("testUpsertNewThenWithInterestID", testUpsertNewThenWithInterestID),
+      ("testUpsertNewWithInterestIDandName", testUpsertNewWithInterestIDandName),
       ("testUpsertNewWithInterestID", testUpsertNewWithInterestID)
     ]
   }

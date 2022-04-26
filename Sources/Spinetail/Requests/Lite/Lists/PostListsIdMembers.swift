@@ -178,7 +178,7 @@ public extension Lists {
           try container.encodeIfPresent(language, forKey: "language")
           try container.encodeIfPresent(location, forKey: "location")
           try container.encodeIfPresent(marketingPermissions, forKey: "marketing_permissions")
-          try container.encodeAnyIfPresent(mergeFields, forKey: "merge_fields")
+          try container.encodeIfPresent(mergeFields, forKey: "merge_fields")
           try container.encodeIfPresent(tags, forKey: "tags")
           try container.encodeIfPresent(timestampOpt, forKey: "timestamp_opt")
           try container.encodeIfPresent(timestampSignup, forKey: "timestamp_signup")

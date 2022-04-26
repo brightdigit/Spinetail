@@ -124,7 +124,7 @@ public extension Lists {
           }
         }
 
-        public init(emailAddress: String? = nil, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, mergeFields _: [String: [String: AnyCodable]]? = nil, status: Status? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, vip: Bool? = nil) {
+        public init(emailAddress: String? = nil, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, mergeFields: [String: AnyCodable]? = nil, status: Status? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, vip: Bool? = nil) {
           self.emailAddress = emailAddress
           self.emailType = emailType
           self.interests = interests
@@ -133,7 +133,7 @@ public extension Lists {
           self.language = language
           self.location = location
           self.marketingPermissions = marketingPermissions
-          // self.mergeFields = mergeFields
+          self.mergeFields = mergeFields
           self.status = status
           self.timestampOpt = timestampOpt
           self.timestampSignup = timestampSignup
@@ -151,7 +151,7 @@ public extension Lists {
           language = try container.decodeIfPresent("language")
           location = try container.decodeIfPresent("location")
           marketingPermissions = try container.decodeArrayIfPresent("marketing_permissions")
-          // mergeFields = try container.decodeAnyCodableDictionary("merge_fields")
+          mergeFields = try container.decodeAnyCodableDictionary("merge_fields")
           status = try container.decodeIfPresent("status")
           timestampOpt = try container.decodeIfPresent("timestamp_opt")
           timestampSignup = try container.decodeIfPresent("timestamp_signup")
@@ -169,7 +169,7 @@ public extension Lists {
           try container.encodeIfPresent(language, forKey: "language")
           try container.encodeIfPresent(location, forKey: "location")
           try container.encodeIfPresent(marketingPermissions, forKey: "marketing_permissions")
-          // try container.encodeAnyIfPresent(mergeFields, forKey: "merge_fields")
+          try container.encodeIfPresent(mergeFields, forKey: "merge_fields")
           try container.encodeIfPresent(status, forKey: "status")
           try container.encodeIfPresent(timestampOpt, forKey: "timestamp_opt")
           try container.encodeIfPresent(timestampSignup, forKey: "timestamp_signup")
