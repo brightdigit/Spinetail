@@ -65,10 +65,10 @@ public extension Lists {
         public var tags: [String]?
 
         /** The date and time the subscribe confirmed their opt-in status in ISO 8601 format. */
-        public var timestampOpt: Date
+        public var timestampOpt: Date?
 
         /** The date and time the subscriber signed up for the list in ISO 8601 format. */
-        public var timestampSignup: Date
+        public var timestampSignup: Date?
 
         /** [VIP status](https://mailchimp.com/help/view-and-edit-contact-languages/) for subscriber. */
         public var vip: Bool?
@@ -129,7 +129,7 @@ public extension Lists {
           }
         }
 
-        public init(emailAddress: String, status: Status, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, mergeFields: [String: AnyCodable]? = nil, tags: [String]? = nil, timestampOpt: Date, timestampSignup: Date, vip: Bool? = nil) {
+        public init(emailAddress: String, status: Status, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: Location? = nil, marketingPermissions: [MarketingPermissions]? = nil, mergeFields: [String: AnyCodable]? = nil, tags: [String]? = nil, timestampOpt: Date?, timestampSignup: Date?, vip: Bool? = nil) {
           self.emailAddress = emailAddress
           self.status = status
           self.emailType = emailType
@@ -666,8 +666,8 @@ public extension Lists {
           status = try container.decodeIfPresent("status")
           tags = try container.decodeArrayIfPresent("tags")
           tagsCount = try container.decodeIfPresent("tags_count")
-          timestampOpt = try container.decodeIfPresent("timestamp_opt")
-          timestampSignup = try container.decodeIfPresent("timestamp_signup")
+          timestampOpt = try container.decodeIfPresent("timestamp_opt", safeOptionalDecoding: true)
+          timestampSignup = try container.decodeIfPresent("timestamp_signup", safeOptionalDecoding: true)
           uniqueEmailId = try container.decodeIfPresent("unique_email_id")
           unsubscribeReason = try container.decodeIfPresent("unsubscribe_reason")
           vip = try container.decodeIfPresent("vip")

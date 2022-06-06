@@ -15,14 +15,22 @@
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__ListsTests = [
-      ("testUpsertExistingWithInterestIDandName", testUpsertExistingWithInterestIDandName),
-      ("testUpsertExistingWithInterestID", testUpsertExistingWithInterestID),
-      ("testUpsertExistingWithoutInterestIDandName", testUpsertExistingWithoutInterestIDandName),
-      ("testUpsertExistingWithoutInterestID", testUpsertExistingWithoutInterestID),
-      ("testUpsertNewThenWithInterestIDandName", testUpsertNewThenWithInterestIDandName),
-      ("testUpsertNewThenWithInterestID", testUpsertNewThenWithInterestID),
-      ("testUpsertNewWithInterestIDandName", testUpsertNewWithInterestIDandName),
-      ("testUpsertNewWithInterestID", testUpsertNewWithInterestID)
+      ("testUpsertExistingWithInterestIDandNameWithoutTimestamp", testUpsertExistingWithInterestIDandNameWithoutTimestamp),
+      ("testUpsertExistingWithInterestIDandNameWithTimestamp", testUpsertExistingWithInterestIDandNameWithTimestamp),
+      ("testUpsertExistingWithInterestIDWithoutTimestamp", testUpsertExistingWithInterestIDWithoutTimestamp),
+      ("testUpsertExistingWithInterestIDWithTimestamp", testUpsertExistingWithInterestIDWithTimestamp),
+      ("testUpsertExistingWithoutInterestIDandNameWithoutTimestamp", testUpsertExistingWithoutInterestIDandNameWithoutTimestamp),
+      ("testUpsertExistingWithoutInterestIDandNameWithTimestamp", testUpsertExistingWithoutInterestIDandNameWithTimestamp),
+      ("testUpsertExistingWithoutInterestIDWithoutTimestamp", testUpsertExistingWithoutInterestIDWithoutTimestamp),
+      ("testUpsertExistingWithoutInterestIDWithTimestamp", testUpsertExistingWithoutInterestIDWithTimestamp),
+      ("testUpsertNewThenWithInterestIDandNameWithoutTimestamp", testUpsertNewThenWithInterestIDandNameWithoutTimestamp),
+      ("testUpsertNewThenWithInterestIDandNameWithTimestamp", testUpsertNewThenWithInterestIDandNameWithTimestamp),
+      ("testUpsertNewThenWithInterestIDWithoutTimestamp", testUpsertNewThenWithInterestIDWithoutTimestamp),
+      ("testUpsertNewThenWithInterestIDWithTimestamp", testUpsertNewThenWithInterestIDWithTimestamp),
+      ("testUpsertNewWithInterestIDandNameWithoutTimestamp", testUpsertNewWithInterestIDandNameWithoutTimestamp),
+      ("testUpsertNewWithInterestIDandNameWithTimestamp", testUpsertNewWithInterestIDandNameWithTimestamp),
+      ("testUpsertNewWithInterestIDWithoutTimestamp", testUpsertNewWithInterestIDWithoutTimestamp),
+      ("testUpsertNewWithInterestIDWithTimestamp", testUpsertNewWithInterestIDWithTimestamp)
     ]
   }
 
