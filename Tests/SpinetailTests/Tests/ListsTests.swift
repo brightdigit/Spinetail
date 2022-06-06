@@ -48,7 +48,7 @@ final class ListsTests: XCTestCase {
     let interested: Bool
 
     do {
-      member = try client.requestSync(getMember)
+      member = try client.requestSync(getMember, timeout: .distantFuture)
       if let interestID = interestID {
         interested = member?.interests?[interestID] ?? false
       } else {
@@ -124,7 +124,7 @@ final class ListsTests: XCTestCase {
     let actualUpdate = try upsertEmailAddress(emailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: Self.interestID, andTimestamp: false)
     XCTAssertEqual(actualUpdate, false)
   }
-  
+
   func testUpsertExistingWithInterestIDWithTimestamp() throws {
     let actual = try upsertEmailAddress(existingEmailAddress, withFirstName: nil, andLastName: nil, withInterestID: Self.interestID, andTimestamp: true)
     XCTAssertNil(actual)
