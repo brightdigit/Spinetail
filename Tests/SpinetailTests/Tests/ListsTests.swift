@@ -26,7 +26,8 @@ final class ListsTests: XCTestCase {
     _ emailAddress: String,
     withFirstName firstName: String?,
     andLastName lastName: String?,
-    withInterestID interestID: String?
+    withInterestID interestID: String?,
+    andTimestamp useTimestamp: Bool
   ) throws -> Bool? {
     let client = Client(api: Self.api, session: URLSession.shared)
     let getMember = Lists.GetListsIdMembersId.Request(
@@ -70,57 +71,105 @@ final class ListsTests: XCTestCase {
       _ = try client.requestSync(patch)
       return false
     } else {
-      let post = Lists.PostListsIdMembers.Request(listId: Self.listID, body: .init(emailAddress: emailAddress, status: Lists.PostListsIdMembers.Request.Body.Status.subscribed, interests: interests, mergeFields: mergeFields, timestampOpt: .init(), timestampSignup: .init()))
+      let post = Lists.PostListsIdMembers.Request(listId: Self.listID, body: .init(emailAddress: emailAddress, status: Lists.PostListsIdMembers.Request.Body.Status.subscribed, interests: interests, mergeFields: mergeFields, timestampOpt: useTimestamp ? .init() : nil, timestampSignup: useTimestamp ? .init() : nil))
       _ = try client.requestSync(post)
       return true
     }
   }
 
-  func testUpsertExistingWithInterestID() throws {
-    let actual = try upsertEmailAddress(existingEmailAddress, withFirstName: nil, andLastName: nil, withInterestID: Self.interestID)
+  func testUpsertExistingWithInterestIDWithoutTimestamp() throws {
+    let actual = try upsertEmailAddress(existingEmailAddress, withFirstName: nil, andLastName: nil, withInterestID: Self.interestID, andTimestamp: false)
     XCTAssertNil(actual)
   }
 
-  func testUpsertExistingWithoutInterestID() throws {
-    let actual = try upsertEmailAddress(existingEmailAddress, withFirstName: nil, andLastName: nil, withInterestID: nil)
+  func testUpsertExistingWithoutInterestIDWithoutTimestamp() throws {
+    let actual = try upsertEmailAddress(existingEmailAddress, withFirstName: nil, andLastName: nil, withInterestID: nil, andTimestamp: false)
     XCTAssertNil(actual)
   }
 
-  func testUpsertNewWithInterestID() throws {
+  func testUpsertNewWithInterestIDWithoutTimestamp() throws {
     let emailAddress = String.randomEmailAddress(withDomain: "brightdigit.com")
-    let actual = try upsertEmailAddress(emailAddress, withFirstName: nil, andLastName: nil, withInterestID: Self.interestID)
+    let actual = try upsertEmailAddress(emailAddress, withFirstName: nil, andLastName: nil, withInterestID: Self.interestID, andTimestamp: false)
     XCTAssertEqual(actual, true)
   }
 
-  func testUpsertNewThenWithInterestID() throws {
+  func testUpsertNewThenWithInterestIDWithoutTimestamp() throws {
     let emailAddress = String.randomEmailAddress(withDomain: "brightdigit.com")
-    let actualCreate = try upsertEmailAddress(emailAddress, withFirstName: nil, andLastName: nil, withInterestID: nil)
+    let actualCreate = try upsertEmailAddress(emailAddress, withFirstName: nil, andLastName: nil, withInterestID: nil, andTimestamp: false)
     XCTAssertEqual(actualCreate, true)
-    let actualUpdate = try upsertEmailAddress(emailAddress, withFirstName: nil, andLastName: nil, withInterestID: Self.interestID)
+    let actualUpdate = try upsertEmailAddress(emailAddress, withFirstName: nil, andLastName: nil, withInterestID: Self.interestID, andTimestamp: false)
     XCTAssertEqual(actualUpdate, false)
   }
 
-  func testUpsertExistingWithInterestIDandName() throws {
-    let actual = try upsertEmailAddress(existingEmailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: Self.interestID)
+  func testUpsertExistingWithInterestIDandNameWithoutTimestamp() throws {
+    let actual = try upsertEmailAddress(existingEmailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: Self.interestID, andTimestamp: false)
     XCTAssertNil(actual)
   }
 
-  func testUpsertExistingWithoutInterestIDandName() throws {
-    let actual = try upsertEmailAddress(existingEmailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: nil)
+  func testUpsertExistingWithoutInterestIDandNameWithoutTimestamp() throws {
+    let actual = try upsertEmailAddress(existingEmailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: nil, andTimestamp: false)
     XCTAssertNil(actual)
   }
 
-  func testUpsertNewWithInterestIDandName() throws {
+  func testUpsertNewWithInterestIDandNameWithoutTimestamp() throws {
     let emailAddress = String.randomEmailAddress(withDomain: "brightdigit.com")
-    let actual = try upsertEmailAddress(emailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: Self.interestID)
+    let actual = try upsertEmailAddress(emailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: Self.interestID, andTimestamp: false)
     XCTAssertEqual(actual, true)
   }
 
-  func testUpsertNewThenWithInterestIDandName() throws {
+  func testUpsertNewThenWithInterestIDandNameWithoutTimestamp() throws {
     let emailAddress = String.randomEmailAddress(withDomain: "brightdigit.com")
-    let actualCreate = try upsertEmailAddress(emailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: nil)
+    let actualCreate = try upsertEmailAddress(emailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: nil, andTimestamp: false)
     XCTAssertEqual(actualCreate, true)
-    let actualUpdate = try upsertEmailAddress(emailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: Self.interestID)
+    let actualUpdate = try upsertEmailAddress(emailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: Self.interestID, andTimestamp: false)
+    XCTAssertEqual(actualUpdate, false)
+  }
+  
+  func testUpsertExistingWithInterestIDWithTimestamp() throws {
+    let actual = try upsertEmailAddress(existingEmailAddress, withFirstName: nil, andLastName: nil, withInterestID: Self.interestID, andTimestamp: true)
+    XCTAssertNil(actual)
+  }
+
+  func testUpsertExistingWithoutInterestIDWithTimestamp() throws {
+    let actual = try upsertEmailAddress(existingEmailAddress, withFirstName: nil, andLastName: nil, withInterestID: nil, andTimestamp: true)
+    XCTAssertNil(actual)
+  }
+
+  func testUpsertNewWithInterestIDWithTimestamp() throws {
+    let emailAddress = String.randomEmailAddress(withDomain: "brightdigit.com")
+    let actual = try upsertEmailAddress(emailAddress, withFirstName: nil, andLastName: nil, withInterestID: Self.interestID, andTimestamp: true)
+    XCTAssertEqual(actual, true)
+  }
+
+  func testUpsertNewThenWithInterestIDWithTimestamp() throws {
+    let emailAddress = String.randomEmailAddress(withDomain: "brightdigit.com")
+    let actualCreate = try upsertEmailAddress(emailAddress, withFirstName: nil, andLastName: nil, withInterestID: nil, andTimestamp: true)
+    XCTAssertEqual(actualCreate, true)
+    let actualUpdate = try upsertEmailAddress(emailAddress, withFirstName: nil, andLastName: nil, withInterestID: Self.interestID, andTimestamp: true)
+    XCTAssertEqual(actualUpdate, false)
+  }
+
+  func testUpsertExistingWithInterestIDandNameWithTimestamp() throws {
+    let actual = try upsertEmailAddress(existingEmailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: Self.interestID, andTimestamp: true)
+    XCTAssertNil(actual)
+  }
+
+  func testUpsertExistingWithoutInterestIDandNameWithTimestamp() throws {
+    let actual = try upsertEmailAddress(existingEmailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: nil, andTimestamp: true)
+    XCTAssertNil(actual)
+  }
+
+  func testUpsertNewWithInterestIDandNameWithTimestamp() throws {
+    let emailAddress = String.randomEmailAddress(withDomain: "brightdigit.com")
+    let actual = try upsertEmailAddress(emailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: Self.interestID, andTimestamp: true)
+    XCTAssertEqual(actual, true)
+  }
+
+  func testUpsertNewThenWithInterestIDandNameWithTimestamp() throws {
+    let emailAddress = String.randomEmailAddress(withDomain: "brightdigit.com")
+    let actualCreate = try upsertEmailAddress(emailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: nil, andTimestamp: true)
+    XCTAssertEqual(actualCreate, true)
+    let actualUpdate = try upsertEmailAddress(emailAddress, withFirstName: UUID().uuidString, andLastName: UUID().uuidString, withInterestID: Self.interestID, andTimestamp: true)
     XCTAssertEqual(actualUpdate, false)
   }
 }
