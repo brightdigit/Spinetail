@@ -74,14 +74,16 @@ import Prch
       }
 
       public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
-public var response: ClientResult<[String: AnyCodable], DefaultResponse> {
-        switch self {
-        case .defaultResponse(statusCode: let statusCode, let response):
-          return .defaultResponse(statusCode, response)
-        case .status204(let response):
-          return .success(response)
+        public var response: ClientResult<[String: AnyCodable], DefaultResponse> {
+          switch self {
+          case let .defaultResponse(statusCode: statusCode, response):
+            return .defaultResponse(statusCode, response)
+
+          case let .status204(response):
+            return .success(response)
+          }
         }
-      }
+
         public typealias APIType = Mailchimp.API
 
         public typealias SuccessType = [String: AnyCodable]

@@ -44,14 +44,16 @@ public extension TemplateFolders {
     }
 
     public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
-public var response: ClientResult<Void, DefaultResponse> {
+      public var response: ClientResult<Void, DefaultResponse> {
         switch self {
-        case .defaultResponse(statusCode: let statusCode, let response):
+        case let .defaultResponse(statusCode: statusCode, response):
           return .defaultResponse(statusCode, response)
+
         case .status204:
           return .success(())
         }
       }
+
       public typealias APIType = Mailchimp.API
 
       public typealias SuccessType = Void
@@ -76,8 +78,6 @@ public var response: ClientResult<Void, DefaultResponse> {
         default: return nil
         }
       }
-
-
 
       public var anyResponse: Any {
         switch self {

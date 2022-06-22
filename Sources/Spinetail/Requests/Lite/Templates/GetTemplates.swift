@@ -138,14 +138,16 @@ public extension Templates {
     }
 
     public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
-public var response: ClientResult<Status200, DefaultResponse> {
+      public var response: ClientResult<Status200, DefaultResponse> {
         switch self {
-        case .defaultResponse(statusCode: let statusCode, let response):
+        case let .defaultResponse(statusCode: statusCode, response):
           return .defaultResponse(statusCode, response)
-        case .status200(let response):
+
+        case let .status200(response):
           return .success(response)
         }
       }
+
       public typealias APIType = Mailchimp.API
       /** A list an account's available templates. */
       public struct Status200: Model {
@@ -423,8 +425,6 @@ public var response: ClientResult<Status200, DefaultResponse> {
         default: return nil
         }
       }
-
-
 
       public var anyResponse: Any {
         switch self {

@@ -1,23 +1,21 @@
 import Foundation
 import Prch
 
-
-extension Prch.Response {
-
-  public var description: String {
-    
-    "\(statusCode) \(self.response)"
+public extension Prch.Response {
+  var description: String {
+    "\(statusCode) \(response)"
   }
 
-  public var debugDescription: String {
+  var debugDescription: String {
     var string = description
-    let responseString = "\(self.response)"
+    let responseString = "\(response)"
     if responseString != "()" {
       string += "\n\(responseString)"
     }
     return string
   }
 }
+
 #if !os(watchOS)
   public extension LandingPages {
     /**
@@ -62,24 +60,23 @@ extension Prch.Response {
       }
 
       public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
-        
-        
         public typealias SuccessType = LandingPageResponse?
-        
-        
-        
-public var response: ClientResult<LandingPageResponse?, DefaultResponse> {
-        switch self {
-        case .defaultResponse(statusCode: let statusCode, let response):
-          return .defaultResponse(statusCode, response)
-        case .status200(let response):
-          return .success(response)
-        case .status204:
-          return .success(nil)
+
+        public var response: ClientResult<LandingPageResponse?, DefaultResponse> {
+          switch self {
+          case let .defaultResponse(statusCode: statusCode, response):
+            return .defaultResponse(statusCode, response)
+
+          case let .status200(response):
+            return .success(response)
+
+          case .status204:
+            return .success(nil)
+          }
         }
-      }
+
         public typealias APIType = Mailchimp.API
-        
+
         /** A summary of an individual landing page's settings and content. */
         public struct LandingPageResponse: Model {
           /** The status of this landing page. */
@@ -315,7 +312,6 @@ public var response: ClientResult<LandingPageResponse?, DefaultResponse> {
 //          }
 //        }
 
-
 //
 //        public var anyResponse: Any {
 //          switch self {
@@ -332,6 +328,7 @@ public var response: ClientResult<LandingPageResponse?, DefaultResponse> {
           case let .defaultResponse(statusCode, _): return statusCode
           }
         }
+
 //
 //        public var successful: Bool {
 //          switch self {
@@ -348,7 +345,6 @@ public var response: ClientResult<LandingPageResponse?, DefaultResponse> {
           default: self = try .defaultResponse(statusCode: statusCode, decoder.decode(DefaultResponse.self, from: data))
           }
         }
-
       }
     }
   }

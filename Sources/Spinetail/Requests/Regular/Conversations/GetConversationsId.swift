@@ -64,14 +64,16 @@ import Prch
       }
 
       public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
-public var response: ClientResult<Status200, DefaultResponse> {
-        switch self {
-        case .defaultResponse(statusCode: let statusCode, let response):
-          return .defaultResponse(statusCode, response)
-        case .status200(let response):
-          return .success(response)
+        public var response: ClientResult<Status200, DefaultResponse> {
+          switch self {
+          case let .defaultResponse(statusCode: statusCode, response):
+            return .defaultResponse(statusCode, response)
+
+          case let .status200(response):
+            return .success(response)
+          }
         }
-      }
+
         public typealias APIType = Mailchimp.API
         /** Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account. */
         public struct Status200: Model {
@@ -278,8 +280,6 @@ public var response: ClientResult<Status200, DefaultResponse> {
           default: return nil
           }
         }
-
-
 
         public var anyResponse: Any {
           switch self {
