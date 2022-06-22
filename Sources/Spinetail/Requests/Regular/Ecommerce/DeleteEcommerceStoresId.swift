@@ -45,7 +45,7 @@ import Prch
           }
         }
 
-        public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
+        public enum Response: Prch.Response {
           public var response: ClientResult<[String: AnyCodable], DefaultResponse> {
             switch self {
             case let .defaultResponse(statusCode: statusCode, response):

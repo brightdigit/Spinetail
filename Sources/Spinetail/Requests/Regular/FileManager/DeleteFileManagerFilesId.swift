@@ -43,7 +43,7 @@ public extension FileManager {
       }
     }
 
-    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
+    public enum Response: Prch.Response {
       public var response: ClientResult<Void, DefaultResponse> {
         switch self {
         case let .defaultResponse(statusCode: statusCode, response):
@@ -93,31 +93,11 @@ public extension FileManager {
         }
       }
 
-      public var successful: Bool {
-        switch self {
-        case .status204: return true
-        case .defaultResponse: return false
-        }
-      }
-
       public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
         switch statusCode {
         case 204: self = .status204
         default: self = try .defaultResponse(statusCode: statusCode, decoder.decode(DefaultResponse.self, from: data))
         }
-      }
-
-      public var description: String {
-        "\(statusCode) \(successful ? "success" : "failure")"
-      }
-
-      public var debugDescription: String {
-        var string = description
-        let responseString = "\(anyResponse)"
-        if responseString != "()" {
-          string += "\n\(responseString)"
-        }
-        return string
       }
     }
   }
