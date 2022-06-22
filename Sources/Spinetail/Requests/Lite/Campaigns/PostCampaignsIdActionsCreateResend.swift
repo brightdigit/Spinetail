@@ -43,8 +43,16 @@ public extension Campaigns {
       }
     }
 
-    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
-      public typealias APIType = MailchimpAPI
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
+public var response: ClientResult<Status200, DefaultResponse> {
+        switch self {
+        case .defaultResponse(statusCode: let statusCode, let response):
+          return .defaultResponse(statusCode, response)
+        case .status200(let response):
+          return .success(response)
+        }
+      }
+      public typealias APIType = Mailchimp.API
       /** A summary of an individual campaign's settings and content. */
       public struct Status200: Model {
         /** There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead. */
@@ -1240,17 +1248,7 @@ public extension Campaigns {
         }
       }
 
-      /// either success or failure value. Success is anything in the 200..<300 status code range
-      @available(*, unavailable)
-      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
-        if let successValue = success {
-          return .success(successValue)
-        } else if let failureValue = failure {
-          return .failure(failureValue)
-        } else {
-          fatalError("Response does not have success or failure response")
-        }
-      }
+
 
       public var anyResponse: Any {
         switch self {

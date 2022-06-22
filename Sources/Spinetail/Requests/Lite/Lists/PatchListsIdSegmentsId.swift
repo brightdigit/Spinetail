@@ -118,8 +118,16 @@ public extension Lists {
       }
     }
 
-    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
-      public typealias APIType = MailchimpAPI
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
+public var response: ClientResult<Status200, DefaultResponse> {
+        switch self {
+        case .defaultResponse(statusCode: let statusCode, let response):
+          return .defaultResponse(statusCode, response)
+        case .status200(let response):
+          return .success(response)
+        }
+      }
+      public typealias APIType = Mailchimp.API
       /** Information about a specific segment. */
       public struct Status200: Model {
         /** The type of segment. Static segments are now known as tags. Learn more about [tags](https://mailchimp.com/help/getting-started-tags?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs). */
@@ -311,17 +319,7 @@ public extension Lists {
         }
       }
 
-      /// either success or failure value. Success is anything in the 200..<300 status code range
-      @available(*, unavailable)
-      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
-        if let successValue = success {
-          return .success(successValue)
-        } else if let failureValue = failure {
-          return .failure(failureValue)
-        } else {
-          fatalError("Response does not have success or failure response")
-        }
-      }
+
 
       public var anyResponse: Any {
         switch self {

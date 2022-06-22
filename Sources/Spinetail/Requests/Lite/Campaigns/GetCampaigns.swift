@@ -144,16 +144,16 @@ public extension Campaigns {
         if let status = options.status?.encode() {
           params["status"] = status
         }
-        if let beforeSendTime = options.beforeSendTime.encode(with: MailchimpAPI.dateEncodingFormatter) {
+        if let beforeSendTime = options.beforeSendTime.encode(with: Mailchimp.API.dateEncodingFormatter) {
           params["before_send_time"] = beforeSendTime
         }
-        if let sinceSendTime = options.sinceSendTime.encode(with: MailchimpAPI.dateEncodingFormatter) {
+        if let sinceSendTime = options.sinceSendTime.encode(with: Mailchimp.API.dateEncodingFormatter) {
           params["since_send_time"] = sinceSendTime
         }
-        if let beforeCreateTime = options.beforeCreateTime.encode(with: MailchimpAPI.dateEncodingFormatter) {
+        if let beforeCreateTime = options.beforeCreateTime.encode(with: Mailchimp.API.dateEncodingFormatter) {
           params["before_create_time"] = beforeCreateTime
         }
-        if let sinceCreateTime = options.sinceCreateTime.encode(with: MailchimpAPI.dateEncodingFormatter) {
+        if let sinceCreateTime = options.sinceCreateTime.encode(with: Mailchimp.API.dateEncodingFormatter) {
           params["since_create_time"] = sinceCreateTime
         }
         if let listId = options.listId {
@@ -175,8 +175,16 @@ public extension Campaigns {
       }
     }
 
-    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
-      public typealias APIType = MailchimpAPI
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
+public var response: ClientResult<Status200, DefaultResponse> {
+        switch self {
+        case .defaultResponse(statusCode: let statusCode, let response):
+          return .defaultResponse(statusCode, response)
+        case .status200(let response):
+          return .success(response)
+        }
+      }
+      public typealias APIType = Mailchimp.API
       /** An array of campaigns. */
       public struct Status200: Model {
         /** A list of link types and descriptions for the API schema documents. */
@@ -1477,17 +1485,7 @@ public extension Campaigns {
         }
       }
 
-      /// either success or failure value. Success is anything in the 200..<300 status code range
-      @available(*, unavailable)
-      public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
-        if let successValue = success {
-          return .success(successValue)
-        } else if let failureValue = failure {
-          return .failure(failureValue)
-        } else {
-          fatalError("Response does not have success or failure response")
-        }
-      }
+
 
       public var anyResponse: Any {
         switch self {

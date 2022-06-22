@@ -319,7 +319,7 @@ With that email address, we can create a `Request`:
 ```swift
 import Spinetail 
 
-let api = MailchimpAPI(apiKey: "")
+let api = Mailchimp.API(apiKey: "")
 let client = Client(api: api, session: URLSession.shared)
 let request = Lists.GetListsIdMembersId.Request(listId: listId, subscriberHash: emailAddress)
 ```
