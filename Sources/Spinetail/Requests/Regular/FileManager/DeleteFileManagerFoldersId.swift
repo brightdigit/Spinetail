@@ -43,8 +43,18 @@ public extension FileManager {
       }
     }
 
-    public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
-      public typealias APIType = MailchimpAPI
+    public enum Response: Prch.Response, CustomStringConvertible, CustomDebugStringConvertible {
+      public var response: ClientResult<Void, DefaultResponse> {
+        switch self {
+        case let .defaultResponse(statusCode: statusCode, response):
+          return .defaultResponse(statusCode, response)
+
+        case .status204:
+          return .success(())
+        }
+      }
+
+      public typealias APIType = Mailchimp.API
 
       public typealias SuccessType = Void
       public typealias FailureType = DefaultResponse
@@ -69,18 +79,6 @@ public extension FileManager {
         }
       }
 
-      /// either success or failure value. Success is anything in the 200..<300 status code range
-      @available(*, unavailable)
-      public var _obsolete_responseResult: DeprecatedResponseResult<Void, DefaultResponse> {
-        if let successValue = success {
-          return .success(successValue)
-        } else if let failureValue = failure {
-          return .failure(failureValue)
-        } else {
-          fatalError("Response does not have success or failure response")
-        }
-      }
-
       public var anyResponse: Any {
         switch self {
         case let .defaultResponse(_, response): return response
@@ -95,31 +93,11 @@ public extension FileManager {
         }
       }
 
-      public var successful: Bool {
-        switch self {
-        case .status204: return true
-        case .defaultResponse: return false
-        }
-      }
-
       public init(statusCode: Int, data: Data, decoder: ResponseDecoder) throws {
         switch statusCode {
         case 204: self = .status204
         default: self = try .defaultResponse(statusCode: statusCode, decoder.decode(DefaultResponse.self, from: data))
         }
-      }
-
-      public var description: String {
-        "\(statusCode) \(successful ? "success" : "failure")"
-      }
-
-      public var debugDescription: String {
-        var string = description
-        let responseString = "\(anyResponse)"
-        if responseString != "()" {
-          string += "\n\(responseString)"
-        }
-        return string
       }
     }
   }

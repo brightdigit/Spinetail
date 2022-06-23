@@ -57,6 +57,3 @@ public extension Mailchimp {
     }
   }
 }
-
-@available(*, deprecated, renamed: "Mailchimp.API")
-public typealias MailchimpAPI = Mailchimp.API

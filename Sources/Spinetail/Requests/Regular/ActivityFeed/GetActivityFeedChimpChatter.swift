@@ -55,8 +55,8 @@ import Prch
         }
       }
 
-      public typealias APIType = MailchimpAPI
-      public typealias Response = BasicResponse<Status200, DefaultResponse, MailchimpAPI>
+      public typealias APIType = Mailchimp.API
+      public typealias Response = BasicResponse<Status200, DefaultResponse, Mailchimp.API>
       /** An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account. */
       public struct Status200: SuccessModel {
         public static let statusCode: Int = 200

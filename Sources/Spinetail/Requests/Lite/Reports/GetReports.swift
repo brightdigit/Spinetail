@@ -89,18 +89,28 @@ import Prch
           if let type = options.type?.encode() {
             params["type"] = type
           }
-          if let beforeSendTime = options.beforeSendTime.encode(with: MailchimpAPI.dateEncodingFormatter) {
+          if let beforeSendTime = options.beforeSendTime.encode(with: Mailchimp.API.dateEncodingFormatter) {
             params["before_send_time"] = beforeSendTime
           }
-          if let sinceSendTime = options.sinceSendTime.encode(with: MailchimpAPI.dateEncodingFormatter) {
+          if let sinceSendTime = options.sinceSendTime.encode(with: Mailchimp.API.dateEncodingFormatter) {
             params["since_send_time"] = sinceSendTime
           }
           return params
         }
       }
 
-      public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
-        public typealias APIType = MailchimpAPI
+      public enum Response: Prch.Response {
+        public var response: ClientResult<Status200, DefaultResponse> {
+          switch self {
+          case let .defaultResponse(statusCode: statusCode, response):
+            return .defaultResponse(statusCode, response)
+
+          case let .status200(response):
+            return .success(response)
+          }
+        }
+
+        public typealias APIType = Mailchimp.API
         /** A list of reports containing campaigns marked as Sent. */
         public struct Status200: Model {
           /** A list of link types and descriptions for the API schema documents. */
@@ -1119,18 +1129,6 @@ import Prch
           switch self {
           case let .defaultResponse(_, response): return response
           default: return nil
-          }
-        }
-
-        /// either success or failure value. Success is anything in the 200..<300 status code range
-        @available(*, unavailable)
-        public var _obsolete_responseResult: DeprecatedResponseResult<Status200, DefaultResponse> {
-          if let successValue = success {
-            return .success(successValue)
-          } else if let failureValue = failure {
-            return .failure(failureValue)
-          } else {
-            fatalError("Response does not have success or failure response")
           }
         }
 

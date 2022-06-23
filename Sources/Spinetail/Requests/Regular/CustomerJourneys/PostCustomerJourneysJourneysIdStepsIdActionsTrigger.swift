@@ -73,8 +73,18 @@ import Prch
         }
       }
 
-      public enum Response: DeprecatedResponse, CustomStringConvertible, CustomDebugStringConvertible {
-        public typealias APIType = MailchimpAPI
+      public enum Response: Prch.Response {
+        public var response: ClientResult<[String: AnyCodable], DefaultResponse> {
+          switch self {
+          case let .defaultResponse(statusCode: statusCode, response):
+            return .defaultResponse(statusCode, response)
+
+          case let .status204(response):
+            return .success(response)
+          }
+        }
+
+        public typealias APIType = Mailchimp.API
 
         public typealias SuccessType = [String: AnyCodable]
         public typealias FailureType = DefaultResponse
@@ -96,18 +106,6 @@ import Prch
           switch self {
           case let .defaultResponse(_, response): return response
           default: return nil
-          }
-        }
-
-        /// either success or failure value. Success is anything in the 200..<300 status code range
-        @available(*, unavailable)
-        public var _obsolete_responseResult: DeprecatedResponseResult<[String: AnyCodable], DefaultResponse> {
-          if let successValue = success {
-            return .success(successValue)
-          } else if let failureValue = failure {
-            return .failure(failureValue)
-          } else {
-            fatalError("Response does not have success or failure response")
           }
         }
 
