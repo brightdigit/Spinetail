@@ -84,7 +84,7 @@ jobs:
       - name: Build
         run: swift build
       - name: Lint
-        if: false #startsWith(github.ref, 'refs/tags/') != true
+        if: startsWith(github.ref, 'refs/tags/') != true
         run: swift run swiftformat --lint . && swift run swiftlint
       - name: Run tests
         run: swift test -v --enable-code-coverage
