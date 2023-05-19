@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     List member events
@@ -14,8 +14,16 @@ extension Lists {
     Get events for a contact.
     */
     public struct GetListsIdMembersIdEvents : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/members/{subscriber_hash}/events"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "subscriber_hash" + "}", with: "\(self.subscriberHash)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -40,8 +48,31 @@ extension Lists {
         /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
         public var excludeFields: [String]?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getListsIdMembersIdEvents", tag: "lists", method: "GET", path: "/lists/{list_id}/members/{subscriber_hash}/events", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = CollectionOfEvents
+        public typealias SuccessType = CollectionOfEventsModel
+        public typealias BodyType =  Empty
+
     }
 }

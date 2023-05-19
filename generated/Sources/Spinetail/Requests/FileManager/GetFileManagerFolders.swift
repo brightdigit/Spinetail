@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension FileManager {
+extension STFileManager {
 
     /**
     List folders
@@ -14,8 +14,16 @@ extension FileManager {
     Get a list of all folders in the File Manager.
     */
     public struct GetFileManagerFolders : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/file-manager/folders"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .GET
@@ -43,8 +51,40 @@ extension FileManager {
         /** Restrict the response to files created after the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
         public var sinceCreatedAt: String?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let createdBy = self.createdBy {
+              params["created_by"] = String(describing: createdBy)
+            }
+            if let beforeCreatedAt = self.beforeCreatedAt {
+              params["before_created_at"] = String(describing: beforeCreatedAt)
+            }
+            if let sinceCreatedAt = self.sinceCreatedAt {
+              params["since_created_at"] = String(describing: sinceCreatedAt)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getFileManagerFolders", tag: "fileManager", method: "GET", path: "/file-manager/folders", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = FileManagerFolders
+        public typealias SuccessType = FileManagerFoldersModel
+        public typealias BodyType =  Empty
+
     }
 }

@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Ecommerce {
+extension STEcommerce {
 
     /**
     Add promo code
@@ -14,8 +14,16 @@ extension Ecommerce {
     Add a new promo code to a store.
     */
     public struct PostEcommerceStoresIdPromocodes : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "store_id" + "}", with: "\(self.storeId)").replacingOccurrences(of: "{" + "promo_rule_id" + "}", with: "\(self.promoRuleId)")
+        }
 
         public var method : RequestMethod {
             .POST
@@ -28,8 +36,18 @@ extension Ecommerce {
         /** The id for the promo rule of a store. */
         public var promoRuleId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "postEcommerceStoresIdPromocodes", tag: "ecommerce", method: "POST", path: "/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = ECommercePromoCode
+        public typealias SuccessType = ECommercePromoCodeModel
+        public typealias BodyType =  ECommercePromoCode1Model
+
+
+        public let body: ECommercePromoCode1Model
     }
 }

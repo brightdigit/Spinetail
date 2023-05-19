@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Reporting {
+extension STReporting {
 
     /**
     Get survey question report
@@ -14,8 +14,16 @@ extension Reporting {
     Get report for a survey question.
     */
     public struct GetReportingSurveysIdQuestionsId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/reporting/surveys/{outreach_id}/questions/{question_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "outreach_id" + "}", with: "\(self.outreachId)").replacingOccurrences(of: "{" + "question_id" + "}", with: "\(self.questionId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -34,8 +42,25 @@ extension Reporting {
         /** The ID of the survey question. */
         public var questionId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getReportingSurveysIdQuestionsId", tag: "reporting", method: "GET", path: "/reporting/surveys/{outreach_id}/questions/{question_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = SurveyQuestionReport
+        public typealias SuccessType = SurveyQuestionReportModel
+        public typealias BodyType =  Empty
+
     }
 }

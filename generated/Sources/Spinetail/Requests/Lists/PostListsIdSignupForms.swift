@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Customize signup form
@@ -14,8 +14,16 @@ extension Lists {
     Customize a list's default signup form.
     */
     public struct PostListsIdSignupForms : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/signup-forms"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)")
+        }
 
         public var method : RequestMethod {
             .POST
@@ -25,8 +33,18 @@ extension Lists {
         /** The unique ID for the list. */
         public var listId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "postListsIdSignupForms", tag: "lists", method: "POST", path: "/lists/{list_id}/signup-forms", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = SignupForm
+        public typealias SuccessType = SignupFormModel
+        public typealias BodyType =  SignupForm1Model
+
+
+        public let body: SignupForm1Model
     }
 }

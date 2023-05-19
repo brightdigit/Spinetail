@@ -6,37 +6,38 @@
 import Foundation
 import PrchModel
 
+
 public typealias DateTime = Date
 public typealias File = Data
 public typealias ID = UUID
 
-public enum Surveys {}
-public enum AccountExport {}
-public enum AccountExports {}
-public enum ActivityFeed {}
-public enum AuthorizedApps {}
-public enum Automations {}
-public enum BatchWebhooks {}
-public enum Batches {}
-public enum CampaignFolders {}
-public enum Campaigns {}
-public enum ConnectedSites {}
-public enum Conversations {}
-public enum CustomerJourneys {}
-public enum Ecommerce {}
-public enum FacebookAds {}
-public enum FileManager {}
-public enum LandingPages {}
-public enum Lists {}
-public enum Ping {}
-public enum Reporting {}
-public enum Reports {}
-public enum Root {}
-public enum SearchCampaigns {}
-public enum SearchMembers {}
-public enum TemplateFolders {}
-public enum Templates {}
-public enum VerifiedDomains {}
+public enum STSurveys {}
+public enum STAccountExport {}
+public enum STAccountExports {}
+public enum STActivityFeed {}
+public enum STAuthorizedApps {}
+public enum STAutomations {}
+public enum STBatchWebhooks {}
+public enum STBatches {}
+public enum STCampaignFolders {}
+public enum STCampaigns {}
+public enum STConnectedSites {}
+public enum STConversations {}
+public enum STCustomerJourneys {}
+public enum STEcommerce {}
+public enum STFacebookAds {}
+public enum STFileManager {}
+public enum STLandingPages {}
+public enum STLists {}
+public enum STPing {}
+public enum STReporting {}
+public enum STReports {}
+public enum STRoot {}
+public enum STSearchCampaigns {}
+public enum STSearchMembers {}
+public enum STTemplateFolders {}
+public enum STTemplates {}
+public enum STVerifiedDomains {}
 
 public protocol BaseURLProvider {
   var baseURLComponents: URLComponents? { get }
@@ -45,33 +46,33 @@ public protocol BaseURLProvider {
 
 public class SpinetailAPI: API {
   public init(baseURLProvider: BaseURLProvider) {
-    self.baseURLProvider = baseURLProvider
+	self.baseURLProvider = baseURLProvider
   }
 
   public var isReady: Bool {
-    baseURLProvider.baseURLComponents != nil
+	baseURLProvider.baseURLComponents != nil
   }
 
   public let baseURLProvider: BaseURLProvider
   public var baseURLComponents: URLComponents {
-    guard let baseURLComponents = baseURLProvider.baseURLComponents else {
-      assertionFailure("BaseURLProvider is not ready")
-      return URLComponents()
-    }
+	guard let baseURLComponents = baseURLProvider.baseURLComponents else {
+	  assertionFailure("BaseURLProvider is not ready")
+	  return URLComponents()
+	}
 
-    return baseURLComponents
+	return baseURLComponents
   }
 
   public var headers: [String: String] {
-    Defaults.headers
+	Defaults.headers
   }
 
   public var encoder: any Encoder<Data> {
-    Defaults.encoder
+	Defaults.encoder
   }
 
   public var decoder: any Decoder<Data> {
-    Defaults.decoder
+	Defaults.decoder
   }
 
   public typealias RequestDataType = Data
@@ -81,29 +82,33 @@ public class SpinetailAPI: API {
 
 extension JSONDecoder {
   convenience init(dateFormatter: DateFormatter) {
-    self.init()
-    self.dateDecodingStrategy = .formatted(dateFormatter)
+	self.init()
+	self.dateDecodingStrategy = .formatted(dateFormatter)
   }
 }
 
 extension JSONEncoder {
   convenience init(dateFormatter: DateFormatter) {
-    self.init()
-    self.dateEncodingStrategy = .formatted(dateFormatter)
+	self.init()
+	self.dateEncodingStrategy = .formatted(dateFormatter)
   }
 }
 
 extension SpinetailAPI {
   enum Defaults {
-    public static let dateEncodingFormatter = DateFormatter(formatString: "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
-                                                            locale: Locale(identifier: "en_US_POSIX"),
-                                                            calendar: Calendar(identifier: .gregorian))
-    
-    public static let encoder: any Encoder<Data> = JSONEncoder(dateFormatter: Self.dateEncodingFormatter)
+	public static let dateEncodingFormatter = {
+	  let formatter = DateFormatter()
+	  formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+	  formatter.locale = Locale(identifier: "en_US_POSIX")
+	  formatter.calendar = Calendar(identifier: .gregorian)
+	  return formatter
+	}()
 
-    public static let decoder: any Decoder<Data> = JSONDecoder(dateFormatter: Self.dateEncodingFormatter)
+	public static let encoder: any Encoder<Data> = JSONEncoder(dateFormatter: Self.dateEncodingFormatter)
 
-    public static let headers: [String: String] =
-      ["Content-Type": "application/json; charset=utf-8"]
+	public static let decoder: any Decoder<Data> = JSONDecoder(dateFormatter: Self.dateEncodingFormatter)
+
+	public static let headers: [String: String] =
+	  ["Content-Type": "application/json; charset=utf-8"]
   }
 }

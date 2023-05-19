@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Delete merge field
@@ -14,8 +14,16 @@ extension Lists {
     Delete a specific merge field.
     */
     public struct DeleteListsIdMergeFieldsId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/merge-fields/{merge_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "merge_id" + "}", with: "\(self.mergeId)")
+        }
 
         public var method : RequestMethod {
             .DELETE
@@ -28,8 +36,16 @@ extension Lists {
         /** The id for the merge field. */
         public var mergeId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "deleteListsIdMergeFieldsId", tag: "lists", method: "DELETE", path: "/lists/{list_id}/merge-fields/{merge_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         public typealias SuccessType = Empty
+        public typealias BodyType =  Empty
+
     }
 }

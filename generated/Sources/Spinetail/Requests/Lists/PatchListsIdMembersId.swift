@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Update list member
@@ -14,8 +14,16 @@ extension Lists {
     Update information for a specific list member.
     */
     public struct PatchListsIdMembersId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/members/{subscriber_hash}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "subscriber_hash" + "}", with: "\(self.subscriberHash)")
+        }
 
         public var method : RequestMethod {
             .PATCH
@@ -31,8 +39,24 @@ extension Lists {
         /** If skip_merge_validation is true, member data will be accepted without merge field values, even if the merge field is usually required. This defaults to false. */
         public var skipMergeValidation: Bool?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let skipMergeValidation = self.skipMergeValidation {
+              params["skip_merge_validation"] = String(describing: skipMergeValidation)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "patchListsIdMembersId", tag: "lists", method: "PATCH", path: "/lists/{list_id}/members/{subscriber_hash}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = ListMembers2
+        public typealias SuccessType = ListMembers2Model
+        public typealias BodyType =  AddListMembers3Model
+
+
+        public let body: AddListMembers3Model
     }
 }

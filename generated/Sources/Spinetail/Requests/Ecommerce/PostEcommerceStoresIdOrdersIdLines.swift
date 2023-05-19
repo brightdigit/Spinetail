@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Ecommerce {
+extension STEcommerce {
 
     /**
     Add order line item
@@ -14,8 +14,16 @@ extension Ecommerce {
     Add a new line item to an existing order.
     */
     public struct PostEcommerceStoresIdOrdersIdLines : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/ecommerce/stores/{store_id}/orders/{order_id}/lines"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "store_id" + "}", with: "\(self.storeId)").replacingOccurrences(of: "{" + "order_id" + "}", with: "\(self.orderId)")
+        }
 
         public var method : RequestMethod {
             .POST
@@ -28,8 +36,18 @@ extension Ecommerce {
         /** The id for the order in a store. */
         public var orderId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "postEcommerceStoresIdOrdersIdLines", tag: "ecommerce", method: "POST", path: "/ecommerce/stores/{store_id}/orders/{order_id}/lines", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = ECommerceOrderLineItem
+        public typealias SuccessType = ECommerceOrderLineItemModel
+        public typealias BodyType =  ECommerceOrderLineItem1Model
+
+
+        public let body: ECommerceOrderLineItem1Model
     }
 }

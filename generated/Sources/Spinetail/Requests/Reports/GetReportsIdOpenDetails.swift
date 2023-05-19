@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Reports {
+extension STReports {
 
     /**
     List campaign open details
@@ -14,8 +14,16 @@ extension Reports {
     Get detailed information about any campaign emails that were opened by a list member.
     */
     public struct GetReportsIdOpenDetails : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/reports/{campaign_id}/open-details"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "campaign_id" + "}", with: "\(self.campaignId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -40,8 +48,34 @@ extension Reports {
         /** Restrict results to campaign open events that occur after a specific time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
         public var since: String?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let since = self.since {
+              params["since"] = String(describing: since)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getReportsIdOpenDetails", tag: "reports", method: "GET", path: "/reports/{campaign_id}/open-details", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = OpenDetailReport
+        public typealias SuccessType = OpenDetailReportModel
+        public typealias BodyType =  Empty
+
     }
 }

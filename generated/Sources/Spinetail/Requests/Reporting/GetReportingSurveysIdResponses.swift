@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Reporting {
+extension STReporting {
 
     /**
     List survey responses
@@ -14,8 +14,16 @@ extension Reporting {
     Get responses to a survey.
     */
     public struct GetReportingSurveysIdResponses : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/reporting/surveys/{outreach_id}/responses"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "outreach_id" + "}", with: "\(self.outreachId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -40,6 +48,30 @@ extension Reporting {
         /** Filter survey responses by familiarity of the respondents. */
         public var respondentFamiliarityIs: RespondentFamiliarityIs?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let answeredQuestion = self.answeredQuestion {
+              params["answered_question"] = String(describing: answeredQuestion)
+            }
+            if let choseAnswer = self.choseAnswer {
+              params["chose_answer"] = String(describing: choseAnswer)
+            }
+            if let respondentFamiliarityIs = self.respondentFamiliarityIs {
+              params["respondent_familiarity_is"] = String(describing: respondentFamiliarityIs)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getReportingSurveysIdResponses", tag: "reporting", method: "GET", path: "/reporting/surveys/{outreach_id}/responses", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         /** Filter survey responses by familiarity of the respondents. */
@@ -49,6 +81,8 @@ extension Reporting {
             case unknown = "unknown"
         }
 
-        public typealias SuccessType = GetReportingSurveysIdResponses200Response
+        public typealias SuccessType = GetReportingSurveysIdResponses200ResponseModel
+        public typealias BodyType =  Empty
+
     }
 }

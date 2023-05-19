@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Ecommerce {
+extension STEcommerce {
 
     /**
     Update order line item
@@ -14,8 +14,16 @@ extension Ecommerce {
     Update a specific order line item.
     */
     public struct PatchEcommerceStoresIdOrdersIdLinesId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "store_id" + "}", with: "\(self.storeId)").replacingOccurrences(of: "{" + "order_id" + "}", with: "\(self.orderId)").replacingOccurrences(of: "{" + "line_id" + "}", with: "\(self.lineId)")
+        }
 
         public var method : RequestMethod {
             .PATCH
@@ -31,8 +39,18 @@ extension Ecommerce {
         /** The id for the line item of an order. */
         public var lineId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "patchEcommerceStoresIdOrdersIdLinesId", tag: "ecommerce", method: "PATCH", path: "/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = ECommerceOrderLineItem
+        public typealias SuccessType = ECommerceOrderLineItemModel
+        public typealias BodyType =  ECommerceOrderLineItem2Model
+
+
+        public let body: ECommerceOrderLineItem2Model
     }
 }

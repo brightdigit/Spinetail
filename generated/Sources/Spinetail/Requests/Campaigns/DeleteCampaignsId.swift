@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Campaigns {
+extension STCampaigns {
 
     /**
     Delete campaign
@@ -14,8 +14,16 @@ extension Campaigns {
     Remove a campaign from your Mailchimp account.
     */
     public struct DeleteCampaignsId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/campaigns/{campaign_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "campaign_id" + "}", with: "\(self.campaignId)")
+        }
 
         public var method : RequestMethod {
             .DELETE
@@ -25,8 +33,16 @@ extension Campaigns {
         /** The unique id for the campaign. */
         public var campaignId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "deleteCampaignsId", tag: "campaigns", method: "DELETE", path: "/campaigns/{campaign_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         public typealias SuccessType = Empty
+        public typealias BodyType =  Empty
+
     }
 }

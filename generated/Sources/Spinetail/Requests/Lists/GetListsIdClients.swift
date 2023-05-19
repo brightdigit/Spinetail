@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     List top email clients
@@ -14,8 +14,16 @@ extension Lists {
     Get a list of the top email clients based on user-agent strings.
     */
     public struct GetListsIdClients : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/clients"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -31,8 +39,25 @@ extension Lists {
         /** The unique ID for the list. */
         public var listId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getListsIdClients", tag: "lists", method: "GET", path: "/lists/{list_id}/clients", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = EmailClients
+        public typealias SuccessType = EmailClientsModel
+        public typealias BodyType =  Empty
+
     }
 }

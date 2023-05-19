@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Automations {
+extension STAutomations {
 
     /**
     List automated emails
@@ -14,8 +14,16 @@ extension Automations {
     Get a summary of the emails in a classic automation workflow.
     */
     public struct GetAutomationsIdEmails : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/automations/{workflow_id}/emails"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "workflow_id" + "}", with: "\(self.workflowId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -25,8 +33,16 @@ extension Automations {
         /** The unique id for the Automation workflow. */
         public var workflowId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getAutomationsIdEmails", tag: "automations", method: "GET", path: "/automations/{workflow_id}/emails", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = AutomationEmails
+        public typealias SuccessType = AutomationEmailsModel
+        public typealias BodyType =  Empty
+
     }
 }

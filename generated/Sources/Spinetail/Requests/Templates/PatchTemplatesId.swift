@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Templates {
+extension STTemplates {
 
     /**
     Update template
@@ -14,8 +14,16 @@ extension Templates {
     Update the name, HTML, or `folder_id` of an existing template.
     */
     public struct PatchTemplatesId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/templates/{template_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "template_id" + "}", with: "\(self.templateId)")
+        }
 
         public var method : RequestMethod {
             .PATCH
@@ -25,8 +33,18 @@ extension Templates {
         /** The unique id for the template. */
         public var templateId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "patchTemplatesId", tag: "templates", method: "PATCH", path: "/templates/{template_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = TemplateInstance
+        public typealias SuccessType = TemplateInstanceModel
+        public typealias BodyType =  TemplateInstance1Model
+
+
+        public let body: TemplateInstance1Model
     }
 }

@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Ecommerce {
+extension STEcommerce {
 
     /**
     Update store
@@ -14,8 +14,16 @@ extension Ecommerce {
     Update a store.
     */
     public struct PatchEcommerceStoresId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/ecommerce/stores/{store_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "store_id" + "}", with: "\(self.storeId)")
+        }
 
         public var method : RequestMethod {
             .PATCH
@@ -25,8 +33,18 @@ extension Ecommerce {
         /** The store id. */
         public var storeId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "patchEcommerceStoresId", tag: "ecommerce", method: "PATCH", path: "/ecommerce/stores/{store_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = ECommerceStore
+        public typealias SuccessType = ECommerceStoreModel
+        public typealias BodyType =  ECommerceStore2Model
+
+
+        public let body: ECommerceStore2Model
     }
 }

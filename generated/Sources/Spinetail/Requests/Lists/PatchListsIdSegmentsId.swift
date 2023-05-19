@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Update segment
@@ -14,8 +14,16 @@ extension Lists {
     Update a specific segment in a list.
     */
     public struct PatchListsIdSegmentsId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/segments/{segment_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "segment_id" + "}", with: "\(self.segmentId)")
+        }
 
         public var method : RequestMethod {
             .PATCH
@@ -28,8 +36,18 @@ extension Lists {
         /** The unique id for the segment. */
         public var segmentId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "patchListsIdSegmentsId", tag: "lists", method: "PATCH", path: "/lists/{list_id}/segments/{segment_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = List7
+        public typealias SuccessType = List7Model
+        public typealias BodyType =  List9Model
+
+
+        public let body: List9Model
     }
 }

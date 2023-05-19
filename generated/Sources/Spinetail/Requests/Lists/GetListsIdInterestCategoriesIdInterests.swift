@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     List interests in category
@@ -14,8 +14,16 @@ extension Lists {
     Get a list of this category's interests.
     */
     public struct GetListsIdInterestCategoriesIdInterests : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/interest-categories/{interest_category_id}/interests"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "interest_category_id" + "}", with: "\(self.interestCategoryId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -40,8 +48,31 @@ extension Lists {
         /** Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0. */
         public var offset: Int?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getListsIdInterestCategoriesIdInterests", tag: "lists", method: "GET", path: "/lists/{list_id}/interest-categories/{interest_category_id}/interests", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = Interests
+        public typealias SuccessType = InterestsModel
+        public typealias BodyType =  Empty
+
     }
 }

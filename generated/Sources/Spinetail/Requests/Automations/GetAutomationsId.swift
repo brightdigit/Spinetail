@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Automations {
+extension STAutomations {
 
     /**
     Get automation info
@@ -14,8 +14,16 @@ extension Automations {
     Get a summary of an individual classic automation workflow's settings and content. The `trigger_settings` object returns information for the first email in the workflow.
     */
     public struct GetAutomationsId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/automations/{workflow_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "workflow_id" + "}", with: "\(self.workflowId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -31,8 +39,25 @@ extension Automations {
         /** The unique id for the Automation workflow. */
         public var workflowId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getAutomationsId", tag: "automations", method: "GET", path: "/automations/{workflow_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = AutomationWorkflow
+        public typealias SuccessType = AutomationWorkflowModel
+        public typealias BodyType =  Empty
+
     }
 }

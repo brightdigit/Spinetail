@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Reports {
+extension STReports {
 
     /**
     List clicked link subscribers
@@ -14,8 +14,16 @@ extension Reports {
     Get information about list members who clicked on a specific link in a campaign.
     */
     public struct GetReportsIdClickDetailsIdMembers : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/reports/{campaign_id}/click-details/{link_id}/members"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "campaign_id" + "}", with: "\(self.campaignId)").replacingOccurrences(of: "{" + "link_id" + "}", with: "\(self.linkId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -40,8 +48,31 @@ extension Reports {
         /** The id for the link. */
         public var linkId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getReportsIdClickDetailsIdMembers", tag: "reports", method: "GET", path: "/reports/{campaign_id}/click-details/{link_id}/members", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = ClickDetailMembers
+        public typealias SuccessType = ClickDetailMembersModel
+        public typealias BodyType =  Empty
+
     }
 }

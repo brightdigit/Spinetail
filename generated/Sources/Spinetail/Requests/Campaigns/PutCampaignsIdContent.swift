@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Campaigns {
+extension STCampaigns {
 
     /**
     Set campaign content
@@ -14,8 +14,16 @@ extension Campaigns {
     Set the content for a campaign.
     */
     public struct PutCampaignsIdContent : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/campaigns/{campaign_id}/content"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "campaign_id" + "}", with: "\(self.campaignId)")
+        }
 
         public var method : RequestMethod {
             .PUT
@@ -25,8 +33,18 @@ extension Campaigns {
         /** The unique id for the campaign. */
         public var campaignId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "putCampaignsIdContent", tag: "campaigns", method: "PUT", path: "/campaigns/{campaign_id}/content", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = CampaignContent
+        public typealias SuccessType = CampaignContentModel
+        public typealias BodyType =  CampaignContent1Model
+
+
+        public let body: CampaignContent1Model
     }
 }

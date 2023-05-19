@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Automations {
+extension STAutomations {
 
     /**
     Get automated email subscriber
@@ -14,8 +14,16 @@ extension Automations {
     Get information about a specific subscriber in a classic automation email queue.
     */
     public struct GetAutomationsIdEmailsIdQueueId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/automations/{workflow_id}/emails/{workflow_email_id}/queue/{subscriber_hash}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "workflow_id" + "}", with: "\(self.workflowId)").replacingOccurrences(of: "{" + "workflow_email_id" + "}", with: "\(self.workflowEmailId)").replacingOccurrences(of: "{" + "subscriber_hash" + "}", with: "\(self.subscriberHash)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -31,8 +39,16 @@ extension Automations {
         /** The MD5 hash of the lowercase version of the list member's email address. */
         public var subscriberHash: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getAutomationsIdEmailsIdQueueId", tag: "automations", method: "GET", path: "/automations/{workflow_id}/emails/{workflow_email_id}/queue/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = SubscriberInAutomationQueue2
+        public typealias SuccessType = SubscriberInAutomationQueue2Model
+        public typealias BodyType =  Empty
+
     }
 }

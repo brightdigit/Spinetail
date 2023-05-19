@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension LandingPages {
+extension STLandingPages {
 
     /**
     Publish landing page
@@ -14,8 +14,16 @@ extension LandingPages {
     Publish a landing page that is in draft, unpublished, or has been previously published and edited.
     */
     public struct PostLandingPageIdActionsPublish : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/landing-pages/{page_id}/actions/publish"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "page_id" + "}", with: "\(self.pageId)")
+        }
 
         public var method : RequestMethod {
             .POST
@@ -25,8 +33,16 @@ extension LandingPages {
         /** The unique id for the page. */
         public var pageId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "postLandingPageIdActionsPublish", tag: "landingPages", method: "POST", path: "/landing-pages/{page_id}/actions/publish", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         public typealias SuccessType = Empty
+        public typealias BodyType =  Empty
+
     }
 }

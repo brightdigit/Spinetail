@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension LandingPages {
+extension STLandingPages {
 
     /**
     Get landing page content
@@ -14,8 +14,16 @@ extension LandingPages {
     Get the the HTML for your landing page.
     */
     public struct GetLandingPageIdContent : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/landing-pages/{page_id}/content"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "page_id" + "}", with: "\(self.pageId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -31,8 +39,25 @@ extension LandingPages {
         /** The unique id for the page. */
         public var pageId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getLandingPageIdContent", tag: "landingPages", method: "GET", path: "/landing-pages/{page_id}/content", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = LandingPageContent
+        public typealias SuccessType = LandingPageContentModel
+        public typealias BodyType =  Empty
+
     }
 }

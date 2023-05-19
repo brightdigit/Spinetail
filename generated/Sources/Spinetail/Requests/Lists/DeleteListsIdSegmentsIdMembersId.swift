@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Remove list member from segment
@@ -14,8 +14,16 @@ extension Lists {
     Remove a member from the specified static segment.
     */
     public struct DeleteListsIdSegmentsIdMembersId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/segments/{segment_id}/members/{subscriber_hash}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "segment_id" + "}", with: "\(self.segmentId)").replacingOccurrences(of: "{" + "subscriber_hash" + "}", with: "\(self.subscriberHash)")
+        }
 
         public var method : RequestMethod {
             .DELETE
@@ -31,8 +39,16 @@ extension Lists {
         /** The MD5 hash of the lowercase version of the list member's email address. */
         public var subscriberHash: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "deleteListsIdSegmentsIdMembersId", tag: "lists", method: "DELETE", path: "/lists/{list_id}/segments/{segment_id}/members/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         public typealias SuccessType = Empty
+        public typealias BodyType =  Empty
+
     }
 }

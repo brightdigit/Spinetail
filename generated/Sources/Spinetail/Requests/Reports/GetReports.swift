@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Reports {
+extension STReports {
 
     /**
     List campaign reports
@@ -14,8 +14,16 @@ extension Reports {
     Get campaign reports.
     */
     public struct GetReports : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/reports"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .GET
@@ -43,6 +51,36 @@ extension Reports {
         /** Restrict the response to campaigns sent after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
         public var sinceSendTime: DateTime?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let type = self.type {
+              params["type"] = String(describing: type)
+            }
+            if let beforeSendTime = self.beforeSendTime {
+              params["before_send_time"] = String(describing: beforeSendTime)
+            }
+            if let sinceSendTime = self.sinceSendTime {
+              params["since_send_time"] = String(describing: sinceSendTime)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getReports", tag: "reports", method: "GET", path: "/reports", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         /** The campaign type. */
@@ -54,6 +92,8 @@ extension Reports {
             case variate = "variate"
         }
 
-        public typealias SuccessType = CampaignReports1
+        public typealias SuccessType = CampaignReports1Model
+        public typealias BodyType =  Empty
+
     }
 }

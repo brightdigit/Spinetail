@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension ConnectedSites {
+extension STConnectedSites {
 
     /**
     Delete connected site
@@ -14,8 +14,16 @@ extension ConnectedSites {
     Remove a connected site from your Mailchimp account.
     */
     public struct DeleteConnectedSitesId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/connected-sites/{connected_site_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "connected_site_id" + "}", with: "\(self.connectedSiteId)")
+        }
 
         public var method : RequestMethod {
             .DELETE
@@ -25,8 +33,16 @@ extension ConnectedSites {
         /** The unique identifier for the site. */
         public var connectedSiteId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "deleteConnectedSitesId", tag: "connectedSites", method: "DELETE", path: "/connected-sites/{connected_site_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         public typealias SuccessType = Empty
+        public typealias BodyType =  Empty
+
     }
 }

@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Get lists info
@@ -14,8 +14,16 @@ extension Lists {
     Get information about all lists in the account.
     */
     public struct GetLists : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .GET
@@ -61,6 +69,54 @@ extension Lists {
         /** Return the total_contacts field in the stats response, which contains an approximate count of all contacts in any state. */
         public var includeTotalContacts: Bool?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let beforeDateCreated = self.beforeDateCreated {
+              params["before_date_created"] = String(describing: beforeDateCreated)
+            }
+            if let sinceDateCreated = self.sinceDateCreated {
+              params["since_date_created"] = String(describing: sinceDateCreated)
+            }
+            if let beforeCampaignLastSent = self.beforeCampaignLastSent {
+              params["before_campaign_last_sent"] = String(describing: beforeCampaignLastSent)
+            }
+            if let sinceCampaignLastSent = self.sinceCampaignLastSent {
+              params["since_campaign_last_sent"] = String(describing: sinceCampaignLastSent)
+            }
+            if let email = self.email {
+              params["email"] = String(describing: email)
+            }
+            if let sortField = self.sortField {
+              params["sort_field"] = String(describing: sortField)
+            }
+            if let sortDir = self.sortDir {
+              params["sort_dir"] = String(describing: sortDir)
+            }
+            if let hasEcommerceStore = self.hasEcommerceStore {
+              params["has_ecommerce_store"] = String(describing: hasEcommerceStore)
+            }
+            if let includeTotalContacts = self.includeTotalContacts {
+              params["include_total_contacts"] = String(describing: includeTotalContacts)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getLists", tag: "lists", method: "GET", path: "/lists", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         /** Returns files sorted by the specified field. */
@@ -74,6 +130,8 @@ extension Lists {
             case desc = "DESC"
         }
 
-        public typealias SuccessType = SubscriberLists
+        public typealias SuccessType = SubscriberListsModel
+        public typealias BodyType =  Empty
+
     }
 }

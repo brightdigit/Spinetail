@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension VerifiedDomains {
+extension STVerifiedDomains {
 
     /**
     Get domain info
@@ -14,8 +14,16 @@ extension VerifiedDomains {
     Get the details for a single domain on the account.
     */
     public struct GetVerifiedDomain : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/verified-domains/{domain_name}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "domain_name" + "}", with: "\(self.domainName)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -25,8 +33,16 @@ extension VerifiedDomains {
         /** The domain name. */
         public var domainName: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getVerifiedDomain", tag: "verifiedDomains", method: "GET", path: "/verified-domains/{domain_name}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = VerifiedDomains
+        public typealias SuccessType = VerifiedDomainsModel
+        public typealias BodyType =  Empty
+
     }
 }

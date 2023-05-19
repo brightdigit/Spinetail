@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension TemplateFolders {
+extension STTemplateFolders {
 
     /**
     Update template folder
@@ -14,8 +14,16 @@ extension TemplateFolders {
     Update a specific folder used to organize templates.
     */
     public struct PatchTemplateFoldersId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/template-folders/{folder_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "folder_id" + "}", with: "\(self.folderId)")
+        }
 
         public var method : RequestMethod {
             .PATCH
@@ -25,8 +33,18 @@ extension TemplateFolders {
         /** The unique id for the template folder. */
         public var folderId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "patchTemplateFoldersId", tag: "templateFolders", method: "PATCH", path: "/template-folders/{folder_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = TemplateFolder
+        public typealias SuccessType = TemplateFolderModel
+        public typealias BodyType =  TemplateFolder1Model
+
+
+        public let body: TemplateFolder1Model
     }
 }

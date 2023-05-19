@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Automations {
+extension STAutomations {
 
     /**
     Pause automated email
@@ -14,8 +14,16 @@ extension Automations {
     Pause an automated email.
     */
     public struct PostAutomationsIdEmailsIdActionsPause : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/automations/{workflow_id}/emails/{workflow_email_id}/actions/pause"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "workflow_id" + "}", with: "\(self.workflowId)").replacingOccurrences(of: "{" + "workflow_email_id" + "}", with: "\(self.workflowEmailId)")
+        }
 
         public var method : RequestMethod {
             .POST
@@ -28,8 +36,16 @@ extension Automations {
         /** The unique id for the Automation workflow email. */
         public var workflowEmailId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "postAutomationsIdEmailsIdActionsPause", tag: "automations", method: "POST", path: "/automations/{workflow_id}/emails/{workflow_email_id}/actions/pause", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         public typealias SuccessType = Empty
+        public typealias BodyType =  Empty
+
     }
 }

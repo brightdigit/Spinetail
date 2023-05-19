@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Campaigns {
+extension STCampaigns {
 
     /**
     List campaigns
@@ -14,8 +14,16 @@ extension Campaigns {
     Get all campaigns in an account.
     */
     public struct GetCampaigns : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/campaigns"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .GET
@@ -67,6 +75,60 @@ extension Campaigns {
         /** Determines the order direction for sorted results. */
         public var sortDir: SortDir?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let type = self.type {
+              params["type"] = String(describing: type)
+            }
+            if let status = self.status {
+              params["status"] = String(describing: status)
+            }
+            if let beforeSendTime = self.beforeSendTime {
+              params["before_send_time"] = String(describing: beforeSendTime)
+            }
+            if let sinceSendTime = self.sinceSendTime {
+              params["since_send_time"] = String(describing: sinceSendTime)
+            }
+            if let beforeCreateTime = self.beforeCreateTime {
+              params["before_create_time"] = String(describing: beforeCreateTime)
+            }
+            if let sinceCreateTime = self.sinceCreateTime {
+              params["since_create_time"] = String(describing: sinceCreateTime)
+            }
+            if let listId = self.listId {
+              params["list_id"] = String(describing: listId)
+            }
+            if let folderId = self.folderId {
+              params["folder_id"] = String(describing: folderId)
+            }
+            if let memberId = self.memberId {
+              params["member_id"] = String(describing: memberId)
+            }
+            if let sortField = self.sortField {
+              params["sort_field"] = String(describing: sortField)
+            }
+            if let sortDir = self.sortDir {
+              params["sort_dir"] = String(describing: sortDir)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getCampaigns", tag: "campaigns", method: "GET", path: "/campaigns", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         /** The campaign type. */
@@ -99,6 +161,8 @@ extension Campaigns {
             case desc = "DESC"
         }
 
-        public typealias SuccessType = GetCampaigns200Response
+        public typealias SuccessType = GetCampaigns200ResponseModel
+        public typealias BodyType =  Empty
+
     }
 }

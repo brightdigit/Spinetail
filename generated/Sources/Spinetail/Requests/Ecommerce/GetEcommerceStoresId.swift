@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Ecommerce {
+extension STEcommerce {
 
     /**
     Get store info
@@ -14,8 +14,16 @@ extension Ecommerce {
     Get information about a specific store.
     */
     public struct GetEcommerceStoresId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/ecommerce/stores/{store_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "store_id" + "}", with: "\(self.storeId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -31,8 +39,25 @@ extension Ecommerce {
         /** The store id. */
         public var storeId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getEcommerceStoresId", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = ECommerceStore
+        public typealias SuccessType = ECommerceStoreModel
+        public typealias BodyType =  Empty
+
     }
 }

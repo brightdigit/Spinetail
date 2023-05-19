@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Add list
@@ -14,16 +14,34 @@ extension Lists {
     Create a new list in your Mailchimp account.
     */
     public struct PostLists : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .POST
         }
 
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "postLists", tag: "lists", method: "POST", path: "/lists", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = SubscriberList
+        public typealias SuccessType = SubscriberListModel
+        public typealias BodyType =  SubscriberList1Model
+
+
+        public let body: SubscriberList1Model
     }
 }

@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Add member note
@@ -14,8 +14,16 @@ extension Lists {
     Add a new note for a specific subscriber.
     */
     public struct PostListsIdMembersIdNotes : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/members/{subscriber_hash}/notes"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "subscriber_hash" + "}", with: "\(self.subscriberHash)")
+        }
 
         public var method : RequestMethod {
             .POST
@@ -28,8 +36,18 @@ extension Lists {
         /** The MD5 hash of the lowercase version of the list member's email address. */
         public var subscriberHash: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "postListsIdMembersIdNotes", tag: "lists", method: "POST", path: "/lists/{list_id}/members/{subscriber_hash}/notes", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = MemberNotes
+        public typealias SuccessType = MemberNotesModel
+        public typealias BodyType =  MemberNotes1Model
+
+
+        public let body: MemberNotes1Model
     }
 }

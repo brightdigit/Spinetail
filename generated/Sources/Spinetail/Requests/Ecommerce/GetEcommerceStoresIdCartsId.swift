@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Ecommerce {
+extension STEcommerce {
 
     /**
     Get cart info
@@ -14,8 +14,16 @@ extension Ecommerce {
     Get information about a specific cart.
     */
     public struct GetEcommerceStoresIdCartsId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/ecommerce/stores/{store_id}/carts/{cart_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "store_id" + "}", with: "\(self.storeId)").replacingOccurrences(of: "{" + "cart_id" + "}", with: "\(self.cartId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -34,8 +42,25 @@ extension Ecommerce {
         /** The id for the cart. */
         public var cartId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getEcommerceStoresIdCartsId", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/carts/{cart_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = ECommerceCart
+        public typealias SuccessType = ECommerceCartModel
+        public typealias BodyType =  Empty
+
     }
 }

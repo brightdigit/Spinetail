@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Update merge field
@@ -14,8 +14,16 @@ extension Lists {
     Update a specific merge field.
     */
     public struct PatchListsIdMergeFieldsId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/merge-fields/{merge_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "merge_id" + "}", with: "\(self.mergeId)")
+        }
 
         public var method : RequestMethod {
             .PATCH
@@ -28,8 +36,18 @@ extension Lists {
         /** The id for the merge field. */
         public var mergeId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "patchListsIdMergeFieldsId", tag: "lists", method: "PATCH", path: "/lists/{list_id}/merge-fields/{merge_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = MergeField
+        public typealias SuccessType = MergeFieldModel
+        public typealias BodyType =  MergeField2Model
+
+
+        public let body: MergeField2Model
     }
 }

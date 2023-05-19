@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Update note
@@ -14,8 +14,16 @@ extension Lists {
     Update a specific note for a specific list member.
     */
     public struct PatchListsIdMembersIdNotesId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "subscriber_hash" + "}", with: "\(self.subscriberHash)").replacingOccurrences(of: "{" + "note_id" + "}", with: "\(self.noteId)")
+        }
 
         public var method : RequestMethod {
             .PATCH
@@ -31,8 +39,18 @@ extension Lists {
         /** The id for the note. */
         public var noteId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "patchListsIdMembersIdNotesId", tag: "lists", method: "PATCH", path: "/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = MemberNotes
+        public typealias SuccessType = MemberNotesModel
+        public typealias BodyType =  MemberNotes1Model
+
+
+        public let body: MemberNotes1Model
     }
 }

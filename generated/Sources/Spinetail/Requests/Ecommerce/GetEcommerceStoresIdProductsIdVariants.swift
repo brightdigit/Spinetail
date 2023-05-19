@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Ecommerce {
+extension STEcommerce {
 
     /**
     List product variants
@@ -14,8 +14,16 @@ extension Ecommerce {
     Get information about a product's variants.
     */
     public struct GetEcommerceStoresIdProductsIdVariants : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/ecommerce/stores/{store_id}/products/{product_id}/variants"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "store_id" + "}", with: "\(self.storeId)").replacingOccurrences(of: "{" + "product_id" + "}", with: "\(self.productId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -40,8 +48,31 @@ extension Ecommerce {
         /** The id for the product of a store. */
         public var productId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getEcommerceStoresIdProductsIdVariants", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/products/{product_id}/variants", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = EcommerceProductVariants
+        public typealias SuccessType = EcommerceProductVariantsModel
+        public typealias BodyType =  Empty
+
     }
 }

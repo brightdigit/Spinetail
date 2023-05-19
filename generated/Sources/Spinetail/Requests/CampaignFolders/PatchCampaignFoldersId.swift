@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension CampaignFolders {
+extension STCampaignFolders {
 
     /**
     Update campaign folder
@@ -14,8 +14,16 @@ extension CampaignFolders {
     Update a specific folder used to organize campaigns.
     */
     public struct PatchCampaignFoldersId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/campaign-folders/{folder_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "folder_id" + "}", with: "\(self.folderId)")
+        }
 
         public var method : RequestMethod {
             .PATCH
@@ -25,8 +33,18 @@ extension CampaignFolders {
         /** The unique id for the campaign folder. */
         public var folderId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "patchCampaignFoldersId", tag: "campaignFolders", method: "PATCH", path: "/campaign-folders/{folder_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = CampaignFolder
+        public typealias SuccessType = CampaignFolderModel
+        public typealias BodyType =  CampaignFolder1Model
+
+
+        public let body: CampaignFolder1Model
     }
 }

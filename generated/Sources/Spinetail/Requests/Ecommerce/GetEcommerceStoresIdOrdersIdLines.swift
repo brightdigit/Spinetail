@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Ecommerce {
+extension STEcommerce {
 
     /**
     List order line items
@@ -14,8 +14,16 @@ extension Ecommerce {
     Get information about an order's line items.
     */
     public struct GetEcommerceStoresIdOrdersIdLines : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/ecommerce/stores/{store_id}/orders/{order_id}/lines"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "store_id" + "}", with: "\(self.storeId)").replacingOccurrences(of: "{" + "order_id" + "}", with: "\(self.orderId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -40,8 +48,31 @@ extension Ecommerce {
         /** The id for the order in a store. */
         public var orderId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getEcommerceStoresIdOrdersIdLines", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/orders/{order_id}/lines", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = OrderLines
+        public typealias SuccessType = OrderLinesModel
+        public typealias BodyType =  Empty
+
     }
 }

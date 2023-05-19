@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Get survey
@@ -14,8 +14,16 @@ extension Lists {
     Get details about a specific survey.
     */
     public struct GetListsIdSurveysId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/surveys/{survey_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "survey_id" + "}", with: "\(self.surveyId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -28,8 +36,16 @@ extension Lists {
         /** The ID of the survey. */
         public var surveyId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getListsIdSurveysId", tag: "lists", method: "GET", path: "/lists/{list_id}/surveys/{survey_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         public typealias SuccessType = Empty
+        public typealias BodyType =  Empty
+
     }
 }

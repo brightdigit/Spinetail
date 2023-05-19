@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Get webhook info
@@ -14,8 +14,16 @@ extension Lists {
     Get information about a specific webhook.
     */
     public struct GetListsIdWebhooksId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/webhooks/{webhook_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "webhook_id" + "}", with: "\(self.webhookId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -28,8 +36,16 @@ extension Lists {
         /** The webhook's id. */
         public var webhookId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getListsIdWebhooksId", tag: "lists", method: "GET", path: "/lists/{list_id}/webhooks/{webhook_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = ListWebhooks
+        public typealias SuccessType = ListWebhooksModel
+        public typealias BodyType =  Empty
+
     }
 }

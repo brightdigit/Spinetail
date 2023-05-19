@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Ecommerce {
+extension STEcommerce {
 
     /**
     List account orders
@@ -14,8 +14,16 @@ extension Ecommerce {
     Get information about an account's orders.
     */
     public struct GetEcommerceOrders : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/ecommerce/orders"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .GET
@@ -46,8 +54,43 @@ extension Ecommerce {
         /** Restrict results to orders that have an outreach attached. For example, an email campaign or Facebook ad. */
         public var hasOutreach: Bool?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let campaignId = self.campaignId {
+              params["campaign_id"] = String(describing: campaignId)
+            }
+            if let outreachId = self.outreachId {
+              params["outreach_id"] = String(describing: outreachId)
+            }
+            if let customerId = self.customerId {
+              params["customer_id"] = String(describing: customerId)
+            }
+            if let hasOutreach = self.hasOutreach {
+              params["has_outreach"] = String(describing: hasOutreach)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getEcommerceOrders", tag: "ecommerce", method: "GET", path: "/ecommerce/orders", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = Orders
+        public typealias SuccessType = OrdersModel
+        public typealias BodyType =  Empty
+
     }
 }

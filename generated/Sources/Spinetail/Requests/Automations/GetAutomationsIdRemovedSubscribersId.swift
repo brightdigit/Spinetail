@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Automations {
+extension STAutomations {
 
     /**
     Get subscriber removed from workflow
@@ -14,8 +14,16 @@ extension Automations {
     Get information about a specific subscriber who was removed from a classic automation workflow.
     */
     public struct GetAutomationsIdRemovedSubscribersId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/automations/{workflow_id}/removed-subscribers/{subscriber_hash}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "workflow_id" + "}", with: "\(self.workflowId)").replacingOccurrences(of: "{" + "subscriber_hash" + "}", with: "\(self.subscriberHash)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -28,8 +36,16 @@ extension Automations {
         /** The MD5 hash of the lowercase version of the list member's email address. */
         public var subscriberHash: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getAutomationsIdRemovedSubscribersId", tag: "automations", method: "GET", path: "/automations/{workflow_id}/removed-subscribers/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = SubscriberRemovedFromAutomationWorkflow
+        public typealias SuccessType = SubscriberRemovedFromAutomationWorkflowModel
+        public typealias BodyType =  Empty
+
     }
 }

@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension AuthorizedApps {
+extension STAuthorizedApps {
 
     /**
     Get authorized app info
@@ -14,8 +14,16 @@ extension AuthorizedApps {
     Get information about a specific authorized application.
     */
     public struct GetAuthorizedAppsId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/authorized-apps/{app_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "app_id" + "}", with: "\(self.appId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -31,8 +39,25 @@ extension AuthorizedApps {
         /** The unique id for the connected authorized application. */
         public var appId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getAuthorizedAppsId", tag: "authorizedApps", method: "GET", path: "/authorized-apps/{app_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = AuthorizedApplicationsInner
+        public typealias SuccessType = AuthorizedApplicationsInnerModel
+        public typealias BodyType =  Empty
+
     }
 }

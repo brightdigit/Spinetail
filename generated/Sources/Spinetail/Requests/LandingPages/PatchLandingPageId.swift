@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension LandingPages {
+extension STLandingPages {
 
     /**
     Update landing page
@@ -14,8 +14,16 @@ extension LandingPages {
     Update a landing page.
     */
     public struct PatchLandingPageId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/landing-pages/{page_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "page_id" + "}", with: "\(self.pageId)")
+        }
 
         public var method : RequestMethod {
             .PATCH
@@ -25,8 +33,18 @@ extension LandingPages {
         /** The unique id for the page. */
         public var pageId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "patchLandingPageId", tag: "landingPages", method: "PATCH", path: "/landing-pages/{page_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = LandingPage
+        public typealias SuccessType = LandingPageModel
+        public typealias BodyType =  LandingPage2Model
+
+
+        public let body: LandingPage2Model
     }
 }

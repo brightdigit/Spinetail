@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Add webhook
@@ -14,8 +14,16 @@ extension Lists {
     Create a new webhook for a specific list.
     */
     public struct PostListsIdWebhooks : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/webhooks"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)")
+        }
 
         public var method : RequestMethod {
             .POST
@@ -25,8 +33,18 @@ extension Lists {
         /** The unique ID for the list. */
         public var listId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "postListsIdWebhooks", tag: "lists", method: "POST", path: "/lists/{list_id}/webhooks", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = ListWebhooks
+        public typealias SuccessType = ListWebhooksModel
+        public typealias BodyType =  AddWebhookModel
+
+
+        public let body: AddWebhookModel
     }
 }

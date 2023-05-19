@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Ecommerce {
+extension STEcommerce {
 
     /**
     Add product image
@@ -14,8 +14,16 @@ extension Ecommerce {
     Add a new image to the product.
     */
     public struct PostEcommerceStoresIdProductsIdImages : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/ecommerce/stores/{store_id}/products/{product_id}/images"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "store_id" + "}", with: "\(self.storeId)").replacingOccurrences(of: "{" + "product_id" + "}", with: "\(self.productId)")
+        }
 
         public var method : RequestMethod {
             .POST
@@ -28,8 +36,18 @@ extension Ecommerce {
         /** The id for the product of a store. */
         public var productId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "postEcommerceStoresIdProductsIdImages", tag: "ecommerce", method: "POST", path: "/ecommerce/stores/{store_id}/products/{product_id}/images", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = ECommerceProductImage
+        public typealias SuccessType = ECommerceProductImageModel
+        public typealias BodyType =  ECommerceProductImage1Model
+
+
+        public let body: ECommerceProductImage1Model
     }
 }

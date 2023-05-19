@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Reports {
+extension STReports {
 
     /**
     List domain performance stats
@@ -14,8 +14,16 @@ extension Reports {
     Get statistics for the top-performing email domains in a campaign.
     */
     public struct GetReportsIdDomainPerformance : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/reports/{campaign_id}/domain-performance"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "campaign_id" + "}", with: "\(self.campaignId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -31,8 +39,25 @@ extension Reports {
         /** The unique id for the campaign. */
         public var campaignId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getReportsIdDomainPerformance", tag: "reports", method: "GET", path: "/reports/{campaign_id}/domain-performance", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = DomainPerformance
+        public typealias SuccessType = DomainPerformanceModel
+        public typealias BodyType =  Empty
+
     }
 }

@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Automations {
+extension STAutomations {
 
     /**
     List automations
@@ -14,8 +14,16 @@ extension Automations {
     Get a summary of an account's classic automations.
     */
     public struct GetAutomations : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/automations"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .GET
@@ -49,6 +57,42 @@ extension Automations {
         /** Restrict the results to automations with the specified status. */
         public var status: Status?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let beforeCreateTime = self.beforeCreateTime {
+              params["before_create_time"] = String(describing: beforeCreateTime)
+            }
+            if let sinceCreateTime = self.sinceCreateTime {
+              params["since_create_time"] = String(describing: sinceCreateTime)
+            }
+            if let beforeStartTime = self.beforeStartTime {
+              params["before_start_time"] = String(describing: beforeStartTime)
+            }
+            if let sinceStartTime = self.sinceStartTime {
+              params["since_start_time"] = String(describing: sinceStartTime)
+            }
+            if let status = self.status {
+              params["status"] = String(describing: status)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getAutomations", tag: "automations", method: "GET", path: "/automations", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         /** Restrict the results to automations with the specified status. */
@@ -58,6 +102,8 @@ extension Automations {
             case sending = "sending"
         }
 
-        public typealias SuccessType = GetAutomations200Response
+        public typealias SuccessType = GetAutomations200ResponseModel
+        public typealias BodyType =  Empty
+
     }
 }

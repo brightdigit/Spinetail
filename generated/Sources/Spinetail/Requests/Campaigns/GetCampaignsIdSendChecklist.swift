@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Campaigns {
+extension STCampaigns {
 
     /**
     Get campaign send checklist
@@ -14,8 +14,16 @@ extension Campaigns {
     Review the send checklist for a campaign, and resolve any issues before sending.
     */
     public struct GetCampaignsIdSendChecklist : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/campaigns/{campaign_id}/send-checklist"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "campaign_id" + "}", with: "\(self.campaignId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -31,8 +39,25 @@ extension Campaigns {
         /** The unique id for the campaign. */
         public var campaignId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getCampaignsIdSendChecklist", tag: "campaigns", method: "GET", path: "/campaigns/{campaign_id}/send-checklist", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = SendChecklist
+        public typealias SuccessType = SendChecklistModel
+        public typealias BodyType =  Empty
+
     }
 }

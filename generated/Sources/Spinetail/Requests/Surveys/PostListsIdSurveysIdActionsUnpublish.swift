@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Surveys {
+extension STSurveys {
 
     /**
     Unpublish a Survey
@@ -14,8 +14,16 @@ extension Surveys {
     Unpublish a survey that has been published.
     */
     public struct PostListsIdSurveysIdActionsUnpublish : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/surveys/{survey_id}/actions/unpublish"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "survey_id" + "}", with: "\(self.surveyId)")
+        }
 
         public var method : RequestMethod {
             .POST
@@ -28,8 +36,16 @@ extension Surveys {
         /** The ID of the survey. */
         public var surveyId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "postListsIdSurveysIdActionsUnpublish", tag: "Surveys", method: "POST", path: "/lists/{list_id}/surveys/{survey_id}/actions/unpublish", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         public typealias SuccessType = Empty
+        public typealias BodyType =  Empty
+
     }
 }

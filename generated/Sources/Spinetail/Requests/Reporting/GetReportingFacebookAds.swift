@@ -6,17 +6,24 @@
 import Foundation
 import PrchModel
 
-extension Reporting {
+extension STReporting {
 
     /**
     List facebook ads reports
 
     Get reports of Facebook ads.
     */
-  public struct GetReportingFacebookAds : ServiceCall {
-    
+    public struct GetReportingFacebookAds : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/reporting/facebook-ads"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .GET
@@ -41,6 +48,33 @@ extension Reporting {
         /** Determines the order direction for sorted results. */
         public var sortDir: SortDir?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let sortField = self.sortField {
+              params["sort_field"] = String(describing: sortField)
+            }
+            if let sortDir = self.sortDir {
+              params["sort_dir"] = String(describing: sortDir)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getReportingFacebookAds", tag: "reporting", method: "GET", path: "/reporting/facebook-ads", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         /** Returns files sorted by the specified field. */
@@ -56,6 +90,8 @@ extension Reporting {
             case desc = "DESC"
         }
 
-        public typealias SuccessType = GetReportingFacebookAds200Response
+        public typealias SuccessType = GetReportingFacebookAds200ResponseModel
+        public typealias BodyType =  Empty
+
     }
 }

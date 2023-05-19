@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     List recent activity
@@ -14,8 +14,16 @@ extension Lists {
     Get up to the previous 180 days of daily detailed aggregated activity stats for a list, not including Automation activity.
     */
     public struct GetListsIdActivity : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/activity"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -37,8 +45,31 @@ extension Lists {
         /** The unique ID for the list. */
         public var listId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getListsIdActivity", tag: "lists", method: "GET", path: "/lists/{list_id}/activity", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = ListActivity
+        public typealias SuccessType = ListActivityModel
+        public typealias BodyType =  Empty
+
     }
 }

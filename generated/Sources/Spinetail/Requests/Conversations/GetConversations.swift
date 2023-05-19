@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Conversations {
+extension STConversations {
 
     /**
     List conversations
@@ -14,8 +14,16 @@ extension Conversations {
     Get a list of conversations for the account. Conversations has been deprecated in favor of Inbox and these endpoints don't include Inbox data. Past Conversations are still available via this endpoint, but new campaign replies and other Inbox messages aren’t available using this endpoint.
     */
     public struct GetConversations : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/conversations"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .GET
@@ -43,6 +51,36 @@ extension Conversations {
         /** The unique id for the campaign. */
         public var campaignId: String?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let hasUnreadMessages = self.hasUnreadMessages {
+              params["has_unread_messages"] = String(describing: hasUnreadMessages)
+            }
+            if let listId = self.listId {
+              params["list_id"] = String(describing: listId)
+            }
+            if let campaignId = self.campaignId {
+              params["campaign_id"] = String(describing: campaignId)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getConversations", tag: "conversations", method: "GET", path: "/conversations", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         /** Whether the conversation has any unread messages. */
@@ -51,6 +89,8 @@ extension Conversations {
             case `false` = "false"
         }
 
-        public typealias SuccessType = TrackedConversations
+        public typealias SuccessType = TrackedConversationsModel
+        public typealias BodyType =  Empty
+
     }
 }

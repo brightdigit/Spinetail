@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Delete segment
@@ -14,8 +14,16 @@ extension Lists {
     Delete a specific segment in a list.
     */
     public struct DeleteListsIdSegmentsId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/segments/{segment_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "segment_id" + "}", with: "\(self.segmentId)")
+        }
 
         public var method : RequestMethod {
             .DELETE
@@ -28,8 +36,16 @@ extension Lists {
         /** The unique id for the segment. */
         public var segmentId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "deleteListsIdSegmentsId", tag: "lists", method: "DELETE", path: "/lists/{list_id}/segments/{segment_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         public typealias SuccessType = Empty
+        public typealias BodyType =  Empty
+
     }
 }

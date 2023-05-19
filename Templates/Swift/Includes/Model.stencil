@@ -80,56 +80,13 @@ public struct {{ type }}: {% if parent %}{{ parent.type }}{% else %}{% if option
         super.init({% for property in parent.allProperties %}{{ property.name }}: {{ property.name }}{% ifnot forloop.last %}, {% endif %}{% endfor %})
         {% endif %}
     }
-
-    public {% if options.modelType == 'class' %}required {% endif %}init(from decoder: Decoder) throws {
-        {% if properties.count > 0 %}
-        let container = try decoder.container(keyedBy: StringCodingKey.self)
-
+    
+    public enum CodingKeys: String, CodingKey {
         {% for property in properties %}
-        {{ property.name }} = try container.decode{% if property.isArray and not property.isAnyType %}Array{% endif %}{% if property.isAnyType %}Any{% endif %}{% if property.optional %}IfPresent{% endif %}("{{ property.value }}")
+        case {{ property.name }} = "{{ property.value }}"
         {% endfor %}
-        {% endif %}
-        {% if additionalPropertiesType %}
-
-        let additionalPropertiesContainer = try decoder.container(keyedBy: StringCodingKey.self)
-        var additionalProperties = try additionalPropertiesContainer.toDictionary()
-        {% for property in properties %}
-        additionalProperties.removeValue(forKey: "{{ property.value }}")
-        {% endfor %}
-        {% if additionalPropertiesType != "Any" %}
-        var decodedAdditionalProperties: [String: {{ additionalPropertiesType }}] = [:]
-        for key in additionalProperties.keys {
-            decodedAdditionalProperties[key] = try additionalPropertiesContainer.decode(StringCodingKey(string: key))
-        }
-        self.additionalProperties = decodedAdditionalProperties
-        {% else %}
-        self.additionalProperties = additionalProperties
-        {% endif %}
-        {% endif %}
-        {% if parent %}
-        try super.init(from: decoder)
-        {% endif %}
     }
 
-    public {% if parent %}override {% endif %}func encode(to encoder: Encoder) throws {
-        {% if properties.count > 0 %}
-        var container = encoder.container(keyedBy: StringCodingKey.self)
-
-        {% for property in properties %}
-        try container.encode{% if property.isAnyType %}Any{% endif %}{% if property.optional %}IfPresent{% endif %}({{ property.name }}, forKey: "{{ property.value }}")
-        {% endfor %}
-        {% endif %}
-        {% if additionalPropertiesType %}
-
-        var additionalPropertiesContainer = encoder.container(keyedBy: StringCodingKey.self)
-        for (key, value) in additionalProperties {
-            try additionalPropertiesContainer.encode{% if additionalPropertiesType == "Any" %}Any{% endif %}(value, forKey: StringCodingKey(string: key))
-        }
-        {% endif %}
-        {% if parent %}
-        try super.encode(to: encoder)
-        {% endif %}
-    }
     {% if additionalPropertiesType %}
 
     public subscript(key: String) -> {{ additionalPropertiesType }}? {

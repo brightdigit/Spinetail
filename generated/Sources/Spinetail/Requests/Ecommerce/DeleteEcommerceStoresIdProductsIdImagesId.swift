@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Ecommerce {
+extension STEcommerce {
 
     /**
     Delete product image
@@ -14,8 +14,16 @@ extension Ecommerce {
     Delete a product image.
     */
     public struct DeleteEcommerceStoresIdProductsIdImagesId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/ecommerce/stores/{store_id}/products/{product_id}/images/{image_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "store_id" + "}", with: "\(self.storeId)").replacingOccurrences(of: "{" + "product_id" + "}", with: "\(self.productId)").replacingOccurrences(of: "{" + "image_id" + "}", with: "\(self.imageId)")
+        }
 
         public var method : RequestMethod {
             .DELETE
@@ -31,8 +39,16 @@ extension Ecommerce {
         /** The id for the product image. */
         public var imageId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "deleteEcommerceStoresIdProductsIdImagesId", tag: "ecommerce", method: "DELETE", path: "/ecommerce/stores/{store_id}/products/{product_id}/images/{image_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         public typealias SuccessType = Empty
+        public typealias BodyType =  Empty
+
     }
 }

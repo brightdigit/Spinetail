@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension SearchCampaigns {
+extension STSearchCampaigns {
 
     /**
     Search campaigns
@@ -14,8 +14,16 @@ extension SearchCampaigns {
     Search all campaigns for the specified query terms.
     */
     public struct GetSearchCampaigns : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/search-campaigns"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .GET
@@ -31,8 +39,26 @@ extension SearchCampaigns {
         /** The search query used to filter results. */
         public var query: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            params["query"] = String(describing: self.query)
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getSearchCampaigns", tag: "searchCampaigns", method: "GET", path: "/search-campaigns", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = Campaigns
+        public typealias SuccessType = CampaignsModel
+        public typealias BodyType =  Empty
+
     }
 }

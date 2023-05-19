@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Ecommerce {
+extension STEcommerce {
 
     /**
     List orders
@@ -14,8 +14,16 @@ extension Ecommerce {
     Get information about a store's orders.
     */
     public struct GetEcommerceStoresIdOrders : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/ecommerce/stores/{store_id}/orders"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "store_id" + "}", with: "\(self.storeId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -49,8 +57,43 @@ extension Ecommerce {
         /** Restrict results to orders with a specific `outreach_id` value. */
         public var outreachId: String?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let customerId = self.customerId {
+              params["customer_id"] = String(describing: customerId)
+            }
+            if let hasOutreach = self.hasOutreach {
+              params["has_outreach"] = String(describing: hasOutreach)
+            }
+            if let campaignId = self.campaignId {
+              params["campaign_id"] = String(describing: campaignId)
+            }
+            if let outreachId = self.outreachId {
+              params["outreach_id"] = String(describing: outreachId)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getEcommerceStoresIdOrders", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/orders", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = Orders1
+        public typealias SuccessType = Orders1Model
+        public typealias BodyType =  Empty
+
     }
 }

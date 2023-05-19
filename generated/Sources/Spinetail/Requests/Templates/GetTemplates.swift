@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Templates {
+extension STTemplates {
 
     /**
     List templates
@@ -14,8 +14,16 @@ extension Templates {
     Get a list of an account's available templates.
     */
     public struct GetTemplates : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/templates"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .GET
@@ -58,6 +66,51 @@ extension Templates {
         /** Determines the order direction for sorted results. */
         public var sortDir: SortDir?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let createdBy = self.createdBy {
+              params["created_by"] = String(describing: createdBy)
+            }
+            if let sinceDateCreated = self.sinceDateCreated {
+              params["since_date_created"] = String(describing: sinceDateCreated)
+            }
+            if let beforeDateCreated = self.beforeDateCreated {
+              params["before_date_created"] = String(describing: beforeDateCreated)
+            }
+            if let type = self.type {
+              params["type"] = String(describing: type)
+            }
+            if let category = self.category {
+              params["category"] = String(describing: category)
+            }
+            if let folderId = self.folderId {
+              params["folder_id"] = String(describing: folderId)
+            }
+            if let sortField = self.sortField {
+              params["sort_field"] = String(describing: sortField)
+            }
+            if let sortDir = self.sortDir {
+              params["sort_dir"] = String(describing: sortDir)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getTemplates", tag: "templates", method: "GET", path: "/templates", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         /** Returns user templates sorted by the specified field. */
@@ -73,6 +126,8 @@ extension Templates {
             case desc = "DESC"
         }
 
-        public typealias SuccessType = Templates
+        public typealias SuccessType = TemplatesModel
+        public typealias BodyType =  Empty
+
     }
 }

@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension ConnectedSites {
+extension STConnectedSites {
 
     /**
     Verify connected site script
@@ -14,8 +14,16 @@ extension ConnectedSites {
     Verify that the connected sites script has been installed, either via the script URL or fragment.
     */
     public struct PostConnectedSitesIdActionsVerifyScriptInstallation : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/connected-sites/{connected_site_id}/actions/verify-script-installation"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "connected_site_id" + "}", with: "\(self.connectedSiteId)")
+        }
 
         public var method : RequestMethod {
             .POST
@@ -25,8 +33,16 @@ extension ConnectedSites {
         /** The unique identifier for the site. */
         public var connectedSiteId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "postConnectedSitesIdActionsVerifyScriptInstallation", tag: "connectedSites", method: "POST", path: "/connected-sites/{connected_site_id}/actions/verify-script-installation", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         public typealias SuccessType = Empty
+        public typealias BodyType =  Empty
+
     }
 }

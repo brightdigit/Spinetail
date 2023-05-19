@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     List merge fields
@@ -14,8 +14,16 @@ extension Lists {
     Get a list of all merge fields for an audience.
     */
     public struct GetListsIdMergeFields : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/merge-fields"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -43,8 +51,37 @@ extension Lists {
         /** Whether it's a required merge field. */
         public var required: Bool?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let type = self.type {
+              params["type"] = String(describing: type)
+            }
+            if let required = self.required {
+              params["required"] = String(describing: required)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getListsIdMergeFields", tag: "lists", method: "GET", path: "/lists/{list_id}/merge-fields", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = CollectionOfMergeFields
+        public typealias SuccessType = CollectionOfMergeFieldsModel
+        public typealias BodyType =  Empty
+
     }
 }

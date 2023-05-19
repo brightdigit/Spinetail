@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Templates {
+extension STTemplates {
 
     /**
     Add template
@@ -14,16 +14,34 @@ extension Templates {
     Create a new template for the account. Only Classic templates are supported.
     */
     public struct PostTemplates : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/templates"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .POST
         }
 
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "postTemplates", tag: "templates", method: "POST", path: "/templates", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = TemplateInstance
+        public typealias SuccessType = TemplateInstanceModel
+        public typealias BodyType =  TemplateInstance1Model
+
+
+        public let body: TemplateInstance1Model
     }
 }

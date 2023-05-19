@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Ecommerce {
+extension STEcommerce {
 
     /**
     Add store
@@ -14,16 +14,34 @@ extension Ecommerce {
     Add a new store to your Mailchimp account.
     */
     public struct PostEcommerceStores : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/ecommerce/stores"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .POST
         }
 
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "postEcommerceStores", tag: "ecommerce", method: "POST", path: "/ecommerce/stores", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = ECommerceStore
+        public typealias SuccessType = ECommerceStoreModel
+        public typealias BodyType =  ECommerceStore1Model
+
+
+        public let body: ECommerceStore1Model
     }
 }

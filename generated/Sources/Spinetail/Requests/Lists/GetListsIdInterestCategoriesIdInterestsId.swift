@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Get interest in category
@@ -14,8 +14,16 @@ extension Lists {
     Get interests or 'group names' for a specific category.
     */
     public struct GetListsIdInterestCategoriesIdInterestsId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "interest_category_id" + "}", with: "\(self.interestCategoryId)").replacingOccurrences(of: "{" + "interest_id" + "}", with: "\(self.interestId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -37,8 +45,25 @@ extension Lists {
         /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
         public var excludeFields: [String]?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getListsIdInterestCategoriesIdInterestsId", tag: "lists", method: "GET", path: "/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = Interest
+        public typealias SuccessType = InterestModel
+        public typealias BodyType =  Empty
+
     }
 }

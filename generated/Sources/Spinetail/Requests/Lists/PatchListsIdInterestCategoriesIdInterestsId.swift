@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Update interest in category
@@ -14,8 +14,16 @@ extension Lists {
     Update interests or 'group names' for a specific category.
     */
     public struct PatchListsIdInterestCategoriesIdInterestsId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "interest_category_id" + "}", with: "\(self.interestCategoryId)").replacingOccurrences(of: "{" + "interest_id" + "}", with: "\(self.interestId)")
+        }
 
         public var method : RequestMethod {
             .PATCH
@@ -31,8 +39,18 @@ extension Lists {
         /** The specific interest or 'group name'. */
         public var interestId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "patchListsIdInterestCategoriesIdInterestsId", tag: "lists", method: "PATCH", path: "/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = Interest
+        public typealias SuccessType = InterestModel
+        public typealias BodyType =  Interest1Model
+
+
+        public let body: Interest1Model
     }
 }

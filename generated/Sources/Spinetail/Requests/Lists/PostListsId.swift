@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Batch subscribe or unsubscribe
@@ -14,8 +14,16 @@ extension Lists {
     Batch subscribe or unsubscribe list members.
     */
     public struct PostListsId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)")
+        }
 
         public var method : RequestMethod {
             .POST
@@ -31,8 +39,27 @@ extension Lists {
         /** If skip_duplicate_check is true, we will ignore duplicates sent in the request when using the batch sub/unsub on the lists endpoint. The status of the first appearance in the request will be saved. This defaults to false. */
         public var skipDuplicateCheck: Bool?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let skipMergeValidation = self.skipMergeValidation {
+              params["skip_merge_validation"] = String(describing: skipMergeValidation)
+            }
+            if let skipDuplicateCheck = self.skipDuplicateCheck {
+              params["skip_duplicate_check"] = String(describing: skipDuplicateCheck)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "postListsId", tag: "lists", method: "POST", path: "/lists/{list_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = BatchUpdateListMembers
+        public typealias SuccessType = BatchUpdateListMembersModel
+        public typealias BodyType =  MembersToSubscribeUnsubscribeToFromaListInBatchModel
+
+
+        public let body: MembersToSubscribeUnsubscribeToFromaListInBatchModel
     }
 }

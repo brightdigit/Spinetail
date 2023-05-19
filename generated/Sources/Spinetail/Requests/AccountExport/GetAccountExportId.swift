@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension AccountExport {
+extension STAccountExport {
 
     /**
     Get account export info
@@ -14,8 +14,16 @@ extension AccountExport {
     Get information about a specific account export.
     */
     public struct GetAccountExportId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/account-exports/{export_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "export_id" + "}", with: "\(self.exportId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -31,8 +39,25 @@ extension AccountExport {
         /** The unique id for the account export. */
         public var exportId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getAccountExportId", tag: "accountExport", method: "GET", path: "/account-exports/{export_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = AccountExportsInner
+        public typealias SuccessType = AccountExportsInnerModel
+        public typealias BodyType =  Empty
+
     }
 }

@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Get merge field
@@ -14,8 +14,16 @@ extension Lists {
     Get information about a specific merge field.
     */
     public struct GetListsIdMergeFieldsId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/merge-fields/{merge_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "merge_id" + "}", with: "\(self.mergeId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -34,8 +42,25 @@ extension Lists {
         /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
         public var fields: [String]?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getListsIdMergeFieldsId", tag: "lists", method: "GET", path: "/lists/{list_id}/merge-fields/{merge_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = MergeField
+        public typealias SuccessType = MergeFieldModel
+        public typealias BodyType =  Empty
+
     }
 }

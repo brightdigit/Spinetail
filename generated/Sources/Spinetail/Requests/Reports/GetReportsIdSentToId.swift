@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Reports {
+extension STReports {
 
     /**
     Get campaign recipient info
@@ -14,8 +14,16 @@ extension Reports {
     Get information about a specific campaign recipient.
     */
     public struct GetReportsIdSentToId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/reports/{campaign_id}/sent-to/{subscriber_hash}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "campaign_id" + "}", with: "\(self.campaignId)").replacingOccurrences(of: "{" + "subscriber_hash" + "}", with: "\(self.subscriberHash)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -34,8 +42,25 @@ extension Reports {
         /** The MD5 hash of the lowercase version of the list member's email address. */
         public var subscriberHash: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getReportsIdSentToId", tag: "reports", method: "GET", path: "/reports/{campaign_id}/sent-to/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = SentTo
+        public typealias SuccessType = SentToModel
+        public typealias BodyType =  Empty
+
     }
 }

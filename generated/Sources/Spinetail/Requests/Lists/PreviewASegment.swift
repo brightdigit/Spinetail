@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     List segments
@@ -14,8 +14,16 @@ extension Lists {
     Get information about all available segments for a specific list.
     */
     public struct PreviewASegment : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/segments"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -61,8 +69,55 @@ extension Lists {
         /** Restrict results to segments update before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
         public var beforeUpdatedAt: String?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let type = self.type {
+              params["type"] = String(describing: type)
+            }
+            if let sinceCreatedAt = self.sinceCreatedAt {
+              params["since_created_at"] = String(describing: sinceCreatedAt)
+            }
+            if let beforeCreatedAt = self.beforeCreatedAt {
+              params["before_created_at"] = String(describing: beforeCreatedAt)
+            }
+            if let includeCleaned = self.includeCleaned {
+              params["include_cleaned"] = String(describing: includeCleaned)
+            }
+            if let includeTransactional = self.includeTransactional {
+              params["include_transactional"] = String(describing: includeTransactional)
+            }
+            if let includeUnsubscribed = self.includeUnsubscribed {
+              params["include_unsubscribed"] = String(describing: includeUnsubscribed)
+            }
+            if let sinceUpdatedAt = self.sinceUpdatedAt {
+              params["since_updated_at"] = String(describing: sinceUpdatedAt)
+            }
+            if let beforeUpdatedAt = self.beforeUpdatedAt {
+              params["before_updated_at"] = String(describing: beforeUpdatedAt)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "previewASegment", tag: "lists", method: "GET", path: "/lists/{list_id}/segments", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = CollectionOfSegments
+        public typealias SuccessType = CollectionOfSegmentsModel
+        public typealias BodyType =  Empty
+
     }
 }

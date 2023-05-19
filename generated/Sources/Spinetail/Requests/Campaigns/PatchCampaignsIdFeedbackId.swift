@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Campaigns {
+extension STCampaigns {
 
     /**
     Update campaign feedback message
@@ -14,8 +14,16 @@ extension Campaigns {
     Update a specific feedback message for a campaign.
     */
     public struct PatchCampaignsIdFeedbackId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/campaigns/{campaign_id}/feedback/{feedback_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "campaign_id" + "}", with: "\(self.campaignId)").replacingOccurrences(of: "{" + "feedback_id" + "}", with: "\(self.feedbackId)")
+        }
 
         public var method : RequestMethod {
             .PATCH
@@ -28,8 +36,18 @@ extension Campaigns {
         /** The unique id for the feedback message. */
         public var feedbackId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "patchCampaignsIdFeedbackId", tag: "campaigns", method: "PATCH", path: "/campaigns/{campaign_id}/feedback/{feedback_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = CampaignFeedback2
+        public typealias SuccessType = CampaignFeedback2Model
+        public typealias BodyType =  CampaignFeedback3Model
+
+
+        public let body: CampaignFeedback3Model
     }
 }

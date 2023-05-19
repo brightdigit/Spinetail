@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension FileManager {
+extension STFileManager {
 
     /**
     List stored files
@@ -14,8 +14,16 @@ extension FileManager {
     Get a list of available images and files stored in the File Manager for the account.
     */
     public struct GetFileManagerFiles : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/file-manager/files"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .GET
@@ -52,6 +60,45 @@ extension FileManager {
         /** Determines the order direction for sorted results. */
         public var sortDir: SortDir?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let type = self.type {
+              params["type"] = String(describing: type)
+            }
+            if let createdBy = self.createdBy {
+              params["created_by"] = String(describing: createdBy)
+            }
+            if let beforeCreatedAt = self.beforeCreatedAt {
+              params["before_created_at"] = String(describing: beforeCreatedAt)
+            }
+            if let sinceCreatedAt = self.sinceCreatedAt {
+              params["since_created_at"] = String(describing: sinceCreatedAt)
+            }
+            if let sortField = self.sortField {
+              params["sort_field"] = String(describing: sortField)
+            }
+            if let sortDir = self.sortDir {
+              params["sort_dir"] = String(describing: sortDir)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getFileManagerFiles", tag: "fileManager", method: "GET", path: "/file-manager/files", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         /** Returns files sorted by the specified field. */
@@ -65,6 +112,8 @@ extension FileManager {
             case desc = "DESC"
         }
 
-        public typealias SuccessType = FileManager
+        public typealias SuccessType = FileManagerModel
+        public typealias BodyType =  Empty
+
     }
 }

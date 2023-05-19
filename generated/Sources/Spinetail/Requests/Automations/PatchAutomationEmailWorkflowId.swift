@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Automations {
+extension STAutomations {
 
     /**
     Update workflow email
@@ -14,8 +14,16 @@ extension Automations {
     Update settings for a classic automation workflow email.  Only works with workflows of type: abandonedBrowse, abandonedCart, emailFollowup, or singleWelcome.
     */
     public struct PatchAutomationEmailWorkflowId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/automations/{workflow_id}/emails/{workflow_email_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "workflow_id" + "}", with: "\(self.workflowId)").replacingOccurrences(of: "{" + "workflow_email_id" + "}", with: "\(self.workflowEmailId)")
+        }
 
         public var method : RequestMethod {
             .PATCH
@@ -28,8 +36,18 @@ extension Automations {
         /** The unique id for the Automation workflow email. */
         public var workflowEmailId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "patchAutomationEmailWorkflowId", tag: "automations", method: "PATCH", path: "/automations/{workflow_id}/emails/{workflow_email_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = AutomationWorkflowEmail
+        public typealias SuccessType = AutomationWorkflowEmailModel
+        public typealias BodyType =  UpdateInformationAboutaSpecificWorkflowEmailModel
+
+
+        public let body: UpdateInformationAboutaSpecificWorkflowEmailModel
     }
 }

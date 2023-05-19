@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension BatchWebhooks {
+extension STBatchWebhooks {
 
     /**
     Get batch webhook info
@@ -14,8 +14,16 @@ extension BatchWebhooks {
     Get information about a specific batch webhook.
     */
     public struct GetBatchWebhook : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/batch-webhooks/{batch_webhook_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "batch_webhook_id" + "}", with: "\(self.batchWebhookId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -31,8 +39,25 @@ extension BatchWebhooks {
         /** The unique id for the batch webhook. */
         public var batchWebhookId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getBatchWebhook", tag: "batchWebhooks", method: "GET", path: "/batch-webhooks/{batch_webhook_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = BatchWebhook
+        public typealias SuccessType = BatchWebhookModel
+        public typealias BodyType =  Empty
+
     }
 }

@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Batches {
+extension STBatches {
 
     /**
     Delete batch request
@@ -14,8 +14,16 @@ extension Batches {
     Stops a batch request from running. Since only one batch request is run at a time, this can be used to cancel a long running request. The results of any completed operations will not be available after this call.
     */
     public struct DeleteBatchesId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/batches/{batch_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "batch_id" + "}", with: "\(self.batchId)")
+        }
 
         public var method : RequestMethod {
             .DELETE
@@ -25,8 +33,16 @@ extension Batches {
         /** The unique id for the batch operation. */
         public var batchId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "deleteBatchesId", tag: "batches", method: "DELETE", path: "/batches/{batch_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         public typealias SuccessType = Empty
+        public typealias BodyType =  Empty
+
     }
 }

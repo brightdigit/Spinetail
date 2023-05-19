@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     List members info
@@ -14,8 +14,16 @@ extension Lists {
     Get information about members in a specific Mailchimp list.
     */
     public struct GetListsIdMembers : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/members"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -82,6 +90,72 @@ extension Lists {
         /** Filter subscribers by those unsubscribed since a specific date. Using any status other than unsubscribed with this filter will result in an error. */
         public var unsubscribedSince: String?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let emailType = self.emailType {
+              params["email_type"] = String(describing: emailType)
+            }
+            if let status = self.status {
+              params["status"] = String(describing: status)
+            }
+            if let sinceTimestampOpt = self.sinceTimestampOpt {
+              params["since_timestamp_opt"] = String(describing: sinceTimestampOpt)
+            }
+            if let beforeTimestampOpt = self.beforeTimestampOpt {
+              params["before_timestamp_opt"] = String(describing: beforeTimestampOpt)
+            }
+            if let sinceLastChanged = self.sinceLastChanged {
+              params["since_last_changed"] = String(describing: sinceLastChanged)
+            }
+            if let beforeLastChanged = self.beforeLastChanged {
+              params["before_last_changed"] = String(describing: beforeLastChanged)
+            }
+            if let uniqueEmailId = self.uniqueEmailId {
+              params["unique_email_id"] = String(describing: uniqueEmailId)
+            }
+            if let vipOnly = self.vipOnly {
+              params["vip_only"] = String(describing: vipOnly)
+            }
+            if let interestCategoryId = self.interestCategoryId {
+              params["interest_category_id"] = String(describing: interestCategoryId)
+            }
+            if let interestIds = self.interestIds {
+              params["interest_ids"] = String(describing: interestIds)
+            }
+            if let interestMatch = self.interestMatch {
+              params["interest_match"] = String(describing: interestMatch)
+            }
+            if let sortField = self.sortField {
+              params["sort_field"] = String(describing: sortField)
+            }
+            if let sortDir = self.sortDir {
+              params["sort_dir"] = String(describing: sortDir)
+            }
+            if let sinceLastCampaign = self.sinceLastCampaign {
+              params["since_last_campaign"] = String(describing: sinceLastCampaign)
+            }
+            if let unsubscribedSince = self.unsubscribedSince {
+              params["unsubscribed_since"] = String(describing: unsubscribedSince)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getListsIdMembers", tag: "lists", method: "GET", path: "/lists/{list_id}/members", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         /** The subscriber's status. */
@@ -114,6 +188,8 @@ extension Lists {
             case desc = "DESC"
         }
 
-        public typealias SuccessType = ListMembers2
+        public typealias SuccessType = ListMembers2Model
+        public typealias BodyType =  Empty
+
     }
 }

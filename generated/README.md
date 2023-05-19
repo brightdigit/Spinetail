@@ -150,430 +150,430 @@ To add support for a specific asynchronous library, just add an extension on `AP
 
 ## Models
 
-- **ABSplit**
-- **ABSplitStats**
-- **ABTestOptions**
-- **ABTestOptions1**
-- **ABTestOptions2**
-- **ABTestingOptions**
-- **APIHealthStatus**
-- **APIRoot**
-- **AbandonedBrowseAutomation**
-- **AbandonedCartAutomation**
-- **AbuseComplaint**
-- **AbuseComplaint1**
-- **AbuseComplaints**
-- **AbuseComplaints1**
-- **AccountContact**
-- **AccountExportsInner**
-- **AddListMembers**
-- **AddListMembers1**
-- **AddListMembers2**
-- **AddListMembers3**
-- **AddWebhook**
-- **Address**
-- **Address1**
-- **AnOptionForSignupFormStyles**
-- **AuthorizedApplicationsInner**
-- **AutomationCampaignSettings**
-- **AutomationCampaignSettings1**
-- **AutomationDelay**
-- **AutomationDelay1**
-- **AutomationEmails**
-- **AutomationTrackingOptions**
-- **AutomationTrigger**
-- **AutomationTrigger1**
-- **AutomationWorkflow**
-- **AutomationWorkflow1**
-- **AutomationWorkflowEmail**
-- **AutomationWorkflowRuntimeSettings**
-- **Automations**
-- **Batch**
-- **BatchAddRemoveListMembersToFromStaticSegment**
-- **BatchDelivery**
-- **BatchOperations**
-- **BatchUpdateListMembers**
-- **BatchWebhook**
-- **BatchWebhook1**
-- **BatchWebhook2**
-- **BatchWebhooks**
-- **BillingAddress**
-- **BillingAddress1**
-- **Bounces**
-- **Campaign**
-- **Campaign1**
-- **Campaign2**
-- **Campaign3**
-- **CampaignA**
-- **CampaignAdvice**
-- **CampaignAdviceReport**
-- **CampaignB**
-- **CampaignContent**
-- **CampaignContent1**
-- **CampaignDefaults**
-- **CampaignDefaults1**
-- **CampaignDeliveryStatus**
-- **CampaignFeedback**
-- **CampaignFeedback1**
-- **CampaignFeedback2**
-- **CampaignFeedback3**
-- **CampaignFolder**
-- **CampaignFolder1**
-- **CampaignFolders**
-- **CampaignReport**
-- **CampaignReportSummary**
-- **CampaignReportSummary1**
-- **CampaignReportSummary2**
-- **CampaignReportSummary3**
-- **CampaignReports**
-- **CampaignReports1**
-- **CampaignSettings**
-- **CampaignSettings1**
-- **CampaignSettings2**
-- **CampaignSettings3**
-- **CampaignSettings4**
-- **CampaignSettings5**
-- **CampaignSocialCard**
-- **CampaignSubReports**
-- **CampaignTrackingOptions**
-- **CampaignTrackingOptions1**
-- **Campaigns**
-- **CapsuleCRMTracking**
-- **CapsuleCRMTracking1**
-- **CapsuleCRMTracking2**
-- **CartLines**
-- **Carts**
-- **ChimpChatter**
-- **ClickDetailMember**
-- **ClickDetailMembers**
-- **ClickDetailReport**
-- **ClickSummary**
-- **Clicks**
-- **Clicks1Inner**
-- **Clicks1Inner1**
-- **CollectionAuthorization**
-- **CollectionOfContentForListSignupForms**
-- **CollectionOfConversationMessages**
-- **CollectionOfElementStyleForListSignupForms**
-- **CollectionOfEvents**
-- **CollectionOfMemberActivityEvents**
-- **CollectionOfMergeFields**
-- **CollectionOfNotes**
-- **CollectionOfSegments**
-- **CollectionOfTags**
-- **CombinationsInner**
-- **Conditions**
-- **Conditions1**
-- **Conditions2**
-- **ConnectedSite**
-- **ConnectedSite1**
-- **ConnectedSite2**
-- **ConnectedSites**
-- **Contact**
-- **ContactCounts**
-- **Conversation**
-- **ConversationMessage**
-- **CreateAnAccountExport**
-- **Customers**
-- **DailyClicksAndVisitsData**
-- **DailyListActivity**
-- **DailySendingDays**
-- **DomainPerformance**
-- **ECommerceCart**
-- **ECommerceCart1**
-- **ECommerceCart2**
-- **ECommerceCartLineItem**
-- **ECommerceCartLineItem1**
-- **ECommerceCartLineItem2**
-- **ECommerceCustomer**
-- **ECommerceCustomer1**
-- **ECommerceCustomer2**
-- **ECommerceCustomer3**
-- **ECommerceCustomer4**
-- **ECommerceOrder**
-- **ECommerceOrder1**
-- **ECommerceOrder2**
-- **ECommerceOrderLineItem**
-- **ECommerceOrderLineItem1**
-- **ECommerceOrderLineItem2**
-- **ECommerceProduct**
-- **ECommerceProduct1**
-- **ECommerceProduct2**
-- **ECommerceProductImage**
-- **ECommerceProductImage1**
-- **ECommerceProductImage2**
-- **ECommerceProductVariant**
-- **ECommerceProductVariant1**
-- **ECommerceProductVariant2**
-- **ECommercePromoCode**
-- **ECommercePromoCode1**
-- **ECommercePromoCode2**
-- **ECommercePromoRule**
-- **ECommercePromoRule1**
-- **ECommercePromoRule2**
-- **ECommerceReport**
-- **ECommerceReport1**
-- **ECommerceStore**
-- **ECommerceStore1**
-- **ECommerceStore2**
-- **ECommerceStores**
-- **EcommerceProductImages**
-- **EcommerceProductVariants**
-- **EcommerceStats**
-- **EepurlActivity**
-- **EmailActivity**
-- **EmailClient**
-- **EmailClients**
-- **EmailDomain**
-- **ErrorsInner**
-- **ErrorsInner1**
-- **Event**
-- **Events**
-- **Events1**
-- **Events2**
-- **ExactMatches**
-- **FacebookLikes**
-- **FileManager**
-- **FileManagerFolders**
-- **Forwards**
-- **GalleryFile**
-- **GalleryFile1**
-- **GalleryFile2**
-- **GalleryFolder**
-- **GalleryFolder1**
-- **GetAccountExports200Response**
-- **GetActivityFeedChimpChatter200Response**
-- **GetAllFacebookAds200Response**
-- **GetAllFacebookAds200ResponseFacebookAdsInner**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf1**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2Audience**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2AudienceEmailSource**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2AudienceTargetingSpecs**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2AudienceTargetingSpecsInterestsInner**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2AudienceTargetingSpecsLocations**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2Budget**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2Channel**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2Content**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2ContentAttachmentsInner**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2Feedback**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2Site**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf3**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOfReportSummary**
-- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryEcommerce**
-- **GetAllLandingPages200Response**
-- **GetAuthorizedApps200Response**
-- **GetAutomations200Response**
-- **GetAutomationsIdEmailsIdQueue200Response**
-- **GetCampaigns200Response**
-- **GetFacebookAdsId200Response**
-- **GetReportingFacebookAds200Response**
-- **GetReportingFacebookAds200ResponseFacebookAdsInner**
-- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOf**
-- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfAudienceActivity**
-- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfAudienceActivityClicksInner**
-- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfAudienceActivityImpressionsInner**
-- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfAudienceActivityRevenueInner**
-- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummary**
-- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryAverageOrderAmount**
-- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryEcommerce**
-- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryExtendedAt**
-- **GetReportingFacebookAdsId200Response**
-- **GetReportingLandingPages200Response**
-- **GetReportingSurveys200Response**
-- **GetReportingSurveysIdQuestions200Response**
-- **GetReportingSurveysIdQuestionsIdAnswers200Response**
-- **GetReportingSurveysIdResponses200Response**
-- **GetReportsIdEcommerceProductActivity200Response**
-- **GetReportsIdEcommerceProductActivity200ResponseProductsInner**
-- **Goal**
-- **GroupA**
-- **GroupB**
-- **GrowthHistory**
-- **Hours**
-- **IndustryStats**
-- **IndustryStats1**
-- **Interest**
-- **Interest1**
-- **InterestCategory**
-- **InterestCategory1**
-- **InterestGroupings**
-- **Interests**
-- **ItemsInner**
-- **LandingPage**
-- **LandingPage1**
-- **LandingPage2**
-- **LandingPageContent**
-- **LandingPageReport**
-- **LandingPageReportEcommerce**
-- **LandingPageReportTimeseries**
-- **LastMessage**
-- **List**
-- **List1**
-- **List10**
-- **List2**
-- **List3**
-- **List4**
-- **List5**
-- **List6**
-- **List7**
-- **List8**
-- **List9**
-- **ListActivity**
-- **ListContact**
-- **ListContact1**
-- **ListContact2**
-- **ListLocation**
-- **ListLocations**
-- **ListMembers**
-- **ListMembers1**
-- **ListMembers2**
-- **ListSignupForms**
-- **ListStats**
-- **ListWebhooks**
-- **ListsInner**
-- **Location**
-- **Location1**
-- **Location2**
-- **Location3**
-- **MarketingPermission**
-- **MarketingPermission1**
-- **MemberActivity**
-- **MemberActivity1**
-- **MemberActivity2**
-- **MemberActivityEvents**
-- **MemberActivityEvents1**
-- **MemberNotes**
-- **MemberNotes1**
-- **MemberTag**
-- **MemberTags**
-- **Members**
-- **MembersToAddRemoveToFromaStaticSegment**
-- **MembersToSubscribeUnsubscribeToFromaListInBatch**
-- **MergeField**
-- **MergeField1**
-- **MergeField2**
-- **MergeField3**
-- **MergeFieldOptions**
-- **MergeFieldOptions1**
-- **MergeFieldOptions2**
-- **Notes**
-- **OpenActivity**
-- **OpenDetailReport**
-- **OpenLocations**
-- **Opens**
-- **Operations**
-- **OptionsInner**
-- **OrderLines**
-- **Orders**
-- **Orders1**
-- **Outreach**
-- **Outreach1**
-- **PartialMatches**
-- **PostBatchesRequest**
-- **PostCampaignsIdActionsScheduleRequest**
-- **PostCampaignsIdActionsTestRequest**
-- **PostListsIdSegmentsIdMembersRequest**
-- **ProblemDetailDocument**
-- **Products**
-- **PromoCodes**
-- **PromoRules**
-- **PromosInner**
-- **PromosInner1**
-- **RSSOptions**
-- **RSSOptions1**
-- **RSSOptions2**
-- **RSSOptions3**
-- **Referrer**
-- **RemovedSubscribers**
-- **ResourceLink**
-- **Response**
-- **ResultsInner**
-- **SalesforceCRMTracking**
-- **SalesforceCRMTracking1**
-- **Script**
-- **Script1**
-- **SegmentMembers**
-- **SegmentOptions**
-- **SegmentOptions1**
-- **SegmentOptions2**
-- **SendChecklist**
-- **SendingSchedule**
-- **SendingSchedule1**
-- **SentTo**
-- **ShareReport**
-- **ShippingAddress**
-- **ShippingAddress1**
-- **SignupForm**
-- **SignupForm1**
-- **SignupFormHeaderOptions**
-- **Sources**
-- **Sources1**
-- **Statistics**
-- **SubscriberInAutomationQueue**
-- **SubscriberInAutomationQueue1**
-- **SubscriberInAutomationQueue2**
-- **SubscriberInCustomerJourneysAudience**
-- **SubscriberList**
-- **SubscriberList1**
-- **SubscriberList2**
-- **SubscriberLists**
-- **SubscriberRemovedFromAutomationWorkflow**
-- **SubscriberStats**
-- **SubscriberStats1**
-- **SurveyQuestionAnswer**
-- **SurveyQuestionReport**
-- **SurveyReport**
-- **SurveyRespondents**
-- **SurveyResponse**
-- **Tag**
-- **TagSearchResults**
-- **TagsInner**
-- **TagsInner1**
-- **TagsInner2**
-- **TemplateContent**
-- **TemplateContent1**
-- **TemplateDefaultContent**
-- **TemplateFolder**
-- **TemplateFolder1**
-- **TemplateFolders**
-- **TemplateInstance**
-- **TemplateInstance1**
-- **Templates**
-- **TimeseriesInner**
-- **TimewarpStatsInner**
-- **TrackedConversations**
-- **TrackingSettings**
-- **TwitterStats**
-- **TwitterStatus**
-- **UniqueVisitsInner**
-- **Unsubscribes**
-- **UpdateInformationAboutaSpecificWorkflowEmail**
-- **UploadArchive**
-- **VariateContentsInner**
-- **VariateContentsInner1**
-- **VerifiedDomains**
-- **VerifiedDomains1**
-- **VerifiedDomains2**
-- **VerifyaDomainForSending**
-- **VisitsInner**
-- **VisitsInner1**
-- **WeeklyClicksAndVisitsData**
+- **ABSplitModel**
+- **ABSplitStatsModel**
+- **ABTestOptions1Model**
+- **ABTestOptions2Model**
+- **ABTestOptionsModel**
+- **ABTestingOptionsModel**
+- **APIHealthStatusModel**
+- **APIRootModel**
+- **AbandonedBrowseAutomationModel**
+- **AbandonedCartAutomationModel**
+- **AbuseComplaint1Model**
+- **AbuseComplaintModel**
+- **AbuseComplaints1Model**
+- **AbuseComplaintsModel**
+- **AccountContactModel**
+- **AccountExportsInnerModel**
+- **AddListMembers1Model**
+- **AddListMembers2Model**
+- **AddListMembers3Model**
+- **AddListMembersModel**
+- **AddWebhookModel**
+- **Address1Model**
+- **AddressModel**
+- **AnOptionForSignupFormStylesModel**
+- **AuthorizedApplicationsInnerModel**
+- **AutomationCampaignSettings1Model**
+- **AutomationCampaignSettingsModel**
+- **AutomationDelay1Model**
+- **AutomationDelayModel**
+- **AutomationEmailsModel**
+- **AutomationTrackingOptionsModel**
+- **AutomationTrigger1Model**
+- **AutomationTriggerModel**
+- **AutomationWorkflow1Model**
+- **AutomationWorkflowEmailModel**
+- **AutomationWorkflowModel**
+- **AutomationWorkflowRuntimeSettingsModel**
+- **AutomationsModel**
+- **BatchAddRemoveListMembersToFromStaticSegmentModel**
+- **BatchDeliveryModel**
+- **BatchModel**
+- **BatchOperationsModel**
+- **BatchUpdateListMembersModel**
+- **BatchWebhook1Model**
+- **BatchWebhook2Model**
+- **BatchWebhookModel**
+- **BatchWebhooksModel**
+- **BillingAddress1Model**
+- **BillingAddressModel**
+- **BouncesModel**
+- **Campaign1Model**
+- **Campaign2Model**
+- **Campaign3Model**
+- **CampaignAModel**
+- **CampaignAdviceModel**
+- **CampaignAdviceReportModel**
+- **CampaignBModel**
+- **CampaignContent1Model**
+- **CampaignContentModel**
+- **CampaignDefaults1Model**
+- **CampaignDefaultsModel**
+- **CampaignDeliveryStatusModel**
+- **CampaignFeedback1Model**
+- **CampaignFeedback2Model**
+- **CampaignFeedback3Model**
+- **CampaignFeedbackModel**
+- **CampaignFolder1Model**
+- **CampaignFolderModel**
+- **CampaignFoldersModel**
+- **CampaignModel**
+- **CampaignReportModel**
+- **CampaignReportSummary1Model**
+- **CampaignReportSummary2Model**
+- **CampaignReportSummary3Model**
+- **CampaignReportSummaryModel**
+- **CampaignReports1Model**
+- **CampaignReportsModel**
+- **CampaignSettings1Model**
+- **CampaignSettings2Model**
+- **CampaignSettings3Model**
+- **CampaignSettings4Model**
+- **CampaignSettings5Model**
+- **CampaignSettingsModel**
+- **CampaignSocialCardModel**
+- **CampaignSubReportsModel**
+- **CampaignTrackingOptions1Model**
+- **CampaignTrackingOptionsModel**
+- **CampaignsModel**
+- **CapsuleCRMTracking1Model**
+- **CapsuleCRMTracking2Model**
+- **CapsuleCRMTrackingModel**
+- **CartLinesModel**
+- **CartsModel**
+- **ChimpChatterModel**
+- **ClickDetailMemberModel**
+- **ClickDetailMembersModel**
+- **ClickDetailReportModel**
+- **ClickSummaryModel**
+- **Clicks1Inner1Model**
+- **Clicks1InnerModel**
+- **ClicksModel**
+- **CollectionAuthorizationModel**
+- **CollectionOfContentForListSignupFormsModel**
+- **CollectionOfConversationMessagesModel**
+- **CollectionOfElementStyleForListSignupFormsModel**
+- **CollectionOfEventsModel**
+- **CollectionOfMemberActivityEventsModel**
+- **CollectionOfMergeFieldsModel**
+- **CollectionOfNotesModel**
+- **CollectionOfSegmentsModel**
+- **CollectionOfTagsModel**
+- **CombinationsInnerModel**
+- **Conditions1Model**
+- **Conditions2Model**
+- **ConditionsModel**
+- **ConnectedSite1Model**
+- **ConnectedSite2Model**
+- **ConnectedSiteModel**
+- **ConnectedSitesModel**
+- **ContactCountsModel**
+- **ContactModel**
+- **ConversationMessageModel**
+- **ConversationModel**
+- **CreateAnAccountExportModel**
+- **CustomersModel**
+- **DailyClicksAndVisitsDataModel**
+- **DailyListActivityModel**
+- **DailySendingDaysModel**
+- **DomainPerformanceModel**
+- **ECommerceCart1Model**
+- **ECommerceCart2Model**
+- **ECommerceCartLineItem1Model**
+- **ECommerceCartLineItem2Model**
+- **ECommerceCartLineItemModel**
+- **ECommerceCartModel**
+- **ECommerceCustomer1Model**
+- **ECommerceCustomer2Model**
+- **ECommerceCustomer3Model**
+- **ECommerceCustomer4Model**
+- **ECommerceCustomerModel**
+- **ECommerceOrder1Model**
+- **ECommerceOrder2Model**
+- **ECommerceOrderLineItem1Model**
+- **ECommerceOrderLineItem2Model**
+- **ECommerceOrderLineItemModel**
+- **ECommerceOrderModel**
+- **ECommerceProduct1Model**
+- **ECommerceProduct2Model**
+- **ECommerceProductImage1Model**
+- **ECommerceProductImage2Model**
+- **ECommerceProductImageModel**
+- **ECommerceProductModel**
+- **ECommerceProductVariant1Model**
+- **ECommerceProductVariant2Model**
+- **ECommerceProductVariantModel**
+- **ECommercePromoCode1Model**
+- **ECommercePromoCode2Model**
+- **ECommercePromoCodeModel**
+- **ECommercePromoRule1Model**
+- **ECommercePromoRule2Model**
+- **ECommercePromoRuleModel**
+- **ECommerceReport1Model**
+- **ECommerceReportModel**
+- **ECommerceStore1Model**
+- **ECommerceStore2Model**
+- **ECommerceStoreModel**
+- **ECommerceStoresModel**
+- **EcommerceProductImagesModel**
+- **EcommerceProductVariantsModel**
+- **EcommerceStatsModel**
+- **EepurlActivityModel**
+- **EmailActivityModel**
+- **EmailClientModel**
+- **EmailClientsModel**
+- **EmailDomainModel**
+- **ErrorsInner1Model**
+- **ErrorsInnerModel**
+- **EventModel**
+- **Events1Model**
+- **Events2Model**
+- **EventsModel**
+- **ExactMatchesModel**
+- **FacebookLikesModel**
+- **FileManagerFoldersModel**
+- **FileManagerModel**
+- **ForwardsModel**
+- **GalleryFile1Model**
+- **GalleryFile2Model**
+- **GalleryFileModel**
+- **GalleryFolder1Model**
+- **GalleryFolderModel**
+- **GetAccountExports200ResponseModel**
+- **GetActivityFeedChimpChatter200ResponseModel**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf1Model**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2AudienceEmailSourceModel**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2AudienceModel**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2AudienceTargetingSpecsInterestsInnerModel**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2AudienceTargetingSpecsLocationsModel**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2AudienceTargetingSpecsModel**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2BudgetModel**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2ChannelModel**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2ContentAttachmentsInnerModel**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2ContentModel**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2FeedbackModel**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2Model**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2SiteModel**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOf3Model**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOfModel**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryEcommerceModel**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryModel**
+- **GetAllFacebookAds200ResponseFacebookAdsInnerModel**
+- **GetAllFacebookAds200ResponseModel**
+- **GetAllLandingPages200ResponseModel**
+- **GetAuthorizedApps200ResponseModel**
+- **GetAutomations200ResponseModel**
+- **GetAutomationsIdEmailsIdQueue200ResponseModel**
+- **GetCampaigns200ResponseModel**
+- **GetFacebookAdsId200ResponseModel**
+- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfAudienceActivityClicksInnerModel**
+- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfAudienceActivityImpressionsInnerModel**
+- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfAudienceActivityModel**
+- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfAudienceActivityRevenueInnerModel**
+- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfModel**
+- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryAverageOrderAmountModel**
+- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryEcommerceModel**
+- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryExtendedAtModel**
+- **GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryModel**
+- **GetReportingFacebookAds200ResponseFacebookAdsInnerModel**
+- **GetReportingFacebookAds200ResponseModel**
+- **GetReportingFacebookAdsId200ResponseModel**
+- **GetReportingLandingPages200ResponseModel**
+- **GetReportingSurveys200ResponseModel**
+- **GetReportingSurveysIdQuestions200ResponseModel**
+- **GetReportingSurveysIdQuestionsIdAnswers200ResponseModel**
+- **GetReportingSurveysIdResponses200ResponseModel**
+- **GetReportsIdEcommerceProductActivity200ResponseModel**
+- **GetReportsIdEcommerceProductActivity200ResponseProductsInnerModel**
+- **GoalModel**
+- **GroupAModel**
+- **GroupBModel**
+- **GrowthHistoryModel**
+- **HoursModel**
+- **IndustryStats1Model**
+- **IndustryStatsModel**
+- **Interest1Model**
+- **InterestCategory1Model**
+- **InterestCategoryModel**
+- **InterestGroupingsModel**
+- **InterestModel**
+- **InterestsModel**
+- **ItemsInnerModel**
+- **LandingPage1Model**
+- **LandingPage2Model**
+- **LandingPageContentModel**
+- **LandingPageModel**
+- **LandingPageReportEcommerceModel**
+- **LandingPageReportModel**
+- **LandingPageReportTimeseriesModel**
+- **LastMessageModel**
+- **List10Model**
+- **List1Model**
+- **List2Model**
+- **List3Model**
+- **List4Model**
+- **List5Model**
+- **List6Model**
+- **List7Model**
+- **List8Model**
+- **List9Model**
+- **ListActivityModel**
+- **ListContact1Model**
+- **ListContact2Model**
+- **ListContactModel**
+- **ListLocationModel**
+- **ListLocationsModel**
+- **ListMembers1Model**
+- **ListMembers2Model**
+- **ListMembersModel**
+- **ListModel**
+- **ListSignupFormsModel**
+- **ListStatsModel**
+- **ListWebhooksModel**
+- **ListsInnerModel**
+- **Location1Model**
+- **Location2Model**
+- **Location3Model**
+- **LocationModel**
+- **MarketingPermission1Model**
+- **MarketingPermissionModel**
+- **MemberActivity1Model**
+- **MemberActivity2Model**
+- **MemberActivityEvents1Model**
+- **MemberActivityEventsModel**
+- **MemberActivityModel**
+- **MemberNotes1Model**
+- **MemberNotesModel**
+- **MemberTagModel**
+- **MemberTagsModel**
+- **MembersModel**
+- **MembersToAddRemoveToFromaStaticSegmentModel**
+- **MembersToSubscribeUnsubscribeToFromaListInBatchModel**
+- **MergeField1Model**
+- **MergeField2Model**
+- **MergeField3Model**
+- **MergeFieldModel**
+- **MergeFieldOptions1Model**
+- **MergeFieldOptions2Model**
+- **MergeFieldOptionsModel**
+- **NotesModel**
+- **OpenActivityModel**
+- **OpenDetailReportModel**
+- **OpenLocationsModel**
+- **OpensModel**
+- **OperationsModel**
+- **OptionsInnerModel**
+- **OrderLinesModel**
+- **Orders1Model**
+- **OrdersModel**
+- **Outreach1Model**
+- **OutreachModel**
+- **PartialMatchesModel**
+- **PostBatchesRequestModel**
+- **PostCampaignsIdActionsScheduleRequestModel**
+- **PostCampaignsIdActionsTestRequestModel**
+- **PostListsIdSegmentsIdMembersRequestModel**
+- **ProblemDetailDocumentModel**
+- **ProductsModel**
+- **PromoCodesModel**
+- **PromoRulesModel**
+- **PromosInner1Model**
+- **PromosInnerModel**
+- **RSSOptions1Model**
+- **RSSOptions2Model**
+- **RSSOptions3Model**
+- **RSSOptionsModel**
+- **ReferrerModel**
+- **RemovedSubscribersModel**
+- **ResourceLinkModel**
+- **ResponseModel**
+- **ResultsInnerModel**
+- **SalesforceCRMTracking1Model**
+- **SalesforceCRMTrackingModel**
+- **Script1Model**
+- **ScriptModel**
+- **SegmentMembersModel**
+- **SegmentOptions1Model**
+- **SegmentOptions2Model**
+- **SegmentOptionsModel**
+- **SendChecklistModel**
+- **SendingSchedule1Model**
+- **SendingScheduleModel**
+- **SentToModel**
+- **ShareReportModel**
+- **ShippingAddress1Model**
+- **ShippingAddressModel**
+- **SignupForm1Model**
+- **SignupFormHeaderOptionsModel**
+- **SignupFormModel**
+- **Sources1Model**
+- **SourcesModel**
+- **StatisticsModel**
+- **SubscriberInAutomationQueue1Model**
+- **SubscriberInAutomationQueue2Model**
+- **SubscriberInAutomationQueueModel**
+- **SubscriberInCustomerJourneysAudienceModel**
+- **SubscriberList1Model**
+- **SubscriberList2Model**
+- **SubscriberListModel**
+- **SubscriberListsModel**
+- **SubscriberRemovedFromAutomationWorkflowModel**
+- **SubscriberStats1Model**
+- **SubscriberStatsModel**
+- **SurveyQuestionAnswerModel**
+- **SurveyQuestionReportModel**
+- **SurveyReportModel**
+- **SurveyRespondentsModel**
+- **SurveyResponseModel**
+- **TagModel**
+- **TagSearchResultsModel**
+- **TagsInner1Model**
+- **TagsInner2Model**
+- **TagsInnerModel**
+- **TemplateContent1Model**
+- **TemplateContentModel**
+- **TemplateDefaultContentModel**
+- **TemplateFolder1Model**
+- **TemplateFolderModel**
+- **TemplateFoldersModel**
+- **TemplateInstance1Model**
+- **TemplateInstanceModel**
+- **TemplatesModel**
+- **TimeseriesInnerModel**
+- **TimewarpStatsInnerModel**
+- **TrackedConversationsModel**
+- **TrackingSettingsModel**
+- **TwitterStatsModel**
+- **TwitterStatusModel**
+- **UniqueVisitsInnerModel**
+- **UnsubscribesModel**
+- **UpdateInformationAboutaSpecificWorkflowEmailModel**
+- **UploadArchiveModel**
+- **VariateContentsInner1Model**
+- **VariateContentsInnerModel**
+- **VerifiedDomains1Model**
+- **VerifiedDomains2Model**
+- **VerifiedDomainsModel**
+- **VerifyaDomainForSendingModel**
+- **VisitsInner1Model**
+- **VisitsInnerModel**
+- **WeeklyClicksAndVisitsDataModel**
 
 ## Requests
 
-- **Spinetail.AccountExport**
+- **Spinetail.STAccountExport**
 	- **GetAccountExportId**: GET `/account-exports/{export_id}`
-- **Spinetail.AccountExports**
+- **Spinetail.STAccountExports**
 	- **GetAccountExports**: GET `/account-exports`
 	- **PostAccountExport**: POST `/account-exports`
-- **Spinetail.ActivityFeed**
+- **Spinetail.STActivityFeed**
 	- **GetActivityFeedChimpChatter**: GET `/activity-feed/chimp-chatter`
-- **Spinetail.AuthorizedApps**
+- **Spinetail.STAuthorizedApps**
 	- **GetAuthorizedApps**: GET `/authorized-apps`
 	- **GetAuthorizedAppsId**: GET `/authorized-apps/{app_id}`
-- **Spinetail.Automations**
+- **Spinetail.STAutomations**
 	- **ArchiveAutomations**: POST `/automations/{workflow_id}/actions/archive`
 	- **DeleteAutomationsIdEmailsId**: DELETE `/automations/{workflow_id}/emails/{workflow_email_id}`
 	- **GetAutomations**: GET `/automations`
@@ -592,24 +592,24 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PostAutomationsIdEmailsIdActionsStart**: POST `/automations/{workflow_id}/emails/{workflow_email_id}/actions/start`
 	- **PostAutomationsIdEmailsIdQueue**: POST `/automations/{workflow_id}/emails/{workflow_email_id}/queue`
 	- **PostAutomationsIdRemovedSubscribers**: POST `/automations/{workflow_id}/removed-subscribers`
-- **Spinetail.Batches**
+- **Spinetail.STBatches**
 	- **DeleteBatchesId**: DELETE `/batches/{batch_id}`
 	- **GetBatches**: GET `/batches`
 	- **GetBatchesId**: GET `/batches/{batch_id}`
 	- **PostBatches**: POST `/batches`
-- **Spinetail.BatchWebhooks**
+- **Spinetail.STBatchWebhooks**
 	- **DeleteBatchWebhookId**: DELETE `/batch-webhooks/{batch_webhook_id}`
 	- **GetBatchWebhook**: GET `/batch-webhooks/{batch_webhook_id}`
 	- **GetBatchWebhooks**: GET `/batch-webhooks`
 	- **PatchBatchWebhooks**: PATCH `/batch-webhooks/{batch_webhook_id}`
 	- **PostBatchWebhooks**: POST `/batch-webhooks`
-- **Spinetail.CampaignFolders**
+- **Spinetail.STCampaignFolders**
 	- **DeleteCampaignFoldersId**: DELETE `/campaign-folders/{folder_id}`
 	- **GetCampaignFolders**: GET `/campaign-folders`
 	- **GetCampaignFoldersId**: GET `/campaign-folders/{folder_id}`
 	- **PatchCampaignFoldersId**: PATCH `/campaign-folders/{folder_id}`
 	- **PostCampaignFolders**: POST `/campaign-folders`
-- **Spinetail.Campaigns**
+- **Spinetail.STCampaigns**
 	- **DeleteCampaignsId**: DELETE `/campaigns/{campaign_id}`
 	- **DeleteCampaignsIdFeedbackId**: DELETE `/campaigns/{campaign_id}/feedback/{feedback_id}`
 	- **GetCampaigns**: GET `/campaigns`
@@ -632,20 +632,20 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PostCampaignsIdActionsUnschedule**: POST `/campaigns/{campaign_id}/actions/unschedule`
 	- **PostCampaignsIdFeedback**: POST `/campaigns/{campaign_id}/feedback`
 	- **PutCampaignsIdContent**: PUT `/campaigns/{campaign_id}/content`
-- **Spinetail.ConnectedSites**
+- **Spinetail.STConnectedSites**
 	- **DeleteConnectedSitesId**: DELETE `/connected-sites/{connected_site_id}`
 	- **GetConnectedSites**: GET `/connected-sites`
 	- **GetConnectedSitesId**: GET `/connected-sites/{connected_site_id}`
 	- **PostConnectedSites**: POST `/connected-sites`
 	- **PostConnectedSitesIdActionsVerifyScriptInstallation**: POST `/connected-sites/{connected_site_id}/actions/verify-script-installation`
-- **Spinetail.Conversations**
+- **Spinetail.STConversations**
 	- **GetConversations**: GET `/conversations`
 	- **GetConversationsId**: GET `/conversations/{conversation_id}`
 	- **GetConversationsIdMessages**: GET `/conversations/{conversation_id}/messages`
 	- **GetConversationsIdMessagesId**: GET `/conversations/{conversation_id}/messages/{message_id}`
-- **Spinetail.CustomerJourneys**
+- **Spinetail.STCustomerJourneys**
 	- **PostCustomerJourneysJourneysIdStepsIdActionsTrigger**: POST `/customer-journeys/journeys/{journey_id}/steps/{step_id}/actions/trigger`
-- **Spinetail.Ecommerce**
+- **Spinetail.STEcommerce**
 	- **DeleteEcommerceStoresId**: DELETE `/ecommerce/stores/{store_id}`
 	- **DeleteEcommerceStoresIdCartsId**: DELETE `/ecommerce/stores/{store_id}/carts/{cart_id}`
 	- **DeleteEcommerceStoresIdCartsLinesId**: DELETE `/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}`
@@ -704,10 +704,10 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PostEcommerceStoresIdPromorules**: POST `/ecommerce/stores/{store_id}/promo-rules`
 	- **PutEcommerceStoresIdCustomersId**: PUT `/ecommerce/stores/{store_id}/customers/{customer_id}`
 	- **PutEcommerceStoresIdProductsIdVariantsId**: PUT `/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}`
-- **Spinetail.FacebookAds**
+- **Spinetail.STFacebookAds**
 	- **GetAllFacebookAds**: GET `/facebook-ads`
 	- **GetFacebookAdsId**: GET `/facebook-ads/{outreach_id}`
-- **Spinetail.FileManager**
+- **Spinetail.STFileManager**
 	- **DeleteFileManagerFilesId**: DELETE `/file-manager/files/{file_id}`
 	- **DeleteFileManagerFoldersId**: DELETE `/file-manager/folders/{folder_id}`
 	- **GetFileManagerFiles**: GET `/file-manager/files`
@@ -718,7 +718,7 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PatchFileManagerFoldersId**: PATCH `/file-manager/folders/{folder_id}`
 	- **PostFileManagerFiles**: POST `/file-manager/files`
 	- **PostFileManagerFolders**: POST `/file-manager/folders`
-- **Spinetail.LandingPages**
+- **Spinetail.STLandingPages**
 	- **DeleteLandingPageId**: DELETE `/landing-pages/{page_id}`
 	- **GetAllLandingPages**: GET `/landing-pages`
 	- **GetLandingPageId**: GET `/landing-pages/{page_id}`
@@ -727,7 +727,7 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PostAllLandingPages**: POST `/landing-pages`
 	- **PostLandingPageIdActionsPublish**: POST `/landing-pages/{page_id}/actions/publish`
 	- **PostLandingPageIdActionsUnpublish**: POST `/landing-pages/{page_id}/actions/unpublish`
-- **Spinetail.Lists**
+- **Spinetail.STLists**
 	- **DeleteListsId**: DELETE `/lists/{list_id}`
 	- **DeleteListsIdInterestCategoriesId**: DELETE `/lists/{list_id}/interest-categories/{interest_category_id}`
 	- **DeleteListsIdInterestCategoriesIdInterestsId**: DELETE `/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}`
@@ -794,9 +794,9 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **PreviewASegment**: GET `/lists/{list_id}/segments`
 	- **PutListsIdMembersId**: PUT `/lists/{list_id}/members/{subscriber_hash}`
 	- **SearchTagsByName**: GET `/lists/{list_id}/tag-search`
-- **Spinetail.Ping**
+- **Spinetail.STPing**
 	- **GetPing**: GET `/ping`
-- **Spinetail.Reporting**
+- **Spinetail.STReporting**
 	- **GetReportingFacebookAds**: GET `/reporting/facebook-ads`
 	- **GetReportingFacebookAdsId**: GET `/reporting/facebook-ads/{outreach_id}`
 	- **GetReportingFacebookAdsIdEcommerceProductActivity**: GET `/reporting/facebook-ads/{outreach_id}/ecommerce-product-activity`
@@ -809,7 +809,7 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **GetReportingSurveysIdQuestionsIdAnswers**: GET `/reporting/surveys/{outreach_id}/questions/{question_id}/answers`
 	- **GetReportingSurveysIdResponses**: GET `/reporting/surveys/{outreach_id}/responses`
 	- **GetReportingSurveysIdResponsesId**: GET `/reporting/surveys/{outreach_id}/responses/{response_id}`
-- **Spinetail.Reports**
+- **Spinetail.STReports**
 	- **GetReports**: GET `/reports`
 	- **GetReportsId**: GET `/reports/{campaign_id}`
 	- **GetReportsIdAbuseReportsId**: GET `/reports/{campaign_id}/abuse-reports`
@@ -832,29 +832,29 @@ To add support for a specific asynchronous library, just add an extension on `AP
 	- **GetReportsIdSubReportsId**: GET `/reports/{campaign_id}/sub-reports`
 	- **GetReportsIdUnsubscribed**: GET `/reports/{campaign_id}/unsubscribed`
 	- **GetReportsIdUnsubscribedId**: GET `/reports/{campaign_id}/unsubscribed/{subscriber_hash}`
-- **Spinetail.Root**
+- **Spinetail.STRoot**
 	- **GetRoot**: GET `/`
-- **Spinetail.SearchCampaigns**
+- **Spinetail.STSearchCampaigns**
 	- **GetSearchCampaigns**: GET `/search-campaigns`
-- **Spinetail.SearchMembers**
+- **Spinetail.STSearchMembers**
 	- **GetSearchMembers**: GET `/search-members`
-- **Spinetail.Surveys**
+- **Spinetail.STSurveys**
 	- **PostListsIdSurveysIdActionsPublish**: POST `/lists/{list_id}/surveys/{survey_id}/actions/publish`
 	- **PostListsIdSurveysIdActionsUnpublish**: POST `/lists/{list_id}/surveys/{survey_id}/actions/unpublish`
-- **Spinetail.TemplateFolders**
+- **Spinetail.STTemplateFolders**
 	- **DeleteTemplateFoldersId**: DELETE `/template-folders/{folder_id}`
 	- **GetTemplateFolders**: GET `/template-folders`
 	- **GetTemplateFoldersId**: GET `/template-folders/{folder_id}`
 	- **PatchTemplateFoldersId**: PATCH `/template-folders/{folder_id}`
 	- **PostTemplateFolders**: POST `/template-folders`
-- **Spinetail.Templates**
+- **Spinetail.STTemplates**
 	- **DeleteTemplatesId**: DELETE `/templates/{template_id}`
 	- **GetTemplates**: GET `/templates`
 	- **GetTemplatesId**: GET `/templates/{template_id}`
 	- **GetTemplatesIdDefaultContent**: GET `/templates/{template_id}/default-content`
 	- **PatchTemplatesId**: PATCH `/templates/{template_id}`
 	- **PostTemplates**: POST `/templates`
-- **Spinetail.VerifiedDomains**
+- **Spinetail.STVerifiedDomains**
 	- **CreateVerifiedDomain**: POST `/verified-domains`
 	- **DeleteVerifiedDomain**: DELETE `/verified-domains/{domain_name}`
 	- **GetVerifiedDomain**: GET `/verified-domains/{domain_name}`

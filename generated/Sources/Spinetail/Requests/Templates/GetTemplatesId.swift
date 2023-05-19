@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Templates {
+extension STTemplates {
 
     /**
     Get template info
@@ -14,8 +14,16 @@ extension Templates {
     Get information about a specific template.
     */
     public struct GetTemplatesId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/templates/{template_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "template_id" + "}", with: "\(self.templateId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -31,8 +39,25 @@ extension Templates {
         /** The unique id for the template. */
         public var templateId: String
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getTemplatesId", tag: "templates", method: "GET", path: "/templates/{template_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = TemplateInstance
+        public typealias SuccessType = TemplateInstanceModel
+        public typealias BodyType =  Empty
+
     }
 }

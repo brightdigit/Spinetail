@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Get member note
@@ -14,8 +14,16 @@ extension Lists {
     Get a specific note for a specific list member.
     */
     public struct GetListsIdMembersIdNotesId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "subscriber_hash" + "}", with: "\(self.subscriberHash)").replacingOccurrences(of: "{" + "note_id" + "}", with: "\(self.noteId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -37,8 +45,25 @@ extension Lists {
         /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
         public var excludeFields: [String]?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getListsIdMembersIdNotesId", tag: "lists", method: "GET", path: "/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = MemberNotes
+        public typealias SuccessType = MemberNotesModel
+        public typealias BodyType =  Empty
+
     }
 }

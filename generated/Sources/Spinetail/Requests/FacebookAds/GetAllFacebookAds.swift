@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension FacebookAds {
+extension STFacebookAds {
 
     /**
     List facebook ads
@@ -14,8 +14,16 @@ extension FacebookAds {
     Get list of Facebook ads.
     */
     public struct GetAllFacebookAds : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/facebook-ads"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .GET
@@ -40,6 +48,33 @@ extension FacebookAds {
         /** Determines the order direction for sorted results. */
         public var sortDir: SortDir?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let sortField = self.sortField {
+              params["sort_field"] = String(describing: sortField)
+            }
+            if let sortDir = self.sortDir {
+              params["sort_dir"] = String(describing: sortDir)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getAllFacebookAds", tag: "facebookAds", method: "GET", path: "/facebook-ads", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         /** Returns files sorted by the specified field. */
@@ -55,6 +90,8 @@ extension FacebookAds {
             case desc = "DESC"
         }
 
-        public typealias SuccessType = GetAllFacebookAds200Response
+        public typealias SuccessType = GetAllFacebookAds200ResponseModel
+        public typealias BodyType =  Empty
+
     }
 }

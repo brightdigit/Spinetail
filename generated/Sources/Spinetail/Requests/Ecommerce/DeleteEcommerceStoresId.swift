@@ -6,7 +6,15 @@
 import Foundation
 import PrchModel
 
-extension Ecommerce {
+extension Dictionary : ContentEncodable where Key : Encodable, Value : Encodable {
+  
+}
+
+extension Dictionary : ContentDecodable where Key : Decodable, Value : Decodable {
+  
+}
+
+extension STEcommerce {
 
     /**
     Delete store
@@ -14,8 +22,16 @@ extension Ecommerce {
     Delete a store. Deleting a store will also delete any associated subresources, including Customers, Orders, Products, and Carts.
     */
     public struct DeleteEcommerceStoresId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/ecommerce/stores/{store_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "store_id" + "}", with: "\(self.storeId)")
+        }
 
         public var method : RequestMethod {
             .DELETE
@@ -25,8 +41,16 @@ extension Ecommerce {
         /** The store id. */
         public var storeId: String
 
+
+        public var parameters: [String : String] { [:] }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "deleteEcommerceStoresId", tag: "ecommerce", method: "DELETE", path: "/ecommerce/stores/{store_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = [String: Any]
+        public typealias SuccessType = [String: String]
+        public typealias BodyType =  Empty
+
     }
 }

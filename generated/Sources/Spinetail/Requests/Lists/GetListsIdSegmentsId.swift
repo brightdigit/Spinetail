@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Lists {
+extension STLists {
 
     /**
     Get segment info
@@ -14,8 +14,16 @@ extension Lists {
     Get information about a specific segment.
     */
     public struct GetListsIdSegmentsId : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/lists/{list_id}/segments/{segment_id}"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "list_id" + "}", with: "\(self.listId)").replacingOccurrences(of: "{" + "segment_id" + "}", with: "\(self.segmentId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -43,8 +51,34 @@ extension Lists {
         /** Include unsubscribed members in response */
         public var includeUnsubscribed: Bool?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let includeCleaned = self.includeCleaned {
+              params["include_cleaned"] = String(describing: includeCleaned)
+            }
+            if let includeTransactional = self.includeTransactional {
+              params["include_transactional"] = String(describing: includeTransactional)
+            }
+            if let includeUnsubscribed = self.includeUnsubscribed {
+              params["include_unsubscribed"] = String(describing: includeUnsubscribed)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getListsIdSegmentsId", tag: "lists", method: "GET", path: "/lists/{list_id}/segments/{segment_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = List7
+        public typealias SuccessType = List7Model
+        public typealias BodyType =  Empty
+
     }
 }

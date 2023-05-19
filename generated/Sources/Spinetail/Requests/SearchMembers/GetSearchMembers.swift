@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension SearchMembers {
+extension STSearchMembers {
 
     /**
     Search members
@@ -14,8 +14,16 @@ extension SearchMembers {
     Search for list members. This search can be restricted to a specific list, or can be used to search across all lists in an account.
     */
     public struct GetSearchMembers : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/search-members"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .GET
@@ -34,8 +42,29 @@ extension SearchMembers {
         /** The unique id for the list. */
         public var listId: String?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            params["query"] = String(describing: self.query)
+            if let listId = self.listId {
+              params["list_id"] = String(describing: listId)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getSearchMembers", tag: "searchMembers", method: "GET", path: "/search-members", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = Members
+        public typealias SuccessType = MembersModel
+        public typealias BodyType =  Empty
+
     }
 }

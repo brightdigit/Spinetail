@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension Reporting {
+extension STReporting {
 
     /**
     List facebook ecommerce report
@@ -14,8 +14,16 @@ extension Reporting {
     Get breakdown of product activity for an outreach.
     */
     public struct GetReportingFacebookAdsIdEcommerceProductActivity : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/reporting/facebook-ads/{outreach_id}/ecommerce-product-activity"
+
+        public var path: String {
+            return Self.pathTemplate.replacingOccurrences(of: "{" + "outreach_id" + "}", with: "\(self.outreachId)")
+        }
 
         public var method : RequestMethod {
             .GET
@@ -40,6 +48,30 @@ extension Reporting {
         /** Returns files sorted by the specified field. */
         public var sortField: SortField?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            if let sortField = self.sortField {
+              params["sort_field"] = String(describing: sortField)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getReportingFacebookAdsIdEcommerceProductActivity", tag: "reporting", method: "GET", path: "/reporting/facebook-ads/{outreach_id}/ecommerce-product-activity", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
         /** Returns files sorted by the specified field. */
@@ -49,6 +81,8 @@ extension Reporting {
             case totalPurchased = "total_purchased"
         }
 
-        public typealias SuccessType = GetReportsIdEcommerceProductActivity200Response
+        public typealias SuccessType = GetReportsIdEcommerceProductActivity200ResponseModel
+        public typealias BodyType =  Empty
+
     }
 }

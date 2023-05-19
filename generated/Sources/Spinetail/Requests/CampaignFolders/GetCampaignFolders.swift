@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension CampaignFolders {
+extension STCampaignFolders {
 
     /**
     List campaign folders
@@ -14,8 +14,16 @@ extension CampaignFolders {
     Get all folders used to organize campaigns.
     */
     public struct GetCampaignFolders : ServiceCall {
+        public static var requiresCredentials: Bool {
+            return false
+        }
+        public typealias ServiceAPI = SpinetailAPI
 
         public static let pathTemplate = "/campaign-folders"
+
+        public var path: String {
+            return Self.pathTemplate
+        }
 
         public var method : RequestMethod {
             .GET
@@ -34,8 +42,31 @@ extension CampaignFolders {
         /** Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0. */
         public var offset: Int?
 
+
+        public var parameters: [String : String] {
+            var params: [String: String] = [:]
+            if let fields = self.fields?.joined(separator: ",") {
+              params["fields"] = String(describing: fields)
+            }
+            if let excludeFields = self.excludeFields?.joined(separator: ",") {
+              params["exclude_fields"] = String(describing: excludeFields)
+            }
+            if let count = self.count {
+              params["count"] = String(describing: count)
+            }
+            if let offset = self.offset {
+              params["offset"] = String(describing: offset)
+            }
+            return params
+        }
+
+        public var headers: [String : String] { [:] }
+
+
         //public static let service = APIService<Response>(id: "getCampaignFolders", tag: "campaignFolders", method: "GET", path: "/campaign-folders", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
-        public typealias SuccessType = CampaignFolders
+        public typealias SuccessType = CampaignFoldersModel
+        public typealias BodyType =  Empty
+
     }
 }
