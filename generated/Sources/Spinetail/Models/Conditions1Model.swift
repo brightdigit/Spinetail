@@ -16,12 +16,12 @@ public struct Conditions1Model: Codable, Equatable, Content {
     }
 
     /** Segment match conditions. There are multiple possible types, see the [condition types documentation](https://mailchimp.com/developer/marketing/docs/alternative-schemas/#segment-condition-schemas). */
-    public var conditions: [[String: Any]]?
+    public var conditions: [String: String]?
 
     /** Match type. */
     public var match: Match?
 
-    public init(conditions: [[String: Any]]? = nil, match: Match? = nil) {
+    public init(conditions: [String: String]? = nil, match: Match? = nil) {
         self.conditions = conditions
         self.match = match
     }

@@ -16,7 +16,7 @@ public struct SegmentOptionsModel: Codable, Equatable, Content {
     }
 
     /** Segment match conditions. There are multiple possible types, see the [condition types documentation](https://mailchimp.com/developer/marketing/docs/alternative-schemas/#segment-condition-schemas). */
-    public var conditions: [[String: Any]]?
+    public var conditions: [String: String]?
 
     /** Segment match type. */
     public var match: Match?
@@ -24,7 +24,7 @@ public struct SegmentOptionsModel: Codable, Equatable, Content {
     /** The id for an existing saved segment. */
     public var savedSegmentId: Int?
 
-    public init(conditions: [[String: Any]]? = nil, match: Match? = nil, savedSegmentId: Int? = nil) {
+    public init(conditions: [String: String]? = nil, match: Match? = nil, savedSegmentId: Int? = nil) {
         self.conditions = conditions
         self.match = match
         self.savedSegmentId = savedSegmentId

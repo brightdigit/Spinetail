@@ -18,7 +18,8 @@ let package = Package(
   ],
   targets: [
         .target(name: "Spinetail", dependencies: [
-        .product(name: "PrchModel", package: "Prch")
-  ])
+              .product(name: "PrchModel", package: "Prch")
+        ]),
+        .testTarget(name: "SpinetailTests", dependencies: ["Spinetail", "Prch"])
   ]
 )

@@ -1,0 +1,62 @@
+//import Prch
+@testable import Spinetail
+import XCTest
+
+#if canImport(FoundationNetworking)
+  import FoundationNetworking
+#endif
+
+final class CampaignTests: XCTestCase {
+  static var listID: String!
+  static var interestID: String!
+  static var api: SpinetailAPI!
+
+  override class func setUp() {
+    let settings = Settings.parseAll()
+
+    listID = settings.listID
+    interestID = settings.interestID
+    api = settings.apiKey.flatMap(SpinetailAPI.init(apiKey:))
+  }
+
+  func testCampaign() async throws {
+    let client = MailchimpService(api: CampaignTests.api, session: URLSession.shared)
+    let date = Date()
+    let template = try await client.request(STTemplates.PostTemplates(body: .init(html: "test email - \(date)", name: "test email - \(date)")))
+
+
+    guard let templateID = template.id else {
+      XCTAssertNil(template.id)
+      return
+    }
+
+    let settings : CampaignSettings3Model =
+      .init(
+        fromName: "Leo",
+        replyTo: "leogdion+mailchimpdev@brightdigit.com",
+        subjectLine: "Hello World",
+        templateId: templateID
+      )
+    
+    let body : Campaign1Model = .init(type: .regular, recipients: .init(listId: Self.listID), settings: settings)
+    let campaign = try await client.request(STCampaigns.PostCampaigns(body: body))
+//      .createCampaign(
+//      withTemplateID: templateID,
+//      fromName: "Leo",
+//      replyTo: "leogdion+mailchimpdev@brightdigit.com",
+//      subjectLine: "Hello World",
+//      toListID: Self.listID
+//    )
+
+    guard let campaignID = campaign.id else {
+      XCTAssertNil(campaign.id)
+      return
+    }
+    
+    try await client.request(STCampaigns.PostCampaignsIdActionsSend(campaignId: campaignID))
+//
+//    try client.requestSync(
+//      Campaigns.PostCampaignsIdActionsSend.Request(campaignId: campaignID)
+//    )
+  }
+}

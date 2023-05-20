@@ -13,9 +13,9 @@ public struct TemplateDefaultContentModel: Codable, Equatable, Content {
     public var links: [ResourceLinkModel]?
 
     /** The sections that you can edit in the template, including each section's default content. */
-    public var sections: [String: [String: Any]]?
+    public var sections: [String: [String: String]]?
 
-    public init(links: [ResourceLinkModel]? = nil, sections: [String: [String: Any]]? = nil) {
+    public init(links: [ResourceLinkModel]? = nil, sections: [String: [String: String]]? = nil) {
         self.links = links
         self.sections = sections
     }

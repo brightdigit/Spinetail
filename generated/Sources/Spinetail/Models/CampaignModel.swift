@@ -79,7 +79,7 @@ public struct CampaignModel: Codable, Equatable, Content {
     public var rssOpts: RSSOptionsModel?
 
     /** The date and time a campaign was sent. */
-    public var sendTime: DateTime?
+    //public var sendTime: DateTime?
 
     public var settings: CampaignSettings2Model?
 
@@ -114,7 +114,7 @@ public struct CampaignModel: Codable, Equatable, Content {
         self.reportSummary = reportSummary
         self.resendable = resendable
         self.rssOpts = rssOpts
-        self.sendTime = sendTime
+        //self.sendTime = sendTime
         self.settings = settings
         self.socialCard = socialCard
         self.status = status
@@ -140,7 +140,7 @@ public struct CampaignModel: Codable, Equatable, Content {
         case reportSummary = "report_summary"
         case resendable = "resendable"
         case rssOpts = "rss_opts"
-        case sendTime = "send_time"
+        //case sendTime = "send_time"
         case settings = "settings"
         case socialCard = "social_card"
         case status = "status"

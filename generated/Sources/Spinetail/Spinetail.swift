@@ -39,32 +39,39 @@ public enum STTemplateFolders {}
 public enum STTemplates {}
 public enum STVerifiedDomains {}
 
-public protocol BaseURLProvider {
-  var baseURLComponents: URLComponents? { get }
-}
 
 
 public class SpinetailAPI: API {
-  public init(baseURLProvider: BaseURLProvider) {
-	self.baseURLProvider = baseURLProvider
-  }
+  private let apiKey : String
+  private let dc: String
+  
+  public init?(apiKey: String) {
+    self.apiKey = apiKey
+    let apiKeyComponents = apiKey.components(separatedBy: "-")
 
-  public var isReady: Bool {
-	baseURLProvider.baseURLComponents != nil
-  }
+    guard let dc = apiKeyComponents.last, apiKeyComponents.count == 2 else {
+      return nil
+    }
 
-  public let baseURLProvider: BaseURLProvider
-  public var baseURLComponents: URLComponents {
-	guard let baseURLComponents = baseURLProvider.baseURLComponents else {
-	  assertionFailure("BaseURLProvider is not ready")
-	  return URLComponents()
-	}
+    self.dc = dc
+    
+    
 
-	return baseURLComponents
+    guard let baseURLComponents = URLComponents(string:  "https://\(dc).api.mailchimp.com/3.0") else {
+      return nil
+    }
+    self.baseURLComponents = baseURLComponents
+
   }
+  
+  public let baseURLComponents: URLComponents
+
 
   public var headers: [String: String] {
-	Defaults.headers
+    [
+      "Authorization": "anystring \(self.apiKey)",
+      "Content-type": "application/json; charset=utf-8"
+    ]
   }
 
   public var encoder: any Encoder<Data> {
@@ -96,19 +103,17 @@ extension JSONEncoder {
 
 extension SpinetailAPI {
   enum Defaults {
-	public static let dateEncodingFormatter = {
-	  let formatter = DateFormatter()
-	  formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-	  formatter.locale = Locale(identifier: "en_US_POSIX")
-	  formatter.calendar = Calendar(identifier: .gregorian)
-	  return formatter
-	}()
-
-	public static let encoder: any Encoder<Data> = JSONEncoder(dateFormatter: Self.dateEncodingFormatter)
-
-	public static let decoder: any Decoder<Data> = JSONDecoder(dateFormatter: Self.dateEncodingFormatter)
-
-	public static let headers: [String: String] =
-	  ["Content-Type": "application/json; charset=utf-8"]
+    public static let dateEncodingFormatter = {
+      let formatter = DateFormatter()
+      formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+      formatter.locale = Locale(identifier: "en_US_POSIX")
+      formatter.calendar = Calendar(identifier: .gregorian)
+      return formatter
+    }()
+    
+    public static let encoder: any Encoder<Data> = JSONEncoder(dateFormatter: Self.dateEncodingFormatter)
+    
+    public static let decoder: any Decoder<Data> = JSONDecoder(dateFormatter: Self.dateEncodingFormatter)
   }
+
 }
