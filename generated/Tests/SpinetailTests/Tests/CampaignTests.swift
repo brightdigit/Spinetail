@@ -8,14 +8,14 @@ import XCTest
 
 final class CampaignTests: XCTestCase {
   static var listID: String!
-  static var interestID: String!
+  //static var interestID: String!
   static var api: SpinetailAPI!
 
   override class func setUp() {
     let settings = Settings.parseAll()
 
     listID = settings.listID
-    interestID = settings.interestID
+    //interestID = settings.interestID
     api = settings.apiKey.flatMap(SpinetailAPI.init(apiKey:))
   }
 

@@ -51,15 +51,15 @@ public struct AddListMembers1Model: Codable, Equatable, Content {
     public var tags: [String]?
 
     /** The date and time the subscriber confirmed their opt-in status in ISO 8601 format. */
-    public var timestampOpt: DateTime?
+    public var timestampOpt: MailchimpOptionalDate
 
     /** The date and time the subscriber signed up for the list in ISO 8601 format. */
-    public var timestampSignup: DateTime?
+    public var timestampSignup: MailchimpOptionalDate
 
     /** [VIP status](https://mailchimp.com/help/designate-and-send-to-vip-contacts/) for subscriber. */
     public var vip: Bool?
 
-    public init(emailAddress: String, status: Status, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: LocationModel? = nil, marketingPermissions: [MarketingPermission1Model]? = nil, mergeFields: [String: String]? = nil, tags: [String]? = nil, timestampOpt: DateTime? = nil, timestampSignup: DateTime? = nil, vip: Bool? = nil) {
+    public init(emailAddress: String, status: Status, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: LocationModel? = nil, marketingPermissions: [MarketingPermission1Model]? = nil, mergeFields: [String: String]? = nil, tags: [String]? = nil, timestampOpt: Date? = nil, timestampSignup: Date? = nil, vip: Bool? = nil) {
         self.emailAddress = emailAddress
         self.status = status
         self.emailType = emailType
@@ -71,8 +71,8 @@ public struct AddListMembers1Model: Codable, Equatable, Content {
         self.marketingPermissions = marketingPermissions
         self.mergeFields = mergeFields
         self.tags = tags
-        self.timestampOpt = timestampOpt
-        self.timestampSignup = timestampSignup
+      self.timestampOpt = .init(value: timestampOpt)
+        self.timestampSignup = .init(value: timestampSignup)
         self.vip = vip
     }
 
