@@ -21,6 +21,13 @@ final class CampaignTests: XCTestCase {
 
   func testCampaign() async throws {
     let client = MailchimpService(api: CampaignTests.api, session: URLSession.shared)
+    
+    let campaigns = try await client.request(STCampaigns.GetCampaigns()).campaigns
+    
+    let count = campaigns!.count
+    
+    
+    
     let date = Date()
     let template = try await client.request(STTemplates.PostTemplates(body: .init(html: "test email - \(date)", name: "test email - \(date)")))
 
@@ -54,6 +61,10 @@ final class CampaignTests: XCTestCase {
     }
     
     try await client.request(STCampaigns.PostCampaignsIdActionsSend(campaignId: campaignID))
+    
+    let newCount = try await client.request(STCampaigns.GetCampaigns()).campaigns?.count
+    
+    XCTAssertEqual(count + 1, newCount)
 //
 //    try client.requestSync(
 //      Campaigns.PostCampaignsIdActionsSend.Request(campaignId: campaignID)

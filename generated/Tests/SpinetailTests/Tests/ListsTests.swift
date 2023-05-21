@@ -18,7 +18,7 @@ final class ListsTests: XCTestCase {
     let settings = Settings.parseAll()
 
     listID = settings.listID
-    interestID = nil
+    interestID = settings.interestID
     api = settings.apiKey.flatMap(SpinetailAPI.init(apiKey:))
   }
 
@@ -38,11 +38,18 @@ final class ListsTests: XCTestCase {
     )
     
     let member : ListMembers2Model?
+    let interested: Bool
     
     do {
       member = try await client.request(getMember)
+            if let interestID = interestID {
+              interested = member?.interests?[interestID] ?? false
+            } else {
+              interested = true
+            }
     } catch RequestError.invalidStatusCode(let statusCode) where statusCode == 404 {
       member = nil
+      interested = false
     }
     
     let mergeFields = { firstName, lastName -> [String: String]? in
@@ -56,7 +63,6 @@ final class ListsTests: XCTestCase {
     }(firstName, lastName)
 
 //    let member: Lists.GetListsIdMembersId.Response.Status200?
-//    let interested: Bool
 //
 //    do {
 //      member = try client.requestSync(getMember, timeout: .distantFuture)
@@ -73,17 +79,17 @@ final class ListsTests: XCTestCase {
 //      member = nil
 //    }
 
-//    let interests: [String: Bool] = interestID.map { [$0: true] } ?? [:]
-//    guard !interested else {
-//      return nil
-//    }
+    let interests: [String: Bool] = interestID.map { [$0: true] } ?? [:]
+    guard !interested else {
+      return nil
+    }
     if let subscriberHash = member?.id {
       
-      let patch = STLists.PatchListsIdMembersId(listId: Self.listID, subscriberHash: subscriberHash, body: .init(emailAddress: emailAddress, emailType: nil, interests: nil, mergeFields: mergeFields))
+      let patch = STLists.PatchListsIdMembersId(listId: Self.listID, subscriberHash: subscriberHash, body: .init(emailAddress: emailAddress, emailType: nil, interests: interests, mergeFields: mergeFields))
       _ = try await client.request(patch)
       return false
     } else {
-      let post = STLists.PostListsIdMembers(listId: Self.listID, body: .init(emailAddress: emailAddress, status: .subscribed, interests: nil, mergeFields: mergeFields, timestampOpt: useTimestamp ? .init() : nil, timestampSignup: useTimestamp ? .init() : nil))
+      let post = STLists.PostListsIdMembers(listId: Self.listID, body: .init(emailAddress: emailAddress, status: .subscribed, interests: interests, mergeFields: mergeFields, timestampOpt: useTimestamp ? .init() : nil, timestampSignup: useTimestamp ? .init() : nil))
       _ = try await client.request(post)
       return true
     }
