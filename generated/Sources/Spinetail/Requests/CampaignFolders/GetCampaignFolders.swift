@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STCampaignFolders {
+extension CampaignFolders {
 
     /**
     List campaign folders

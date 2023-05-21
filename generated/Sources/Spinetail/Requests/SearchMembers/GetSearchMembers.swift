@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STSearchMembers {
+extension SearchMembers {
 
     /**
     Search members

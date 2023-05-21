@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STSurveys {
+extension Surveys {
 
     /**
     Unpublish a Survey

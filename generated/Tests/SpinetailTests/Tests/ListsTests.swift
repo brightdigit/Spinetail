@@ -32,7 +32,7 @@ final class ListsTests: XCTestCase {
     let client = MailchimpService(api: Self.api)
     //Client(api: Self.api, session: URLSession.shared)
     
-    let getMember = STLists.GetListsIdMembersId(
+    let getMember = Lists.GetListsIdMembersId(
       listId: Self.listID,
       subscriberHash: emailAddress
     )
@@ -85,11 +85,11 @@ final class ListsTests: XCTestCase {
     }
     if let subscriberHash = member?.id {
       
-      let patch = STLists.PatchListsIdMembersId(listId: Self.listID, subscriberHash: subscriberHash, body: .init(emailAddress: emailAddress, emailType: nil, interests: interests, mergeFields: mergeFields))
+      let patch = Lists.PatchListsIdMembersId(listId: Self.listID, subscriberHash: subscriberHash, body: .init(emailAddress: emailAddress, emailType: nil, interests: interests, mergeFields: mergeFields))
       _ = try await client.request(patch)
       return false
     } else {
-      let post = STLists.PostListsIdMembers(listId: Self.listID, body: .init(emailAddress: emailAddress, status: .subscribed, interests: interests, mergeFields: mergeFields, timestampOpt: useTimestamp ? .init() : nil, timestampSignup: useTimestamp ? .init() : nil))
+      let post = Lists.PostListsIdMembers(listId: Self.listID, body: .init(emailAddress: emailAddress, status: .subscribed, interests: interests, mergeFields: mergeFields, timestampOpt: useTimestamp ? .init() : nil, timestampSignup: useTimestamp ? .init() : nil))
       _ = try await client.request(post)
       return true
     }

@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STConnectedSites {
+extension ConnectedSites {
 
     /**
     Get connected site

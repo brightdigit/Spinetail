@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STActivityFeed {
+extension ActivityFeed {
 
     /**
     Get latest chimp chatter

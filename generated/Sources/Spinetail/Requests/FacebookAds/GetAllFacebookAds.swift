@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STFacebookAds {
+extension FacebookAds {
 
     /**
     List facebook ads

@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STConversations {
+extension Conversations {
 
     /**
     Get conversation

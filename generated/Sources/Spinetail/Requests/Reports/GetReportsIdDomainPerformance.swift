@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STReports {
+extension Reports {
 
     /**
     List domain performance stats

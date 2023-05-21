@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STLists {
+extension Lists {
 
     /**
     Search for tags on a list by name.

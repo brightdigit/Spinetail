@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STTemplates {
+extension Templates {
 
     /**
     Get template info

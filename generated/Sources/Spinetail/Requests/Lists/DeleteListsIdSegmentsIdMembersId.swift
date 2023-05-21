@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STLists {
+extension Lists {
 
     /**
     Remove list member from segment

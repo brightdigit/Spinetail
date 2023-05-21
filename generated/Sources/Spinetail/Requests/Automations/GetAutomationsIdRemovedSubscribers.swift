@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STAutomations {
+extension Automations {
 
     /**
     List subscribers removed from workflow

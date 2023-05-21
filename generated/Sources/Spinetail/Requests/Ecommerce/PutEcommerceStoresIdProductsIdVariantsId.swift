@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STEcommerce {
+extension Ecommerce {
 
     /**
     Add or update product variant

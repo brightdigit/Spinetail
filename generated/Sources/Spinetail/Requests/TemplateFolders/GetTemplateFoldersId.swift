@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STTemplateFolders {
+extension TemplateFolders {
 
     /**
     Get template folder

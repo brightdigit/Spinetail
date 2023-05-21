@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STRoot {
+extension Root {
 
     /**
     List api root resources

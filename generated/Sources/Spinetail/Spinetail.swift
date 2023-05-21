@@ -11,33 +11,33 @@ public typealias DateTime = Date
 public typealias File = Data
 public typealias ID = UUID
 
-public enum STSurveys {}
-public enum STAccountExport {}
-public enum STAccountExports {}
-public enum STActivityFeed {}
-public enum STAuthorizedApps {}
-public enum STAutomations {}
-public enum STBatchWebhooks {}
-public enum STBatches {}
-public enum STCampaignFolders {}
-public enum STCampaigns {}
-public enum STConnectedSites {}
-public enum STConversations {}
-public enum STCustomerJourneys {}
-public enum STEcommerce {}
-public enum STFacebookAds {}
-public enum STFileManager {}
-public enum STLandingPages {}
-public enum STLists {}
-public enum STPing {}
-public enum STReporting {}
-public enum STReports {}
-public enum STRoot {}
-public enum STSearchCampaigns {}
-public enum STSearchMembers {}
-public enum STTemplateFolders {}
-public enum STTemplates {}
-public enum STVerifiedDomains {}
+public enum Surveys {}
+public enum AccountExport {}
+public enum AccountExports {}
+public enum ActivityFeed {}
+public enum AuthorizedApps {}
+public enum Automations {}
+public enum BatchWebhooks {}
+public enum Batches {}
+public enum CampaignFolders {}
+public enum Campaigns {}
+public enum ConnectedSites {}
+public enum Conversations {}
+public enum CustomerJourneys {}
+public enum Ecommerce {}
+public enum FacebookAds {}
+public enum FileManager {}
+public enum LandingPages {}
+public enum Lists {}
+public enum Ping {}
+public enum Reporting {}
+public enum Reports {}
+public enum Root {}
+public enum SearchCampaigns {}
+public enum SearchMembers {}
+public enum TemplateFolders {}
+public enum Templates {}
+public enum VerifiedDomains {}
 
 
 

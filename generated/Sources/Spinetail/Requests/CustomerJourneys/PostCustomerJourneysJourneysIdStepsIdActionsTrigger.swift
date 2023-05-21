@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STCustomerJourneys {
+extension CustomerJourneys {
 
     /**
     Customer Journeys API trigger for a contact

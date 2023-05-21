@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STLists {
+extension Lists {
 
     /**
     Batch add or remove members

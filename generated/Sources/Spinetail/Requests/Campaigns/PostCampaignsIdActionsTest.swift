@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STCampaigns {
+extension Campaigns {
 
     /**
     Send test email

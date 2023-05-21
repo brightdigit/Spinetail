@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STBatchWebhooks {
+extension BatchWebhooks {
 
     /**
     Delete batch webhook

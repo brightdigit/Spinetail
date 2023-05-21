@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STReporting {
+extension Reporting {
 
     /**
     Get facebook ad report

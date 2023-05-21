@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STLandingPages {
+extension LandingPages {
 
     /**
     Publish landing page

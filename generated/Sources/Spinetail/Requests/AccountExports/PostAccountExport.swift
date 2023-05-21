@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STAccountExports {
+extension AccountExports {
 
     /**
     Add export

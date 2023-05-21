@@ -14,7 +14,7 @@ extension Dictionary : ContentDecodable where Key : Decodable, Value : Decodable
   
 }
 
-extension STEcommerce {
+extension Ecommerce {
 
     /**
     Delete store

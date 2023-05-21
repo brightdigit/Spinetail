@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STBatches {
+extension Batches {
 
     /**
     Get batch operation status

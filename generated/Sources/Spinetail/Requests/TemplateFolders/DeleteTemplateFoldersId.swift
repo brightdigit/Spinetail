@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STTemplateFolders {
+extension TemplateFolders {
 
     /**
     Delete template folder

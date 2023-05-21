@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STAuthorizedApps {
+extension AuthorizedApps {
 
     /**
     Get authorized app info

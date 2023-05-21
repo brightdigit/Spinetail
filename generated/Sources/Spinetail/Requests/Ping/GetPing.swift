@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STPing {
+extension Ping {
 
     /**
     Ping

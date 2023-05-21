@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STBatchWebhooks {
+extension BatchWebhooks {
 
     /**
     List batch webhooks

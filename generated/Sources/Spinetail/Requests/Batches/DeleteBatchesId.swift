@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STBatches {
+extension Batches {
 
     /**
     Delete batch request

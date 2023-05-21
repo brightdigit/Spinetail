@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STSearchCampaigns {
+extension SearchCampaigns {
 
     /**
     Search campaigns

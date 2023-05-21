@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STFileManager {
+extension FileManager {
 
     /**
     Update file

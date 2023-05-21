@@ -6,7 +6,7 @@
 import Foundation
 import PrchModel
 
-extension STVerifiedDomains {
+extension VerifiedDomains {
 
     /**
     Verify domain
