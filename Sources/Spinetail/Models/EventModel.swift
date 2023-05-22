@@ -18,7 +18,7 @@ public struct EventModel: Codable, Equatable, Content {
     self.properties = properties
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case name
     case occurredAt = "occurred_at"
     case properties

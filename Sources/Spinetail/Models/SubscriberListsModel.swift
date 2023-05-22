@@ -21,7 +21,7 @@ public struct SubscriberListsModel: Codable, Equatable, Content {
     self.totalItems = totalItems
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case lists
     case links = "_links"
     case constraints

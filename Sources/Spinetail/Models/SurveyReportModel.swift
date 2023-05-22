@@ -4,7 +4,7 @@ import PrchModel
 /** The report for a survey. */
 public struct SurveyReportModel: Codable, Equatable, Content {
   /** The survey's status. */
-  public enum Status: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
     case published
     case unpublished
   }
@@ -56,7 +56,7 @@ public struct SurveyReportModel: Codable, Equatable, Content {
     self.webId = webId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case createdAt = "created_at"
     case id
     case listId = "list_id"

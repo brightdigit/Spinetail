@@ -57,7 +57,7 @@ public struct ECommerceStore1Model: Codable, Equatable, Content {
     self.timezone = timezone
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case currencyCode = "currency_code"
     case id
     case listId = "list_id"

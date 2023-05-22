@@ -25,7 +25,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2AudienceEmailSou
     self.type = type
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case isSegment = "is_segment"
     case listName = "list_name"
     case name

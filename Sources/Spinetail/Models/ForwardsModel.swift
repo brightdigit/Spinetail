@@ -14,7 +14,7 @@ public struct ForwardsModel: Codable, Equatable, Content {
     self.forwardsOpens = forwardsOpens
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case forwardsCount = "forwards_count"
     case forwardsOpens = "forwards_opens"
   }

@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Templates {
+public extension AutomationsAutomationsTemplates {
   /**
    Get template info
 

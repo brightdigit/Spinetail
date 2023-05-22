@@ -10,7 +10,7 @@ public struct MemberActivity1Model: Codable, Equatable, Content {
     self.timestamp = timestamp
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case timestamp
   }
 }

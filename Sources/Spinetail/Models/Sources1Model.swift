@@ -18,7 +18,7 @@ public struct Sources1Model: Codable, Equatable, Content {
     self.user = user
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case admin
     case api
     case user

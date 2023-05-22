@@ -32,7 +32,7 @@ public struct EepurlActivityModel: Codable, Equatable, Content {
     self.twitter = twitter
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case campaignId = "campaign_id"
     case clicks

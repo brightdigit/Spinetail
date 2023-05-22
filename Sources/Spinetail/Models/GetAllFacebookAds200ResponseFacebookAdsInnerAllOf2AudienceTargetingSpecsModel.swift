@@ -20,7 +20,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2AudienceTargetin
     self.minAge = minAge
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case gender
     case interests
     case locations

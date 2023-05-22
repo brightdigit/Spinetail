@@ -3,7 +3,7 @@ import Foundation
 import PrchModel
 public struct ItemsInnerModel: Codable, Equatable, Content {
   /** The item type. */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case success
     case warning
     case error
@@ -28,7 +28,7 @@ public struct ItemsInnerModel: Codable, Equatable, Content {
     self.type = type
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case details
     case heading
     case id

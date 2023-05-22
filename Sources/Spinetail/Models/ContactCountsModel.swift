@@ -18,7 +18,7 @@ public struct ContactCountsModel: Codable, Equatable, Content {
     self.unknown = unknown
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case known
     case new
     case unknown

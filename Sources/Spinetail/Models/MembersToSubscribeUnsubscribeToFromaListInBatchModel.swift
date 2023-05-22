@@ -18,7 +18,7 @@ public struct MembersToSubscribeUnsubscribeToFromaListInBatchModel: Codable, Equ
     self.updateExisting = updateExisting
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case members
     case syncTags = "sync_tags"
     case updateExisting = "update_existing"

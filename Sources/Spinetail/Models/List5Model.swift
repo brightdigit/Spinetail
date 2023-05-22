@@ -13,7 +13,7 @@ public struct List5Model: Codable, Equatable, Content {
     self.segmentOpts = segmentOpts
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case listId = "list_id"
     case segmentOpts = "segment_opts"
   }

@@ -17,7 +17,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2AudienceTargetin
     self.zips = zips
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case cities
     case countries
     case regions

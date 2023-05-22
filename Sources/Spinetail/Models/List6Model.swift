@@ -25,7 +25,7 @@ public struct List6Model: Codable, Equatable, Content {
     self.segmentText = segmentText
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case listId = "list_id"
     case listName = "list_name"
     case recipientCount = "recipient_count"

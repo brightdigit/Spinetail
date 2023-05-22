@@ -74,7 +74,7 @@ public struct StatisticsModel: Codable, Equatable, Content {
     self.unsubscribeCountSinceSend = unsubscribeCountSinceSend
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case avgSubRate = "avg_sub_rate"
     case avgUnsubRate = "avg_unsub_rate"
     case campaignCount = "campaign_count"

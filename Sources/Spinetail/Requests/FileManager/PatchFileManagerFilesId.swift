@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension FileManager {
+public extension AutomationsAutomationsFileManager {
   /**
    Update file
 

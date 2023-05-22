@@ -22,7 +22,7 @@ public struct MemberActivityEvents1Model: Codable, Equatable, Content {
     self.listId = listId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case activity
     case emailId = "email_id"

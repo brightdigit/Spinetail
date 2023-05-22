@@ -13,7 +13,7 @@ public struct ConnectedSite2Model: Codable, Equatable, Content {
     self.siteScript = siteScript
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case siteForeignId = "site_foreign_id"
     case siteScript = "site_script"
   }

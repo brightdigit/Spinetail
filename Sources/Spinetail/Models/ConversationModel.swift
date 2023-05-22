@@ -45,7 +45,7 @@ public struct ConversationModel: Codable, Equatable, Content {
     self.unreadMessages = unreadMessages
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case campaignId = "campaign_id"
     case fromEmail = "from_email"

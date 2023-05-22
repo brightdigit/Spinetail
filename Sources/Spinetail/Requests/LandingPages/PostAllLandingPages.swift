@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension LandingPages {
+public extension AutomationsAutomationsLandingPages {
   /**
    Add landing page
 

@@ -12,7 +12,7 @@ public struct ABSplitStatsModel: Codable, Equatable, Content {
     self.b = b
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case a
     case b
   }

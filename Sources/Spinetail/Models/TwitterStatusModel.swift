@@ -26,7 +26,7 @@ public struct TwitterStatusModel: Codable, Equatable, Content {
     self.statusId = statusId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case datetime
     case isRetweet = "is_retweet"
     case screenName = "screen_name"

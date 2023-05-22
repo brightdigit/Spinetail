@@ -58,7 +58,7 @@ public struct ShippingAddressModel: Codable, Equatable, Content {
     self.provinceCode = provinceCode
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case address1
     case address2
     case city

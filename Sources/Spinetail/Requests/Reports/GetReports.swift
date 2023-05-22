@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Reports {
+public extension AutomationsAutomationsReports {
   /**
    List campaign reports
 
@@ -76,7 +76,7 @@ public extension Reports {
     // public static let service = APIService<Response>(id: "getReports", tag: "reports", method: "GET", path: "/reports", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** The campaign type. */
-    public enum `Type`: String, Codable, Equatable, CaseIterable {
+    public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
       case regular
       case plaintext
       case absplit

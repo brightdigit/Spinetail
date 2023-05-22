@@ -34,7 +34,7 @@ public struct InterestModel: Codable, Equatable, Content {
     self.subscriberCount = subscriberCount
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case categoryId = "category_id"
     case displayOrder = "display_order"

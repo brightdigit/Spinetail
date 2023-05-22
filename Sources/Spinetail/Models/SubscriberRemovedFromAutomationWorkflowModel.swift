@@ -26,7 +26,7 @@ public struct SubscriberRemovedFromAutomationWorkflowModel: Codable, Equatable, 
     self.workflowId = workflowId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case emailAddress = "email_address"
     case id

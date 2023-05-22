@@ -24,7 +24,7 @@ public struct Campaign2Model: Codable, Equatable, Content {
     self.variateSettings = variateSettings
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case settings
     case recipients
     case rssOpts = "rss_opts"

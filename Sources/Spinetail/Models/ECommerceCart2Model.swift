@@ -33,7 +33,7 @@ public struct ECommerceCart2Model: Codable, Equatable, Content {
     self.taxTotal = taxTotal
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case campaignId = "campaign_id"
     case checkoutURL = "checkout_url"
     case currencyCode = "currency_code"

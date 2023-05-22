@@ -18,7 +18,7 @@ public struct IndustryStatsModel: Codable, Equatable, Content {
     self.openRate = openRate
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case bounceRate = "bounce_rate"
     case clickRate = "click_rate"
     case openRate = "open_rate"

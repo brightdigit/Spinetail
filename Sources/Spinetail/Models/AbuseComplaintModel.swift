@@ -42,7 +42,7 @@ public struct AbuseComplaintModel: Codable, Equatable, Content {
     self.vip = vip
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case campaignId = "campaign_id"
     case date

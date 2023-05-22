@@ -26,7 +26,7 @@ public struct ProblemDetailDocumentModel: Codable, Equatable, Content {
     self.type = type
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case detail
     case instance
     case status

@@ -4,7 +4,7 @@ import PrchModel
 /** The settings specific to A/B test campaigns. */
 public struct ABTestOptions1Model: Codable, Equatable, Content {
   /** The combination that performs the best. This may be determined automatically by click rate, open rate, or total revenue -- or you may choose manually based on the reporting data you find the most valuable. For Multivariate Campaigns testing send_time, winner_criteria is ignored. For Multivariate Campaigns with 'manual' as the winner_criteria, the winner must be chosen in the Mailchimp web application. */
-  public enum WinnerCriteria: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsWinnerCriteria: String, Codable, Equatable, CaseIterable {
     case opens
     case clicks
     case manual
@@ -42,7 +42,7 @@ public struct ABTestOptions1Model: Codable, Equatable, Content {
     self.waitTime = waitTime
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case winnerCriteria = "winner_criteria"
     case fromNames = "from_names"
     case replyToAddresses = "reply_to_addresses"

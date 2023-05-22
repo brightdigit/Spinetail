@@ -4,7 +4,7 @@ import PrchModel
 /** Information about a specific template. */
 public struct TemplateInstanceModel: Codable, Equatable, Content {
   /** How the template's content is put together. */
-  public enum ContentType: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsContentType: String, Codable, Equatable, CaseIterable {
     case template
     case multichannel
     case html
@@ -77,7 +77,7 @@ public struct TemplateInstanceModel: Codable, Equatable, Content {
     self.type = type
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case active
     case category

@@ -4,7 +4,7 @@ import PrchModel
 /** The status of a batch request */
 public struct BatchModel: Codable, Equatable, Content {
   /** The status of the batch call. [Learn more](https://mailchimp.com/developer/marketing/guides/run-async-requests-batch-endpoint/#check-the-status-of-a-batch-operation) about the batch operation status. */
-  public enum Status: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
     case pending
     case preprocessing
     case started
@@ -51,7 +51,7 @@ public struct BatchModel: Codable, Equatable, Content {
     self.totalOperations = totalOperations
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case completedAt = "completed_at"
     case erroredOperations = "errored_operations"

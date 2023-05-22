@@ -4,7 +4,7 @@ import PrchModel
 /** The conditions of the segment. Static segments (tags) and fuzzy segments don't have conditions. */
 public struct ConditionsModel: Codable, Equatable, Content {
   /** Match type. */
-  public enum Match: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsMatch: String, Codable, Equatable, CaseIterable {
     case any
     case all
   }
@@ -20,7 +20,7 @@ public struct ConditionsModel: Codable, Equatable, Content {
     self.match = match
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case conditions
     case match
   }

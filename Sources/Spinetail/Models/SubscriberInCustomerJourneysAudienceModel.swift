@@ -10,7 +10,7 @@ public struct SubscriberInCustomerJourneysAudienceModel: Codable, Equatable, Con
     self.emailAddress = emailAddress
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case emailAddress = "email_address"
   }
 }

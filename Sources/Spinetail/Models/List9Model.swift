@@ -17,7 +17,7 @@ public struct List9Model: Codable, Equatable, Content {
     self.staticSegment = staticSegment
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case name
     case options
     case staticSegment = "static_segment"

@@ -26,7 +26,7 @@ public struct TwitterStatsModel: Codable, Equatable, Content {
     self.tweets = tweets
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case firstTweet = "first_tweet"
     case lastTweet = "last_tweet"
     case retweets

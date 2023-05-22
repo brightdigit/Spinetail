@@ -14,7 +14,7 @@ public struct Script1Model: Codable, Equatable, Content {
     self.url = url
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case fragment
     case url
   }

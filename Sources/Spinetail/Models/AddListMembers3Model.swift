@@ -4,7 +4,7 @@ import PrchModel
 /** Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed. */
 public struct AddListMembers3Model: Codable, Equatable, Content {
   /** Subscriber's current status. */
-  public enum Status: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
     case subscribed
     case unsubscribed
     case cleaned
@@ -65,7 +65,7 @@ public struct AddListMembers3Model: Codable, Equatable, Content {
     self.vip = vip
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case emailAddress = "email_address"
     case emailType = "email_type"
     case interests

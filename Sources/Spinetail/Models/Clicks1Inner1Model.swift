@@ -11,7 +11,7 @@ public struct Clicks1Inner1Model: Codable, Equatable, Content {
     self.val = val
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case date
     case val
   }

@@ -29,7 +29,7 @@ public struct LandingPage2Model: Codable, Equatable, Content {
     self.tracking = tracking
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case description
     case listId = "list_id"
     case name

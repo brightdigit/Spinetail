@@ -22,7 +22,7 @@ public struct OpensModel: Codable, Equatable, Content {
     self.uniqueOpens = uniqueOpens
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case lastOpen = "last_open"
     case openRate = "open_rate"
     case opensTotal = "opens_total"

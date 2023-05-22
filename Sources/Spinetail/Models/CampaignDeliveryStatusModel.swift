@@ -4,7 +4,7 @@ import PrchModel
 /** Updates on campaigns in the process of sending. */
 public struct CampaignDeliveryStatusModel: Codable, Equatable, Content {
   /** The current state of a campaign delivery. */
-  public enum Status: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
     case delivering
     case delivered
     case canceling
@@ -34,7 +34,7 @@ public struct CampaignDeliveryStatusModel: Codable, Equatable, Content {
     self.status = status
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case canCancel = "can_cancel"
     case emailsCanceled = "emails_canceled"
     case emailsSent = "emails_sent"

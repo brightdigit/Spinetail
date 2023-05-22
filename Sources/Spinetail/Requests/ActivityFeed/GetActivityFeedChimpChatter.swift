@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension ActivityFeed {
+public extension AutomationsAutomationsActivityFeed {
   /**
    Get latest chimp chatter
 

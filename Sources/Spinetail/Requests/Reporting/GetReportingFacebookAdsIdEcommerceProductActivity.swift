@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Reporting {
+public extension AutomationsAutomationsReporting {
   /**
    List facebook ecommerce report
 
@@ -67,7 +67,7 @@ public extension Reporting {
     // public static let service = APIService<Response>(id: "getReportingFacebookAdsIdEcommerceProductActivity", tag: "reporting", method: "GET", path: "/reporting/facebook-ads/{outreach_id}/ecommerce-product-activity", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** Returns files sorted by the specified field. */
-    public enum SortField: String, Codable, Equatable, CaseIterable {
+    public enum AutomationsAutomationsSortField: String, Codable, Equatable, CaseIterable {
       case title
       case totalRevenue = "total_revenue"
       case totalPurchased = "total_purchased"

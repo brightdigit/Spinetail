@@ -10,7 +10,7 @@ public struct AutomationTrigger1Model: Codable, Equatable, Content {
     self.workflowType = workflowType
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case workflowType = "workflow_type"
   }
 }

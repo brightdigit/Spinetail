@@ -18,7 +18,7 @@ public struct SendChecklistModel: Codable, Equatable, Content {
     self.items = items
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case isReady = "is_ready"
     case items

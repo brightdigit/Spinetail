@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Lists {
+public extension AutomationsAutomationsLists {
   /**
    Remove list member from segment
 

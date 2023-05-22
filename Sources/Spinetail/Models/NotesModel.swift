@@ -22,7 +22,7 @@ public struct NotesModel: Codable, Equatable, Content {
     self.noteId = noteId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case createdAt = "created_at"
     case createdBy = "created_by"
     case note

@@ -22,7 +22,7 @@ public struct CampaignDefaultsModel: Codable, Equatable, Content {
     self.subject = subject
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case fromEmail = "from_email"
     case fromName = "from_name"
     case language

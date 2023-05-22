@@ -3,7 +3,7 @@ import Foundation
 import PrchModel
 public struct PostCampaignsIdActionsTestRequestModel: Codable, Equatable, Content {
   /** Choose the type of test email to send. */
-  public enum SendType: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsSendType: String, Codable, Equatable, CaseIterable {
     case html
     case plaintext
   }
@@ -19,7 +19,7 @@ public struct PostCampaignsIdActionsTestRequestModel: Codable, Equatable, Conten
     self.testEmails = testEmails
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case sendType = "send_type"
     case testEmails = "test_emails"
   }

@@ -66,7 +66,7 @@ public struct CampaignSettings4Model: Codable, Equatable, Content {
     self.useConversation = useConversation
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case fromName = "from_name"
     case replyTo = "reply_to"
     case subjectLine = "subject_line"

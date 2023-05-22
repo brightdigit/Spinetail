@@ -17,7 +17,7 @@ public struct SignupForm1Model: Codable, Equatable, Content {
     self.styles = styles
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case contents
     case header
     case styles

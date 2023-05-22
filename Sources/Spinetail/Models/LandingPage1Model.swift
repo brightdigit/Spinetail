@@ -4,7 +4,7 @@ import PrchModel
 /** A summary of an individual page's properties. */
 public struct LandingPage1Model: Codable, Equatable, Content {
   /** The type of template the landing page has. */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case signup
     case product
   }
@@ -43,7 +43,7 @@ public struct LandingPage1Model: Codable, Equatable, Content {
     self.type = type
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case description
     case listId = "list_id"
     case name

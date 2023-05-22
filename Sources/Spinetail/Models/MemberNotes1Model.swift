@@ -10,7 +10,7 @@ public struct MemberNotes1Model: Codable, Equatable, Content {
     self.note = note
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case note
   }
 }

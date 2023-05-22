@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension CustomerJourneys {
+public extension AutomationsAutomationsCustomerJourneys {
   /**
    Customer Journeys API trigger for a contact
 

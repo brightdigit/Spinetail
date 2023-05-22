@@ -15,7 +15,7 @@ public struct DailyClicksAndVisitsDataModel: Codable, Equatable, Content {
     self.visits = visits
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case clicks
     case uniqueVisits = "unique_visits"
     case visits

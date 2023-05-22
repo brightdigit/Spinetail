@@ -20,7 +20,7 @@ public struct GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfModel: Coda
     self.reportSummary = reportSummary
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case audience
     case audienceActivity = "audience_activity"
     case budget

@@ -8,7 +8,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2AudienceTargetin
     self.name = name
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case name
   }
 }

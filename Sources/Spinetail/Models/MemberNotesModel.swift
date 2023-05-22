@@ -42,7 +42,7 @@ public struct MemberNotesModel: Codable, Equatable, Content {
     self.updatedAt = updatedAt
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case contactId = "contact_id"
     case createdAt = "created_at"

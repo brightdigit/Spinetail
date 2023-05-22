@@ -2,33 +2,6 @@ import Foundation
 
 import typealias PrchModel.Content
 
-public struct MailchimpOptionalDate: Codable, Equatable {
-  public init(value: Date? = nil) {
-    self.value = value
-  }
-
-  public let value: Date?
-
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.singleValueContainer()
-    let string = try container.decode(String.self)
-    if string == "" {
-      value = nil
-    } else {
-      value = try container.decode(Date.self)
-    }
-  }
-
-  public func encode(to encoder: Encoder) throws {
-    var container = encoder.singleValueContainer()
-    if let value = value {
-      try container.encode(value)
-    } else {
-      try container.encode("")
-    }
-  }
-}
-
 /** Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members. */
 public struct ListMembers2Model: Codable, Equatable, Content {
   /** A list of link types and descriptions for the API schema documents. */
@@ -110,7 +83,7 @@ public struct ListMembers2Model: Codable, Equatable, Content {
     self.totalItems = totalItems
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case listId = "list_id"
     case members

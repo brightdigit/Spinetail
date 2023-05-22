@@ -33,7 +33,7 @@ public struct CombinationsInnerModel: Codable, Equatable, Content {
     self.subjectLine = subjectLine
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case contentDescription = "content_description"
     case fromName = "from_name"
     case id

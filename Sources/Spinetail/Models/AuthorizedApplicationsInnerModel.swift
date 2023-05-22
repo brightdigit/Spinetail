@@ -26,7 +26,7 @@ public struct AuthorizedApplicationsInnerModel: Codable, Equatable, Content {
     self.users = users
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case description
     case id

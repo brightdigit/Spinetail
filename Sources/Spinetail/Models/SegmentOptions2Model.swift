@@ -4,7 +4,7 @@ import PrchModel
 /** An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options. */
 public struct SegmentOptions2Model: Codable, Equatable, Content {
   /** Segment match type. */
-  public enum Match: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsMatch: String, Codable, Equatable, CaseIterable {
     case any
     case all
   }
@@ -24,7 +24,7 @@ public struct SegmentOptions2Model: Codable, Equatable, Content {
     self.savedSegmentId = savedSegmentId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case conditions
     case match
     case savedSegmentId = "saved_segment_id"

@@ -14,7 +14,7 @@ public struct MemberTagsModel: Codable, Equatable, Content {
     self.isSyncing = isSyncing
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case tags
     case isSyncing = "is_syncing"
   }

@@ -18,7 +18,7 @@ public struct CampaignFeedback3Model: Codable, Equatable, Content {
     self.message = message
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case blockId = "block_id"
     case isComplete = "is_complete"
     case message

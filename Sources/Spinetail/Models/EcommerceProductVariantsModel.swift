@@ -26,7 +26,7 @@ public struct EcommerceProductVariantsModel: Codable, Equatable, Content {
     self.variants = variants
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case productId = "product_id"
     case storeId = "store_id"

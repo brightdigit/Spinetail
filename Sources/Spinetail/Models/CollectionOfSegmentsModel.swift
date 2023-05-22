@@ -22,7 +22,7 @@ public struct CollectionOfSegmentsModel: Codable, Equatable, Content {
     self.totalItems = totalItems
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case listId = "list_id"
     case segments

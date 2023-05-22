@@ -34,7 +34,7 @@ public struct AccountContactModel: Codable, Equatable, Content {
     self.zip = zip
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case addr1
     case addr2
     case city

@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension SearchCampaigns {
+public extension AutomationsAutomationsSearchCampaigns {
   /**
    Search campaigns
 

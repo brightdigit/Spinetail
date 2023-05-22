@@ -4,7 +4,7 @@ import PrchModel
 /** Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application. */
 public struct InterestCategory1Model: Codable, Equatable, Content {
   /** Determines how this category’s interests appear on signup forms. */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case checkboxes
     case dropdown
     case radio
@@ -26,7 +26,7 @@ public struct InterestCategory1Model: Codable, Equatable, Content {
     self.displayOrder = displayOrder
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case title
     case type
     case displayOrder = "display_order"

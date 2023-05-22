@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Campaigns {
+public extension AutomationsAutomationsCampaigns {
   /**
    List campaigns
 
@@ -124,7 +124,7 @@ public extension Campaigns {
     // public static let service = APIService<Response>(id: "getCampaigns", tag: "campaigns", method: "GET", path: "/campaigns", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** The campaign type. */
-    public enum `Type`: String, Codable, Equatable, CaseIterable {
+    public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
       case regular
       case plaintext
       case absplit
@@ -133,7 +133,7 @@ public extension Campaigns {
     }
 
     /** The status of the campaign. */
-    public enum Status: String, Codable, Equatable, CaseIterable {
+    public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
       case save
       case paused
       case schedule
@@ -142,13 +142,13 @@ public extension Campaigns {
     }
 
     /** Returns files sorted by the specified field. */
-    public enum SortField: String, Codable, Equatable, CaseIterable {
+    public enum AutomationsAutomationsSortField: String, Codable, Equatable, CaseIterable {
       case createTime = "create_time"
       case sendTime = "send_time"
     }
 
     /** Determines the order direction for sorted results. */
-    public enum SortDir: String, Codable, Equatable, CaseIterable {
+    public enum AutomationsAutomationsSortDir: String, Codable, Equatable, CaseIterable {
       case asc = "ASC"
       case desc = "DESC"
     }

@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AccountExport {
+public extension AutomationsAutomationsAccountExport {
   /**
    Get account export info
 

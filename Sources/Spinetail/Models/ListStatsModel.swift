@@ -22,7 +22,7 @@ public struct ListStatsModel: Codable, Equatable, Content {
     self.unsubRate = unsubRate
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case clickRate = "click_rate"
     case openRate = "open_rate"
     case subRate = "sub_rate"

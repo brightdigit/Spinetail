@@ -16,7 +16,7 @@ public struct PostCampaignsIdActionsScheduleRequestModel: Codable, Equatable, Co
     self.timewarp = timewarp
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case scheduleTime = "schedule_time"
     case batchDelivery = "batch_delivery"
     case timewarp

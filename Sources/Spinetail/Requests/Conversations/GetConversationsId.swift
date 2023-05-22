@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Conversations {
+public extension AutomationsAutomationsConversations {
   /**
    Get conversation
 

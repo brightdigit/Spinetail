@@ -18,7 +18,7 @@ public struct TemplateInstance1Model: Codable, Equatable, Content {
     self.folderId = folderId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case html
     case name
     case folderId = "folder_id"

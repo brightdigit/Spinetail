@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Reporting {
+public extension AutomationsAutomationsReporting {
   /**
    Get landing page report
 

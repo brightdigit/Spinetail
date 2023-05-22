@@ -26,7 +26,7 @@ public struct DomainPerformanceModel: Codable, Equatable, Content {
     self.totalSent = totalSent
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case campaignId = "campaign_id"
     case domains

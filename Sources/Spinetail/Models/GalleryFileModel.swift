@@ -4,7 +4,7 @@ import PrchModel
 /** An individual file listed in the File Manager. */
 public struct GalleryFileModel: Codable, Equatable, Content {
   /** The type of file in the File Manager. */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case image
     case file
   }
@@ -60,7 +60,7 @@ public struct GalleryFileModel: Codable, Equatable, Content {
     self.width = width
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case createdAt = "created_at"
     case createdBy = "created_by"

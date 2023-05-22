@@ -14,7 +14,7 @@ public struct EmailClientModel: Codable, Equatable, Content {
     self.members = members
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case client
     case members
   }

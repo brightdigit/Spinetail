@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Batches {
+public extension AutomationsAutomationsBatches {
   /**
    List batch requests
 

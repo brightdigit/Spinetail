@@ -58,7 +58,7 @@ public struct ECommerceProductModel: Codable, Equatable, Content {
     self.vendor = vendor
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case currencyCode = "currency_code"
     case description

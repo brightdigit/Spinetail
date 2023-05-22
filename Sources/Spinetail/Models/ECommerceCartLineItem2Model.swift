@@ -22,7 +22,7 @@ public struct ECommerceCartLineItem2Model: Codable, Equatable, Content {
     self.quantity = quantity
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case price
     case productId = "product_id"
     case productVariantId = "product_variant_id"

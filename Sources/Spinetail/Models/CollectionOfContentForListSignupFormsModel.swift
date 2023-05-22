@@ -4,7 +4,7 @@ import PrchModel
 /** Collection of Content for List Signup Forms. */
 public struct CollectionOfContentForListSignupFormsModel: Codable, Equatable, Content {
   /** The content section name. */
-  public enum Section: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsSection: String, Codable, Equatable, CaseIterable {
     case signupMessage = "signup_message"
     case unsubMessage = "unsub_message"
     case signupThankYouTitle = "signup_thank_you_title"
@@ -21,7 +21,7 @@ public struct CollectionOfContentForListSignupFormsModel: Codable, Equatable, Co
     self.value = value
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case section
     case value
   }

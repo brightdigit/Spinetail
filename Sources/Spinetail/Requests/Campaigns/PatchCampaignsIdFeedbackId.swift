@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Campaigns {
+public extension AutomationsAutomationsCampaigns {
   /**
    Update campaign feedback message
 

@@ -1,5 +1,6 @@
-{ % include "Includes/Header.stencil" % }
+{% include "Includes/Header.stencil" %}
 
 import Foundation
+import PrchModel
 
-  { % include "Includes/Model.stencil" % }
+{% include "Includes/Model.stencil" %}

@@ -18,7 +18,7 @@ public struct ECommerceProductImage1Model: Codable, Equatable, Content {
     self.variantIds = variantIds
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case id
     case url
     case variantIds = "variant_ids"

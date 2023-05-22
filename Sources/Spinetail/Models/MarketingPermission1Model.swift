@@ -14,7 +14,7 @@ public struct MarketingPermission1Model: Codable, Equatable, Content {
     self.marketingPermissionId = marketingPermissionId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case enabled
     case marketingPermissionId = "marketing_permission_id"
   }

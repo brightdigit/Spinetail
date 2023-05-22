@@ -26,7 +26,7 @@ public struct VerifiedDomainsModel: Codable, Equatable, Content {
     self.verified = verified
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case authenticated
     case domain
     case verificationEmail = "verification_email"

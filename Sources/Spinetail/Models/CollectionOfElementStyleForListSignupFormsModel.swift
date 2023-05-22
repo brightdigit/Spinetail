@@ -4,7 +4,7 @@ import PrchModel
 /** Collection of Element style for List Signup Forms. */
 public struct CollectionOfElementStyleForListSignupFormsModel: Codable, Equatable, Content {
   /** A string that identifies the element selector. */
-  public enum Selector: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsSelector: String, Codable, Equatable, CaseIterable {
     case pageBackground = "page_background"
     case pageHeader = "page_header"
     case pageOuterWrapper = "page_outer_wrapper"
@@ -32,7 +32,7 @@ public struct CollectionOfElementStyleForListSignupFormsModel: Codable, Equatabl
     self.selector = selector
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case options
     case selector
   }

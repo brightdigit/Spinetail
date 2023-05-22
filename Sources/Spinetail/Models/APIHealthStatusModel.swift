@@ -10,7 +10,7 @@ public struct APIHealthStatusModel: Codable, Equatable, Content {
     self.healthStatus = healthStatus
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case healthStatus = "health_status"
   }
 }

@@ -18,7 +18,7 @@ public struct BatchWebhooksModel: Codable, Equatable, Content {
     self.webhooks = webhooks
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case totalItems = "total_items"
     case webhooks

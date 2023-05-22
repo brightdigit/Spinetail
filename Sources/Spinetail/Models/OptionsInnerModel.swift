@@ -17,7 +17,7 @@ public struct OptionsInnerModel: Codable, Equatable, Content {
     self.label = label
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case count
     case id
     case label

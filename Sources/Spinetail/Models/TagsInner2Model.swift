@@ -17,7 +17,7 @@ public struct TagsInner2Model: Codable, Equatable, Content {
     self.name = name
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case dateAdded = "date_added"
     case id
     case name

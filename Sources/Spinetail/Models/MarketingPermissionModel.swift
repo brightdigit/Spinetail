@@ -18,7 +18,7 @@ public struct MarketingPermissionModel: Codable, Equatable, Content {
     self.text = text
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case enabled
     case marketingPermissionId = "marketing_permission_id"
     case text

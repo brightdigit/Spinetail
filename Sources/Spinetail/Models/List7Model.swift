@@ -4,7 +4,7 @@ import PrchModel
 /** Information about a specific segment. */
 public struct List7Model: Codable, Equatable, Content {
   /** The type of segment. Static segments are now known as tags. Learn more about [tags](https://mailchimp.com/help/getting-started-tags?utm_source=mc-api&utm_medium=docs&utm_campaign=apidocs). */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case saved
     case `static`
     case fuzzy
@@ -48,7 +48,7 @@ public struct List7Model: Codable, Equatable, Content {
     self.updatedAt = updatedAt
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case createdAt = "created_at"
     case id

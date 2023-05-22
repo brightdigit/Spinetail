@@ -4,7 +4,7 @@ import PrchModel
 /** Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed. */
 public struct AddListMembers2Model: Codable, Equatable, Content {
   /** Subscriber's status. This value is required only if the email address is not already present on the list. */
-  public enum StatusIfNew: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsStatusIfNew: String, Codable, Equatable, CaseIterable {
     case subscribed
     case unsubscribed
     case cleaned
@@ -13,7 +13,7 @@ public struct AddListMembers2Model: Codable, Equatable, Content {
   }
 
   /** Subscriber's current status. */
-  public enum Status: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
     case subscribed
     case unsubscribed
     case cleaned
@@ -79,7 +79,7 @@ public struct AddListMembers2Model: Codable, Equatable, Content {
     self.vip = vip
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case emailAddress = "email_address"
     case statusIfNew = "status_if_new"
     case emailType = "email_type"

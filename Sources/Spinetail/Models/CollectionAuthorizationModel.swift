@@ -18,7 +18,7 @@ public struct CollectionAuthorizationModel: Codable, Equatable, Content {
     self.currentTotalInstances = currentTotalInstances
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case maxInstances = "max_instances"
     case mayCreate = "may_create"
     case currentTotalInstances = "current_total_instances"

@@ -26,7 +26,7 @@ public struct ClicksModel: Codable, Equatable, Content {
     self.uniqueSubscriberClicks = uniqueSubscriberClicks
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case clickRate = "click_rate"
     case clicksTotal = "clicks_total"
     case lastClick = "last_click"

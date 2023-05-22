@@ -17,7 +17,7 @@ public struct GetReportingFacebookAds200ResponseModel: Codable, Equatable, Conte
     self.totalItems = totalItems
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case facebookAds = "facebook_ads"
     case totalItems = "total_items"

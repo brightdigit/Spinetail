@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Root {
+public extension AutomationsAutomationsRoot {
   /**
    List api root resources
 

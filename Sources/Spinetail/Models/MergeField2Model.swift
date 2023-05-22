@@ -37,7 +37,7 @@ public struct MergeField2Model: Codable, Equatable, Content {
     self.tag = tag
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case name
     case defaultValue = "default_value"
     case displayOrder = "display_order"

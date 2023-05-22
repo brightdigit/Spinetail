@@ -10,7 +10,7 @@ public struct VerifiedDomains2Model: Codable, Equatable, Content {
     self.verificationEmail = verificationEmail
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case verificationEmail = "verification_email"
   }
 }

@@ -12,7 +12,7 @@ public struct AutomationsModel: Codable, Equatable, Content {
     self.abandonedCart = abandonedCart
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case abandonedBrowse = "abandoned_browse"
     case abandonedCart = "abandoned_cart"
   }

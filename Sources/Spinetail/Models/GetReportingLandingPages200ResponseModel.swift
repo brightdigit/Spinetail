@@ -17,7 +17,7 @@ public struct GetReportingLandingPages200ResponseModel: Codable, Equatable, Cont
     self.totalItems = totalItems
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case landingPages = "landing_pages"
     case totalItems = "total_items"

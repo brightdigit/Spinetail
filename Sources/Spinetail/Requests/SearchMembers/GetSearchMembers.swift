@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension SearchMembers {
+public extension AutomationsAutomationsSearchMembers {
   /**
    Search members
 

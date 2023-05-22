@@ -16,7 +16,7 @@ public struct AddWebhookModel: Codable, Equatable, Content {
     self.url = url
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case events
     case sources
     case url

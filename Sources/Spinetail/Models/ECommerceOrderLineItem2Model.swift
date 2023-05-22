@@ -26,7 +26,7 @@ public struct ECommerceOrderLineItem2Model: Codable, Equatable, Content {
     self.quantity = quantity
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case discount
     case price
     case productId = "product_id"

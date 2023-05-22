@@ -30,7 +30,7 @@ public struct ECommerceOrderLineItem1Model: Codable, Equatable, Content {
     self.discount = discount
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case id
     case price
     case productId = "product_id"

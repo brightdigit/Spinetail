@@ -14,7 +14,7 @@ public struct ConnectedSite1Model: Codable, Equatable, Content {
     self.foreignId = foreignId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case domain
     case foreignId = "foreign_id"
   }

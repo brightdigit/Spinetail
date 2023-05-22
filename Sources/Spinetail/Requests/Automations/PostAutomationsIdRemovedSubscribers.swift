@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Automations {
+public extension AutomationsAutomationsAutomations {
   /**
    Remove subscriber from workflow
 

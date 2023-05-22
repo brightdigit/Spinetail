@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Automations {
+public extension AutomationsAutomationsAutomations {
   /**
    List automations
 
@@ -88,7 +88,7 @@ public extension Automations {
     // public static let service = APIService<Response>(id: "getAutomations", tag: "automations", method: "GET", path: "/automations", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** Restrict the results to automations with the specified status. */
-    public enum Status: String, Codable, Equatable, CaseIterable {
+    public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
       case save
       case paused
       case sending

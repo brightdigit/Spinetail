@@ -20,7 +20,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2ContentAttachmen
     self.name = name
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case callToAction = "call_to_action"
     case description
     case imageURL = "image_url"

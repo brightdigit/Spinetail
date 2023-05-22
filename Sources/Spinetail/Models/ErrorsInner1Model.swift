@@ -13,7 +13,7 @@ public struct ErrorsInner1Model: Codable, Equatable, Content {
     self.error = error
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case emailAddresses = "email_addresses"
     case error
   }

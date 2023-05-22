@@ -46,7 +46,7 @@ public struct ECommerceProduct2Model: Codable, Equatable, Content {
     self.vendor = vendor
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case description
     case handle
     case imageURL = "image_url"

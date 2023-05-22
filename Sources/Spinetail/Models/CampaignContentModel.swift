@@ -26,7 +26,7 @@ public struct CampaignContentModel: Codable, Equatable, Content {
     self.variateContents = variateContents
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case archiveHtml = "archive_html"
     case html

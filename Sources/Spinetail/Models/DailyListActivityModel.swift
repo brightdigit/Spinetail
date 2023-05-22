@@ -50,7 +50,7 @@ public struct DailyListActivityModel: Codable, Equatable, Content {
     self.unsubs = unsubs
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case day
     case emailsSent = "emails_sent"

@@ -10,7 +10,7 @@ public struct VerifyaDomainForSendingModel: Codable, Equatable, Content {
     self.code = code
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case code
   }
 }

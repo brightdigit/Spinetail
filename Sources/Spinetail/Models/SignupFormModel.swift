@@ -29,7 +29,7 @@ public struct SignupFormModel: Codable, Equatable, Content {
     self.styles = styles
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case contents
     case header

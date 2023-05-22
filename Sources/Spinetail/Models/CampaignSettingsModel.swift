@@ -58,7 +58,7 @@ public struct CampaignSettingsModel: Codable, Equatable, Content {
     self.title = title
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case authenticate
     case autoFbPost = "auto_fb_post"
     case autoFooter = "auto_footer"

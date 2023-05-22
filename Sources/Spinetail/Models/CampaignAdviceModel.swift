@@ -4,7 +4,7 @@ import PrchModel
 /** Campaign feedback details. */
 public struct CampaignAdviceModel: Codable, Equatable, Content {
   /** The sentiment type for a feedback message. */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case negative
     case positive
     case neutral
@@ -25,7 +25,7 @@ public struct CampaignAdviceModel: Codable, Equatable, Content {
     self.type = type
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case message
     case type

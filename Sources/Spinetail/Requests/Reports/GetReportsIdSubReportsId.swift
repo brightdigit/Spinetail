@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Reports {
+public extension AutomationsAutomationsReports {
   /**
    List child campaign reports
 

@@ -18,7 +18,7 @@ public struct BatchWebhookModel: Codable, Equatable, Content {
     self.url = url
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case id
     case url

@@ -30,7 +30,7 @@ public struct CampaignReportSummaryModel: Codable, Equatable, Content {
     self.uniqueOpens = uniqueOpens
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case clickRate = "click_rate"
     case clicks
     case openRate = "open_rate"

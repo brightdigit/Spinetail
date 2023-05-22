@@ -103,7 +103,7 @@ public struct CampaignReportModel: Codable, Equatable, Content {
     self.unsubscribed = unsubscribed
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case abSplit = "ab_split"
     case abuseReports = "abuse_reports"

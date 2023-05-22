@@ -34,7 +34,7 @@ public struct Location2Model: Codable, Equatable, Content {
     self.timezone = timezone
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case countryCode = "country_code"
     case dstoff
     case gmtoff

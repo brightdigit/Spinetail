@@ -30,7 +30,7 @@ public struct LastMessageModel: Codable, Equatable, Content {
     self.timestamp = timestamp
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case fromEmail = "from_email"
     case fromLabel = "from_label"
     case message

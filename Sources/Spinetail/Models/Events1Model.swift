@@ -30,7 +30,7 @@ public struct Events1Model: Codable, Equatable, Content {
     self.upemail = upemail
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case campaign
     case cleaned
     case profile

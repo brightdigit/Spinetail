@@ -4,7 +4,7 @@ import PrchModel
 /** The details of a survey question's report. */
 public struct SurveyQuestionReportModel: Codable, Equatable, Content {
   /** The response type of the survey question. */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case pickOne
     case pickMany
     case range
@@ -81,7 +81,7 @@ public struct SurveyQuestionReportModel: Codable, Equatable, Content {
     self.type = type
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case averageRating = "average_rating"
     case contactCounts = "contact_counts"
     case hasOther = "has_other"

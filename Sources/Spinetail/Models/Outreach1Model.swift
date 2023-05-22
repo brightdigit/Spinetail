@@ -10,7 +10,7 @@ public struct Outreach1Model: Codable, Equatable, Content {
     self.id = id
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case id
   }
 }

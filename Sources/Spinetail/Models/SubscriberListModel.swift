@@ -4,7 +4,7 @@ import PrchModel
 /** Information about a specific list. */
 public struct SubscriberListModel: Codable, Equatable, Content {
   /** Legacy - visibility settings are no longer used */
-  public enum Visibility: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsVisibility: String, Codable, Equatable, CaseIterable {
     case pub
     case prv
   }
@@ -28,7 +28,7 @@ public struct SubscriberListModel: Codable, Equatable, Content {
   /** Whether the list supports [multiple formats for emails](https://mailchimp.com/help/change-audience-name-defaults/). When set to `true`, subscribers can choose whether they want to receive HTML or plain-text emails. When set to `false`, subscribers will receive HTML emails, with a plain-text alternative backup. */
   public var emailTypeOption: Bool?
 
-  /** Whether or not this list has a welcome automation connected. Welcome Automations: welcomeSeries, singleWelcome, emailFollowup. */
+  /** Whether or not this list has a welcome automation connected. Welcome : welcomeSeries, singleWelcome, emailFollowup. */
   public var hasWelcome: Bool?
 
   /** A string that uniquely identifies this list. */
@@ -97,7 +97,7 @@ public struct SubscriberListModel: Codable, Equatable, Content {
     self.webId = webId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case beamerAddress = "beamer_address"
     case campaignDefaults = "campaign_defaults"

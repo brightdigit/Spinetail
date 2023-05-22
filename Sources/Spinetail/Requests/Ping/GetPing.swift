@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Ping {
+public extension AutomationsAutomationsPing {
   /**
    Ping
 

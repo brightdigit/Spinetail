@@ -1,11 +1,11 @@
 import Foundation
 import PrchModel
 
-extension Dictionary: ContentEncodable where Key: Encodable, Value: Encodable {}
+extension AutomationsAutomationsDictionary: ContentEncodable where Key: Encodable, Value: Encodable {}
 
-extension Dictionary: ContentDecodable where Key: Decodable, Value: Decodable {}
+extension AutomationsAutomationsDictionary: ContentDecodable where Key: Decodable, Value: Decodable {}
 
-public extension Ecommerce {
+public extension AutomationsAutomationsEcommerce {
   /**
    Delete store
 

@@ -44,7 +44,7 @@ public struct SubscriberList1Model: Codable, Equatable, Content {
     self.useArchiveBar = useArchiveBar
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case campaignDefaults = "campaign_defaults"
     case contact
     case emailTypeOption = "email_type_option"

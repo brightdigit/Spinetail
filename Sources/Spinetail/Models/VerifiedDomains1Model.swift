@@ -14,7 +14,7 @@ public struct VerifiedDomains1Model: Codable, Equatable, Content {
     self.totalItems = totalItems
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case domains
     case totalItems = "total_items"
   }

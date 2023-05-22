@@ -13,7 +13,7 @@ public struct TagModel: Codable, Equatable, Content {
     self.tagName = tagName
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case tagId = "tag_id"
     case tagName = "tag_name"
   }

@@ -50,7 +50,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryMode
     self.visits = visits
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case clickRate = "click_rate"
     case clicks
     case conversionRate = "conversion_rate"

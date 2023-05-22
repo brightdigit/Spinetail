@@ -14,7 +14,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryEcom
     self.totalRevenue = totalRevenue
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case averageOrderRevenue = "average_order_revenue"
     case currencyCode = "currency_code"
     case totalRevenue = "total_revenue"

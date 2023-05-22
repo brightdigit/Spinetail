@@ -15,7 +15,7 @@ public struct AutomationWorkflow1Model: Codable, Equatable, Content {
     self.settings = settings
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case recipients
     case triggerSettings = "trigger_settings"
     case settings

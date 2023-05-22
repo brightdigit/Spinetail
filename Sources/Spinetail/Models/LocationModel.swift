@@ -14,7 +14,7 @@ public struct LocationModel: Codable, Equatable, Content {
     self.longitude = longitude
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case latitude
     case longitude
   }

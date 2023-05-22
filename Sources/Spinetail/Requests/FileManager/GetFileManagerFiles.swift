@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension FileManager {
+public extension AutomationsAutomationsFileManager {
   /**
    List stored files
 
@@ -94,12 +94,12 @@ public extension FileManager {
     // public static let service = APIService<Response>(id: "getFileManagerFiles", tag: "fileManager", method: "GET", path: "/file-manager/files", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** Returns files sorted by the specified field. */
-    public enum SortField: String, Codable, Equatable, CaseIterable {
+    public enum AutomationsAutomationsSortField: String, Codable, Equatable, CaseIterable {
       case addedDate = "added_date"
     }
 
     /** Determines the order direction for sorted results. */
-    public enum SortDir: String, Codable, Equatable, CaseIterable {
+    public enum AutomationsAutomationsSortDir: String, Codable, Equatable, CaseIterable {
       case asc = "ASC"
       case desc = "DESC"
     }

@@ -4,7 +4,7 @@ import PrchModel
 /** A summary of an individual landing page's settings and content. */
 public struct LandingPageModel: Codable, Equatable, Content {
   /** The status of this landing page. */
-  public enum Status: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
     case published
     case unpublished
     case draft
@@ -80,7 +80,7 @@ public struct LandingPageModel: Codable, Equatable, Content {
     self.webId = webId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case createdAt = "created_at"
     case createdBySource = "created_by_source"

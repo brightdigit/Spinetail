@@ -14,7 +14,7 @@ public struct GalleryFile2Model: Codable, Equatable, Content {
     self.name = name
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case folderId = "folder_id"
     case name
   }

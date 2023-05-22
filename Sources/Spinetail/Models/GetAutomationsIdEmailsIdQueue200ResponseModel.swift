@@ -26,7 +26,7 @@ public struct GetAutomationsIdEmailsIdQueue200ResponseModel: Codable, Equatable,
     self.workflowId = workflowId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case emailId = "email_id"
     case queue

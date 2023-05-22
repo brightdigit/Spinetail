@@ -17,7 +17,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2BudgetModel: Cod
     self.totalAmount = totalAmount
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case currencyCode = "currency_code"
     case duration
     case totalAmount = "total_amount"

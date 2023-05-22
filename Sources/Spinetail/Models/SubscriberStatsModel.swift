@@ -14,7 +14,7 @@ public struct SubscriberStatsModel: Codable, Equatable, Content {
     self.avgOpenRate = avgOpenRate
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case avgClickRate = "avg_click_rate"
     case avgOpenRate = "avg_open_rate"
   }

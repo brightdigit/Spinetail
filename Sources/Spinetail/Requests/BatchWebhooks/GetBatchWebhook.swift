@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension BatchWebhooks {
+public extension AutomationsAutomationsBatchWebhooks {
   /**
    Get batch webhook info
 

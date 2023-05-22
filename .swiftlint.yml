@@ -126,5 +126,6 @@ excluded:
   - Tests/LinuxMain.swift
   - Packages
   - Templates
+  - generated*
 indentation_width:
   indentation_width: 2

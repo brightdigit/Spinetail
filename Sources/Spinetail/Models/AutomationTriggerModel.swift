@@ -4,7 +4,7 @@ import PrchModel
 /** Available triggers for Automation workflows. */
 public struct AutomationTriggerModel: Codable, Equatable, Content {
   /** The type of Automation workflow. */
-  public enum WorkflowType: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsWorkflowType: String, Codable, Equatable, CaseIterable {
     case abandonedBrowse
     case abandonedCart
     case api
@@ -42,7 +42,7 @@ public struct AutomationTriggerModel: Codable, Equatable, Content {
     self.workflowTitle = workflowTitle
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case workflowType = "workflow_type"
     case runtime
     case workflowEmailsCount = "workflow_emails_count"

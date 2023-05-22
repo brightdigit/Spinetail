@@ -38,7 +38,7 @@ public struct ECommerceProductVariant2Model: Codable, Equatable, Content {
     self.visibility = visibility
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case backorders
     case imageURL = "image_url"
     case inventoryQuantity = "inventory_quantity"

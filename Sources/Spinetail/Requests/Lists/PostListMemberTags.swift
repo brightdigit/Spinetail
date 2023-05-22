@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Lists {
+public extension AutomationsAutomationsLists {
   /**
    Add or remove member tags
 

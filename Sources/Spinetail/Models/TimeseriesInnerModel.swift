@@ -21,7 +21,7 @@ public struct TimeseriesInnerModel: Codable, Equatable, Content {
     self.uniqueOpens = uniqueOpens
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case emailsSent = "emails_sent"
     case recipientsClicks = "recipients_clicks"
     case timestamp

@@ -25,7 +25,7 @@ public struct ListModel: Codable, Equatable, Content {
     self.storeId = storeId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case listId = "list_id"
     case listIsActive = "list_is_active"
     case listName = "list_name"

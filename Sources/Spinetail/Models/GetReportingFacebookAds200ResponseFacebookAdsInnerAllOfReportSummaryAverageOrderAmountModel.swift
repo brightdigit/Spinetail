@@ -11,7 +11,7 @@ public struct GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSumma
     self.currencyCode = currencyCode
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case amount
     case currencyCode = "currency_code"
   }

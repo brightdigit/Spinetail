@@ -14,7 +14,7 @@ public struct MembersToAddRemoveToFromaStaticSegmentModel: Codable, Equatable, C
     self.membersToRemove = membersToRemove
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case membersToAdd = "members_to_add"
     case membersToRemove = "members_to_remove"
   }

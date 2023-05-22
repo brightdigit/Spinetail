@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension FacebookAds {
+public extension AutomationsAutomationsFacebookAds {
   /**
    Get facebook ad info
 

@@ -37,7 +37,7 @@ public struct TimewarpStatsInnerModel: Codable, Equatable, Content {
     self.uniqueOpens = uniqueOpens
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case bounces
     case clicks
     case gmtOffset = "gmt_offset"

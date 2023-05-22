@@ -13,7 +13,7 @@ public struct TagsInner1Model: Codable, Equatable, Content {
     self.name = name
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case id
     case name
   }

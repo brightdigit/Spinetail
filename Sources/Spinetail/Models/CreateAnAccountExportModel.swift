@@ -4,7 +4,7 @@ import PrchModel
 /** Creates an account export with the given parameters. */
 public struct CreateAnAccountExportModel: Codable, Equatable, Content {
   /** The stages of an account export to include. */
-  public enum IncludeStages: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsIncludeStages: String, Codable, Equatable, CaseIterable {
     case audiences
     case campaigns
     case events
@@ -24,7 +24,7 @@ public struct CreateAnAccountExportModel: Codable, Equatable, Content {
     self.sinceTimestamp = sinceTimestamp
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case includeStages = "include_stages"
     case sinceTimestamp = "since_timestamp"
   }

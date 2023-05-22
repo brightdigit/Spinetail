@@ -4,7 +4,7 @@ import PrchModel
 /** Information about a specific order. */
 public struct ECommerceOrder2Model: Codable, Equatable, Content {
   /** The Mailchimp tracking code for the order. Uses the 'mc_tc' parameter in E-Commerce tracking URLs. */
-  public enum TrackingCode: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsTrackingCode: String, Codable, Equatable, CaseIterable {
     case prec
   }
 
@@ -99,7 +99,7 @@ public struct ECommerceOrder2Model: Codable, Equatable, Content {
     self.updatedAtForeign = updatedAtForeign
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case billingAddress = "billing_address"
     case campaignId = "campaign_id"
     case cancelledAtForeign = "cancelled_at_foreign"

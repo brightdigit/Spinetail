@@ -80,7 +80,7 @@ public struct LandingPageReportModel: Codable, Equatable, Content {
     self.webId = webId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case clicks
     case conversionRate = "conversion_rate"

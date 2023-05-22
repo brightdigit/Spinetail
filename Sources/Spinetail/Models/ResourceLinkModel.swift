@@ -4,7 +4,7 @@ import PrchModel
 /** This object represents a link from the resource where it is found to another resource or action that may be performed. */
 public struct ResourceLinkModel: Codable, Equatable, Content {
   /** The HTTP method that should be used when accessing the URL defined in 'href'. */
-  public enum Method: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsMethod: String, Codable, Equatable, CaseIterable {
     case get = "GET"
     case post = "POST"
     case put = "PUT"
@@ -37,7 +37,7 @@ public struct ResourceLinkModel: Codable, Equatable, Content {
     self.targetSchema = targetSchema
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case href
     case method
     case rel

@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Lists {
+public extension AutomationsAutomationsLists {
   /**
    List members info
 
@@ -151,7 +151,7 @@ public extension Lists {
     // public static let service = APIService<Response>(id: "getListsIdMembers", tag: "lists", method: "GET", path: "/lists/{list_id}/members", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** The subscriber's status. */
-    public enum Status: String, Codable, Equatable, CaseIterable {
+    public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
       case subscribed
       case unsubscribed
       case cleaned
@@ -161,21 +161,21 @@ public extension Lists {
     }
 
     /** Used to filter list members by interests. Must be accompanied by interest_category_id and interest_ids. "any" will match a member with any of the interest supplied, "all" will only match members with every interest supplied, and "none" will match members without any of the interest supplied. */
-    public enum InterestMatch: String, Codable, Equatable, CaseIterable {
+    public enum AutomationsAutomationsInterestMatch: String, Codable, Equatable, CaseIterable {
       case any
       case all
       case none
     }
 
     /** Returns files sorted by the specified field. */
-    public enum SortField: String, Codable, Equatable, CaseIterable {
+    public enum AutomationsAutomationsSortField: String, Codable, Equatable, CaseIterable {
       case timestampOpt = "timestamp_opt"
       case timestampSignup = "timestamp_signup"
       case lastChanged = "last_changed"
     }
 
     /** Determines the order direction for sorted results. */
-    public enum SortDir: String, Codable, Equatable, CaseIterable {
+    public enum AutomationsAutomationsSortDir: String, Codable, Equatable, CaseIterable {
       case asc = "ASC"
       case desc = "DESC"
     }

@@ -14,7 +14,7 @@ public struct TagSearchResultsModel: Codable, Equatable, Content {
     self.totalItems = totalItems
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case tags
     case totalItems = "total_items"
   }

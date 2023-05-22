@@ -4,14 +4,14 @@ import PrchModel
 /** Information about an Ecommerce Store's specific Promo Rule. */
 public struct ECommercePromoRule1Model: Codable, Equatable, Content {
   /** The target that the discount applies to. */
-  public enum Target: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsTarget: String, Codable, Equatable, CaseIterable {
     case perItem = "per_item"
     case total
     case shipping
   }
 
   /** Type of discount. For free shipping set type to fixed. */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case fixed
     case percentage
   }
@@ -63,7 +63,7 @@ public struct ECommercePromoRule1Model: Codable, Equatable, Content {
     self.updatedAtForeign = updatedAtForeign
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case amount
     case description
     case id

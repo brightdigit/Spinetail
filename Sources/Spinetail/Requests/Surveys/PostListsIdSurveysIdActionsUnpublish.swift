@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Surveys {
+public extension AutomationsAutomationsSurveys {
   /**
    Unpublish a Survey
 

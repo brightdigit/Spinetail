@@ -14,7 +14,7 @@ public struct SalesforceCRMTracking1Model: Codable, Equatable, Content {
     self.notes = notes
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case campaign
     case notes
   }

@@ -4,7 +4,7 @@ import PrchModel
 /** The schedule for sending the RSS Campaign. */
 public struct SendingScheduleModel: Codable, Equatable, Content {
   /** The day of the week to send a weekly RSS Campaign. */
-  public enum WeeklySendDay: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsWeeklySendDay: String, Codable, Equatable, CaseIterable {
     case sunday
     case monday
     case tuesday
@@ -32,7 +32,7 @@ public struct SendingScheduleModel: Codable, Equatable, Content {
     self.weeklySendDay = weeklySendDay
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case dailySend = "daily_send"
     case hour
     case monthlySendDate = "monthly_send_date"

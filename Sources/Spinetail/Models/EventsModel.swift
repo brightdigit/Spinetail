@@ -22,7 +22,7 @@ public struct EventsModel: Codable, Equatable, Content {
     self.properties = properties
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case name
     case isSyncing = "is_syncing"
     case occurredAt = "occurred_at"

@@ -60,7 +60,7 @@ public struct GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSumma
     self.uniqueClicks = uniqueClicks
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case averageDailyBudget = "average_daily_budget"
     case averageOrderAmount = "average_order_amount"
     case clickRate = "click_rate"

@@ -42,7 +42,7 @@ public struct CampaignBModel: Codable, Equatable, Content {
     self.unsubs = unsubs
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case abuseReports = "abuse_reports"
     case bounces
     case forwards

@@ -4,7 +4,7 @@ import PrchModel
 /** Options for customizing your signup form header. */
 public struct SignupFormHeaderOptionsModel: Codable, Equatable, Content {
   /** Image alignment. */
-  public enum ImageAlign: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsImageAlign: String, Codable, Equatable, CaseIterable {
     case none
     case left
     case center
@@ -12,7 +12,7 @@ public struct SignupFormHeaderOptionsModel: Codable, Equatable, Content {
   }
 
   /** Image border style. */
-  public enum ImageBorderStyle: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsImageBorderStyle: String, Codable, Equatable, CaseIterable {
     case none
     case solid
     case dotted
@@ -25,7 +25,7 @@ public struct SignupFormHeaderOptionsModel: Codable, Equatable, Content {
   }
 
   /** Image link target. */
-  public enum ImageTarget: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsImageTarget: String, Codable, Equatable, CaseIterable {
     case blank = "_blank"
     case null
   }
@@ -77,7 +77,7 @@ public struct SignupFormHeaderOptionsModel: Codable, Equatable, Content {
     self.text = text
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case imageAlign = "image_align"
     case imageAlt = "image_alt"
     case imageBorderColor = "image_border_color"

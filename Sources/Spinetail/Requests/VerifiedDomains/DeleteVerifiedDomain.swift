@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension VerifiedDomains {
+public extension AutomationsAutomationsVerifiedDomains {
   /**
    Delete domain
 

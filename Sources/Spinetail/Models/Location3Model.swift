@@ -14,7 +14,7 @@ public struct Location3Model: Codable, Equatable, Content {
     self.region = region
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case country
     case region
   }

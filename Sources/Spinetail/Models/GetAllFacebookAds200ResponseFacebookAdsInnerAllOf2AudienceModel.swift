@@ -4,13 +4,13 @@ import PrchModel
 /** Audience settings */
 public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2AudienceModel: Codable, Equatable, Content {
   /** List or Facebook based audience */
-  public enum SourceType: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsSourceType: String, Codable, Equatable, CaseIterable {
     case facebook
     case list
   }
 
   /** Type of the audience */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case customAudience = "Custom Audience"
     case lookalikeAudience = "Lookalike Audience"
     case interestBasedAudience = "Interest-based Audience"
@@ -41,7 +41,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2AudienceModel: C
     self.type = type
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case emailSource = "email_source"
     case includeSourceInTarget = "include_source_in_target"
     case lookalikeCountryCode = "lookalike_country_code"

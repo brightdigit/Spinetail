@@ -26,7 +26,7 @@ public struct MemberActivity2Model: Codable, Equatable, Content {
     self.url = url
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case action
     case ip
     case timestamp

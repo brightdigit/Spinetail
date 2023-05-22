@@ -26,7 +26,7 @@ public struct MergeFieldOptionsModel: Codable, Equatable, Content {
     self.size = size
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case choices
     case dateFormat = "date_format"
     case defaultCountry = "default_country"

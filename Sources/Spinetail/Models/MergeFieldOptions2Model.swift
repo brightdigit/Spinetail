@@ -22,7 +22,7 @@ public struct MergeFieldOptions2Model: Codable, Equatable, Content {
     self.phoneFormat = phoneFormat
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case choices
     case dateFormat = "date_format"
     case defaultCountry = "default_country"

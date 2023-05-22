@@ -25,7 +25,7 @@ public struct SurveyResponseModel: Codable, Equatable, Content {
     self.submittedAt = submittedAt
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case contact
     case isNewContact = "is_new_contact"
     case responseId = "response_id"

@@ -40,7 +40,7 @@ public struct CampaignTrackingOptionsModel: Codable, Equatable, Content {
     self.textClicks = textClicks
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case capsule
     case clicktale
     case ecomm360

@@ -4,7 +4,7 @@ import PrchModel
 /** [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign. */
 public struct RSSOptionsModel: Codable, Equatable, Content {
   /** The frequency of the RSS Campaign. */
-  public enum Frequency: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsFrequency: String, Codable, Equatable, CaseIterable {
     case daily
     case weekly
     case monthly
@@ -32,7 +32,7 @@ public struct RSSOptionsModel: Codable, Equatable, Content {
     self.schedule = schedule
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case constrainRssImg = "constrain_rss_img"
     case feedURL = "feed_url"
     case frequency

@@ -53,7 +53,7 @@ public struct ECommerceCustomerModel: Codable, Equatable, Content {
     self.updatedAt = updatedAt
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case address
     case company

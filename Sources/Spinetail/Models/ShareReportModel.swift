@@ -14,7 +14,7 @@ public struct ShareReportModel: Codable, Equatable, Content {
     self.shareURL = shareURL
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case sharePassword = "share_password"
     case shareURL = "share_url"
   }

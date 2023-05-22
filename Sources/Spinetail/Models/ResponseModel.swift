@@ -4,7 +4,7 @@ import PrchModel
 /** A single question and the response to that question. */
 public struct ResponseModel: Codable, Equatable, Content {
   /** The type of question this is. */
-  public enum QuestionType: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsQuestionType: String, Codable, Equatable, CaseIterable {
     case pickOne
     case pickMany
     case range
@@ -31,7 +31,7 @@ public struct ResponseModel: Codable, Equatable, Content {
     self.questionType = questionType
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case answer
     case query
     case questionId = "question_id"

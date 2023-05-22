@@ -54,7 +54,7 @@ public struct EmailDomainModel: Codable, Equatable, Content {
     self.unsubsPct = unsubsPct
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case bounces
     case bouncesPct = "bounces_pct"
     case clicks

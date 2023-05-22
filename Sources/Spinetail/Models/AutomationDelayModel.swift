@@ -4,7 +4,7 @@ import PrchModel
 /** The delay settings for an Automation email. */
 public struct AutomationDelayModel: Codable, Equatable, Content {
   /** The action that triggers the delay of an Automation email. */
-  public enum Action: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsAction: String, Codable, Equatable, CaseIterable {
     case previousCampaignSent = "previous_campaign_sent"
     case previousCampaignOpened = "previous_campaign_opened"
     case previousCampaignNotOpened = "previous_campaign_not_opened"
@@ -41,13 +41,13 @@ public struct AutomationDelayModel: Codable, Equatable, Content {
   }
 
   /** Whether the delay settings describe before or after the delay action of an Automation email. */
-  public enum Direction: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsDirection: String, Codable, Equatable, CaseIterable {
     case before
     case after
   }
 
   /** The type of delay for an Automation email. */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case now
     case day
     case hour
@@ -81,7 +81,7 @@ public struct AutomationDelayModel: Codable, Equatable, Content {
     self.type = type
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case action
     case actionDescription = "action_description"
     case amount

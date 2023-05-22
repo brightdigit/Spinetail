@@ -22,7 +22,7 @@ public struct AbuseComplaints1Model: Codable, Equatable, Content {
     self.totalItems = totalItems
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case abuseReports = "abuse_reports"
     case campaignId = "campaign_id"

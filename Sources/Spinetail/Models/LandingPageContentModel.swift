@@ -18,7 +18,7 @@ public struct LandingPageContentModel: Codable, Equatable, Content {
     self.json = json
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case html
     case json

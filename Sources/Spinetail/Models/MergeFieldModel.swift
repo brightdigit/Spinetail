@@ -4,7 +4,7 @@ import PrchModel
 /** A [merge field](https://mailchimp.com/developer/marketing/docs/merge-fields/) for an audience. */
 public struct MergeFieldModel: Codable, Equatable, Content {
   /** The [type](https://mailchimp.com/developer/marketing/docs/merge-fields/#structure) for the merge field. */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case text
     case number
     case address
@@ -68,7 +68,7 @@ public struct MergeFieldModel: Codable, Equatable, Content {
     self.type = type
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case defaultValue = "default_value"
     case displayOrder = "display_order"

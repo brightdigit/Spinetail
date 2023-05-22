@@ -22,7 +22,7 @@ public struct ClickSummaryModel: Codable, Equatable, Content {
     self.locations = locations
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case clicks
     case firstClick = "first_click"
     case lastClick = "last_click"

@@ -4,7 +4,7 @@ import PrchModel
 /** abandonedBrowse automation details. abandonedBrowse is also known as Product Retargeting Email or Retarget Site Visitors on the web. */
 public struct AbandonedBrowseAutomationModel: Codable, Equatable, Content {
   /** Status of the abandonedBrowse automation. */
-  public enum Status: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
     case save
     case sending
     case paused
@@ -25,7 +25,7 @@ public struct AbandonedBrowseAutomationModel: Codable, Equatable, Content {
     self.status = status
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case id
     case isSupported = "is_supported"
     case status

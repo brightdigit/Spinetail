@@ -4,7 +4,7 @@ import PrchModel
 /** A summary of an individual Automation workflow's settings and content. */
 public struct AutomationWorkflowModel: Codable, Equatable, Content {
   /** The current status of the Automation. */
-  public enum Status: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
     case save
     case paused
     case sending
@@ -52,7 +52,7 @@ public struct AutomationWorkflowModel: Codable, Equatable, Content {
     self.triggerSettings = triggerSettings
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case createTime = "create_time"
     case emailsSent = "emails_sent"

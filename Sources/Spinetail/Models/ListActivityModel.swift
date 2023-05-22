@@ -22,7 +22,7 @@ public struct ListActivityModel: Codable, Equatable, Content {
     self.totalItems = totalItems
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case activity
     case listId = "list_id"

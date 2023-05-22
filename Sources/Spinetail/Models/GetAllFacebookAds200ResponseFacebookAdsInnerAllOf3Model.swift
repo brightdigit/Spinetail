@@ -9,7 +9,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf3Model: Codable, 
     self.links = links
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
   }
 }

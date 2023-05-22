@@ -4,7 +4,7 @@ import PrchModel
 /** A specific feedback message from a specific campaign. */
 public struct CampaignFeedback2Model: Codable, Equatable, Content {
   /** The source of the feedback. */
-  public enum Source: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsSource: String, Codable, Equatable, CaseIterable {
     case api
     case email
     case sms
@@ -60,7 +60,7 @@ public struct CampaignFeedback2Model: Codable, Equatable, Content {
     self.updatedAt = updatedAt
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case blockId = "block_id"
     case campaignId = "campaign_id"

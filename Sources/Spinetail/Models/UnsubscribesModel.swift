@@ -22,7 +22,7 @@ public struct UnsubscribesModel: Codable, Equatable, Content {
     self.unsubscribes = unsubscribes
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case campaignId = "campaign_id"
     case totalItems = "total_items"

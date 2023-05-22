@@ -14,7 +14,7 @@ public struct TemplateDefaultContentModel: Codable, Equatable, Content {
     self.sections = sections
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case sections
   }

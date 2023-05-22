@@ -3,7 +3,7 @@ import Foundation
 import PrchModel
 public struct OperationsModel: Codable, Equatable, Content {
   /** The HTTP method to use for the operation. */
-  public enum Method: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsMethod: String, Codable, Equatable, CaseIterable {
     case get = "GET"
     case post = "POST"
     case put = "PUT"
@@ -34,7 +34,7 @@ public struct OperationsModel: Codable, Equatable, Content {
     self.params = params
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case method
     case path
     case body

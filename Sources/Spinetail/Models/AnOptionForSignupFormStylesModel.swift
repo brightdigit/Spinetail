@@ -14,7 +14,7 @@ public struct AnOptionForSignupFormStylesModel: Codable, Equatable, Content {
     self.value = value
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case property
     case value
   }

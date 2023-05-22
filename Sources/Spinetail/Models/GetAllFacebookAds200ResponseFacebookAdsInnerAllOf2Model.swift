@@ -36,7 +36,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2Model: Codable, 
     self.site = site
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case audience
     case budget
     case channel

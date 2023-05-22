@@ -16,7 +16,7 @@ public struct MembersModel: Codable, Equatable, Content {
     self.fullSearch = fullSearch
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case exactMatches = "exact_matches"
     case fullSearch = "full_search"

@@ -14,7 +14,7 @@ public struct List1Model: Codable, Equatable, Content {
     self.storeId = storeId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case listId = "list_id"
     case storeId = "store_id"
   }

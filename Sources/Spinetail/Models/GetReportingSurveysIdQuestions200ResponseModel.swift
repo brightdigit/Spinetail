@@ -17,7 +17,7 @@ public struct GetReportingSurveysIdQuestions200ResponseModel: Codable, Equatable
     self.totalItems = totalItems
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case questions
     case totalItems = "total_items"

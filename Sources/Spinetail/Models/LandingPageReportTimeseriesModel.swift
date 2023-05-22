@@ -11,7 +11,7 @@ public struct LandingPageReportTimeseriesModel: Codable, Equatable, Content {
     self.weeklyStats = weeklyStats
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case dailyStats = "daily_stats"
     case weeklyStats = "weekly_stats"
   }

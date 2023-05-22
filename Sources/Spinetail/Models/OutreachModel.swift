@@ -22,7 +22,7 @@ public struct OutreachModel: Codable, Equatable, Content {
     self.type = type
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case id
     case name
     case publishedTime = "published_time"

@@ -29,7 +29,7 @@ public struct SurveyQuestionAnswerModel: Codable, Equatable, Content {
     self.value = value
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case contact
     case id
     case isNewContact = "is_new_contact"

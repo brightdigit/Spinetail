@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Ecommerce {
+public extension AutomationsAutomationsEcommerce {
   /**
    Get product image info
 

@@ -18,7 +18,7 @@ public struct FacebookLikesModel: Codable, Equatable, Content {
     self.uniqueLikes = uniqueLikes
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case facebookLikes = "facebook_likes"
     case recipientLikes = "recipient_likes"
     case uniqueLikes = "unique_likes"

@@ -33,7 +33,7 @@ public struct ECommerceCustomer1Model: Codable, Equatable, Content {
     self.optInStatus = optInStatus
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case id
     case address
     case company

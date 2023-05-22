@@ -22,7 +22,7 @@ public struct GoalModel: Codable, Equatable, Content {
     self.lastVisitedAt = lastVisitedAt
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case data
     case event
     case goalId = "goal_id"

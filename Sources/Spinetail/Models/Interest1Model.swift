@@ -14,7 +14,7 @@ public struct Interest1Model: Codable, Equatable, Content {
     self.displayOrder = displayOrder
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case name
     case displayOrder = "display_order"
   }

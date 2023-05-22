@@ -17,7 +17,7 @@ public struct VariateContentsInnerModel: Codable, Equatable, Content {
     self.plainText = plainText
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case contentLabel = "content_label"
     case html
     case plainText = "plain_text"

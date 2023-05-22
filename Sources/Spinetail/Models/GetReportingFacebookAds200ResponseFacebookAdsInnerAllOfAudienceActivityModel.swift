@@ -14,7 +14,7 @@ public struct GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfAudienceAct
     self.revenue = revenue
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case clicks
     case impressions
     case revenue

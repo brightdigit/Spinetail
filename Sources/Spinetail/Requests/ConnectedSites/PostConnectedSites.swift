@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension ConnectedSites {
+public extension AutomationsAutomationsConnectedSites {
   /**
    Add connected site
 

@@ -9,7 +9,7 @@ public struct PostBatchesRequestModel: Codable, Equatable, Content {
     self.operations = operations
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case operations
   }
 }

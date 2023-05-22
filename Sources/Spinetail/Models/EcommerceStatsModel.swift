@@ -18,7 +18,7 @@ public struct EcommerceStatsModel: Codable, Equatable, Content {
     self.totalRevenue = totalRevenue
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case currencyCode = "currency_code"
     case numberOfOrders = "number_of_orders"
     case totalRevenue = "total_revenue"

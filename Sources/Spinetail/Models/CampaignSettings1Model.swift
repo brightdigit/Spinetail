@@ -26,7 +26,7 @@ public struct CampaignSettings1Model: Codable, Equatable, Content {
     self.title = title
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case fromName = "from_name"
     case previewText = "preview_text"
     case replyTo = "reply_to"

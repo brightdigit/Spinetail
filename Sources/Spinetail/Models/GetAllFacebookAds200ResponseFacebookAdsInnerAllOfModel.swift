@@ -3,7 +3,7 @@ import Foundation
 import PrchModel
 public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOfModel: Codable, Equatable, Content {
   /** Campaign, Ad, or Page status */
-  public enum Status: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
     case save
     case paused
     case schedule
@@ -24,7 +24,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOfModel: Codable, E
   }
 
   /** Supported Campaign, Ad, Page type */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case regular
     case plaintext
     case rss
@@ -96,7 +96,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOfModel: Codable, E
     self.webId = webId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case canceledAt = "canceled_at"
     case createTime = "create_time"
     case hasSegment = "has_segment"

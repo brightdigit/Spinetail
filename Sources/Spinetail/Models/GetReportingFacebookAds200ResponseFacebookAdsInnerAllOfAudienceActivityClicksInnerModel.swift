@@ -11,7 +11,7 @@ public struct GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfAudienceAct
     self.date = date
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case clicks
     case date
   }

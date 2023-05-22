@@ -34,7 +34,7 @@ public struct ECommercePromoCode1Model: Codable, Equatable, Content {
     self.usageCount = usageCount
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case code
     case id
     case redemptionURL = "redemption_url"

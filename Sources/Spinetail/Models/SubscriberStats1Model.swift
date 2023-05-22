@@ -17,7 +17,7 @@ public struct SubscriberStats1Model: Codable, Equatable, Content {
     self.ecommerceData = ecommerceData
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case avgClickRate = "avg_click_rate"
     case avgOpenRate = "avg_open_rate"
     case ecommerceData = "ecommerce_data"

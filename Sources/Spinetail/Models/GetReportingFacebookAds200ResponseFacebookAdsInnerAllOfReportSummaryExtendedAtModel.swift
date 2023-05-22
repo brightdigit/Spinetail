@@ -11,7 +11,7 @@ public struct GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSumma
     self.timezone = timezone
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case datetime
     case timezone
   }

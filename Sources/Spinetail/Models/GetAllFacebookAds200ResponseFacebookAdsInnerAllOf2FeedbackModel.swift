@@ -22,7 +22,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2FeedbackModel: C
     self.content = content
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case audience
     case budget
     case compliance

@@ -4,7 +4,7 @@ import PrchModel
 /** A Chimp Chatter message */
 public struct ChimpChatterModel: Codable, Equatable, Content {
   /** The type of activity */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case listsnewSubscriber = "lists:new-subscriber"
     case listsunsubscribes = "lists:unsubscribes"
     case listsprofileUpdates = "lists:profile-updates"
@@ -42,7 +42,7 @@ public struct ChimpChatterModel: Codable, Equatable, Content {
     self.url = url
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case campaignId = "campaign_id"
     case listId = "list_id"
     case message

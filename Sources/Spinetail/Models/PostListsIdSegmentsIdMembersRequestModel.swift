@@ -9,7 +9,7 @@ public struct PostListsIdSegmentsIdMembersRequestModel: Codable, Equatable, Cont
     self.emailAddress = emailAddress
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case emailAddress = "email_address"
   }
 }

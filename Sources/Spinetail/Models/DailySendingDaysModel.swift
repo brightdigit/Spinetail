@@ -34,7 +34,7 @@ public struct DailySendingDaysModel: Codable, Equatable, Content {
     self.wednesday = wednesday
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case friday
     case monday
     case saturday

@@ -22,7 +22,7 @@ public struct RemovedSubscribersModel: Codable, Equatable, Content {
     self.workflowId = workflowId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case subscribers
     case totalItems = "total_items"

@@ -14,7 +14,7 @@ public struct AutomationCampaignSettings1Model: Codable, Equatable, Content {
     self.replyTo = replyTo
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case fromName = "from_name"
     case replyTo = "reply_to"
   }

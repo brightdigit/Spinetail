@@ -3,7 +3,7 @@ import Foundation
 import PrchModel
 public struct PromosInnerModel: Codable, Equatable, Content {
   /** Type of discount. For free shipping set type to fixed */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case fixed
     case percentage
   }
@@ -23,7 +23,7 @@ public struct PromosInnerModel: Codable, Equatable, Content {
     self.type = type
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case amountDiscounted = "amount_discounted"
     case code
     case type

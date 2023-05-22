@@ -18,7 +18,7 @@ public struct BouncesModel: Codable, Equatable, Content {
     self.syntaxErrors = syntaxErrors
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case hardBounces = "hard_bounces"
     case softBounces = "soft_bounces"
     case syntaxErrors = "syntax_errors"

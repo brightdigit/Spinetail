@@ -18,7 +18,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2ChannelModel: Co
     self.igPlacementFeed = igPlacementFeed
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case fbPlacementAudience = "fb_placement_audience"
     case fbPlacementFeed = "fb_placement_feed"
     case igPlacementFeed = "ig_placement_feed"

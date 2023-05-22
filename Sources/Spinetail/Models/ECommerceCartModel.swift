@@ -49,7 +49,7 @@ public struct ECommerceCartModel: Codable, Equatable, Content {
     self.updatedAt = updatedAt
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case campaignId = "campaign_id"
     case checkoutURL = "checkout_url"

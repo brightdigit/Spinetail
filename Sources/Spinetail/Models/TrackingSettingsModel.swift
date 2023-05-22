@@ -14,7 +14,7 @@ public struct TrackingSettingsModel: Codable, Equatable, Content {
     self.trackWithMailchimp = trackWithMailchimp
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case enableRestrictedDataProcessing = "enable_restricted_data_processing"
     case trackWithMailchimp = "track_with_mailchimp"
   }

@@ -14,7 +14,7 @@ public struct BatchDeliveryModel: Codable, Equatable, Content {
     self.batchDelay = batchDelay
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case batchCount = "batch_count"
     case batchDelay = "batch_delay"
   }

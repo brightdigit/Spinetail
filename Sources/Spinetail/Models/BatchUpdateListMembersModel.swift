@@ -34,7 +34,7 @@ public struct BatchUpdateListMembersModel: Codable, Equatable, Content {
     self.updatedMembers = updatedMembers
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case errorCount = "error_count"
     case errors

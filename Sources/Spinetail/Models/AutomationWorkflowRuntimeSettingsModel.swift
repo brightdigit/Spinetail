@@ -4,7 +4,7 @@ import PrchModel
 /** A workflow's runtime settings for an Automation. */
 public struct AutomationWorkflowRuntimeSettingsModel: Codable, Equatable, Content {
   /** The days an Automation workflow can send. */
-  public enum Days: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsDays: String, Codable, Equatable, CaseIterable {
     case sunday
     case monday
     case tuesday
@@ -24,7 +24,7 @@ public struct AutomationWorkflowRuntimeSettingsModel: Codable, Equatable, Conten
     self.hours = hours
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case days
     case hours
   }

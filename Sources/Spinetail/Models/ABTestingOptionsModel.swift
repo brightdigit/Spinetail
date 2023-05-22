@@ -4,21 +4,21 @@ import PrchModel
 /** [A/B Testing](https://mailchimp.com/help/about-ab-testing-campaigns/) options for a campaign. */
 public struct ABTestingOptionsModel: Codable, Equatable, Content {
   /** How we should evaluate a winner. Based on 'opens', 'clicks', or 'manual'. */
-  public enum PickWinner: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsPickWinner: String, Codable, Equatable, CaseIterable {
     case opens
     case clicks
     case manual
   }
 
   /** The type of AB split to run. */
-  public enum SplitTest: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsSplitTest: String, Codable, Equatable, CaseIterable {
     case subject
     case fromName = "from_name"
     case schedule
   }
 
   /** How unit of time for measuring the winner ('hours' or 'days'). This cannot be changed after a campaign is sent. */
-  public enum WaitUnits: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsWaitUnits: String, Codable, Equatable, CaseIterable {
     case hours
     case days
   }
@@ -82,7 +82,7 @@ public struct ABTestingOptionsModel: Codable, Equatable, Content {
     self.waitUnits = waitUnits
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case fromNamea = "from_name_a"
     case fromNameb = "from_name_b"
     case pickWinner = "pick_winner"

@@ -20,7 +20,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf1Model: Codable, 
     self.wasCanceledByFacebook = wasCanceledByFacebook
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case emailSourceName = "email_source_name"
     case endTime = "end_time"
     case needsAttention = "needs_attention"

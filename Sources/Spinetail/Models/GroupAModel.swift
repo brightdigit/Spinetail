@@ -22,7 +22,7 @@ public struct GroupAModel: Codable, Equatable, Content {
     self.uniqueClicksa = uniqueClicksa
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case clickPercentagea = "click_percentage_a"
     case totalClicksa = "total_clicks_a"
     case uniqueClickPercentagea = "unique_click_percentage_a"

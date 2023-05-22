@@ -145,3 +145,4 @@ xcuserdata
 env.json
 .openapi-generator*
 .mint
+generated*

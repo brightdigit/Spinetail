@@ -3,7 +3,7 @@ import Foundation
 import PrchModel
 public struct GetFacebookAdsId200ResponseModel: Codable, Equatable, Content {
   /** Campaign, Ad, or Page status */
-  public enum Status: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
     case save
     case paused
     case schedule
@@ -24,7 +24,7 @@ public struct GetFacebookAdsId200ResponseModel: Codable, Equatable, Content {
   }
 
   /** Supported Campaign, Ad, Page type */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case regular
     case plaintext
     case rss
@@ -145,7 +145,7 @@ public struct GetFacebookAdsId200ResponseModel: Codable, Equatable, Content {
     self.webId = webId
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case audience
     case budget

@@ -1,8 +1,8 @@
 formatter: swift
 options:
-  name: Spinetail # the name of the API
+  name: API # the name of the API
   fixedWidthIntegers: false # whether to use types like Int32 and Int64
-  mutableModels: true # whether model properties are mutable
+  mutableModels: false # whether model properties are mutable
   safeOptionalDecoding: false # set invalid optionals to nil instead of throwing
   safeArrayDecoding: false # filter out invalid items in array instead of throwing
   modelPrefix: null # applied to model classes and enums
@@ -24,6 +24,8 @@ templateFiles:
   - path: README.md
   - path: Package.swift
   - path: Sources/Coding.swift
+    destination: "Sources/{{ options.name }}/Coding.swift"
+  - path: Sources/API.swift
     destination: "Sources/{{ options.name }}/{{ options.name }}.swift"
   - path: Sources/Enum.swift
     context: enums

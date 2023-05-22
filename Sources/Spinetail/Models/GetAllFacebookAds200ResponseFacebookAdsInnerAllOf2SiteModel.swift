@@ -18,7 +18,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2SiteModel: Codab
     self.url = url
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case id
     case name
     case url

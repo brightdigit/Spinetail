@@ -4,7 +4,7 @@ import PrchModel
 /** Information about the contact. */
 public struct ContactModel: Codable, Equatable, Content {
   /** The contact's current status. */
-  public enum Status: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
     case subscribed = "Subscribed"
     case unsubscribed = "Unsubscribed"
     case nonSubscribed = "Non-Subscribed"
@@ -43,7 +43,7 @@ public struct ContactModel: Codable, Equatable, Content {
     self.status = status
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case avatarURL = "avatar_url"
     case consentsToOneToOneMessaging = "consents_to_one_to_one_messaging"
     case contactId = "contact_id"

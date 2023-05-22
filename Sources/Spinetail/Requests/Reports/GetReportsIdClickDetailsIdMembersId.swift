@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Reports {
+public extension AutomationsAutomationsReports {
   /**
    Get clicked link subscriber
 

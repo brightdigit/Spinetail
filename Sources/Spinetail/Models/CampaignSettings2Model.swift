@@ -74,7 +74,7 @@ public struct CampaignSettings2Model: Codable, Equatable, Content {
     self.useConversation = useConversation
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case authenticate
     case autoFbPost = "auto_fb_post"
     case autoFooter = "auto_footer"

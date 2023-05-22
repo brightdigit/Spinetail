@@ -18,7 +18,7 @@ public struct CampaignSocialCardModel: Codable, Equatable, Content {
     self.title = title
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case description
     case imageURL = "image_url"
     case title

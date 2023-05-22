@@ -4,7 +4,7 @@ import PrchModel
 /** The API root resource links to all other resources available in the API. */
 public struct APIRootModel: Codable, Equatable, Content {
   /** The type of pricing plan the account is on. */
-  public enum PricingPlanType: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsPricingPlanType: String, Codable, Equatable, CaseIterable {
     case monthly
     case payAsYouGo = "pay_as_you_go"
     case foreverFree = "forever_free"
@@ -91,7 +91,7 @@ public struct APIRootModel: Codable, Equatable, Content {
     self.username = username
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case accountId = "account_id"
     case accountIndustry = "account_industry"

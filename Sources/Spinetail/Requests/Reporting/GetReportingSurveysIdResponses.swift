@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension Reporting {
+public extension AutomationsAutomationsReporting {
   /**
    List survey responses
 
@@ -67,7 +67,7 @@ public extension Reporting {
     // public static let service = APIService<Response>(id: "getReportingSurveysIdResponses", tag: "reporting", method: "GET", path: "/reporting/surveys/{outreach_id}/responses", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     /** Filter survey responses by familiarity of the respondents. */
-    public enum RespondentFamiliarityIs: String, Codable, Equatable, CaseIterable {
+    public enum AutomationsAutomationsRespondentFamiliarityIs: String, Codable, Equatable, CaseIterable {
       case new
       case known
       case unknown

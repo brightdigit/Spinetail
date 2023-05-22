@@ -4,7 +4,7 @@ import PrchModel
 /** A summary of an individual campaign's settings and content. */
 public struct Campaign1Model: Codable, Equatable, Content {
   /** There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead. */
-  public enum `Type`: String, Codable, Equatable, CaseIterable {
+  public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
     case regular
     case plaintext
     case absplit
@@ -13,7 +13,7 @@ public struct Campaign1Model: Codable, Equatable, Content {
   }
 
   /** How the campaign's content is put together. The old drag and drop editor uses 'template' while the new editor uses 'multichannel'. Defaults to template. */
-  public enum ContentType: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsContentType: String, Codable, Equatable, CaseIterable {
     case template
     case multichannel
   }
@@ -47,7 +47,7 @@ public struct Campaign1Model: Codable, Equatable, Content {
     self.variateSettings = variateSettings
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case type
     case contentType = "content_type"
     case recipients

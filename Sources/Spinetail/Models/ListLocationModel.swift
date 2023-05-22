@@ -21,7 +21,7 @@ public struct ListLocationModel: Codable, Equatable, Content {
     self.total = total
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case cc
     case country
     case percent

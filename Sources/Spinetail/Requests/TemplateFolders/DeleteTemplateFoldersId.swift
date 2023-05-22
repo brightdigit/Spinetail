@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension TemplateFolders {
+public extension AutomationsAutomationsTemplateFolders {
   /**
    Delete template folder
 

@@ -4,7 +4,7 @@ import PrchModel
 /** Available when uploading an archive to create campaign content. The archive should include all campaign content and images. [Learn more](https://mailchimp.com/help/import-a-custom-html-template/). */
 public struct UploadArchiveModel: Codable, Equatable, Content {
   /** The type of encoded file. Defaults to zip. */
-  public enum ArchiveType: String, Codable, Equatable, CaseIterable {
+  public enum AutomationsAutomationsArchiveType: String, Codable, Equatable, CaseIterable {
     case zip
     case tarGz = "tar.gz"
     case tarBz2 = "tar.bz2"
@@ -24,7 +24,7 @@ public struct UploadArchiveModel: Codable, Equatable, Content {
     self.archiveType = archiveType
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case archiveContent = "archive_content"
     case archiveType = "archive_type"
   }

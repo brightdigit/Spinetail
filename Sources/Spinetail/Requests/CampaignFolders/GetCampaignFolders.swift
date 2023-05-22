@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension CampaignFolders {
+public extension AutomationsAutomationsCampaignFolders {
   /**
    List campaign folders
 

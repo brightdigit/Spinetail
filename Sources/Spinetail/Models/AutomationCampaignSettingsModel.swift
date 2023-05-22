@@ -38,7 +38,7 @@ public struct AutomationCampaignSettingsModel: Codable, Equatable, Content {
     self.useConversation = useConversation
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case authenticate
     case autoFooter = "auto_footer"
     case fromName = "from_name"

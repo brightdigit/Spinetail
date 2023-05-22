@@ -54,7 +54,7 @@ public struct ECommerceProductVariantModel: Codable, Equatable, Content {
     self.visibility = visibility
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case backorders
     case createdAt = "created_at"

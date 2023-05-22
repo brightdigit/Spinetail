@@ -18,7 +18,7 @@ public struct ECommerceReportModel: Codable, Equatable, Content {
     self.totalSpent = totalSpent
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case totalOrders = "total_orders"
     case totalRevenue = "total_revenue"
     case totalSpent = "total_spent"

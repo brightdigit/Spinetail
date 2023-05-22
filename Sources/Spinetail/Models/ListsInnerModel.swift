@@ -21,7 +21,7 @@ public struct ListsInnerModel: Codable, Equatable, Content {
     self.regionName = regionName
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case countryCode = "country_code"
     case opens
     case region

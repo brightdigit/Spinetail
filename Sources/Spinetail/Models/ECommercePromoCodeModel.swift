@@ -38,7 +38,7 @@ public struct ECommercePromoCodeModel: Codable, Equatable, Content {
     self.usageCount = usageCount
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case links = "_links"
     case code
     case createdAtForeign = "created_at_foreign"

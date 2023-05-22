@@ -29,7 +29,7 @@ public struct GetReportsIdEcommerceProductActivity200ResponseProductsInnerModel:
     self.totalRevenue = totalRevenue
   }
 
-  public enum CodingKeys: String, CodingKey {
+  public enum AutomationsAutomationsCodingKeys: String, CodingKey {
     case currencyCode = "currency_code"
     case imageURL = "image_url"
     case recommendationPurchased = "recommendation_purchased"
