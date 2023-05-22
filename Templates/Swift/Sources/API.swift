@@ -17,7 +17,7 @@ public enum {{ options.tagPrefix }}{{ tag | upperCamelCase }} {{ options.tagSuff
 
 public class {{ options.name }}API: API {
   public init(baseURLComponents: URLComponents) {
-    self.baseURLComponents = baseComponents
+    self.baseURLComponents = baseURLComponents
   }
 
   public let baseURLComponents: URLComponents

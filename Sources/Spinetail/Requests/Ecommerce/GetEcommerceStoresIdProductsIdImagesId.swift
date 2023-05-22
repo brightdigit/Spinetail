@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsEcommerce {
+public extension Ecommerce {
   /**
    Get product image info
 
@@ -52,9 +52,7 @@ public extension AutomationsAutomationsEcommerce {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getEcommerceStoresIdProductsIdImagesId", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/products/{product_id}/images/{image_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = ECommerceProductImageModel
+    public typealias SuccessType = ECommerceProductImage
     public typealias BodyType = Empty
   }
 }

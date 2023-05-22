@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsAutomations {
+public extension Automations {
   /**
    Delete workflow email
 
@@ -33,8 +33,6 @@ public extension AutomationsAutomationsAutomations {
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "deleteAutomationsIdEmailsId", tag: "automations", method: "DELETE", path: "/automations/{workflow_id}/emails/{workflow_email_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = Empty
     public typealias BodyType = Empty

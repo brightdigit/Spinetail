@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLists {
+public extension Lists {
   /**
    List member events
 
@@ -61,9 +61,7 @@ public extension AutomationsAutomationsLists {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getListsIdMembersIdEvents", tag: "lists", method: "GET", path: "/lists/{list_id}/members/{subscriber_hash}/events", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = CollectionOfEventsModel
+    public typealias SuccessType = CollectionOfEvents
     public typealias BodyType = Empty
   }
 }

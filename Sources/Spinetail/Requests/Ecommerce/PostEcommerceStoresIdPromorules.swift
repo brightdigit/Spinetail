@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsEcommerce {
+public extension Ecommerce {
   /**
    Add promo rule
 
@@ -31,11 +31,9 @@ public extension AutomationsAutomationsEcommerce {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "postEcommerceStoresIdPromorules", tag: "ecommerce", method: "POST", path: "/ecommerce/stores/{store_id}/promo-rules", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = ECommercePromoRule
+    public typealias BodyType = ECommercePromoRule1
 
-    public typealias SuccessType = ECommercePromoRuleModel
-    public typealias BodyType = ECommercePromoRule1Model
-
-    public let body: ECommercePromoRule1Model
+    public let body: ECommercePromoRule1
   }
 }

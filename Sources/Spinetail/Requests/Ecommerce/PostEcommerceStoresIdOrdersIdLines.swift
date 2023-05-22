@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsEcommerce {
+public extension Ecommerce {
   /**
    Add order line item
 
@@ -34,11 +34,9 @@ public extension AutomationsAutomationsEcommerce {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "postEcommerceStoresIdOrdersIdLines", tag: "ecommerce", method: "POST", path: "/ecommerce/stores/{store_id}/orders/{order_id}/lines", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = ECommerceOrderLineItem
+    public typealias BodyType = ECommerceOrderLineItem1
 
-    public typealias SuccessType = ECommerceOrderLineItemModel
-    public typealias BodyType = ECommerceOrderLineItem1Model
-
-    public let body: ECommerceOrderLineItem1Model
+    public let body: ECommerceOrderLineItem1
   }
 }

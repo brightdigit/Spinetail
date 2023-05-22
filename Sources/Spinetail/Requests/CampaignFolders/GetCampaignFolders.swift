@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsCampaignFolders {
+public extension CampaignFolders {
   /**
    List campaign folders
 
@@ -54,8 +54,6 @@ public extension AutomationsAutomationsCampaignFolders {
     }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "getCampaignFolders", tag: "campaignFolders", method: "GET", path: "/campaign-folders", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = CampaignFoldersModel
     public typealias BodyType = Empty

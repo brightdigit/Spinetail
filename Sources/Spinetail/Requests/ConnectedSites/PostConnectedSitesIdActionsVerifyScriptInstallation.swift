@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsConnectedSites {
+public extension ConnectedSites {
   /**
    Verify connected site script
 
@@ -30,8 +30,6 @@ public extension AutomationsAutomationsConnectedSites {
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "postConnectedSitesIdActionsVerifyScriptInstallation", tag: "connectedSites", method: "POST", path: "/connected-sites/{connected_site_id}/actions/verify-script-installation", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = Empty
     public typealias BodyType = Empty

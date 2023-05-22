@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsCampaigns {
+public extension Campaigns {
   /**
    Cancel campaign
 
@@ -30,8 +30,6 @@ public extension AutomationsAutomationsCampaigns {
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "postCampaignsIdActionsCancelSend", tag: "campaigns", method: "POST", path: "/campaigns/{campaign_id}/actions/cancel-send", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = Empty
     public typealias BodyType = Empty

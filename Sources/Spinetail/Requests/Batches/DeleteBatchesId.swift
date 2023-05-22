@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsBatches {
+public extension Batches {
   /**
    Delete batch request
 
@@ -30,8 +30,6 @@ public extension AutomationsAutomationsBatches {
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "deleteBatchesId", tag: "batches", method: "DELETE", path: "/batches/{batch_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = Empty
     public typealias BodyType = Empty

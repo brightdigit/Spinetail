@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLists {
+public extension Lists {
   /**
    Batch add or remove members
 
@@ -34,11 +34,9 @@ public extension AutomationsAutomationsLists {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "postListsIdSegmentsId", tag: "lists", method: "POST", path: "/lists/{list_id}/segments/{segment_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = BatchAddRemoveListMembersToFromStaticSegment
+    public typealias BodyType = MembersToAddRemoveToFromaStaticSegment
 
-    public typealias SuccessType = BatchAddRemoveListMembersToFromStaticSegmentModel
-    public typealias BodyType = MembersToAddRemoveToFromaStaticSegmentModel
-
-    public let body: MembersToAddRemoveToFromaStaticSegmentModel
+    public let body: MembersToAddRemoveToFromaStaticSegment
   }
 }

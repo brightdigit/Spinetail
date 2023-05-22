@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsConversations {
+public extension Conversations {
   /**
    List conversations
 
@@ -73,15 +73,13 @@ public extension AutomationsAutomationsConversations {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getConversations", tag: "conversations", method: "GET", path: "/conversations", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
     /** Whether the conversation has any unread messages. */
-    public enum AutomationsAutomationsHasUnreadMessages: String, Codable, Equatable, CaseIterable {
+    public enum HasUnreadMessages: String, Codable, Equatable, CaseIterable {
       case `true`
       case `false`
     }
 
-    public typealias SuccessType = TrackedConversationsModel
+    public typealias SuccessType = TrackedConversations
     public typealias BodyType = Empty
   }
 }

@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsReports {
+public extension Reports {
   /**
    List EepURL activity
 
@@ -46,9 +46,7 @@ public extension AutomationsAutomationsReports {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getReportsIdEepurl", tag: "reports", method: "GET", path: "/reports/{campaign_id}/eepurl", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = EepurlActivityModel
+    public typealias SuccessType = EepurlActivity
     public typealias BodyType = Empty
   }
 }

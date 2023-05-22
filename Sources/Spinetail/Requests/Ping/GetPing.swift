@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsPing {
+public extension Ping {
   /**
    Ping
 
@@ -28,9 +28,7 @@ public extension AutomationsAutomationsPing {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getPing", tag: "ping", method: "GET", path: "/ping", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = APIHealthStatusModel
+    public typealias SuccessType = APIHealthStatus
     public typealias BodyType = Empty
   }
 }

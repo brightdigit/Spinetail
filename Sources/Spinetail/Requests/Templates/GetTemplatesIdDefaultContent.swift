@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsTemplates {
+public extension Templates {
   /**
    View default content
 
@@ -46,9 +46,7 @@ public extension AutomationsAutomationsTemplates {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getTemplatesIdDefaultContent", tag: "templates", method: "GET", path: "/templates/{template_id}/default-content", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = TemplateDefaultContentModel
+    public typealias SuccessType = TemplateDefaultContent
     public typealias BodyType = Empty
   }
 }

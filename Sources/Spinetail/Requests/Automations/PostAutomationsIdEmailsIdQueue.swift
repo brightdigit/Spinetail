@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsAutomations {
+public extension Automations {
   /**
    Add subscriber to workflow email
 
@@ -34,11 +34,9 @@ public extension AutomationsAutomationsAutomations {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "postAutomationsIdEmailsIdQueue", tag: "automations", method: "POST", path: "/automations/{workflow_id}/emails/{workflow_email_id}/queue", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = SubscriberInAutomationQueue2
+    public typealias BodyType = SubscriberInAutomationQueue1
 
-    public typealias SuccessType = SubscriberInAutomationQueue2Model
-    public typealias BodyType = SubscriberInAutomationQueue1Model
-
-    public let body: SubscriberInAutomationQueue1Model
+    public let body: SubscriberInAutomationQueue1
   }
 }

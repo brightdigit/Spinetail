@@ -12,7 +12,7 @@ struct Settings: Codable {
   let interestID: String?
 }
 
-extension AutomationsAutomationsSettings {
+extension Settings {
   init(environment: [String: String]) {
     self.init(
       apiKey: environment["MAILCHIMP_API_KEY"],

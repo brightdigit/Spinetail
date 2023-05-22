@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsCampaigns {
+public extension Campaigns {
   /**
    Get campaign send checklist
 
@@ -46,9 +46,7 @@ public extension AutomationsAutomationsCampaigns {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getCampaignsIdSendChecklist", tag: "campaigns", method: "GET", path: "/campaigns/{campaign_id}/send-checklist", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = SendChecklistModel
+    public typealias SuccessType = SendChecklist
     public typealias BodyType = Empty
   }
 }

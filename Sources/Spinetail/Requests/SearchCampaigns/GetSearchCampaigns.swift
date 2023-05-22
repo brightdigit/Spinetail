@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsSearchCampaigns {
+public extension SearchCampaigns {
   /**
    Search campaigns
 
@@ -46,8 +46,6 @@ public extension AutomationsAutomationsSearchCampaigns {
     }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "getSearchCampaigns", tag: "searchCampaigns", method: "GET", path: "/search-campaigns", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = CampaignsModel
     public typealias BodyType = Empty

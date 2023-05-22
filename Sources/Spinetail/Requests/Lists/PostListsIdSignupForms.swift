@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLists {
+public extension Lists {
   /**
    Customize signup form
 
@@ -31,11 +31,9 @@ public extension AutomationsAutomationsLists {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "postListsIdSignupForms", tag: "lists", method: "POST", path: "/lists/{list_id}/signup-forms", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = SignupForm
+    public typealias BodyType = SignupForm1
 
-    public typealias SuccessType = SignupFormModel
-    public typealias BodyType = SignupForm1Model
-
-    public let body: SignupForm1Model
+    public let body: SignupForm1
   }
 }

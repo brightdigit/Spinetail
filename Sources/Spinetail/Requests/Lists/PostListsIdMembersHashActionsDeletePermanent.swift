@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLists {
+public extension Lists {
   /**
    Delete list member
 
@@ -33,8 +33,6 @@ public extension AutomationsAutomationsLists {
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "postListsIdMembersHashActionsDeletePermanent", tag: "lists", method: "POST", path: "/lists/{list_id}/members/{subscriber_hash}/actions/delete-permanent", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = Empty
     public typealias BodyType = Empty

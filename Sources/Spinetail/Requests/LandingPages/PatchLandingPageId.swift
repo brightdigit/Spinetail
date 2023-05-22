@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLandingPages {
+public extension LandingPages {
   /**
    Update landing page
 
@@ -31,11 +31,9 @@ public extension AutomationsAutomationsLandingPages {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "patchLandingPageId", tag: "landingPages", method: "PATCH", path: "/landing-pages/{page_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = LandingPage
+    public typealias BodyType = LandingPage2
 
-    public typealias SuccessType = LandingPageModel
-    public typealias BodyType = LandingPage2Model
-
-    public let body: LandingPage2Model
+    public let body: LandingPage2
   }
 }

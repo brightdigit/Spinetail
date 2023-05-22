@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLists {
+public extension Lists {
   /**
    Add member to segment
 
@@ -34,11 +34,9 @@ public extension AutomationsAutomationsLists {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "postListsIdSegmentsIdMembers", tag: "lists", method: "POST", path: "/lists/{list_id}/segments/{segment_id}/members", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = ListMembers1
+    public typealias BodyType = PostListsIdSegmentsIdMembersRequest
 
-    public typealias SuccessType = ListMembers1Model
-    public typealias BodyType = PostListsIdSegmentsIdMembersRequestModel
-
-    public let body: PostListsIdSegmentsIdMembersRequestModel
+    public let body: PostListsIdSegmentsIdMembersRequest
   }
 }

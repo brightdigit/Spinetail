@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLandingPages {
+public extension LandingPages {
   /**
    Publish landing page
 
@@ -30,8 +30,6 @@ public extension AutomationsAutomationsLandingPages {
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "postLandingPageIdActionsPublish", tag: "landingPages", method: "POST", path: "/landing-pages/{page_id}/actions/publish", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = Empty
     public typealias BodyType = Empty

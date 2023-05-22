@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsConversations {
+public extension Conversations {
   /**
    Get conversation
 
@@ -46,9 +46,7 @@ public extension AutomationsAutomationsConversations {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getConversationsId", tag: "conversations", method: "GET", path: "/conversations/{conversation_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = ConversationModel
+    public typealias SuccessType = Conversation
     public typealias BodyType = Empty
   }
 }

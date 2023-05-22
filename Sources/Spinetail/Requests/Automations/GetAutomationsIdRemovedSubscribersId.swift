@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsAutomations {
+public extension Automations {
   /**
    Get subscriber removed from workflow
 
@@ -34,9 +34,7 @@ public extension AutomationsAutomationsAutomations {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getAutomationsIdRemovedSubscribersId", tag: "automations", method: "GET", path: "/automations/{workflow_id}/removed-subscribers/{subscriber_hash}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = SubscriberRemovedFromAutomationWorkflowModel
+    public typealias SuccessType = SubscriberRemovedFromAutomationWorkflow
     public typealias BodyType = Empty
   }
 }

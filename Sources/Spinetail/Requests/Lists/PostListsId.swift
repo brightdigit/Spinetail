@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLists {
+public extension Lists {
   /**
    Batch subscribe or unsubscribe
 
@@ -46,11 +46,9 @@ public extension AutomationsAutomationsLists {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "postListsId", tag: "lists", method: "POST", path: "/lists/{list_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = BatchUpdateListMembers
+    public typealias BodyType = MembersToSubscribeUnsubscribeToFromaListInBatch
 
-    public typealias SuccessType = BatchUpdateListMembersModel
-    public typealias BodyType = MembersToSubscribeUnsubscribeToFromaListInBatchModel
-
-    public let body: MembersToSubscribeUnsubscribeToFromaListInBatchModel
+    public let body: MembersToSubscribeUnsubscribeToFromaListInBatch
   }
 }

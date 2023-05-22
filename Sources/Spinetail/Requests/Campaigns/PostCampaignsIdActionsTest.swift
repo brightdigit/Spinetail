@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsCampaigns {
+public extension Campaigns {
   /**
    Send test email
 
@@ -31,11 +31,9 @@ public extension AutomationsAutomationsCampaigns {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "postCampaignsIdActionsTest", tag: "campaigns", method: "POST", path: "/campaigns/{campaign_id}/actions/test", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
     public typealias SuccessType = Empty
-    public typealias BodyType = PostCampaignsIdActionsTestRequestModel
+    public typealias BodyType = PostCampaignsIdActionsTestRequest
 
-    public let body: PostCampaignsIdActionsTestRequestModel
+    public let body: PostCampaignsIdActionsTestRequest
   }
 }

@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsTemplates {
+public extension Templates {
   /**
    Delete template
 
@@ -30,8 +30,6 @@ public extension AutomationsAutomationsTemplates {
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "deleteTemplatesId", tag: "templates", method: "DELETE", path: "/templates/{template_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = Empty
     public typealias BodyType = Empty

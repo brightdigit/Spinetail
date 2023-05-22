@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLists {
+public extension Lists {
   /**
    Update note
 
@@ -37,11 +37,9 @@ public extension AutomationsAutomationsLists {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "patchListsIdMembersIdNotesId", tag: "lists", method: "PATCH", path: "/lists/{list_id}/members/{subscriber_hash}/notes/{note_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = MemberNotes
+    public typealias BodyType = MemberNotes1
 
-    public typealias SuccessType = MemberNotesModel
-    public typealias BodyType = MemberNotes1Model
-
-    public let body: MemberNotes1Model
+    public let body: MemberNotes1
   }
 }

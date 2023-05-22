@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsTemplateFolders {
+public extension TemplateFolders {
   /**
    Get template folder
 
@@ -46,9 +46,7 @@ public extension AutomationsAutomationsTemplateFolders {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getTemplateFoldersId", tag: "templateFolders", method: "GET", path: "/template-folders/{folder_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = TemplateFolderModel
+    public typealias SuccessType = TemplateFolder
     public typealias BodyType = Empty
   }
 }

@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLists {
+public extension Lists {
   /**
    Add webhook
 
@@ -31,11 +31,9 @@ public extension AutomationsAutomationsLists {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "postListsIdWebhooks", tag: "lists", method: "POST", path: "/lists/{list_id}/webhooks", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = ListWebhooks
+    public typealias BodyType = AddWebhook
 
-    public typealias SuccessType = ListWebhooksModel
-    public typealias BodyType = AddWebhookModel
-
-    public let body: AddWebhookModel
+    public let body: AddWebhook
   }
 }

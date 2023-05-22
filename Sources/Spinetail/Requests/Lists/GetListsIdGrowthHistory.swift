@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLists {
+public extension Lists {
   /**
    List growth history data
 
@@ -70,20 +70,18 @@ public extension AutomationsAutomationsLists {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getListsIdGrowthHistory", tag: "lists", method: "GET", path: "/lists/{list_id}/growth-history", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
     /** Returns files sorted by the specified field. */
-    public enum AutomationsAutomationsSortField: String, Codable, Equatable, CaseIterable {
+    public enum SortField: String, Codable, Equatable, CaseIterable {
       case month
     }
 
     /** Determines the order direction for sorted results. */
-    public enum AutomationsAutomationsSortDir: String, Codable, Equatable, CaseIterable {
+    public enum SortDir: String, Codable, Equatable, CaseIterable {
       case asc = "ASC"
       case desc = "DESC"
     }
 
-    public typealias SuccessType = GrowthHistoryModel
+    public typealias SuccessType = GrowthHistory
     public typealias BodyType = Empty
   }
 }

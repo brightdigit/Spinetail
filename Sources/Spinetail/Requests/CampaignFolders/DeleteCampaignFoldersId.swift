@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsCampaignFolders {
+public extension CampaignFolders {
   /**
    Delete campaign folder
 
@@ -30,8 +30,6 @@ public extension AutomationsAutomationsCampaignFolders {
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "deleteCampaignFoldersId", tag: "campaignFolders", method: "DELETE", path: "/campaign-folders/{folder_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = Empty
     public typealias BodyType = Empty

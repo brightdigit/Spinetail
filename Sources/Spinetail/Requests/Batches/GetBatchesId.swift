@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsBatches {
+public extension Batches {
   /**
    Get batch operation status
 
@@ -46,9 +46,7 @@ public extension AutomationsAutomationsBatches {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getBatchesId", tag: "batches", method: "GET", path: "/batches/{batch_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = BatchModel
+    public typealias SuccessType = Batch
     public typealias BodyType = Empty
   }
 }

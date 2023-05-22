@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsTemplates {
+public extension Templates {
   /**
    Add template
 
@@ -28,11 +28,9 @@ public extension AutomationsAutomationsTemplates {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "postTemplates", tag: "templates", method: "POST", path: "/templates", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = TemplateInstance
+    public typealias BodyType = TemplateInstance1
 
-    public typealias SuccessType = TemplateInstanceModel
-    public typealias BodyType = TemplateInstance1Model
-
-    public let body: TemplateInstance1Model
+    public let body: TemplateInstance1
   }
 }

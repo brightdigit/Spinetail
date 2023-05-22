@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsReports {
+public extension Reports {
   /**
    Get campaign report
 
@@ -46,9 +46,7 @@ public extension AutomationsAutomationsReports {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getReportsId", tag: "reports", method: "GET", path: "/reports/{campaign_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = CampaignReportModel
+    public typealias SuccessType = CampaignReport
     public typealias BodyType = Empty
   }
 }

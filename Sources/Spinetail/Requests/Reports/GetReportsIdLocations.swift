@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsReports {
+public extension Reports {
   /**
    List top open activities
 
@@ -58,9 +58,7 @@ public extension AutomationsAutomationsReports {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getReportsIdLocations", tag: "reports", method: "GET", path: "/reports/{campaign_id}/locations", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = OpenLocationsModel
+    public typealias SuccessType = OpenLocations
     public typealias BodyType = Empty
   }
 }

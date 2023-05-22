@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsTemplates {
+public extension Templates {
   /**
    List templates
 
@@ -103,17 +103,15 @@ public extension AutomationsAutomationsTemplates {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getTemplates", tag: "templates", method: "GET", path: "/templates", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
     /** Returns user templates sorted by the specified field. */
-    public enum AutomationsAutomationsSortField: String, Codable, Equatable, CaseIterable {
+    public enum SortField: String, Codable, Equatable, CaseIterable {
       case dateCreated = "date_created"
       case dateEdited = "date_edited"
       case name
     }
 
     /** Determines the order direction for sorted results. */
-    public enum AutomationsAutomationsSortDir: String, Codable, Equatable, CaseIterable {
+    public enum SortDir: String, Codable, Equatable, CaseIterable {
       case asc = "ASC"
       case desc = "DESC"
     }

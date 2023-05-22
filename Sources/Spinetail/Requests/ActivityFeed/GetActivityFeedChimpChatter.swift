@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsActivityFeed {
+public extension ActivityFeed {
   /**
    Get latest chimp chatter
 
@@ -43,9 +43,7 @@ public extension AutomationsAutomationsActivityFeed {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getActivityFeedChimpChatter", tag: "activityFeed", method: "GET", path: "/activity-feed/chimp-chatter", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = GetActivityFeedChimpChatter200ResponseModel
+    public typealias SuccessType = GetActivityFeedChimpChatter200Response
     public typealias BodyType = Empty
   }
 }

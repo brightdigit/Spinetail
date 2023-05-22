@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsFileManager {
+public extension FileManager {
   /**
    Delete file
 
@@ -30,8 +30,6 @@ public extension AutomationsAutomationsFileManager {
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "deleteFileManagerFilesId", tag: "fileManager", method: "DELETE", path: "/file-manager/files/{file_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = Empty
     public typealias BodyType = Empty

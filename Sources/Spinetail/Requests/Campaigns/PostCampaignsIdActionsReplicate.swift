@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsCampaigns {
+public extension Campaigns {
   /**
    Replicate campaign
 
@@ -31,9 +31,7 @@ public extension AutomationsAutomationsCampaigns {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "postCampaignsIdActionsReplicate", tag: "campaigns", method: "POST", path: "/campaigns/{campaign_id}/actions/replicate", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = Campaign3Model
+    public typealias SuccessType = Campaign3
     public typealias BodyType = Empty
   }
 }

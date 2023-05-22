@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsReports {
+public extension Reports {
   /**
    List campaign reports
 
@@ -40,10 +40,10 @@ public extension AutomationsAutomationsReports {
     public var type: `Type`?
 
     /** Restrict the response to campaigns sent before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var beforeSendTime: DateTime?
+    public var beforeSendTime: MailchimpOptionalDate
 
     /** Restrict the response to campaigns sent after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var sinceSendTime: DateTime?
+    public var sinceSendTime: MailchimpOptionalDate
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]
@@ -62,10 +62,10 @@ public extension AutomationsAutomationsReports {
       if let type = self.type {
         params["type"] = String(describing: type)
       }
-      if let beforeSendTime = self.beforeSendTime {
+      if let beforeSendTime = self.beforeSendTime.value {
         params["before_send_time"] = String(describing: beforeSendTime)
       }
-      if let sinceSendTime = self.sinceSendTime {
+      if let sinceSendTime = self.sinceSendTime.value {
         params["since_send_time"] = String(describing: sinceSendTime)
       }
       return params
@@ -73,10 +73,8 @@ public extension AutomationsAutomationsReports {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getReports", tag: "reports", method: "GET", path: "/reports", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
     /** The campaign type. */
-    public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
+    public enum `Type`: String, Codable, Equatable, CaseIterable {
       case regular
       case plaintext
       case absplit
@@ -84,7 +82,7 @@ public extension AutomationsAutomationsReports {
       case variate
     }
 
-    public typealias SuccessType = CampaignReports1Model
+    public typealias SuccessType = CampaignReports1
     public typealias BodyType = Empty
   }
 }

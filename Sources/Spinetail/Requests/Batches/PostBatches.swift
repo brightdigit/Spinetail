@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsBatches {
+public extension Batches {
   /**
    Start batch operation
 
@@ -28,11 +28,9 @@ public extension AutomationsAutomationsBatches {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "postBatches", tag: "batches", method: "POST", path: "/batches", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = Batch
+    public typealias BodyType = PostBatchesRequest
 
-    public typealias SuccessType = BatchModel
-    public typealias BodyType = PostBatchesRequestModel
-
-    public let body: PostBatchesRequestModel
+    public let body: PostBatchesRequest
   }
 }

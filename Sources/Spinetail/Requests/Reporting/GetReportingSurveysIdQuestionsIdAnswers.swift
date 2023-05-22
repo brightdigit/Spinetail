@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsReporting {
+public extension Reporting {
   /**
    List answers for question
 
@@ -55,16 +55,14 @@ public extension AutomationsAutomationsReporting {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getReportingSurveysIdQuestionsIdAnswers", tag: "reporting", method: "GET", path: "/reporting/surveys/{outreach_id}/questions/{question_id}/answers", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
     /** Filter survey responses by familiarity of the respondents. */
-    public enum AutomationsAutomationsRespondentFamiliarityIs: String, Codable, Equatable, CaseIterable {
+    public enum RespondentFamiliarityIs: String, Codable, Equatable, CaseIterable {
       case new
       case known
       case unknown
     }
 
-    public typealias SuccessType = GetReportingSurveysIdQuestionsIdAnswers200ResponseModel
+    public typealias SuccessType = GetReportingSurveysIdQuestionsIdAnswers200Response
     public typealias BodyType = Empty
   }
 }

@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLandingPages {
+public extension LandingPages {
   /**
    List landing pages
 
@@ -61,21 +61,19 @@ public extension AutomationsAutomationsLandingPages {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getAllLandingPages", tag: "landingPages", method: "GET", path: "/landing-pages", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
     /** Determines the order direction for sorted results. */
-    public enum AutomationsAutomationsSortDir: String, Codable, Equatable, CaseIterable {
+    public enum SortDir: String, Codable, Equatable, CaseIterable {
       case asc = "ASC"
       case desc = "DESC"
     }
 
     /** Returns files sorted by the specified field. */
-    public enum AutomationsAutomationsSortField: String, Codable, Equatable, CaseIterable {
+    public enum SortField: String, Codable, Equatable, CaseIterable {
       case createdAt = "created_at"
       case updatedAt = "updated_at"
     }
 
-    public typealias SuccessType = GetAllLandingPages200ResponseModel
+    public typealias SuccessType = GetAllLandingPages200Response
     public typealias BodyType = Empty
   }
 }

@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsFacebookAds {
+public extension FacebookAds {
   /**
    Get facebook ad info
 
@@ -46,9 +46,7 @@ public extension AutomationsAutomationsFacebookAds {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getFacebookAdsId", tag: "facebookAds", method: "GET", path: "/facebook-ads/{outreach_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = GetFacebookAdsId200ResponseModel
+    public typealias SuccessType = GetFacebookAdsId200Response
     public typealias BodyType = Empty
   }
 }

@@ -30,3 +30,8 @@ extension {{ options.name }}API {
     public static let decoder: any Decoder<Data> = JSONDecoder(dateFormatter: Self.dateEncodingFormatter)
   }
 }
+
+
+extension Dictionary : ContentDecodable where Key : Decodable, Value : Decodable {}
+
+extension Dictionary : ContentEncodable where Key : Encodable, Value : Encodable {}

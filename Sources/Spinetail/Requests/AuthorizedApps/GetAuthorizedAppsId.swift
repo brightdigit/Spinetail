@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsAuthorizedApps {
+public extension AuthorizedApps {
   /**
    Get authorized app info
 
@@ -46,9 +46,7 @@ public extension AutomationsAutomationsAuthorizedApps {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getAuthorizedAppsId", tag: "authorizedApps", method: "GET", path: "/authorized-apps/{app_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = AuthorizedApplicationsInnerModel
+    public typealias SuccessType = AuthorizedApplicationsInner
     public typealias BodyType = Empty
   }
 }

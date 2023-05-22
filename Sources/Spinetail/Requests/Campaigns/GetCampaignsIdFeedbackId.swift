@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsCampaigns {
+public extension Campaigns {
   /**
    Get campaign feedback message
 
@@ -49,9 +49,7 @@ public extension AutomationsAutomationsCampaigns {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getCampaignsIdFeedbackId", tag: "campaigns", method: "GET", path: "/campaigns/{campaign_id}/feedback/{feedback_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = CampaignFeedback2Model
+    public typealias SuccessType = CampaignFeedback2
     public typealias BodyType = Empty
   }
 }

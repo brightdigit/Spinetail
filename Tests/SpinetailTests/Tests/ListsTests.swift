@@ -36,7 +36,7 @@ final class ListsTests: XCTestCase {
       subscriberHash: emailAddress
     )
 
-    let member: ListMembers2Model?
+    let member: ListMembers?
     let interested: Bool
 
     do {

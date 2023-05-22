@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsCustomerJourneys {
+public extension CustomerJourneys {
   /**
    Customer Journeys API trigger for a contact
 
@@ -34,11 +34,9 @@ public extension AutomationsAutomationsCustomerJourneys {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "postCustomerJourneysJourneysIdStepsIdActionsTrigger", tag: "customerJourneys", method: "POST", path: "/customer-journeys/journeys/{journey_id}/steps/{step_id}/actions/trigger", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
     public typealias SuccessType = [String: String]
-    public typealias BodyType = SubscriberInCustomerJourneysAudienceModel
+    public typealias BodyType = SubscriberInCustomerJourneysAudience
 
-    public let body: SubscriberInCustomerJourneysAudienceModel
+    public let body: SubscriberInCustomerJourneysAudience
   }
 }

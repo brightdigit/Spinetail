@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsTemplateFolders {
+public extension TemplateFolders {
   /**
    Delete template folder
 
@@ -30,8 +30,6 @@ public extension AutomationsAutomationsTemplateFolders {
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "deleteTemplateFoldersId", tag: "templateFolders", method: "DELETE", path: "/template-folders/{folder_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = Empty
     public typealias BodyType = Empty

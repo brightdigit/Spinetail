@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsAutomations {
+public extension Automations {
   /**
    Update workflow email
 
@@ -34,11 +34,9 @@ public extension AutomationsAutomationsAutomations {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "patchAutomationEmailWorkflowId", tag: "automations", method: "PATCH", path: "/automations/{workflow_id}/emails/{workflow_email_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = AutomationWorkflowEmail
+    public typealias BodyType = UpdateInformationAboutaSpecificWorkflowEmail
 
-    public typealias SuccessType = AutomationWorkflowEmailModel
-    public typealias BodyType = UpdateInformationAboutaSpecificWorkflowEmailModel
-
-    public let body: UpdateInformationAboutaSpecificWorkflowEmailModel
+    public let body: UpdateInformationAboutaSpecificWorkflowEmail
   }
 }

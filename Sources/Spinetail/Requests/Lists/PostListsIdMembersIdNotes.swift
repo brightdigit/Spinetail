@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLists {
+public extension Lists {
   /**
    Add member note
 
@@ -34,11 +34,9 @@ public extension AutomationsAutomationsLists {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "postListsIdMembersIdNotes", tag: "lists", method: "POST", path: "/lists/{list_id}/members/{subscriber_hash}/notes", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = MemberNotes
+    public typealias BodyType = MemberNotes1
 
-    public typealias SuccessType = MemberNotesModel
-    public typealias BodyType = MemberNotes1Model
-
-    public let body: MemberNotes1Model
+    public let body: MemberNotes1
   }
 }

@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsConnectedSites {
+public extension ConnectedSites {
   /**
    List connected sites
 
@@ -54,8 +54,6 @@ public extension AutomationsAutomationsConnectedSites {
     }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "getConnectedSites", tag: "connectedSites", method: "GET", path: "/connected-sites", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = ConnectedSitesModel
     public typealias BodyType = Empty

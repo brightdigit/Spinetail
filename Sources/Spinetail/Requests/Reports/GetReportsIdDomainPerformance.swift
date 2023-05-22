@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsReports {
+public extension Reports {
   /**
    List domain performance stats
 
@@ -46,9 +46,7 @@ public extension AutomationsAutomationsReports {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getReportsIdDomainPerformance", tag: "reports", method: "GET", path: "/reports/{campaign_id}/domain-performance", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = DomainPerformanceModel
+    public typealias SuccessType = DomainPerformance
     public typealias BodyType = Empty
   }
 }

@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsEcommerce {
+public extension Ecommerce {
   /**
    Get product variant info
 
@@ -52,9 +52,7 @@ public extension AutomationsAutomationsEcommerce {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getEcommerceStoresIdProductsIdVariantsId", tag: "ecommerce", method: "GET", path: "/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = ECommerceProductVariantModel
+    public typealias SuccessType = ECommerceProductVariant
     public typealias BodyType = Empty
   }
 }

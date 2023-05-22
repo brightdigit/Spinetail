@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsRoot {
+public extension Root {
   /**
    List api root resources
 
@@ -43,9 +43,7 @@ public extension AutomationsAutomationsRoot {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getRoot", tag: "root", method: "GET", path: "/", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = APIRootModel
+    public typealias SuccessType = APIRoot
     public typealias BodyType = Empty
   }
 }

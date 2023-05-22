@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLists {
+public extension Lists {
   /**
    List merge fields
 
@@ -70,9 +70,7 @@ public extension AutomationsAutomationsLists {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getListsIdMergeFields", tag: "lists", method: "GET", path: "/lists/{list_id}/merge-fields", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = CollectionOfMergeFieldsModel
+    public typealias SuccessType = CollectionOfMergeFields
     public typealias BodyType = Empty
   }
 }

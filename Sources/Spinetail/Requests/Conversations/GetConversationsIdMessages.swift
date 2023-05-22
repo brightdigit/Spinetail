@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsConversations {
+public extension Conversations {
   /**
    List messages
 
@@ -37,10 +37,10 @@ public extension AutomationsAutomationsConversations {
     public var isRead: IsRead?
 
     /** Restrict the response to messages created before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var beforeTimestamp: DateTime?
+    public var beforeTimestamp: MailchimpOptionalDate
 
     /** Restrict the response to messages created after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var sinceTimestamp: DateTime?
+    public var sinceTimestamp: MailchimpOptionalDate
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]
@@ -53,10 +53,10 @@ public extension AutomationsAutomationsConversations {
       if let isRead = self.isRead {
         params["is_read"] = String(describing: isRead)
       }
-      if let beforeTimestamp = self.beforeTimestamp {
+      if let beforeTimestamp = self.beforeTimestamp.value {
         params["before_timestamp"] = String(describing: beforeTimestamp)
       }
-      if let sinceTimestamp = self.sinceTimestamp {
+      if let sinceTimestamp = self.sinceTimestamp.value {
         params["since_timestamp"] = String(describing: sinceTimestamp)
       }
       return params
@@ -64,15 +64,13 @@ public extension AutomationsAutomationsConversations {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getConversationsIdMessages", tag: "conversations", method: "GET", path: "/conversations/{conversation_id}/messages", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
     /** Whether a conversation message has been marked as read. */
-    public enum AutomationsAutomationsIsRead: String, Codable, Equatable, CaseIterable {
+    public enum IsRead: String, Codable, Equatable, CaseIterable {
       case `true`
       case `false`
     }
 
-    public typealias SuccessType = CollectionOfConversationMessagesModel
+    public typealias SuccessType = CollectionOfConversationMessages
     public typealias BodyType = Empty
   }
 }

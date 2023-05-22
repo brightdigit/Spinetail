@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLists {
+public extension Lists {
   /**
    Get interest in category
 
@@ -52,9 +52,7 @@ public extension AutomationsAutomationsLists {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getListsIdInterestCategoriesIdInterestsId", tag: "lists", method: "GET", path: "/lists/{list_id}/interest-categories/{interest_category_id}/interests/{interest_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = InterestModel
+    public typealias SuccessType = Interest
     public typealias BodyType = Empty
   }
 }

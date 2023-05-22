@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsBatchWebhooks {
+public extension BatchWebhooks {
   /**
    List batch webhooks
 
@@ -54,8 +54,6 @@ public extension AutomationsAutomationsBatchWebhooks {
     }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "getBatchWebhooks", tag: "batchWebhooks", method: "GET", path: "/batch-webhooks", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = BatchWebhooksModel
     public typealias BodyType = Empty

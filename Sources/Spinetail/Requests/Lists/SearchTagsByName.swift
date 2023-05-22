@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLists {
+public extension Lists {
   /**
    Search for tags on a list by name.
 
@@ -40,9 +40,7 @@ public extension AutomationsAutomationsLists {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "searchTagsByName", tag: "lists", method: "GET", path: "/lists/{list_id}/tag-search", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = TagSearchResultsModel
+    public typealias SuccessType = TagSearchResults
     public typealias BodyType = Empty
   }
 }

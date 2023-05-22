@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsSurveys {
+public extension Surveys {
   /**
    Publish a Survey
 
@@ -33,8 +33,6 @@ public extension AutomationsAutomationsSurveys {
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "postListsIdSurveysIdActionsPublish", tag: "Surveys", method: "POST", path: "/lists/{list_id}/surveys/{survey_id}/actions/publish", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = Empty
     public typealias BodyType = Empty

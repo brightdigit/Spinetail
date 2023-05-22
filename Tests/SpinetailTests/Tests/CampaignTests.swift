@@ -34,7 +34,7 @@ final class CampaignTests: XCTestCase {
       return
     }
 
-    let settings: CampaignSettings3Model =
+    let settings: CampaignSettings3 =
       .init(
         fromName: "Leo",
         replyTo: "leogdion+mailchimpdev@brightdigit.com",
@@ -42,7 +42,7 @@ final class CampaignTests: XCTestCase {
         templateId: templateID
       )
 
-    let body: Campaign1Model = .init(type: .regular, recipients: .init(listId: Self.listID), settings: settings)
+    let body: Campaign1 = .init(type: .regular, recipients: .init(listId: Self.listID), settings: settings)
     let campaign = try await client.request(Campaigns.PostCampaigns(body: body))
 //      .createCampaign(
 //      withTemplateID: templateID,

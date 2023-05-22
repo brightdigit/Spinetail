@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsConnectedSites {
+public extension ConnectedSites {
   /**
    Delete connected site
 
@@ -30,8 +30,6 @@ public extension AutomationsAutomationsConnectedSites {
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "deleteConnectedSitesId", tag: "connectedSites", method: "DELETE", path: "/connected-sites/{connected_site_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = Empty
     public typealias BodyType = Empty

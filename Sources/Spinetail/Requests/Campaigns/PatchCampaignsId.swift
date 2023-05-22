@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsCampaigns {
+public extension Campaigns {
   /**
    Update campaign settings
 
@@ -31,11 +31,9 @@ public extension AutomationsAutomationsCampaigns {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "patchCampaignsId", tag: "campaigns", method: "PATCH", path: "/campaigns/{campaign_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = Campaign
+    public typealias BodyType = Campaign2
 
-    public typealias SuccessType = CampaignModel
-    public typealias BodyType = Campaign2Model
-
-    public let body: Campaign2Model
+    public let body: Campaign2
   }
 }

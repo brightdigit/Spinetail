@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLists {
+public extension Lists {
   /**
    List recent member notes
 
@@ -73,22 +73,20 @@ public extension AutomationsAutomationsLists {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getListsIdMembersIdNotes", tag: "lists", method: "GET", path: "/lists/{list_id}/members/{subscriber_hash}/notes", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
     /** Returns notes sorted by the specified field. */
-    public enum AutomationsAutomationsSortField: String, Codable, Equatable, CaseIterable {
+    public enum SortField: String, Codable, Equatable, CaseIterable {
       case createdAt = "created_at"
       case updatedAt = "updated_at"
       case noteId = "note_id"
     }
 
     /** Determines the order direction for sorted results. */
-    public enum AutomationsAutomationsSortDir: String, Codable, Equatable, CaseIterable {
+    public enum SortDir: String, Codable, Equatable, CaseIterable {
       case asc = "ASC"
       case desc = "DESC"
     }
 
-    public typealias SuccessType = CollectionOfNotesModel
+    public typealias SuccessType = CollectionOfNotes
     public typealias BodyType = Empty
   }
 }

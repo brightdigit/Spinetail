@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsFileManager {
+public extension FileManager {
   /**
    List folders
 
@@ -73,9 +73,7 @@ public extension AutomationsAutomationsFileManager {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getFileManagerFolders", tag: "fileManager", method: "GET", path: "/file-manager/folders", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = FileManagerFoldersModel
+    public typealias SuccessType = FileManagerFolders
     public typealias BodyType = Empty
   }
 }

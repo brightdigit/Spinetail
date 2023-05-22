@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsCampaigns {
+public extension Campaigns {
   /**
    List campaigns
 
@@ -43,16 +43,16 @@ public extension AutomationsAutomationsCampaigns {
     public var status: Status?
 
     /** Restrict the response to campaigns sent before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var beforeSendTime: DateTime?
+    public var beforeSendTime: MailchimpOptionalDate = nil
 
     /** Restrict the response to campaigns sent after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var sinceSendTime: DateTime?
+    public var sinceSendTime: MailchimpOptionalDate = nil
 
     /** Restrict the response to campaigns created before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var beforeCreateTime: DateTime?
+    public var beforeCreateTime: MailchimpOptionalDate = nil
 
     /** Restrict the response to campaigns created after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var sinceCreateTime: DateTime?
+    public var sinceCreateTime: MailchimpOptionalDate = nil
 
     /** The unique id for the list. */
     public var listId: String?
@@ -89,16 +89,16 @@ public extension AutomationsAutomationsCampaigns {
       if let status = self.status {
         params["status"] = String(describing: status)
       }
-      if let beforeSendTime = self.beforeSendTime {
+      if let beforeSendTime = self.beforeSendTime.value {
         params["before_send_time"] = String(describing: beforeSendTime)
       }
-      if let sinceSendTime = self.sinceSendTime {
+      if let sinceSendTime = self.sinceSendTime.value {
         params["since_send_time"] = String(describing: sinceSendTime)
       }
-      if let beforeCreateTime = self.beforeCreateTime {
+      if let beforeCreateTime = self.beforeCreateTime.value {
         params["before_create_time"] = String(describing: beforeCreateTime)
       }
-      if let sinceCreateTime = self.sinceCreateTime {
+      if let sinceCreateTime = self.sinceCreateTime.value {
         params["since_create_time"] = String(describing: sinceCreateTime)
       }
       if let listId = self.listId {
@@ -121,10 +121,8 @@ public extension AutomationsAutomationsCampaigns {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getCampaigns", tag: "campaigns", method: "GET", path: "/campaigns", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
     /** The campaign type. */
-    public enum Automations`Type`: String, Codable, Equatable, CaseIterable {
+    public enum `Type`: String, Codable, Equatable, CaseIterable {
       case regular
       case plaintext
       case absplit
@@ -133,7 +131,7 @@ public extension AutomationsAutomationsCampaigns {
     }
 
     /** The status of the campaign. */
-    public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
+    public enum Status: String, Codable, Equatable, CaseIterable {
       case save
       case paused
       case schedule
@@ -142,18 +140,18 @@ public extension AutomationsAutomationsCampaigns {
     }
 
     /** Returns files sorted by the specified field. */
-    public enum AutomationsAutomationsSortField: String, Codable, Equatable, CaseIterable {
+    public enum SortField: String, Codable, Equatable, CaseIterable {
       case createTime = "create_time"
       case sendTime = "send_time"
     }
 
     /** Determines the order direction for sorted results. */
-    public enum AutomationsAutomationsSortDir: String, Codable, Equatable, CaseIterable {
+    public enum SortDir: String, Codable, Equatable, CaseIterable {
       case asc = "ASC"
       case desc = "DESC"
     }
 
-    public typealias SuccessType = GetCampaigns200ResponseModel
+    public typealias SuccessType = GetCampaigns200Response
     public typealias BodyType = Empty
   }
 }

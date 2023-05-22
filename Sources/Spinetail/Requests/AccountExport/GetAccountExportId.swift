@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsAccountExport {
+public extension AccountExport {
   /**
    Get account export info
 
@@ -46,9 +46,7 @@ public extension AutomationsAutomationsAccountExport {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getAccountExportId", tag: "accountExport", method: "GET", path: "/account-exports/{export_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = AccountExportsInnerModel
+    public typealias SuccessType = AccountExportsInner
     public typealias BodyType = Empty
   }
 }

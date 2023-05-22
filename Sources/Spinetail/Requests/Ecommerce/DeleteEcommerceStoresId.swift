@@ -1,11 +1,7 @@
 import Foundation
 import PrchModel
 
-extension AutomationsAutomationsDictionary: ContentEncodable where Key: Encodable, Value: Encodable {}
-
-extension AutomationsAutomationsDictionary: ContentDecodable where Key: Decodable, Value: Decodable {}
-
-public extension AutomationsAutomationsEcommerce {
+public extension Ecommerce {
   /**
    Delete store
 
@@ -34,8 +30,6 @@ public extension AutomationsAutomationsEcommerce {
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "deleteEcommerceStoresId", tag: "ecommerce", method: "DELETE", path: "/ecommerce/stores/{store_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = [String: String]
     public typealias BodyType = Empty

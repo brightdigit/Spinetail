@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsLists {
+public extension Lists {
   /**
    List top email clients
 
@@ -46,9 +46,7 @@ public extension AutomationsAutomationsLists {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getListsIdClients", tag: "lists", method: "GET", path: "/lists/{list_id}/clients", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = EmailClientsModel
+    public typealias SuccessType = EmailClients
     public typealias BodyType = Empty
   }
 }

@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsAutomations {
+public extension Automations {
   /**
    Start automated email
 
@@ -33,8 +33,6 @@ public extension AutomationsAutomationsAutomations {
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "postAutomationsIdEmailsIdActionsStart", tag: "automations", method: "POST", path: "/automations/{workflow_id}/emails/{workflow_email_id}/actions/start", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = Empty
     public typealias BodyType = Empty

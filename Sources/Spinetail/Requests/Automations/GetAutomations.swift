@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsAutomations {
+public extension Automations {
   /**
    List automations
 
@@ -37,16 +37,16 @@ public extension AutomationsAutomationsAutomations {
     public var excludeFields: [String]?
 
     /** Restrict the response to automations created before this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var beforeCreateTime: DateTime?
+    public var beforeCreateTime: MailchimpOptionalDate
 
     /** Restrict the response to automations created after this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var sinceCreateTime: DateTime?
+    public var sinceCreateTime: MailchimpOptionalDate
 
     /** Restrict the response to automations started before this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var beforeStartTime: DateTime?
+    public var beforeStartTime: MailchimpOptionalDate
 
     /** Restrict the response to automations started after this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var sinceStartTime: DateTime?
+    public var sinceStartTime: MailchimpOptionalDate
 
     /** Restrict the results to automations with the specified status. */
     public var status: Status?
@@ -65,16 +65,16 @@ public extension AutomationsAutomationsAutomations {
       if let excludeFields = self.excludeFields?.joined(separator: ",") {
         params["exclude_fields"] = String(describing: excludeFields)
       }
-      if let beforeCreateTime = self.beforeCreateTime {
+      if let beforeCreateTime = self.beforeCreateTime.value {
         params["before_create_time"] = String(describing: beforeCreateTime)
       }
-      if let sinceCreateTime = self.sinceCreateTime {
+      if let sinceCreateTime = self.sinceCreateTime.value {
         params["since_create_time"] = String(describing: sinceCreateTime)
       }
-      if let beforeStartTime = self.beforeStartTime {
+      if let beforeStartTime = self.beforeStartTime.value {
         params["before_start_time"] = String(describing: beforeStartTime)
       }
-      if let sinceStartTime = self.sinceStartTime {
+      if let sinceStartTime = self.sinceStartTime.value {
         params["since_start_time"] = String(describing: sinceStartTime)
       }
       if let status = self.status {
@@ -85,16 +85,14 @@ public extension AutomationsAutomationsAutomations {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getAutomations", tag: "automations", method: "GET", path: "/automations", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
     /** Restrict the results to automations with the specified status. */
-    public enum AutomationsAutomationsStatus: String, Codable, Equatable, CaseIterable {
+    public enum Status: String, Codable, Equatable, CaseIterable {
       case save
       case paused
       case sending
     }
 
-    public typealias SuccessType = GetAutomations200ResponseModel
+    public typealias SuccessType = GetAutomations200Response
     public typealias BodyType = Empty
   }
 }

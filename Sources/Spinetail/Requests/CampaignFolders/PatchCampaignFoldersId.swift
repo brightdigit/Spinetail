@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsCampaignFolders {
+public extension CampaignFolders {
   /**
    Update campaign folder
 
@@ -31,11 +31,9 @@ public extension AutomationsAutomationsCampaignFolders {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "patchCampaignFoldersId", tag: "campaignFolders", method: "PATCH", path: "/campaign-folders/{folder_id}", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = CampaignFolder
+    public typealias BodyType = CampaignFolder1
 
-    public typealias SuccessType = CampaignFolderModel
-    public typealias BodyType = CampaignFolder1Model
-
-    public let body: CampaignFolder1Model
+    public let body: CampaignFolder1
   }
 }

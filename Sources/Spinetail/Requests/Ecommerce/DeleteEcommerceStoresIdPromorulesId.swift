@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsEcommerce {
+public extension Ecommerce {
   /**
    Delete promo rule
 
@@ -33,8 +33,6 @@ public extension AutomationsAutomationsEcommerce {
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
-
-    // public static let service = APIService<Response>(id: "deleteEcommerceStoresIdPromorulesId", tag: "ecommerce", method: "DELETE", path: "/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
 
     public typealias SuccessType = Empty
     public typealias BodyType = Empty

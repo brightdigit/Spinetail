@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsFileManager {
+public extension FileManager {
   /**
    Add file
 
@@ -28,11 +28,9 @@ public extension AutomationsAutomationsFileManager {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "postFileManagerFiles", tag: "fileManager", method: "POST", path: "/file-manager/files", hasBody: true, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
+    public typealias SuccessType = GalleryFile
+    public typealias BodyType = GalleryFile1
 
-    public typealias SuccessType = GalleryFileModel
-    public typealias BodyType = GalleryFile1Model
-
-    public let body: GalleryFile1Model
+    public let body: GalleryFile1
   }
 }

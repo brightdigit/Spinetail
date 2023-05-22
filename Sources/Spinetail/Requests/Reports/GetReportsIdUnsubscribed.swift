@@ -1,7 +1,7 @@
 import Foundation
 import PrchModel
 
-public extension AutomationsAutomationsReports {
+public extension Reports {
   /**
    List unsubscribed members
 
@@ -58,9 +58,7 @@ public extension AutomationsAutomationsReports {
 
     public var headers: [String: String] { [:] }
 
-    // public static let service = APIService<Response>(id: "getReportsIdUnsubscribed", tag: "reports", method: "GET", path: "/reports/{campaign_id}/unsubscribed", hasBody: false, securityRequirements: [SecurityRequirement(type: "basicAuth", scopes: [])])
-
-    public typealias SuccessType = UnsubscribesModel
+    public typealias SuccessType = Unsubscribes
     public typealias BodyType = Empty
   }
 }
