@@ -125,5 +125,6 @@ excluded:
   - .build
   - Tests/LinuxMain.swift
   - Packages
+  - Templates
 indentation_width:
   indentation_width: 2

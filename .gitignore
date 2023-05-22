@@ -143,3 +143,5 @@ xcuserdata
 
 *.pxd/QuickLook
 env.json
+.openapi-generator*
+.mint
