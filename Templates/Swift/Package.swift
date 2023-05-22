@@ -15,16 +15,16 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/brightdigit/Prch.git", from: "1.0.0-alpha.1"),
-    {% for dependency in options.dependencies %}
-    .package(url: "https://github.com/{{ dependency.github }}.git", from: "{{ dependency.version }}"),
-    {% endfor %}
+    { % for dependency in options.dependencies % }
+      .package(url: "https://github.com/{{ dependency.github }}.git", from: "{{ dependency.version }}"),
+    { % endfor % }
   ],
   targets: [
-        .target(name: "{{ options.name }}", dependencies: [
-        .product(name: "PrchModel", package: "Prch")
-    {% for dependency in options.dependencies %}
-    "{{ dependency.name }}",
-    {% endfor %}
-  ])
+    .target(name: "{{ options.name }}", dependencies: [
+      .product(name: "PrchModel", package: "Prch")
+        { % for dependency in options.dependencies % }
+      "{{ dependency.name }}",
+      { % endfor % }
+    ])
   ]
 )

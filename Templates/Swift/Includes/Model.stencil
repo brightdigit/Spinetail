@@ -57,7 +57,7 @@ public struct {{ type }}: {% if parent %}{{ parent.type }}{% else %}{% if option
     {% endif %}
     {% endfor %}
     {% for property in properties %}
-
+ # fix missing props
     {% if property.description %}
     /** {{ property.description }} */
     {% endif %}

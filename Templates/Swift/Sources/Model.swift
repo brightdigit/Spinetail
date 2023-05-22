@@ -1,5 +1,5 @@
-{% include "Includes/Header.stencil" %}
+{ % include "Includes/Header.stencil" % }
 
 import Foundation
 
-{% include "Includes/Model.stencil" %}
+  { % include "Includes/Model.stencil" % }

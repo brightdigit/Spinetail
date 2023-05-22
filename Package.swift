@@ -17,7 +17,9 @@ let package = Package(
     .package(url: "https://github.com/brightdigit/Prch.git", from: "1.0.0-alpha.1")
   ],
   targets: [
-    .target(name: "Spinetail", dependencies: ["Prch"]),
-    .testTarget(name: "SpinetailTests", dependencies: ["Spinetail"])
+    .target(name: "Spinetail", dependencies: [
+      .product(name: "PrchModel", package: "Prch")
+    ]),
+    .testTarget(name: "SpinetailTests", dependencies: ["Spinetail", "Prch"])
   ]
 )
