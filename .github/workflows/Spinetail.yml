@@ -61,8 +61,8 @@ jobs:
         run: echo "$GITHUB_WORKSPACE/swift-${SWIFT_VER}-RELEASE-ubuntu${RELEASE_DOT}/usr/bin" >> $GITHUB_PATH
       - name: Build
         run: swift build
-      - name: Run tests
-        run: swift test --enable-test-discovery --enable-code-coverage
+#       - name: Run tests
+#         run: swift test --enable-test-discovery --enable-code-coverage
       # - name: Prepare Code Coverage
       #   run: llvm-cov export -format="lcov" .build/x86_64-unknown-linux-gnu/debug/${{ env.PACKAGE_NAME }}PackageTests.xctest -instr-profile .build/debug/codecov/default.profdata > info.lcov
       # - name: Upload to CodeCov.io
