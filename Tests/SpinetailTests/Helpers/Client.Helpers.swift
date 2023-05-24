@@ -2,6 +2,10 @@ import Foundation
 import Prch
 import Spinetail
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 class MailchimpService: Service {
   convenience init?(apiKey: String, session: URLSession = .shared) {
     guard let api = SpinetailAPI(apiKey: apiKey) else {
