@@ -21,7 +21,7 @@ public struct GalleryFolder: Codable, Equatable, Content {
   /** The name of the folder. */
   public let name: String?
 
-  public init(links: [ResourceLink]? = nil, createdAt: MailchimpOptionalDate = nil, createdBy: String? = nil, fileCount: Int? = nil, id: Int? = nil, name: String? = nil) {
+  public init(links: [ResourceLink]? = nil, createdAt: MailchimpOptionalDate, createdBy: String? = nil, fileCount: Int? = nil, id: Int? = nil, name: String? = nil) {
     self.links = links
     self.createdAt = createdAt
     self.createdBy = createdBy

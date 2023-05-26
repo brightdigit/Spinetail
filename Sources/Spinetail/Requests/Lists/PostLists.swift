@@ -24,6 +24,10 @@ public extension Lists {
       .POST
     }
 
+    public init(body: SubscriberList1) {
+      self.body = body
+    }
+
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }

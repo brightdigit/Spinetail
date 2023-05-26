@@ -25,10 +25,15 @@ public extension Lists {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** The unique id for the segment. */
-    public var segmentId: String
+    public let segmentId: String
+
+    public init(listId: String, segmentId: String) {
+      self.listId = listId
+      self.segmentId = segmentId
+    }
 
     public var parameters: [String: String] { [:] }
 

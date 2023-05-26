@@ -99,7 +99,18 @@ public struct GetReportingFacebookAdsId200Response: Codable, Equatable, Content 
   /** Web ID */
   public let webId: Int?
 
-  public init(links: [ResourceLink]? = nil, audience: GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2Audience? = nil, audienceActivity: GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfAudienceActivity? = nil, budget: GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2Budget? = nil, canceledAt: MailchimpOptionalDate = nil, channel: GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2Channel? = nil, createTime: MailchimpOptionalDate = nil, emailSourceName: String? = nil, endTime: MailchimpOptionalDate = nil, hasSegment: Bool? = nil, id: String? = nil, name: String? = nil, needsAttention: Bool? = nil, pausedAt: MailchimpOptionalDate = nil, publishedTime: MailchimpOptionalDate = nil, recipients: List10? = nil, reportSummary: GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummary? = nil, showReport: Bool? = nil, startTime: MailchimpOptionalDate = nil, status: Status? = nil, thumbnail: String? = nil, type: Type? = nil, updatedAt: MailchimpOptionalDate = nil, wasCanceledByFacebook: Bool? = nil, webId: Int? = nil) {
+  public init(
+    links: [ResourceLink]? = nil,
+    audience: GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2Audience? = nil,
+    audienceActivity: GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfAudienceActivity? = nil,
+    budget: GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2Budget? = nil, canceledAt: MailchimpOptionalDate, channel: GetAllFacebookAds200ResponseFacebookAdsInnerAllOf2Channel? = nil,
+    createTime: MailchimpOptionalDate, emailSourceName: String? = nil, endTime: MailchimpOptionalDate,
+    hasSegment: Bool? = nil, id: String? = nil, name: String? = nil, needsAttention: Bool? = nil,
+    pausedAt: MailchimpOptionalDate, publishedTime: MailchimpOptionalDate, recipients: List10? = nil,
+    reportSummary: GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummary? = nil,
+    showReport: Bool? = nil, startTime: MailchimpOptionalDate, status: Status? = nil, thumbnail: String? = nil,
+    type: Type? = nil, updatedAt: MailchimpOptionalDate, wasCanceledByFacebook: Bool? = nil, webId: Int? = nil
+  ) {
     self.links = links
     self.audience = audience
     self.audienceActivity = audienceActivity

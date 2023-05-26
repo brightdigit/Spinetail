@@ -25,22 +25,31 @@ public extension Lists {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** The MD5 hash of the lowercase version of the list member's email address. This endpoint also accepts a list member's email address or contact_id. */
-    public var subscriberHash: String
+    public let subscriberHash: String
 
     /** The number of records to return. Default value is 10. Maximum value is 1000 */
-    public var count: Int?
+    public let count: Int?
 
     /** Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0. */
-    public var offset: Int?
+    public let offset: Int?
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
+
+    public init(listId: String, subscriberHash: String, count: Int? = nil, offset: Int? = nil, fields: [String]? = nil, excludeFields: [String]? = nil) {
+      self.listId = listId
+      self.subscriberHash = subscriberHash
+      self.count = count
+      self.offset = offset
+      self.fields = fields
+      self.excludeFields = excludeFields
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

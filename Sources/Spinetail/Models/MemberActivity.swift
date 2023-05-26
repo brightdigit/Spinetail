@@ -24,7 +24,7 @@ public struct MemberActivity: Codable, Equatable, Content {
   /** For clicks, the URL the subscriber clicked on. */
   public let url: String?
 
-  public init(action: String? = nil, campaignId: String? = nil, parentCampaign: String? = nil, timestamp: MailchimpOptionalDate = nil, title: String? = nil, type: String? = nil, url: String? = nil) {
+  public init(action: String? = nil, campaignId: String? = nil, parentCampaign: String? = nil, timestamp: MailchimpOptionalDate, title: String? = nil, type: String? = nil, url: String? = nil) {
     self.action = action
     self.campaignId = campaignId
     self.parentCampaign = parentCampaign

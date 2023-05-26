@@ -58,7 +58,7 @@ public struct TemplateInstance: Codable, Equatable, Content {
   /** The type of template (user, base, or gallery). */
   public let type: String?
 
-  public init(links: [ResourceLink]? = nil, active: Bool? = nil, category: String? = nil, contentType: ContentType? = nil, createdBy: String? = nil, dateCreated: MailchimpOptionalDate = nil, dateEdited: MailchimpOptionalDate = nil, dragAndDrop: Bool? = nil, editedBy: String? = nil, folderId: String? = nil, id: Int? = nil, name: String? = nil, responsive: Bool? = nil, shareURL: String? = nil, thumbnail: String? = nil, type: String? = nil) {
+  public init(links: [ResourceLink]? = nil, active: Bool? = nil, category: String? = nil, contentType: ContentType? = nil, createdBy: String? = nil, dateCreated: MailchimpOptionalDate, dateEdited: MailchimpOptionalDate, dragAndDrop: Bool? = nil, editedBy: String? = nil, folderId: String? = nil, id: Int? = nil, name: String? = nil, responsive: Bool? = nil, shareURL: String? = nil, thumbnail: String? = nil, type: String? = nil) {
     self.links = links
     self.active = active
     self.category = category

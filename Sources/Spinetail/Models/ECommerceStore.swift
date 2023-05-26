@@ -57,7 +57,7 @@ public struct ECommerceStore: Codable, Equatable, Content {
   /** The date and time the store was last updated in ISO 8601 format. */
   public let updatedAt: MailchimpOptionalDate
 
-  public init(links: [ResourceLink]? = nil, address: Address1? = nil, automations: AutomationsModel? = nil, connectedSite: ConnectedSite2? = nil, createdAt: MailchimpOptionalDate = nil, currencyCode: String? = nil, domain: String? = nil, emailAddress: String? = nil, id: String? = nil, isSyncing: Bool? = nil, listId: String? = nil, listIsActive: Bool? = nil, moneyFormat: String? = nil, name: String? = nil, phone: String? = nil, platform: String? = nil, primaryLocale: String? = nil, timezone: String? = nil, updatedAt: MailchimpOptionalDate = nil) {
+  public init(links: [ResourceLink]? = nil, address: Address1? = nil, automations: AutomationsModel? = nil, connectedSite: ConnectedSite2? = nil, createdAt: MailchimpOptionalDate, currencyCode: String? = nil, domain: String? = nil, emailAddress: String? = nil, id: String? = nil, isSyncing: Bool? = nil, listId: String? = nil, listIsActive: Bool? = nil, moneyFormat: String? = nil, name: String? = nil, phone: String? = nil, platform: String? = nil, primaryLocale: String? = nil, timezone: String? = nil, updatedAt: MailchimpOptionalDate) {
     self.links = links
     self.address = address
     self.automations = automations

@@ -66,7 +66,7 @@ public struct AutomationWorkflowEmail: Codable, Equatable, Content {
   /** A string that uniquely identifies an Automation workflow. */
   public let workflowId: String?
 
-  public init(links: [ResourceLink]? = nil, archiveURL: String? = nil, contentType: String? = nil, createTime: MailchimpOptionalDate = nil, delay: AutomationDelay? = nil, emailsSent: Int? = nil, hasLogoMergeTag: Bool? = nil, id: String? = nil, needsBlockRefresh: Bool? = nil, position: Int? = nil, recipients: List2? = nil, reportSummary: CampaignReportSummary1? = nil, sendTime: MailchimpOptionalDate = nil, settings: CampaignSettings? = nil, socialCard: CampaignSocialCard? = nil, startTime: MailchimpOptionalDate = nil, status: Status? = nil, tracking: CampaignTrackingOptions? = nil, triggerSettings: AutomationTrigger? = nil, webId: Int? = nil, workflowId: String? = nil) {
+  public init(links: [ResourceLink]? = nil, archiveURL: String? = nil, contentType: String? = nil, createTime: MailchimpOptionalDate, delay: AutomationDelay? = nil, emailsSent: Int? = nil, hasLogoMergeTag: Bool? = nil, id: String? = nil, needsBlockRefresh: Bool? = nil, position: Int? = nil, recipients: List2? = nil, reportSummary: CampaignReportSummary1? = nil, sendTime: MailchimpOptionalDate, settings: CampaignSettings? = nil, socialCard: CampaignSocialCard? = nil, startTime: MailchimpOptionalDate, status: Status? = nil, tracking: CampaignTrackingOptions? = nil, triggerSettings: AutomationTrigger? = nil, webId: Int? = nil, workflowId: String? = nil) {
     self.links = links
     self.archiveURL = archiveURL
     self.contentType = contentType

@@ -24,6 +24,10 @@ public extension ConnectedSites {
       .POST
     }
 
+    public init(body: ConnectedSite1) {
+      self.body = body
+    }
+
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }

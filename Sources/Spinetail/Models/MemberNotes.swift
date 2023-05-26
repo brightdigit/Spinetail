@@ -30,7 +30,7 @@ public struct MemberNotes: Codable, Equatable, Content {
   /** The date and time the note was last updated in ISO 8601 format. */
   public let updatedAt: MailchimpOptionalDate
 
-  public init(links: [ResourceLink]? = nil, contactId: String? = nil, createdAt: MailchimpOptionalDate = nil, createdBy: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, note: String? = nil, updatedAt: MailchimpOptionalDate = nil) {
+  public init(links: [ResourceLink]? = nil, contactId: String? = nil, createdAt: MailchimpOptionalDate, createdBy: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, note: String? = nil, updatedAt: MailchimpOptionalDate) {
     self.links = links
     self.contactId = contactId
     self.createdAt = createdAt

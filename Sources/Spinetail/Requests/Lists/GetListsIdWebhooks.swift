@@ -25,7 +25,11 @@ public extension Lists {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
+
+    public init(listId: String) {
+      self.listId = listId
+    }
 
     public var parameters: [String: String] { [:] }
 

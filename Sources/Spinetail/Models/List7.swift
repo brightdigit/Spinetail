@@ -36,7 +36,7 @@ public struct List7: Codable, Equatable, Content {
   /** The date and time the segment was last updated in ISO 8601 format. */
   public let updatedAt: MailchimpOptionalDate
 
-  public init(links: [ResourceLink]? = nil, createdAt: MailchimpOptionalDate = nil, id: Int? = nil, listId: String? = nil, memberCount: Int? = nil, name: String? = nil, options: Conditions? = nil, type: Type? = nil, updatedAt: MailchimpOptionalDate = nil) {
+  public init(links: [ResourceLink]? = nil, createdAt: MailchimpOptionalDate, id: Int? = nil, listId: String? = nil, memberCount: Int? = nil, name: String? = nil, options: Conditions? = nil, type: Type? = nil, updatedAt: MailchimpOptionalDate) {
     self.links = links
     self.createdAt = createdAt
     self.id = id

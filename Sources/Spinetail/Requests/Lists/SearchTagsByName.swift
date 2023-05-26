@@ -25,10 +25,15 @@ public extension Lists {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** The search query used to filter tags.  The search query will be compared to each tag as a prefix, so all tags that have a name starting with this field will be returned. */
-    public var name: String?
+    public let name: String?
+
+    public init(listId: String, name: String? = nil) {
+      self.listId = listId
+      self.name = name
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

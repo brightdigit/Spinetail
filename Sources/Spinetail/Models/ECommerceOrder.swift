@@ -82,7 +82,16 @@ public struct ECommerceOrder: Codable, Equatable, Content {
   /** The date and time the order was updated in ISO 8601 format. */
   public let updatedAtForeign: MailchimpOptionalDate
 
-  public init(links: [ResourceLink]? = nil, billingAddress: BillingAddress? = nil, campaignId: String? = nil, cancelledAtForeign: MailchimpOptionalDate = nil, currencyCode: String? = nil, customer: ECommerceCustomer? = nil, discountTotal: Double? = nil, financialStatus: String? = nil, fulfillmentStatus: String? = nil, id: String? = nil, landingSite: String? = nil, lines: [ECommerceOrderLineItem]? = nil, orderTotal: Double? = nil, orderURL: String? = nil, outreach: Outreach? = nil, processedAtForeign: MailchimpOptionalDate = nil, promos: [PromosInner]? = nil, shippingAddress: ShippingAddress? = nil, shippingTotal: Double? = nil, storeId: String? = nil, taxTotal: Double? = nil, trackingCarrier: String? = nil, trackingCode: TrackingCode? = nil, trackingNumber: String? = nil, trackingURL: String? = nil, updatedAtForeign: MailchimpOptionalDate = nil) {
+  public init(
+    links: [ResourceLink]? = nil, billingAddress: BillingAddress? = nil, campaignId: String? = nil,
+    cancelledAtForeign: MailchimpOptionalDate, currencyCode: String? = nil, customer: ECommerceCustomer? = nil,
+    discountTotal: Double? = nil, financialStatus: String? = nil, fulfillmentStatus: String? = nil, id: String? = nil,
+    landingSite: String? = nil, lines: [ECommerceOrderLineItem]? = nil, orderTotal: Double? = nil,
+    orderURL: String? = nil, outreach: Outreach? = nil, processedAtForeign: MailchimpOptionalDate,
+    promos: [PromosInner]? = nil, shippingAddress: ShippingAddress? = nil, shippingTotal: Double? = nil, storeId: String? = nil, taxTotal: Double? = nil, trackingCarrier: String? = nil,
+    trackingCode: TrackingCode? = nil, trackingNumber: String? = nil, trackingURL: String? = nil,
+    updatedAtForeign: MailchimpOptionalDate
+  ) {
     self.links = links
     self.billingAddress = billingAddress
     self.campaignId = campaignId

@@ -12,7 +12,7 @@ public struct Event: Codable, Equatable, Content {
   /** An optional list of properties */
   public let properties: [String: String]?
 
-  public init(name: String? = nil, occurredAt: MailchimpOptionalDate = nil, properties: [String: String]? = nil) {
+  public init(name: String? = nil, occurredAt: MailchimpOptionalDate, properties: [String: String]? = nil) {
     self.name = name
     self.occurredAt = occurredAt
     self.properties = properties

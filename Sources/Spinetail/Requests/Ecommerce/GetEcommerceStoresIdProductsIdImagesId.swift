@@ -25,19 +25,27 @@ public extension Ecommerce {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The store id. */
-    public var storeId: String
+    public let storeId: String
 
     /** The id for the product of a store. */
-    public var productId: String
+    public let productId: String
 
     /** The id for the product image. */
-    public var imageId: String
+    public let imageId: String
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, storeId: String, productId: String, imageId: String) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.storeId = storeId
+      self.productId = productId
+      self.imageId = imageId
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

@@ -25,16 +25,23 @@ public extension Lists {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** Return the total_contacts field in the stats response, which contains an approximate count of all contacts in any state. */
-    public var includeTotalContacts: Bool?
+    public let includeTotalContacts: Bool?
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, listId: String, includeTotalContacts: Bool? = nil) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.listId = listId
+      self.includeTotalContacts = includeTotalContacts
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

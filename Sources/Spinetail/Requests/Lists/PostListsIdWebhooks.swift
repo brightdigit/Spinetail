@@ -25,7 +25,12 @@ public extension Lists {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
+
+    public init(body: AddWebhook, listId: String) {
+      self.body = body
+      self.listId = listId
+    }
 
     public var parameters: [String: String] { [:] }
 

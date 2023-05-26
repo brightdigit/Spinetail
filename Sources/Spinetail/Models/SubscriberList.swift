@@ -72,7 +72,7 @@ public struct SubscriberList: Codable, Equatable, Content {
   /** The ID used in the Mailchimp web application. View this list in your Mailchimp account at `https://{dc}.admin.mailchimp.com/lists/members/?id={web_id}`. */
   public let webId: Int?
 
-  public init(links: [ResourceLink]? = nil, beamerAddress: String? = nil, campaignDefaults: CampaignDefaults? = nil, contact: ListContact? = nil, dateCreated: MailchimpOptionalDate = nil, doubleOptin: Bool? = nil, emailTypeOption: Bool? = nil, hasWelcome: Bool? = nil, id: String? = nil, listRating: Int? = nil, marketingPermissions: Bool? = nil, modules: [String]? = nil, name: String? = nil, notifyOnSubscribe: String? = nil, notifyOnUnsubscribe: String? = nil, permissionReminder: String? = nil, stats: Statistics? = nil, subscribeURLLong: String? = nil, subscribeURLShort: String? = nil, useArchiveBar: Bool? = nil, visibility: Visibility? = nil, webId: Int? = nil) {
+  public init(links: [ResourceLink]? = nil, beamerAddress: String? = nil, campaignDefaults: CampaignDefaults? = nil, contact: ListContact? = nil, dateCreated: MailchimpOptionalDate, doubleOptin: Bool? = nil, emailTypeOption: Bool? = nil, hasWelcome: Bool? = nil, id: String? = nil, listRating: Int? = nil, marketingPermissions: Bool? = nil, modules: [String]? = nil, name: String? = nil, notifyOnSubscribe: String? = nil, notifyOnUnsubscribe: String? = nil, permissionReminder: String? = nil, stats: Statistics? = nil, subscribeURLLong: String? = nil, subscribeURLShort: String? = nil, useArchiveBar: Bool? = nil, visibility: Visibility? = nil, webId: Int? = nil) {
     self.links = links
     self.beamerAddress = beamerAddress
     self.campaignDefaults = campaignDefaults

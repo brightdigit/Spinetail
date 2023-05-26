@@ -39,7 +39,16 @@ public struct GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSumma
 
   public let uniqueClicks: Int?
 
-  public init(averageDailyBudget: GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryAverageOrderAmount? = nil, averageOrderAmount: GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryAverageOrderAmount? = nil, clickRate: Double? = nil, clicks: Int? = nil, comments: Int? = nil, costPerClick: GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryAverageOrderAmount? = nil, ecommerce: GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryEcommerce? = nil, extendedAt: GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryExtendedAt? = nil, firstTimeBuyers: Int? = nil, hasExtendedAdDuration: Bool? = nil, impressions: Int? = nil, likes: Int? = nil, reach: Int? = nil, returnOnInvestment: Double? = nil, shares: Int? = nil, totalOrders: Int? = nil, totalProductsSold: Int? = nil, uniqueClicks: Int? = nil) {
+  public init(
+    averageDailyBudget: GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryAverageOrderAmount? = nil,
+    averageOrderAmount: GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryAverageOrderAmount? = nil,
+    clickRate: Double? = nil, clicks: Int? = nil, comments: Int? = nil, costPerClick: GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryAverageOrderAmount? = nil,
+    ecommerce: GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryEcommerce? = nil,
+    extendedAt: GetReportingFacebookAds200ResponseFacebookAdsInnerAllOfReportSummaryExtendedAt? = nil,
+    firstTimeBuyers: Int? = nil, hasExtendedAdDuration: Bool? = nil, impressions: Int? = nil,
+    likes: Int? = nil, reach: Int? = nil, returnOnInvestment: Double? = nil, shares: Int? = nil, totalOrders: Int? = nil,
+    totalProductsSold: Int? = nil, uniqueClicks: Int? = nil
+  ) {
     self.averageDailyBudget = averageDailyBudget
     self.averageOrderAmount = averageOrderAmount
     self.clickRate = clickRate

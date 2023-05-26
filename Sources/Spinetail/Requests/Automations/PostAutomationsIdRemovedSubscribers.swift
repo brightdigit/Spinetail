@@ -25,7 +25,12 @@ public extension Automations {
     }
 
     /** The unique id for the Automation workflow. */
-    public var workflowId: String
+    public let workflowId: String
+
+    public init(body: SubscriberInAutomationQueue1, workflowId: String) {
+      self.body = body
+      self.workflowId = workflowId
+    }
 
     public var parameters: [String: String] { [:] }
 

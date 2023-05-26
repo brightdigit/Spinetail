@@ -25,7 +25,12 @@ public extension LandingPages {
     }
 
     /** Will create the Landing Page using the account's Default List instead of requiring a list_id. */
-    public var useDefaultList: Bool?
+    public let useDefaultList: Bool?
+
+    public init(body: LandingPage1, useDefaultList: Bool? = nil) {
+      self.body = body
+      self.useDefaultList = useDefaultList
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

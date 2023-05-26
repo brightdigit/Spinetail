@@ -25,10 +25,15 @@ public extension Ecommerce {
     }
 
     /** The store id. */
-    public var storeId: String
+    public let storeId: String
 
     /** The id for the cart. */
-    public var cartId: String
+    public let cartId: String
+
+    public init(storeId: String, cartId: String) {
+      self.storeId = storeId
+      self.cartId = cartId
+    }
 
     public var parameters: [String: String] { [:] }
 

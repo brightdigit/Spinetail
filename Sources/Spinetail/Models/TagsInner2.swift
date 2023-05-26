@@ -11,7 +11,7 @@ public struct TagsInner2: Codable, Equatable, Content {
   /** The name of the tag. */
   public let name: String?
 
-  public init(dateAdded: MailchimpOptionalDate = nil, id: Int? = nil, name: String? = nil) {
+  public init(dateAdded: MailchimpOptionalDate, id: Int? = nil, name: String? = nil) {
     self.dateAdded = dateAdded
     self.id = id
     self.name = name

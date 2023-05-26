@@ -19,7 +19,7 @@ public struct CreateAnAccountExport: Codable, Equatable, Content {
   /** An ISO 8601 date that will limit the export to only records created after a given time. For instance, the reports stage will contain any campaign sent after the given timestamp. Audiences, however, are excluded from this limit. */
   public let sinceTimestamp: MailchimpOptionalDate
 
-  public init(includeStages: [IncludeStages], sinceTimestamp: MailchimpOptionalDate = nil) {
+  public init(includeStages: [IncludeStages], sinceTimestamp: MailchimpOptionalDate) {
     self.includeStages = includeStages
     self.sinceTimestamp = sinceTimestamp
   }

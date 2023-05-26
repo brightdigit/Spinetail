@@ -68,7 +68,7 @@ public struct APIRoot: Codable, Equatable, Content {
   /** The username tied to the account. */
   public let username: String?
 
-  public init(links: [ResourceLink]? = nil, accountId: String? = nil, accountIndustry: String? = nil, accountName: String? = nil, accountTimezone: String? = nil, avatarURL: String? = nil, contact: AccountContact? = nil, email: String? = nil, firstName: String? = nil, firstPayment: MailchimpOptionalDate = nil, industryStats: IndustryStats? = nil, lastLogin: MailchimpOptionalDate = nil, lastName: String? = nil, loginId: String? = nil, memberSince: MailchimpOptionalDate = nil, pricingPlanType: PricingPlanType? = nil, proEnabled: Bool? = nil, role: String? = nil, totalSubscribers: Int? = nil, username: String? = nil) {
+  public init(links: [ResourceLink]? = nil, accountId: String? = nil, accountIndustry: String? = nil, accountName: String? = nil, accountTimezone: String? = nil, avatarURL: String? = nil, contact: AccountContact? = nil, email: String? = nil, firstName: String? = nil, firstPayment: MailchimpOptionalDate, industryStats: IndustryStats? = nil, lastLogin: MailchimpOptionalDate, lastName: String? = nil, loginId: String? = nil, memberSince: MailchimpOptionalDate, pricingPlanType: PricingPlanType? = nil, proEnabled: Bool? = nil, role: String? = nil, totalSubscribers: Int? = nil, username: String? = nil) {
     self.links = links
     self.accountId = accountId
     self.accountIndustry = accountIndustry

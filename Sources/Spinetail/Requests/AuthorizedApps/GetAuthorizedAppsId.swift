@@ -25,13 +25,19 @@ public extension AuthorizedApps {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The unique id for the connected authorized application. */
-    public var appId: String
+    public let appId: String
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, appId: String) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.appId = appId
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

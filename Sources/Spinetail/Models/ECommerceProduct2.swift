@@ -33,7 +33,7 @@ public struct ECommerceProduct2: Codable, Equatable, Content {
   /** The vendor for a product. */
   public let vendor: String?
 
-  public init(description: String? = nil, handle: String? = nil, imageURL: String? = nil, images: [ECommerceProductImage2]? = nil, publishedAtForeign: MailchimpOptionalDate = nil, title: String? = nil, type: String? = nil, url: String? = nil, variants: [ECommerceProductVariant2]? = nil, vendor: String? = nil) {
+  public init(description: String? = nil, handle: String? = nil, imageURL: String? = nil, images: [ECommerceProductImage2]? = nil, publishedAtForeign: MailchimpOptionalDate, title: String? = nil, type: String? = nil, url: String? = nil, variants: [ECommerceProductVariant2]? = nil, vendor: String? = nil) {
     self.description = description
     self.handle = handle
     self.imageURL = imageURL

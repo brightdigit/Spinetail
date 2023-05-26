@@ -25,16 +25,23 @@ public extension Lists {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** The MD5 hash of the lowercase version of the list member's email address. This endpoint also accepts a list member's email address or contact_id. */
-    public var subscriberHash: String
+    public let subscriberHash: String
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, listId: String, subscriberHash: String) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.listId = listId
+      self.subscriberHash = subscriberHash
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

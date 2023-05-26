@@ -32,7 +32,7 @@ public struct ChimpChatter: Codable, Equatable, Content {
   /** URL to a report that includes this activity */
   public let url: String?
 
-  public init(campaignId: String? = nil, listId: String? = nil, message: String? = nil, title: String? = nil, type: Type? = nil, updateTime: MailchimpOptionalDate = nil, url: String? = nil) {
+  public init(campaignId: String? = nil, listId: String? = nil, message: String? = nil, title: String? = nil, type: Type? = nil, updateTime: MailchimpOptionalDate, url: String? = nil) {
     self.campaignId = campaignId
     self.listId = listId
     self.message = message

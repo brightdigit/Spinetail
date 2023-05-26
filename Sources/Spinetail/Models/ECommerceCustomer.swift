@@ -38,7 +38,7 @@ public struct ECommerceCustomer: Codable, Equatable, Content {
   /** The date and time the customer was last updated in ISO 8601 format. */
   public let updatedAt: MailchimpOptionalDate
 
-  public init(links: [ResourceLink]? = nil, address: Address? = nil, company: String? = nil, createdAt: MailchimpOptionalDate = nil, emailAddress: String? = nil, firstName: String? = nil, id: String? = nil, lastName: String? = nil, optInStatus: Bool? = nil, ordersCount: Int? = nil, totalSpent: Double? = nil, updatedAt: MailchimpOptionalDate = nil) {
+  public init(links: [ResourceLink]? = nil, address: Address? = nil, company: String? = nil, createdAt: MailchimpOptionalDate, emailAddress: String? = nil, firstName: String? = nil, id: String? = nil, lastName: String? = nil, optInStatus: Bool? = nil, ordersCount: Int? = nil, totalSpent: Double? = nil, updatedAt: MailchimpOptionalDate) {
     self.links = links
     self.address = address
     self.company = company

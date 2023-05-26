@@ -25,13 +25,20 @@ public extension Lists {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** If skip_merge_validation is true, member data will be accepted without merge field values, even if the merge field is usually required. This defaults to false. */
-    public var skipMergeValidation: Bool?
+    public let skipMergeValidation: Bool?
 
     /** If skip_duplicate_check is true, we will ignore duplicates sent in the request when using the batch sub/unsub on the lists endpoint. The status of the first appearance in the request will be saved. This defaults to false. */
-    public var skipDuplicateCheck: Bool?
+    public let skipDuplicateCheck: Bool?
+
+    public init(body: MembersToSubscribeUnsubscribeToFromaListInBatch, listId: String, skipMergeValidation: Bool? = nil, skipDuplicateCheck: Bool? = nil) {
+      self.body = body
+      self.listId = listId
+      self.skipMergeValidation = skipMergeValidation
+      self.skipDuplicateCheck = skipDuplicateCheck
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

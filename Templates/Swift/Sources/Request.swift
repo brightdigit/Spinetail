@@ -44,8 +44,18 @@ extension {% if tag %}{{ options.tagPrefix }}{{ tag|upperCamelCase }}{{ options.
     {% if param.description %}
     /** {{ param.description }} */
     {% endif %}
-    public var {{ param.name }}: {{ param.optionalType }}
+    public let {{ param.name }}: {{ param.optionalType }}
     {% endfor %}
+    
+    
+    public init({% if body %}body: {{body.optionalType}}{% if nonBodyParams.count > 0 %}, {% endif %}{% endif %}{% for param in nonBodyParams %}{{ param.name }}: {{ param.optionalType }}{% ifnot param.required %} = nil{% endif %}{% ifnot forloop.last %}, {% endif %}{% endfor %}) {
+        {% if body %}
+        self.body = body
+        {% endif %}
+        {% for param in nonBodyParams %}
+        self.{{ param.name }} = {{ param.name }}
+        {% endfor %}
+    }
     
     
     {% if queryParams %}
@@ -95,7 +105,6 @@ extension {% if tag %}{{ options.tagPrefix }}{{ tag|upperCamelCase }}{{ options.
     public typealias BodyType =  {{ body.optionalType|default:"Empty"}}
     
     {% if body %}
-    
     public let body: {{body.optionalType}}
     {% endif %}
   }

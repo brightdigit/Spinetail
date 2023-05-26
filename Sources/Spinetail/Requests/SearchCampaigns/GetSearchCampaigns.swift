@@ -25,13 +25,19 @@ public extension SearchCampaigns {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The search query used to filter results. */
-    public var query: String
+    public let query: String
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, query: String) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.query = query
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

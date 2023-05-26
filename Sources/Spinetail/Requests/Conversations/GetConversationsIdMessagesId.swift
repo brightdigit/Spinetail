@@ -25,16 +25,23 @@ public extension Conversations {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The unique id for the conversation. */
-    public var conversationId: String
+    public let conversationId: String
 
     /** The unique id for the conversation message. */
-    public var messageId: String
+    public let messageId: String
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, conversationId: String, messageId: String) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.conversationId = conversationId
+      self.messageId = messageId
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

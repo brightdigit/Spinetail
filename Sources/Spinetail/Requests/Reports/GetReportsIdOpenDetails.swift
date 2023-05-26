@@ -25,22 +25,31 @@ public extension Reports {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The number of records to return. Default value is 10. Maximum value is 1000 */
-    public var count: Int?
+    public let count: Int?
 
     /** Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0. */
-    public var offset: Int?
+    public let offset: Int?
 
     /** The unique id for the campaign. */
-    public var campaignId: String
+    public let campaignId: String
 
     /** Restrict results to campaign open events that occur after a specific time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var since: String?
+    public let since: String?
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, count: Int? = nil, offset: Int? = nil, campaignId: String, since: String? = nil) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.count = count
+      self.offset = offset
+      self.campaignId = campaignId
+      self.since = since
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

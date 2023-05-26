@@ -38,7 +38,7 @@ public struct AutomationWorkflow: Codable, Equatable, Content {
 
   public let triggerSettings: AutomationTrigger?
 
-  public init(links: [ResourceLink]? = nil, createTime: MailchimpOptionalDate = nil, emailsSent: Int? = nil, id: String? = nil, recipients: List? = nil, reportSummary: CampaignReportSummary? = nil, settings: AutomationCampaignSettings? = nil, startTime: MailchimpOptionalDate = nil, status: Status? = nil, tracking: AutomationTrackingOptions? = nil, triggerSettings: AutomationTrigger? = nil) {
+  public init(links: [ResourceLink]? = nil, createTime: MailchimpOptionalDate, emailsSent: Int? = nil, id: String? = nil, recipients: List? = nil, reportSummary: CampaignReportSummary? = nil, settings: AutomationCampaignSettings? = nil, startTime: MailchimpOptionalDate, status: Status? = nil, tracking: AutomationTrackingOptions? = nil, triggerSettings: AutomationTrigger? = nil) {
     self.links = links
     self.createTime = createTime
     self.emailsSent = emailsSent

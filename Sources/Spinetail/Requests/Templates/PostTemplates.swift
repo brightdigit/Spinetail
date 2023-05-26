@@ -24,6 +24,10 @@ public extension Templates {
       .POST
     }
 
+    public init(body: TemplateInstance1) {
+      self.body = body
+    }
+
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }

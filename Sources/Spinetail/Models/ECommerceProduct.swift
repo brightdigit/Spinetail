@@ -42,7 +42,21 @@ public struct ECommerceProduct: Codable, Equatable, Content {
   /** The vendor for a product. */
   public let vendor: String?
 
-  public init(links: [ResourceLink]? = nil, currencyCode: String? = nil, description: String? = nil, handle: String? = nil, id: String? = nil, imageURL: String? = nil, images: [ECommerceProductImage]? = nil, publishedAtForeign: MailchimpOptionalDate = nil, title: String? = nil, type: String? = nil, url: String? = nil, variants: [ECommerceProductVariant]? = nil, vendor: String? = nil) {
+  public init(
+    links: [ResourceLink]? = nil,
+    currencyCode: String? = nil,
+    description: String? = nil,
+    handle: String? = nil,
+    id: String? = nil,
+    imageURL: String? = nil,
+    images: [ECommerceProductImage]? = nil,
+    publishedAtForeign: MailchimpOptionalDate,
+    title: String? = nil,
+    type: String? = nil,
+    url: String? = nil,
+    variants: [ECommerceProductVariant]? = nil,
+    vendor: String? = nil
+  ) {
     self.links = links
     self.currencyCode = currencyCode
     self.description = description

@@ -25,7 +25,12 @@ public extension Campaigns {
     }
 
     /** The unique id for the campaign. */
-    public var campaignId: String
+    public let campaignId: String
+
+    public init(body: PostCampaignsIdActionsScheduleRequest, campaignId: String) {
+      self.body = body
+      self.campaignId = campaignId
+    }
 
     public var parameters: [String: String] { [:] }
 

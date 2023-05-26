@@ -3,7 +3,7 @@ import Prch
 import Spinetail
 
 #if canImport(FoundationNetworking)
-import FoundationNetworking
+  import FoundationNetworking
 #endif
 
 class MailchimpService: Service {

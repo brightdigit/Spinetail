@@ -3,37 +3,39 @@ import PrchModel
 
 public extension VerifiedDomains {
   /**
-   Verify domain
+   Delete domain
 
-   Verify a domain for sending.
+   Delete a verified domain from the account.
    */
-  struct VerifyDomain: ServiceCall {
+  struct DeleteVerifiedDomain: ServiceCall {
     public static var requiresCredentials: Bool {
       false
     }
 
     public typealias ServiceAPI = SpinetailAPI
 
-    public static let pathTemplate = "/verified-domains/{domain_name}/actions/verify"
+    public static let pathTemplate = "/verified-domains/{domain_name}"
 
     public var path: String {
       Self.pathTemplate.replacingOccurrences(of: "{" + "domain_name" + "}", with: "\(domainName)")
     }
 
     public var method: RequestMethod {
-      .POST
+      .DELETE
     }
 
     /** The domain name. */
-    public var domainName: String
+    public let domainName: String
+
+    public init(domainName: String) {
+      self.domainName = domainName
+    }
 
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
 
-    public typealias SuccessType = VerifiedDomainsModel
-    public typealias BodyType = VerifyaDomainForSending
-
-    public let body: VerifyaDomainForSending
+    public typealias SuccessType = Empty
+    public typealias BodyType = Empty
   }
 }

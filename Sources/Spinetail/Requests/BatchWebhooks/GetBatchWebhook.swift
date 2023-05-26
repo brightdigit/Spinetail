@@ -25,13 +25,19 @@ public extension BatchWebhooks {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The unique id for the batch webhook. */
-    public var batchWebhookId: String
+    public let batchWebhookId: String
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, batchWebhookId: String) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.batchWebhookId = batchWebhookId
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

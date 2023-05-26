@@ -25,10 +25,15 @@ public extension Lists {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** The webhook's id. */
-    public var webhookId: String
+    public let webhookId: String
+
+    public init(listId: String, webhookId: String) {
+      self.listId = listId
+      self.webhookId = webhookId
+    }
 
     public var parameters: [String: String] { [:] }
 

@@ -24,6 +24,10 @@ public extension CampaignFolders {
       .POST
     }
 
+    public init(body: CampaignFolder1) {
+      self.body = body
+    }
+
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }

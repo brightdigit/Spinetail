@@ -25,10 +25,15 @@ public extension Reporting {
     }
 
     /** The outreach id. */
-    public var outreachId: String
+    public let outreachId: String
 
     /** The ID of the survey response. */
-    public var responseId: String
+    public let responseId: String
+
+    public init(outreachId: String, responseId: String) {
+      self.outreachId = outreachId
+      self.responseId = responseId
+    }
 
     public var parameters: [String: String] { [:] }
 

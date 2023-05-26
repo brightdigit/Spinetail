@@ -65,7 +65,7 @@ public struct ABTestingOptions: Codable, Equatable, Content {
   /** How unit of time for measuring the winner ('hours' or 'days'). This cannot be changed after a campaign is sent. */
   public let waitUnits: WaitUnits?
 
-  public init(fromNamea: String? = nil, fromNameb: String? = nil, pickWinner: PickWinner? = nil, replyEmaila: String? = nil, replyEmailb: String? = nil, sendTimea: MailchimpOptionalDate = nil, sendTimeb: MailchimpOptionalDate = nil, sendTimeWinner: String? = nil, splitSize: Int? = nil, splitTest: SplitTest? = nil, subjecta: String? = nil, subjectb: String? = nil, waitTime: Int? = nil, waitUnits: WaitUnits? = nil) {
+  public init(fromNamea: String? = nil, fromNameb: String? = nil, pickWinner: PickWinner? = nil, replyEmaila: String? = nil, replyEmailb: String? = nil, sendTimea: MailchimpOptionalDate, sendTimeb: MailchimpOptionalDate, sendTimeWinner: String? = nil, splitSize: Int? = nil, splitTest: SplitTest? = nil, subjecta: String? = nil, subjectb: String? = nil, waitTime: Int? = nil, waitUnits: WaitUnits? = nil) {
     self.fromNamea = fromNamea
     self.fromNameb = fromNameb
     self.pickWinner = pickWinner

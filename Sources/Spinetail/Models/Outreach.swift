@@ -15,7 +15,7 @@ public struct Outreach: Codable, Equatable, Content {
   /** The type of the outreach. */
   public let type: String?
 
-  public init(id: String? = nil, name: String? = nil, publishedTime: MailchimpOptionalDate = nil, type: String? = nil) {
+  public init(id: String? = nil, name: String? = nil, publishedTime: MailchimpOptionalDate, type: String? = nil) {
     self.id = id
     self.name = name
     self.publishedTime = publishedTime

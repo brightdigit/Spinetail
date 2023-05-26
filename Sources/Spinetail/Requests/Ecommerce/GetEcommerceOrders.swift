@@ -25,28 +25,39 @@ public extension Ecommerce {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The number of records to return. Default value is 10. Maximum value is 1000 */
-    public var count: Int?
+    public let count: Int?
 
     /** Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0. */
-    public var offset: Int?
+    public let offset: Int?
 
     /** Restrict results to orders with a specific `campaign_id` value. */
-    public var campaignId: String?
+    public let campaignId: String?
 
     /** Restrict results to orders with a specific `outreach_id` value. */
-    public var outreachId: String?
+    public let outreachId: String?
 
     /** Restrict results to orders made by a specific customer. */
-    public var customerId: String?
+    public let customerId: String?
 
     /** Restrict results to orders that have an outreach attached. For example, an email campaign or Facebook ad. */
-    public var hasOutreach: Bool?
+    public let hasOutreach: Bool?
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, count: Int? = nil, offset: Int? = nil, campaignId: String? = nil, outreachId: String? = nil, customerId: String? = nil, hasOutreach: Bool? = nil) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.count = count
+      self.offset = offset
+      self.campaignId = campaignId
+      self.outreachId = outreachId
+      self.customerId = customerId
+      self.hasOutreach = hasOutreach
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

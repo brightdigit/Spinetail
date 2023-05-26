@@ -21,7 +21,7 @@ public struct LastMessage: Codable, Equatable, Content {
   /** The date and time the message was either sent or received in ISO 8601 format. */
   public let timestamp: MailchimpOptionalDate
 
-  public init(fromEmail: String? = nil, fromLabel: String? = nil, message: String? = nil, read: Bool? = nil, subject: String? = nil, timestamp: MailchimpOptionalDate = nil) {
+  public init(fromEmail: String? = nil, fromLabel: String? = nil, message: String? = nil, read: Bool? = nil, subject: String? = nil, timestamp: MailchimpOptionalDate) {
     self.fromEmail = fromEmail
     self.fromLabel = fromLabel
     self.message = message

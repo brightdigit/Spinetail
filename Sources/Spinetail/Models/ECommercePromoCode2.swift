@@ -21,7 +21,7 @@ public struct ECommercePromoCode2: Codable, Equatable, Content {
   /** Number of times promo code has been used. */
   public let usageCount: Int?
 
-  public init(code: String? = nil, createdAtForeign: MailchimpOptionalDate = nil, enabled: Bool? = nil, redemptionURL: String? = nil, updatedAtForeign: MailchimpOptionalDate = nil, usageCount: Int? = nil) {
+  public init(code: String? = nil, createdAtForeign: MailchimpOptionalDate, enabled: Bool? = nil, redemptionURL: String? = nil, updatedAtForeign: MailchimpOptionalDate, usageCount: Int? = nil) {
     self.code = code
     self.createdAtForeign = createdAtForeign
     self.enabled = enabled

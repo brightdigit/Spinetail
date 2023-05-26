@@ -20,7 +20,7 @@ public struct SurveyQuestionAnswer: Codable, Equatable, Content {
   /** The raw text answer. */
   public let value: String?
 
-  public init(contact: Contact? = nil, id: String? = nil, isNewContact: Bool? = nil, responseId: String? = nil, submittedAt: MailchimpOptionalDate = nil, value: String? = nil) {
+  public init(contact: Contact? = nil, id: String? = nil, isNewContact: Bool? = nil, responseId: String? = nil, submittedAt: MailchimpOptionalDate, value: String? = nil) {
     self.contact = contact
     self.id = id
     self.isNewContact = isNewContact

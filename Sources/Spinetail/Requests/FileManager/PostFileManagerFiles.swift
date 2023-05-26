@@ -24,6 +24,10 @@ public extension FileManager {
       .POST
     }
 
+    public init(body: GalleryFile1) {
+      self.body = body
+    }
+
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }

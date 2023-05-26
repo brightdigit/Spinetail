@@ -60,7 +60,7 @@ public struct LandingPage: Codable, Equatable, Content {
   /** The ID used in the Mailchimp web application. */
   public let webId: Int?
 
-  public init(links: [ResourceLink]? = nil, createdAt: MailchimpOptionalDate = nil, createdBySource: String? = nil, description: String? = nil, id: String? = nil, listId: String? = nil, name: String? = nil, publishedAt: MailchimpOptionalDate = nil, status: Status? = nil, storeId: String? = nil, templateId: Int? = nil, title: String? = nil, tracking: TrackingSettings? = nil, unpublishedAt: MailchimpOptionalDate = nil, updatedAt: MailchimpOptionalDate = nil, url: String? = nil, webId: Int? = nil) {
+  public init(links: [ResourceLink]? = nil, createdAt: MailchimpOptionalDate, createdBySource: String? = nil, description: String? = nil, id: String? = nil, listId: String? = nil, name: String? = nil, publishedAt: MailchimpOptionalDate, status: Status? = nil, storeId: String? = nil, templateId: Int? = nil, title: String? = nil, tracking: TrackingSettings? = nil, unpublishedAt: MailchimpOptionalDate, updatedAt: MailchimpOptionalDate, url: String? = nil, webId: Int? = nil) {
     self.links = links
     self.createdAt = createdAt
     self.createdBySource = createdBySource

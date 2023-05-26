@@ -25,7 +25,12 @@ public extension Ecommerce {
     }
 
     /** The store id. */
-    public var storeId: String
+    public let storeId: String
+
+    public init(body: ECommercePromoRule1, storeId: String) {
+      self.body = body
+      self.storeId = storeId
+    }
 
     public var parameters: [String: String] { [:] }
 

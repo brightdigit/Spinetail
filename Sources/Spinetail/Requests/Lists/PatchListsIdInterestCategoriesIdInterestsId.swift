@@ -25,13 +25,20 @@ public extension Lists {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** The unique ID for the interest category. */
-    public var interestCategoryId: String
+    public let interestCategoryId: String
 
     /** The specific interest or 'group name'. */
-    public var interestId: String
+    public let interestId: String
+
+    public init(body: Interest1, listId: String, interestCategoryId: String, interestId: String) {
+      self.body = body
+      self.listId = listId
+      self.interestCategoryId = interestCategoryId
+      self.interestId = interestId
+    }
 
     public var parameters: [String: String] { [:] }
 

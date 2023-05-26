@@ -25,13 +25,19 @@ public extension Templates {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The unique id for the template. */
-    public var templateId: String
+    public let templateId: String
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, templateId: String) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.templateId = templateId
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

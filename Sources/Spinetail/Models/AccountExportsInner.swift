@@ -21,7 +21,7 @@ public struct AccountExportsInner: Codable, Equatable, Content {
   /** Start time for the export. */
   public let started: MailchimpOptionalDate
 
-  public init(links: [ResourceLink]? = nil, downloadURL: String? = nil, exportId: Int? = nil, finished: MailchimpOptionalDate = nil, sizeInBytes: Int? = nil, started: MailchimpOptionalDate = nil) {
+  public init(links: [ResourceLink]? = nil, downloadURL: String? = nil, exportId: Int? = nil, finished: MailchimpOptionalDate, sizeInBytes: Int? = nil, started: MailchimpOptionalDate) {
     self.links = links
     self.downloadURL = downloadURL
     self.exportId = exportId

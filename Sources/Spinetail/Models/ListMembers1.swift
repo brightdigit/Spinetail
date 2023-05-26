@@ -72,7 +72,7 @@ public struct ListMembers1: Codable, Equatable, Content {
   /** [VIP status](https://mailchimp.com/help/designate-and-send-to-vip-contacts/) for subscriber. */
   public let vip: Bool?
 
-  public init(links: [ResourceLink]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: MailchimpOptionalDate = nil, lastNote: Notes? = nil, listId: String? = nil, location: Location1? = nil, memberRating: Int? = nil, mergeFields: [String: String]? = nil, stats: SubscriberStats? = nil, status: Status? = nil, timestampOpt: MailchimpOptionalDate = nil, timestampSignup: MailchimpOptionalDate = nil, uniqueEmailId: String? = nil, vip: Bool? = nil) {
+  public init(links: [ResourceLink]? = nil, emailAddress: String? = nil, emailClient: String? = nil, emailType: String? = nil, id: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, lastChanged: MailchimpOptionalDate, lastNote: Notes? = nil, listId: String? = nil, location: Location1? = nil, memberRating: Int? = nil, mergeFields: [String: String]? = nil, stats: SubscriberStats? = nil, status: Status? = nil, timestampOpt: MailchimpOptionalDate, timestampSignup: MailchimpOptionalDate, uniqueEmailId: String? = nil, vip: Bool? = nil) {
     self.links = links
     self.emailAddress = emailAddress
     self.emailClient = emailClient

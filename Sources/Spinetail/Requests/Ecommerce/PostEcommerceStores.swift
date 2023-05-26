@@ -24,6 +24,10 @@ public extension Ecommerce {
       .POST
     }
 
+    public init(body: ECommerceStore1) {
+      self.body = body
+    }
+
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }

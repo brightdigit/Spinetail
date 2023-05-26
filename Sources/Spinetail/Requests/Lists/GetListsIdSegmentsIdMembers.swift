@@ -25,31 +25,43 @@ public extension Lists {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The number of records to return. Default value is 10. Maximum value is 1000 */
-    public var count: Int?
+    public let count: Int?
 
     /** Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0. */
-    public var offset: Int?
+    public let offset: Int?
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** The unique id for the segment. */
-    public var segmentId: String
+    public let segmentId: String
 
     /** Include cleaned members in response */
-    public var includeCleaned: Bool?
+    public let includeCleaned: Bool?
 
     /** Include transactional members in response */
-    public var includeTransactional: Bool?
+    public let includeTransactional: Bool?
 
     /** Include unsubscribed members in response */
-    public var includeUnsubscribed: Bool?
+    public let includeUnsubscribed: Bool?
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, count: Int? = nil, offset: Int? = nil, listId: String, segmentId: String, includeCleaned: Bool? = nil, includeTransactional: Bool? = nil, includeUnsubscribed: Bool? = nil) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.count = count
+      self.offset = offset
+      self.listId = listId
+      self.segmentId = segmentId
+      self.includeCleaned = includeCleaned
+      self.includeTransactional = includeTransactional
+      self.includeUnsubscribed = includeUnsubscribed
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

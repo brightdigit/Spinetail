@@ -35,7 +35,7 @@ public struct ECommerceCart: Codable, Equatable, Content {
   /** The date and time the cart was last updated in ISO 8601 format. */
   public let updatedAt: MailchimpOptionalDate
 
-  public init(links: [ResourceLink]? = nil, campaignId: String? = nil, checkoutURL: String? = nil, createdAt: MailchimpOptionalDate = nil, currencyCode: String? = nil, customer: ECommerceCustomer? = nil, id: String? = nil, lines: [ECommerceCartLineItem]? = nil, orderTotal: Double? = nil, taxTotal: Double? = nil, updatedAt: MailchimpOptionalDate = nil) {
+  public init(links: [ResourceLink]? = nil, campaignId: String? = nil, checkoutURL: String? = nil, createdAt: MailchimpOptionalDate, currencyCode: String? = nil, customer: ECommerceCustomer? = nil, id: String? = nil, lines: [ECommerceCartLineItem]? = nil, orderTotal: Double? = nil, taxTotal: Double? = nil, updatedAt: MailchimpOptionalDate) {
     self.links = links
     self.campaignId = campaignId
     self.checkoutURL = checkoutURL

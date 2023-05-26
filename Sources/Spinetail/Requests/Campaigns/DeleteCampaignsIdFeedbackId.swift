@@ -25,10 +25,15 @@ public extension Campaigns {
     }
 
     /** The unique id for the campaign. */
-    public var campaignId: String
+    public let campaignId: String
 
     /** The unique id for the feedback message. */
-    public var feedbackId: String
+    public let feedbackId: String
+
+    public init(campaignId: String, feedbackId: String) {
+      self.campaignId = campaignId
+      self.feedbackId = feedbackId
+    }
 
     public var parameters: [String: String] { [:] }
 
