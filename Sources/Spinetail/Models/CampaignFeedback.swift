@@ -46,7 +46,7 @@ public struct CampaignFeedback: Codable, Equatable, Content {
   /** The date and time the feedback was last updated in ISO 8601 format. */
   public let updatedAt: MailchimpOptionalDate
 
-  public init(message: String, links: [ResourceLink]? = nil, blockId: Int? = nil, campaignId: String? = nil, createdAt: MailchimpOptionalDate = nil, createdBy: String? = nil, feedbackId: Int? = nil, isComplete: Bool? = nil, parentId: Int? = nil, source: Source? = nil, updatedAt: MailchimpOptionalDate = nil) {
+  public init(message: String, links: [ResourceLink]? = nil, blockId: Int? = nil, campaignId: String? = nil, createdAt: MailchimpOptionalDate, createdBy: String? = nil, feedbackId: Int? = nil, isComplete: Bool? = nil, parentId: Int? = nil, source: Source? = nil, updatedAt: MailchimpOptionalDate) {
     self.message = message
     self.links = links
     self.blockId = blockId

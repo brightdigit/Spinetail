@@ -15,7 +15,7 @@ public struct Notes: Codable, Equatable, Content {
   /** The note id. */
   public let noteId: Int?
 
-  public init(createdAt: MailchimpOptionalDate = nil, createdBy: String? = nil, note: String? = nil, noteId: Int? = nil) {
+  public init(createdAt: MailchimpOptionalDate, createdBy: String? = nil, note: String? = nil, noteId: Int? = nil) {
     self.createdAt = createdAt
     self.createdBy = createdBy
     self.note = note

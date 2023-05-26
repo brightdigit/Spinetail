@@ -25,22 +25,31 @@ public extension Conversations {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The unique id for the conversation. */
-    public var conversationId: String
+    public let conversationId: String
 
     /** Whether a conversation message has been marked as read. */
-    public var isRead: IsRead?
+    public let isRead: IsRead?
 
     /** Restrict the response to messages created before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var beforeTimestamp: MailchimpOptionalDate
+    public let beforeTimestamp: MailchimpOptionalDate
 
     /** Restrict the response to messages created after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var sinceTimestamp: MailchimpOptionalDate
+    public let sinceTimestamp: MailchimpOptionalDate
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, conversationId: String, isRead: IsRead? = nil, beforeTimestamp: MailchimpOptionalDate = nil, sinceTimestamp: MailchimpOptionalDate = nil) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.conversationId = conversationId
+      self.isRead = isRead
+      self.beforeTimestamp = beforeTimestamp
+      self.sinceTimestamp = sinceTimestamp
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

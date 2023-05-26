@@ -25,7 +25,11 @@ public extension Batches {
     }
 
     /** The unique id for the batch operation. */
-    public var batchId: String
+    public let batchId: String
+
+    public init(batchId: String) {
+      self.batchId = batchId
+    }
 
     public var parameters: [String: String] { [:] }
 

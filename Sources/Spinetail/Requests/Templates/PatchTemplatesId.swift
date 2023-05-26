@@ -25,7 +25,12 @@ public extension Templates {
     }
 
     /** The unique id for the template. */
-    public var templateId: String
+    public let templateId: String
+
+    public init(body: TemplateInstance1, templateId: String) {
+      self.body = body
+      self.templateId = templateId
+    }
 
     public var parameters: [String: String] { [:] }
 

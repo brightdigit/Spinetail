@@ -25,13 +25,19 @@ public extension Reporting {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The outreach id. */
-    public var outreachId: String
+    public let outreachId: String
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, outreachId: String) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.outreachId = outreachId
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

@@ -24,6 +24,8 @@ public extension Ping {
       .GET
     }
 
+    public init() {}
+
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }

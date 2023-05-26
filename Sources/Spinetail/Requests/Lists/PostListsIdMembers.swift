@@ -25,10 +25,16 @@ public extension Lists {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** If skip_merge_validation is true, member data will be accepted without merge field values, even if the merge field is usually required. This defaults to false. */
-    public var skipMergeValidation: Bool?
+    public let skipMergeValidation: Bool?
+
+    public init(body: AddListMembers1, listId: String, skipMergeValidation: Bool? = nil) {
+      self.body = body
+      self.listId = listId
+      self.skipMergeValidation = skipMergeValidation
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

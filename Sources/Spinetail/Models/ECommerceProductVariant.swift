@@ -39,7 +39,7 @@ public struct ECommerceProductVariant: Codable, Equatable, Content {
   /** The visibility of a product variant. */
   public let visibility: String?
 
-  public init(links: [ResourceLink]? = nil, backorders: String? = nil, createdAt: MailchimpOptionalDate = nil, id: String? = nil, imageURL: String? = nil, inventoryQuantity: Int? = nil, price: Double? = nil, sku: String? = nil, title: String? = nil, updatedAt: MailchimpOptionalDate = nil, url: String? = nil, visibility: String? = nil) {
+  public init(links: [ResourceLink]? = nil, backorders: String? = nil, createdAt: MailchimpOptionalDate, id: String? = nil, imageURL: String? = nil, inventoryQuantity: Int? = nil, price: Double? = nil, sku: String? = nil, title: String? = nil, updatedAt: MailchimpOptionalDate, url: String? = nil, visibility: String? = nil) {
     self.links = links
     self.backorders = backorders
     self.createdAt = createdAt

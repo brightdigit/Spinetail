@@ -58,7 +58,7 @@ public struct LandingPageReport: Codable, Equatable, Content {
   /** The ID used in the Mailchimp web application. */
   public let webId: Int?
 
-  public init(links: [ResourceLink]? = nil, clicks: Int? = nil, conversionRate: Double? = nil, ecommerce: LandingPageReportEcommerce? = nil, id: String? = nil, listId: String? = nil, listName: String? = nil, name: String? = nil, publishedAt: MailchimpOptionalDate = nil, signupTags: [Tag]? = nil, status: String? = nil, subscribes: Int? = nil, timeseries: LandingPageReportTimeseries? = nil, title: String? = nil, uniqueVisits: Int? = nil, unpublishedAt: MailchimpOptionalDate = nil, url: String? = nil, visits: Int? = nil, webId: Int? = nil) {
+  public init(links: [ResourceLink]? = nil, clicks: Int? = nil, conversionRate: Double? = nil, ecommerce: LandingPageReportEcommerce? = nil, id: String? = nil, listId: String? = nil, listName: String? = nil, name: String? = nil, publishedAt: MailchimpOptionalDate, signupTags: [Tag]? = nil, status: String? = nil, subscribes: Int? = nil, timeseries: LandingPageReportTimeseries? = nil, title: String? = nil, uniqueVisits: Int? = nil, unpublishedAt: MailchimpOptionalDate, url: String? = nil, visits: Int? = nil, webId: Int? = nil) {
     self.links = links
     self.clicks = clicks
     self.conversionRate = conversionRate

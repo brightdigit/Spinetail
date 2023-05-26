@@ -3,11 +3,11 @@ import PrchModel
 
 public extension VerifiedDomains {
   /**
-   Delete domain
+   Get domain info
 
-   Delete a verified domain from the account.
+   Get the details for a single domain on the account.
    */
-  struct DeleteVerifiedDomain: ServiceCall {
+  struct GetVerifiedDomain: ServiceCall {
     public static var requiresCredentials: Bool {
       false
     }
@@ -21,17 +21,21 @@ public extension VerifiedDomains {
     }
 
     public var method: RequestMethod {
-      .DELETE
+      .GET
     }
 
     /** The domain name. */
-    public var domainName: String
+    public let domainName: String
+
+    public init(domainName: String) {
+      self.domainName = domainName
+    }
 
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
 
-    public typealias SuccessType = Empty
+    public typealias SuccessType = VerifiedDomainsModel
     public typealias BodyType = Empty
   }
 }

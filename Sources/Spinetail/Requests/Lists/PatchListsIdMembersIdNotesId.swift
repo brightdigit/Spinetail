@@ -25,13 +25,20 @@ public extension Lists {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** The MD5 hash of the lowercase version of the list member's email address. This endpoint also accepts a list member's email address or contact_id. */
-    public var subscriberHash: String
+    public let subscriberHash: String
 
     /** The id for the note. */
-    public var noteId: String
+    public let noteId: String
+
+    public init(body: MemberNotes1, listId: String, subscriberHash: String, noteId: String) {
+      self.body = body
+      self.listId = listId
+      self.subscriberHash = subscriberHash
+      self.noteId = noteId
+    }
 
     public var parameters: [String: String] { [:] }
 

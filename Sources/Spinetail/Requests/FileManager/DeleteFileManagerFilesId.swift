@@ -25,7 +25,11 @@ public extension FileManager {
     }
 
     /** The unique id for the File Manager file. */
-    public var fileId: String
+    public let fileId: String
+
+    public init(fileId: String) {
+      self.fileId = fileId
+    }
 
     public var parameters: [String: String] { [:] }
 

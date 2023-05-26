@@ -25,10 +25,16 @@ public extension Ecommerce {
     }
 
     /** The store id. */
-    public var storeId: String
+    public let storeId: String
 
     /** The id for the order in a store. */
-    public var orderId: String
+    public let orderId: String
+
+    public init(body: ECommerceOrderLineItem1, storeId: String, orderId: String) {
+      self.body = body
+      self.storeId = storeId
+      self.orderId = orderId
+    }
 
     public var parameters: [String: String] { [:] }
 

@@ -25,22 +25,31 @@ public extension Reporting {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The outreach id. */
-    public var outreachId: String
+    public let outreachId: String
 
     /** The ID of the question that was answered. */
-    public var answeredQuestion: Int?
+    public let answeredQuestion: Int?
 
     /** The ID of the option chosen to filter responses on. */
-    public var choseAnswer: String?
+    public let choseAnswer: String?
 
     /** Filter survey responses by familiarity of the respondents. */
-    public var respondentFamiliarityIs: RespondentFamiliarityIs?
+    public let respondentFamiliarityIs: RespondentFamiliarityIs?
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, outreachId: String, answeredQuestion: Int? = nil, choseAnswer: String? = nil, respondentFamiliarityIs: RespondentFamiliarityIs? = nil) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.outreachId = outreachId
+      self.answeredQuestion = answeredQuestion
+      self.choseAnswer = choseAnswer
+      self.respondentFamiliarityIs = respondentFamiliarityIs
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

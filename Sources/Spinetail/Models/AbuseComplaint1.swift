@@ -33,7 +33,7 @@ public struct AbuseComplaint1: Codable, Equatable, Content {
   /** [VIP status](https://mailchimp.com/help/designate-and-send-to-vip-contacts/) for subscriber. */
   public let vip: Bool?
 
-  public init(links: [ResourceLink]? = nil, campaignId: String? = nil, date: MailchimpOptionalDate = nil, emailAddress: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: String]? = nil, vip: Bool? = nil) {
+  public init(links: [ResourceLink]? = nil, campaignId: String? = nil, date: MailchimpOptionalDate, emailAddress: String? = nil, emailId: String? = nil, id: Int? = nil, listId: String? = nil, listIsActive: Bool? = nil, mergeFields: [String: String]? = nil, vip: Bool? = nil) {
     self.links = links
     self.campaignId = campaignId
     self.date = date

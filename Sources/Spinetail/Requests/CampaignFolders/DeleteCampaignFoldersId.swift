@@ -25,7 +25,11 @@ public extension CampaignFolders {
     }
 
     /** The unique id for the campaign folder. */
-    public var folderId: String
+    public let folderId: String
+
+    public init(folderId: String) {
+      self.folderId = folderId
+    }
 
     public var parameters: [String: String] { [:] }
 

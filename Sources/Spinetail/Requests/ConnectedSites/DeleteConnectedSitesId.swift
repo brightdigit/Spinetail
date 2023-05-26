@@ -25,7 +25,11 @@ public extension ConnectedSites {
     }
 
     /** The unique identifier for the site. */
-    public var connectedSiteId: String
+    public let connectedSiteId: String
+
+    public init(connectedSiteId: String) {
+      self.connectedSiteId = connectedSiteId
+    }
 
     public var parameters: [String: String] { [:] }
 

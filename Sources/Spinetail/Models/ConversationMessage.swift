@@ -33,7 +33,7 @@ public struct ConversationMessage: Codable, Equatable, Content {
   /** The date and time the message was either sent or received in ISO 8601 format. */
   public let timestamp: MailchimpOptionalDate
 
-  public init(links: [ResourceLink]? = nil, conversationId: String? = nil, fromEmail: String? = nil, fromLabel: String? = nil, id: String? = nil, listId: Int? = nil, message: String? = nil, read: Bool? = nil, subject: String? = nil, timestamp: MailchimpOptionalDate = nil) {
+  public init(links: [ResourceLink]? = nil, conversationId: String? = nil, fromEmail: String? = nil, fromLabel: String? = nil, id: String? = nil, listId: Int? = nil, message: String? = nil, read: Bool? = nil, subject: String? = nil, timestamp: MailchimpOptionalDate) {
     self.links = links
     self.conversationId = conversationId
     self.fromEmail = fromEmail

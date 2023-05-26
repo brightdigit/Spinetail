@@ -25,10 +25,15 @@ public extension Surveys {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** The ID of the survey. */
-    public var surveyId: String
+    public let surveyId: String
+
+    public init(listId: String, surveyId: String) {
+      self.listId = listId
+      self.surveyId = surveyId
+    }
 
     public var parameters: [String: String] { [:] }
 

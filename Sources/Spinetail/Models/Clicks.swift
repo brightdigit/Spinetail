@@ -18,7 +18,7 @@ public struct Clicks: Codable, Equatable, Content {
   /** The total number of subscribers who clicked on a campaign. */
   public let uniqueSubscriberClicks: Int?
 
-  public init(clickRate: Double? = nil, clicksTotal: Int? = nil, lastClick: MailchimpOptionalDate = nil, uniqueClicks: Int? = nil, uniqueSubscriberClicks: Int? = nil) {
+  public init(clickRate: Double? = nil, clicksTotal: Int? = nil, lastClick: MailchimpOptionalDate, uniqueClicks: Int? = nil, uniqueSubscriberClicks: Int? = nil) {
     self.clickRate = clickRate
     self.clicksTotal = clicksTotal
     self.lastClick = lastClick

@@ -83,11 +83,11 @@ final class ListsTests: XCTestCase {
       return nil
     }
     if let subscriberHash = member?.id {
-      let patch = Lists.PatchListsIdMembersId(listId: Self.listID, subscriberHash: subscriberHash, body: .init(emailAddress: emailAddress, emailType: nil, interests: interests, mergeFields: mergeFields))
+      let patch = Lists.PatchListsIdMembersId(body: .init(emailAddress: emailAddress, emailType: nil, interests: interests, mergeFields: mergeFields), listId: Self.listID, subscriberHash: subscriberHash)
       _ = try await client.request(patch)
       return false
     } else {
-      let post = Lists.PostListsIdMembers(listId: Self.listID, body: .init(emailAddress: emailAddress, status: .subscribed, interests: interests, mergeFields: mergeFields, timestampOpt: useTimestamp ? .init() : nil, timestampSignup: useTimestamp ? .init() : nil))
+      let post = Lists.PostListsIdMembers(body: .init(emailAddress: emailAddress, status: .subscribed, interests: interests, mergeFields: mergeFields, timestampOpt: useTimestamp ? .init() : nil, timestampSignup: useTimestamp ? .init() : nil), listId: Self.listID)
       _ = try await client.request(post)
       return true
     }

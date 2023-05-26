@@ -25,10 +25,15 @@ public extension Automations {
     }
 
     /** The unique id for the Automation workflow. */
-    public var workflowId: String
+    public let workflowId: String
 
     /** The unique id for the Automation workflow email. */
-    public var workflowEmailId: String
+    public let workflowEmailId: String
+
+    public init(workflowId: String, workflowEmailId: String) {
+      self.workflowId = workflowId
+      self.workflowEmailId = workflowEmailId
+    }
 
     public var parameters: [String: String] { [:] }
 

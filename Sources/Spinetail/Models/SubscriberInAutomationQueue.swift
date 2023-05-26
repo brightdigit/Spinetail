@@ -24,7 +24,7 @@ public struct SubscriberInAutomationQueue: Codable, Equatable, Content {
   /** A string that uniquely identifies an Automation workflow. */
   public let workflowId: String?
 
-  public init(emailAddress: String, links: [ResourceLink]? = nil, emailId: String? = nil, id: String? = nil, listId: String? = nil, nextSend: MailchimpOptionalDate = nil, workflowId: String? = nil) {
+  public init(emailAddress: String, links: [ResourceLink]? = nil, emailId: String? = nil, id: String? = nil, listId: String? = nil, nextSend: MailchimpOptionalDate, workflowId: String? = nil) {
     self.emailAddress = emailAddress
     self.links = links
     self.emailId = emailId

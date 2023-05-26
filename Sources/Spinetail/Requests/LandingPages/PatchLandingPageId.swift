@@ -25,7 +25,12 @@ public extension LandingPages {
     }
 
     /** The unique id for the page. */
-    public var pageId: String
+    public let pageId: String
+
+    public init(body: LandingPage2, pageId: String) {
+      self.body = body
+      self.pageId = pageId
+    }
 
     public var parameters: [String: String] { [:] }
 

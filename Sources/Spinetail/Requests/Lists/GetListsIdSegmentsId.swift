@@ -25,25 +25,35 @@ public extension Lists {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** The unique id for the segment. */
-    public var segmentId: String
+    public let segmentId: String
 
     /** Include cleaned members in response */
-    public var includeCleaned: Bool?
+    public let includeCleaned: Bool?
 
     /** Include transactional members in response */
-    public var includeTransactional: Bool?
+    public let includeTransactional: Bool?
 
     /** Include unsubscribed members in response */
-    public var includeUnsubscribed: Bool?
+    public let includeUnsubscribed: Bool?
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, listId: String, segmentId: String, includeCleaned: Bool? = nil, includeTransactional: Bool? = nil, includeUnsubscribed: Bool? = nil) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.listId = listId
+      self.segmentId = segmentId
+      self.includeCleaned = includeCleaned
+      self.includeTransactional = includeTransactional
+      self.includeUnsubscribed = includeUnsubscribed
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

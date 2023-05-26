@@ -39,7 +39,7 @@ public struct Batch: Codable, Equatable, Content {
   /** The total number of operations to complete as part of this batch request. For GET requests requiring pagination, each page counts as a separate operation. */
   public let totalOperations: Int?
 
-  public init(links: [ResourceLink]? = nil, completedAt: MailchimpOptionalDate = nil, erroredOperations: Int? = nil, finishedOperations: Int? = nil, id: String? = nil, responseBodyURL: String? = nil, status: Status? = nil, submittedAt: MailchimpOptionalDate = nil, totalOperations: Int? = nil) {
+  public init(links: [ResourceLink]? = nil, completedAt: MailchimpOptionalDate, erroredOperations: Int? = nil, finishedOperations: Int? = nil, id: String? = nil, responseBodyURL: String? = nil, status: Status? = nil, submittedAt: MailchimpOptionalDate, totalOperations: Int? = nil) {
     self.links = links
     self.completedAt = completedAt
     self.erroredOperations = erroredOperations

@@ -46,7 +46,7 @@ public struct ECommercePromoRule2: Codable, Equatable, Content {
   /** The date and time the promotion was updated in ISO 8601 format. */
   public let updatedAtForeign: MailchimpOptionalDate
 
-  public init(amount: Float? = nil, createdAtForeign: MailchimpOptionalDate = nil, description: String? = nil, enabled: Bool? = nil, endsAt: String? = nil, startsAt: MailchimpOptionalDate = nil, target: Target? = nil, title: String? = nil, type: Type? = nil, updatedAtForeign: MailchimpOptionalDate = nil) {
+  public init(amount: Float? = nil, createdAtForeign: MailchimpOptionalDate, description: String? = nil, enabled: Bool? = nil, endsAt: String? = nil, startsAt: MailchimpOptionalDate, target: Target? = nil, title: String? = nil, type: Type? = nil, updatedAtForeign: MailchimpOptionalDate) {
     self.amount = amount
     self.createdAtForeign = createdAtForeign
     self.description = description

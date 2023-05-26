@@ -15,7 +15,7 @@ public struct ClickSummary: Codable, Equatable, Content {
   /** A summary of the top click locations. */
   public let locations: [Location3]?
 
-  public init(clicks: Int? = nil, firstClick: MailchimpOptionalDate = nil, lastClick: MailchimpOptionalDate = nil, locations: [Location3]? = nil) {
+  public init(clicks: Int? = nil, firstClick: MailchimpOptionalDate, lastClick: MailchimpOptionalDate, locations: [Location3]? = nil) {
     self.clicks = clicks
     self.firstClick = firstClick
     self.lastClick = lastClick

@@ -15,7 +15,7 @@ public struct Referrer: Codable, Equatable, Content {
   /** A referrer (truncated to 100 bytes). */
   public let referrer: String?
 
-  public init(clicks: Int? = nil, firstClick: MailchimpOptionalDate = nil, lastClick: MailchimpOptionalDate = nil, referrer: String? = nil) {
+  public init(clicks: Int? = nil, firstClick: MailchimpOptionalDate, lastClick: MailchimpOptionalDate, referrer: String? = nil) {
     self.clicks = clicks
     self.firstClick = firstClick
     self.lastClick = lastClick

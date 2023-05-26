@@ -15,7 +15,7 @@ public struct Opens: Codable, Equatable, Content {
   /** The total number of unique opens. */
   public let uniqueOpens: Int?
 
-  public init(lastOpen: MailchimpOptionalDate = nil, openRate: Double? = nil, opensTotal: Int? = nil, uniqueOpens: Int? = nil) {
+  public init(lastOpen: MailchimpOptionalDate, openRate: Double? = nil, opensTotal: Int? = nil, uniqueOpens: Int? = nil) {
     self.lastOpen = lastOpen
     self.openRate = openRate
     self.opensTotal = opensTotal

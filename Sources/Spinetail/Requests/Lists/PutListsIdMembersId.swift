@@ -25,13 +25,20 @@ public extension Lists {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** The MD5 hash of the lowercase version of the list member's email address. This endpoint also accepts a list member's email address or contact_id. */
-    public var subscriberHash: String
+    public let subscriberHash: String
 
     /** If skip_merge_validation is true, member data will be accepted without merge field values, even if the merge field is usually required. This defaults to false. */
-    public var skipMergeValidation: Bool?
+    public let skipMergeValidation: Bool?
+
+    public init(body: AddListMembers2, listId: String, subscriberHash: String, skipMergeValidation: Bool? = nil) {
+      self.body = body
+      self.listId = listId
+      self.subscriberHash = subscriberHash
+      self.skipMergeValidation = skipMergeValidation
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

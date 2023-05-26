@@ -24,6 +24,10 @@ public extension BatchWebhooks {
       .POST
     }
 
+    public init(body: BatchWebhook1) {
+      self.body = body
+    }
+
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }

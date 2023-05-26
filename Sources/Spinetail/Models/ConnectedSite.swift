@@ -26,7 +26,7 @@ public struct ConnectedSite: Codable, Equatable, Content {
   /** The date and time the connected site was last updated in ISO 8601 format. */
   public let updatedAt: MailchimpOptionalDate
 
-  public init(links: [ResourceLink]? = nil, createdAt: MailchimpOptionalDate = nil, domain: String? = nil, foreignId: String? = nil, platform: String? = nil, siteScript: Script? = nil, storeId: String? = nil, updatedAt: MailchimpOptionalDate = nil) {
+  public init(links: [ResourceLink]? = nil, createdAt: MailchimpOptionalDate, domain: String? = nil, foreignId: String? = nil, platform: String? = nil, siteScript: Script? = nil, storeId: String? = nil, updatedAt: MailchimpOptionalDate) {
     self.links = links
     self.createdAt = createdAt
     self.domain = domain

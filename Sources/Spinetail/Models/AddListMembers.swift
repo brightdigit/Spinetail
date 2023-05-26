@@ -47,7 +47,7 @@ public struct AddListMembers: Codable, Equatable, Content {
   /** [VIP status](https://mailchimp.com/help/designate-and-send-to-vip-contacts/) for subscriber. */
   public let vip: Bool?
 
-  public init(emailAddress: String? = nil, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: Location? = nil, mergeFields: [String: String]? = nil, status: Status? = nil, timestampOpt: MailchimpOptionalDate = nil, timestampSignup: MailchimpOptionalDate = nil, vip: Bool? = nil) {
+  public init(emailAddress: String? = nil, emailType: String? = nil, interests: [String: Bool]? = nil, ipOpt: String? = nil, ipSignup: String? = nil, language: String? = nil, location: Location? = nil, mergeFields: [String: String]? = nil, status: Status? = nil, timestampOpt: MailchimpOptionalDate, timestampSignup: MailchimpOptionalDate, vip: Bool? = nil) {
     self.emailAddress = emailAddress
     self.emailType = emailType
     self.interests = interests

@@ -25,7 +25,12 @@ public extension TemplateFolders {
     }
 
     /** The unique id for the template folder. */
-    public var folderId: String
+    public let folderId: String
+
+    public init(body: TemplateFolder1, folderId: String) {
+      self.body = body
+      self.folderId = folderId
+    }
 
     public var parameters: [String: String] { [:] }
 

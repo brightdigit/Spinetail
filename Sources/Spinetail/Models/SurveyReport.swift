@@ -42,7 +42,7 @@ public struct SurveyReport: Codable, Equatable, Content {
   /** The ID used in the Mailchimp web application. View this survey report in your Mailchimp account at `https://{dc}.admin.mailchimp.com/lists/surveys/results?survey_id={web_id}`. */
   public let webId: Int?
 
-  public init(createdAt: MailchimpOptionalDate = nil, id: String? = nil, listId: String? = nil, listName: String? = nil, publishedAt: MailchimpOptionalDate = nil, status: Status? = nil, title: String? = nil, totalResponses: Int? = nil, updatedAt: MailchimpOptionalDate = nil, url: String? = nil, webId: Int? = nil) {
+  public init(createdAt: MailchimpOptionalDate, id: String? = nil, listId: String? = nil, listName: String? = nil, publishedAt: MailchimpOptionalDate, status: Status? = nil, title: String? = nil, totalResponses: Int? = nil, updatedAt: MailchimpOptionalDate, url: String? = nil, webId: Int? = nil) {
     self.createdAt = createdAt
     self.id = id
     self.listId = listId

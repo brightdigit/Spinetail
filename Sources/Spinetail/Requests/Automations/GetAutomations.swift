@@ -25,31 +25,43 @@ public extension Automations {
     }
 
     /** The number of records to return. Default value is 10. Maximum value is 1000 */
-    public var count: Int?
+    public let count: Int?
 
     /** Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0. */
-    public var offset: Int?
+    public let offset: Int?
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** Restrict the response to automations created before this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var beforeCreateTime: MailchimpOptionalDate
+    public let beforeCreateTime: MailchimpOptionalDate
 
     /** Restrict the response to automations created after this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var sinceCreateTime: MailchimpOptionalDate
+    public let sinceCreateTime: MailchimpOptionalDate
 
     /** Restrict the response to automations started before this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var beforeStartTime: MailchimpOptionalDate
+    public let beforeStartTime: MailchimpOptionalDate
 
     /** Restrict the response to automations started after this time. Uses the ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var sinceStartTime: MailchimpOptionalDate
+    public let sinceStartTime: MailchimpOptionalDate
 
     /** Restrict the results to automations with the specified status. */
-    public var status: Status?
+    public let status: Status?
+
+    public init(count: Int? = nil, offset: Int? = nil, fields: [String]? = nil, excludeFields: [String]? = nil, beforeCreateTime: MailchimpOptionalDate = nil, sinceCreateTime: MailchimpOptionalDate = nil, beforeStartTime: MailchimpOptionalDate = nil, sinceStartTime: MailchimpOptionalDate = nil, status: Status? = nil) {
+      self.count = count
+      self.offset = offset
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.beforeCreateTime = beforeCreateTime
+      self.sinceCreateTime = sinceCreateTime
+      self.beforeStartTime = beforeStartTime
+      self.sinceStartTime = sinceStartTime
+      self.status = status
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

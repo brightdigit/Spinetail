@@ -3,35 +3,42 @@ import PrchModel
 
 public extension VerifiedDomains {
   /**
-   Get domain info
+   Verify domain
 
-   Get the details for a single domain on the account.
+   Verify a domain for sending.
    */
-  struct GetVerifiedDomain: ServiceCall {
+  struct VerifyDomain: ServiceCall {
     public static var requiresCredentials: Bool {
       false
     }
 
     public typealias ServiceAPI = SpinetailAPI
 
-    public static let pathTemplate = "/verified-domains/{domain_name}"
+    public static let pathTemplate = "/verified-domains/{domain_name}/actions/verify"
 
     public var path: String {
       Self.pathTemplate.replacingOccurrences(of: "{" + "domain_name" + "}", with: "\(domainName)")
     }
 
     public var method: RequestMethod {
-      .GET
+      .POST
     }
 
     /** The domain name. */
-    public var domainName: String
+    public let domainName: String
+
+    public init(body: VerifyaDomainForSending, domainName: String) {
+      self.body = body
+      self.domainName = domainName
+    }
 
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
 
     public typealias SuccessType = VerifiedDomainsModel
-    public typealias BodyType = Empty
+    public typealias BodyType = VerifyaDomainForSending
+
+    public let body: VerifyaDomainForSending
   }
 }

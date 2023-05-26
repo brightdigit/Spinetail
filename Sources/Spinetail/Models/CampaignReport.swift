@@ -73,7 +73,35 @@ public struct CampaignReport: Codable, Equatable, Content {
   /** The total number of unsubscribed members for this campaign. */
   public let unsubscribed: Int?
 
-  public init(links: [ResourceLink]? = nil, abSplit: ABSplitStats? = nil, abuseReports: Int? = nil, bounces: Bounces? = nil, campaignTitle: String? = nil, clicks: Clicks? = nil, deliveryStatus: CampaignDeliveryStatus? = nil, ecommerce: ECommerceReport1? = nil, emailsSent: Int? = nil, facebookLikes: FacebookLikes? = nil, forwards: Forwards? = nil, id: String? = nil, industryStats: IndustryStats1? = nil, listId: String? = nil, listIsActive: Bool? = nil, listName: String? = nil, listStats: ListStats? = nil, opens: Opens? = nil, previewText: String? = nil, rssLastSend: MailchimpOptionalDate = nil, sendTime: MailchimpOptionalDate = nil, shareReport: ShareReport? = nil, subjectLine: String? = nil, timeseries: [TimeseriesInner]? = nil, timewarp: [TimewarpStatsInner]? = nil, type: String? = nil, unsubscribed: Int? = nil) {
+  public init(
+    links: [ResourceLink]? = nil,
+    abSplit: ABSplitStats? = nil,
+    abuseReports: Int? = nil,
+    bounces: Bounces? = nil,
+    campaignTitle: String? = nil,
+    clicks: Clicks? = nil,
+    deliveryStatus: CampaignDeliveryStatus? = nil,
+    ecommerce: ECommerceReport1? = nil,
+    emailsSent: Int? = nil,
+    facebookLikes: FacebookLikes? = nil,
+    forwards: Forwards? = nil,
+    id: String? = nil,
+    industryStats: IndustryStats1? = nil,
+    listId: String? = nil,
+    listIsActive: Bool? = nil,
+    listName: String? = nil,
+    listStats: ListStats? = nil,
+    opens: Opens? = nil,
+    previewText: String? = nil,
+    rssLastSend: MailchimpOptionalDate,
+    sendTime: MailchimpOptionalDate,
+    shareReport: ShareReport? = nil,
+    subjectLine: String? = nil,
+    timeseries: [TimeseriesInner]? = nil,
+    timewarp: [TimewarpStatsInner]? = nil,
+    type: String? = nil,
+    unsubscribed: Int? = nil
+  ) {
     self.links = links
     self.abSplit = abSplit
     self.abuseReports = abuseReports

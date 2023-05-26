@@ -14,7 +14,7 @@ public struct TimeseriesInner: Codable, Equatable, Content {
   /** The number of unique opens in the timeseries. */
   public let uniqueOpens: Int?
 
-  public init(emailsSent: Int? = nil, recipientsClicks: Int? = nil, timestamp: MailchimpOptionalDate = nil, uniqueOpens: Int? = nil) {
+  public init(emailsSent: Int? = nil, recipientsClicks: Int? = nil, timestamp: MailchimpOptionalDate, uniqueOpens: Int? = nil) {
     self.emailsSent = emailsSent
     self.recipientsClicks = recipientsClicks
     self.timestamp = timestamp

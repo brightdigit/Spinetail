@@ -25,22 +25,31 @@ public extension Lists {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** The unique ID for the interest category. */
-    public var interestCategoryId: String
+    public let interestCategoryId: String
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The number of records to return. Default value is 10. Maximum value is 1000 */
-    public var count: Int?
+    public let count: Int?
 
     /** Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0. */
-    public var offset: Int?
+    public let offset: Int?
+
+    public init(listId: String, interestCategoryId: String, fields: [String]? = nil, excludeFields: [String]? = nil, count: Int? = nil, offset: Int? = nil) {
+      self.listId = listId
+      self.interestCategoryId = interestCategoryId
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.count = count
+      self.offset = offset
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

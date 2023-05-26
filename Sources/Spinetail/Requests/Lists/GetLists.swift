@@ -25,43 +25,59 @@ public extension Lists {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The number of records to return. Default value is 10. Maximum value is 1000 */
-    public var count: Int?
+    public let count: Int?
 
     /** Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0. */
-    public var offset: Int?
+    public let offset: Int?
 
     /** Restrict response to lists created before the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var beforeDateCreated: String?
+    public let beforeDateCreated: String?
 
     /** Restrict results to lists created after the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var sinceDateCreated: String?
+    public let sinceDateCreated: String?
 
     /** Restrict results to lists created before the last campaign send date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var beforeCampaignLastSent: String?
+    public let beforeCampaignLastSent: String?
 
     /** Restrict results to lists created after the last campaign send date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00. */
-    public var sinceCampaignLastSent: String?
+    public let sinceCampaignLastSent: String?
 
     /** Restrict results to lists that include a specific subscriber's email address. */
-    public var email: String?
+    public let email: String?
 
     /** Returns files sorted by the specified field. */
-    public var sortField: SortField?
+    public let sortField: SortField?
 
     /** Determines the order direction for sorted results. */
-    public var sortDir: SortDir?
+    public let sortDir: SortDir?
 
     /** Restrict results to lists that contain an active, connected, undeleted ecommerce store. */
-    public var hasEcommerceStore: Bool?
+    public let hasEcommerceStore: Bool?
 
     /** Return the total_contacts field in the stats response, which contains an approximate count of all contacts in any state. */
-    public var includeTotalContacts: Bool?
+    public let includeTotalContacts: Bool?
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, count: Int? = nil, offset: Int? = nil, beforeDateCreated: String? = nil, sinceDateCreated: String? = nil, beforeCampaignLastSent: String? = nil, sinceCampaignLastSent: String? = nil, email: String? = nil, sortField: SortField? = nil, sortDir: SortDir? = nil, hasEcommerceStore: Bool? = nil, includeTotalContacts: Bool? = nil) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.count = count
+      self.offset = offset
+      self.beforeDateCreated = beforeDateCreated
+      self.sinceDateCreated = sinceDateCreated
+      self.beforeCampaignLastSent = beforeCampaignLastSent
+      self.sinceCampaignLastSent = sinceCampaignLastSent
+      self.email = email
+      self.sortField = sortField
+      self.sortDir = sortDir
+      self.hasEcommerceStore = hasEcommerceStore
+      self.includeTotalContacts = includeTotalContacts
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

@@ -25,16 +25,23 @@ public extension SearchMembers {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The search query used to filter results. Query should be a valid email, or a string representing a contact's first or last name. */
-    public var query: String
+    public let query: String
 
     /** The unique id for the list. */
-    public var listId: String?
+    public let listId: String?
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, query: String, listId: String? = nil) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.query = query
+      self.listId = listId
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

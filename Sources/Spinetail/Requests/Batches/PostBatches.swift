@@ -24,6 +24,10 @@ public extension Batches {
       .POST
     }
 
+    public init(body: PostBatchesRequest) {
+      self.body = body
+    }
+
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }

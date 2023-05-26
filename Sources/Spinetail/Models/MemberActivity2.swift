@@ -18,7 +18,7 @@ public struct MemberActivity2: Codable, Equatable, Content {
   /** If the action is a 'click', the URL on which the member clicked. */
   public let url: String?
 
-  public init(action: String? = nil, ip: String? = nil, timestamp: MailchimpOptionalDate = nil, type: String? = nil, url: String? = nil) {
+  public init(action: String? = nil, ip: String? = nil, timestamp: MailchimpOptionalDate, type: String? = nil, url: String? = nil) {
     self.action = action
     self.ip = ip
     self.timestamp = timestamp

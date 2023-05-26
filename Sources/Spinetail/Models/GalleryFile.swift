@@ -45,7 +45,7 @@ public struct GalleryFile: Codable, Equatable, Content {
   /** The width of the image. */
   public let width: Int?
 
-  public init(links: [ResourceLink]? = nil, createdAt: MailchimpOptionalDate = nil, createdBy: String? = nil, folderId: Int? = nil, fullSizeURL: URL? = nil, height: Int? = nil, id: Int? = nil, name: String? = nil, size: Int? = nil, thumbnailURL: URL? = nil, type: Type? = nil, width: Int? = nil) {
+  public init(links: [ResourceLink]? = nil, createdAt: MailchimpOptionalDate, createdBy: String? = nil, folderId: Int? = nil, fullSizeURL: URL? = nil, height: Int? = nil, id: Int? = nil, name: String? = nil, size: Int? = nil, thumbnailURL: URL? = nil, type: Type? = nil, width: Int? = nil) {
     self.links = links
     self.createdAt = createdAt
     self.createdBy = createdBy

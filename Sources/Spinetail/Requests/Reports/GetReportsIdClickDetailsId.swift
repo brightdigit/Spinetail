@@ -25,16 +25,23 @@ public extension Reports {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The unique id for the campaign. */
-    public var campaignId: String
+    public let campaignId: String
 
     /** The id for the link. */
-    public var linkId: String
+    public let linkId: String
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, campaignId: String, linkId: String) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.campaignId = campaignId
+      self.linkId = linkId
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

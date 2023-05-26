@@ -18,7 +18,7 @@ public struct VerifiedDomainsModel: Codable, Equatable, Content {
   /** Whether the domain has been verified for sending. */
   public let verified: Bool?
 
-  public init(authenticated: Bool? = nil, domain: String? = nil, verificationEmail: String? = nil, verificationSent: MailchimpOptionalDate = nil, verified: Bool? = nil) {
+  public init(authenticated: Bool? = nil, domain: String? = nil, verificationEmail: String? = nil, verificationSent: MailchimpOptionalDate, verified: Bool? = nil) {
     self.authenticated = authenticated
     self.domain = domain
     self.verificationEmail = verificationEmail

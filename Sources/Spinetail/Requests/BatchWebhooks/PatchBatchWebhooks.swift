@@ -25,7 +25,12 @@ public extension BatchWebhooks {
     }
 
     /** The unique id for the batch webhook. */
-    public var batchWebhookId: String
+    public let batchWebhookId: String
+
+    public init(body: BatchWebhook2, batchWebhookId: String) {
+      self.body = body
+      self.batchWebhookId = batchWebhookId
+    }
 
     public var parameters: [String: String] { [:] }
 

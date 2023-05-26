@@ -15,7 +15,7 @@ public struct Events: Codable, Equatable, Content {
   /** An optional list of properties */
   public let properties: [String: String]?
 
-  public init(name: String, isSyncing: Bool? = nil, occurredAt: MailchimpOptionalDate = nil, properties: [String: String]? = nil) {
+  public init(name: String, isSyncing: Bool? = nil, occurredAt: MailchimpOptionalDate, properties: [String: String]? = nil) {
     self.name = name
     self.isSyncing = isSyncing
     self.occurredAt = occurredAt

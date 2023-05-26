@@ -25,10 +25,16 @@ public extension CustomerJourneys {
     }
 
     /** The id for the Journey. */
-    public var journeyId: Int
+    public let journeyId: Int
 
     /** The id for the Step. */
-    public var stepId: Int
+    public let stepId: Int
+
+    public init(body: SubscriberInCustomerJourneysAudience, journeyId: Int, stepId: Int) {
+      self.body = body
+      self.journeyId = journeyId
+      self.stepId = stepId
+    }
 
     public var parameters: [String: String] { [:] }
 

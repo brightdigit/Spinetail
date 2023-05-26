@@ -24,7 +24,7 @@ public struct RSSOptions3: Codable, Equatable, Content {
 
   public let schedule: SendingSchedule1?
 
-  public init(feedURL: URL, frequency: Frequency, constrainRssImg: Bool? = nil, lastSent: MailchimpOptionalDate = nil, schedule: SendingSchedule1? = nil) {
+  public init(feedURL: URL, frequency: Frequency, constrainRssImg: Bool? = nil, lastSent: MailchimpOptionalDate, schedule: SendingSchedule1? = nil) {
     self.feedURL = feedURL
     self.frequency = frequency
     self.constrainRssImg = constrainRssImg

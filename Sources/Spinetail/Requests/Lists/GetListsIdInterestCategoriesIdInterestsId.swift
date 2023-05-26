@@ -25,19 +25,27 @@ public extension Lists {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** The unique ID for the interest category. */
-    public var interestCategoryId: String
+    public let interestCategoryId: String
 
     /** The specific interest or 'group name'. */
-    public var interestId: String
+    public let interestId: String
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
+
+    public init(listId: String, interestCategoryId: String, interestId: String, fields: [String]? = nil, excludeFields: [String]? = nil) {
+      self.listId = listId
+      self.interestCategoryId = interestCategoryId
+      self.interestId = interestId
+      self.fields = fields
+      self.excludeFields = excludeFields
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

@@ -12,7 +12,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf1: Codable, Equat
 
   public let wasCanceledByFacebook: Bool?
 
-  public init(emailSourceName: String? = nil, endTime: MailchimpOptionalDate = nil, needsAttention: Bool? = nil, pausedAt: MailchimpOptionalDate = nil, wasCanceledByFacebook: Bool? = nil) {
+  public init(emailSourceName: String? = nil, endTime: MailchimpOptionalDate, needsAttention: Bool? = nil, pausedAt: MailchimpOptionalDate, wasCanceledByFacebook: Bool? = nil) {
     self.emailSourceName = emailSourceName
     self.endTime = endTime
     self.needsAttention = needsAttention

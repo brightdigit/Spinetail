@@ -26,7 +26,7 @@ public struct TimewarpStatsInner: Codable, Equatable, Content {
   /** The number of unique opens. */
   public let uniqueOpens: Int?
 
-  public init(bounces: Int? = nil, clicks: Int? = nil, gmtOffset: Int? = nil, lastClick: MailchimpOptionalDate = nil, lastOpen: MailchimpOptionalDate = nil, opens: Int? = nil, uniqueClicks: Int? = nil, uniqueOpens: Int? = nil) {
+  public init(bounces: Int? = nil, clicks: Int? = nil, gmtOffset: Int? = nil, lastClick: MailchimpOptionalDate, lastOpen: MailchimpOptionalDate, opens: Int? = nil, uniqueClicks: Int? = nil, uniqueOpens: Int? = nil) {
     self.bounces = bounces
     self.clicks = clicks
     self.gmtOffset = gmtOffset

@@ -25,13 +25,19 @@ public extension Automations {
     }
 
     /** The unique id for the Automation workflow. */
-    public var workflowId: String
+    public let workflowId: String
 
     /** The unique id for the Automation workflow email. */
-    public var workflowEmailId: String
+    public let workflowEmailId: String
 
     /** The MD5 hash of the lowercase version of the list member's email address. */
-    public var subscriberHash: String
+    public let subscriberHash: String
+
+    public init(workflowId: String, workflowEmailId: String, subscriberHash: String) {
+      self.workflowId = workflowId
+      self.workflowEmailId = workflowEmailId
+      self.subscriberHash = subscriberHash
+    }
 
     public var parameters: [String: String] { [:] }
 

@@ -24,6 +24,10 @@ public extension Automations {
       .POST
     }
 
+    public init(body: AutomationWorkflow1) {
+      self.body = body
+    }
+
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }

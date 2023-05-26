@@ -54,7 +54,7 @@ public struct Statistics: Codable, Equatable, Content {
   /** The number of members who have unsubscribed since the last campaign was sent. */
   public let unsubscribeCountSinceSend: Int?
 
-  public init(avgSubRate: Double? = nil, avgUnsubRate: Double? = nil, campaignCount: Int? = nil, campaignLastSent: MailchimpOptionalDate = nil, cleanedCount: Int? = nil, cleanedCountSinceSend: Int? = nil, clickRate: Double? = nil, lastSubDate: MailchimpOptionalDate = nil, lastUnsubDate: MailchimpOptionalDate = nil, memberCount: Int? = nil, memberCountSinceSend: Int? = nil, mergeFieldCount: Int? = nil, openRate: Double? = nil, targetSubRate: Double? = nil, totalContacts: Int? = nil, unsubscribeCount: Int? = nil, unsubscribeCountSinceSend: Int? = nil) {
+  public init(avgSubRate: Double? = nil, avgUnsubRate: Double? = nil, campaignCount: Int? = nil, campaignLastSent: MailchimpOptionalDate, cleanedCount: Int? = nil, cleanedCountSinceSend: Int? = nil, clickRate: Double? = nil, lastSubDate: MailchimpOptionalDate, lastUnsubDate: MailchimpOptionalDate, memberCount: Int? = nil, memberCountSinceSend: Int? = nil, mergeFieldCount: Int? = nil, openRate: Double? = nil, targetSubRate: Double? = nil, totalContacts: Int? = nil, unsubscribeCount: Int? = nil, unsubscribeCountSinceSend: Int? = nil) {
     self.avgSubRate = avgSubRate
     self.avgUnsubRate = avgUnsubRate
     self.campaignCount = campaignCount

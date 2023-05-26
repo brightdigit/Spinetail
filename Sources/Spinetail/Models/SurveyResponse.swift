@@ -17,7 +17,7 @@ public struct SurveyResponse: Codable, Equatable, Content {
   /** The date and time when the survey response was submitted in ISO 8601 format. */
   public let submittedAt: MailchimpOptionalDate
 
-  public init(contact: Contact? = nil, isNewContact: Bool? = nil, responseId: String? = nil, results: [Response]? = nil, submittedAt: MailchimpOptionalDate = nil) {
+  public init(contact: Contact? = nil, isNewContact: Bool? = nil, responseId: String? = nil, results: [Response]? = nil, submittedAt: MailchimpOptionalDate) {
     self.contact = contact
     self.isNewContact = isNewContact
     self.responseId = responseId

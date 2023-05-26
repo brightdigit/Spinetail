@@ -24,6 +24,10 @@ public extension AccountExports {
       .POST
     }
 
+    public init(body: CreateAnAccountExport) {
+      self.body = body
+    }
+
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }

@@ -25,16 +25,23 @@ public extension Lists {
     }
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** A specific month of list growth history. */
-    public var month: String
+    public let month: String
+
+    public init(fields: [String]? = nil, excludeFields: [String]? = nil, listId: String, month: String) {
+      self.fields = fields
+      self.excludeFields = excludeFields
+      self.listId = listId
+      self.month = month
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]

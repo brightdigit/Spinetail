@@ -25,10 +25,16 @@ public extension Lists {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** The id for the merge field. */
-    public var mergeId: String
+    public let mergeId: String
+
+    public init(body: MergeField2, listId: String, mergeId: String) {
+      self.body = body
+      self.listId = listId
+      self.mergeId = mergeId
+    }
 
     public var parameters: [String: String] { [:] }
 

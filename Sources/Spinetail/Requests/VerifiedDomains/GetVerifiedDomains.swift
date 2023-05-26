@@ -3,11 +3,11 @@ import PrchModel
 
 public extension VerifiedDomains {
   /**
-   Add domain to account
+   List sending domains
 
-   Add a domain to the account.
+   Get all of the sending domains on the account.
    */
-  struct CreateVerifiedDomain: ServiceCall {
+  struct GetVerifiedDomains: ServiceCall {
     public static var requiresCredentials: Bool {
       false
     }
@@ -21,16 +21,16 @@ public extension VerifiedDomains {
     }
 
     public var method: RequestMethod {
-      .POST
+      .GET
     }
+
+    public init() {}
 
     public var parameters: [String: String] { [:] }
 
     public var headers: [String: String] { [:] }
 
-    public typealias SuccessType = VerifiedDomainsModel
-    public typealias BodyType = VerifiedDomainsModel2
-
-    public let body: VerifiedDomainsModel2
+    public typealias SuccessType = VerifiedDomainsModel1
+    public typealias BodyType = Empty
   }
 }

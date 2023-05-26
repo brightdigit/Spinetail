@@ -78,7 +78,7 @@ public struct GetAllFacebookAds200ResponseFacebookAdsInnerAllOf: Codable, Equata
   /** Web ID */
   public let webId: Int?
 
-  public init(canceledAt: MailchimpOptionalDate = nil, createTime: MailchimpOptionalDate = nil, hasSegment: Bool? = nil, id: String? = nil, name: String? = nil, publishedTime: MailchimpOptionalDate = nil, recipients: List10? = nil, reportSummary: GetAllFacebookAds200ResponseFacebookAdsInnerAllOfReportSummary? = nil, showReport: Bool? = nil, startTime: MailchimpOptionalDate = nil, status: Status? = nil, thumbnail: String? = nil, type: Type? = nil, updatedAt: MailchimpOptionalDate = nil, webId: Int? = nil) {
+  public init(canceledAt: MailchimpOptionalDate, createTime: MailchimpOptionalDate, hasSegment: Bool? = nil, id: String? = nil, name: String? = nil, publishedTime: MailchimpOptionalDate, recipients: List10? = nil, reportSummary: GetAllFacebookAds200ResponseFacebookAdsInnerAllOfReportSummary? = nil, showReport: Bool? = nil, startTime: MailchimpOptionalDate, status: Status? = nil, thumbnail: String? = nil, type: Type? = nil, updatedAt: MailchimpOptionalDate, webId: Int? = nil) {
     self.canceledAt = canceledAt
     self.createTime = createTime
     self.hasSegment = hasSegment

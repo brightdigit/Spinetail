@@ -18,7 +18,7 @@ public struct TwitterStatus: Codable, Equatable, Content {
   /** The individual id for the tweet. */
   public let statusId: String?
 
-  public init(datetime: MailchimpOptionalDate = nil, isRetweet: Bool? = nil, screenName: String? = nil, status: String? = nil, statusId: String? = nil) {
+  public init(datetime: MailchimpOptionalDate, isRetweet: Bool? = nil, screenName: String? = nil, status: String? = nil, statusId: String? = nil) {
     self.datetime = datetime
     self.isRetweet = isRetweet
     self.screenName = screenName

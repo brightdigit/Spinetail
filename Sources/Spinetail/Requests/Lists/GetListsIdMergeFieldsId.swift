@@ -25,16 +25,23 @@ public extension Lists {
     }
 
     /** The unique ID for the list. */
-    public var listId: String
+    public let listId: String
 
     /** The id for the merge field. */
-    public var mergeId: String
+    public let mergeId: String
 
     /** A comma-separated list of fields to exclude. Reference parameters of sub-objects with dot notation. */
-    public var excludeFields: [String]?
+    public let excludeFields: [String]?
 
     /** A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation. */
-    public var fields: [String]?
+    public let fields: [String]?
+
+    public init(listId: String, mergeId: String, excludeFields: [String]? = nil, fields: [String]? = nil) {
+      self.listId = listId
+      self.mergeId = mergeId
+      self.excludeFields = excludeFields
+      self.fields = fields
+    }
 
     public var parameters: [String: String] {
       var params: [String: String] = [:]
