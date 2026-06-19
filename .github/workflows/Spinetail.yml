@@ -1,179 +1,81 @@
 name: Spinetail
+
+# Standalone CI for Spinetail, following the BrightDigit CI template on Swift
+# 6.4. Spinetail is swift-tools-version:6.4, so every leg runs on the nightly
+# 6.4 toolchain — the only one that can resolve the manifest. macOS legs are
+# omitted until a hosted runner ships a 6.4-capable toolchain.
 on:
   push:
-    branches-ignore:
-      - '*WIP'
+    branches: [main, brightdigit-com-260406]
+    tags: ['v*.*.*']
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+  workflow_dispatch:
 
-env:
-  CODEQL_ENABLE_EXPERIMENTAL_FEATURES_SWIFT: true
-  MAILCHIMP_API_KEY:  ${{ secrets.MAILCHIMP_API_KEY }}
-  MAILCHIMP_LIST_ID:  ${{ secrets.MAILCHIMP_LIST_ID }}
-  MAILCHIMP_INTEREST_ID:  ${{ secrets.MAILCHIMP_INTEREST_ID }}
-  PACKAGE_NAME: Spinetail
-  
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-ubuntu:
     name: Build on Ubuntu
-    env:
-      SWIFT_VER: ${{ matrix.swift-version }}
-    runs-on: ${{ matrix.runs-on }}
-    if: "!contains(github.event.head_commit.message, 'ci skip')"
-    strategy:
-      matrix:
-        runs-on: [ubuntu-20.04, ubuntu-22.04]
-        swift-version: [5.7.3, 5.8]
+    runs-on: ubuntu-latest
+    container: swiftlang/swift:nightly-6.4.x-noble
+    if: ${{ !contains(github.event.head_commit.message, 'ci skip') }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Set Ubuntu Release DOT
-        run: echo "RELEASE_DOT=$(lsb_release -sr)" >> $GITHUB_ENV
-      - name: Set Ubuntu Release NUM
-        run: echo "RELEASE_NUM=${RELEASE_DOT//[-._]/}"  >> $GITHUB_ENV
-      - name: Set Ubuntu Codename
-        run: echo "RELEASE_NAME=$(lsb_release -sc)"  >> $GITHUB_ENV
-      - name: Cache swift package modules
-        id: cache-spm-linux
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-spm
-        with:
-          path: .build
-          key: ${{ runner.os }}-${{ env.RELEASE_DOT }}-${{ env.cache-name }}-${{ matrix.swift-version }}-${{ hashFiles('Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.RELEASE_DOT }}-${{ env.cache-name }}-${{ matrix.swift-version }}-
-            ${{ runner.os }}-${{ env.RELEASE_DOT }}-${{ env.cache-name }}-
-      - name: Cache swift
-        id: cache-swift-linux
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-swift
-        with:
-          path: swift-${{ env.SWIFT_VER }}-RELEASE-ubuntu${{ env.RELEASE_DOT }}
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ matrix.swift-version }}-${{ env.RELEASE_DOT }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.cache-name }}-${{ matrix.swift-version }}-
-      - name: Download Swift
-        if: steps.cache-swift-linux.outputs.cache-hit != 'true'
-        run: curl -O https://download.swift.org/swift-${SWIFT_VER}-release/ubuntu${RELEASE_NUM}/swift-${SWIFT_VER}-RELEASE/swift-${SWIFT_VER}-RELEASE-ubuntu${RELEASE_DOT}.tar.gz
-      - name: Extract Swift
-        if: steps.cache-swift-linux.outputs.cache-hit != 'true'
-        run: tar xzf swift-${SWIFT_VER}-RELEASE-ubuntu${RELEASE_DOT}.tar.gz
-      - name: Add Path
-        run: echo "$GITHUB_WORKSPACE/swift-${SWIFT_VER}-RELEASE-ubuntu${RELEASE_DOT}/usr/bin" >> $GITHUB_PATH
-      - name: Build
-        run: swift build
-#       - name: Run tests
-#         run: swift test --enable-test-discovery --enable-code-coverage
-      # - name: Prepare Code Coverage
-      #   run: llvm-cov export -format="lcov" .build/x86_64-unknown-linux-gnu/debug/${{ env.PACKAGE_NAME }}PackageTests.xctest -instr-profile .build/debug/codecov/default.profdata > info.lcov
-      # - name: Upload to CodeCov.io
-      #   run: bash <(curl https://codecov.io/bash) -F github -F ${RELEASE_NAME} -F ${SWIFT_VER}
-      #   env:
-      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-  build-macos:
-    name: Build on macOS
-    runs-on: ${{ matrix.runs-on }}
-    if: "!contains(github.event.head_commit.message, 'ci skip')"
-    strategy:
-      matrix:
-        include:
-#           - runs-on: macos-12
-#             xcode: "/Applications/Xcode_14.0.1.app"
-#             iOSVersion: "16.0"
-#             watchOSVersion: "9.0"
-#             watchName: "Apple Watch Series 8 (41mm)"
-#             iPhoneName: "iPhone 12"
-#           - runs-on: macos-12
-#             xcode: "/Applications/Xcode_14.1.app"
-#             iOSVersion: "16.1"
-#             watchOSVersion: "9.1"
-#             watchName: "Apple Watch Ultra (49mm)"
-#             iPhoneName: "iPhone 13"
-          - runs-on: macos-12
-            xcode: "/Applications/Xcode_14.2.app"
-            iOSVersion: "16.2"
-            watchOSVersion: "9.1"
-            watchName: "Apple Watch Ultra (49mm)"
-            iPhoneName: "iPhone 14"
-          - runs-on: macos-13
-            xcode: "/Applications/Xcode_14.3.app"
-            iOSVersion: "16.4"
-            watchOSVersion: "9.4"
-            watchName: "Apple Watch Ultra (49mm)"
-            iPhoneName: "iPhone 14 Pro Max"
-    steps:
-      - uses: actions/checkout@v3
-      - name: Cache swift package modules
-        id: cache-spm-macos
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-spm
-        with:
-          path: .build
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.xcode }}-${{ hashFiles('Package.resolved') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.xcode }}-
-      - name: Cache mint
-        if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
-        id: cache-mint
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-mint
-        with:
-          path: .mint
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('Mintfile') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: Set Xcode Name
-        run: echo "XCODE_NAME=$(basename -- ${{ matrix.xcode }} | sed 's/\.[^.]*$//' | cut -d'_' -f2)" >> $GITHUB_ENV
-      - name: Setup Xcode
-        run: sudo xcode-select -s ${{ matrix.xcode }}/Contents/Developer
-      - name: Install mint
-        if: startsWith(matrix.xcode,'/Applications/Xcode_14.3')
+      - uses: actions/checkout@v6
+      - uses: brightdigit/swift-build@v1
+        id: build
+      - name: Install curl (required by Codecov uploader)
+        if: steps.build.outputs.contains-code-coverage == 'true'
         run: |
-          brew update
-          brew install mint
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+          if ! command -v curl &> /dev/null; then
+            apt-get update -q
+            apt-get install -y --no-install-recommends curl ca-certificates
+          fi
+      # brightdigit fork of swift-coverage-action: upstream @v5 can't pair the
+      # profdata with the test binary under Swift 6.4's swiftbuild layout
+      # (.so + <Name>-test-runner, no .xctest) — issue #92. Pinned by SHA.
+      - uses: brightdigit/swift-coverage-action@2f8538f723b99ab2406ac3a0e5b3355a9de4cf6c
+        if: steps.build.outputs.contains-code-coverage == 'true'
+        id: coverage-files
         with:
-          languages: swift
-      - name: Build
-        run: swift build
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+          search-paths: .build
+          fail-on-empty-output: true
+      - name: Upload coverage to Codecov
+        if: steps.build.outputs.contains-code-coverage == 'true'
+        uses: codecov/codecov-action@v7
+        with:
+          fail_ci_if_error: false
+          flags: noble,swift-6.4
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ${{ join(fromJSON(steps.coverage-files.outputs.files), ',') }}
+
+  lint:
+    name: Linting
+    if: ${{ !cancelled() && !failure() && !contains(github.event.head_commit.message, 'ci skip') }}
+    needs: [build-ubuntu]
+    runs-on: ubuntu-latest
+    container: swiftlang/swift:nightly-6.4.x-noble
+    steps:
+      - name: Install curl (required by mise-action)
+        run: |
+          apt-get update -q
+          apt-get install -y --no-install-recommends curl ca-certificates
+      - uses: actions/checkout@v6
+      - uses: jdx/mise-action@v4
+        env:
+          MISE_HTTP_TIMEOUT: 300s
+          MISE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          cache: true
       - name: Lint
-        run: ./scripts/lint.sh
-        if: ${{ github.ref_name == 'main' && matrix.xcode == '/Applications/Xcode_14.3.app' }}
-      # - name: Dump PIF
-      #   if: startsWith(matrix.xcode,'/Applications/Xcode_14')
-      #   run: |
-      #     swift package dump-pif > /dev/null
-      #     MAX_ATTEMPT=3
-      #     ATTEMPT=0
-      #     while [ -z $SUCCESS ] && [ "$ATTEMPT" -le "$MAX_ATTEMPT" ]; do
-      #       xcodebuild clean -scheme Spinetail -destination 'generic/platform=iOS' | grep -q "CLEAN SUCCEEDED" && SUCCESS=true
-      #       ATTEMPT=$(($ATTEMPT+1))
-      #     done
-      # - name: Run iOS target tests
-      #   run:  xcodebuild test -scheme Spinetail -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 13,OS=${{ matrix.iOSVersion }}' -enableCodeCoverage YES build test
-      # - uses: sersoft-gmbh/swift-coverage-action@v3
-      #   with:
-      #     fail-on-empty-output: true
-      # - name: Upload iOS coverage to Codecov
-      #   uses: codecov/codecov-action@v3
-      #   with:
-      #     fail_ci_if_error: true
-      #     flags: iOS,iOS-${{ matrix.iOSVersion }}
-      #     token: ${{ secrets.CODECOV_TOKEN }}
-      # - name: Run watchOS target tests
-      #   run: xcodebuild test -scheme Spinetail -sdk watchsimulator -destination 'platform=watchOS Simulator,name=${{ matrix.watchName }},OS=${{ matrix.watchOSVersion }}' -enableCodeCoverage YES build test
-      # - uses: sersoft-gmbh/swift-coverage-action@v3
-      #   with:
-      #     fail-on-empty-output: true
-      # - name: Upload watchOS coverage to Codecov
-      #   uses: codecov/codecov-action@v3
-      #   with:
-      #     fail_ci_if_error: true
-      #     flags: watchOS,watchOS${{ matrix.watchOSVersion }}
-      #     token: ${{ secrets.CODECOV_TOKEN }}
+        run: ./Scripts/lint.sh
+        env:
+          LINT_MODE: STRICT
