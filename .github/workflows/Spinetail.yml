@@ -7,7 +7,7 @@ name: Spinetail
 # nightly snapshot. WASM + Android deferred (see the note below the build jobs).
 on:
   push:
-    branches: [main, brightdigit-com-260406]
+    branches: [main]
     tags: ['v*.*.*']
     paths-ignore:
       - '**.md'
