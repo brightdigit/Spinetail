@@ -2,8 +2,9 @@ name: Spinetail
 
 # Standalone CI for Spinetail, following the BrightDigit CI template on Swift
 # 6.4. Spinetail is swift-tools-version:6.4, so every leg runs on the nightly
-# 6.4 toolchain — the only one that can resolve the manifest. macOS legs are
-# omitted until a hosted runner ships a 6.4-capable toolchain.
+# 6.4 toolchain — the only one that can resolve the manifest. macOS runs on the
+# self-hosted runner with /Applications/Xcode-beta.app; Windows on a swift.org
+# nightly snapshot. WASM + Android deferred (see the note below the build jobs).
 on:
   push:
     branches: [main, brightdigit-com-260406]
@@ -57,10 +58,88 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ${{ join(fromJSON(steps.coverage-files.outputs.files), ',') }}
 
+  configure:
+    name: Configure Matrix
+    runs-on: ubuntu-latest
+    outputs:
+      full-matrix: ${{ steps.check.outputs.full }}
+    steps:
+      - uses: actions/checkout@v6
+      - id: check
+        name: Determine matrix scope
+        run: |
+          FULL=false
+          REF="${{ github.ref }}"; EVENT="${{ github.event_name }}"; BASE_REF="${{ github.base_ref }}"
+          if [[ "$REF" == "refs/heads/main" ]]; then FULL=true
+          elif [[ "$REF" =~ ^refs/heads/v?[0-9]+\.[0-9]+\.[0-9]+ ]]; then FULL=true
+          elif [[ "$EVENT" == "workflow_dispatch" ]]; then FULL=true
+          elif [[ "$EVENT" == "pull_request" && ( "$BASE_REF" == "main" || "$BASE_REF" =~ ^v?[0-9]+\.[0-9]+\.[0-9]+ ) ]]; then FULL=true
+          fi
+          echo "full=$FULL" >> "$GITHUB_OUTPUT"
+
+  # Self-hosted macOS runner ships /Applications/Xcode-beta.app (Swift 6.4) — the
+  # only path to a 6.4 toolchain on macOS today. Always runs.
+  build-macos:
+    name: Build on macOS
+    runs-on: [self-hosted, macOS]
+    if: ${{ !contains(github.event.head_commit.message, 'ci skip') }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: brightdigit/swift-build@v1
+        id: build
+        with:
+          xcode: "/Applications/Xcode-beta.app"
+      - name: Process coverage
+        if: steps.build.outputs.contains-code-coverage == 'true'
+        uses: sersoft-gmbh/swift-coverage-action@v5
+        with:
+          search-paths: .build
+      - name: Upload coverage to Codecov
+        if: steps.build.outputs.contains-code-coverage == 'true'
+        uses: codecov/codecov-action@v7
+        with:
+          fail_ci_if_error: false
+          flags: spm,macos
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  # Windows nightly 6.4 via swift.org development snapshot (compnerd/gha-setup-swift
+  # under swift-build). Hosted runners — the only self-hosted runner is macOS.
+  # Gated to full-matrix runs (main / semver / dispatch / PRs into those).
+  # continue-on-error: swift-openapi transport support on Windows is unverified;
+  # drop continue-on-error once a run is green. Bump the snapshot id periodically.
+  build-windows:
+    name: Build on Windows
+    needs: configure
+    if: ${{ needs.configure.outputs.full-matrix == 'true' }}
+    runs-on: ${{ matrix.runs-on }}
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        runs-on: [windows-2022, windows-2025]
+        swift:
+          - version: swift-6.4.x-branch
+            build: 6.4.x-DEVELOPMENT-SNAPSHOT-2026-06-01-a
+    steps:
+      - uses: actions/checkout@v6
+      - uses: brightdigit/swift-build@v1
+        id: build
+        with:
+          windows-swift-version: ${{ matrix.swift.version }}
+          windows-swift-build: ${{ matrix.swift.build }}
+
+  # WASM + Android legs deferred: no nightly Swift 6.4 support yet.
+  #  - WASM: blocked by brightdigit/swift-build — it derives a -RELEASE wasm SDK
+  #    URL from the running toolchain, with no input for a nightly snapshot bundle.
+  #    Tracking: https://github.com/brightdigit/swift-build/issues/115.
+  #  - Android: blocked upstream — no nightly 6.4 Android SDK published yet.
+  # Add build-wasm (type: wasm) / build-android (type: android) once unblocked;
+  # job bodies live in git history of the monorepo .github/workflows/packages.yaml.
+
   lint:
     name: Linting
     if: ${{ !cancelled() && !failure() && !contains(github.event.head_commit.message, 'ci skip') }}
-    needs: [build-ubuntu]
+    needs: [build-ubuntu, build-macos, build-windows]
     runs-on: ubuntu-latest
     container: swiftlang/swift:nightly-6.4.x-noble
     steps:
