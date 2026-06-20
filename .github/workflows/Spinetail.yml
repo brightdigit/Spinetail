@@ -1,10 +1,13 @@
 name: Spinetail
 
-# Standalone CI for Spinetail, following the BrightDigit CI template on Swift
-# 6.4. Spinetail is swift-tools-version:6.4, so every leg runs on the nightly
-# 6.4 toolchain — the only one that can resolve the manifest. macOS runs on the
-# self-hosted runner with /Applications/Xcode-beta.app; Windows on a swift.org
-# nightly snapshot. WASM + Android deferred (see the note below the build jobs).
+# Standalone CI for this BrightDigit Swift package on Swift 6.4 (the BrightDigit
+# CI template). These five workflows are kept byte-identical except the name above;
+# the only per-package difference is externalized to the ENABLE_WASM repo variable.
+# Linux + wasm run in the nightly-6.4 container; macOS + the Apple-platform suite
+# run on the self-hosted runner with /Applications/Xcode-beta.app (Xcode 27 /
+# Swift 6.4); Windows on a swift.org nightly snapshot; Android via a swift.org SDK
+# bundle. The wasm step is gated on ENABLE_WASM — set it to 'false' where a
+# dependency can't build for wasm (e.g. Yams).
 on:
   push:
     branches: [main]
@@ -57,12 +60,14 @@ jobs:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ${{ join(fromJSON(steps.coverage-files.outputs.files), ',') }}
-      # WASM build folded into the Ubuntu job: same nightly-6.4.x-noble container,
-      # one spin-up, runs on every push/PR. continue-on-error so a wasm regression
-      # doesn't block the Linux build while the swift-build wasm-sdk-url path is
+      # WASM build, folded into the Ubuntu job (same nightly-6.4.x-noble container,
+      # one spin-up). Gated on the ENABLE_WASM repo variable — set it to 'false'
+      # where a dependency can't build for wasm (e.g. Yams; see that package's issue
+      # tracker). continue-on-error while the swift-build wasm-sdk-url path is
       # validated. Bump the snapshot SDK URL/checksum periodically.
       - name: Build on WASM
         id: wasm
+        if: ${{ vars.ENABLE_WASM != 'false' }}
         continue-on-error: true
         uses: brightdigit/swift-build@sdk-url-checksum-nightly-6.4
         with:
@@ -86,8 +91,8 @@ jobs:
       - id: check
         name: Determine matrix scope
         run: |
-          # Three tiers: small set (build-ubuntu/build-macos/lint, always) <
-          # full-matrix (macOS-platforms/wasm/android) < +Windows. full-matrix runs on
+          # Three tiers: small set (build-ubuntu[+wasm]/build-macos/lint, always) <
+          # full-matrix (macOS-platforms/android) < +Windows. full-matrix runs on
           # main / semver / dispatch / PRs into main or semver. Windows is the most
           # expensive leg, so run-windows is the same MINUS PRs into semver branches.
           FULL=false; WIN=false
@@ -103,8 +108,7 @@ jobs:
           echo "full=$FULL" >> "$GITHUB_OUTPUT"
           echo "windows=$WIN" >> "$GITHUB_OUTPUT"
 
-  # Self-hosted macOS runner ships /Applications/Xcode-beta.app (Swift 6.4) — the
-  # only path to a 6.4 toolchain on macOS today. Always runs.
+  # macOS on Swift 6.4 via the self-hosted runner with /Applications/Xcode-beta.app.
   build-macos:
     name: Build on macOS
     runs-on: [self-hosted, macOS]
@@ -128,19 +132,15 @@ jobs:
           flags: spm,macos
           token: ${{ secrets.CODECOV_TOKEN }}
 
-  # Windows nightly 6.4 via swift.org development snapshot (compnerd/gha-setup-swift
-  # under swift-build). Hosted runners — the only self-hosted runner is macOS.
-  # Most expensive leg — own tier (run-windows): main / semver / dispatch / PRs
-  # into main, but NOT PRs into semver branches (those still get the rest of the
-  # full matrix, just not Windows).
-  # continue-on-error: swift-openapi transport support on Windows is unverified;
-  # drop continue-on-error once a run is green. Bump the snapshot id periodically.
+  # Windows nightly 6.4 via a swift.org development snapshot (compnerd/gha-setup-swift
+  # under swift-build), on hosted runners. Own tier (run-windows): the most
+  # expensive leg, so it runs on main / semver / dispatch / PRs into main, but NOT
+  # PRs into semver branches. Bump the snapshot id periodically (swift.org GCs them).
   build-windows:
     name: Build on Windows
     needs: configure
     if: ${{ needs.configure.outputs.run-windows == 'true' }}
     runs-on: ${{ matrix.runs-on }}
-    continue-on-error: true
     strategy:
       fail-fast: false
       matrix:
@@ -156,12 +156,10 @@ jobs:
           windows-swift-version: ${{ matrix.swift.version }}
           windows-swift-build: ${{ matrix.swift.build }}
 
-  # Full Apple-platform suite (iOS/watchOS/tvOS) on Swift 6.4. Runs on the
-  # self-hosted runner with /Applications/Xcode-beta.app (Xcode 27 / Swift 6.4) —
-  # required here: this package is swift-tools-version:6.4, so hosted released-Xcode
-  # runners can't even parse the manifest. Uses the iOS/watchOS/tvOS 27.0 simulator
-  # runtimes on the runner. continue-on-error until green (swift-openapi on the
-  # simulators is unverified). Bump deviceName/osVersion as the Xcode-beta moves.
+  # Full Apple-platform suite (iOS/watchOS/tvOS) on Swift 6.4, on the self-hosted
+  # runner with /Applications/Xcode-beta.app (Xcode 27), using the 27.0 simulator
+  # runtimes installed there. continue-on-error: simulator runs on the nightly
+  # toolchain are the most fragile leg. Bump deviceName/osVersion as Xcode-beta moves.
   build-macos-platforms:
     name: Build on macOS (Platforms)
     needs: configure
@@ -199,9 +197,9 @@ jobs:
           flags: ${{ format('{0}{1}', matrix.type, matrix.osVersion) }}
 
   # Android on nightly 6.4 via a swift.org swift-6.4.x-branch snapshot SDK bundle
-  # (custom-sdk-url path, needs brightdigit/swift-build#116). continue-on-error
-  # until that ships in @v1 and the leg goes green — swift-openapi Android support
-  # is unverified. build-only (android-run-tests: false). Bump the snapshot id.
+  # (custom-sdk-url path through swift-build → skiptools/swift-android-action).
+  # continue-on-error until the leg goes green. build-only (android-run-tests: false).
+  # Bump the snapshot id periodically.
   build-android:
     name: Build on Android
     needs: configure
