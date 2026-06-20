@@ -128,6 +128,48 @@ jobs:
           windows-swift-version: ${{ matrix.swift.version }}
           windows-swift-build: ${{ matrix.swift.build }}
 
+  # Full Apple-platform suite (iOS/watchOS/tvOS) on Swift 6.4. Runs on the
+  # self-hosted runner with /Applications/Xcode-beta.app (Xcode 27 / Swift 6.4) —
+  # required here: this package is swift-tools-version:6.4, so hosted released-Xcode
+  # runners can't even parse the manifest. Uses the iOS/watchOS/tvOS 27.0 simulator
+  # runtimes on the runner. continue-on-error until green (swift-openapi on the
+  # simulators is unverified). Bump deviceName/osVersion as the Xcode-beta moves.
+  build-macos-platforms:
+    name: Build on macOS (Platforms)
+    needs: configure
+    if: ${{ needs.configure.outputs.full-matrix == 'true' }}
+    runs-on: [self-hosted, macOS]
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { type: ios,     deviceName: "iPhone 17 Pro",                osVersion: "27.0" }
+          - { type: watchos, deviceName: "Apple Watch Ultra 3 (49mm)",   osVersion: "27.0" }
+          - { type: tvos,    deviceName: "Apple TV 4K (3rd generation)", osVersion: "27.0" }
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build and Test
+        id: build
+        uses: brightdigit/swift-build@v1
+        with:
+          type: ${{ matrix.type }}
+          xcode: "/Applications/Xcode-beta.app"
+          deviceName: ${{ matrix.deviceName }}
+          osVersion: ${{ matrix.osVersion }}
+      - name: Process coverage
+        if: steps.build.outputs.contains-code-coverage == 'true'
+        uses: sersoft-gmbh/swift-coverage-action@v5
+        with:
+          search-paths: .build
+      - name: Upload coverage to Codecov
+        if: steps.build.outputs.contains-code-coverage == 'true'
+        uses: codecov/codecov-action@v7
+        with:
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: ${{ format('{0}{1}', matrix.type, matrix.osVersion) }}
+
   # WASM on nightly 6.4 via a swift.org swift-6.4.x-branch snapshot SDK bundle.
   # Needs the wasm-sdk-url/wasm-sdk-checksum inputs from brightdigit/swift-build#115
   # (PR #116); continue-on-error until that ships in @v1 and the leg goes green —
@@ -190,7 +232,7 @@ jobs:
   lint:
     name: Linting
     if: ${{ !cancelled() && !failure() && !contains(github.event.head_commit.message, 'ci skip') }}
-    needs: [build-ubuntu, build-macos, build-windows]
+    needs: [build-ubuntu, build-macos, build-windows, build-macos-platforms]
     runs-on: ubuntu-latest
     container: swiftlang/swift:nightly-6.4.x-noble
     steps:
