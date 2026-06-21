@@ -40,7 +40,13 @@ let package = Package(
       name: "SpinetailOpenAPI",
       dependencies: [
         .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
-        .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
+        // URLSession transport is unavailable on WASI; exclude it there so the
+        // wasm / wasm-embedded builds link. Mirrors brightdigit/MistKit.
+        .product(
+          name: "OpenAPIURLSession",
+          package: "swift-openapi-urlsession",
+          condition: .when(platforms: Platform.withoutWASI)
+        ),
         .product(name: "HTTPTypes", package: "swift-http-types")
       ],
       exclude: [
@@ -54,7 +60,13 @@ let package = Package(
       dependencies: [
         "SpinetailOpenAPI",
         .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
-        .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
+        // URLSession transport is unavailable on WASI; exclude it there so the
+        // wasm / wasm-embedded builds link. Mirrors brightdigit/MistKit.
+        .product(
+          name: "OpenAPIURLSession",
+          package: "swift-openapi-urlsession",
+          condition: .when(platforms: Platform.withoutWASI)
+        ),
         .product(name: "HTTPTypes", package: "swift-http-types")
       ]
     ),
@@ -69,3 +81,12 @@ let package = Package(
     )
   ]
 )
+
+// All platforms except WASI. OpenAPIURLSession (URLSession transport) doesn't
+// build for wasm/wasm-embedded, so URLSession-backed dependencies are scoped to
+// these platforms. Mirrors brightdigit/MistKit.
+extension Platform {
+  static let withoutWASI: [Platform] = [
+    .macOS, .macCatalyst, .iOS, .tvOS, .watchOS, .visionOS, .driverKit, .linux, .windows, .android
+  ]
+}

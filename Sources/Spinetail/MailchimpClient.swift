@@ -1,7 +1,12 @@
 import Foundation
 import OpenAPIRuntime
-import OpenAPIURLSession
 import SpinetailOpenAPI
+
+// URLSession transport is unavailable on WASI; the URLSession-defaulting
+// initializer is gated behind #if !os(WASI) below.
+#if !os(WASI)
+  import OpenAPIURLSession
+#endif
 
 #if canImport(FoundationNetworking)
   import FoundationNetworking
@@ -40,12 +45,12 @@ public struct MailchimpClient: Sendable {
   ///
   /// - Parameters:
   ///   - apiKey: The Mailchimp API key, including its `-<datacenter>` suffix.
-  ///   - transport: The transport to use. Defaults to `URLSessionTransport`.
+  ///   - transport: The transport to use.
   /// - Throws: ``ClientError/invalidAPIKey`` if the key has no datacenter
   ///   suffix.
   public init(
     apiKey: String,
-    transport: any ClientTransport = URLSessionTransport()
+    transport: any ClientTransport
   ) throws {
     let serverURL = try Self.serverURL(forAPIKey: apiKey)
     underlying = Client(
@@ -54,6 +59,18 @@ public struct MailchimpClient: Sendable {
       middlewares: [AuthenticationMiddleware(apiKey: apiKey)]
     )
   }
+
+  // URLSession transport is unavailable on WASI; this convenience (default
+  // `URLSessionTransport`) is gated. WASI callers pass an explicit transport above.
+  #if !os(WASI)
+    /// Creates a client from a Mailchimp API key using the default
+    /// `URLSessionTransport`.
+    /// - Parameter apiKey: The Mailchimp API key, including its `-<datacenter>` suffix.
+    /// - Throws: ``ClientError/invalidAPIKey`` if the key has no datacenter suffix.
+    public init(apiKey: String) throws {
+      try self.init(apiKey: apiKey, transport: URLSessionTransport())
+    }
+  #endif
 
   /// Creates a client wrapping an already-configured generated client.
   ///
