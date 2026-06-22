@@ -1,65 +1,92 @@
-// swift-tools-version:5.2.0
+// swift-tools-version:6.4
 // swiftlint:disable explicit_top_level_acl
 import PackageDescription
 
 let package = Package(
   name: "Spinetail",
   platforms: [
-    .macOS(.v10_15),
-    .iOS(.v10),
-    .tvOS(.v10),
-    .watchOS(.v3)
+    .macOS(.v13),
+    .iOS(.v16),
+    .tvOS(.v16),
+    .watchOS(.v9)
   ],
   products: [
+    // The public product is the abstract `Spinetail` layer (async Mailchimp
+    // client, campaign DTO, auth middleware). It wraps the generated
+    // swift-openapi-generator client, which consumers never see directly.
     .library(name: "Spinetail", targets: ["Spinetail"])
   ],
   dependencies: [
-    .package(url: "https://github.com/shibapm/Komondor", from: "1.1.2"), // dev
-    .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.47.0"), // dev
-    .package(url: "https://github.com/realm/SwiftLint", from: "0.43.0"), // dev
-    .package(url: "https://github.com/brightdigit/swift-test-codecov", from: "1.0.0"), // dev
-    .package(url: "https://github.com/shibapm/Rocket", from: "1.2.0"), // dev
-    .package(url: "https://github.com/brightdigit/Prch.git", from: "0.2.0")
+    .package(
+      url: "https://github.com/apple/swift-openapi-runtime",
+      from: "1.8.0"
+    ),
+    .package(
+      url: "https://github.com/apple/swift-openapi-urlsession",
+      from: "1.0.0"
+    ),
+    // Transitive via swift-openapi-runtime; declared explicitly so the
+    // contract tests can name HTTPRequest/HTTPResponse in their mock transport.
+    .package(
+      url: "https://github.com/apple/swift-http-types",
+      from: "1.0.0"
+    )
   ],
   targets: [
-    .target(name: "Spinetail", dependencies: ["Prch"]),
-    .testTarget(name: "SpinetailTests", dependencies: ["Spinetail"])
+    // GENERATED ONLY: Types.swift / Client.swift are generated ahead of time by
+    // Scripts/generate-openapi-spinetail.sh and committed (no build plugin).
+    // The generator config lives alongside the output but is not a Swift source.
+    .target(
+      name: "SpinetailOpenAPI",
+      dependencies: [
+        .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
+        // URLSession transport is unavailable on WASI; exclude it there so the
+        // wasm / wasm-embedded builds link. Mirrors brightdigit/MistKit.
+        .product(
+          name: "OpenAPIURLSession",
+          package: "swift-openapi-urlsession",
+          condition: .when(platforms: Platform.withoutWASI)
+        ),
+        .product(name: "HTTPTypes", package: "swift-http-types")
+      ],
+      exclude: [
+        "openapi-generator-config.yaml"
+      ]
+    ),
+    // Abstract layer: the hand-written async wrapper, campaign DTO, and auth
+    // middleware. The only target consumers depend on.
+    .target(
+      name: "Spinetail",
+      dependencies: [
+        "SpinetailOpenAPI",
+        .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
+        // URLSession transport is unavailable on WASI; exclude it there so the
+        // wasm / wasm-embedded builds link. Mirrors brightdigit/MistKit.
+        .product(
+          name: "OpenAPIURLSession",
+          package: "swift-openapi-urlsession",
+          condition: .when(platforms: Platform.withoutWASI)
+        ),
+        .product(name: "HTTPTypes", package: "swift-http-types")
+      ]
+    ),
+    .testTarget(
+      name: "SpinetailTests",
+      dependencies: [
+        "Spinetail",
+        "SpinetailOpenAPI",
+        .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
+        .product(name: "HTTPTypes", package: "swift-http-types")
+      ]
+    )
   ]
 )
 
-#if canImport(PackageConfig)
-  import PackageConfig
-
-  let requiredCoverage: Int = 85
-
-  let config = PackageConfiguration([
-    "rocket": [
-      "steps": [
-        ["hide_dev_dependencies": ["package_path": "Package@swift-5.5.swift"]],
-        "hide_dev_dependencies",
-        "git_add",
-        "commit",
-        "tag",
-        "unhide_dev_dependencies",
-        ["unhide_dev_dependencies": ["package_path": "Package@swift-5.5.swift"]],
-        "git_add",
-        ["commit": ["message": "Unhide dev dependencies"]]
-      ]
-    ],
-    "komondor": [
-      "pre-push": [
-        "swift test --enable-code-coverage --enable-test-discovery"
-        // swiftlint:disable:next line_length
-        // "swift run swift-test-codecov .build/debug/codecov/SyndiKit.json --minimum \(requiredCoverage)"
-      ],
-      "pre-commit": [
-        "swift test --enable-code-coverage --enable-test-discovery --generate-linuxmain",
-        "swift run swiftformat .",
-        "swift run swiftlint autocorrect",
-        "git add .",
-        "swift run swiftformat --lint .",
-        "swift run swiftlint"
-      ]
-    ]
-  ]).write()
-#endif
+// All platforms except WASI. OpenAPIURLSession (URLSession transport) doesn't
+// build for wasm/wasm-embedded, so URLSession-backed dependencies are scoped to
+// these platforms. Mirrors brightdigit/MistKit.
+extension Platform {
+  static let withoutWASI: [Platform] = [
+    .macOS, .macCatalyst, .iOS, .tvOS, .watchOS, .visionOS, .driverKit, .linux, .windows, .android
+  ]
+}
