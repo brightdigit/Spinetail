@@ -59,6 +59,27 @@ import Testing
     #expect(transport.authorizationHeaders.first == expectedAuth)
   }
 
+  /// `sentCampaigns(forListID:)` pages until every campaign the server reports
+  /// (`total_items`) has been collected, preserving order across pages.
+  @Test internal func listCampaignsPagesThroughAllResults() async throws {
+    let transport = MockTransport(
+      responses: [
+        Self.campaignsPath: [Fixtures.campaignsPage1, Fixtures.campaignsPage2]
+      ]
+    )
+    let client = try makeClient(transport)
+
+    let campaigns = try await client.sentCampaigns(forListID: Self.listID)
+
+    #expect(campaigns.map(\.id) == ["camp1", "camp2", "camp3"])
+    // Two GETs to /campaigns: the first page, then the offset follow-up.
+    let campaignsRequests = transport.requestedPaths.filter {
+      $0.hasPrefix(Self.campaignsPath)
+    }
+    #expect(campaignsRequests.count == 2)
+    #expect(campaignsRequests.last?.contains("offset=2") == true)
+  }
+
   /// `archiveHTML(forCampaignID:)` returns the campaign's `archive_html`.
   @Test internal func archiveHTMLReturnsArchiveHTML() async throws {
     let transport = MockTransport(

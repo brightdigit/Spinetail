@@ -107,29 +107,52 @@ public struct MailchimpClient: Sendable {
 
   /// Lists the sent campaigns for a list, most recent first.
   ///
+  /// Pages through the full result set: Mailchimp caps `count` at
+  /// ``maxCount`` per request, so this issues successive `getCampaigns` calls
+  /// with an advancing `offset` until every campaign the server reports
+  /// (`total_items`) has been collected. This matters for the archive backfill,
+  /// which must not silently drop the oldest issues if the account ever exceeds
+  /// one page of sent campaigns.
+  ///
   /// - Parameter listID: The Mailchimp list (audience) id to filter by.
-  /// - Returns: The sent campaigns mapped into the flat importer model.
+  /// - Returns: The sent campaigns mapped into the flat importer model, most
+  ///   recent first.
   /// - Throws: ``ClientError/invalidResponse`` for a non-200 response.
   public func sentCampaigns(
     forListID listID: String
   ) async throws -> [MailchimpCampaign] {
-    let response = try await underlying.getCampaigns(
-      .init(
-        query: .init(
-          count: Self.maxCount,
-          status: .sent,
-          list_id: listID,
-          sort_field: .send_time,
-          sort_dir: .DESC
+    var collected: [MailchimpCampaign] = []
+    var offset = 0
+    while true {
+      let response = try await underlying.getCampaigns(
+        .init(
+          query: .init(
+            count: Self.maxCount,
+            offset: offset,
+            status: .sent,
+            list_id: listID,
+            sort_field: .send_time,
+            sort_dir: .DESC
+          )
         )
       )
-    )
-    guard case .ok(let okResponse) = response,
-      case .json(let body) = okResponse.body
-    else {
-      throw ClientError.invalidResponse
+      guard case .ok(let okResponse) = response,
+        case .json(let body) = okResponse.body
+      else {
+        throw ClientError.invalidResponse
+      }
+      let page = body.campaigns ?? []
+      collected.append(contentsOf: page.map(MailchimpCampaign.init(from:)))
+      // Stop when the server reports no more items to fetch, or when a page
+      // comes back empty (defensive: guarantees termination even if
+      // `total_items` is absent or inconsistent).
+      let total = body.total_items ?? collected.count
+      if page.isEmpty || collected.count >= total {
+        break
+      }
+      offset += page.count
     }
-    return (body.campaigns ?? []).map(MailchimpCampaign.init(from:))
+    return collected
   }
 
   /// Fetches the archive HTML for a campaign.

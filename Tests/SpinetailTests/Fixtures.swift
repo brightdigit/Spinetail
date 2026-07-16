@@ -17,6 +17,27 @@ internal enum Fixtures {
     "total_items":2}
     """
 
+  /// First page of a two-page `getCampaigns` result (`total_items` = 3).
+  internal static let campaignsPage1 = """
+    {"campaigns":[\
+    {"id":"camp1","long_archive_url":"https://archive/1",\
+    "send_time":"2020-03-03T00:00:00+00:00",\
+    "settings":{"subject_line":"BrightDigit Newsletter #3","title":"Issue Three"}},\
+    {"id":"camp2","long_archive_url":"https://archive/2",\
+    "send_time":"2020-02-02T00:00:00+00:00",\
+    "settings":{"subject_line":"BrightDigit Newsletter #2","title":"Issue Two"}}],\
+    "total_items":3}
+    """
+
+  /// Second (final) page of the two-page `getCampaigns` result.
+  internal static let campaignsPage2 = """
+    {"campaigns":[\
+    {"id":"camp3","long_archive_url":"https://archive/3",\
+    "send_time":"2020-01-01T00:00:00+00:00",\
+    "settings":{"subject_line":"BrightDigit Newsletter #1","title":"Issue One"}}],\
+    "total_items":3}
+    """
+
   /// A `getCampaignsIdContent` OK response carrying archive HTML.
   internal static let campaignContent = """
     {"archive_html":"<html><body>Hello</body></html>","html":"<p>Hello</p>"}
