@@ -106,6 +106,45 @@ import Testing
     }
   }
 
+  /// `plainText(forCampaignID:)` returns the sibling `plain_text` field.
+  @Test internal func plainTextReturnsPlainText() async throws {
+    let transport = MockTransport(
+      responses: [Self.contentPath: [Fixtures.campaignContent]]
+    )
+    let client = try makeClient(transport)
+
+    let plainText = try await client.plainText(forCampaignID: "camp1")
+
+    #expect(plainText == "Hello from plain text")
+  }
+
+  /// Both representations are exposed from one decoded content response.
+  @Test internal func campaignContentReturnsHTMLAndPlainText() async throws {
+    let transport = MockTransport(
+      responses: [Self.contentPath: [Fixtures.campaignContent]]
+    )
+    let client = try makeClient(transport)
+
+    let content = try await client.campaignContent(forCampaignID: "camp1")
+
+    #expect(content.archiveHTML == "<html><body>Hello</body></html>")
+    #expect(content.plainText == "Hello from plain text")
+  }
+
+  /// A content response missing `plain_text` surfaces `missingPlainText`.
+  @Test internal func plainTextThrowsWhenMissing() async throws {
+    let transport = MockTransport(
+      responses: [Self.contentPath: [Fixtures.campaignContentNoHTML]]
+    )
+    let client = try makeClient(transport)
+
+    await #expect(
+      throws: MailchimpClient.ClientError.missingPlainText(campaignID: "camp1")
+    ) {
+      _ = try await client.plainText(forCampaignID: "camp1")
+    }
+  }
+
   /// A non-200 (problem+json) response surfaces as
   /// `ClientError.invalidResponse`.
   @Test internal func non200ResponseThrows() async throws {

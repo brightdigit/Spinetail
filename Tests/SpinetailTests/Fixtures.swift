@@ -40,7 +40,8 @@ internal enum Fixtures {
 
   /// A `getCampaignsIdContent` OK response carrying archive HTML.
   internal static let campaignContent = """
-    {"archive_html":"<html><body>Hello</body></html>","html":"<p>Hello</p>"}
+    {"archive_html":"<html><body>Hello</body></html>","html":"<p>Hello</p>",\
+    "plain_text":"Hello from plain text"}
     """
 
   /// A `getCampaignsIdContent` OK response with no archive HTML.

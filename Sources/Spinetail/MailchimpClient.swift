@@ -20,6 +20,20 @@ import SpinetailOpenAPI
 /// (fetch a campaign's archive HTML). Authentication is HTTP Basic with the
 /// API key as the password (see ``AuthenticationMiddleware``).
 public struct MailchimpClient: Sendable {
+  /// The authored representations returned by Mailchimp's campaign-content endpoint.
+  public struct CampaignContent: Equatable, Sendable {
+    /// The campaign's rendered archive HTML, if Mailchimp returned it.
+    public let archiveHTML: String?
+    /// The campaign's plain-text representation, if Mailchimp returned it.
+    public let plainText: String?
+
+    /// Creates a campaign-content value from its authored representations.
+    public init(archiveHTML: String?, plainText: String?) {
+      self.archiveHTML = archiveHTML
+      self.plainText = plainText
+    }
+  }
+
   /// Errors surfaced by ``MailchimpClient``.
   public enum ClientError: Error, Equatable, Sendable {
     /// The supplied API key is missing a `-<datacenter>` suffix, so the
@@ -29,6 +43,8 @@ public struct MailchimpClient: Sendable {
     case invalidResponse
     /// The requested campaign returned no archive HTML.
     case missingHTML(campaignID: String)
+    /// The requested campaign returned no plain-text body.
+    case missingPlainText(campaignID: String)
   }
 
   /// The maximum number of campaigns to request per `getCampaigns` call. The
@@ -164,6 +180,17 @@ public struct MailchimpClient: Sendable {
   public func archiveHTML(
     forCampaignID campaignID: String
   ) async throws -> String {
+    let content = try await campaignContent(forCampaignID: campaignID)
+    guard let html = content.archiveHTML else {
+      throw ClientError.missingHTML(campaignID: campaignID)
+    }
+    return html
+  }
+
+  /// Fetches both authored representations of a campaign in one request.
+  public func campaignContent(
+    forCampaignID campaignID: String
+  ) async throws -> CampaignContent {
     let response = try await underlying.getCampaignsIdContent(
       .init(path: .init(campaign_id: campaignID))
     )
@@ -172,9 +199,22 @@ public struct MailchimpClient: Sendable {
     else {
       throw ClientError.invalidResponse
     }
-    guard let html = body.archive_html else {
-      throw ClientError.missingHTML(campaignID: campaignID)
+    return CampaignContent(archiveHTML: body.archive_html, plainText: body.plain_text)
+  }
+
+  /// Fetches the authored plain-text body for a campaign.
+  ///
+  /// - Parameter campaignID: The campaign id.
+  /// - Returns: The campaign's `plain_text` content.
+  /// - Throws: ``ClientError/missingPlainText(campaignID:)`` if the response
+  ///   carries no plain-text body.
+  public func plainText(
+    forCampaignID campaignID: String
+  ) async throws -> String {
+    let content = try await campaignContent(forCampaignID: campaignID)
+    guard let plainText = content.plainText else {
+      throw ClientError.missingPlainText(campaignID: campaignID)
     }
-    return html
+    return plainText
   }
 }
