@@ -80,3 +80,15 @@ network.
 It builds on Linux (incl. wasm/wasm-embedded, gated by the `ENABLE_WASM` repo
 variable), macOS + Apple platforms, Windows, and Android. Only the standard
 Linux leg runs the test suite + coverage; wasm legs are build-only.
+
+## Memory & Corrections Convention
+
+`.claude/agent-notes.md` is the canonical, versioned corrections log for this repository — an
+append-only record of the maintainer's corrections and standing **always/never** directives.
+
+- **Read `.claude/agent-notes.md` at the start of every work session, before doing any work.** It
+  is the source of truth for *how* to work in this repo.
+- **Whenever the maintainer makes a correction or gives an always/never instruction, append one
+  line to `.claude/agent-notes.md` proactively (without being asked).** One line per directive,
+  newest at the bottom. If a directive supersedes an earlier one, update or remove the stale line
+  rather than leaving both.
