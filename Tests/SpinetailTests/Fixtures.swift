@@ -38,6 +38,30 @@ internal enum Fixtures {
     "total_items":3}
     """
 
+  /// First page of a multi-page result that omits `total_items`.
+  internal static let campaignsPage1NoTotal = """
+    {"campaigns":[\
+    {"id":"camp1","long_archive_url":"https://archive/1",\
+    "send_time":"2020-03-03T00:00:00+00:00",\
+    "settings":{"subject_line":"BrightDigit Newsletter #3","title":"Issue Three"}},\
+    {"id":"camp2","long_archive_url":"https://archive/2",\
+    "send_time":"2020-02-02T00:00:00+00:00",\
+    "settings":{"subject_line":"BrightDigit Newsletter #2","title":"Issue Two"}}]}
+    """
+
+  /// Second page of a multi-page result that omits `total_items`.
+  internal static let campaignsPage2NoTotal = """
+    {"campaigns":[\
+    {"id":"camp3","long_archive_url":"https://archive/3",\
+    "send_time":"2020-01-01T00:00:00+00:00",\
+    "settings":{"subject_line":"BrightDigit Newsletter #1","title":"Issue One"}}]}
+    """
+
+  /// Empty `getCampaigns` page used to terminate paging when `total_items` is absent.
+  internal static let campaignsEmptyPage = """
+    {"campaigns":[]}
+    """
+
   /// A `getCampaignsIdContent` OK response carrying archive HTML.
   internal static let campaignContent = """
     {"archive_html":"<html><body>Hello</body></html>","html":"<p>Hello</p>",\

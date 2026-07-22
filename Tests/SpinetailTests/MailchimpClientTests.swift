@@ -80,6 +80,30 @@ import Testing
     #expect(campaignsRequests.last?.contains("offset=2") == true)
   }
 
+  /// When `total_items` is omitted, paging continues until an empty page.
+  @Test internal func listCampaignsPagesUntilEmptyWhenTotalItemsAbsent() async throws {
+    let transport = MockTransport(
+      responses: [
+        Self.campaignsPath: [
+          Fixtures.campaignsPage1NoTotal,
+          Fixtures.campaignsPage2NoTotal,
+          Fixtures.campaignsEmptyPage,
+        ]
+      ]
+    )
+    let client = try makeClient(transport)
+
+    let campaigns = try await client.sentCampaigns(forListID: Self.listID)
+
+    #expect(campaigns.map(\.id) == ["camp1", "camp2", "camp3"])
+    let campaignsRequests = transport.requestedPaths.filter {
+      $0.hasPrefix(Self.campaignsPath)
+    }
+    #expect(campaignsRequests.count == 3)
+    #expect(campaignsRequests[1].contains("offset=2") == true)
+    #expect(campaignsRequests[2].contains("offset=3") == true)
+  }
+
   /// `archiveHTML(forCampaignID:)` returns the campaign's `archive_html`.
   @Test internal func archiveHTMLReturnsArchiveHTML() async throws {
     let transport = MockTransport(

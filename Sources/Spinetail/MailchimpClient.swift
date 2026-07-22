@@ -159,11 +159,12 @@ public struct MailchimpClient: Sendable {
       }
       let page = body.campaigns ?? []
       collected.append(contentsOf: page.map(Campaign.init(from:)))
-      // Stop when the server reports no more items to fetch, or when a page
-      // comes back empty (defensive: guarantees termination even if
-      // `total_items` is absent or inconsistent).
-      let total = body.total_items ?? collected.count
-      if page.isEmpty || collected.count >= total {
+      // Stop when a page comes back empty (guarantees termination even if
+      // `total_items` is absent), or when the server reports no more items.
+      if page.isEmpty {
+        break
+      }
+      if let total = body.total_items, collected.count >= total {
         break
       }
       offset += page.count
