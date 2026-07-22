@@ -1,23 +1,27 @@
 <p align="center">
-	<img alt="Spinetail" title="Spinetail" src="Assets/logo.svg" height="200">
+    <img alt="Spinetail" title="Spinetail" src="Sources/Spinetail/Spinetail.docc/Resources/logo.svg" height="200">
 </p>
 
-<h1 align="center"> Spinetail </h1>
+# Spinetail
+
+<p align="center">A lightweight async Swift client for the Mailchimp Marketing API.</p>
+
+<!-- Platform Compatibility -->
+[![Swift Versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FSpinetail%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/brightdigit/Spinetail)
+[![Platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FSpinetail%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/brightdigit/Spinetail)
+
+<!-- Documentation & License -->
+[![Documentation](https://img.shields.io/badge/docc-read_documentation-blue)](https://swiftpackageindex.com/brightdigit/Spinetail/documentation)
+[![License](https://img.shields.io/github/license/brightdigit/Spinetail)](LICENSE)
+
+<!-- CI/CD & Code Quality -->
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/brightdigit/Spinetail/Spinetail.yml?label=actions&logo=github&branch=main)](https://github.com/brightdigit/Spinetail/actions)
+[![Maintainability](https://qlty.sh/gh/brightdigit/projects/Spinetail/maintainability.svg)](https://qlty.sh/gh/brightdigit/projects/Spinetail)
+[![Codecov](https://img.shields.io/codecov/c/github/brightdigit/Spinetail)](https://codecov.io/gh/brightdigit/Spinetail)
+[![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/brightdigit/Spinetail)](https://www.codefactor.io/repository/github/brightdigit/Spinetail)
 
 A lightweight async Swift client for the [Mailchimp Marketing API](https://mailchimp.com/developer/marketing/api/),
 built on [swift-openapi-generator](https://github.com/apple/swift-openapi-generator).
-
-[![SwiftPM](https://img.shields.io/badge/SPM-Linux%20%7C%20iOS%20%7C%20macOS%20%7C%20watchOS%20%7C%20tvOS%20%7C%20Windows%20%7C%20Android%20%7C%20Wasm-success?logo=swift)](https://swift.org)
-[![Twitter](https://img.shields.io/badge/twitter-@brightdigit-blue.svg?style=flat)](http://twitter.com/brightdigit)
-![GitHub](https://img.shields.io/github/license/brightdigit/Spinetail)
-![GitHub issues](https://img.shields.io/github/issues/brightdigit/Spinetail)
-
-[![Spinetail](https://github.com/brightdigit/Spinetail/actions/workflows/Spinetail.yml/badge.svg)](https://github.com/brightdigit/Spinetail/actions/workflows/Spinetail.yml)
-[![CodeQL](https://github.com/brightdigit/Spinetail/actions/workflows/codeql.yml/badge.svg)](https://github.com/brightdigit/Spinetail/actions/workflows/codeql.yml)
-[![codecov](https://codecov.io/gh/brightdigit/Spinetail/branch/main/graph/badge.svg)](https://codecov.io/gh/brightdigit/Spinetail)
-
-[![Supported Swift versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FSpinetail%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/brightdigit/Spinetail)
-[![Supported platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FSpinetail%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/brightdigit/Spinetail)
 
 # Table of Contents
 
