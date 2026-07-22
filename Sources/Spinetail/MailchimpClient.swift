@@ -136,8 +136,8 @@ public struct MailchimpClient: Sendable {
   /// - Throws: ``ClientError/invalidResponse`` for a non-200 response.
   public func sentCampaigns(
     forListID listID: String
-  ) async throws -> [MailchimpCampaign] {
-    var collected: [MailchimpCampaign] = []
+  ) async throws -> [Campaign] {
+    var collected: [Campaign] = []
     var offset = 0
     while true {
       let response = try await underlying.getCampaigns(
@@ -158,7 +158,7 @@ public struct MailchimpClient: Sendable {
         throw ClientError.invalidResponse
       }
       let page = body.campaigns ?? []
-      collected.append(contentsOf: page.map(MailchimpCampaign.init(from:)))
+      collected.append(contentsOf: page.map(Campaign.init(from:)))
       // Stop when the server reports no more items to fetch, or when a page
       // comes back empty (defensive: guarantees termination even if
       // `total_items` is absent or inconsistent).

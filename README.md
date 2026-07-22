@@ -128,7 +128,7 @@ let client = try MailchimpClient(
 ## Listing sent campaigns
 
 `sentCampaigns(forListID:)` returns the **sent** campaigns for a given Mailchimp
-list (audience), most recent first, mapped into the flat ``MailchimpCampaign``
+list (audience), most recent first, mapped into the flat ``Campaign``
 model:
 
 ```swift
@@ -139,7 +139,7 @@ for campaign in campaigns {
 }
 ```
 
-Each `MailchimpCampaign` exposes the fields the importer reads — all optional by
+Each `Campaign` exposes the fields the importer reads — all optional by
 design (the consumer validates presence):
 
 | Property             | Source                        |
@@ -193,7 +193,7 @@ Spinetail is two layered targets:
   - `MailchimpClient` — the public client (host derivation + the two operations).
   - `AuthenticationMiddleware` — adds HTTP Basic auth (API key as the password;
     username ignored by Mailchimp).
-  - `MailchimpCampaign` — the flat DTO mapped from the generated campaign payload.
+  - `Campaign` — the flat DTO mapped from the generated campaign payload.
 
 `OpenAPIURLSession` (the URLSession transport) does not build for WebAssembly, so
 anything depending on it is gated behind `#if !os(WASI)`; Wasm callers supply an

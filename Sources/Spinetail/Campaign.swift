@@ -6,7 +6,7 @@ import SpinetailOpenAPI
 /// All fields are optional because the importer is responsible for validating
 /// presence and emitting domain-specific errors; this type intentionally does
 /// not throw. It is mapped from the generated OpenAPI campaign payload.
-public struct MailchimpCampaign: Equatable, Sendable {
+public struct Campaign: Equatable, Sendable {
   /// The unique campaign id.
   public let id: String?
   /// The long-form archive URL for the campaign.
@@ -46,7 +46,7 @@ public struct MailchimpCampaign: Equatable, Sendable {
   }
 }
 
-extension MailchimpCampaign {
+extension Campaign {
   /// Maps a generated OpenAPI campaign payload into the flat importer model.
   internal init(
     from campaign: Operations.getCampaigns.Output.Ok.Body.jsonPayload

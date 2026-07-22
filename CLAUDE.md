@@ -52,7 +52,7 @@ Two targets, layered:
     inject a test transport.
   - `AuthenticationMiddleware.swift` — `ClientMiddleware` adding HTTP Basic auth
     (username ignored by Mailchimp, API key as password).
-  - `MailchimpCampaign.swift` — flat DTO mapped from the generated campaign
+  - `Campaign.swift` — flat DTO mapped from the generated campaign
     payload. All fields optional by design; mapping never throws (the consumer
     validates presence).
 
