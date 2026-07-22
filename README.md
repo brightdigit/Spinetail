@@ -1,20 +1,12 @@
-<p align="center">
-    <img alt="Spinetail" title="Spinetail" src="Sources/Spinetail/Spinetail.docc/Resources/logo.svg" height="200">
-</p>
+![Spinetail Logo](Sources/Spinetail/Spinetail.docc/Resources/logo.svg)
 
 # Spinetail
 
-<p align="center">A lightweight async Swift client for the Mailchimp Marketing API.</p>
 
-<!-- Platform Compatibility -->
 [![Swift Versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FSpinetail%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/brightdigit/Spinetail)
 [![Platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbrightdigit%2FSpinetail%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/brightdigit/Spinetail)
-
-<!-- Documentation & License -->
 [![Documentation](https://img.shields.io/badge/docc-read_documentation-blue)](https://swiftpackageindex.com/brightdigit/Spinetail/documentation)
 [![License](https://img.shields.io/github/license/brightdigit/Spinetail)](LICENSE)
-
-<!-- CI/CD & Code Quality -->
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/brightdigit/Spinetail/Spinetail.yml?label=actions&logo=github&branch=main)](https://github.com/brightdigit/Spinetail/actions)
 [![Maintainability](https://qlty.sh/gh/brightdigit/projects/Spinetail/maintainability.svg)](https://qlty.sh/gh/brightdigit/projects/Spinetail)
 [![Codecov](https://img.shields.io/codecov/c/github/brightdigit/Spinetail)](https://codecov.io/gh/brightdigit/Spinetail)
@@ -87,7 +79,7 @@ Add Spinetail as a dependency in your `Package.swift`:
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/brightdigit/Spinetail.git", from: "1.0.0")
+  .package(url: "https://github.com/brightdigit/Spinetail.git", from: "1.0.0-alpha.1")
 ]
 ```
 
