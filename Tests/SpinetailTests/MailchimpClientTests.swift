@@ -59,6 +59,27 @@ import Testing
     #expect(transport.authorizationHeaders.first == expectedAuth)
   }
 
+  /// `sentCampaigns(forListID:)` pages until every campaign the server reports
+  /// (`total_items`) has been collected, preserving order across pages.
+  @Test internal func listCampaignsPagesThroughAllResults() async throws {
+    let transport = MockTransport(
+      responses: [
+        Self.campaignsPath: [Fixtures.campaignsPage1, Fixtures.campaignsPage2]
+      ]
+    )
+    let client = try makeClient(transport)
+
+    let campaigns = try await client.sentCampaigns(forListID: Self.listID)
+
+    #expect(campaigns.map(\.id) == ["camp1", "camp2", "camp3"])
+    // Two GETs to /campaigns: the first page, then the offset follow-up.
+    let campaignsRequests = transport.requestedPaths.filter {
+      $0.hasPrefix(Self.campaignsPath)
+    }
+    #expect(campaignsRequests.count == 2)
+    #expect(campaignsRequests.last?.contains("offset=2") == true)
+  }
+
   /// `archiveHTML(forCampaignID:)` returns the campaign's `archive_html`.
   @Test internal func archiveHTMLReturnsArchiveHTML() async throws {
     let transport = MockTransport(
@@ -82,6 +103,45 @@ import Testing
       throws: MailchimpClient.ClientError.missingHTML(campaignID: "camp1")
     ) {
       _ = try await client.archiveHTML(forCampaignID: "camp1")
+    }
+  }
+
+  /// `plainText(forCampaignID:)` returns the sibling `plain_text` field.
+  @Test internal func plainTextReturnsPlainText() async throws {
+    let transport = MockTransport(
+      responses: [Self.contentPath: [Fixtures.campaignContent]]
+    )
+    let client = try makeClient(transport)
+
+    let plainText = try await client.plainText(forCampaignID: "camp1")
+
+    #expect(plainText == "Hello from plain text")
+  }
+
+  /// Both representations are exposed from one decoded content response.
+  @Test internal func campaignContentReturnsHTMLAndPlainText() async throws {
+    let transport = MockTransport(
+      responses: [Self.contentPath: [Fixtures.campaignContent]]
+    )
+    let client = try makeClient(transport)
+
+    let content = try await client.campaignContent(forCampaignID: "camp1")
+
+    #expect(content.archiveHTML == "<html><body>Hello</body></html>")
+    #expect(content.plainText == "Hello from plain text")
+  }
+
+  /// A content response missing `plain_text` surfaces `missingPlainText`.
+  @Test internal func plainTextThrowsWhenMissing() async throws {
+    let transport = MockTransport(
+      responses: [Self.contentPath: [Fixtures.campaignContentNoHTML]]
+    )
+    let client = try makeClient(transport)
+
+    await #expect(
+      throws: MailchimpClient.ClientError.missingPlainText(campaignID: "camp1")
+    ) {
+      _ = try await client.plainText(forCampaignID: "camp1")
     }
   }
 
