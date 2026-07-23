@@ -11,8 +11,6 @@ externalDocs:
   url: https://mailchimp.com/developer/marketing/
 servers:
 - url: https://server.api.mailchimp.com/3.0
-security:
-- basicAuth: []
 paths:
   /:
     get:

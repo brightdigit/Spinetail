@@ -1,0 +1,82 @@
+internal enum Fixtures {
+  /// A `getCampaigns` OK response with two sent campaigns.
+  internal static let campaigns = """
+    {"campaigns":[\
+    {"id":"camp1","long_archive_url":"https://archive/1",\
+    "send_time":"2020-01-01T00:00:00+00:00",\
+    "recipients":{"segment_text":"brightdigit-business"},\
+    "settings":{"subject_line":"BrightDigit Newsletter #1","title":"Issue One",\
+    "preview_text":"first preview"},\
+    "social_card":{"image_url":"https://img/1.jpg"}},\
+    {"id":"camp2","long_archive_url":"https://archive/2",\
+    "send_time":"2020-02-02T00:00:00+00:00",\
+    "recipients":{"segment_text":"other"},\
+    "settings":{"subject_line":"BrightDigit Newsletter #2","title":"Issue Two",\
+    "preview_text":"second preview"},\
+    "social_card":{"image_url":"https://img/2.jpg"}}],\
+    "total_items":2}
+    """
+
+  /// First page of a two-page `getCampaigns` result (`total_items` = 3).
+  internal static let campaignsPage1 = """
+    {"campaigns":[\
+    {"id":"camp1","long_archive_url":"https://archive/1",\
+    "send_time":"2020-03-03T00:00:00+00:00",\
+    "settings":{"subject_line":"BrightDigit Newsletter #3","title":"Issue Three"}},\
+    {"id":"camp2","long_archive_url":"https://archive/2",\
+    "send_time":"2020-02-02T00:00:00+00:00",\
+    "settings":{"subject_line":"BrightDigit Newsletter #2","title":"Issue Two"}}],\
+    "total_items":3}
+    """
+
+  /// Second (final) page of the two-page `getCampaigns` result.
+  internal static let campaignsPage2 = """
+    {"campaigns":[\
+    {"id":"camp3","long_archive_url":"https://archive/3",\
+    "send_time":"2020-01-01T00:00:00+00:00",\
+    "settings":{"subject_line":"BrightDigit Newsletter #1","title":"Issue One"}}],\
+    "total_items":3}
+    """
+
+  /// First page of a multi-page result that omits `total_items`.
+  internal static let campaignsPage1NoTotal = """
+    {"campaigns":[\
+    {"id":"camp1","long_archive_url":"https://archive/1",\
+    "send_time":"2020-03-03T00:00:00+00:00",\
+    "settings":{"subject_line":"BrightDigit Newsletter #3","title":"Issue Three"}},\
+    {"id":"camp2","long_archive_url":"https://archive/2",\
+    "send_time":"2020-02-02T00:00:00+00:00",\
+    "settings":{"subject_line":"BrightDigit Newsletter #2","title":"Issue Two"}}]}
+    """
+
+  /// Second page of a multi-page result that omits `total_items`.
+  internal static let campaignsPage2NoTotal = """
+    {"campaigns":[\
+    {"id":"camp3","long_archive_url":"https://archive/3",\
+    "send_time":"2020-01-01T00:00:00+00:00",\
+    "settings":{"subject_line":"BrightDigit Newsletter #1","title":"Issue One"}}]}
+    """
+
+  /// Empty `getCampaigns` page used to terminate paging when `total_items` is absent.
+  internal static let campaignsEmptyPage = """
+    {"campaigns":[]}
+    """
+
+  /// A `getCampaignsIdContent` OK response carrying archive HTML.
+  internal static let campaignContent = """
+    {"archive_html":"<html><body>Hello</body></html>","html":"<p>Hello</p>",\
+    "plain_text":"Hello from plain text"}
+    """
+
+  /// A `getCampaignsIdContent` OK response with no archive HTML.
+  internal static let campaignContentNoHTML = """
+    {"html":"<p>Hello</p>"}
+    """
+
+  /// A Mailchimp problem+json error body, returned for non-200 responses.
+  internal static let problem = """
+    {"type":"https://mailchimp.com/developer/marketing/docs/errors/",\
+    "title":"Internal Server Error","status":500,\
+    "detail":"An unexpected internal error occurred.","instance":"abc"}
+    """
+}
