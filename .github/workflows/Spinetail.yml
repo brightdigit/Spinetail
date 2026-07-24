@@ -165,9 +165,6 @@ jobs:
   # Full Apple-platform suite (iOS/watchOS/tvOS) on Swift 6.4, on the GitHub-hosted
   # xcode-27 runner with downloadable 27.0 simulator runtimes. Blocking leg; simulator runs on the nightly
   # toolchain are the most fragile leg. Bump deviceName/osVersion as Xcode-beta moves.
-  # The watchOS leg is gated on the ENABLE_WATCHOS repo variable (set 'false' to skip it
-  # where the watchOS-27 SDK rejects deps inferring 8.0 — SwiftPM #10188; see
-  # brightdigit.com#119). iOS/tvOS always run.
   build-macos-platforms:
     name: Build on macOS (Platforms)
     needs: configure
