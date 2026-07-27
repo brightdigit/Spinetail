@@ -1,15 +1,18 @@
 # ``Spinetail``
 
-<!--@START_MENU_TOKEN@-->Summary<!--@END_MENU_TOKEN@-->
-
-![Spinetail Logo](logo.png)
+A lightweight async Swift client for the Mailchimp Marketing API.
 
 ## Overview
 
-<!--@START_MENU_TOKEN@-->Text<!--@END_MENU_TOKEN@-->
+Spinetail is built on
+[swift-openapi-generator](https://github.com/apple/swift-openapi-generator) and provides
+an ergonomic, `async`/`await` interface to the
+[Mailchimp Marketing API](https://mailchimp.com/developer/marketing/api/) — used by
+brightdigit.com to import its newsletter archive.
 
 ## Topics
 
-### <!--@START_MENU_TOKEN@-->Group<!--@END_MENU_TOKEN@-->
+### Essentials
 
-- <!--@START_MENU_TOKEN@-->``Symbol``<!--@END_MENU_TOKEN@-->
+- ``MailchimpClient``
+- ``Campaign``
